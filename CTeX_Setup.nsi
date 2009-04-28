@@ -1,6 +1,6 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "1"
+!define BUILD_NUMBER "2"
 ;!define BUILD_FULL
 ;!define BUILD_DEBUG
 
@@ -27,6 +27,7 @@ SetCompressorDictSize 128
 ; Functions and Macros
 !include "FileFunc.nsh"
 !include "EnvVarUpdate.nsh"
+!include "FileAssociation.nsh"
 
 !macro _CreateURLShortCut URLFile URLSite
 	WriteINIStr "${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
@@ -172,8 +173,11 @@ Section "GSview" Section_GSview
 !endif
 
 	WriteRegStr HKLM "Software\Ghostgum\GSview" "$1" "$0"
-
+	
 	${AddPath} "$0\gsview"
+
+	${registerExtension} "$0\gsview\gsview32.exe" ".ps" "PostScript File"
+	${registerExtension} "$0\gsview\gsview32.exe" ".eps" "Encapsulated PostScript File"
 
 	CreateDirectory "$SMPROGRAMS\CTeX\Ghostgum"
 	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview.lnk" "$0\gsview\gsview32.exe"
@@ -195,6 +199,8 @@ Section "WinEdt" Section_WinEdt
 	WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
 
 	${AddPath} "$0"
+
+	${registerExtension} "$0\WinEdt.exe" ".tex" "TeX File"
 
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\WinEdt.lnk" "$0\WinEdt.exe"
@@ -236,6 +242,10 @@ Section Uninstall
 	${un.RemovePath} "$INSTDIR\${dGhostscript}\gs${vGhostscript}\bin"
 	${un.RemovePath} "$INSTDIR\${dGSview}\gsview"
 	${un.RemovePath} "$INSTDIR\${dWinEdt}"
+
+	${unregisterExtension} ".ps" "PostScript File"
+	${unregisterExtension} ".eps" "Encapsulated PostScript File"
+	${unregisterExtension} ".tex" "TeX File"
 
 	; Delete self
 	Delete "$INSTDIR\uninstall.exe"
