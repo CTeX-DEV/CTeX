@@ -1,8 +1,8 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "2"
+!define BUILD_NUMBER "3"
 ;!define BUILD_FULL
-;!define BUILD_DEBUG
+!define BUILD_DEBUG
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -27,7 +27,7 @@ SetCompressorDictSize 128
 ; Functions and Macros
 !include "FileFunc.nsh"
 !include "EnvVarUpdate.nsh"
-!include "FileAssociation.nsh"
+!include "FileAssoc.nsh"
 
 !macro _CreateURLShortCut URLFile URLSite
 	WriteINIStr "${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
@@ -89,6 +89,9 @@ LangString Desc_GSview ${LANG_SIMPCHINESE} "GSview «GhostscriptµƒÕº–ŒΩÁ√Ê≥Ã–Ú£¨Õ
 LangString Desc_GSview ${LANG_ENGLISH} "GSview is the frontend GUI of Ghostscript, used with Ghostscript to view and edit PS (PostScript) file."
 LangString Desc_WinEdt ${LANG_SIMPCHINESE} "WinEdt «“ª∏ˆ±‡º≠∆˜£¨À¸ƒ⁄÷√¡À∂‘TeXµƒ¡º∫√÷ß≥÷°£‘⁄À¸µƒ≤Àµ•…œ∫Õ∞¥≈•…œø…“‘÷±Ω”µ˜”√TeX≥Ã–Ú£¨∞¸¿®±‡“Î°¢‘§¿¿µ»°£WinEdtªπƒ‹∞Ô÷˙ƒ„—∏ÀŸ ‰»Î∏˜÷÷TeX√¸¡Ó∫Õ∑˚∫≈£¨ °»•ƒ„º«“‰¥Û¡ø√¸¡Óµƒ∑≥ƒ’°£"
 LangString Desc_WinEdt ${LANG_ENGLISH} "WinEdt a well designed text editor with full support to edit and compile TeX file."
+
+LangString Desc_File ${LANG_SIMPCHINESE} "Œƒµµ"
+LangString Desc_File ${LANG_ENGLISH} "File"
 
 ; Components information
 !define dMiKTeX "MiKTeX"
@@ -176,8 +179,8 @@ Section "GSview" Section_GSview
 	
 	${AddPath} "$0\gsview"
 
-	${registerExtension} "$0\gsview\gsview32.exe" ".ps" "PostScript File"
-	${registerExtension} "$0\gsview\gsview32.exe" ".eps" "Encapsulated PostScript File"
+	!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$0\gsview\gsview32.exe,0" "Open with GSview" '$0\gsview\gsview32.exe "%1"'
+	!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$0\gsview\gsview32.exe,0" "Open with GSview" '$0\gsview\gsview32.exe "%1"'
 
 	CreateDirectory "$SMPROGRAMS\CTeX\Ghostgum"
 	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview.lnk" "$0\gsview\gsview32.exe"
@@ -200,7 +203,7 @@ Section "WinEdt" Section_WinEdt
 
 	${AddPath} "$0"
 
-	${registerExtension} "$0\WinEdt.exe" ".tex" "TeX File"
+	!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "$0\WinEdt.exe,0" "Open with WinEdt" '$0\WinEdt.exe "%1"'
 
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\WinEdt.lnk" "$0\WinEdt.exe"
@@ -215,6 +218,8 @@ Section -FinishSection
 	WriteUninstaller "$INSTDIR\uninstall.exe"
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+
+	!insertmacro UPDATEFILEASSOC
 
 SectionEnd
 
@@ -243,9 +248,9 @@ Section Uninstall
 	${un.RemovePath} "$INSTDIR\${dGSview}\gsview"
 	${un.RemovePath} "$INSTDIR\${dWinEdt}"
 
-	${unregisterExtension} ".ps" "PostScript File"
-	${unregisterExtension} ".eps" "Encapsulated PostScript File"
-	${unregisterExtension} ".tex" "TeX File"
+	!insertmacro APP_UNASSOCIATE "ps" "CTeX.PS"
+	!insertmacro APP_UNASSOCIATE "eps" "CTeX.EPS"
+	!insertmacro APP_UNASSOCIATE "tex" "CTeX.TeX"
 
 	; Delete self
 	Delete "$INSTDIR\uninstall.exe"
@@ -257,6 +262,8 @@ Section Uninstall
 	RMDir /r $INSTDIR
 
 	; Remove remaining directories
+
+	!insertmacro UPDATEFILEASSOC
 
 SectionEnd
 
