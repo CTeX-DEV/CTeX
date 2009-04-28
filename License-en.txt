@@ -1,0 +1,9 @@
+<CTeX Chinese TeX Suite> Copyright Agreement
+
+1. This software suite is for academic and educational purpose ONLY, and can NOT be used for commercial benefit.
+2. All the softwares included in this suite are property of their respective owner.
+3. The setup scripts are property of CTEX.
+4. This software is distributed WITHOUT any warranty.
+
+----------------------------
+http://www.ctex.org
