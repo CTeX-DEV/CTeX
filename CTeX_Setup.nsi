@@ -1,8 +1,8 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "4"
+!define BUILD_NUMBER "5"
 ;!define BUILD_FULL
-!define BUILD_DEBUG
+;!define BUILD_DEBUG
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -13,7 +13,7 @@
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
-InstallDir "C:\CTeX"
+InstallDir "C:\CTEX"
 !ifndef BUILD_FULL
 	OutFile "CTeX ${APP_BUILD}.exe"
 !else
