@@ -2,7 +2,7 @@
 
 !define BUILD_NUMBER "5"
 ;!define BUILD_FULL
-!define BUILD_DEBUG
+;!define BUILD_DEBUG
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -182,6 +182,8 @@ Section -FinishSection
 	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall.lnk" "$INSTDIR\uninstall.exe"
 
 	!insertmacro UPDATEFILEASSOC
+
+	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --dump --update-fndb"
 
 SectionEnd
 
