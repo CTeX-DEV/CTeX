@@ -2,7 +2,7 @@
 
 !define BUILD_NUMBER "5"
 ;!define BUILD_FULL
-;!define BUILD_DEBUG
+!define BUILD_DEBUG
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -69,6 +69,7 @@ LangString Desc_File ${LANG_ENGLISH} "File"
 ; Components information
 !define dMiKTeX "MiKTeX"
 !define vMiKTeX "2.7"
+!define dAddons "CTeX"
 !define dGhostscript "Ghostscript"
 !define vGhostscript "8.64"
 !define dGSview "GSview"
@@ -94,6 +95,27 @@ Section "MiKTeX" Section_MiKTeX
 
 	!insertmacro Install_Reg_MiKTeX "$0" "$1"
 	!insertmacro Install_Link_MiKTeX "$0" "$1"
+
+SectionEnd
+
+Section "Addons" Section_Addons
+
+	SetOverwrite On
+
+	StrCpy $0 "$INSTDIR\${dAddons}"
+	SetOutpath $0
+
+!ifndef BUILD_DEBUG
+	File /r Addons\CJK\*.*
+	File /r Addons\CCT\*.*
+	File /r Addons\TY\*.*
+	File /r Addons\Packages\*.*
+!endif
+
+	!insertmacro Install_Reg_Addons "$0" "${vMiKTeX}"
+	!insertmacro Install_Reg_CCT "$0"
+	!insertmacro Install_Reg_TY "$0"
+	!insertmacro Install_Fonts "$0"
 
 SectionEnd
 

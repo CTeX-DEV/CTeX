@@ -6,17 +6,15 @@
 !macroend
 !define CreateURLShortCut "!insertmacro _CreateURLShortCut"
 
-Function _AddPath
-	ClearErrors
-	${EnvVarUpdate} $R1 "PATH" "P" "HKLM" "$R0"
-	IfErrors 0 done
-		${EnvVarUpdate} $R1 "PATH" "P" "HKCU" "$R0"
-done:
-FunctionEnd
-
 !macro _AddPath DIR
-	StrCpy $R0 "${DIR}"
-	Call _AddPath
+	StrCpy $R0 0
+	ClearErrors
+	${EnvVarUpdate} $R1 "PATH" "P" "HKLM" "${DIR}"
+	IfErrors 0 +2
+		StrCpy $R0 1
+	${If} $R0 == 1
+		${EnvVarUpdate} $R1 "PATH" "P" "HKCU" "${DIR}"
+	${EndIf}
 !macroend
 !define AddPath "!insertmacro _AddPath"
 
@@ -59,6 +57,51 @@ FunctionEnd
 	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Known Issues.lnk" "http://miktex.org/2.7/issues"
 	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\MiKTeX Project Page.lnk" "http://miktex.org/"
 	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Support.lnk" "http://miktex.org/support"
+!macroend
+
+!macro Install_Reg_Addons DIR VERSION
+	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots"
+	${If} $R0 == ""
+		ReadRegStr $R1 HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Install"
+		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots" "${DIR};$R1"
+	${Else}
+		StrCpy $R1 0
+		StrCpy $R9 ""
+		${Do}
+			${StrTok} $R2 $R0 ";" $R1 "0"
+			${If} $R2 == ""
+				${ExitDo}
+			${EndIf}
+			${Do}
+				StrCpy $R3 $R2 1
+				${If} $R3 != " "
+					${ExitDo}
+				${EndIf}
+				StrCpy $R2 $R2 "" 1                ;  Remove leading space
+      ${Loop}
+      ${Do}
+				StrCpy $R3 $R2 1 -1
+				${If} $R3 != " "
+					${ExitDo}
+				${EndIf}
+				StrCpy $R2 $R2 -1                  ;  Remove trailing space
+      ${Loop}
+			${If} $R2 != ${DIR}                  ;  Remove existing target
+				StrCpy $R9 "$R9;$R2"
+			${EndIf}
+			IntOp $R1 $R1 + 1
+		${EndDo}
+		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots" "${DIR};$R9"
+	${EndIf}
+!macroend
+
+!macro Install_Reg_CCT DIR
+!macroend
+
+!macro Install_Reg_TY DIR
+!macroend
+
+!macro Install_Fonts DIR
 !macroend
 
 !macro Install_Reg_Ghostscript DIR VERSION
