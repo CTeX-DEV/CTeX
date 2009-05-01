@@ -18,12 +18,29 @@
 !macroend
 !define AddPath "!insertmacro _AddPath"
 
+!macro _AddEnvVar NAME VALUE
+	StrCpy $R0 0
+	ClearErrors
+	WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}" "${VALUE}"
+	IfErrors 0 +2
+		StrCpy $R0 1
+	${If} $R0 == 1
+		WriteRegExpandStr HKCU "Environment" "${NAME}" "${VALUE}"
+	${EndIf}
+!macroend
+!define AddEnvVar "!insertmacro _AddEnvVar"
+
 !macro _unRemovePath DIR
 	${un.EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
 	${un.EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
 !macroend
 !define un.RemovePath "!insertmacro _unRemovePath"
 
+!macro _unRemoveEnvVar NAME
+	DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}"
+	DeleteRegValue HKCU "Environment" "${NAME}"
+!macroend
+!define un.RemoveEnvVar "!insertmacro _unRemoveEnvVar"
 
 
 !macro Install_Reg_MiKTeX DIR VERSION
@@ -90,18 +107,65 @@
 				StrCpy $R9 "$R9;$R2"
 			${EndIf}
 			IntOp $R1 $R1 + 1
-		${EndDo}
+		${Loop}
 		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots" "${DIR};$R9"
 	${EndIf}
+
+	!insertmacro Install_CCT "${DIR}"
+	!insertmacro Install_TY "${DIR}"
+	!insertmacro Install_Fonts "${DIR}"
 !macroend
 
-!macro Install_Reg_CCT DIR
+!macro Uninstall_Reg_Addons DIR
+	!insertmacro Uninstall_CCT "${DIR}"
+	!insertmacro Uninstall_TY "${DIR}"
 !macroend
 
-!macro Install_Reg_TY DIR
+!macro Uninstall_Addons DIR
+	!insertmacro Uninstall_CCT "${DIR}"
+	!insertmacro Uninstall_TY "${DIR}"
+	!insertmacro Uninstall_Fonts "${DIR}"
+!macroend
+
+!macro Install_CCT DIR
+	${AddPath} "${DIR}\cct\bin"
+	${AddEnvVar} "CCHZPATH" "${DIR}\cct\fonts"
+	${AddEnvVar} "CCPKPATH" "${DIR}\fonts\pk\modeless\cct\dpi$$d"
+	
+	FileOpen $R0 "${DIR}\cct\bin\cctinit.ini" "w"
+	FileWrite $R0 "-T ${DIR}\fonts\tfm\cct$\n"
+	FileWrite $R0 "-H ${DIR}\tex\latex\cct$\n"
+	FileClose $R0
+!macroend
+
+!macro Uninstall_CCT DIR
+	${un.RemovePath} "${DIR}\cct\bin"
+	${un.RemoveEnvVar} "CCHZPATH"
+	${un.RemoveEnvVar} "CCPKPATH"
+!macroend
+
+!macro Install_TY DIR
+	${AddPath} "${DIR}\ty\bin"
+
+	FileOpen $R0 "$EXEDIR\ty.cfg" "w"
+	FileWrite $R0 "${DIR}\fonts\tfm\ty\$\r$\n"
+	FileWrite $R0 "${DIR}\fonts\pk\modeless\ty\DPI@Rr\$\r$\n"
+	FileWrite $R0 ".\$\r$\n"
+	FileWrite $R0 "${DIR}\ty\bin\$\r$\n"
+	FileWrite $R0 "$FONTS\$\r$\n"
+	FileWrite $R0 "600$\r$\n1095$\r$\n"
+	FileWrite $R0 "simsun.ttc$\r$\nsimkai.ttf$\r$\nsimfang.ttf$\r$\nsimhei.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
+	FileWrite $R0 "simsun.ttc$\r$\nsimyou.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimli.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
+	FileWrite $R0 "0$\r$\n0$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n"
+	FileClose $R0
+!macroend
+
+!macro Uninstall_TY DIR
+	${un.RemovePath} "${DIR}\ty\bin"
 !macroend
 
 !macro Install_Fonts DIR
+	ExecWait "${DIR}\ctex\bin\Simsun.Bat $FONTS ${DIR}\fonts\truetype\chinese"
 !macroend
 
 !macro Install_Reg_Ghostscript DIR VERSION
