@@ -113,9 +113,6 @@ Section "Addons" Section_Addons
 !endif
 
 	!insertmacro Install_Reg_Addons "$0" "${vMiKTeX}"
-	!insertmacro Install_Reg_CCT "$0"
-	!insertmacro Install_Reg_TY "$0"
-	!insertmacro Install_Fonts "$0"
 
 SectionEnd
 
@@ -204,6 +201,7 @@ Section Uninstall
 	DeleteRegKey HKLM "Software\${APP_NAME}"
 
 	!insertmacro Uninstall_Reg_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
+	!insertmacro Uninstall_Reg_Addons "$INSTDIR\${dAddons}"
 	!insertmacro Uninstall_Reg_Ghostscript "$INSTDIR\${dGhostscript}" "${vGhostscript}"
 	!insertmacro Uninstall_Reg_GSview "$INSTDIR\${dGSview}" "${vGSview}"
 	!insertmacro Uninstall_Reg_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
