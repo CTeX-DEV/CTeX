@@ -106,10 +106,11 @@ Section "Addons" Section_Addons
 	SetOutpath $0
 
 !ifndef BUILD_DEBUG
+	File /r Addons\CTeX\*.*
+	File /r Addons\Packages\*.*
 	File /r Addons\CJK\*.*
 	File /r Addons\CCT\*.*
 	File /r Addons\TY\*.*
-	File /r Addons\Packages\*.*
 !endif
 
 	!insertmacro Install_Reg_Addons "$0" "${vMiKTeX}"
