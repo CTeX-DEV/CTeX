@@ -1,6 +1,6 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "5"
+!define BUILD_NUMBER "6"
 ;!define BUILD_FULL
 ;!define BUILD_DEBUG
 
