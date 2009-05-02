@@ -136,6 +136,8 @@
 	FileWrite $R0 "-T ${DIR}\fonts\tfm\cct$\n"
 	FileWrite $R0 "-H ${DIR}\tex\latex\cct$\n"
 	FileClose $R0
+	
+	ExecWait "${DIR}\cct\bin\cctinit.exe"
 !macroend
 
 !macro Uninstall_CCT DIR
@@ -165,7 +167,7 @@
 !macroend
 
 !macro Install_Fonts DIR
-	ExecWait "${DIR}\ctex\bin\Simsun.Bat $FONTS ${DIR}\fonts\truetype\chinese"
+	ExecWait '${DIR}\ctex\bin\Simsun.Bat "$FONTS" "${DIR}\fonts\truetype\chinese"'
 !macroend
 
 !macro Install_Reg_Ghostscript DIR VERSION
