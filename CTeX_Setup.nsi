@@ -188,7 +188,8 @@ Section -FinishSection
 
 	!insertmacro UPDATEFILEASSOC
 
-	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --dump --update-fndb"
+	ExecWait "initexmf.exe --dump --update-fndb"
+	ExecWait "updmap.exe"
 
 SectionEnd
 

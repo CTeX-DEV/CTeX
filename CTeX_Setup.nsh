@@ -133,8 +133,8 @@
 	${AddEnvVar} "CCPKPATH" "${DIR}\fonts\pk\modeless\cct\dpi$$d"
 	
 	FileOpen $R0 "${DIR}\cct\bin\cctinit.ini" "w"
-	FileWrite $R0 "-T ${DIR}\fonts\tfm\cct$\n"
-	FileWrite $R0 "-H ${DIR}\tex\latex\cct$\n"
+	FileWrite $R0 "-T${DIR}\fonts\tfm\cct$\n"
+	FileWrite $R0 "-H${DIR}\tex\latex\cct$\n"
 	FileClose $R0
 	
 	ExecWait "${DIR}\cct\bin\cctinit.exe"
