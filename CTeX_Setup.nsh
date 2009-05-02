@@ -230,6 +230,7 @@
 !macro Install_Link_WinEdt DIR VERSION
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\WinEdt.lnk" "${DIR}\WinEdt.exe"
+	CreateShortCut "$SMPROGRAMS\CTeX\TexFriend.lnk" "${DIR}\Plugins\TexFriend\TexFriend.exe"
 !macroend
 
 !macro Associate_WinEdt_MiKTeX DIR_WinEdt VERSION_MiKTeX
