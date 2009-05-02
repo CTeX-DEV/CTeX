@@ -1,6 +1,6 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "6"
+!define BUILD_NUMBER "7"
 ;!define BUILD_FULL
 ;!define BUILD_DEBUG
 
@@ -56,6 +56,8 @@ LicenseLangString license ${LANG_ENGLISH} License-en.txt
 
 LangString Desc_MiKTeX ${LANG_SIMPCHINESE} "Windows下最好用的TeX系统之一，它带有一个很优秀的DVI预览器Yap。"
 LangString Desc_MiKTeX ${LANG_ENGLISH} "One of the best TeX system on Windows platform, with an excellent DVI previewer Yap."
+LangString Desc_Addons ${LANG_SIMPCHINESE} "中文TeX组件，包括CJK/CCT/TY和相应的字体设置，以及一些中文LaTeX宏包。"
+LangString Desc_Addons ${LANG_ENGLISH} "Chinese TeX addons, including CJK/CCT/TY and their Chinese font settings, and several Chinese LaTeX packages."
 LangString Desc_Ghostscript ${LANG_SIMPCHINESE} "PS (PostScript)语言和PDF文件的解释器，可在非PS打印机上打印它们。可以将PS文件和PDF文件相互转换。"
 LangString Desc_Ghostscript ${LANG_ENGLISH} "PS (PostScript) and PDF interpreter."
 LangString Desc_GSview ${LANG_SIMPCHINESE} "GSview是Ghostscript的图形界面程序，通过Ghostscript的支持，可以很方便地浏览和修改PS文件。"
@@ -98,7 +100,7 @@ Section "MiKTeX" Section_MiKTeX
 
 SectionEnd
 
-Section "Addons" Section_Addons
+Section "CTeX Addons" Section_Addons
 
 	SetOverwrite On
 
@@ -107,7 +109,6 @@ Section "Addons" Section_Addons
 
 !ifndef BUILD_DEBUG
 	File /r Addons\CTeX\*.*
-	File /r Addons\Packages\*.*
 	File /r Addons\CJK\*.*
 	File /r Addons\CCT\*.*
 	File /r Addons\TY\*.*
@@ -191,6 +192,7 @@ SectionEnd
 ; Modern install component descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 	!insertmacro MUI_DESCRIPTION_TEXT ${Section_MiKTeX} $(Desc_MiKTeX)
+	!insertmacro MUI_DESCRIPTION_TEXT ${Section_Addons} $(Desc_Addons)
 	!insertmacro MUI_DESCRIPTION_TEXT ${Section_Ghostscript} $(Desc_Ghostscript)
 	!insertmacro MUI_DESCRIPTION_TEXT ${Section_GSview} $(Desc_GSview)
 	!insertmacro MUI_DESCRIPTION_TEXT ${Section_WinEdt} $(Desc_WinEdt)
