@@ -147,7 +147,7 @@
 !macro Install_TY DIR
 	${AddPath} "${DIR}\ty\bin"
 
-	FileOpen $R0 "$EXEDIR\ty.cfg" "w"
+	FileOpen $R0 "${DIR}\ty\bin\ty.cfg" "w"
 	FileWrite $R0 "${DIR}\fonts\tfm\ty\$\r$\n"
 	FileWrite $R0 "${DIR}\fonts\pk\modeless\ty\DPI@Rr\$\r$\n"
 	FileWrite $R0 ".\$\r$\n"
