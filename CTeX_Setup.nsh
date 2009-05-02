@@ -167,7 +167,10 @@
 !macroend
 
 !macro Install_Fonts DIR
-	ExecWait '${DIR}\ctex\bin\Simsun.Bat "$FONTS" "${DIR}\fonts\truetype\chinese"'
+	ExecWait '${DIR}\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
+	ExecWait '$SYSDIR\CMD.exe /C move /Y FONT00.TTF "${DIR}\fonts\truetype\chinese\simsun.ttf"'
+	ExecWait "$SYSDIR\CMD.exe /C del /F /Q FONT01.TTF"
+	ExecWait "$SYSDIR\CMD.exe /C del /F /Q FONT02.TTF"
 !macroend
 
 !macro Install_Reg_Ghostscript DIR VERSION
