@@ -2,7 +2,7 @@
 
 !define BUILD_NUMBER "8"
 ;!define BUILD_FULL
-!define BUILD_DEBUG
+;!define BUILD_DEBUG
 
 ; Define your application name
 !define APP_NAME "CTeX"
