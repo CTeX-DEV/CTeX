@@ -71,9 +71,9 @@
 	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Help\Manual.lnk" "${DIR}\doc\miktex\miktex.chm"
 	CreateDirectory "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web"
 	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Give back" "http://miktex.org/giveback"
-	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Known Issues.lnk" "http://miktex.org/2.7/issues"
-	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\MiKTeX Project Page.lnk" "http://miktex.org/"
-	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Support.lnk" "http://miktex.org/support"
+	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Known Issues" "http://miktex.org/2.7/issues"
+	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\MiKTeX Project Page" "http://miktex.org/"
+	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Support" "http://miktex.org/support"
 !macroend
 
 !macro Install_Reg_Addons DIR VERSION
