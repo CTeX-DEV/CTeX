@@ -14,14 +14,16 @@
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
 BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
-ShowInstDetails nevershow
-ShowUninstDetails nevershow
 InstallDir "C:\CTEX"
 !ifndef BUILD_FULL
 	OutFile "CTeX ${APP_BUILD}.exe"
 !else
 	OutFile "CTeX ${APP_BUILD} Full.exe"
 !endif
+
+; Other settings
+ShowInstDetails nevershow
+ShowUninstDetails nevershow
 
 ; Use compression
 SetCompressor /SOLID LZMA
