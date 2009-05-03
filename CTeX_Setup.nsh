@@ -51,6 +51,8 @@
 	WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\${VERSION}\MPM" "RepositoryType" "remote"
 
 	${AddPath} "${DIR}\miktex\bin"
+
+	!insertmacro APP_ASSOCIATE "dvi" "CTeX.DVI" "DVI $(Desc_File)" "${DIR}\miktex\bin\yap.exe,0" "Open with Yap" '${DIR}\miktex\bin\yap.exe "%1"'
 !macroend
 
 !macro Uninstall_Reg_MiKTeX DIR VERSION
@@ -194,7 +196,17 @@
 
 !macro Install_Reg_GSview DIR VERSION
 	WriteRegStr HKLM "Software\Ghostgum\GSview" "${VERSION}" "${DIR}"
-	
+
+	StrCpy $R0 "${DIR}\gsview\gsview32.ini"
+	WriteINIStr $R0 "GSview-${VERSION}"	"Version" "${VERSION}"
+	WriteINIStr $R0 "GSview-${VERSION}"	"GSversion" "864"
+	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${VERSION}" "GS_DLL"
+	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptDLL" "$R1"
+	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${VERSION}" "GS_LIB"
+	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptInclude" "$R1"
+	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptOther" "-dNOPLATFONTS -sFONTPATH="c:\psfonts"
+	WriteINIStr $R0 "GSview-${VERSION}"	"Configured" "0"
+
 	${AddPath} "${DIR}\gsview"
 
 	!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "${DIR}\gsview\gsview32.exe,0" "Open with GSview" '${DIR}\gsview\gsview32.exe "%1"'
