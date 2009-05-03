@@ -168,9 +168,9 @@
 
 !macro Install_Fonts DIR
 	ExecWait '${DIR}\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
-	ExecWait '$SYSDIR\CMD.exe /C md "${DIR}\fonts\truetype\chinese"'
-	ExecWait '$SYSDIR\CMD.exe /C move /Y FONT00.TTF "${DIR}\fonts\truetype\chinese\simsun.ttf"'
-	ExecWait "$SYSDIR\CMD.exe /C del /F /Q *.TTF"
+	CreateDirectory "${DIR}\fonts\truetype\chinese"
+	Rename "FONT00.TTF" "${DIR}\fonts\truetype\chinese\simsun.ttf"
+	Delete "*.TTF"
 !macroend
 
 !macro Install_Reg_Ghostscript DIR VERSION
@@ -235,7 +235,6 @@
 !macro Install_Link_WinEdt DIR VERSION
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\WinEdt.lnk" "${DIR}\WinEdt.exe"
-	CreateShortCut "$SMPROGRAMS\CTeX\TexFriend.lnk" "${DIR}\Plugins\TexFriend\TexFriend.exe"
 !macroend
 
 !macro Associate_WinEdt_MiKTeX DIR_WinEdt VERSION_MiKTeX
