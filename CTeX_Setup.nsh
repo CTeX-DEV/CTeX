@@ -204,7 +204,7 @@
 	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptDLL" "$R1"
 	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${VERSION}" "GS_LIB"
 	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptInclude" "$R1"
-	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptOther" "-dNOPLATFONTS -sFONTPATH="c:\psfonts"
+	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptOther" '-dNOPLATFONTS -sFONTPATH="c:\psfonts"'
 	WriteINIStr $R0 "GSview-${VERSION}"	"Configured" "0"
 
 	${AddPath} "${DIR}\gsview"
