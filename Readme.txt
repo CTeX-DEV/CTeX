@@ -1,0 +1,149 @@
+CTeX 2.7.0
+==========
+
+目录
+
+1. 内容
+2. 安装
+3. 其它
+   3.1. CJK 中文模式和字库
+   3.2. 升级和更新
+   3.3. 刷新文件名数据库
+4. 致谢
+5. 关于我们
+   5.1. 网站
+   5.2. CTeX 中文套装
+   5.3. 联系方式
+
+
+====================================================
+
+1. 内容
+
+本套装软件包中含有如下软件：
+
+        MiKTeX 2.7
+        CCT 0.6180-3a
+        CJK 4.8.2
+        WinEdt 5.5
+        GSview 4.9
+        Ghostscript 8.64
+
+
+====================================================
+
+2. 安装
+
+已经安装了低版本的 CTeX 中文套装的用户请将原先的 CTeX 中文套装卸载后
+删除安装目录，再安装新版本，不要直接升级。
+
+新版本中不包含中文 Type1 字库，建议尽量使用 TrueType 字库。
+
+
+====================================================
+
+3. 其它
+
+
+3.1. CJK 中文模式和字库
+
+CTeX 中文套装可以直接使用的 CJK 模式和字库有六种
+
+\begin{CJK*}{GBK}{song}    % 宋体
+\begin{CJK*}{GBK}{hei}     % 黑体
+\begin{CJK*}{GBK}{kai}     % 楷体
+\begin{CJK*}{GBK}{fs}      % 仿宋
+\begin{CJK*}{GBK}{li}      % 隶书
+\begin{CJK*}{GBK}{you}     % 幼圆
+
+如果需要使用 pmC 模式或者 GB 编码，或者增加其他中文字库，请自己生成相关
+字库和配置文件。可以参考 CTEX 目录下的文件。
+
+如果没有安装中文 Type1 字库，则自动使用 Windows 自带的 TrueType 字库。
+
+注意：Windows 中的楷体和仿宋体 TrueType 字库只是 GB2312 字符集，而其他几
+种字体是 GBK 大字符集。而 CTeX-Font 的中文 Type1 字库都是 GBK 大字符集。
+
+
+3.2. 升级
+
+如果 CTeX 中文套装没有及时升级，你可以自己更新 CTeX 中文套装中的部件。
+CTeX 中文套装中的大部分软件可以单独升级。
+
+MiKTeX 升级可以使用菜单中的 MiKTeX -> Update
+MiKTeX 增加 package 可以使用菜单中的 MiKTeX -> Browser Packages
+
+Ghostscript 和 GSview 只需直接安装新的版本即可。安装完成以后，原来的目录
+可以删除。升级 Ghostscript 以后要在 GSview 的菜单
+Options -> Easy Configuration 中设置正确的版本号，这样 GSview 才能正常工
+作。有时还要刷新 MiKTeX 的文件名数据库以使用 Ghostscript 所带的字库。
+
+WinEdt 的升级比较麻烦，不建议自己升级。
+
+
+3.3. 刷新文件名数据库
+
+在对 localtexmf 和 texmf 目录下的文件作出修改后，请不要忘了刷新 MiKTeX 的
+文件名数据库。可以使用菜单中的 MiKTeX -> Settings 工具来完成。
+
+
+====================================================
+
+4. 致谢
+
+如果你对 CTeX 中文套装进行了修改，或者制作了补丁，欢迎将修改信息反馈到 CTEX。
+这将对我们制作下一个发行版本有很大的帮助。有任何的建议和意见，也欢迎向
+我们反映。所有对 CTeX 中文套装的制作做出贡献的人都会在这个文件中被列出。
+
+
+CTeX 中文套装包含了以下人员的工作成果（排名不分先后）：
+
+张林波 (zf)                 zlb@lsec.cc.ac.cn
+王磊   (cxterm, eggs)       lwang@ctex.org
+energy (obase)              obase@163.com
+shredder                    shredder@etang.com
+nsii                        nsii@sina.com
+李树钧 (hooklee)            http://www.hooklee.com
+邓建松 (texguru)            http://202.38.68.78/~texguru
+孙文昌 (mytex)              http://miktex.nankai.edu.cn
+
+感谢 CTEX 论坛上的用户对 CTeX 套装软件提出的各种建议和意见。
+
+
+====================================================
+
+5. 关于我们
+
+CTEX 是一个中国 TeX 用户社区，目前负责 CTEX 网站和 CTEX 论坛的管理维护
+工作。
+
+CTEX 的宗旨是为中国广大的 TeX 用户提供力所能及的帮助。CTEX 目前除了
+维护 CTEX 网站外，还开发提供了 CTeX 中文套装（中文 TeX 套装）软件。
+
+
+5.1. CTEX 网站
+
+CTEX 的服务器和网络接入得到了中国科学院数学与系统科学研究院的支持。
+
+CTEX 网站提供大量的 TeX 相关软件和文档下载，以及各类新闻通讯。
+
+CTEX 网站的网址为 http://www.ctex.org
+CTEX 论坛的网址为 http://bbs.ctex.org
+
+
+5.2. CTeX 中文套装
+
+CTeX 中文套装是基于 Windows 下的 MiKTeX 系统，集成了编辑器 WinEdt 和 PostScript 
+处理软件 Ghostscript 和 GSview 等主要工具。
+
+CTeX 中文套装在 MiKTeX 的基础上增加了对中文的完整支持。CTeX 中文套装支持
+CJK/CCT/TY 三种中文 TeX 处理方式。
+
+CTeX 中文套装只用于科研与学术目的，不得以任何理由用于商业目的。CTeX 中文套装中
+包含的所有免费、共享软件的版权均属于其原作者。安装程序的版权属于 CTEX。
+
+
+5.3. 联系方式
+
+主页：http://www.ctex.org
+论坛：http://bbs.ctex.org

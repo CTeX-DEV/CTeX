@@ -1,6 +1,6 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "12"
+!define BUILD_NUMBER "13"
 ;!define BUILD_FULL
 ;!define BUILD_DEBUG
 
@@ -181,12 +181,22 @@ SectionEnd
 
 Section -FinishSection
 
+	SetOverwrite on
+	SetOutPath $INSTDIR
+	File Readme.txt
+	File Changes.txt
+
 	WriteRegStr HKLM "Software\${APP_NAME}" "" "$INSTDIR"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayName" "${APP_NAME}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayVersion" "${APP_BUILD}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Publisher" "${APP_COMPANY}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Readme" "$INSTDIR\Readme.txt"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "HelpLink" "http://bbs.ctex.org"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "URLInfoAbout" "http://www.ctex.org"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\uninstall.exe"
 	WriteUninstaller "$INSTDIR\uninstall.exe"
 	CreateDirectory "$SMPROGRAMS\CTeX"
-	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\uninstall.exe"
 
 	!insertmacro UPDATEFILEASSOC
 
