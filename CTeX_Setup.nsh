@@ -87,7 +87,7 @@
 		StrCpy $R1 0
 		StrCpy $R9 ""
 		${Do}
-			${StrTok} $R2 $R0 ";" $R1 "0"
+			${StrTok} $R2 $R0 ";" $R1 "1"
 			${If} $R2 == ""
 				${ExitDo}
 			${EndIf}
@@ -106,7 +106,12 @@
 				StrCpy $R2 $R2 -1                  ;  Remove trailing space
       ${Loop}
 			${If} $R2 != ${DIR}                  ;  Remove existing target
-				StrCpy $R9 "$R9;$R2"
+			${AndIf} $R2 != ""
+				${If} $R9 != ""
+					StrCpy $R9 "$R9;$R2"
+				${Else}
+					StrCpy $R9 "$R2"
+				${EndIf}
 			${EndIf}
 			IntOp $R1 $R1 + 1
 		${Loop}
@@ -169,10 +174,12 @@
 !macroend
 
 !macro Install_Fonts DIR
+!ifndef BUILD_REPAIR
 	ExecWait '${DIR}\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
 	CreateDirectory "${DIR}\fonts\truetype\chinese"
 	Rename "FONT00.TTF" "${DIR}\fonts\truetype\chinese\simsun.ttf"
 	Delete "*.TTF"
+!endif
 !macroend
 
 !macro Install_Reg_Ghostscript DIR VERSION
