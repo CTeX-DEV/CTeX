@@ -234,12 +234,13 @@ FunctionEnd
 	StrCpy $R0 "${DIR}\gsview\gsview32.ini"
 	WriteINIStr $R0 "GSview-${VERSION}"	"Version" "${VERSION}"
 	WriteINIStr $R0 "GSview-${VERSION}"	"GSversion" "864"
-	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${VERSION}" "GS_DLL"
+	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${vGhostscript}" "GS_DLL"
 	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptDLL" "$R1"
-	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${VERSION}" "GS_LIB"
+	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${vGhostscript}" "GS_LIB"
 	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptInclude" "$R1"
 	WriteINIStr $R0 "GSview-${VERSION}"	"GhostscriptOther" '-dNOPLATFONTS -sFONTPATH="c:\psfonts"'
-	WriteINIStr $R0 "GSview-${VERSION}"	"Configured" "0"
+	WriteINIStr $R0 "GSview-${VERSION}"	"Configured" "1"
+	Delete "$PROFILE\gsview32.ini"
 
 	${AddPath} "${DIR}\gsview"
 
