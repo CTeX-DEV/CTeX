@@ -177,7 +177,7 @@ FunctionEnd
 !endif
 !macroend
 
-!macro Repair_Reg_Addons DIR
+!macro Repair_Reg_Addons DIR VERSION
 	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots"
 	${If} $R0 != ""
 		StrCpy $R1 "${DIR}"
@@ -195,7 +195,7 @@ FunctionEnd
 	${RemovePath} "${DIR}\ty\bin"
 !macroend
 
-!macro Uninstall_Reg_Addons DIR
+!macro Uninstall_Reg_Addons DIR VERSION
 ; Uninstall CCT
 	${un.RemovePath} "${DIR}\cct\bin"
 	${un.RemoveEnvVar} "CCHZPATH"
