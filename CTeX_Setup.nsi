@@ -24,6 +24,7 @@ InstallDir "C:\CTEX"
 ; Other settings
 ShowInstDetails nevershow
 ShowUninstDetails nevershow
+RequestExecutionLevel admin
 
 ; Use compression
 SetCompressor /SOLID LZMA
