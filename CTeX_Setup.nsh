@@ -76,6 +76,8 @@
 	DeleteRegKey HKCU "Software\MiKTeX.org"
 
 	${un.RemovePath} "${DIR}\miktex\bin"
+
+	!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.${VERSION}"
 !macroend
 
 !macro Install_Link_MiKTeX DIR VERSION
