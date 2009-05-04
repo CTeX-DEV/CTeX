@@ -1,8 +1,8 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "15"
+!define BUILD_NUMBER "16"
 ;!define BUILD_FULL
-;!define BUILD_DEBUG
+;!define BUILD_REPAIR
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -15,10 +15,14 @@
 Name "${APP_NAME} ${APP_VERSION}"
 BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 InstallDir "C:\CTEX"
+!ifndef BUILD_REPAIR
 !ifndef BUILD_FULL
 	OutFile "CTeX ${APP_BUILD}.exe"
 !else
 	OutFile "CTeX ${APP_BUILD} Full.exe"
+!endif
+!else
+  OutFile "Repair.exe"
 !endif
 
 ; Other settings
@@ -93,7 +97,7 @@ Section "MiKTeX" Section_MiKTeX
 	StrCpy $1 "${vMiKTeX}"
 	SetOutPath $0
 
-!ifndef BUILD_DEBUG
+!ifndef BUILD_REPAIR
 !ifndef BUILD_FULL
 	File /r MiKTeX.basic\*.*
 !else
@@ -113,7 +117,7 @@ Section "CTeX Addons" Section_Addons
 	StrCpy $0 "$INSTDIR\${dAddons}"
 	SetOutpath $0
 
-!ifndef BUILD_DEBUG
+!ifndef BUILD_REPAIR
 	File /r Addons\CTeX\*.*
 	File /r Addons\CJK\*.*
 	File /r Addons\CCT\*.*
@@ -132,7 +136,7 @@ Section "Ghostscript" Section_Ghostscript
 	StrCpy $1 "${vGhostscript}"
 	SetOutPath $0
 
-!ifndef BUILD_DEBUG
+!ifndef BUILD_REPAIR
 	File /r Ghostscript\*.*
 !endif
 
@@ -149,7 +153,7 @@ Section "GSview" Section_GSview
 	StrCpy $1 "${vGSview}"
 	SetOutPath $0
 
-!ifndef BUILD_DEBUG
+!ifndef BUILD_REPAIR
 	File /r GSview\*.*
 !endif
 
@@ -165,7 +169,7 @@ Section "WinEdt" Section_WinEdt
 	StrCpy $0 "$INSTDIR\${dWinEdt}"
 	SetOutPath $0
 
-!ifndef BUILD_DEBUG
+!ifndef BUILD_REPAIR
 	File /r WinEdt\*.*
 !endif
 
@@ -184,8 +188,12 @@ Section -FinishSection
 
 	SetOverwrite on
 	SetOutPath $INSTDIR
+
+!ifndef BUILD_REPAIR
 	File Readme.txt
 	File Changes.txt
+	File Repair.exe
+!endif
 
 	WriteRegStr HKLM "Software\${APP_NAME}" "" "$INSTDIR"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayName" "${APP_NAME}"
