@@ -23,8 +23,6 @@ CTeX 2.7.0
 本套装软件包中含有如下软件：
 
         MiKTeX 2.7
-        CCT 0.6180-3a
-        CJK 4.8.2
         WinEdt 5.5
         GSview 4.9
         Ghostscript 8.64
@@ -83,7 +81,7 @@ WinEdt 的升级比较麻烦，不建议自己升级。
 
 3.3. 刷新文件名数据库
 
-在对 localtexmf 和 texmf 目录下的文件作出修改后，请不要忘了刷新 MiKTeX 的
+在对 CTeX 和 MiKTeX 目录下的文件作出修改后，请不要忘了刷新 MiKTeX 的
 文件名数据库。可以使用菜单中的 MiKTeX -> Settings 工具来完成。
 
 

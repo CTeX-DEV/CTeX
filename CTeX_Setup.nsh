@@ -54,6 +54,39 @@
 !macroend
 !define un.RemoveEnvVar "!insertmacro _unRemoveEnvVar"
 
+Function RemoveToken
+	StrCpy $R9 ""
+	StrCpy $R8 0
+	${Do}
+		${StrTok} $R7 $R0 $R2 $R8 "1"
+		${If} $R7 == ""
+			${ExitDo}
+		${EndIf}
+		${Do}
+			StrCpy $R6 $R7 1
+			${If} $R6 != " "
+				${ExitDo}
+			${EndIf}
+			StrCpy $R7 $R7 "" 1                ;  Remove leading space
+		${Loop}
+		${Do}
+			StrCpy $R6 $R7 1 -1
+			${If} $R6 != " "
+				${ExitDo}
+			${EndIf}
+			StrCpy $R7 $R7 -1                  ;  Remove trailing space
+     ${Loop}
+		${If} $R7 != $R1                     ;  Remove existing target
+		${AndIf} $R7 != ""
+			${If} $R9 != ""
+				StrCpy $R9 "$R9;$R7"
+			${Else}
+				StrCpy $R9 "$R7"
+			${EndIf}
+		${EndIf}
+		IntOp $R8 $R8 + 1
+	${Loop}
+FunctionEnd
 
 !macro Install_Reg_MiKTeX DIR VERSION
 	WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Install" "${DIR}"
@@ -102,37 +135,9 @@
 		ReadRegStr $R1 HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Install"
 		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots" "${DIR};$R1"
 	${Else}
-		StrCpy $R1 0
-		StrCpy $R9 ""
-		${Do}
-			${StrTok} $R2 $R0 ";" $R1 "1"
-			${If} $R2 == ""
-				${ExitDo}
-			${EndIf}
-			${Do}
-				StrCpy $R3 $R2 1
-				${If} $R3 != " "
-					${ExitDo}
-				${EndIf}
-				StrCpy $R2 $R2 "" 1                ;  Remove leading space
-      ${Loop}
-      ${Do}
-				StrCpy $R3 $R2 1 -1
-				${If} $R3 != " "
-					${ExitDo}
-				${EndIf}
-				StrCpy $R2 $R2 -1                  ;  Remove trailing space
-      ${Loop}
-			${If} $R2 != ${DIR}                  ;  Remove existing target
-			${AndIf} $R2 != ""
-				${If} $R9 != ""
-					StrCpy $R9 "$R9;$R2"
-				${Else}
-					StrCpy $R9 "$R2"
-				${EndIf}
-			${EndIf}
-			IntOp $R1 $R1 + 1
-		${Loop}
+		StrCpy $R1 "${DIR}"
+		StrCpy $R2 ";"
+		Call RemoveToken
 		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots" "${DIR};$R9"
 	${EndIf}
 
@@ -173,6 +178,14 @@
 !macroend
 
 !macro Repair_Reg_Addons DIR
+	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots"
+	${If} $R0 != ""
+		StrCpy $R1 "${DIR}"
+		StrCpy $R2 ";"
+		Call RemoveToken
+		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots" "$R9"
+	${EndIf}
+
 ; Uninstall CCT
 	${RemovePath} "${DIR}\cct\bin"
 	${RemoveEnvVar} "CCHZPATH"
