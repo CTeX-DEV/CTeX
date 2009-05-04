@@ -30,11 +30,23 @@
 !macroend
 !define AddEnvVar "!insertmacro _AddEnvVar"
 
+!macro _RemovePath DIR
+	${EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
+	${EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
+!macroend
+!define RemovePath "!insertmacro _RemovePath"
+
 !macro _unRemovePath DIR
 	${un.EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
 	${un.EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
 !macroend
 !define un.RemovePath "!insertmacro _unRemovePath"
+
+!macro _RemoveEnvVar NAME
+	DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}"
+	DeleteRegValue HKCU "Environment" "${NAME}"
+!macroend
+!define RemoveEnvVar "!insertmacro _RemoveEnvVar"
 
 !macro _unRemoveEnvVar NAME
 	DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}"
@@ -52,7 +64,11 @@
 
 	${AddPath} "${DIR}\miktex\bin"
 
-	!insertmacro APP_ASSOCIATE "dvi" "CTeX.DVI" "DVI $(Desc_File)" "${DIR}\miktex\bin\yap.exe,0" "Open with Yap" '${DIR}\miktex\bin\yap.exe "%1"'
+	!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.${VERSION}" "DVI $(Desc_File)" "${DIR}\miktex\bin\yap.exe,1" "Open with Yap" '${DIR}\miktex\bin\yap.exe "%1"'
+!macroend
+
+!macro Repair_Reg_MiKTeX DIR VERSION
+	${RemovePath} "${DIR}\miktex\bin"
 !macroend
 
 !macro Uninstall_Reg_MiKTeX DIR VERSION
@@ -118,23 +134,7 @@
 		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${VERSION}\Core" "Roots" "${DIR};$R9"
 	${EndIf}
 
-	!insertmacro Install_CCT "${DIR}"
-	!insertmacro Install_TY "${DIR}"
-	!insertmacro Install_Fonts "${DIR}"
-!macroend
-
-!macro Uninstall_Reg_Addons DIR
-	!insertmacro Uninstall_CCT "${DIR}"
-	!insertmacro Uninstall_TY "${DIR}"
-!macroend
-
-!macro Uninstall_Addons DIR
-	!insertmacro Uninstall_CCT "${DIR}"
-	!insertmacro Uninstall_TY "${DIR}"
-	!insertmacro Uninstall_Fonts "${DIR}"
-!macroend
-
-!macro Install_CCT DIR
+; Install CCT
 	${AddPath} "${DIR}\cct\bin"
 	${AddEnvVar} "CCHZPATH" "${DIR}\cct\fonts"
 	${AddEnvVar} "CCPKPATH" "${DIR}\fonts\pk\modeless\cct\dpi$$d"
@@ -145,15 +145,8 @@
 	FileClose $R0
 	
 	ExecWait "${DIR}\cct\bin\cctinit.exe"
-!macroend
 
-!macro Uninstall_CCT DIR
-	${un.RemovePath} "${DIR}\cct\bin"
-	${un.RemoveEnvVar} "CCHZPATH"
-	${un.RemoveEnvVar} "CCPKPATH"
-!macroend
-
-!macro Install_TY DIR
+; Install TY
 	${AddPath} "${DIR}\ty\bin"
 
 	FileOpen $R0 "${DIR}\ty\bin\ty.cfg" "w"
@@ -167,13 +160,8 @@
 	FileWrite $R0 "simsun.ttc$\r$\nsimyou.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimli.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
 	FileWrite $R0 "0$\r$\n0$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n"
 	FileClose $R0
-!macroend
 
-!macro Uninstall_TY DIR
-	${un.RemovePath} "${DIR}\ty\bin"
-!macroend
-
-!macro Install_Fonts DIR
+; Install Fonts
 !ifndef BUILD_REPAIR
 	ExecWait '${DIR}\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
 	CreateDirectory "${DIR}\fonts\truetype\chinese"
@@ -182,11 +170,35 @@
 !endif
 !macroend
 
+!macro Repair_Reg_Addons DIR
+; Uninstall CCT
+	${RemovePath} "${DIR}\cct\bin"
+	${RemoveEnvVar} "CCHZPATH"
+	${RemoveEnvVar} "CCPKPATH"
+
+; Uninstall TY
+	${RemovePath} "${DIR}\ty\bin"
+!macroend
+
+!macro Uninstall_Reg_Addons DIR
+; Uninstall CCT
+	${un.RemovePath} "${DIR}\cct\bin"
+	${un.RemoveEnvVar} "CCHZPATH"
+	${un.RemoveEnvVar} "CCPKPATH"
+
+; Uninstall TY
+	${un.RemovePath} "${DIR}\ty\bin"
+!macroend
+
 !macro Install_Reg_Ghostscript DIR VERSION
 	WriteRegStr HKLM "Software\GPL Ghostscript\${VERSION}" "GS_DLL" "${DIR}\gs${VERSION}\bin\gsdll32.dll"
 	WriteRegStr HKLM "Software\GPL Ghostscript\${VERSION}" "GS_LIB" "${DIR}\gs${VERSION}\lib;${DIR}\fonts;$FONTS"
 
 	${AddPath} "${DIR}\gs${VERSION}\bin"
+!macroend
+
+!macro Repair_Reg_Ghostscript DIR VERSION
+	${RemovePath} "${DIR}\gs${VERSION}\bin"
 !macroend
 
 !macro Uninstall_Reg_Ghostscript DIR VERSION
@@ -216,8 +228,12 @@
 
 	${AddPath} "${DIR}\gsview"
 
-	!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "${DIR}\gsview\gsview32.exe,0" "Open with GSview" '${DIR}\gsview\gsview32.exe "%1"'
-	!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "${DIR}\gsview\gsview32.exe,0" "Open with GSview" '${DIR}\gsview\gsview32.exe "%1"'
+	!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "${DIR}\gsview\gsview32.exe,3" "Open with GSview" '${DIR}\gsview\gsview32.exe "%1"'
+	!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "${DIR}\gsview\gsview32.exe,3" "Open with GSview" '${DIR}\gsview\gsview32.exe "%1"'
+!macroend
+
+!macro Repair_Reg_GSview DIR VERSION
+	${RemovePath} "${DIR}\gsview"
 !macroend
 
 !macro Uninstall_Reg_GSview DIR VERSION
@@ -241,6 +257,10 @@
 	${AddPath} "${DIR}"
 
 	!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "${DIR}\WinEdt.exe,0" "Open with WinEdt" '${DIR}\WinEdt.exe "%1"'
+!macroend
+
+!macro Repair_Reg_WinEdt DIR VERSION
+	${RemovePath} "${DIR}"
 !macroend
 
 !macro Uninstall_Reg_WinEdt DIR VERSION

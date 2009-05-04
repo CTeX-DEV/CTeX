@@ -1,8 +1,8 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "17"
+!define BUILD_NUMBER "18"
 ;!define BUILD_FULL
-!define BUILD_REPAIR
+;!define BUILD_REPAIR
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -90,6 +90,17 @@ LangString Desc_File ${LANG_ENGLISH} "File"
 !define dWinEdt "WinEdt"
 !define vWinEdt "5.5"
 
+
+!ifdef BUILD_REPAIR
+Var OLDINSTDIR
+
+Section -RepairSection
+
+	ReadRegStr $OLDINSTDIR HKLM "Software\${APP_NAME}" ""
+
+SectionEnd
+!endif
+
 Section "MiKTeX" Section_MiKTeX
 
 	SetOverwrite on
@@ -104,6 +115,12 @@ Section "MiKTeX" Section_MiKTeX
 !else
 	File /r MiKTeX.full\*.*
 !endif
+!endif
+
+!ifdef BUILD_REPAIR
+	${If} $OLDINSTDIR != ""
+		!insertmacro Repair_Reg_MiKTeX "$OLDINSTDIR\${dMiKTeX}" "${vMiKTeX}"
+	${EndIf}
 !endif
 
 	!insertmacro Install_Reg_MiKTeX "$0" "$1"
@@ -125,6 +142,12 @@ Section "CTeX Addons" Section_Addons
 	File /r Addons\TY\*.*
 !endif
 
+!ifdef BUILD_REPAIR
+	${If} $OLDINSTDIR != ""
+		!insertmacro Repair_Reg_Addons "$OLDINSTDIR\${dAddons}"
+	${EndIf}
+!endif
+
 	!insertmacro Install_Reg_Addons "$0" "${vMiKTeX}"
 
 SectionEnd
@@ -139,6 +162,12 @@ Section "Ghostscript" Section_Ghostscript
 
 !ifndef BUILD_REPAIR
 	File /r Ghostscript\*.*
+!endif
+
+!ifdef BUILD_REPAIR
+	${If} $OLDINSTDIR != ""
+		!insertmacro Repair_Reg_Ghostscript "$OLDINSTDIR\${dGhostscript}" "${vGhostscript}"
+	${EndIf}
 !endif
 
 	!insertmacro Install_Reg_Ghostscript "$0" "$1"
@@ -158,6 +187,12 @@ Section "GSview" Section_GSview
 	File /r GSview\*.*
 !endif
 
+!ifdef BUILD_REPAIR
+	${If} $OLDINSTDIR != ""
+		!insertmacro Repair_Reg_GSview "$OLDINSTDIR\${dGSview}" "${vGSview}"
+	${EndIf}
+!endif
+
 	!insertmacro Install_Reg_GSview "$0" "$1"
 	!insertmacro Install_Link_GSview "$0" "$1"
 
@@ -172,6 +207,12 @@ Section "WinEdt" Section_WinEdt
 
 !ifndef BUILD_REPAIR
 	File /r WinEdt\*.*
+!endif
+
+!ifdef BUILD_REPAIR
+	${If} $OLDINSTDIR != ""
+		!insertmacro Repair_Reg_WinEdt "$OLDINSTDIR\${dWinEdt}" "${vWinEdt}"
+	${EndIf}
 !endif
 
 	!insertmacro Install_Reg_WinEdt "$0" "$1"
@@ -210,6 +251,8 @@ Section -FinishSection
 
 	!insertmacro UPDATEFILEASSOC
 
+	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\mpm.exe --register-components --quiet"
+	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --force --mklinks --quiet"
 	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --update-fndb --quiet"
 	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --mkmaps --quiet"
 
