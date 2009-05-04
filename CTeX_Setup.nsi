@@ -1,6 +1,6 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "18"
+!define BUILD_NUMBER "19"
 ;!define BUILD_FULL
 ;!define BUILD_REPAIR
 
@@ -273,6 +273,8 @@ Section Uninstall
 	;Remove from registry...
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
+
+	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\mpm.exe --unregister-components --quiet"
 
 	!insertmacro Uninstall_Reg_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
 	!insertmacro Uninstall_Reg_Addons "$INSTDIR\${dAddons}"
