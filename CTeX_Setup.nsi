@@ -2,7 +2,7 @@
 
 !define BUILD_NUMBER "19"
 ;!define BUILD_FULL
-;!define BUILD_REPAIR
+!define BUILD_REPAIR
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -104,10 +104,7 @@ SectionEnd
 Section "MiKTeX" Section_MiKTeX
 
 	SetOverwrite on
-
-	StrCpy $0 "$INSTDIR\${dMiKTeX}"
-	StrCpy $1 "${vMiKTeX}"
-	SetOutPath $0
+	SetOutPath "$INSTDIR\${dMiKTeX}"
 
 !ifndef BUILD_REPAIR
 !ifndef BUILD_FULL
@@ -123,17 +120,15 @@ Section "MiKTeX" Section_MiKTeX
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_MiKTeX "$0" "$1"
-	!insertmacro Install_Link_MiKTeX "$0" "$1"
+	!insertmacro Install_Reg_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
+	!insertmacro Install_Link_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
 
 SectionEnd
 
 Section "CTeX Addons" Section_Addons
 
 	SetOverwrite On
-
-	StrCpy $0 "$INSTDIR\${dAddons}"
-	SetOutpath $0
+	SetOutPath "$INSTDIR\${dAddons}"
 
 !ifndef BUILD_REPAIR
 	File /r Addons\CTeX\*.*
@@ -144,21 +139,18 @@ Section "CTeX Addons" Section_Addons
 
 !ifdef BUILD_REPAIR
 	${If} $OLDINSTDIR != ""
-		!insertmacro Repair_Reg_Addons "$OLDINSTDIR\${dAddons}"
+		!insertmacro Repair_Reg_Addons "$OLDINSTDIR\${dAddons}" "${vMiKTeX}"
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_Addons "$0" "${vMiKTeX}"
+	!insertmacro Install_Reg_Addons "$INSTDIR\${dAddons}" "${vMiKTeX}"
 
 SectionEnd
 
 Section "Ghostscript" Section_Ghostscript
 
 	SetOverwrite on
-
-	StrCpy $0 "$INSTDIR\${dGhostscript}"
-	StrCpy $1 "${vGhostscript}"
-	SetOutPath $0
+	SetOutPath "$INSTDIR\${dGhostscript}"
 
 !ifndef BUILD_REPAIR
 	File /r Ghostscript\*.*
@@ -170,18 +162,15 @@ Section "Ghostscript" Section_Ghostscript
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_Ghostscript "$0" "$1"
-	!insertmacro Install_Link_Ghostscript "$0" "$1"
+	!insertmacro Install_Reg_Ghostscript "$INSTDIR\${dGhostscript}" "${vGhostscript}"
+	!insertmacro Install_Link_Ghostscript "$INSTDIR\${dGhostscript}" "${vGhostscript}"
 
 SectionEnd
 
 Section "GSview" Section_GSview
 
 	SetOverwrite on
-
-	StrCpy $0 "$INSTDIR\${dGSview}"
-	StrCpy $1 "${vGSview}"
-	SetOutPath $0
+	SetOutPath "$INSTDIR\${dGSview}"
 
 !ifndef BUILD_REPAIR
 	File /r GSview\*.*
@@ -193,17 +182,15 @@ Section "GSview" Section_GSview
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_GSview "$0" "$1"
-	!insertmacro Install_Link_GSview "$0" "$1"
+	!insertmacro Install_Reg_GSview "$INSTDIR\${dGSview}" "${vGSview}"
+	!insertmacro Install_Link_GSview "$INSTDIR\${dGSview}" "${vGSview}"
 
 SectionEnd
 
 Section "WinEdt" Section_WinEdt
 
 	SetOverwrite on
-
-	StrCpy $0 "$INSTDIR\${dWinEdt}"
-	SetOutPath $0
+	SetOutPath "$INSTDIR\${dWinEdt}"
 
 !ifndef BUILD_REPAIR
 	File /r WinEdt\*.*
@@ -215,13 +202,13 @@ Section "WinEdt" Section_WinEdt
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_WinEdt "$0" "$1"
-	!insertmacro Install_Link_WinEdt "$0" "$1"
+	!insertmacro Install_Reg_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
+	!insertmacro Install_Link_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
 
 	SectionGetFlags ${Section_MiKTeX} $R0
 	IntOp $R0 $R0 & ${SF_SELECTED}
 	${If} $R0 == ${SF_SELECTED}
-		!insertmacro Associate_WinEdt_MiKTeX "$0" "${vMiKTeX}" 
+		!insertmacro Associate_WinEdt_MiKTeX "$INSTDIR\${dWinEdt}" "${vMiKTeX}" 
 	${EndIf}
 
 SectionEnd
@@ -277,7 +264,7 @@ Section Uninstall
 	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\mpm.exe --unregister-components --quiet"
 
 	!insertmacro Uninstall_Reg_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
-	!insertmacro Uninstall_Reg_Addons "$INSTDIR\${dAddons}"
+	!insertmacro Uninstall_Reg_Addons "$INSTDIR\${dAddons}" "${vMiKTeX}"
 	!insertmacro Uninstall_Reg_Ghostscript "$INSTDIR\${dGhostscript}" "${vGhostscript}"
 	!insertmacro Uninstall_Reg_GSview "$INSTDIR\${dGSview}" "${vGSview}"
 	!insertmacro Uninstall_Reg_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
