@@ -209,7 +209,7 @@ Function ${UN}EnvVarUpdate
     StrCpy $6 0
  
     ${Do}
-      ${${UN}StrTok} $7 $9 ";" $8 "0"      ; $7 = next entry, $8 = entry counter
+      ${${UN}StrTok} $7 $9 ";" $8 "1"      ; $7 = next entry, $8 = entry counter
  
       ${If} $7 == ""                       ; If we've run out of entries,
         ${ExitDo}                          ;    were done

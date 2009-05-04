@@ -1,8 +1,8 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "16"
+!define BUILD_NUMBER "17"
 ;!define BUILD_FULL
-;!define BUILD_REPAIR
+!define BUILD_REPAIR
 
 ; Define your application name
 !define APP_NAME "CTeX"
@@ -14,14 +14,15 @@
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
 BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
-InstallDir "C:\CTEX"
 !ifndef BUILD_REPAIR
+	InstallDir "C:\CTEX"
 !ifndef BUILD_FULL
 	OutFile "CTeX ${APP_BUILD}.exe"
 !else
 	OutFile "CTeX ${APP_BUILD} Full.exe"
 !endif
 !else
+	InstallDir "$EXEDIR"
   OutFile "Repair.exe"
 !endif
 
@@ -202,10 +203,10 @@ Section -FinishSection
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Readme" "$INSTDIR\Readme.txt"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "HelpLink" "http://bbs.ctex.org"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "URLInfoAbout" "http://www.ctex.org"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\uninstall.exe"
-	WriteUninstaller "$INSTDIR\uninstall.exe"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\Uninstall.exe"
+	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	CreateDirectory "$SMPROGRAMS\CTeX"
-	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
 
 	!insertmacro UPDATEFILEASSOC
 
@@ -237,7 +238,7 @@ Section Uninstall
 	!insertmacro Uninstall_Reg_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
 
 	; Delete self
-	Delete "$INSTDIR\uninstall.exe"
+	Delete "$INSTDIR\Uninstall.exe"
 
 	; Delete Shortcuts
 	RMDir /r "$SMPROGRAMS\CTeX"
