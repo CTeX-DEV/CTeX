@@ -46,7 +46,9 @@
 ;             <verb> = <"menu-item text">
 ;                 command = <"command string">
 ;
- 
+
+!include "LogicLib.nsh"
+
 !macro APP_ASSOCIATE EXT FILECLASS DESCRIPTION ICON COMMANDTEXT COMMAND
   ; Backup the previously associated file class
   ReadRegStr $R0 HKCR ".${EXT}" ""
@@ -64,7 +66,9 @@
 !macro APP_ASSOCIATE_EX EXT FILECLASS DESCRIPTION ICON VERB DEFAULTVERB SHELLNEW COMMANDTEXT COMMAND
   ; Backup the previously associated file class
   ReadRegStr $R0 HKCR ".${EXT}" ""
-  WriteRegStr HKCR ".${EXT}" "${FILECLASS}_backup" "$R0"
+  ${If} $R0 != ${FILECLASS}
+    WriteRegStr HKCR ".${EXT}" "${FILECLASS}_backup" "$R0"
+  ${EndIf}
  
   WriteRegStr HKCR ".${EXT}" "" "${FILECLASS}"
   StrCmp "${SHELLNEW}" "0" +2
