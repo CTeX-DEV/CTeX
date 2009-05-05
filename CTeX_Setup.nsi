@@ -1,6 +1,6 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "20"
+!define BUILD_NUMBER "21"
 ;!define BUILD_FULL
 !define BUILD_REPAIR
 
@@ -79,24 +79,53 @@ LangString Desc_WinEdt ${LANG_ENGLISH} "WinEdt a well designed text editor with 
 LangString Desc_File ${LANG_SIMPCHINESE} "文档"
 LangString Desc_File ${LANG_ENGLISH} "File"
 
-; Components information
-!define dMiKTeX "MiKTeX"
-!define vMiKTeX "2.7"
-!define dAddons "CTeX"
-!define dGhostscript "Ghostscript"
-!define vGhostscript "8.64"
-!define dGSview "GSview"
-!define vGSview "4.9"
-!define dWinEdt "WinEdt"
-!define vWinEdt "5.5"
+LangString Err_ObsoleteVersion ${LANG_SIMPCHINESE} "在系统中发现旧版的CTeX，请先卸载！"
+LangString Err_ObsoleteVersion ${LANG_ENGLISH} "Found obsolete version of CTeX installed in the system, please uninstall first!"
+LangString Err_WrongVersion ${LANG_SIMPCHINESE} "系统中安装的CTeX与本程序版本不一致，是否继续？"
+LangString Err_WrongVersion ${LANG_ENGLISH} "The version of installed CTeX and this file are different, continue?"
 
+; Components information
+!define MiKTeX_Dir          "MiKTeX"
+!define MiKTeX_Version      "2.7"
+!define Addons_Dir          "CTeX"
+!define Ghostscript_Dir     "Ghostscript"
+!define Ghostscript_Version "8.64"
+!define GSview_Dir          "GSview"
+!define GSview_Version      "4.9"
+!define WinEdt_Dir          "WinEdt"
+!define WinEdt_Version      "5.5"
+
+Section -CheckObsoleteVersion
+
+	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{7AB19E08-582F-4996-BB5D-7287222D25ED}" "UninstallString"
+	${If} $0 != ""
+		MessageBox MB_OK|MB_ICONSTOP "$(Err_ObsoleteVersion)"
+		Abort
+	${EndIf}
+	ReadRegStr $0 HKLM "Software\${APP_NAME}" "Version"
+	${If} $0 != ""
+		${VersionCompare} $0 "2.7.0.0" $1
+		${If} $1 == "2"
+			MessageBox MB_OK|MB_ICONSTOP "$(Err_ObsoleteVersion)"
+			Abort
+		${EndIf}
+	${EndIf}
+
+SectionEnd
 
 !ifdef BUILD_REPAIR
-Var OLDINSTDIR
-
 Section -RepairSection
 
-	ReadRegStr $OLDINSTDIR HKLM "Software\${APP_NAME}" ""
+	Var /GLOBAL OLD_INSTDIR
+	ReadRegStr $OLD_INSTDIR HKLM "Software\${APP_NAME}" "Install"
+	${If} $OLD_INSTDIR != ""
+		ReadRegStr $0 HKLM "Software\${APP_NAME}" "Version"
+		${If} $0 != ${APP_BUILD}
+			MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Err_WrongVersion)" IDYES next
+			Abort
+next:
+		${EndIf}
+	${EndIf}
 
 SectionEnd
 !endif
@@ -104,7 +133,7 @@ SectionEnd
 Section "MiKTeX" Section_MiKTeX
 
 	SetOverwrite on
-	SetOutPath "$INSTDIR\${dMiKTeX}"
+	SetOutPath "$INSTDIR\${MiKTeX_Dir}"
 
 !ifndef BUILD_REPAIR
 !ifndef BUILD_FULL
@@ -115,20 +144,20 @@ Section "MiKTeX" Section_MiKTeX
 !endif
 
 !ifdef BUILD_REPAIR
-	${If} $OLDINSTDIR != ""
-		!insertmacro Repair_Reg_MiKTeX "$OLDINSTDIR\${dMiKTeX}" "${vMiKTeX}"
+	${If} $OLD_INSTDIR != ""
+		!insertmacro Repair_Reg_MiKTeX
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
-	!insertmacro Install_Link_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
+	!insertmacro Install_Reg_MiKTeX
+	!insertmacro Install_Link_MiKTeX
 
 SectionEnd
 
 Section "CTeX Addons" Section_Addons
 
 	SetOverwrite On
-	SetOutPath "$INSTDIR\${dAddons}"
+	SetOutPath "$INSTDIR\${Addons_Dir}"
 
 !ifndef BUILD_REPAIR
 	File /r Addons\CTeX\*.*
@@ -138,77 +167,77 @@ Section "CTeX Addons" Section_Addons
 !endif
 
 !ifdef BUILD_REPAIR
-	${If} $OLDINSTDIR != ""
-		!insertmacro Repair_Reg_Addons "$OLDINSTDIR\${dAddons}" "${vMiKTeX}"
+	${If} $OLD_INSTDIR != ""
+		!insertmacro Repair_Reg_Addons
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_Addons "$INSTDIR\${dAddons}" "${vMiKTeX}"
+	!insertmacro Install_Reg_Addons
 
 SectionEnd
 
 Section "Ghostscript" Section_Ghostscript
 
 	SetOverwrite on
-	SetOutPath "$INSTDIR\${dGhostscript}"
+	SetOutPath "$INSTDIR\${Ghostscript_Dir}"
 
 !ifndef BUILD_REPAIR
 	File /r Ghostscript\*.*
 !endif
 
 !ifdef BUILD_REPAIR
-	${If} $OLDINSTDIR != ""
-		!insertmacro Repair_Reg_Ghostscript "$OLDINSTDIR\${dGhostscript}" "${vGhostscript}"
+	${If} $OLD_INSTDIR != ""
+		!insertmacro Repair_Reg_Ghostscript
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_Ghostscript "$INSTDIR\${dGhostscript}" "${vGhostscript}"
-	!insertmacro Install_Link_Ghostscript "$INSTDIR\${dGhostscript}" "${vGhostscript}"
+	!insertmacro Install_Reg_Ghostscript
+	!insertmacro Install_Link_Ghostscript
 
 SectionEnd
 
 Section "GSview" Section_GSview
 
 	SetOverwrite on
-	SetOutPath "$INSTDIR\${dGSview}"
+	SetOutPath "$INSTDIR\${GSview_Dir}"
 
 !ifndef BUILD_REPAIR
 	File /r GSview\*.*
 !endif
 
 !ifdef BUILD_REPAIR
-	${If} $OLDINSTDIR != ""
-		!insertmacro Repair_Reg_GSview "$OLDINSTDIR\${dGSview}" "${vGSview}"
+	${If} $OLD_INSTDIR != ""
+		!insertmacro Repair_Reg_GSview
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_GSview "$INSTDIR\${dGSview}" "${vGSview}"
-	!insertmacro Install_Link_GSview "$INSTDIR\${dGSview}" "${vGSview}"
+	!insertmacro Install_Reg_GSview
+	!insertmacro Install_Link_GSview
 
 SectionEnd
 
 Section "WinEdt" Section_WinEdt
 
 	SetOverwrite on
-	SetOutPath "$INSTDIR\${dWinEdt}"
+	SetOutPath "$INSTDIR\${WinEdt_Dir}"
 
 !ifndef BUILD_REPAIR
 	File /r WinEdt\*.*
 !endif
 
 !ifdef BUILD_REPAIR
-	${If} $OLDINSTDIR != ""
-		!insertmacro Repair_Reg_WinEdt "$OLDINSTDIR\${dWinEdt}" "${vWinEdt}"
+	${If} $OLD_INSTDIR != ""
+		!insertmacro Repair_Reg_WinEdt
 	${EndIf}
 !endif
 
-	!insertmacro Install_Reg_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
-	!insertmacro Install_Link_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
+	!insertmacro Install_Reg_WinEdt
+	!insertmacro Install_Link_WinEdt
 
 	SectionGetFlags ${Section_MiKTeX} $R0
 	IntOp $R0 $R0 & ${SF_SELECTED}
 	${If} $R0 == ${SF_SELECTED}
-		!insertmacro Associate_WinEdt_MiKTeX "$INSTDIR\${dWinEdt}" "${vMiKTeX}" 
+		!insertmacro Associate_WinEdt_MiKTeX
 	${EndIf}
 
 SectionEnd
@@ -224,7 +253,10 @@ Section -FinishSection
 	File Repair.exe
 !endif
 
-	WriteRegStr HKLM "Software\${APP_NAME}" "" "$INSTDIR"
+	WriteRegStr HKLM "Software\${APP_NAME}" "" "${APP_NAME} ${APP_VERSION}"
+	WriteRegStr HKLM "Software\${APP_NAME}" "Install" "$INSTDIR"
+	WriteRegStr HKLM "Software\${APP_NAME}" "Version" "${APP_BUILD}"
+
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayName" "${APP_NAME}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayVersion" "${APP_BUILD}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Publisher" "${APP_COMPANY}"
@@ -238,10 +270,11 @@ Section -FinishSection
 
 	!insertmacro UPDATEFILEASSOC
 
-	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\mpm.exe --register-components --quiet"
-	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --force --mklinks --quiet"
-	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --update-fndb --quiet"
-	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\initexmf.exe --mkmaps --quiet"
+	StrCpy $0 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
+	ExecWait "$0\mpm.exe --register-components --quiet"
+	ExecWait "$0\initexmf.exe --force --mklinks --quiet"
+	ExecWait "$0\initexmf.exe --update-fndb --quiet"
+	ExecWait "$0\initexmf.exe --mkmaps --quiet"
 
 SectionEnd
 
@@ -261,13 +294,13 @@ Section Uninstall
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
 
-	ExecWait "$INSTDIR\${dMiKTeX}\miktex\bin\mpm.exe --unregister-components --quiet"
+	ExecWait "$INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
 
-	!insertmacro Uninstall_Reg_MiKTeX "$INSTDIR\${dMiKTeX}" "${vMiKTeX}"
-	!insertmacro Uninstall_Reg_Addons "$INSTDIR\${dAddons}" "${vMiKTeX}"
-	!insertmacro Uninstall_Reg_Ghostscript "$INSTDIR\${dGhostscript}" "${vGhostscript}"
-	!insertmacro Uninstall_Reg_GSview "$INSTDIR\${dGSview}" "${vGSview}"
-	!insertmacro Uninstall_Reg_WinEdt "$INSTDIR\${dWinEdt}" "${vWinEdt}"
+	!insertmacro Uninstall_Reg_MiKTeX
+	!insertmacro Uninstall_Reg_Addons
+	!insertmacro Uninstall_Reg_Ghostscript
+	!insertmacro Uninstall_Reg_GSview
+	!insertmacro Uninstall_Reg_WinEdt
 
 	; Delete self
 	Delete "$INSTDIR\Uninstall.exe"
