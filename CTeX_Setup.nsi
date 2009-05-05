@@ -1,6 +1,6 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "19"
+!define BUILD_NUMBER "20"
 ;!define BUILD_FULL
 !define BUILD_REPAIR
 
