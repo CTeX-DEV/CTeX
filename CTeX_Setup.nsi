@@ -1,8 +1,8 @@
 ; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "21"
+!define BUILD_NUMBER "22"
 ;!define BUILD_FULL
-!define BUILD_REPAIR
+;!define BUILD_REPAIR
 
 ; Define your application name
 !define APP_NAME "CTeX"
