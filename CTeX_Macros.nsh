@@ -90,7 +90,7 @@ Function RemoveToken
 	${Loop}
 FunctionEnd
 
-!macro Install_Reg_MiKTeX
+!macro Install_Config_MiKTeX
 	StrCpy $0 "$INSTDIR\${MiKTeX_Dir}"
 
 	WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Install" "$0"
@@ -103,25 +103,6 @@ FunctionEnd
 
 	StrCpy $1 "$0\miktex\bin\yap.exe"
 	!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.${MiKTeX_Version}" "DVI $(Desc_File)" "$1,1" "Open with Yap" '$1 "%1"'
-!macroend
-
-!macro Reset_Reg_MiKTeX
-	${If} $OLD_INSTDIR != ""
-		${RemovePath} "$OLD_INSTDIR\${MiKTeX_Dir}\miktex\bin"
-	${EndIf}
-!macroend
-
-!macro Uninstall_Reg_MiKTeX
-	DeleteRegKey HKLM "Software\MiKTeX.org"
-	DeleteRegKey HKCU "Software\MiKTeX.org"
-
-	${un.RemovePath} "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
-
-	!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.${MiKTeX_Version}"
-!macroend
-
-!macro Install_Link_MiKTeX
-	StrCpy $0 "$INSTDIR\${MiKTeX_Dir}"
 
 	CreateDirectory "$SMPROGRAMS\CTeX\MiKTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Browse Packages.lnk" "$0\miktex\bin\mpm_mfc.exe"
@@ -139,7 +120,22 @@ FunctionEnd
 	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Support" "http://miktex.org/support"
 !macroend
 
-!macro Install_Reg_Addons
+!macro Reset_Config_MiKTeX
+	${If} $OLD_INSTDIR != ""
+		${RemovePath} "$OLD_INSTDIR\${MiKTeX_Dir}\miktex\bin"
+	${EndIf}
+!macroend
+
+!macro Uninstall_Config_MiKTeX
+	DeleteRegKey HKLM "Software\MiKTeX.org"
+	DeleteRegKey HKCU "Software\MiKTeX.org"
+
+	${un.RemovePath} "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
+
+	!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.${MiKTeX_Version}"
+!macroend
+
+!macro Install_Config_Addons
 	StrCpy $0 "$INSTDIR\${Addons_Dir}"
 
 	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Roots"
@@ -192,7 +188,7 @@ FunctionEnd
 	${EndIf}
 !macroend
 
-!macro Reset_Reg_Addons
+!macro Reset_Config_Addons
 	${If} $OLD_INSTDIR != ""
 		StrCpy $0 "$OLD_INSTDIR\${Addons_Dir}"
 		
@@ -214,7 +210,7 @@ FunctionEnd
 	${EndIf}
 !macroend
 
-!macro Uninstall_Reg_Addons
+!macro Uninstall_Config_Addons
 	StrCpy $0 "$INSTDIR\${Addons_Dir}"
 
 ; Uninstall CCT
@@ -226,36 +222,32 @@ FunctionEnd
 	${un.RemovePath} "$0\ty\bin"
 !macroend
 
-!macro Install_Reg_Ghostscript
+!macro Install_Config_Ghostscript
 	StrCpy $0 "$INSTDIR\${Ghostscript_Dir}"
 	StrCpy $1 "$0\gs${Ghostscript_Version}"
 	WriteRegStr HKLM "Software\GPL Ghostscript\${Ghostscript_Version}" "GS_DLL" "$1\bin\gsdll32.dll"
 	WriteRegStr HKLM "Software\GPL Ghostscript\${Ghostscript_Version}" "GS_LIB" "$1\lib;$0\fonts;$FONTS"
 
 	${AddPath} "$1\bin"
-!macroend
 
-!macro Reset_Reg_Ghostscript
-	${If} $OLD_INSTDIR != ""
-		${RemovePath} "$OLD_INSTDIR\${Ghostscript_Dir}\gs$OLD_Ghostscript_Version\bin"
-	${EndIf}
-!macroend
-
-!macro Uninstall_Reg_Ghostscript
-	DeleteRegKey HKLM "Software\GPL Ghostscript"
-
-	${un.RemovePath} "$INSTDIR\${Ghostscript_Dir}\gs${Ghostscript_Version}\bin"
-!macroend
-
-!macro Install_Link_Ghostscript
-	StrCpy $0 "$INSTDIR\${Ghostscript_Dir}"
-	StrCpy $1 "$0\gs${Ghostscript_Version}"
 	CreateDirectory "$SMPROGRAMS\CTeX\Ghostcript"
 	CreateShortCut "$SMPROGRAMS\CTeX\Ghostcript\Ghostscript.lnk" "$1\bin\gswin32.exe" '"-I$1\lib;$0\fonts;$FONTS"'
 	CreateShortCut "$SMPROGRAMS\CTeX\Ghostcript\Ghostscript Readme.lnk" "$1\doc\Readme.htm"
 !macroend
 
-!macro Install_Reg_GSview
+!macro Reset_Config_Ghostscript
+	${If} $OLD_INSTDIR != ""
+		${RemovePath} "$OLD_INSTDIR\${Ghostscript_Dir}\gs$OLD_Ghostscript_Version\bin"
+	${EndIf}
+!macroend
+
+!macro Uninstall_Config_Ghostscript
+	DeleteRegKey HKLM "Software\GPL Ghostscript"
+
+	${un.RemovePath} "$INSTDIR\${Ghostscript_Dir}\gs${Ghostscript_Version}\bin"
+!macroend
+
+!macro Install_Config_GSview
 	StrCpy $0 "$INSTDIR\${GSview_Dir}"
 	WriteRegStr HKLM "Software\Ghostgum\GSview" "${GSview_Version}" "$0"
 
@@ -275,15 +267,19 @@ FunctionEnd
 	StrCpy $1 "$0\gsview\gsview32.exe"
 	!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$1,3" "Open with GSview" '$1 "%1"'
 	!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$1,3" "Open with GSview" '$1 "%1"'
+
+	CreateDirectory "$SMPROGRAMS\CTeX\Ghostgum"
+	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview.lnk" "$0\gsview\gsview32.exe"
+	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview Readme.lnk" "$0\gsview\Readme.htm"
 !macroend
 
-!macro Reset_Reg_GSview
+!macro Reset_Config_GSview
 	${If} $OLD_INSTDIR != ""
 		${RemovePath} "$OLD_INSTDIR\${GSview_Dir}\gsview"
 	${EndIf}
 !macroend
 
-!macro Uninstall_Reg_GSview
+!macro Uninstall_Config_GSview
 	DeleteRegKey HKLM "Software\Ghostgum"
 
 	${un.RemovePath} "$INSTDIR\${GSview_Dir}\gsview"
@@ -292,14 +288,7 @@ FunctionEnd
 	!insertmacro APP_UNASSOCIATE "eps" "CTeX.EPS"
 !macroend
 
-!macro Install_Link_GSview
-	StrCpy $0 "$INSTDIR\${GSview_Dir}"
-	CreateDirectory "$SMPROGRAMS\CTeX\Ghostgum"
-	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview.lnk" "$0\gsview\gsview32.exe"
-	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview Readme.lnk" "$0\gsview\Readme.htm"
-!macroend
-
-!macro Install_Reg_WinEdt
+!macro Install_Config_WinEdt
 	StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
 	WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
 
@@ -307,15 +296,18 @@ FunctionEnd
 
 	StrCpy $1 "$0\WinEdt.exe"
 	!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "$1,0" "Open with WinEdt" '$1 "%1"'
+
+	CreateDirectory "$SMPROGRAMS\CTeX"
+	CreateShortCut "$SMPROGRAMS\CTeX\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
 !macroend
 
-!macro Reset_Reg_WinEdt
+!macro Reset_Config_WinEdt
 	${If} $OLD_INSTDIR != ""
 		${RemovePath} "$OLD_INSTDIR\${WinEdt_Dir}"
 	${EndIf}
 !macroend
 
-!macro Uninstall_Reg_WinEdt
+!macro Uninstall_Config_WinEdt
 	DeleteRegKey HKLM "Software\WinEdt"
 
 	${un.RemovePath} "$INSTDIR\${WinEdt_Dir}"
@@ -323,16 +315,11 @@ FunctionEnd
 	!insertmacro APP_UNASSOCIATE "tex" "CTeX.TeX"
 !macroend
 
-!macro Install_Link_WinEdt
-	CreateDirectory "$SMPROGRAMS\CTeX"
-	CreateShortCut "$SMPROGRAMS\CTeX\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
-!macroend
-
 !macro Associate_WinEdt_MiKTeX
 	WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
 !macroend
 
-!macro Install_Reg_CTeX
+!macro Install_Config_CTeX
 	WriteRegStr HKLM "Software\${APP_NAME}" "" "${APP_NAME} ${APP_VERSION}"
 	WriteRegStr HKLM "Software\${APP_NAME}" "Install" "$INSTDIR"
 	WriteRegStr HKLM "Software\${APP_NAME}" "Version" "${APP_BUILD}"
@@ -346,12 +333,12 @@ FunctionEnd
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\Uninstall.exe"
 !macroend
 
-!macro Reset_Reg_CTeX
+!macro Reset_Config_CTeX
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
 !macroend
 
-!macro Uninstall_Reg_CTeX
+!macro Uninstall_Config_CTeX
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
 !macroend

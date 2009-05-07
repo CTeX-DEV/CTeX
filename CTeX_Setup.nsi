@@ -86,10 +86,9 @@ Section "MiKTeX" Section_MiKTeX
 !endif
 !endif
 
-	!insertmacro Reset_Reg_MiKTeX
+	!insertmacro Reset_Config_MiKTeX
 
-	!insertmacro Install_Reg_MiKTeX
-	!insertmacro Install_Link_MiKTeX
+	!insertmacro Install_Config_MiKTeX
 
 SectionEnd
 
@@ -105,9 +104,9 @@ Section "CTeX Addons" Section_Addons
 	${Install_Files} "Addons\TY\*.*" "install_ty.log"
 !endif
 
-	!insertmacro Reset_Reg_Addons
+	!insertmacro Reset_Config_Addons
 
-	!insertmacro Install_Reg_Addons
+	!insertmacro Install_Config_Addons
 
 SectionEnd
 
@@ -120,10 +119,9 @@ Section "Ghostscript" Section_Ghostscript
 	${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
 !endif
 
-	!insertmacro Reset_Reg_Ghostscript
+	!insertmacro Reset_Config_Ghostscript
 
-	!insertmacro Install_Reg_Ghostscript
-	!insertmacro Install_Link_Ghostscript
+	!insertmacro Install_Config_Ghostscript
 
 SectionEnd
 
@@ -136,10 +134,9 @@ Section "GSview" Section_GSview
 	${Install_Files} "GSview\*.*" "install_gsview.log"
 !endif
 
-	!insertmacro Reset_Reg_GSview
+	!insertmacro Reset_Config_GSview
 
-	!insertmacro Install_Reg_GSview
-	!insertmacro Install_Link_GSview
+	!insertmacro Install_Config_GSview
 
 SectionEnd
 
@@ -152,10 +149,9 @@ Section "WinEdt" Section_WinEdt
 	${Install_Files} "WinEdt\*.*" "install_winedt.log"
 !endif
 
-	!insertmacro Reset_Reg_WinEdt
+	!insertmacro Reset_Config_WinEdt
 
-	!insertmacro Install_Reg_WinEdt
-	!insertmacro Install_Link_WinEdt
+	!insertmacro Install_Config_WinEdt
 
 	SectionGetFlags ${Section_MiKTeX} $R0
 	IntOp $R0 $R0 & ${SF_SELECTED}
@@ -178,9 +174,9 @@ Section -FinishSection
 	${End_Install_Files} "install.log"
 !endif
 
-	!insertmacro Reset_Reg_CTeX
+	!insertmacro Reset_Config_CTeX
 	
-	!insertmacro Install_Reg_CTeX
+	!insertmacro Install_Config_CTeX
 
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	CreateDirectory "$SMPROGRAMS\CTeX"
@@ -208,16 +204,16 @@ SectionEnd
 ;Uninstall section
 Section Uninstall
 
-	;Remove from registry...
-	!insertmacro Uninstall_Reg_CTeX
-
+	;Remove configs...
 	ExecWait "$INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
 
-	!insertmacro Uninstall_Reg_MiKTeX
-	!insertmacro Uninstall_Reg_Addons
-	!insertmacro Uninstall_Reg_Ghostscript
-	!insertmacro Uninstall_Reg_GSview
-	!insertmacro Uninstall_Reg_WinEdt
+	!insertmacro Uninstall_Config_CTeX
+
+	!insertmacro Uninstall_Config_MiKTeX
+	!insertmacro Uninstall_Config_Addons
+	!insertmacro Uninstall_Config_Ghostscript
+	!insertmacro Uninstall_Config_GSview
+	!insertmacro Uninstall_Config_WinEdt
 
 	; Delete self
 	Delete "$INSTDIR\Uninstall.exe"
