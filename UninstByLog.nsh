@@ -15,12 +15,14 @@
 !macro _Uninstall_Files Log_File
 	Push ${Log_File}
 	Call UninstallByLog
+	Delete ${Log_File}
 !macroend
 !define Uninstall_Files "!insertmacro _Uninstall_Files"
 
 !macro _unUninstall_Files Log_File
 	Push ${Log_File}
 	Call un.UninstallByLog
+	Delete ${Log_File}
 !macroend
 !define un.Uninstall_Files "!insertmacro _unUninstall_Files"
 
