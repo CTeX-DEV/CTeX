@@ -1,6 +1,7 @@
 !include "WordFunc.nsh"
 !include "EnvVarUpdate.nsh"
 !include "FileAssoc.nsh"
+!include "UninstByLog.nsh"
 
 !macro _CreateURLShortCut URLFile URLSite
 	WriteINIStr "${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
@@ -105,7 +106,9 @@ FunctionEnd
 !macroend
 
 !macro Reset_Reg_MiKTeX
-	${RemovePath} "$OLD_INSTDIR\${MiKTeX_Dir}\miktex\bin"
+	${If} $OLD_INSTDIR != ""
+		${RemovePath} "$OLD_INSTDIR\${MiKTeX_Dir}\miktex\bin"
+	${EndIf}
 !macroend
 
 !macro Uninstall_Reg_MiKTeX
@@ -190,23 +193,25 @@ FunctionEnd
 !macroend
 
 !macro Reset_Reg_Addons
-	StrCpy $0 "$OLD_INSTDIR\${Addons_Dir}"
+	${If} $OLD_INSTDIR != ""
+		StrCpy $0 "$OLD_INSTDIR\${Addons_Dir}"
+		
+		ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots"
+		${If} $R0 != ""
+			StrCpy $R1 "$0"
+			StrCpy $R2 ";"
+			Call RemoveToken
+			WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots" "$R9"
+		${EndIf}
 	
-	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots"
-	${If} $R0 != ""
-		StrCpy $R1 "$0"
-		StrCpy $R2 ";"
-		Call RemoveToken
-		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots" "$R9"
-	${EndIf}
-
 ; Uninstall CCT
-	${RemovePath} "$0\cct\bin"
-	${RemoveEnvVar} "CCHZPATH"
-	${RemoveEnvVar} "CCPKPATH"
+		${RemovePath} "$0\cct\bin"
+		${RemoveEnvVar} "CCHZPATH"
+		${RemoveEnvVar} "CCPKPATH"
 
 ; Uninstall TY
-	${RemovePath} "$0\ty\bin"
+		${RemovePath} "$0\ty\bin"
+	${EndIf}
 !macroend
 
 !macro Uninstall_Reg_Addons
@@ -231,7 +236,9 @@ FunctionEnd
 !macroend
 
 !macro Reset_Reg_Ghostscript
-	${RemovePath} "$OLD_INSTDIR\${Ghostscript_Dir}\gs$OLD_Ghostscript_Version\bin"
+	${If} $OLD_INSTDIR != ""
+		${RemovePath} "$OLD_INSTDIR\${Ghostscript_Dir}\gs$OLD_Ghostscript_Version\bin"
+	${EndIf}
 !macroend
 
 !macro Uninstall_Reg_Ghostscript
@@ -271,7 +278,9 @@ FunctionEnd
 !macroend
 
 !macro Reset_Reg_GSview
-	${RemovePath} "$OLD_INSTDIR\${GSview_Dir}\gsview"
+	${If} $OLD_INSTDIR != ""
+		${RemovePath} "$OLD_INSTDIR\${GSview_Dir}\gsview"
+	${EndIf}
 !macroend
 
 !macro Uninstall_Reg_GSview
@@ -301,7 +310,9 @@ FunctionEnd
 !macroend
 
 !macro Reset_Reg_WinEdt
-	${RemovePath} "$OLD_INSTDIR\${WinEdt_Dir}"
+	${If} $OLD_INSTDIR != ""
+		${RemovePath} "$OLD_INSTDIR\${WinEdt_Dir}"
+	${EndIf}
 !macroend
 
 !macro Uninstall_Reg_WinEdt
@@ -343,4 +354,39 @@ FunctionEnd
 !macro Uninstall_Reg_CTeX
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
+!macroend
+
+!macro _Install_Files Files Log_File
+	CreateDirectory "$INSTDIR\${Logs_Dir}"
+	LogSet on
+	File /r "${Files}"
+	LogSet off
+	CopyFiles "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
+	Delete "$INSTDIR\install.log"
+!macroend
+!define Install_Files "!insertmacro _Install_Files"
+
+!macro _Begin_Install_Files
+	CreateDirectory "$INSTDIR\${Logs_Dir}"
+	LogSet on
+!macroend
+!define Begin_Install_Files "!insertmacro _Begin_Install_Files"
+
+!macro _End_Install_Files Log_File
+	LogSet off
+	CopyFiles "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
+	Delete "$INSTDIR\install.log"
+!macroend
+!define End_Install_Files "!insertmacro _End_Install_Files"
+
+!macro UninstallAllFiles UN
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_miktex.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ctex.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cjk.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cct.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ty.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_gsview.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
+	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install.log"
 !macroend

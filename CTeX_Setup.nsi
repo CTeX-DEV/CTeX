@@ -41,11 +41,13 @@ SetCompressorDictSize 128
 
 !define MUI_ABORTWARNING
 !define MUI_ICON "CTeX.ico"
-!define MUI_CUSTOMFUNCTION_GUIINIT OnInit
+!define MUI_CUSTOMFUNCTION_GUIINIT OnGUIInit
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE $(license)
+!define MUI_PAGE_CUSTOMFUNCTION_PRE PrePageDirectory
 !insertmacro MUI_PAGE_COMPONENTS
+!define MUI_PAGE_CUSTOMFUNCTION_PRE PrePageDirectory
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
@@ -60,6 +62,16 @@ SetCompressorDictSize 128
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
+Section -UpdateSection
+
+!ifndef BUILD_REPAIR
+	${If} $OLD_INSTDIR != ""
+		!insertmacro UninstallAllFiles ""
+	${EndIf}
+!endif
+
+SectionEnd	
+
 Section "MiKTeX" Section_MiKTeX
 
 	SetOverwrite on
@@ -67,9 +79,9 @@ Section "MiKTeX" Section_MiKTeX
 
 !ifndef BUILD_REPAIR
 !ifndef BUILD_FULL
-	File /r MiKTeX.basic\*.*
+	${Install_Files} "MiKTeX.basic\*.*" "install_miktex.log"
 !else
-	File /r MiKTeX.full\*.*
+	${Install_Files} "MiKTeX.full\*.*" "install_miktex.log"
 !endif
 !endif
 
@@ -86,10 +98,10 @@ Section "CTeX Addons" Section_Addons
 	SetOutPath "$INSTDIR\${Addons_Dir}"
 
 !ifndef BUILD_REPAIR
-	File /r Addons\CTeX\*.*
-	File /r Addons\CJK\*.*
-	File /r Addons\CCT\*.*
-	File /r Addons\TY\*.*
+	${Install_Files} "Addons\CTeX\*.*" "install_ctex.log"
+	${Install_Files} "Addons\CJK\*.*" "install_cjk.log"
+	${Install_Files} "Addons\CCT\*.*" "install_cct.log"
+	${Install_Files} "Addons\TY\*.*" "install_ty.log"
 !endif
 
 	!insertmacro Reset_Reg_Addons
@@ -104,7 +116,7 @@ Section "Ghostscript" Section_Ghostscript
 	SetOutPath "$INSTDIR\${Ghostscript_Dir}"
 
 !ifndef BUILD_REPAIR
-	File /r Ghostscript\*.*
+	${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
 !endif
 
 	!insertmacro Reset_Reg_Ghostscript
@@ -120,7 +132,7 @@ Section "GSview" Section_GSview
 	SetOutPath "$INSTDIR\${GSview_Dir}"
 
 !ifndef BUILD_REPAIR
-	File /r GSview\*.*
+	${Install_Files} "GSview\*.*" "install_gsview.log"
 !endif
 
 	!insertmacro Reset_Reg_GSview
@@ -136,7 +148,7 @@ Section "WinEdt" Section_WinEdt
 	SetOutPath "$INSTDIR\${WinEdt_Dir}"
 
 !ifndef BUILD_REPAIR
-	File /r WinEdt\*.*
+	${Install_Files} "WinEdt\*.*" "install_winedt.log"
 !endif
 
 	!insertmacro Reset_Reg_WinEdt
@@ -158,9 +170,11 @@ Section -FinishSection
 	SetOutPath $INSTDIR
 
 !ifndef BUILD_REPAIR
+	${Begin_Install_Files}
 	File Readme.txt
 	File Changes.txt
 	File Repair.exe
+	${End_Install_Files} "install.log"
 !endif
 
 	!insertmacro Reset_Reg_CTeX
@@ -211,9 +225,12 @@ Section Uninstall
 	RMDir /r "$SMPROGRAMS\CTeX"
 
 	; Clean up CTeX
-	RMDir /r $INSTDIR
+	!insertmacro UninstallAllFiles "un."
 
 	; Remove remaining directories
+	RMDir /r "$INSTDIR\${Logs_Dir}"
+	MessageBox MB_YESNO $(Msg_RemoveInstDir) /SD IDNO IDNO +2
+		RMDir /r $INSTDIR
 
 	!insertmacro UPDATEFILEASSOC
 
@@ -226,7 +243,7 @@ Function .onInit
 
 FunctionEnd
 
-Function OnInit
+Function OnGUIInit
 
 	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{7AB19E08-582F-4996-BB5D-7287222D25ED}" "UninstallString"
 	${If} $0 != ""
@@ -258,12 +275,27 @@ downgrade:
 			${EndIf}
 		${EndIf}
 !endif
-	${Else}
-		StrCpy $OLD_INSTDIR $INSTDIR
-		StrCpy $OLD_VERSION ${APP_BUILD}
 	${EndIf}
 	
 	!insertmacro Get_Old_Version
+
+FunctionEnd
+
+Function PrePageDirectory
+	
+!ifndef BUILD_REPAIR
+	${If} $OLD_INSTDIR != ""
+		StrCpy $INSTDIR $OLD_INSTDIR
+	${EndIf}
+!endif
+
+FunctionEnd
+
+Function PrePageComponents
+
+	${If} $OLD_INSTDIR != ""
+
+	${EndIf}
 
 FunctionEnd
 
@@ -293,5 +325,7 @@ LangString Msg_WrongVersion ${LANG_SIMPCHINESE} "ÏµÍ³ÖÐ°²×°ÁËÆäËû°æ±¾µÄCTeX£¬ÊÇ·
 LangString Msg_WrongVersion ${LANG_ENGLISH} "Another version of CTeX is installed in the system, continue?"
 LangString Msg_Downgrade ${LANG_SIMPCHINESE} "ÏµÍ³ÖÐ°²×°ÁË¸ü¸ß°æ±¾µÄCTeX£¬ÊÇ·ñ¼ÌÐø½øÐÐ½µ¼¶°²×°£¿"
 LangString Msg_Downgrade ${LANG_ENGLISH} "Newer version of CTeX is installed in the system, continue to downgrade setup?"
+LangString Msg_RemoveInstDir ${LANG_SIMPCHINESE} "ÊÇ·ñÍêÈ«É¾³ý°²×°Ä¿Â¼£¿"
+LangString Msg_RemoveInstDir ${LANG_ENGLISH} "Remove all files in the installed diretory?"
 
 ; eof

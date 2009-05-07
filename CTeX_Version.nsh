@@ -18,8 +18,10 @@
 !define GSview_Version      "4.9"
 !define WinEdt_Dir          "WinEdt"
 !define WinEdt_Version      "5.5"
+!define Logs_Dir            "Logs"
 
 !define Obsolete_Version    "2.7.0.0"
+
 
 !macro Set_Version_Information
 VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "ProductName" "${APP_NAME}"
@@ -36,18 +38,23 @@ VIProductVersion "${APP_BUILD}"
 !macroend
 
 !macro Get_Old_Version
-	${VersionCompare} $OLD_VERSION "2.7.1.0" $1
-	${If} $1 == "2"
-		StrCpy $OLD_MiKTeX_Version      "2.7"
-		StrCpy $OLD_Ghostscript_Version "8.64"
-		StrCpy $OLD_GSview_Version      "4.9"
-		StrCpy $OLD_WinEdt_Version      "5.5"
-		Goto gotoldversion
-	${EndIf}
+	${If} $OLD_INSTDIR != ""
+		StrCpy $0 0
 
-	StrCpy $OLD_MiKTeX_Version      "${MiKTeX_Version}"
-	StrCpy $OLD_Ghostscript_Version "${Ghostscript_Version}"
-	StrCpy $OLD_GSview_Version      "${GSview_Version}"
-	StrCpy $OLD_WinEdt_Version      "${WinEdt_Version}"
-gotoldversion:
+		${VersionCompare} $OLD_VERSION "2.7.1.0" $1
+		${If} $1 == "2"
+			StrCpy $OLD_MiKTeX_Version      "2.7"
+			StrCpy $OLD_Ghostscript_Version "8.64"
+			StrCpy $OLD_GSview_Version      "4.9"
+			StrCpy $OLD_WinEdt_Version      "5.5"
+			StrCpy $0 1
+		${EndIf}
+
+		${If} $0 == 0
+			StrCpy $OLD_MiKTeX_Version      "${MiKTeX_Version}"
+			StrCpy $OLD_Ghostscript_Version "${Ghostscript_Version}"
+			StrCpy $OLD_GSview_Version      "${GSview_Version}"
+			StrCpy $OLD_WinEdt_Version      "${WinEdt_Version}"
+		${EndIf}
+	${EndIf}
 !macroend
