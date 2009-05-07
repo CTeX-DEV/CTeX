@@ -12,6 +12,12 @@ Var OLD_Ghostscript_Version
 Var OLD_GSview_Version
 Var OLD_WinEdt_Version
 
+Var OLD_MiKTeX
+Var OLD_Addons
+Var OLD_Ghostscript
+Var OLD_GSview
+Var OLD_WinEdt
+
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
 BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
@@ -71,6 +77,13 @@ Section -UpdateSection
 	${EndIf}
 !endif
 
+	!insertmacro Reset_Config_MiKTeX
+	!insertmacro Reset_Config_Addons
+	!insertmacro Reset_Config_Ghostscript
+	!insertmacro Reset_Config_GSview
+	!insertmacro Reset_Config_WinEdt
+	!insertmacro Reset_Config_CTeX
+
 SectionEnd	
 
 Section "MiKTeX" Section_MiKTeX
@@ -85,8 +98,6 @@ Section "MiKTeX" Section_MiKTeX
 	${Install_Files} "MiKTeX.full\*.*" "install_miktex.log"
 !endif
 !endif
-
-	!insertmacro Reset_Config_MiKTeX
 
 	!insertmacro Install_Config_MiKTeX
 
@@ -104,8 +115,6 @@ Section "CTeX Addons" Section_Addons
 	${Install_Files} "Addons\TY\*.*" "install_ty.log"
 !endif
 
-	!insertmacro Reset_Config_Addons
-
 	!insertmacro Install_Config_Addons
 
 SectionEnd
@@ -118,8 +127,6 @@ Section "Ghostscript" Section_Ghostscript
 !ifndef BUILD_REPAIR
 	${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
 !endif
-
-	!insertmacro Reset_Config_Ghostscript
 
 	!insertmacro Install_Config_Ghostscript
 
@@ -134,8 +141,6 @@ Section "GSview" Section_GSview
 	${Install_Files} "GSview\*.*" "install_gsview.log"
 !endif
 
-	!insertmacro Reset_Config_GSview
-
 	!insertmacro Install_Config_GSview
 
 SectionEnd
@@ -148,8 +153,6 @@ Section "WinEdt" Section_WinEdt
 !ifndef BUILD_REPAIR
 	${Install_Files} "WinEdt\*.*" "install_winedt.log"
 !endif
-
-	!insertmacro Reset_Config_WinEdt
 
 	!insertmacro Install_Config_WinEdt
 
@@ -174,8 +177,8 @@ Section -FinishSection
 	${End_Install_Files} "install.log"
 !endif
 
-	!insertmacro Reset_Config_CTeX
-	
+	!insertmacro Save_Components_Information
+
 	!insertmacro Install_Config_CTeX
 
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
@@ -276,6 +279,7 @@ downgrade:
 	${EndIf}
 
 	!insertmacro Get_Old_Version
+	!insertmacro Restore_Components_Information
 
 FunctionEnd
 
