@@ -1,26 +1,16 @@
-; Script generated with the Venis Install Wizard
 
-!define BUILD_NUMBER "22"
-;!define BUILD_FULL
-;!define BUILD_REPAIR
+!include "CTeX_Version.nsh"
 
-; Define your application name
-!define APP_NAME "CTeX"
-!define APP_COMPANY "CTEX.ORG"
-!define APP_COPYRIGHT "Copyright (C) 2009 ${APP_COMPANY}"
-!define APP_VERSION "2.7.0"
-!define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
+; Functions and Macros
+!include "CTeX_Macros.nsh"
 
-; Components information
-!define MiKTeX_Dir          "MiKTeX"
-!define MiKTeX_Version      "2.7"
-!define Addons_Dir          "CTeX"
-!define Ghostscript_Dir     "Ghostscript"
-!define Ghostscript_Version "8.64"
-!define GSview_Dir          "GSview"
-!define GSview_Version      "4.9"
-!define WinEdt_Dir          "WinEdt"
-!define WinEdt_Version      "5.5"
+; Variables
+Var OLD_INSTDIR
+Var OLD_VERSION
+Var OLD_MiKTeX_Version
+Var OLD_Ghostscript_Version
+Var OLD_GSview_Version
+Var OLD_WinEdt_Version
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
@@ -46,14 +36,6 @@ RequestExecutionLevel admin
 SetCompressor /SOLID LZMA
 SetCompressorDictSize 128
 
-; Variables
-!ifdef BUILD_REPAIR
-Var OLD_INSTDIR
-!endif
-
-; Functions and Macros
-!include "CTeX_Setup.nsh"
-
 ; Modern interface settings
 !include "MUI2.nsh"
 
@@ -78,36 +60,6 @@ Var OLD_INSTDIR
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
-Function OnInit
-
-	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{7AB19E08-582F-4996-BB5D-7287222D25ED}" "UninstallString"
-	${If} $0 != ""
-		MessageBox MB_OK|MB_ICONSTOP "$(Err_ObsoleteVersion)"
-		Abort
-	${EndIf}
-	ReadRegStr $0 HKLM "Software\${APP_NAME}" "Version"
-	${If} $0 != ""
-		${VersionCompare} $0 "2.7.0.0" $1
-		${If} $1 == "2"
-			MessageBox MB_OK|MB_ICONSTOP "$(Err_ObsoleteVersion)"
-			Abort
-		${EndIf}
-	${EndIf}
-
-!ifdef BUILD_REPAIR
-	ReadRegStr $OLD_INSTDIR HKLM "Software\${APP_NAME}" "Install"
-	${If} $OLD_INSTDIR != ""
-		ReadRegStr $0 HKLM "Software\${APP_NAME}" "Version"
-		${If} $0 != ${APP_BUILD}
-			MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Err_WrongVersion)" IDYES next
-			Abort
-next:
-		${EndIf}
-	${EndIf}
-!endif
-
-FunctionEnd
-
 Section "MiKTeX" Section_MiKTeX
 
 	SetOverwrite on
@@ -121,11 +73,7 @@ Section "MiKTeX" Section_MiKTeX
 !endif
 !endif
 
-!ifdef BUILD_REPAIR
-	${If} $OLD_INSTDIR != ""
-		!insertmacro Repair_Reg_MiKTeX
-	${EndIf}
-!endif
+	!insertmacro Reset_Reg_MiKTeX
 
 	!insertmacro Install_Reg_MiKTeX
 	!insertmacro Install_Link_MiKTeX
@@ -144,11 +92,7 @@ Section "CTeX Addons" Section_Addons
 	File /r Addons\TY\*.*
 !endif
 
-!ifdef BUILD_REPAIR
-	${If} $OLD_INSTDIR != ""
-		!insertmacro Repair_Reg_Addons
-	${EndIf}
-!endif
+	!insertmacro Reset_Reg_Addons
 
 	!insertmacro Install_Reg_Addons
 
@@ -163,11 +107,7 @@ Section "Ghostscript" Section_Ghostscript
 	File /r Ghostscript\*.*
 !endif
 
-!ifdef BUILD_REPAIR
-	${If} $OLD_INSTDIR != ""
-		!insertmacro Repair_Reg_Ghostscript
-	${EndIf}
-!endif
+	!insertmacro Reset_Reg_Ghostscript
 
 	!insertmacro Install_Reg_Ghostscript
 	!insertmacro Install_Link_Ghostscript
@@ -183,11 +123,7 @@ Section "GSview" Section_GSview
 	File /r GSview\*.*
 !endif
 
-!ifdef BUILD_REPAIR
-	${If} $OLD_INSTDIR != ""
-		!insertmacro Repair_Reg_GSview
-	${EndIf}
-!endif
+	!insertmacro Reset_Reg_GSview
 
 	!insertmacro Install_Reg_GSview
 	!insertmacro Install_Link_GSview
@@ -203,11 +139,7 @@ Section "WinEdt" Section_WinEdt
 	File /r WinEdt\*.*
 !endif
 
-!ifdef BUILD_REPAIR
-	${If} $OLD_INSTDIR != ""
-		!insertmacro Repair_Reg_WinEdt
-	${EndIf}
-!endif
+	!insertmacro Reset_Reg_WinEdt
 
 	!insertmacro Install_Reg_WinEdt
 	!insertmacro Install_Link_WinEdt
@@ -231,17 +163,10 @@ Section -FinishSection
 	File Repair.exe
 !endif
 
-	WriteRegStr HKLM "Software\${APP_NAME}" "" "${APP_NAME} ${APP_VERSION}"
-	WriteRegStr HKLM "Software\${APP_NAME}" "Install" "$INSTDIR"
-	WriteRegStr HKLM "Software\${APP_NAME}" "Version" "${APP_BUILD}"
+	!insertmacro Reset_Reg_CTeX
+	
+	!insertmacro Install_Reg_CTeX
 
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayName" "${APP_NAME}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayVersion" "${APP_BUILD}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Publisher" "${APP_COMPANY}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Readme" "$INSTDIR\Readme.txt"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "HelpLink" "http://bbs.ctex.org"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "URLInfoAbout" "http://www.ctex.org"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\Uninstall.exe"
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
@@ -269,8 +194,7 @@ SectionEnd
 Section Uninstall
 
 	;Remove from registry...
-	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
-	DeleteRegKey HKLM "Software\${APP_NAME}"
+	!insertmacro Uninstall_Reg_CTeX
 
 	ExecWait "$INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
 
@@ -302,17 +226,48 @@ Function .onInit
 
 FunctionEnd
 
-VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "ProductName" "${APP_NAME}"
-VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "CompanyName" "${APP_COMPANY}"
-VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileDescription" "中文TeX套装"
-VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileVersion" "${APP_BUILD}"
-VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "LegalCopyright" "${APP_COPYRIGHT}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "${APP_NAME}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "${APP_COMPANY}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Chinese TeX Suite"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${APP_BUILD}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "${APP_COPYRIGHT}"
-VIProductVersion "${APP_BUILD}"
+Function OnInit
+
+	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{7AB19E08-582F-4996-BB5D-7287222D25ED}" "UninstallString"
+	${If} $0 != ""
+		MessageBox MB_OK|MB_ICONSTOP "$(Msg_ObsoleteVersion)"
+		Abort
+	${EndIf}
+
+	ReadRegStr $OLD_INSTDIR HKLM "Software\${APP_NAME}" "Install"
+	ReadRegStr $OLD_VERSION HKLM "Software\${APP_NAME}" "Version"
+	${If} $OLD_INSTDIR != ""
+!ifdef BUILD_REPAIR
+		${If} $OLD_VERSION != ${APP_BUILD}
+			MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_WrongVersion)" /SD IDYES IDYES wrongversion
+			Abort
+wrongversion:
+		${EndIf}
+!else
+		${If} $OLD_VERSION != ""
+			${VersionCompare} $OLD_VERSION ${Obsolete_Version} $1
+			${If} $1 == "2"
+				MessageBox MB_OK|MB_ICONSTOP "$(Msg_ObsoleteVersion)"
+				Abort
+			${EndIf}
+			${VersionCompare} $OLD_VERSION ${APP_BUILD} $1
+			${If} $1 == "1"
+				MessageBox MB_OK|MB_ICONEXCLAMATION "$(Msg_Downgrade)" /SD IDNO IDYES downgrade
+				Abort
+downgrade:
+			${EndIf}
+		${EndIf}
+!endif
+	${Else}
+		StrCpy $OLD_INSTDIR $INSTDIR
+		StrCpy $OLD_VERSION ${APP_BUILD}
+	${EndIf}
+	
+	!insertmacro Get_Old_Version
+
+FunctionEnd
+
+!insertmacro Set_Version_Information
 
 ; Language strings
 LicenseLangString license ${LANG_SIMPCHINESE} License-zh.txt
@@ -332,9 +287,11 @@ LangString Desc_WinEdt ${LANG_ENGLISH} "WinEdt a well designed text editor with 
 LangString Desc_File ${LANG_SIMPCHINESE} "文档"
 LangString Desc_File ${LANG_ENGLISH} "File"
 
-LangString Err_ObsoleteVersion ${LANG_SIMPCHINESE} "在系统中发现旧版的CTeX，请先卸载！"
-LangString Err_ObsoleteVersion ${LANG_ENGLISH} "Found obsolete version of CTeX installed in the system, please uninstall first!"
-LangString Err_WrongVersion ${LANG_SIMPCHINESE} "系统中安装了其他版本的CTeX，是否继续？"
-LangString Err_WrongVersion ${LANG_ENGLISH} "Another version of CTeX is installed in the system, continue?"
+LangString Msg_ObsoleteVersion ${LANG_SIMPCHINESE} "在系统中发现旧版的CTeX，请先卸载！"
+LangString Msg_ObsoleteVersion ${LANG_ENGLISH} "Found obsolete version of CTeX installed in the system, please uninstall first!"
+LangString Msg_WrongVersion ${LANG_SIMPCHINESE} "系统中安装了其他版本的CTeX，是否继续？"
+LangString Msg_WrongVersion ${LANG_ENGLISH} "Another version of CTeX is installed in the system, continue?"
+LangString Msg_Downgrade ${LANG_SIMPCHINESE} "系统中安装了更高版本的CTeX，是否继续进行降级安装？"
+LangString Msg_Downgrade ${LANG_ENGLISH} "Newer version of CTeX is installed in the system, continue to downgrade setup?"
 
 ; eof
