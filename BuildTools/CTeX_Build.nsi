@@ -14,17 +14,16 @@ ShowInstDetails show
 
 
 !define Make "$PROGRAMFILES\NSIS\makensis.exe"
+!define INI_File "$EXEDIR\CTeX_Build.ini"
+!define INI_Sec "CTeX"
+!define INI_Key "BuildNumber"
+
 
 Var Build_Number
 
 Section
-	ReadINIStr $Build_Number "CTeX_Build.ini" "CTeX" "Build Number"
-	${If} $Build_Number == ""
-		StrCpy $Build_Number "0"
-	${EndIf}
-	FileOpen $0 "CTeX_Build.nsh" "w"
-	FileWrite $0 '!define BUILD_NUMBER "$Build_Number"$\r$\n'
-	FileClose $0
+	Call ReadBuildNumber
+	Call WriteBuildNumber
 SectionEnd
 
 Section "Repair Tool" SectionRepair
@@ -44,15 +43,9 @@ Section "Full Version" SectionFull
 SectionEnd
 
 Section
-	ReadINIStr $Build_Number "CTeX_Build.ini" "CTeX" "Build Number"
-	${If} $Build_Number == ""
-		StrCpy $Build_Number "0"
-	${EndIf}
-	IntOp $Build_Number $Build_Number + 1
-	WriteINIStr "CTeX_Build.ini" "CTeX" "Build Number" $Build_Number
-	FileOpen $0 "CTeX_Build.nsh" "w"
-	FileWrite $0 '!define BUILD_NUMBER "$Build_Number"$\r$\n'
-	FileClose $0
+	Call ReadBuildNumber
+	Call UpdateBuildNumber
+	Call WriteBuildNumber
 SectionEnd
 
 Function .onInit
@@ -60,4 +53,22 @@ Function .onInit
   SectionSetFlags ${SectionRepair} $0
   IntOp $0 ${SF_SELECTED} !
 	SectionSetFlags ${SectionFull} $0
+FunctionEnd
+
+Function ReadBuildNumber
+	ReadINIStr $Build_Number "${INI_File}" "${INI_Sec}" "${INI_Key}"
+	${If} $Build_Number == ""
+		StrCpy $Build_Number "0"
+	${EndIf}
+FunctionEnd
+
+Function UpdateBuildNumber
+	IntOp $Build_Number $Build_Number + 1
+	WriteINIStr "${INI_File}" "${INI_Sec}" "${INI_Key}" $Build_Number
+FunctionEnd
+
+Function WriteBuildNumber
+	FileOpen $0 "$EXEDIR\CTeX_Build.nsh" "w"
+	FileWrite $0 '!define BUILD_NUMBER "$Build_Number"$\r$\n'
+	FileClose $0
 FunctionEnd
