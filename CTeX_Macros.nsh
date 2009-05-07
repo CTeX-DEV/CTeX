@@ -377,3 +377,44 @@ FunctionEnd
 	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
 	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install.log"
 !macroend
+
+!macro Save_Component Com_Name
+	SectionGetFlags "Section_${Com_Name}" $R0
+	IntOp $R0 $R0 & ${SF_SELECTED}
+	${If} $R0 != 0
+		WriteINIStr "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "${Com_Name}" "1"
+	${Else}
+		WriteINIStr "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "${Com_Name}" "0"
+	${EndIf}
+!macroend
+
+!macro Save_Components_Information
+	!insertmacro Save_Component "MiKTeX"
+	!insertmacro Save_Component "Addons"
+	!insertmacro Save_Component "Ghostscript"
+	!insertmacro Save_Component "GSview"
+	!insertmacro Save_Component "WinEdt"
+!macroend
+
+!macro Restore_Component Com_Name
+	ReadINIStr $R0 "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "${Com_Name}"
+	StrCpy $OLD_${Com_Name} $R0
+	${If} $R0 == "1"
+		SectionGetFlags "Section_${Com_Name}" $R0
+		IntOp $R0 $R0 | ${SF_SELECTED}
+		SectionSetFlags "Section_${Com_Name}" $R0
+	${Else}
+		SectionGetFlags "Section_${Com_Name}" $R0
+		IntOp $R1 ${SF_SELECTED} !
+		IntOp $R0 $R0 & $R1
+		SectionSetFlags "Section_${Com_Name}" $R0
+	${EndIf}
+!macroend
+
+!macro Restore_Components_Information
+	!insertmacro Restore_Component "MiKTeX"
+	!insertmacro Restore_Component "Addons"
+	!insertmacro Restore_Component "Ghostscript"
+	!insertmacro Restore_Component "GSview"
+	!insertmacro Restore_Component "WinEdt"
+!macroend
