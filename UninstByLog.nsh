@@ -75,7 +75,7 @@ Function ${UN}UninstallByLog
 			${If} $7 != ""
 				IntOp $7 $7 + 1
 				StrCpy $6 $9 "" $7
-				${${UN}StrLoc} $5 $6 '" created' ">"
+				${${UN}StrLoc} $5 $6 '" (1)' ">"
 				${If} $5 != ""
 					StrCpy $4 $6 $5
 					FileWrite $1 "$4$\r$\n"

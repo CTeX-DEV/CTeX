@@ -45,9 +45,10 @@ SetCompressorDictSize 128
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE $(license)
-!define MUI_PAGE_CUSTOMFUNCTION_PRE PrePageDirectory
 !insertmacro MUI_PAGE_COMPONENTS
-!define MUI_PAGE_CUSTOMFUNCTION_PRE PrePageDirectory
+!ifndef BUILD_REPAIR
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW ShowPageDirectory
+!endif
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
@@ -274,30 +275,25 @@ wrongversion:
 downgrade:
 			${EndIf}
 		${EndIf}
+		StrCpy $INSTDIR $OLD_INSTDIR
 !endif
 	${EndIf}
-	
+
 	!insertmacro Get_Old_Version
 
 FunctionEnd
 
-Function PrePageDirectory
-	
 !ifndef BUILD_REPAIR
-	${If} $OLD_INSTDIR != ""
-		StrCpy $INSTDIR $OLD_INSTDIR
-	${EndIf}
+Function ShowPageDirectory
+	
+  FindWindow $R0 "#32770" "" $HWNDPARENT
+  GetDlgItem $R1 $R0 1019
+    SendMessage $R1 ${EM_SETREADONLY} 1 0
+  GetDlgItem $R1 $R0 1001
+    EnableWindow $R1 0
+
+FunctionEnd
 !endif
-
-FunctionEnd
-
-Function PrePageComponents
-
-	${If} $OLD_INSTDIR != ""
-
-	${EndIf}
-
-FunctionEnd
 
 !insertmacro Set_Version_Information
 
