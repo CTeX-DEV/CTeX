@@ -22,8 +22,6 @@ Section
 	${If} $Build_Number == ""
 		StrCpy $Build_Number "0"
 	${EndIf}
-	IntOp $Build_Number $Build_Number + 1
-	WriteINIStr "CTeX_Build.ini" "CTeX" "Build Number" $Build_Number
 	FileOpen $0 "CTeX_Build.nsh" "w"
 	FileWrite $0 '!define BUILD_NUMBER "$Build_Number"$\r$\n'
 	FileClose $0
@@ -43,6 +41,18 @@ SectionEnd
 
 Section "Full Version" SectionFull
 	ExecWait "${Make} CTeX_Full.nsi"
+SectionEnd
+
+Section
+	ReadINIStr $Build_Number "CTeX_Build.ini" "CTeX" "Build Number"
+	${If} $Build_Number == ""
+		StrCpy $Build_Number "0"
+	${EndIf}
+	IntOp $Build_Number $Build_Number + 1
+	WriteINIStr "CTeX_Build.ini" "CTeX" "Build Number" $Build_Number
+	FileOpen $0 "CTeX_Build.nsh" "w"
+	FileWrite $0 '!define BUILD_NUMBER "$Build_Number"$\r$\n'
+	FileClose $0
 SectionEnd
 
 Function .onInit
