@@ -104,7 +104,7 @@ FunctionEnd
 	!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.${MiKTeX_Version}" "DVI $(Desc_File)" "$1,1" "Open with Yap" '$1 "%1"'
 !macroend
 
-!macro Repair_Reg_MiKTeX
+!macro Reset_Reg_MiKTeX
 	${RemovePath} "$OLD_INSTDIR\${MiKTeX_Dir}\miktex\bin"
 !macroend
 
@@ -178,23 +178,26 @@ FunctionEnd
 	FileClose $R0
 
 ; Install Fonts
-!ifndef BUILD_REPAIR
-	ExecWait '$0\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
-	CreateDirectory "$0\fonts\truetype\chinese"
-	Rename "FONT00.TTF" "$0\fonts\truetype\chinese\simsun.ttf"
-	Delete "*.TTF"
-!endif
+	StrCpy $1 "$0\fonts\truetype\chinese\simsun.ttf"
+	IfFileExists $1 0 +2
+		StrCpy $1 ""
+	${If} $1 != ""
+		ExecWait '$0\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
+		CreateDirectory "$0\fonts\truetype\chinese"
+		Rename "FONT00.TTF" "$0\fonts\truetype\chinese\simsun.ttf"
+		Delete "*.TTF"
+	${EndIf}
 !macroend
 
-!macro Repair_Reg_Addons
+!macro Reset_Reg_Addons
 	StrCpy $0 "$OLD_INSTDIR\${Addons_Dir}"
 	
-	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Roots"
+	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots"
 	${If} $R0 != ""
 		StrCpy $R1 "$0"
 		StrCpy $R2 ";"
 		Call RemoveToken
-		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Roots" "$R9"
+		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots" "$R9"
 	${EndIf}
 
 ; Uninstall CCT
@@ -227,8 +230,8 @@ FunctionEnd
 	${AddPath} "$1\bin"
 !macroend
 
-!macro Repair_Reg_Ghostscript
-	${RemovePath} "$OLD_INSTDIR\${Ghostscript_Dir}\gs${Ghostscript_Version}\bin"
+!macro Reset_Reg_Ghostscript
+	${RemovePath} "$OLD_INSTDIR\${Ghostscript_Dir}\gs$OLD_Ghostscript_Version\bin"
 !macroend
 
 !macro Uninstall_Reg_Ghostscript
@@ -267,7 +270,7 @@ FunctionEnd
 	!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$1,3" "Open with GSview" '$1 "%1"'
 !macroend
 
-!macro Repair_Reg_GSview
+!macro Reset_Reg_GSview
 	${RemovePath} "$OLD_INSTDIR\${GSview_Dir}\gsview"
 !macroend
 
@@ -297,7 +300,7 @@ FunctionEnd
 	!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "$1,0" "Open with WinEdt" '$1 "%1"'
 !macroend
 
-!macro Repair_Reg_WinEdt
+!macro Reset_Reg_WinEdt
 	${RemovePath} "$OLD_INSTDIR\${WinEdt_Dir}"
 !macroend
 
@@ -316,4 +319,28 @@ FunctionEnd
 
 !macro Associate_WinEdt_MiKTeX
 	WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
+!macroend
+
+!macro Install_Reg_CTeX
+	WriteRegStr HKLM "Software\${APP_NAME}" "" "${APP_NAME} ${APP_VERSION}"
+	WriteRegStr HKLM "Software\${APP_NAME}" "Install" "$INSTDIR"
+	WriteRegStr HKLM "Software\${APP_NAME}" "Version" "${APP_BUILD}"
+
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayName" "${APP_NAME}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayVersion" "${APP_BUILD}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Publisher" "${APP_COMPANY}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Readme" "$INSTDIR\Readme.txt"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "HelpLink" "http://bbs.ctex.org"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "URLInfoAbout" "http://www.ctex.org"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\Uninstall.exe"
+!macroend
+
+!macro Reset_Reg_CTeX
+	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
+	DeleteRegKey HKLM "Software\${APP_NAME}"
+!macroend
+
+!macro Uninstall_Reg_CTeX
+	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
+	DeleteRegKey HKLM "Software\${APP_NAME}"
 !macroend
