@@ -1,7 +1,9 @@
 !include "WordFunc.nsh"
+!include "Sections.nsh"
 !include "EnvVarUpdate.nsh"
 !include "FileAssoc.nsh"
 !include "UninstByLog.nsh"
+
 
 !macro _CreateURLShortCut URLFile URLSite
 	WriteINIStr "${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
@@ -32,17 +34,12 @@
 !macroend
 !define AddEnvVar "!insertmacro _AddEnvVar"
 
-!macro _RemovePath DIR
-	${EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
-	${EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
+!macro _RemovePath UN DIR
+	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
+	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
 !macroend
-!define RemovePath "!insertmacro _RemovePath"
-
-!macro _unRemovePath DIR
-	${un.EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
-	${un.EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
-!macroend
-!define un.RemovePath "!insertmacro _unRemovePath"
+!define RemovePath '!insertmacro _RemovePath ""'
+!define un.RemovePath '!insertmacro _RemovePath "un."'
 
 !macro _RemoveEnvVar NAME
 	DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}"
@@ -50,17 +47,12 @@
 !macroend
 !define RemoveEnvVar "!insertmacro _RemoveEnvVar"
 
-!macro _unRemoveEnvVar NAME
-	DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}"
-	DeleteRegValue HKCU "Environment" "${NAME}"
-!macroend
-!define un.RemoveEnvVar "!insertmacro _unRemoveEnvVar"
-
-Function RemoveToken
+!macro Define_Func_RemoveToken UN
+Function ${UN}RemoveToken
 	StrCpy $R9 ""
 	StrCpy $R8 0
 	${Do}
-		${StrTok} $R7 $R0 $R2 $R8 "1"
+		${${UN}StrTok} $R7 $R0 $R2 $R8 "1"
 		${If} $R7 == ""
 			${ExitDo}
 		${EndIf}
@@ -89,258 +81,288 @@ Function RemoveToken
 		IntOp $R8 $R8 + 1
 	${Loop}
 FunctionEnd
+!macroend
+!insertmacro Define_Func_RemoveToken ""
+!insertmacro Define_Func_RemoveToken "un."
+
 
 !macro Install_Config_MiKTeX
-	StrCpy $0 "$INSTDIR\${MiKTeX_Dir}"
+	${If} $MiKTeX != ""
+		StrCpy $0 "$INSTDIR\${MiKTeX_Dir}"
+		StrCpy $1 "$0\miktex\bin"
 
-	WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Install" "$0"
-	WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "SharedSetup" "1"
-	WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\MPM" "AutoInstall" "2"
-	WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\MPM" "RemoteRepository" "ftp://ftp.ctex.org/CTAN/systems/win32/miktex/tm/packages/"
-	WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\MPM" "RepositoryType" "remote"
+		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$MiKTeX"
+		WriteRegStr HKLM "$9\Core" "Install" "$0"
+		WriteRegStr HKLM "$9\Core" "SharedSetup" "1"
+		WriteRegStr HKCU "$9\MPM" "AutoInstall" "2"
+		WriteRegStr HKCU "$9\MPM" "RemoteRepository" "ftp://ftp.ctex.org/CTAN/systems/win32/miktex/tm/packages/"
+		WriteRegStr HKCU "$9\MPM" "RepositoryType" "remote"
 
-	${AddPath} "$0\miktex\bin"
+		${AddPath} "$1"
 
-	StrCpy $1 "$0\miktex\bin\yap.exe"
-	!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.${MiKTeX_Version}" "DVI $(Desc_File)" "$1,1" "Open with Yap" '$1 "%1"'
+		StrCpy $9 "$1\yap.exe"
+		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX}" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
 
-	CreateDirectory "$SMPROGRAMS\CTeX\MiKTeX"
-	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Browse Packages.lnk" "$0\miktex\bin\mpm_mfc.exe"
-	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Previewer.lnk" "$0\miktex\bin\yap.exe"
-	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Settings.lnk" "$0\miktex\bin\mo.exe"
-	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Update.lnk" "$0\miktex\bin\copystart_admin.exe" '"$0\miktex\config\update.dat"'
-	CreateDirectory "$SMPROGRAMS\CTeX\MiKTeX\Help"
-	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Help\FAQ.lnk" "$0\doc\miktex\faq.chm"
-	CreateShortCut "$SMPROGRAMS\CTeX\MiKTeX\Help\Manual.lnk" "$0\doc\miktex\miktex.chm"
-	CreateDirectory "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web"
+		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX"
+		CreateDirectory "$9"
+		CreateShortCut "$9\Browse Packages.lnk" "$1\mpm_mfc.exe"
+		CreateShortCut "$9\Previewer.lnk" "$1\yap.exe"
+		CreateShortCut "$9\Settings.lnk" "$1\mo.exe"
+		CreateShortCut "$9\Update.lnk" "$1\copystart_admin.exe" '"$0\miktex\config\update.dat"'
 
-	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Give back" "http://miktex.org/giveback"
-	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Known Issues" "http://miktex.org/2.7/issues"
-	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\MiKTeX Project Page" "http://miktex.org/"
-	${CreateURLShortCut} "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web\Support" "http://miktex.org/support"
-!macroend
+		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\Help"
+		CreateDirectory "$9"
+		CreateShortCut "$9\FAQ.lnk" "$0\doc\miktex\faq.chm"
+		CreateShortCut "$9\Manual.lnk" "$0\doc\miktex\miktex.chm"
 
-!macro Reset_Config_MiKTeX
-	${If} $OLD_INSTDIR != ""
-		${RemovePath} "$OLD_INSTDIR\${MiKTeX_Dir}\miktex\bin"
+		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web"
+		CreateDirectory "$9"
+		${CreateURLShortCut} "$9\Give back" "http://miktex.org/giveback"
+		${CreateURLShortCut} "$9\Known Issues" "http://miktex.org/2.7/issues"
+		${CreateURLShortCut} "$9\MiKTeX Project Page" "http://miktex.org/"
+		${CreateURLShortCut} "$9\Support" "http://miktex.org/support"
+
+		ExecWait "$1\mpm.exe --register-components --quiet"
+		ExecWait "$1\initexmf.exe --force --mklinks --quiet"
 	${EndIf}
 !macroend
 
-!macro Uninstall_Config_MiKTeX
-	DeleteRegKey HKLM "Software\MiKTeX.org"
-	DeleteRegKey HKCU "Software\MiKTeX.org"
+!macro Uninstall_Config_MiKTeX UN
+	${If} $UN_MiKTeX != ""
+		ExecWait "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
 
-	${un.RemovePath} "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
+		DeleteRegKey HKLM "Software\MiKTeX.org"
+		DeleteRegKey HKCU "Software\MiKTeX.org"
 
-	!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.${MiKTeX_Version}"
+		${${UN}RemovePath} "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin"
+
+		!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.$UN_MiKTeX"
+	${EndIf}
 !macroend
 
 !macro Install_Config_Addons
-	StrCpy $0 "$INSTDIR\${Addons_Dir}"
+	${If} $Addons != ""
+		StrCpy $0 "$INSTDIR\${Addons_Dir}"
 
-	ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Roots"
-	${If} $R0 == ""
-		ReadRegStr $R1 HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Install"
-		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Roots" "$0;$R1"
-	${Else}
-		StrCpy $R1 "$0"
-		StrCpy $R2 ";"
-		Call RemoveToken
-		WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Core" "Roots" "$0;$R9"
-	${EndIf}
-
-; Install CCT
-	${AddPath} "$0\cct\bin"
-	${AddEnvVar} "CCHZPATH" "$0\cct\fonts"
-	${AddEnvVar} "CCPKPATH" "$0\fonts\pk\modeless\cct\dpi$$d"
-	
-	FileOpen $R0 "$0\cct\bin\cctinit.ini" "w"
-	FileWrite $R0 "-T$0\fonts\tfm\cct$\n"
-	FileWrite $R0 "-H$0\tex\latex\cct$\n"
-	FileClose $R0
-	
-	ExecWait "$0\cct\bin\cctinit.exe"
-
-; Install TY
-	${AddPath} "$0\ty\bin"
-
-	FileOpen $R0 "$0\ty\bin\ty.cfg" "w"
-	FileWrite $R0 "$0\fonts\tfm\ty\$\r$\n"
-	FileWrite $R0 "$0\fonts\pk\modeless\ty\DPI@Rr\$\r$\n"
-	FileWrite $R0 ".\$\r$\n"
-	FileWrite $R0 "$0\ty\bin\$\r$\n"
-	FileWrite $R0 "$FONTS\$\r$\n"
-	FileWrite $R0 "600$\r$\n1095$\r$\n"
-	FileWrite $R0 "simsun.ttc$\r$\nsimkai.ttf$\r$\nsimfang.ttf$\r$\nsimhei.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
-	FileWrite $R0 "simsun.ttc$\r$\nsimyou.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimli.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
-	FileWrite $R0 "0$\r$\n0$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n"
-	FileClose $R0
-
-; Install Fonts
-	StrCpy $1 "$0\fonts\truetype\chinese\simsun.ttf"
-	IfFileExists $1 0 +2
-		StrCpy $1 ""
-	${If} $1 != ""
-		ExecWait '$0\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
-		CreateDirectory "$0\fonts\truetype\chinese"
-		Rename "FONT00.TTF" "$0\fonts\truetype\chinese\simsun.ttf"
-		Delete "*.TTF"
-	${EndIf}
-!macroend
-
-!macro Reset_Config_Addons
-	${If} $OLD_INSTDIR != ""
-		StrCpy $0 "$OLD_INSTDIR\${Addons_Dir}"
-		
-		ReadRegStr $R0 HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots"
-		${If} $R0 != ""
+		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$MiKTeX\Core"
+		ReadRegStr $R0 HKLM "$9" "Roots"
+		${If} $R0 == ""
+			ReadRegStr $R1 HKLM "$9" "Install"
+			WriteRegStr HKLM "$9" "Roots" "$0;$R1"
+		${Else}
 			StrCpy $R1 "$0"
 			StrCpy $R2 ";"
 			Call RemoveToken
-			WriteRegStr HKLM "Software\MiKTeX.org\MiKTeX\$OLD_MiKTeX_Version\Core" "Roots" "$R9"
+			WriteRegStr HKLM "$9" "Roots" "$0;$R9"
 		${EndIf}
+
+; Install CCT
+		${AddPath} "$0\cct\bin"
+		${AddEnvVar} "CCHZPATH" "$0\cct\fonts"
+		${AddEnvVar} "CCPKPATH" "$0\fonts\pk\modeless\cct\dpi$$d"
 	
+		FileOpen $R0 "$0\cct\bin\cctinit.ini" "w"
+		FileWrite $R0 "-T$0\fonts\tfm\cct$\n"
+		FileWrite $R0 "-H$0\tex\latex\cct$\n"
+		FileClose $R0
+	
+		ExecWait "$0\cct\bin\cctinit.exe"
+
+; Install TY
+		${AddPath} "$0\ty\bin"
+
+		FileOpen $R0 "$0\ty\bin\tywin.cfg" "w"
+		FileWrite $R0 "$0\fonts\tfm\ty\$\r$\n"
+		FileWrite $R0 "$0\fonts\pk\modeless\ty\DPI@Rr\$\r$\n"
+		FileWrite $R0 ".\$\r$\n"
+		FileWrite $R0 "$0\ty\bin\$\r$\n"
+		FileWrite $R0 "$FONTS\$\r$\n"
+		FileWrite $R0 "600$\r$\n1095$\r$\n"
+		FileWrite $R0 "simsun.ttc$\r$\nsimkai.ttf$\r$\nsimfang.ttf$\r$\nsimhei.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
+		FileWrite $R0 "simsun.ttc$\r$\nsimyou.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimli.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
+		FileWrite $R0 "0$\r$\n0$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n"
+		FileClose $R0
+
+; Install Fonts
+		StrCpy $9 "$0\fonts\truetype\chinese"
+		StrCpy $8 "$9\simsun.ttf"
+		IfFileExists $8 0 +2
+			StrCpy $8 ""
+		${If} $8 != ""
+			ExecWait '$0\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
+			CreateDirectory "$9"
+			Rename "FONT00.TTF" "$8"
+			Delete "*.TTF"
+		${EndIf}
+	${EndIf}
+!macroend
+
+!macro Uninstall_Config_Addons UN
+	${If} $UN_Addons != ""
+		StrCpy $0 "$UN_INSTDIR\${Addons_Dir}"
+	
+		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$UN_MiKTeX\Core"
+		ReadRegStr $R0 HKLM "$9" "Roots"
+		${If} $R0 != ""
+			StrCpy $R1 "$0"
+			StrCpy $R2 ";"
+			Call ${UN}RemoveToken
+			WriteRegStr HKLM "$9" "Roots" "$R9"
+		${EndIf}
+
 ; Uninstall CCT
-		${RemovePath} "$0\cct\bin"
+		${${UN}RemovePath} "$0\cct\bin"
 		${RemoveEnvVar} "CCHZPATH"
 		${RemoveEnvVar} "CCPKPATH"
 
 ; Uninstall TY
-		${RemovePath} "$0\ty\bin"
+		${${UN}RemovePath} "$0\ty\bin"
+
+; Uninstall Fonts
+!ifndef BUILD_REPAIR
+		Delete "$0\fonts\truetype\chinese\simsun.ttf"
+!endif
 	${EndIf}
-!macroend
-
-!macro Uninstall_Config_Addons
-	StrCpy $0 "$INSTDIR\${Addons_Dir}"
-
-; Uninstall CCT
-	${un.RemovePath} "$0\cct\bin"
-	${un.RemoveEnvVar} "CCHZPATH"
-	${un.RemoveEnvVar} "CCPKPATH"
-
-; Uninstall TY
-	${un.RemovePath} "$0\ty\bin"
 !macroend
 
 !macro Install_Config_Ghostscript
-	StrCpy $0 "$INSTDIR\${Ghostscript_Dir}"
-	StrCpy $1 "$0\gs${Ghostscript_Version}"
-	WriteRegStr HKLM "Software\GPL Ghostscript\${Ghostscript_Version}" "GS_DLL" "$1\bin\gsdll32.dll"
-	WriteRegStr HKLM "Software\GPL Ghostscript\${Ghostscript_Version}" "GS_LIB" "$1\lib;$0\fonts;$FONTS"
-
-	${AddPath} "$1\bin"
-
-	CreateDirectory "$SMPROGRAMS\CTeX\Ghostcript"
-	CreateShortCut "$SMPROGRAMS\CTeX\Ghostcript\Ghostscript.lnk" "$1\bin\gswin32.exe" '"-I$1\lib;$0\fonts;$FONTS"'
-	CreateShortCut "$SMPROGRAMS\CTeX\Ghostcript\Ghostscript Readme.lnk" "$1\doc\Readme.htm"
-!macroend
-
-!macro Reset_Config_Ghostscript
-	${If} $OLD_INSTDIR != ""
-		${RemovePath} "$OLD_INSTDIR\${Ghostscript_Dir}\gs$OLD_Ghostscript_Version\bin"
+	${If} $Ghostscript != ""
+		StrCpy $0 "$INSTDIR\${Ghostscript_Dir}"
+		StrCpy $1 "$0\gs$Ghostscript"
+		
+		StrCpy $9 "Software\GPL Ghostscript\$Ghostscript"
+		WriteRegStr HKLM "$9" "GS_DLL" "$1\bin\gsdll32.dll"
+		WriteRegStr HKLM "$9" "GS_LIB" "$1\lib;$0\fonts;$FONTS"
+	
+		${AddPath} "$1\bin"
+	
+		StrCpy $9 "$SMPROGRAMS\CTeX\Ghostcript"
+		CreateDirectory "$9"
+		CreateShortCut "$9\Ghostscript.lnk" "$1\bin\gswin32.exe" '"-I$1\lib;$0\fonts;$FONTS"'
+		CreateShortCut "$9\Ghostscript Readme.lnk" "$1\doc\Readme.htm"
 	${EndIf}
 !macroend
 
-!macro Uninstall_Config_Ghostscript
-	DeleteRegKey HKLM "Software\GPL Ghostscript"
-
-	${un.RemovePath} "$INSTDIR\${Ghostscript_Dir}\gs${Ghostscript_Version}\bin"
+!macro Uninstall_Config_Ghostscript UN
+	${If} $UN_Ghostscript != ""
+		DeleteRegKey HKLM "Software\GPL Ghostscript"
+	
+		${${UN}RemovePath} "$UN_INSTDIR\${Ghostscript_Dir}\gs$UN_Ghostscript\bin"
+	${EndIf}
 !macroend
 
 !macro Install_Config_GSview
-	StrCpy $0 "$INSTDIR\${GSview_Dir}"
-	WriteRegStr HKLM "Software\Ghostgum\GSview" "${GSview_Version}" "$0"
-
-	StrCpy $R0 "$0\gsview\gsview32.ini"
-	WriteINIStr $R0 "GSview-${GSview_Version}"	"Version" "${GSview_Version}"
-	WriteINIStr $R0 "GSview-${GSview_Version}"	"GSversion" "864"
-	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${Ghostscript_Version}" "GS_DLL"
-	WriteINIStr $R0 "GSview-${GSview_Version}"	"GhostscriptDLL" "$R1"
-	ReadRegStr $R1 HKLM "Software\GPL Ghostscript\${Ghostscript_Version}" "GS_LIB"
-	WriteINIStr $R0 "GSview-${GSview_Version}"	"GhostscriptInclude" "$R1"
-	WriteINIStr $R0 "GSview-${GSview_Version}"	"GhostscriptOther" '-dNOPLATFONTS -sFONTPATH="c:\psfonts"'
-	WriteINIStr $R0 "GSview-${GSview_Version}"	"Configured" "1"
-	Delete "$PROFILE\gsview32.ini"
-
-	${AddPath} "$0\gsview"
-
-	StrCpy $1 "$0\gsview\gsview32.exe"
-	!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$1,3" "Open with GSview" '$1 "%1"'
-	!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$1,3" "Open with GSview" '$1 "%1"'
-
-	CreateDirectory "$SMPROGRAMS\CTeX\Ghostgum"
-	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview.lnk" "$0\gsview\gsview32.exe"
-	CreateShortCut "$SMPROGRAMS\CTeX\Ghostgum\GSview Readme.lnk" "$0\gsview\Readme.htm"
-!macroend
-
-!macro Reset_Config_GSview
-	${If} $OLD_INSTDIR != ""
-		${RemovePath} "$OLD_INSTDIR\${GSview_Dir}\gsview"
+	${If} $GSview != ""
+		StrCpy $0 "$INSTDIR\${GSview_Dir}"
+		WriteRegStr HKLM "Software\Ghostgum\GSview" "$GSview" "$0"
+	
+		StrCpy $9 "$0\gsview\gsview32.ini"
+		StrCpy $8 "GSview-$GSview"
+		StrCpy $7 "$INSTDIR\${Ghostscript_Dir}"
+		StrCpy $6 "$7\gs$Ghostscript"
+		WriteINIStr $9 "$8"	"Version" "$GSview"
+		WriteINIStr $9 "$8"	"GSversion" "864"
+		WriteINIStr $9 "$8"	"GhostscriptDLL" "$6\bin\gsdll32.dll"
+		WriteINIStr $9 "$8"	"GhostscriptInclude" "$6\lib;$7\fonts;$FONTS"
+		WriteINIStr $9 "$8"	"GhostscriptOther" '-dNOPLATFONTS -sFONTPATH="c:\psfonts"'
+		WriteINIStr $9 "$8"	"Configured" "1"
+		Delete "$PROFILE\gsview32.ini"
+	
+		${AddPath} "$0\gsview"
+	
+		StrCpy $9 "$0\gsview\gsview32.exe"
+		!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
+		!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
+	
+		StrCpy $9 "$SMPROGRAMS\CTeX\Ghostgum"
+		CreateDirectory "$9"
+		CreateShortCut "$9\GSview.lnk" "$0\gsview\gsview32.exe"
+		CreateShortCut "$9\GSview Readme.lnk" "$0\gsview\Readme.htm"
 	${EndIf}
 !macroend
 
-!macro Uninstall_Config_GSview
-	DeleteRegKey HKLM "Software\Ghostgum"
-
-	${un.RemovePath} "$INSTDIR\${GSview_Dir}\gsview"
-
-	!insertmacro APP_UNASSOCIATE "ps" "CTeX.PS"
-	!insertmacro APP_UNASSOCIATE "eps" "CTeX.EPS"
+!macro Uninstall_Config_GSview UN
+	${If} $UN_GSview != ""
+		DeleteRegKey HKLM "Software\Ghostgum"
+	
+		${${UN}RemovePath} "$UN_INSTDIR\${GSview_Dir}\gsview"
+	
+		!insertmacro APP_UNASSOCIATE "ps" "CTeX.PS"
+		!insertmacro APP_UNASSOCIATE "eps" "CTeX.EPS"
+	${EndIf}
 !macroend
 
 !macro Install_Config_WinEdt
-	StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
-	WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
-
-	${AddPath} "$0"
-
-	StrCpy $1 "$0\WinEdt.exe"
-	!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "$1,0" "Open with WinEdt" '$1 "%1"'
-
-	CreateDirectory "$SMPROGRAMS\CTeX"
-	CreateShortCut "$SMPROGRAMS\CTeX\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
-!macroend
-
-!macro Reset_Config_WinEdt
-	${If} $OLD_INSTDIR != ""
-		${RemovePath} "$OLD_INSTDIR\${WinEdt_Dir}"
+	${If} $WinEdt != ""
+		StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
+		WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
+	
+		${AddPath} "$0"
+	
+		StrCpy $9 "$0\WinEdt.exe"
+		!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "$9,0" "Open with WinEdt" '$9 "%1"'
+	
+		StrCpy $9 "$SMPROGRAMS\CTeX"
+		CreateDirectory "$9"
+		CreateShortCut "$9\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
+	
+		${If} $MiKTeX != ""
+			WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\$MiKTeX}\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
+		${EndIf}
 	${EndIf}
 !macroend
 
-!macro Uninstall_Config_WinEdt
-	DeleteRegKey HKLM "Software\WinEdt"
-
-	${un.RemovePath} "$INSTDIR\${WinEdt_Dir}"
-
-	!insertmacro APP_UNASSOCIATE "tex" "CTeX.TeX"
-!macroend
-
-!macro Associate_WinEdt_MiKTeX
-	WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\${MiKTeX_Version}\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
+!macro Uninstall_Config_WinEdt UN
+	${If} $UN_WinEdt != ""
+		DeleteRegKey HKLM "Software\WinEdt"
+	
+		${${UN}RemovePath} "$UN_INSTDIR\${WinEdt_Dir}"
+	
+		!insertmacro APP_UNASSOCIATE "tex" "CTeX.TeX"
+	${EndIf}
 !macroend
 
 !macro Install_Config_CTeX
-	WriteRegStr HKLM "Software\${APP_NAME}" "" "${APP_NAME} ${APP_VERSION}"
-	WriteRegStr HKLM "Software\${APP_NAME}" "Install" "$INSTDIR"
-	WriteRegStr HKLM "Software\${APP_NAME}" "Version" "${APP_BUILD}"
+	StrCpy $9 "Software\${APP_NAME}"
+	WriteRegStr HKLM "$9" "" "${APP_NAME} ${APP_VERSION}"
+	WriteRegStr HKLM "$9" "Install" "$INSTDIR"
+	WriteRegStr HKLM "$9" "Version" "${APP_BUILD}"
+	WriteRegStr HKLM "$9" "MiKTeX" "$MiKTeX"
+	WriteRegStr HKLM "$9" "Addons" "$Addons"
+	WriteRegStr HKLM "$9" "Ghostscript" "$Ghostscript"
+	WriteRegStr HKLM "$9" "GSview" "$GSview"
+	WriteRegStr HKLM "$9" "WinEdt" "$WinEdt"
 
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayName" "${APP_NAME}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayVersion" "${APP_BUILD}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Publisher" "${APP_COMPANY}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Readme" "$INSTDIR\Readme.txt"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "HelpLink" "http://bbs.ctex.org"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "URLInfoAbout" "http://www.ctex.org"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\Uninstall.exe"
+	StrCpy $9 "$INSTDIR\${Logs_Dir}\install.ini"
+	WriteINIStr "$9" "CTeX" "MiKTeX" "$MiKTeX"
+	WriteINIStr "$9" "CTeX" "Addons" "$Addons"
+	WriteINIStr "$9" "CTeX" "Ghostscript" "$Ghostscript"
+	WriteINIStr "$9" "CTeX" "GSview" "$GSview"
+	WriteINIStr "$9" "CTeX" "WinEdt" "$WinEdt"
+
+	StrCpy $9 "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
+	WriteRegStr HKLM "$9" "DisplayName" "${APP_NAME}"
+	WriteRegStr HKLM "$9" "DisplayVersion" "${APP_BUILD}"
+	WriteRegStr HKLM "$9" "Publisher" "${APP_COMPANY}"
+	WriteRegStr HKLM "$9" "Readme" "$INSTDIR\Readme.txt"
+	WriteRegStr HKLM "$9" "HelpLink" "http://bbs.ctex.org"
+	WriteRegStr HKLM "$9" "URLInfoAbout" "http://www.ctex.org"
+	WriteRegStr HKLM "$9" "UninstallString" "$INSTDIR\Uninstall.exe"
+
+	StrCpy $9 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
+	ExecWait "$9\initexmf.exe --update-fndb --quiet"
+	ExecWait "$9\initexmf.exe --mkmaps --quiet"
+
+	!insertmacro UPDATEFILEASSOC
 !macroend
 
-!macro Reset_Config_CTeX
+!macro Uninstall_Config_CTeX UN
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
-!macroend
 
-!macro Uninstall_Config_CTeX
-	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
-	DeleteRegKey HKLM "Software\${APP_NAME}"
+	RMDir /r "$SMPROGRAMS\CTeX"
+
+	!insertmacro UPDATEFILEASSOC
 !macroend
 
 !macro _Install_Files Files Log_File
@@ -348,8 +370,7 @@ FunctionEnd
 	LogSet on
 	File /r "${Files}"
 	LogSet off
-	CopyFiles "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
-	Delete "$INSTDIR\install.log"
+	Rename "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
 !macroend
 !define Install_Files "!insertmacro _Install_Files"
 
@@ -361,60 +382,100 @@ FunctionEnd
 
 !macro _End_Install_Files Log_File
 	LogSet off
-	CopyFiles "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
-	Delete "$INSTDIR\install.log"
+	Rename "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
 !macroend
 !define End_Install_Files "!insertmacro _End_Install_Files"
 
-!macro UninstallAllFiles UN
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_miktex.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ctex.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cjk.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cct.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ty.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_gsview.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
-	${${UN}Uninstall_Files} "$INSTDIR\${Logs_Dir}\install.log"
-!macroend
-
-!macro Save_Component Com_Name
-	SectionGetFlags "Section_${Com_Name}" $R0
-	IntOp $R0 $R0 & ${SF_SELECTED}
-	${If} $R0 != 0
-		WriteINIStr "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "${Com_Name}" "1"
-	${Else}
-		WriteINIStr "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "${Com_Name}" "0"
+!macro Uninstall_All_Configs UN
+	${If} $UN_INSTDIR != ""
+		!insertmacro Uninstall_Config_CTeX "${UN}"
+		!insertmacro Uninstall_Config_WinEdt "${UN}"
+		!insertmacro Uninstall_Config_GSview "${UN}"
+		!insertmacro Uninstall_Config_Ghostscript "${UN}"
+		!insertmacro Uninstall_Config_Addons "${UN}"
+		!insertmacro Uninstall_Config_MiKTeX "${UN}"
 	${EndIf}
 !macroend
 
-!macro Save_Components_Information
-	!insertmacro Save_Component "MiKTeX"
-	!insertmacro Save_Component "Addons"
-	!insertmacro Save_Component "Ghostscript"
-	!insertmacro Save_Component "GSview"
-	!insertmacro Save_Component "WinEdt"
-!macroend
-
-!macro Restore_Component Com_Name
-	ReadINIStr $R0 "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "${Com_Name}"
-	StrCpy $OLD_${Com_Name} $R0
-	${If} $R0 == "1"
-		SectionGetFlags "Section_${Com_Name}" $R0
-		IntOp $R0 $R0 | ${SF_SELECTED}
-		SectionSetFlags "Section_${Com_Name}" $R0
-	${Else}
-		SectionGetFlags "Section_${Com_Name}" $R0
-		IntOp $R1 ${SF_SELECTED} !
-		IntOp $R0 $R0 & $R1
-		SectionSetFlags "Section_${Com_Name}" $R0
+!macro Uninstall_All_Files UN
+	${If} $UN_INSTDIR != ""
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_gsview.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ty.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_cct.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_cjk.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ctex.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_miktex.log"
 	${EndIf}
 !macroend
 
-!macro Restore_Components_Information
-	!insertmacro Restore_Component "MiKTeX"
-	!insertmacro Restore_Component "Addons"
-	!insertmacro Restore_Component "Ghostscript"
-	!insertmacro Restore_Component "GSview"
-	!insertmacro Restore_Component "WinEdt"
+!macro Restore_Install_Information
+	StrCpy $9 "$INSTDIR\${Logs_Dir}\install.ini"
+	${If} ${FileExists} "$9"
+		ReadINIStr $MiKTeX "$9" "CTeX" "MiKTeX"
+		ReadINIStr $Addons "$9" "CTeX" "Addons"
+		ReadINIStr $Ghostscript "$9" "CTeX" "Ghostscript"
+		ReadINIStr $GSview "$9" "CTeX" "GSview"
+		ReadINIStr $WinEdt "$9" "CTeX" "WinEdt"
+	${Else}
+		StrCpy $MiKTeX ${MiKTeX_Version}
+		StrCpy $Addons ${MiKTeX_Version}
+		StrCpy $Ghostscript ${Ghostscript_Version}
+		StrCpy $GSview ${GSview_Version}
+		StrCpy $WinEdt ${WinEdt_Version}
+	${EndIf}
+	${If} $MiKTeX != ""
+		!insertmacro SelectSection ${Section_MiKTeX}
+	${EndIf}
+	${If} $Addons != ""
+		!insertmacro SelectSection ${Section_Addons}
+	${EndIf}
+	${If} $Ghostscript != ""
+		!insertmacro SelectSection ${Section_Ghostscript}
+	${EndIf}
+	${If} $GSview != ""
+		!insertmacro SelectSection ${Section_GSview}
+	${EndIf}
+	${If} $WinEdt != ""
+		!insertmacro SelectSection ${Section_WinEdt}
+	${EndIf}
+!ifdef BUILD_REPAIR
+	!insertmacro SetSectionFlag ${Section_MiKTeX} ${SF_RO}
+	!insertmacro SetSectionFlag ${Section_Addons} ${SF_RO}
+	!insertmacro SetSectionFlag ${Section_Ghostscript} ${SF_RO}
+	!insertmacro SetSectionFlag ${Section_GSview} ${SF_RO}
+	!insertmacro SetSectionFlag ${Section_WinEdt} ${SF_RO}
+!endif
+!macroend
+
+!macro Get_Install_Information
+!ifndef BUILD_REPAIR
+	${If} ${SectionIsSelected} ${Section_MiKTeX}
+		StrCpy $MiKTeX ${MiKTeX_Version}
+	${EndIf}
+	${If} ${SectionIsSelected} ${Section_Addons}
+		StrCpy $Addons ${MiKTeX_Version}
+	${EndIf}
+	${If} ${SectionIsSelected} ${Section_Ghostscript}
+		StrCpy $Ghostscript ${Ghostscript_Version}
+	${EndIf}
+	${If} ${SectionIsSelected} ${Section_GSview}
+		StrCpy $GSview ${GSview_Version}
+	${EndIf}
+	${If} ${SectionIsSelected} ${Section_WinEdt}
+		StrCpy $WinEdt ${WinEdt_Version}
+	${EndIf}
+!endif
+!macroend
+
+!macro Get_Uninstall_Information
+	ReadRegStr $UN_INSTDIR HKLM "Software\${APP_NAME}" "Install"
+	ReadRegStr $UN_Version HKLM "Software\${APP_NAME}" "Version"
+	ReadRegStr $UN_MiKTeX HKLM "Software\${APP_NAME}" "MiKTeX"
+	ReadRegStr $UN_Addons HKLM "Software\${APP_NAME}" "Addons"
+	ReadRegStr $UN_Ghostscript HKLM "Software\${APP_NAME}" "Ghostscript"
+	ReadRegStr $UN_GSview HKLM "Software\${APP_NAME}" "GSview"
+	ReadRegStr $UN_WinEdt HKLM "Software\${APP_NAME}" "WinEdt"
 !macroend

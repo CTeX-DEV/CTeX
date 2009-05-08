@@ -27,7 +27,7 @@
 !define un.Uninstall_Files "!insertmacro _unUninstall_Files"
 
 
-!macro Define_UninstByLog_Functions UN
+!macro Define_Func_UninstallByLog UN
 
 Function ${UN}UninstallByLog
 	Exch $R0 ; log file
@@ -135,5 +135,5 @@ FunctionEnd
 
 !macroend
 
-!insertmacro Define_UninstByLog_Functions ""
-!insertmacro Define_UninstByLog_Functions "un."
+!insertmacro Define_Func_UninstallByLog ""
+!insertmacro Define_Func_UninstallByLog "un."

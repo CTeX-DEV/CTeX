@@ -5,18 +5,18 @@
 !include "CTeX_Macros.nsh"
 
 ; Variables
-Var OLD_INSTDIR
-Var OLD_VERSION
-Var OLD_MiKTeX_Version
-Var OLD_Ghostscript_Version
-Var OLD_GSview_Version
-Var OLD_WinEdt_Version
-
-Var OLD_MiKTeX
-Var OLD_Addons
-Var OLD_Ghostscript
-Var OLD_GSview
-Var OLD_WinEdt
+Var MiKTeX
+Var Addons
+Var Ghostscript
+Var GSview
+Var WinEdt
+Var UN_INSTDIR
+Var UN_Version
+Var UN_MiKTeX
+Var UN_Addons
+Var UN_Ghostscript
+Var UN_GSview
+Var UN_WinEdt
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
@@ -69,20 +69,13 @@ SetCompressorDictSize 128
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
-Section -UpdateSection
+Section -InitSection
 
+	!insertmacro Get_Install_Information
+	!insertmacro Uninstall_All_Configs ""
 !ifndef BUILD_REPAIR
-	${If} $OLD_INSTDIR != ""
-		!insertmacro UninstallAllFiles ""
-	${EndIf}
+	!insertmacro Uninstall_All_Files ""
 !endif
-
-	!insertmacro Reset_Config_MiKTeX
-	!insertmacro Reset_Config_Addons
-	!insertmacro Reset_Config_Ghostscript
-	!insertmacro Reset_Config_GSview
-	!insertmacro Reset_Config_WinEdt
-	!insertmacro Reset_Config_CTeX
 
 SectionEnd	
 
@@ -156,12 +149,6 @@ Section "WinEdt" Section_WinEdt
 
 	!insertmacro Install_Config_WinEdt
 
-	SectionGetFlags ${Section_MiKTeX} $R0
-	IntOp $R0 $R0 & ${SF_SELECTED}
-	${If} $R0 == ${SF_SELECTED}
-		!insertmacro Associate_WinEdt_MiKTeX
-	${EndIf}
-
 SectionEnd
 
 Section -FinishSection
@@ -177,21 +164,11 @@ Section -FinishSection
 	${End_Install_Files} "install.log"
 !endif
 
-	!insertmacro Save_Components_Information
-
 	!insertmacro Install_Config_CTeX
 
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
-
-	!insertmacro UPDATEFILEASSOC
-
-	StrCpy $0 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
-	ExecWait "$0\mpm.exe --register-components --quiet"
-	ExecWait "$0\initexmf.exe --force --mklinks --quiet"
-	ExecWait "$0\initexmf.exe --update-fndb --quiet"
-	ExecWait "$0\initexmf.exe --mkmaps --quiet"
 
 SectionEnd
 
@@ -208,31 +185,18 @@ SectionEnd
 Section Uninstall
 
 	;Remove configs...
-	ExecWait "$INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
-
-	!insertmacro Uninstall_Config_CTeX
-
-	!insertmacro Uninstall_Config_MiKTeX
-	!insertmacro Uninstall_Config_Addons
-	!insertmacro Uninstall_Config_Ghostscript
-	!insertmacro Uninstall_Config_GSview
-	!insertmacro Uninstall_Config_WinEdt
-
-	; Delete self
-	Delete "$INSTDIR\Uninstall.exe"
-
-	; Delete Shortcuts
-	RMDir /r "$SMPROGRAMS\CTeX"
+	!insertmacro Uninstall_All_Configs "un."
 
 	; Clean up CTeX
-	!insertmacro UninstallAllFiles "un."
+	!insertmacro Uninstall_All_Files "un."
+
+	; Delete self
+	Delete "$UN_INSTDIR\Uninstall.exe"
 
 	; Remove remaining directories
-	RMDir /r "$INSTDIR\${Logs_Dir}"
+	RMDir /r "$UN_INSTDIR\${Logs_Dir}"
 	MessageBox MB_YESNO $(Msg_RemoveInstDir) /SD IDNO IDNO +2
-		RMDir /r $INSTDIR
-
-	!insertmacro UPDATEFILEASSOC
+		RMDir /r $UN_INSTDIR
 
 SectionEnd
 
@@ -240,57 +204,37 @@ SectionEnd
 Function .onInit
 
 	!insertmacro MUI_LANGDLL_DISPLAY
+	!insertmacro Get_Uninstall_Information
+
+FunctionEnd
+
+Function un.onInit
+
+	!insertmacro Get_Uninstall_Information
+	${If} $UN_INSTDIR == ""
+		StrCpy $UN_INSTDIR $INSTDIR
+	${EndIf}
 
 FunctionEnd
 
 Function OnGUIInit
 
-	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{7AB19E08-582F-4996-BB5D-7287222D25ED}" "UninstallString"
-	${If} $0 != ""
-		MessageBox MB_OK|MB_ICONSTOP "$(Msg_ObsoleteVersion)"
-		Abort
-	${EndIf}
-
-	ReadRegStr $OLD_INSTDIR HKLM "Software\${APP_NAME}" "Install"
-	ReadRegStr $OLD_VERSION HKLM "Software\${APP_NAME}" "Version"
-	${If} $OLD_INSTDIR != ""
-!ifdef BUILD_REPAIR
-		${If} $OLD_VERSION != ${APP_BUILD}
-			MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_WrongVersion)" /SD IDYES IDYES wrongversion
-			Abort
-wrongversion:
-		${EndIf}
-!else
-		${If} $OLD_VERSION != ""
-			${VersionCompare} $OLD_VERSION ${Obsolete_Version} $1
-			${If} $1 == "2"
-				MessageBox MB_OK|MB_ICONSTOP "$(Msg_ObsoleteVersion)"
-				Abort
-			${EndIf}
-			${VersionCompare} $OLD_VERSION ${APP_BUILD} $1
-			${If} $1 == "1"
-				MessageBox MB_OK|MB_ICONEXCLAMATION "$(Msg_Downgrade)" /SD IDNO IDYES downgrade
-				Abort
-downgrade:
-			${EndIf}
-		${EndIf}
-		StrCpy $INSTDIR $OLD_INSTDIR
-!endif
-	${EndIf}
-
-	!insertmacro Get_Old_Version
-	!insertmacro Restore_Components_Information
+	!insertmacro Check_Obsolete_Version
+	!insertmacro Check_Update_Version
+	!insertmacro Restore_Install_Information
 
 FunctionEnd
 
 !ifndef BUILD_REPAIR
 Function ShowPageDirectory
-	
-  FindWindow $R0 "#32770" "" $HWNDPARENT
-  GetDlgItem $R1 $R0 1019
-    SendMessage $R1 ${EM_SETREADONLY} 1 0
-  GetDlgItem $R1 $R0 1001
-    EnableWindow $R1 0
+
+	${If} $UN_INSTDIR != ""
+		FindWindow $R0 "#32770" "" $HWNDPARENT
+		GetDlgItem $R1 $R0 1019
+			SendMessage $R1 ${EM_SETREADONLY} 1 0
+		GetDlgItem $R1 $R0 1001
+			EnableWindow $R1 0
+	${EndIf}
 
 FunctionEnd
 !endif
