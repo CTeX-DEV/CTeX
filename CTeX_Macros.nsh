@@ -11,24 +11,18 @@
 !define CreateURLShortCut "!insertmacro _CreateURLShortCut"
 
 !macro _AddPath DIR
-	StrCpy $R0 0
 	ClearErrors
-	${EnvVarUpdate} $R1 "PATH" "P" "HKLM" "${DIR}"
-	IfErrors 0 +2
-		StrCpy $R0 1
-	${If} $R0 == 1
-		${EnvVarUpdate} $R1 "PATH" "P" "HKCU" "${DIR}"
+	${EnvVarUpdate} $R0 "PATH" "P" "HKLM" "${DIR}"
+	${If} ${Errors}
+		${EnvVarUpdate} $R0 "PATH" "P" "HKCU" "${DIR}"
 	${EndIf}
 !macroend
 !define AddPath "!insertmacro _AddPath"
 
 !macro _AddEnvVar NAME VALUE
-	StrCpy $R0 0
 	ClearErrors
 	WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}" "${VALUE}"
-	IfErrors 0 +2
-		StrCpy $R0 1
-	${If} $R0 == 1
+	${If} ${Errors}
 		WriteRegExpandStr HKCU "Environment" "${NAME}" "${VALUE}"
 	${EndIf}
 !macroend
@@ -186,9 +180,7 @@ FunctionEnd
 ; Install Fonts
 		StrCpy $9 "$0\fonts\truetype\chinese"
 		StrCpy $8 "$9\simsun.ttf"
-		IfFileExists $8 0 +2
-			StrCpy $8 ""
-		${If} $8 != ""
+		${IfNot} ${FileExists} $8
 			ExecWait '$0\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
 			CreateDirectory "$9"
 			Rename "FONT00.TTF" "$8"
