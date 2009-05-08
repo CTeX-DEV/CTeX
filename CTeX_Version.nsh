@@ -37,24 +37,39 @@
 	VIProductVersion "${APP_BUILD}"
 !macroend
 
-!macro Get_Old_Version
-	${If} $OLD_INSTDIR != ""
-		StrCpy $0 0
+!macro Check_Obsolete_Version
+	ReadRegStr $R0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{7AB19E08-582F-4996-BB5D-7287222D25ED}" "UninstallString"
+	${If} $R0 != ""
+		MessageBox MB_OK|MB_ICONSTOP "$(Msg_ObsoleteVersion)"
+		Abort
+	${EndIf}
 
-		${VersionCompare} $OLD_VERSION "2.7.1.0" $1
-		${If} $1 == "2"
-			StrCpy $OLD_MiKTeX_Version      "2.7"
-			StrCpy $OLD_Ghostscript_Version "8.64"
-			StrCpy $OLD_GSview_Version      "4.9"
-			StrCpy $OLD_WinEdt_Version      "5.5"
-			StrCpy $0 1
+	ReadRegStr $R0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString"
+	${If} $R0 != ""
+		${If} $UN_INSTDIR == ""
+		${OrIf} $UN_Version == ""
+			MessageBox MB_OK|MB_ICONSTOP "$(Msg_ObsoleteVersion)"
+			Abort
 		${EndIf}
+	${EndIf}
+!macroend
 
-		${If} $0 == 0
-			StrCpy $OLD_MiKTeX_Version      "${MiKTeX_Version}"
-			StrCpy $OLD_Ghostscript_Version "${Ghostscript_Version}"
-			StrCpy $OLD_GSview_Version      "${GSview_Version}"
-			StrCpy $OLD_WinEdt_Version      "${WinEdt_Version}"
+!macro Check_Update_Version
+	${If} $UN_INSTDIR != ""
+!ifdef BUILD_REPAIR
+		${If} $UN_Version != ${APP_BUILD}
+			MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_WrongVersion)" /SD IDYES IDYES +2
+			Abort
 		${EndIf}
+!else
+		${If} $UN_Version != ""
+			${VersionCompare} $UN_Version ${APP_BUILD} $1
+			${If} $1 == "1"
+				MessageBox MB_OK|MB_ICONEXCLAMATION "$(Msg_Downgrade)" /SD IDNO IDYES +2
+				Abort
+			${EndIf}
+		${EndIf}
+		StrCpy $INSTDIR $UN_INSTDIR
+!endif
 	${EndIf}
 !macroend
