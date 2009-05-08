@@ -11,11 +11,13 @@
 !define CreateURLShortCut "!insertmacro _CreateURLShortCut"
 
 !macro _AddPath DIR
+	SetDetailsPrint none
 	ClearErrors
 	${EnvVarUpdate} $R0 "PATH" "P" "HKLM" "${DIR}"
 	${If} ${Errors}
 		${EnvVarUpdate} $R0 "PATH" "P" "HKCU" "${DIR}"
 	${EndIf}
+	SetDetailsPrint lastused
 !macroend
 !define AddPath "!insertmacro _AddPath"
 
@@ -29,8 +31,10 @@
 !define AddEnvVar "!insertmacro _AddEnvVar"
 
 !macro _RemovePath UN DIR
+	SetDetailsPrint none
 	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
 	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
+	SetDetailsPrint lastused
 !macroend
 !define RemovePath '!insertmacro _RemovePath ""'
 !define un.RemovePath '!insertmacro _RemovePath "un."'
@@ -554,4 +558,44 @@ FunctionEnd
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_cjk.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_ctex.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_miktex.log"
+!macroend
+
+!macro Compress_Log LogFile
+	${If} ${FileExists} ${LogFile}
+		DetailPrint "Compress install log: ${LogFile}"
+		FileOpen $0 "${LogFile}" "r"
+		FileOpen $1 "${LogFile}.new" "w"
+		${Do}
+			FileRead $0 $9
+			${If} $9 == ""
+				${ExitDo}
+			${EndIf}
+			StrCpy $8 $9 11
+			${If} $8 == "File: overw"
+				${Continue}
+			${EndIf}
+			StrCpy $7 $9 7 -9
+			${If} $8 == "CreateDirec"
+			${AndIf} $7 == "created"
+				${Continue}
+			${EndIf}
+			FileWrite $1 "$9"
+		${Loop}
+		FileClose $1
+		FileClose $0
+		Delete "${LogFile}"
+		Rename "${LogFile}.new" "${LogFile}"
+	${EndIf}
+!macroend
+
+!macro Compress_All_Logs
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_winedt.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_gsview.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ty.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_cct.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_cjk.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ctex.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_miktex.log"
 !macroend
