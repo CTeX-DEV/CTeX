@@ -1,5 +1,6 @@
 !include "WordFunc.nsh"
 !include "Sections.nsh"
+!include "TextReplace.nsh"
 !include "EnvVarUpdate.nsh"
 !include "FileAssoc.nsh"
 !include "UninstByLog.nsh"
@@ -530,18 +531,8 @@ FunctionEnd
 		ReadINIStr $R0 "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "Install"
 		${If} $R0 != ""
 			DetailPrint "Update install log: ${LogFile}"
-			FileOpen $0 "${LogFile}" "r"
-			FileOpen $1 "${LogFile}.new" "w"
-			${Do}
-				FileRead $0 $9
-				${If} $9 == ""
-					${ExitDo}
-				${EndIf}
-				${WordReplace} $9 "$R0" "$INSTDIR" "+" $8
-				FileWrite $1 "$8"
-			${Loop}
-			FileClose $1
-			FileClose $0
+			${textreplace::ReplaceInFile} "${LogFile}" "${LogFile}.new" "$R0" "$INSTDIR" "/S=1" $R1
+			${textreplace::Unload}
 			Delete "${LogFile}"
 			Rename "${LogFile}.new" "${LogFile}"
 		${EndIf}
