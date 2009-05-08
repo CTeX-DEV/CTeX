@@ -327,6 +327,8 @@ FunctionEnd
 	WriteRegStr HKLM "$9" "WinEdt" "$WinEdt"
 
 	StrCpy $9 "$INSTDIR\${Logs_Dir}\install.ini"
+	WriteINIStr "$9" "CTeX" "Install" "$INSTDIR"
+	WriteINIStr "$9" "CTeX" "Version" "${APP_BUILD}"
 	WriteINIStr "$9" "CTeX" "MiKTeX" "$MiKTeX"
 	WriteINIStr "$9" "CTeX" "Addons" "$Addons"
 	WriteINIStr "$9" "CTeX" "Ghostscript" "$Ghostscript"
@@ -345,10 +347,6 @@ FunctionEnd
 	StrCpy $9 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
 	ExecWait "$9\initexmf.exe --update-fndb --quiet"
 	ExecWait "$9\initexmf.exe --mkmaps --quiet"
-
-!ifdef BUILD_REPAIR
-	!insertmacro Update_All_Logs
-!endif
 
 	!insertmacro UPDATEFILEASSOC
 !macroend
@@ -516,13 +514,19 @@ FunctionEnd
 !macroend
 
 !macro Update_All_Logs
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_gsview.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_ty.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_cct.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_cjk.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_ctex.log"
-	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_miktex.log"
+!ifdef BUILD_REPAIR
+	ReadINIStr $0 "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "Install"
+	${If} $0 != ""
+		StrCpy $UN_INSTDIR $0
+	${EndIf}
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_winedt.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_gsview.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_ty.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_cct.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_cjk.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_ctex.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_miktex.log"
+!endif
 !macroend
