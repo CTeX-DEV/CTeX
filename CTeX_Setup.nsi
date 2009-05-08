@@ -190,8 +190,11 @@ Section Uninstall
 	Delete "$UN_INSTDIR\Uninstall.exe"
 
 	; Remove remaining directories
-	MessageBox MB_YESNO $(Msg_RemoveInstDir) /SD IDNO IDNO +2
-		RMDir /r $UN_INSTDIR
+	RMDir $UN_INSTDIR
+	${If} ${FileExists} $UN_INSTDIR
+		MessageBox MB_YESNO $(Msg_RemoveInstDir) /SD IDNO IDNO +2
+			RMDir /r $UN_INSTDIR
+	${EndIf}
 
 SectionEnd
 
