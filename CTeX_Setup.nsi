@@ -168,6 +168,8 @@ Section -FinishSection
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
+	
+	!insertmacro Compress_All_Logs
 
 SectionEnd
 
@@ -232,14 +234,14 @@ Function SectionInit
 
 !ifndef BUILD_REPAIR
 	!insertmacro Update_Install_Information
+!else
+	!insertmacro Update_All_Logs
 !endif
 
 	!insertmacro Uninstall_All_Configs ""
 
 !ifndef BUILD_REPAIR
 	!insertmacro Uninstall_All_Files ""
-!else
-	!insertmacro Update_All_Logs
 !endif
 
 FunctionEnd
