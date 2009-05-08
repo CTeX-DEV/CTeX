@@ -71,11 +71,7 @@ SetCompressorDictSize 128
 
 Section -InitSection
 
-	!insertmacro Get_Install_Information
-	!insertmacro Uninstall_All_Configs ""
-!ifndef BUILD_REPAIR
-	!insertmacro Uninstall_All_Files ""
-!endif
+	Call SectionInit
 
 SectionEnd	
 
@@ -222,6 +218,16 @@ Function OnGUIInit
 	!insertmacro Check_Obsolete_Version
 	!insertmacro Check_Update_Version
 	!insertmacro Restore_Install_Information
+
+FunctionEnd
+
+Function SectionInit
+
+	!insertmacro Get_Install_Information
+	!insertmacro Uninstall_All_Configs ""
+!ifndef BUILD_REPAIR
+	!insertmacro Uninstall_All_Files ""
+!endif
 
 FunctionEnd
 
