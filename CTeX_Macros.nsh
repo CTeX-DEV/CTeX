@@ -211,10 +211,10 @@ FunctionEnd
 		${${UN}RemovePath} "$0\ty\bin"
 
 ; Uninstall Fonts
-!ifndef BUILD_REPAIR
-		Delete "$0\fonts\truetype\chinese\simsun.ttf"
-		RMDir "$0\fonts\truetype\chinese"
-!endif
+		${If} ${UN} == "un."
+			Delete "$0\fonts\truetype\chinese\simsun.ttf"
+			RMDir "$0\fonts\truetype\chinese"
+		${EndIf}
 	${EndIf}
 !macroend
 
@@ -446,17 +446,17 @@ FunctionEnd
 	${If} $WinEdt != ""
 		!insertmacro SelectSection ${Section_WinEdt}
 	${EndIf}
-!ifdef BUILD_REPAIR
+!macroend
+
+!macro Set_All_Sections_ReadOnly
 	!insertmacro SetSectionFlag ${Section_MiKTeX} ${SF_RO}
 	!insertmacro SetSectionFlag ${Section_Addons} ${SF_RO}
 	!insertmacro SetSectionFlag ${Section_Ghostscript} ${SF_RO}
 	!insertmacro SetSectionFlag ${Section_GSview} ${SF_RO}
 	!insertmacro SetSectionFlag ${Section_WinEdt} ${SF_RO}
-!endif
 !macroend
 
-!macro Get_Install_Information
-!ifndef BUILD_REPAIR
+!macro Update_Install_Information
 	${If} ${SectionIsSelected} ${Section_MiKTeX}
 		StrCpy $MiKTeX ${MiKTeX_Version}
 	${EndIf}
@@ -472,7 +472,6 @@ FunctionEnd
 	${If} ${SectionIsSelected} ${Section_WinEdt}
 		StrCpy $WinEdt ${WinEdt_Version}
 	${EndIf}
-!endif
 !macroend
 
 !macro Get_Uninstall_Information
@@ -500,29 +499,28 @@ FunctionEnd
 
 !macro Update_Log LogFile
 	${If} ${FileExists} ${LogFile}
-		FileOpen $0 "${LogFile}" "r"
-		FileOpen $1 "${LogFile}.new" "w"
-		${Do}
-			FileRead $0 $9
-			${If} $9 == ""
-				${ExitDo}
-			${EndIf}
-			${WordReplace} $9 "$UN_INSTDIR" "$INSTDIR" "+" $8
-			FileWrite $1 "$8"
-		${Loop}
-		FileClose $1
-		FileClose $0
-		Delete "${LogFile}"
-		Rename "${LogFile}.new" "${LogFile}"
+		ReadINIStr $R0 "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "Install"
+		${If} $R0 != ""
+			DetailPrint "Update install log: ${LogFile}"
+			FileOpen $0 "${LogFile}" "r"
+			FileOpen $1 "${LogFile}.new" "w"
+			${Do}
+				FileRead $0 $9
+				${If} $9 == ""
+					${ExitDo}
+				${EndIf}
+				${WordReplace} $9 "$R0" "$INSTDIR" "+" $8
+				FileWrite $1 "$8"
+			${Loop}
+			FileClose $1
+			FileClose $0
+			Delete "${LogFile}"
+			Rename "${LogFile}.new" "${LogFile}"
+		${EndIf}
 	${EndIf}
 !macroend
 
 !macro Update_All_Logs
-!ifdef BUILD_REPAIR
-	ReadINIStr $0 "$INSTDIR\${Logs_Dir}\install.ini" "CTeX" "Install"
-	${If} $0 != ""
-		StrCpy $UN_INSTDIR $0
-	${EndIf}
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_winedt.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_gsview.log"
@@ -532,5 +530,4 @@ FunctionEnd
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_cjk.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_ctex.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_miktex.log"
-!endif
 !macroend

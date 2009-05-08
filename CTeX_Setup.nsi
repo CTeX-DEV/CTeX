@@ -21,6 +21,7 @@ Var UN_WinEdt
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
 BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
+
 !ifndef BUILD_REPAIR
 	InstallDir "C:\CTEX"
 !ifndef BUILD_FULL
@@ -28,9 +29,11 @@ BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 !else
 	OutFile "CTeX ${APP_BUILD} Full.exe"
 !endif
-!else
+!endif
+
+!ifdef BUILD_REPAIR
 	InstallDir "$EXEDIR"
-  OutFile "Repair.exe"
+	OutFile "Repair.exe"
 !endif
 
 ; Other settings
@@ -166,8 +169,6 @@ Section -FinishSection
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
 
-	!insertmacro Update_All_Logs
-
 SectionEnd
 
 ; Modern install component descriptions
@@ -220,15 +221,25 @@ Function OnGUIInit
 	!insertmacro Check_Obsolete_Version
 	!insertmacro Check_Update_Version
 	!insertmacro Restore_Install_Information
+	
+!ifdef BUILD_REPAIR
+	!insertmacro Set_All_Sections_ReadOnly
+!endif
 
 FunctionEnd
 
 Function SectionInit
 
-	!insertmacro Get_Install_Information
+!ifndef BUILD_REPAIR
+	!insertmacro Update_Install_Information
+!endif
+
 	!insertmacro Uninstall_All_Configs ""
+
 !ifndef BUILD_REPAIR
 	!insertmacro Uninstall_All_Files ""
+!else
+	!insertmacro Update_All_Logs
 !endif
 
 FunctionEnd
