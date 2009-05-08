@@ -82,6 +82,8 @@ FunctionEnd
 
 !macro Install_Config_MiKTeX
 	${If} $MiKTeX != ""
+		DetailPrint "Install MiKTeX configs"
+
 		StrCpy $0 "$INSTDIR\${MiKTeX_Dir}"
 		StrCpy $1 "$0\miktex\bin"
 
@@ -123,6 +125,8 @@ FunctionEnd
 
 !macro Uninstall_Config_MiKTeX UN
 	${If} $UN_MiKTeX != ""
+		DetailPrint "Uninstall MiKTeX configs"
+
 		ExecWait "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
 
 		DeleteRegKey HKLM "Software\MiKTeX.org"
@@ -136,6 +140,8 @@ FunctionEnd
 
 !macro Install_Config_Addons
 	${If} $Addons != ""
+		DetailPrint "Install CTeX Addons configs"
+
 		StrCpy $0 "$INSTDIR\${Addons_Dir}"
 
 		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$MiKTeX\Core"
@@ -191,6 +197,8 @@ FunctionEnd
 
 !macro Uninstall_Config_Addons UN
 	${If} $UN_Addons != ""
+		DetailPrint "Uninstall CTeX Addons configs"
+
 		StrCpy $0 "$UN_INSTDIR\${Addons_Dir}"
 	
 		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$UN_MiKTeX\Core"
@@ -220,6 +228,8 @@ FunctionEnd
 
 !macro Install_Config_Ghostscript
 	${If} $Ghostscript != ""
+		DetailPrint "Install Ghostscript configs"
+
 		StrCpy $0 "$INSTDIR\${Ghostscript_Dir}"
 		StrCpy $1 "$0\gs$Ghostscript"
 		
@@ -238,6 +248,8 @@ FunctionEnd
 
 !macro Uninstall_Config_Ghostscript UN
 	${If} $UN_Ghostscript != ""
+		DetailPrint "Uninstall Ghostscript configs"
+
 		DeleteRegKey HKLM "Software\GPL Ghostscript"
 	
 		${${UN}RemovePath} "$UN_INSTDIR\${Ghostscript_Dir}\gs$UN_Ghostscript\bin"
@@ -246,6 +258,8 @@ FunctionEnd
 
 !macro Install_Config_GSview
 	${If} $GSview != ""
+		DetailPrint "Install GSview configs"
+
 		StrCpy $0 "$INSTDIR\${GSview_Dir}"
 		WriteRegStr HKLM "Software\Ghostgum\GSview" "$GSview" "$0"
 	
@@ -276,6 +290,8 @@ FunctionEnd
 
 !macro Uninstall_Config_GSview UN
 	${If} $UN_GSview != ""
+		DetailPrint "Uninstall GSview configs"
+
 		DeleteRegKey HKLM "Software\Ghostgum"
 	
 		${${UN}RemovePath} "$UN_INSTDIR\${GSview_Dir}\gsview"
@@ -287,6 +303,8 @@ FunctionEnd
 
 !macro Install_Config_WinEdt
 	${If} $WinEdt != ""
+		DetailPrint "Install WinEdt configs"
+
 		StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
 		WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
 	
@@ -307,6 +325,8 @@ FunctionEnd
 
 !macro Uninstall_Config_WinEdt UN
 	${If} $UN_WinEdt != ""
+		DetailPrint "Uninstall WinEdt configs"
+
 		DeleteRegKey HKLM "Software\WinEdt"
 	
 		${${UN}RemovePath} "$UN_INSTDIR\${WinEdt_Dir}"
@@ -316,6 +336,8 @@ FunctionEnd
 !macroend
 
 !macro Install_Config_CTeX
+	DetailPrint "Install general configs"
+
 	StrCpy $9 "Software\${APP_NAME}"
 	WriteRegStr HKLM "$9" "" "${APP_NAME} ${APP_VERSION}"
 	WriteRegStr HKLM "$9" "Install" "$INSTDIR"
@@ -352,6 +374,8 @@ FunctionEnd
 !macroend
 
 !macro Uninstall_Config_CTeX UN
+	DetailPrint "Uninstall general configs"
+
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
 
