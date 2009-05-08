@@ -211,7 +211,7 @@ FunctionEnd
 		${${UN}RemovePath} "$0\ty\bin"
 
 ; Uninstall Fonts
-		${If} ${UN} == "un."
+		${If} "${UN}" == "un."
 			Delete "$0\fonts\truetype\chinese\simsun.ttf"
 			RMDir "$0\fonts\truetype\chinese"
 		${EndIf}
