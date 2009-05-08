@@ -213,6 +213,7 @@ FunctionEnd
 ; Uninstall Fonts
 !ifndef BUILD_REPAIR
 		Delete "$0\fonts\truetype\chinese\simsun.ttf"
+		RMDir "$0\fonts\truetype\chinese"
 !endif
 	${EndIf}
 !macroend
@@ -345,12 +346,18 @@ FunctionEnd
 	ExecWait "$9\initexmf.exe --update-fndb --quiet"
 	ExecWait "$9\initexmf.exe --mkmaps --quiet"
 
+!ifdef BUILD_REPAIR
+	!insertmacro Update_All_Logs
+!endif
+
 	!insertmacro UPDATEFILEASSOC
 !macroend
 
 !macro Uninstall_Config_CTeX UN
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	DeleteRegKey HKLM "Software\${APP_NAME}"
+
+	Delete "$UN_INSTDIR\${Logs_Dir}\install.ini"
 
 	RMDir /r "$SMPROGRAMS\CTeX"
 
@@ -400,6 +407,12 @@ FunctionEnd
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_cjk.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ctex.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_miktex.log"
+		RMDir "$UN_INSTDIR\${Logs_Dir}"
+		RMDir "$UN_INSTDIR\${WinEdt_Dir}"
+		RMDir "$UN_INSTDIR\${GSview_Dir}"
+		RMDir "$UN_INSTDIR\${Ghostscript_Dir}"
+		RMDir "$UN_INSTDIR\${Addons_Dir}"
+		RMDir "$UN_INSTDIR\${MiKTeX_Dir}"
 	${EndIf}
 !macroend
 
@@ -470,4 +483,46 @@ FunctionEnd
 	ReadRegStr $UN_Ghostscript HKLM "Software\${APP_NAME}" "Ghostscript"
 	ReadRegStr $UN_GSview HKLM "Software\${APP_NAME}" "GSview"
 	ReadRegStr $UN_WinEdt HKLM "Software\${APP_NAME}" "WinEdt"
+!macroend
+
+!macro Update_Uninstall_Information
+	${If} $UN_INSTDIR != ""
+		StrCpy $INSTDIR $UN_INSTDIR
+	${Else}
+		StrCpy $UN_INSTDIR $INSTDIR
+		StrCpy $UN_MiKTeX ${MiKTeX_Version}
+		StrCpy $UN_Addons ${MiKTeX_Version}
+		StrCpy $UN_Ghostscript ${Ghostscript_Version}
+		StrCpy $UN_GSview ${GSview_Version}
+		StrCpy $UN_WinEdt ${WinEdt_Version}
+	${EndIf}
+!macroend
+
+!macro Update_Log LogFile
+	${If} ${FileExists} ${LogFile}
+		FileOpen $0 "${LogFile}" "r"
+		FileOpen $1 "${LogFile}.new" "w"
+		${Do}
+			FileRead $0 $9
+			${If} $9 == ""
+				${ExitDo}
+			${EndIf}
+			${WordReplace} $9 "$UN_INSTDIR" "$INSTDIR" "+" $8
+			FileWrite $1 "$8"
+		${Loop}
+		FileClose $1
+		FileClose $0
+	${EndIf}
+!macroend
+
+!macro Update_All_Logs
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_gsview.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_ty.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_cct.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_cjk.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_ctex.log"
+	!insertmacro Update_Log "$UN_INSTDIR\${Logs_Dir}\install_miktex.log"
 !macroend
