@@ -190,7 +190,6 @@ Section Uninstall
 	Delete "$UN_INSTDIR\Uninstall.exe"
 
 	; Remove remaining directories
-	RMDir /r "$UN_INSTDIR\${Logs_Dir}"
 	MessageBox MB_YESNO $(Msg_RemoveInstDir) /SD IDNO IDNO +2
 		RMDir /r $UN_INSTDIR
 
@@ -207,9 +206,7 @@ FunctionEnd
 Function un.onInit
 
 	!insertmacro Get_Uninstall_Information
-	${If} $UN_INSTDIR == ""
-		StrCpy $UN_INSTDIR $INSTDIR
-	${EndIf}
+	!insertmacro Update_Uninstall_Information
 
 FunctionEnd
 
