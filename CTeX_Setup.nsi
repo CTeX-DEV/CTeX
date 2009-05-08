@@ -166,6 +166,8 @@ Section -FinishSection
 	CreateDirectory "$SMPROGRAMS\CTeX"
 	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
 
+	!insertmacro Update_All_Logs
+
 SectionEnd
 
 ; Modern install component descriptions
