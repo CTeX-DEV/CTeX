@@ -367,6 +367,7 @@ FunctionEnd
 	LogSet on
 	File /r "${Files}"
 	LogSet off
+	Delete "$INSTDIR\${Logs_Dir}\${Log_File}"
 	Rename "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
 !macroend
 !define Install_Files "!insertmacro _Install_Files"
@@ -379,6 +380,7 @@ FunctionEnd
 
 !macro _End_Install_Files Log_File
 	LogSet off
+	Delete "$INSTDIR\${Logs_Dir}\${Log_File}"
 	Rename "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
 !macroend
 !define End_Install_Files "!insertmacro _End_Install_Files"
@@ -510,6 +512,8 @@ FunctionEnd
 		${Loop}
 		FileClose $1
 		FileClose $0
+		Delete "${LogFile}"
+		Rename "${LogFile}.new" "${LogFile}"
 	${EndIf}
 !macroend
 
