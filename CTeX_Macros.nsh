@@ -102,7 +102,7 @@ FunctionEnd
 		${AddPath} "$1"
 
 		StrCpy $9 "$1\yap.exe"
-		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX}" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
+		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
 
 		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX"
 		CreateDirectory "$9"
