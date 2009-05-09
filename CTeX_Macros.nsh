@@ -323,7 +323,7 @@ FunctionEnd
 		CreateShortCut "$9\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
 	
 		${If} $MiKTeX != ""
-			WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\$MiKTeX}\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
+			WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\$MiKTeX\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
 		${EndIf}
 	${EndIf}
 !macroend
@@ -427,6 +427,7 @@ FunctionEnd
 
 !macro Uninstall_All_Files UN
 	${If} $UN_INSTDIR != ""
+		DetailPrint "Uninstall old files"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_gsview.log"
