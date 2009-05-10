@@ -35,7 +35,7 @@ CTeX 2.7.0
 已经安装了低版本的 CTeX 中文套装的用户请将原先的 CTeX 中文套装卸载后
 删除安装目录，再安装新版本，不要直接升级。
 
-新版本中不包含中文 Type1 字库，建议尽量使用 TrueType 字库。
+新版本中的 FontSetup 可以自动生成中文 Type1 字库。
 
 
 ====================================================
@@ -45,22 +45,28 @@ CTeX 2.7.0
 
 3.1. CJK 中文模式和字库
 
-CTeX 中文套装可以直接使用的 CJK 模式和字库有六种
+CTeX 中文套装可以直接使用的 CJK 模式有 GBK 和 UTF8，字体有六种
 
-\begin{CJK*}{GBK}{song}    % 宋体
-\begin{CJK*}{GBK}{hei}     % 黑体
-\begin{CJK*}{GBK}{kai}     % 楷体
-\begin{CJK*}{GBK}{fs}      % 仿宋
-\begin{CJK*}{GBK}{li}      % 隶书
-\begin{CJK*}{GBK}{you}     % 幼圆
+song    % 宋体
+hei     % 黑体
+kai     % 楷体
+fs      % 仿宋
+li      % 隶书
+you     % 幼圆
 
 如果需要使用 pmC 模式或者 GB 编码，或者增加其他中文字库，请自己生成相关
-字库和配置文件。可以参考 CTEX 目录下的文件。
+字库和配置文件。可以参考 CTeX 目录下的文件。
 
-如果没有安装中文 Type1 字库，则自动使用 Windows 自带的 TrueType 字库。
+如果没有生成中文 Type1 字库，则自动使用 Windows 自带的 TrueType 字库。
 
-注意：Windows 中的楷体和仿宋体 TrueType 字库只是 GB2312 字符集，而其他几
-种字体是 GBK 大字符集。而 CTeX-Font 的中文 Type1 字库都是 GBK 大字符集。
+要使 pdfTeX 和 pdfLaTeX 直接使用 TrueType 字库，请在 tex 文件中使用如下命令
+
+\pdfmapfile{+cjk-song-ttf.map}
+
+单独加入某个字体。
+
+注意：Windows XP 中的楷体和仿宋体 TrueType 字库只是 GB2312 字符集，而其他几
+种字体是 GBK 大字符集。
 
 
 3.2. 升级
@@ -97,13 +103,15 @@ WinEdt 的升级比较麻烦，不建议自己升级。
 CTeX 中文套装包含了以下人员的工作成果（排名不分先后）：
 
 张林波 (zf)                 zlb@lsec.cc.ac.cn
-王磊   (cxterm, eggs)       lwang@ctex.org
+王磊   (cxterm, eggs)       lwang2002@gmail.com
 energy (obase)              obase@163.com
 shredder                    shredder@etang.com
 nsii                        nsii@sina.com
 李树钧 (hooklee)            http://www.hooklee.com
 邓建松 (texguru)            http://202.38.68.78/~texguru
 孙文昌 (mytex)              http://miktex.nankai.edu.cn
+instanton
+milksea
 
 感谢 CTEX 论坛上的用户对 CTeX 套装软件提出的各种建议和意见。
 
