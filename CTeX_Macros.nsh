@@ -104,6 +104,7 @@ FunctionEnd
 		StrCpy $9 "$1\yap.exe"
 		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
 
+; ShortCuts
 		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX"
 		CreateDirectory "$9"
 		CreateShortCut "$9\Browse Packages.lnk" "$1\mpm_mfc.exe"
@@ -161,6 +162,8 @@ FunctionEnd
 			WriteRegStr HKLM "$9" "Roots" "$0;$R9"
 		${EndIf}
 
+		${AddPath} "$0\ctex\bin"
+
 ; Install CCT
 		${AddPath} "$0\cct\bin"
 		${AddEnvVar} "CCHZPATH" "$0\cct\fonts"
@@ -187,6 +190,18 @@ FunctionEnd
 		FileWrite $R0 "simsun.ttc$\r$\nsimyou.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimli.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
 		FileWrite $R0 "0$\r$\n0$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n"
 		FileClose $R0
+
+; ShortCuts
+		CreateShortCut "$SMPROGRAMS\CTeX\Font Setup.lnk" "$0\ctex\bin\FontSetup.exe"
+
+		StrCpy $9 "$SMPROGRAMS\CTeX\Help"
+		StrCpy $8 "$0\ctex\doc"
+		CreateDirectory "$9"
+		CreateShortCut "$9\CTeX FAQ.lnk" "$8\ctex-faq.pdf"
+		CreateShortCut "$9\Graphics.lnk" "$8\graphics.pdf"
+		CreateShortCut "$9\Symbols.lnk" "$8\symbols.pdf"
+		CreateShortCut "$9\Mathematics.lnk" "$8\ch8.pdf"
+		CreateShortCut "$9\LaTeX Short.lnk" "$8\lshort-cn.pdf"
 	${EndIf}
 !macroend
 
@@ -205,6 +220,8 @@ FunctionEnd
 			WriteRegStr HKLM "$9" "Roots" "$R9"
 		${EndIf}
 
+		${${UN}RemovePath} "$0\ctex\bin"
+
 ; Uninstall CCT
 		${${UN}RemovePath} "$0\cct\bin"
 		${RemoveEnvVar} "CCHZPATH"
@@ -213,6 +230,9 @@ FunctionEnd
 ; Uninstall TY
 		${${UN}RemovePath} "$0\ty\bin"
 	${EndIf}
+
+	Delete "$SMPROGRAMS\CTeX\Font Setup.lnk"
+	RMDir /r "$SMPROGRAMS\CTeX\Help"
 !macroend
 
 !macro Install_Config_Ghostscript
@@ -228,6 +248,7 @@ FunctionEnd
 	
 		${AddPath} "$1\bin"
 	
+; ShortCuts
 		StrCpy $9 "$SMPROGRAMS\CTeX\Ghostcript"
 		CreateDirectory "$9"
 		CreateShortCut "$9\Ghostscript.lnk" "$1\bin\gswin32.exe" '"-I$1\lib;$0\fonts;$FONTS"'
@@ -242,6 +263,8 @@ FunctionEnd
 		DeleteRegKey HKLM "Software\GPL Ghostscript"
 	
 		${${UN}RemovePath} "$UN_INSTDIR\${Ghostscript_Dir}\gs$UN_Ghostscript\bin"
+
+		RMDir /r "$SMPROGRAMS\CTeX\Ghostscript"
 	${EndIf}
 !macroend
 
@@ -270,6 +293,7 @@ FunctionEnd
 		!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
 		!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
 	
+; ShortCuts
 		StrCpy $9 "$SMPROGRAMS\CTeX\Ghostgum"
 		CreateDirectory "$9"
 		CreateShortCut "$9\GSview.lnk" "$0\gsview\gsview32.exe"
@@ -287,6 +311,8 @@ FunctionEnd
 	
 		!insertmacro APP_UNASSOCIATE "ps" "CTeX.PS"
 		!insertmacro APP_UNASSOCIATE "eps" "CTeX.EPS"
+
+		RMDir /r "$SMPROGRAMS\CTeX\Ghostgum"
 	${EndIf}
 !macroend
 
@@ -302,6 +328,7 @@ FunctionEnd
 		StrCpy $9 "$0\WinEdt.exe"
 		!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "$9,0" "Open with WinEdt" '$9 "%1"'
 	
+; ShortCuts
 		StrCpy $9 "$SMPROGRAMS\CTeX"
 		CreateDirectory "$9"
 		CreateShortCut "$9\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
@@ -321,6 +348,8 @@ FunctionEnd
 		${${UN}RemovePath} "$UN_INSTDIR\${WinEdt_Dir}"
 	
 		!insertmacro APP_UNASSOCIATE "tex" "CTeX.TeX"
+
+		Delete "$SMPROGRAMS\CTeX\WinEdt.lnk"
 	${EndIf}
 !macroend
 
