@@ -187,16 +187,6 @@ FunctionEnd
 		FileWrite $R0 "simsun.ttc$\r$\nsimyou.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\nsimli.ttf$\r$\nsimsun.ttc$\r$\nsimsun.ttc$\r$\n"
 		FileWrite $R0 "0$\r$\n0$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n0$\r$\n"
 		FileClose $R0
-
-; Install Fonts
-		StrCpy $9 "$0\fonts\truetype\chinese"
-		StrCpy $8 "$9\simsun.ttf"
-		${IfNot} ${FileExists} $8
-			ExecWait '$0\ctex\bin\BREAKTTC.exe "$FONTS\simsun.ttc"'
-			CreateDirectory "$9"
-			Rename "FONT00.TTF" "$8"
-			Delete "*.TTF"
-		${EndIf}
 	${EndIf}
 !macroend
 
@@ -222,12 +212,6 @@ FunctionEnd
 
 ; Uninstall TY
 		${${UN}RemovePath} "$0\ty\bin"
-
-; Uninstall Fonts
-		${If} "${UN}" == "un."
-			Delete "$0\fonts\truetype\chinese\simsun.ttf"
-			RMDir "$0\fonts\truetype\chinese"
-		${EndIf}
 	${EndIf}
 !macroend
 
@@ -432,6 +416,7 @@ FunctionEnd
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_gsview.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
+		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ty.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_cct.log"
 		${${UN}Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_cjk.log"
@@ -545,6 +530,7 @@ FunctionEnd
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_winedt.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_gsview.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
+	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_packages.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_ty.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_cct.log"
 	!insertmacro Update_Log "$INSTDIR\${Logs_Dir}\install_cjk.log"
@@ -585,6 +571,7 @@ FunctionEnd
 	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_winedt.log"
 	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_gsview.log"
 	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_packages.log"
 	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ty.log"
 	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_cct.log"
 	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_cjk.log"
