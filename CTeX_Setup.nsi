@@ -49,14 +49,18 @@ SetCompressorDictSize 128
 !include "MUI2.nsh"
 
 !define MUI_ABORTWARNING
+!ifndef BUILD_REPAIR
 !define MUI_ICON "CTeX.ico"
+!else
+!define MUI_ICON "CTeX_Repair.ico"
+!endif
 !define MUI_CUSTOMFUNCTION_GUIINIT OnGUIInit
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE $(license)
 !insertmacro MUI_PAGE_COMPONENTS
 !ifndef BUILD_REPAIR
-!define MUI_PAGE_CUSTOMFUNCTION_SHOW ShowPageDirectory
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW PageDirectoryShow
 !endif
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
@@ -105,10 +109,21 @@ Section "CTeX Addons" Section_Addons
 	${Install_Files} "Addons\CJK\*.*" "install_cjk.log"
 	${Install_Files} "Addons\CCT\*.*" "install_cct.log"
 	${Install_Files} "Addons\TY\*.*" "install_ty.log"
+	${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 !endif
 
 	!insertmacro Install_Config_Addons
 
+; Install Chinese fonts
+!ifndef BUILD_REPAIR
+	${If} ${Silent}
+		StrCpy $0 "/S"
+	${Else}
+		StrCpy $0 ""
+	${EndIf}
+	MessageBox MB_YESNO "$(Msg_FontSetup)" /SD IDYES IDNO +2
+	ExecWait '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe $0 /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
+!endif
 SectionEnd
 
 Section "Ghostscript" Section_Ghostscript
@@ -247,7 +262,7 @@ Function SectionInit
 FunctionEnd
 
 !ifndef BUILD_REPAIR
-Function ShowPageDirectory
+Function PageDirectoryShow
 
 	${If} $UN_INSTDIR != ""
 		FindWindow $R0 "#32770" "" $HWNDPARENT
@@ -288,5 +303,7 @@ LangString Msg_Downgrade ${LANG_SIMPCHINESE} "系统中安装了更高版本的CTeX，是否继
 LangString Msg_Downgrade ${LANG_ENGLISH} "Newer version of CTeX is installed in the system, continue to downgrade setup?"
 LangString Msg_RemoveInstDir ${LANG_SIMPCHINESE} "是否完全删除安装目录？"
 LangString Msg_RemoveInstDir ${LANG_ENGLISH} "Remove all files in the installed diretory?"
+LangString Msg_FontSetup ${LANG_SIMPCHINESE} "是否运行中文字体设置程序？"
+LangString Msg_FontSetup ${LANG_ENGLISH} "Run the Chinese font setup program?"
 
 ; eof
