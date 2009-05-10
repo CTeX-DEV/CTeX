@@ -61,9 +61,14 @@ you     % 幼圆
 
 要使 pdfTeX 和 pdfLaTeX 直接使用 TrueType 字库，请在 tex 文件中使用如下命令
 
+\input{cjk-ttf}
+
+来使用中文 TrueType 字库。或者用命令
+
+\pdfmapfile{-cjk-song.map}
 \pdfmapfile{+cjk-song-ttf.map}
 
-单独加入某个字体。
+单独将某个字体改为使用 TrueType。
 
 注意：Windows XP 中的楷体和仿宋体 TrueType 字库只是 GB2312 字符集，而其他几
 种字体是 GBK 大字符集。
