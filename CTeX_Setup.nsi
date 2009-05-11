@@ -304,7 +304,7 @@ LangString Msg_Downgrade ${LANG_SIMPCHINESE} "系统中安装了更高版本的CTeX，是否继
 LangString Msg_Downgrade ${LANG_ENGLISH} "Newer version of CTeX is installed in the system, continue to downgrade setup?"
 LangString Msg_RemoveInstDir ${LANG_SIMPCHINESE} "是否完全删除安装目录？"
 LangString Msg_RemoveInstDir ${LANG_ENGLISH} "Remove all files in the installed diretory?"
-LangString Msg_FontSetup ${LANG_SIMPCHINESE} "是否运行中文字体设置程序？"
+LangString Msg_FontSetup ${LANG_SIMPCHINESE} "是否运行中文字体安装程序？"
 LangString Msg_FontSetup ${LANG_ENGLISH} "Run the Chinese font setup program?"
 
 ; eof
