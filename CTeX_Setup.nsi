@@ -55,7 +55,6 @@ SetCompressorDictSize 128
 !define MUI_ICON "CTeX_Repair.ico"
 !endif
 !define MUI_UNICON "CTeX_Uninst.ico"
-!define MUI_CUSTOMFUNCTION_GUIINIT OnGUIInit
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE $(license)
@@ -222,8 +221,17 @@ SectionEnd
 ; On initialization
 Function .onInit
 
+	!insertmacro Check_Obsolete_Version
+	!insertmacro Check_Update_Version
+
 	!insertmacro MUI_LANGDLL_DISPLAY
+
 	!insertmacro Get_Uninstall_Information
+	!insertmacro Restore_Install_Information
+	
+!ifdef BUILD_REPAIR
+	!insertmacro Set_All_Sections_ReadOnly
+!endif
 
 FunctionEnd
 
@@ -231,18 +239,6 @@ Function un.onInit
 
 	!insertmacro Get_Uninstall_Information
 	!insertmacro Update_Uninstall_Information
-
-FunctionEnd
-
-Function OnGUIInit
-
-	!insertmacro Check_Obsolete_Version
-	!insertmacro Check_Update_Version
-	!insertmacro Restore_Install_Information
-	
-!ifdef BUILD_REPAIR
-	!insertmacro Set_All_Sections_ReadOnly
-!endif
 
 FunctionEnd
 
