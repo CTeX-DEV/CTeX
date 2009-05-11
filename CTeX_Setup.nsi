@@ -54,6 +54,7 @@ SetCompressorDictSize 128
 !else
 !define MUI_ICON "CTeX_Repair.ico"
 !endif
+!define MUI_UNICON "CTeX_Uninst.ico"
 !define MUI_CUSTOMFUNCTION_GUIINIT OnGUIInit
 
 !insertmacro MUI_PAGE_WELCOME
