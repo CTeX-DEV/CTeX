@@ -25,9 +25,9 @@ BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 !ifndef BUILD_REPAIR
 	InstallDir "C:\CTEX"
 !ifndef BUILD_FULL
-	OutFile "CTeX ${APP_BUILD}.exe"
+	OutFile "CTeX_${APP_BUILD}.exe"
 !else
-	OutFile "CTeX ${APP_BUILD} Full.exe"
+	OutFile "CTeX_${APP_BUILD}_Full.exe"
 !endif
 !endif
 
