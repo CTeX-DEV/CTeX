@@ -378,6 +378,7 @@ FunctionEnd
 	StrCpy $9 "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	WriteRegStr HKLM "$9" "DisplayName" "${APP_NAME}"
 	WriteRegStr HKLM "$9" "DisplayVersion" "${APP_BUILD}"
+	WriteRegStr HKLM "$9" "DisplayIcon" "$INSTDIR\Uninstall.exe,0"
 	WriteRegStr HKLM "$9" "Publisher" "${APP_COMPANY}"
 	WriteRegStr HKLM "$9" "Readme" "$INSTDIR\Readme.txt"
 	WriteRegStr HKLM "$9" "HelpLink" "http://bbs.ctex.org"
