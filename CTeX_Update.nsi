@@ -17,7 +17,6 @@ OutFile "CTeX_${APP_BUILD}_Update.exe"
 
 ; Other settings
 ShowInstDetails nevershow
-ShowUninstDetails nevershow
 RequestExecutionLevel admin
 
 ; Use compression
@@ -29,7 +28,7 @@ SetCompressorDictSize 128
 
 !define MUI_ABORTWARNING
 !define MUI_ICON "CTeX.ico"
-!define MUI_CUSTOMFUNCTION_GUIINIT OnInit
+!define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_INSTFILES
@@ -65,12 +64,16 @@ Function .onInit
 
 	!insertmacro MUI_LANGDLL_DISPLAY
 
-FunctionEnd
-
-Function OnInit
-
 	ReadRegStr $INSTDIR HKLM "Software\${APP_NAME}" "Install"
 	ReadRegStr $Version HKLM "Software\${APP_NAME}" "Version"
+
+	${If} ${Silent}
+		Call onMUIInit
+	${EndIf}
+
+FunctionEnd
+
+Function onMUIInit
 
 	${If} $INSTDIR != ""
 	${AndIf} $Version != ""
