@@ -8,6 +8,11 @@
 
 ; Variables
 Var Version
+Var MiKTeX
+Var Addons
+Var Ghostscript
+Var GSview
+Var WinEdt
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION} Update"
@@ -43,24 +48,46 @@ Section
 
 	SetOverwrite on
 
-	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song-ttf.map
-	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs-ttf.map
-	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei-ttf.map
-	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai-ttf.map
-	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li-ttf.map
-	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you-ttf.map
+	${If} $Addons != ""
+		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song-ttf.map
+		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs-ttf.map
+		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei-ttf.map
+		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai-ttf.map
+		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li-ttf.map
+		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you-ttf.map
+	
+		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
+		File Addons\CTeX\ctex\bin\FontSetup.exe
+		
+		SetOutPath $INSTDIR\${Addons_Dir}
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cjk.log"
+		${Install_Files} "Addons\CJK\*.*" "install_cjk.log"
+	${EndIf}
 
-	SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
-	File Addons\CTeX\ctex\bin\FontSetup.exe
-	
-	SetOutPath $INSTDIR\${Addons_Dir}
-	${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cjk.log"
-	${Install_Files} "Addons\CJK\*.*" "install_cjk.log"
-	
+; Always do update
 	SetOutPath $INSTDIR
 	File Readme.txt
 	File Changes.txt
 	File Repair.exe
+
+	StrCpy $Version ${APP_BUILD}
+	${If} $MiKTeX != ""
+		StrCpy $MiKTeX ${MiKTeX_Version}
+	${EndIf}
+	${If} $Addons != ""
+		StrCpy $Addons ${MiKTeX_Version}
+	${EndIf}
+	${If} $Ghostscript != ""
+		StrCpy $Ghostscript ${Ghostscript_Version}
+	${EndIf}
+	${If} $GSview != ""
+		StrCpy $GSview ${GSview_Version}
+	${EndIf}
+	${If} $WinEdt != ""
+		StrCpy $WinEdt ${WinEdt_Version}
+	${EndIf}
+
+	!insertmacro Save_Install_Information
 	
 	ExecWait "$INSTDIR\Repair.exe /S"
 
@@ -77,6 +104,8 @@ Function .onInit
 	${If} ${Silent}
 		Call onMUIInit
 	${EndIf}
+	
+	!insertmacro Restore_Install_Information
 
 FunctionEnd
 

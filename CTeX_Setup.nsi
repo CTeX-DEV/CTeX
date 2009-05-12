@@ -5,6 +5,7 @@
 !include "CTeX_Macros.nsh"
 
 ; Variables
+Var Version
 Var MiKTeX
 Var Addons
 Var Ghostscript
@@ -228,6 +229,7 @@ Function .onInit
 
 	!insertmacro Get_Uninstall_Information
 	!insertmacro Restore_Install_Information
+	!insertmacro Set_All_Sections_Selection
 	
 !ifdef BUILD_REPAIR
 	!insertmacro Set_All_Sections_ReadOnly
