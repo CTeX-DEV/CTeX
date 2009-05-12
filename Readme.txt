@@ -32,10 +32,10 @@ CTeX 2.7.0
 
 2. 安装
 
-已经安装了低版本的 CTeX 中文套装的用户请将原先的 CTeX 中文套装卸载后
-删除安装目录，再安装新版本，不要直接升级。
+已经安装了低版本（早于2.7.0 beta2）的 CTeX 中文套装的用户请将原先的 
+CTeX 中文套装卸载后删除安装目录，再安装新版本，不要直接升级。
 
-新版本中的 FontSetup 可以自动生成中文 Type1 字库。
+新版本中的 FontSetup 可以自动从系统字库中生成中文 Type1 字库。
 
 
 ====================================================
@@ -63,12 +63,7 @@ you     % 幼圆
 
 \input{cjk-ttf}
 
-来使用中文 TrueType 字库。或者用命令
-
-\pdfmapfile{-cjk-song.map}
-\pdfmapfile{+cjk-song-ttf.map}
-
-单独将某个字体改为使用 TrueType。
+来使用中文 TrueType 字库。
 
 注意：Windows XP 中的楷体和仿宋体 TrueType 字库只是 GB2312 字符集，而其他几
 种字体是 GBK 大字符集。
@@ -102,23 +97,7 @@ WinEdt 的升级比较麻烦，不建议自己升级。
 
 如果你对 CTeX 中文套装进行了修改，或者制作了补丁，欢迎将修改信息反馈到 CTEX。
 这将对我们制作下一个发行版本有很大的帮助。有任何的建议和意见，也欢迎向
-我们反映。所有对 CTeX 中文套装的制作做出贡献的人都会在这个文件中被列出。
-
-
-CTeX 中文套装包含了以下人员的工作成果（排名不分先后）：
-
-张林波 (zf)                 zlb@lsec.cc.ac.cn
-王磊   (cxterm, eggs)       lwang2002@gmail.com
-energy (obase)              obase@163.com
-shredder                    shredder@etang.com
-nsii                        nsii@sina.com
-李树钧 (hooklee)            http://www.hooklee.com
-邓建松 (texguru)            http://202.38.68.78/~texguru
-孙文昌 (mytex)              http://miktex.nankai.edu.cn
-instanton
-milksea
-
-感谢 CTEX 论坛上的用户对 CTeX 套装软件提出的各种建议和意见。
+我们反映。感谢 CTEX 论坛上的用户对 CTeX 套装软件提出的各种建议和意见。
 
 
 ====================================================
