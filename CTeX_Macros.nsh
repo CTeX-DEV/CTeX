@@ -356,28 +356,21 @@ FunctionEnd
 !macro Install_Config_CTeX
 	DetailPrint "Install general configs"
 
+	!insertmacro Save_Install_Information
+
 	StrCpy $9 "Software\${APP_NAME}"
 	WriteRegStr HKLM "$9" "" "${APP_NAME} ${APP_VERSION}"
 	WriteRegStr HKLM "$9" "Install" "$INSTDIR"
-	WriteRegStr HKLM "$9" "Version" "${APP_BUILD}"
+	WriteRegStr HKLM "$9" "Version" "$Version"
 	WriteRegStr HKLM "$9" "MiKTeX" "$MiKTeX"
 	WriteRegStr HKLM "$9" "Addons" "$Addons"
 	WriteRegStr HKLM "$9" "Ghostscript" "$Ghostscript"
 	WriteRegStr HKLM "$9" "GSview" "$GSview"
 	WriteRegStr HKLM "$9" "WinEdt" "$WinEdt"
 
-	StrCpy $9 "$INSTDIR\${Logs_Dir}\install.ini"
-	WriteINIStr "$9" "CTeX" "Install" "$INSTDIR"
-	WriteINIStr "$9" "CTeX" "Version" "${APP_BUILD}"
-	WriteINIStr "$9" "CTeX" "MiKTeX" "$MiKTeX"
-	WriteINIStr "$9" "CTeX" "Addons" "$Addons"
-	WriteINIStr "$9" "CTeX" "Ghostscript" "$Ghostscript"
-	WriteINIStr "$9" "CTeX" "GSview" "$GSview"
-	WriteINIStr "$9" "CTeX" "WinEdt" "$WinEdt"
-
 	StrCpy $9 "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 	WriteRegStr HKLM "$9" "DisplayName" "${APP_NAME}"
-	WriteRegStr HKLM "$9" "DisplayVersion" "${APP_BUILD}"
+	WriteRegStr HKLM "$9" "DisplayVersion" "$Version"
 	WriteRegStr HKLM "$9" "DisplayIcon" "$INSTDIR\Uninstall.exe,0"
 	WriteRegStr HKLM "$9" "Publisher" "${APP_COMPANY}"
 	WriteRegStr HKLM "$9" "Readme" "$INSTDIR\Readme.txt"
@@ -461,21 +454,37 @@ FunctionEnd
 	${EndIf}
 !macroend
 
+!macro Save_Install_Information
+	StrCpy $9 "$INSTDIR\${Logs_Dir}\install.ini"
+	WriteINIStr "$9" "CTeX" "Install" "$INSTDIR"
+	WriteINIStr "$9" "CTeX" "Version" "$Version"
+	WriteINIStr "$9" "CTeX" "MiKTeX" "$MiKTeX"
+	WriteINIStr "$9" "CTeX" "Addons" "$Addons"
+	WriteINIStr "$9" "CTeX" "Ghostscript" "$Ghostscript"
+	WriteINIStr "$9" "CTeX" "GSview" "$GSview"
+	WriteINIStr "$9" "CTeX" "WinEdt" "$WinEdt"
+!macroend
+
 !macro Restore_Install_Information
 	StrCpy $9 "$INSTDIR\${Logs_Dir}\install.ini"
 	${If} ${FileExists} "$9"
+		ReadINIStr $Version "$9" "CTeX" "Version"
 		ReadINIStr $MiKTeX "$9" "CTeX" "MiKTeX"
 		ReadINIStr $Addons "$9" "CTeX" "Addons"
 		ReadINIStr $Ghostscript "$9" "CTeX" "Ghostscript"
 		ReadINIStr $GSview "$9" "CTeX" "GSview"
 		ReadINIStr $WinEdt "$9" "CTeX" "WinEdt"
 	${Else}
+		StrCpy $Version ${APP_BUILD}
 		StrCpy $MiKTeX ${MiKTeX_Version}
 		StrCpy $Addons ${MiKTeX_Version}
 		StrCpy $Ghostscript ${Ghostscript_Version}
 		StrCpy $GSview ${GSview_Version}
 		StrCpy $WinEdt ${WinEdt_Version}
 	${EndIf}
+!macroend
+
+!macro Set_All_Sections_Selection
 	${If} $MiKTeX != ""
 		!insertmacro SelectSection ${Section_MiKTeX}
 	${EndIf}
@@ -502,6 +511,7 @@ FunctionEnd
 !macroend
 
 !macro Update_Install_Information
+	StrCpy $Version ${APP_BUILD}
 	${If} ${SectionIsSelected} ${Section_MiKTeX}
 		StrCpy $MiKTeX ${MiKTeX_Version}
 	${EndIf}
