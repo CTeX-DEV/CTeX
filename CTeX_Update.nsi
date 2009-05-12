@@ -43,6 +43,13 @@ Section
 
 	SetOverwrite on
 
+	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song-ttf.map
+	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs-ttf.map
+	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei-ttf.map
+	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai-ttf.map
+	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li-ttf.map
+	Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you-ttf.map
+
 	SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 	File Addons\CTeX\ctex\bin\FontSetup.exe
 	
