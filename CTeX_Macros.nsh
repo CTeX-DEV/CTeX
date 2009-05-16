@@ -322,7 +322,8 @@ FunctionEnd
 
 		StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
 		WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
-	
+		WriteRegStr HKCU "Software\VB and VBA Program Settings\TexFriend\Options" "StartupByWinEdt" "False"
+
 		${AddPath} "$0"
 	
 		StrCpy $9 "$0\WinEdt.exe"
@@ -344,6 +345,7 @@ FunctionEnd
 		DetailPrint "Uninstall WinEdt configs"
 
 		DeleteRegKey HKLM "Software\WinEdt"
+		DeleteRegKey HKCU "Software\VB and VBA Program Settings\TexFriend"
 	
 		${${UN}RemovePath} "$UN_INSTDIR\${WinEdt_Dir}"
 	
