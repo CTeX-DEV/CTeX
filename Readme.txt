@@ -35,7 +35,8 @@ CTeX 2.7.0
 已经安装了低版本（早于2.7.0 beta2）的 CTeX 中文套装的用户请将原先的 
 CTeX 中文套装卸载后删除安装目录，再安装新版本，不要直接升级。
 
-新版本中的 FontSetup 可以自动从系统字库中生成中文 Type1 字库。
+新版本中的 FontSetup 可以自动从系统字库中生成中文 Type1 字库，但是
+建议尽量不使用，而是使用 TrueType 字库。
 
 
 ====================================================
@@ -43,7 +44,7 @@ CTeX 中文套装卸载后删除安装目录，再安装新版本，不要直接升级。
 3. 其它
 
 
-3.1. CJK 中文模式和字库
+3.1. CJK 中文模式
 
 CTeX 中文套装可以直接使用的 CJK 模式有 GBK 和 UTF8，字体有六种
 
@@ -57,9 +58,15 @@ you     % 幼圆
 如果需要使用 pmC 模式或者 GB 编码，或者增加其他中文字库，请自己生成相关
 字库和配置文件。可以参考 CTeX 目录下的文件。
 
-如果没有生成中文 Type1 字库，则自动使用 Windows 自带的 TrueType 字库。
 
-要使 pdfTeX 和 pdfLaTeX 直接使用 TrueType 字库，请在 tex 文件中使用如下命令
+3.2. Type1 字库
+
+如果没有生成中文 Type1 字库，则自动使用 Windows 自带的 TrueType 字库。
+在这种情况下，只有 dvips 使用 ttf2pk 来将 TrueType 字库转为 pk 字库，
+而其他程序如 dvipdfmx 和 pdfTeX 都将直接使用 TrueType 字库。
+
+在生成 Type1 字库后，pdfTeX 和 pdfLaTeX 将改为使用 Type1 字库，此时要使
+pdfTeX 和 pdfLaTeX 直接使用 TrueType 字库，请在 tex 文件中使用如下命令
 
 \input{cjk-ttf}
 

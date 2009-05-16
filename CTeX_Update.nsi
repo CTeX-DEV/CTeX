@@ -49,6 +49,11 @@ Section
 	SetOverwrite on
 
 	${If} $Addons != ""
+		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex\def
+		File Addons\Packages\tex\latex\ctex\def\ctex-class-defs.sty
+		SetOutPath $INSTDIR\${Addons_Dir}\fonts\map\dvipdfm\dvipdfmx
+		File Addons\CJK\fonts\map\dvipdfm\dvipdfmx\cid-x.map
+
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song-ttf.map
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs-ttf.map
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei-ttf.map
