@@ -118,13 +118,7 @@ Section "CTeX Addons" Section_Addons
 
 ; Install Chinese fonts
 !ifndef BUILD_REPAIR
-	${If} ${Silent}
-		StrCpy $0 "/S"
-	${Else}
-		StrCpy $0 ""
-	${EndIf}
-	MessageBox MB_YESNO "$(Msg_FontSetup)" /SD IDYES IDNO +2
-	ExecWait '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe $0 /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
+	ExecWait '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /S /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
 !endif
 SectionEnd
 

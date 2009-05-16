@@ -1,7 +1,9 @@
 2009.05.17
   - v2.7.0 rc1
   - 升级 FontSetup 1.1，修正了一些错误，改善了任务选择列表
+  - 缺省不再生成 Type1 字库
   - 修改 pdftex 使用中文 TrueType 字库的 map 文件，不再需要 enc 文件
+  - 修改 cid-x.map 中的 stemv 参数
 
 2009.05.10
   - v2.7.0 beta2
