@@ -14,9 +14,9 @@
 !macro _AddPath DIR
 	SetDetailsPrint none
 	ClearErrors
-	${EnvVarUpdate} $R0 "PATH" "P" "HKLM" "${DIR}"
+	${EnvVarUpdate} $R0 "PATH" "A" "HKLM" "${DIR}"
 	${If} ${Errors}
-		${EnvVarUpdate} $R0 "PATH" "P" "HKCU" "${DIR}"
+		${EnvVarUpdate} $R0 "PATH" "A" "HKCU" "${DIR}"
 	${EndIf}
 	SetDetailsPrint lastused
 !macroend
