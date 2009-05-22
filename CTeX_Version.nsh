@@ -65,7 +65,7 @@
 		${If} $UN_Version != ""
 			${VersionCompare} $UN_Version ${APP_BUILD} $1
 			${If} $1 == "1"
-				MessageBox MB_OK|MB_ICONEXCLAMATION "$(Msg_Downgrade)" /SD IDNO IDYES +2
+				MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_Downgrade)" /SD IDNO IDYES +2
 				Abort
 			${EndIf}
 		${EndIf}
