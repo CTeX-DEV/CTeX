@@ -120,8 +120,6 @@ Function .onInit
 	${If} ${Silent}
 		Call onMUIInit
 	${EndIf}
-	
-	!insertmacro Restore_Install_Information
 
 FunctionEnd
 
@@ -144,6 +142,8 @@ Function onMUIInit
 		MessageBox MB_OK|MB_ICONSTOP "$(Msg_NoInstall)"
 		Abort
 	${EndIf}
+	
+	!insertmacro Restore_Install_Information
 
 FunctionEnd
 
