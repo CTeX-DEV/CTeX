@@ -119,7 +119,7 @@ Section "CTeX Addons" Section_Addons
 
 ; Install Chinese fonts
 !ifndef BUILD_REPAIR
-	ExecWait '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /S /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
+	nsExec::Exec '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /S /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
 !endif
 SectionEnd
 
@@ -267,10 +267,11 @@ Function SectionInit
 	${If} $UN_INSTDIR != ""
 	${AndIf} ${FileExists} "$UN_INSTDIR\Uninstall.exe"
 !ifdef BUILD_REPAIR
-		ExecWait "$UN_INSTDIR\Uninstall.exe /S /CONFIG_ONLY=yes"
+	StrCpy $R0 "/CONFIG_ONLY=yes"
 !else
-		ExecWait "$UN_INSTDIR\Uninstall.exe /S"
+	StrCpy $R0 ""
 !endif
+		nsExec::Exec "$UN_INSTDIR\Uninstall.exe /S $R0 _?=$UN_INSTDIR"
 	${Else}
 		!insertmacro Uninstall_All_Configs ""
 !ifndef BUILD_REPAIR
