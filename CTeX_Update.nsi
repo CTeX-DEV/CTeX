@@ -103,7 +103,7 @@ Section
 
 	!insertmacro Save_Install_Information
 	
-	ExecWait "$INSTDIR\Repair.exe /S"
+	nsExec::Exec "$INSTDIR\Repair.exe /S"
 
 SectionEnd
 

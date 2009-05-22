@@ -124,8 +124,8 @@ FunctionEnd
 		${CreateURLShortCut} "$9\MiKTeX Project Page" "http://miktex.org/"
 		${CreateURLShortCut} "$9\Support" "http://miktex.org/support"
 
-		ExecWait "$1\mpm.exe --register-components --quiet"
-		ExecWait "$1\initexmf.exe --force --mklinks --quiet"
+		nsExec::Exec "$1\mpm.exe --register-components --quiet"
+		nsExec::Exec "$1\initexmf.exe --force --mklinks --quiet"
 	${EndIf}
 !macroend
 
@@ -133,7 +133,7 @@ FunctionEnd
 	${If} $UN_MiKTeX != ""
 		DetailPrint "Uninstall MiKTeX configs"
 
-		ExecWait "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
+		nsExec::Exec "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
 
 		DeleteRegKey HKLM "Software\MiKTeX.org"
 		DeleteRegKey HKCU "Software\MiKTeX.org"
@@ -174,7 +174,7 @@ FunctionEnd
 		FileWrite $R0 "-H$0\tex\latex\cct$\n"
 		FileClose $R0
 	
-		ExecWait "$0\cct\bin\cctinit.exe"
+		nsExec::Exec "$0\cct\bin\cctinit.exe"
 
 ; Install TY
 		${AddPath} "$0\ty\bin"
@@ -381,8 +381,8 @@ FunctionEnd
 	WriteRegStr HKLM "$9" "UninstallString" "$INSTDIR\Uninstall.exe"
 
 	StrCpy $9 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
-	ExecWait "$9\initexmf.exe --update-fndb --quiet"
-	ExecWait "$9\initexmf.exe --mkmaps --quiet"
+	nsExec::Exec "$9\initexmf.exe --update-fndb --quiet"
+	nsExec::Exec "$9\initexmf.exe --mkmaps --quiet"
 
 	!insertmacro UPDATEFILEASSOC
 !macroend
