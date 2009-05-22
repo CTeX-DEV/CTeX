@@ -49,10 +49,11 @@ Section
 	SetOverwrite on
 
 	${If} $Addons != ""
-		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex\def
-		File Addons\Packages\tex\latex\ctex\def\ctex-class-defs.sty
 		SetOutPath $INSTDIR\${Addons_Dir}\miktex\config
 		File Addons\CTeX\miktex\config\updmap.cfg
+	
+		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
+		File Addons\CTeX\ctex\bin\FontSetup.exe
 
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song-ttf.map
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs-ttf.map
@@ -60,13 +61,12 @@ Section
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai-ttf.map
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li-ttf.map
 		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you-ttf.map
-	
-		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
-		File Addons\CTeX\ctex\bin\FontSetup.exe
 		
 		SetOutPath $INSTDIR\${Addons_Dir}
 		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cjk.log"
 		${Install_Files} "Addons\CJK\*.*" "install_cjk.log"
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
+		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 
 ; Always do update
