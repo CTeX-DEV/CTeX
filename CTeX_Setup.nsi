@@ -264,12 +264,13 @@ Function SectionInit
 	!insertmacro Update_All_Logs
 !endif
 
+	DetailPrint "Uninstall old configs and files"
 	${If} $UN_INSTDIR != ""
 	${AndIf} ${FileExists} "$UN_INSTDIR\Uninstall.exe"
 !ifdef BUILD_REPAIR
-	StrCpy $R0 "/CONFIG_ONLY=yes"
+		StrCpy $R0 "/CONFIG_ONLY=yes"
 !else
-	StrCpy $R0 ""
+		StrCpy $R0 ""
 !endif
 		nsExec::Exec "$UN_INSTDIR\Uninstall.exe /S $R0 _?=$UN_INSTDIR"
 	${Else}
