@@ -18,6 +18,7 @@ Var UN_Addons
 Var UN_Ghostscript
 Var UN_GSview
 Var UN_WinEdt
+Var UN_CONFIG_ONLY
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
@@ -201,6 +202,10 @@ Section Uninstall
 	;Remove configs...
 	!insertmacro Uninstall_All_Configs "un."
 
+	${If} $UN_CONFIG_ONLY != ""
+		Return
+	${EndIf}
+
 	; Clean up CTeX
 	!insertmacro Uninstall_All_Files "un."
 
@@ -243,6 +248,8 @@ Function onMUIInit
 FunctionEnd
 
 Function un.onInit
+	${GetParameters} $R0
+	${GetOptions} $R0 "/CONFIG_ONLY=" $UN_CONFIG_ONLY
 
 	!insertmacro Get_Uninstall_Information
 	!insertmacro Update_Uninstall_Information
@@ -257,11 +264,19 @@ Function SectionInit
 	!insertmacro Update_All_Logs
 !endif
 
-	!insertmacro Uninstall_All_Configs ""
-
-!ifndef BUILD_REPAIR
-	!insertmacro Uninstall_All_Files ""
+	${If} $UN_INSTDIR != ""
+	${AndIf} ${FileExists} "$UN_INSTDIR\Uninstall.exe"
+!ifdef BUILD_REPAIR
+		ExecWait "$UN_INSTDIR\Uninstall.exe /S /CONFIG_ONLY=yes"
+!else
+		ExecWait "$UN_INSTDIR\Uninstall.exe /S"
 !endif
+	${Else}
+		!insertmacro Uninstall_All_Configs ""
+!ifndef BUILD_REPAIR
+		!insertmacro Uninstall_All_Files ""
+!endif
+	${EndIf}
 
 FunctionEnd
 
