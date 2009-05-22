@@ -76,7 +76,7 @@ pdfTeX 和 pdfLaTeX 直接使用 TrueType 字库，请在 tex 文件中使用如下命令
 种字体是 GBK 大字符集。
 
 
-3.2. 升级
+3.3. 升级
 
 如果 CTeX 中文套装没有及时升级，你可以自己更新 CTeX 中文套装中的部件。
 CTeX 中文套装中的大部分软件可以单独升级。
@@ -92,7 +92,7 @@ Options -> Easy Configuration 中设置正确的版本号，这样 GSview 才能正常工
 WinEdt 的升级比较麻烦，不建议自己升级。
 
 
-3.3. 刷新文件名数据库
+3.4. 刷新文件名数据库
 
 在对 CTeX 和 MiKTeX 目录下的文件作出修改后，请不要忘了刷新 MiKTeX 的
 文件名数据库。可以使用菜单中的 MiKTeX -> Settings 工具来完成。
