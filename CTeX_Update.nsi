@@ -84,6 +84,8 @@ Section
 	File Changes.txt
 	File Repair.exe
 
+; Update configs
+	DetailPrint "Update configs"
 	StrCpy $Version ${APP_BUILD}
 	${If} $MiKTeX != ""
 		StrCpy $MiKTeX ${MiKTeX_Version}
