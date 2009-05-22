@@ -69,6 +69,15 @@ Section
 		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 
+; Delete Uninstall.exe older than 2.7.0.29
+	${If} ${FileExists} "$INSTDIR\Uninstall.exe"
+		${GetFileVersion} "$INSTDIR\Uninstall.exe" $0
+		${VersionCompare} $0 "2.7.0.29" $1
+		${If} $1 == "2"
+			Delete "$INSTDIR\Uninstall.exe"
+		${EndIf}
+	${EndIf}		
+
 ; Always do update
 	SetOutPath $INSTDIR
 	File Readme.txt
