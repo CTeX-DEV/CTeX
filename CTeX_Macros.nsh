@@ -192,7 +192,7 @@ FunctionEnd
 		FileClose $R0
 
 ; ShortCuts
-		CreateShortCut "$SMPROGRAMS\CTeX\Font Setup.lnk" "$0\ctex\bin\FontSetup.exe"
+		CreateShortCut "$SMPROGRAMS\CTeX\FontSetup.lnk" "$0\ctex\bin\FontSetup.exe"
 
 		StrCpy $9 "$SMPROGRAMS\CTeX\Help"
 		StrCpy $8 "$0\ctex\doc"
@@ -231,7 +231,7 @@ FunctionEnd
 		${${UN}RemovePath} "$0\ty\bin"
 	${EndIf}
 
-	Delete "$SMPROGRAMS\CTeX\Font Setup.lnk"
+	Delete "$SMPROGRAMS\CTeX\FontSetup.lnk"
 	RMDir /r "$SMPROGRAMS\CTeX\Help"
 !macroend
 
