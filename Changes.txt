@@ -8,6 +8,7 @@
   - 更新 ctex 宏包为 v0.91 (svn r79)
   - 更新 CASthesis 宏包为 v0.1i
   - 增加 PostDocRep 宏包 v0.1d
+  - 增加 cmap 文件 GBK-EUC-UCS2
 
 2009.05.10
   - v2.7.0 beta2
