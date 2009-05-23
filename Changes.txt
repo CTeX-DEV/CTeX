@@ -5,7 +5,7 @@
   - 缺省 TexFriend 不再随 WinEdt 自动启动
   - 修改 pdftex 使用中文 TrueType 字库的 map 文件，不再需要 enc 文件
   - 修改 cid-x.map 中的 stemv 参数
-  - 更新 ctex 宏包为 v0.91 (svn r74)
+  - 更新 ctex 宏包为 v0.91 (svn r76)
   - 更新 CASthesis 宏包为 v0.1i
   - 增加 PostDocRep 宏包 v0.1d
 
