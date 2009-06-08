@@ -4,7 +4,7 @@
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.7.0.27"
+!define Base_Version "2.7.0.35"
 
 ; Variables
 Var Version
@@ -49,24 +49,19 @@ Section
 	SetOverwrite on
 
 	${If} $Addons != ""
-		SetOutPath $INSTDIR\${Addons_Dir}\miktex\config
-		File Addons\CTeX\miktex\config\updmap.cfg
-	
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\FontSetup.exe
 
-		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song-ttf.map
-		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs-ttf.map
-		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei-ttf.map
-		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai-ttf.map
-		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li-ttf.map
-		Delete $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you-ttf.map
+		${If} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song.map
+		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs.map
+		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei.map
+		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai.map
+		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li.map
+		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you.map
+			MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_FontSetup)" /SD IDNO IDNO +2
+			nsExec::Exec '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
+		${EndIf}
 		
-		SetOutPath $INSTDIR\${Addons_Dir}
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_cjk.log"
-		${Install_Files} "Addons\CJK\*.*" "install_cjk.log"
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
-		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 
 ; Delete Uninstall.exe older than 2.7.0.29
@@ -157,5 +152,7 @@ LangString Msg_TooOld ${LANG_SIMPCHINESE} "ÏµÍ³ÖÐ°²×°µÄCTeX°æ±¾Ì«¾É£¬ÇëÏÈ¸üÐÂµ½°
 LangString Msg_TooOld ${LANG_ENGLISH} "The installed CTeX is too old, please update to version: "
 LangString Msg_NoInstall ${LANG_SIMPCHINESE} "ÏµÍ³ÖÐÃ»ÓÐ°²×°CTeX£¡"
 LangString Msg_NoInstall ${LANG_ENGLISH} "Not found CTeX in the system!"
+LangString Msg_FontSetup ${LANG_SIMPCHINESE} "±ØÐëÖØÐÂÉú³ÉÖÐÎÄType1×Ö¿â£¡ÔËÐÐFontSetup£¿"
+LangString Msg_FontSetup ${LANG_ENGLISH} "Must re-generate Chinese Type1 fonts! Run FontSetup?"
 
 ; eof
