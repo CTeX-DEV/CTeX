@@ -1,3 +1,7 @@
+2009.06.08
+  - v2.7.0 rc2
+  - 升级 FontSetup 1.2，修正 Type1 字库生成错误(未使用FreeType)，改用 Lua 脚本的 CTeXFonts 代替 FontsGen
+
 2009.05.24
   - v2.7.0 rc1
   - 升级 FontSetup 1.1，修正了一些错误，改善了任务选择列表

@@ -18,7 +18,7 @@
 	${If} ${Errors}
 		${EnvVarUpdate} $R0 "PATH" "A" "HKCU" "${DIR}"
 	${EndIf}
-	SetDetailsPrint lastused
+	SetDetailsPrint both
 !macroend
 !define AddPath "!insertmacro _AddPath"
 
@@ -35,7 +35,7 @@
 	SetDetailsPrint none
 	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
 	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
-	SetDetailsPrint lastused
+	SetDetailsPrint both
 !macroend
 !define RemovePath '!insertmacro _RemovePath ""'
 !define un.RemovePath '!insertmacro _RemovePath "un."'
@@ -407,6 +407,7 @@ FunctionEnd
 	LogSet off
 	Delete "$INSTDIR\${Logs_Dir}\${Log_File}"
 	Rename "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\${Log_File}"
 !macroend
 !define Install_Files "!insertmacro _Install_Files"
 
@@ -420,6 +421,7 @@ FunctionEnd
 	LogSet off
 	Delete "$INSTDIR\${Logs_Dir}\${Log_File}"
 	Rename "$INSTDIR\install.log" "$INSTDIR\${Logs_Dir}\${Log_File}"
+	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\${Log_File}"
 !macroend
 !define End_Install_Files "!insertmacro _End_Install_Files"
 
@@ -606,17 +608,4 @@ FunctionEnd
 		Delete "${LogFile}"
 		Rename "${LogFile}.new" "${LogFile}"
 	${EndIf}
-!macroend
-
-!macro Compress_All_Logs
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_winedt.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_gsview.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_packages.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ty.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_cct.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_cjk.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_ctex.log"
-	!insertmacro Compress_Log "$INSTDIR\${Logs_Dir}\install_miktex.log"
 !macroend
