@@ -60,10 +60,19 @@ Section
 			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai.map
 			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li.map
 			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you.map
+				DetailPrint "Run FontSetup"
 				MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_FontSetup)" /SD IDNO IDNO +2
 				nsExec::Exec '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
 			${EndIf}
 		${EndIf}
+	${EndIf}
+
+; Update MiKTeX
+	${If} $MiKTeX != ""
+		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +4
+		CopyFiles "$INSTDIR\${MiKTeX_Dir}\miktex\config\update.dat" "$INSTDIR\Update_MiKTeX.exe"
+		nsExec::Exec "$INSTDIR\Update_MiKTeX.exe"
+		Delete "$INSTDIR\Update_MiKTeX.exe"
 	${EndIf}
 
 ; Delete Uninstall.exe older than 2.7.0.29
@@ -161,5 +170,7 @@ LangString Msg_NotInst ${LANG_SIMPCHINESE} "系统中没有安装CTeX！"
 LangString Msg_NotInst ${LANG_ENGLISH} "Not found CTeX in the system!"
 LangString Msg_FontSetup ${LANG_SIMPCHINESE} "必须重新生成中文Type1字库！运行FontSetup？"
 LangString Msg_FontSetup ${LANG_ENGLISH} "Must re-generate Chinese Type1 fonts! Run FontSetup?"
+LangString Msg_UpdateMiKTeX ${LANG_SIMPCHINESE} "是否在线更新MiKTeX？"
+LangString Msg_UpdateMiKTeX ${LANG_ENGLISH} "Update MiKTeX through Internet?"
 
 ; eof
