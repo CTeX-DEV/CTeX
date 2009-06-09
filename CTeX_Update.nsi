@@ -52,16 +52,18 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\FontSetup.exe
 
-		${If} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song.map
-		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs.map
-		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei.map
-		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai.map
-		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li.map
-		${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you.map
-			MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_FontSetup)" /SD IDNO IDNO +2
-			nsExec::Exec '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
+		${VersionCompare} $Version "2.7.0.36" $1
+		${If} $1 == "2"
+			${If} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song.map
+			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs.map
+			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei.map
+			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai.map
+			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li.map
+			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you.map
+				MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_FontSetup)" /SD IDNO IDNO +2
+				nsExec::Exec '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
+			${EndIf}
 		${EndIf}
-		
 	${EndIf}
 
 ; Delete Uninstall.exe older than 2.7.0.29
@@ -124,17 +126,20 @@ Function onMUIInit
 	${AndIf} $Version != ""
 		${VersionCompare} $Version ${APP_BUILD} $1
 		${If} $1 == "1"
-			MessageBox MB_OK|MB_ICONSTOP "$(Msg_Downgrade)"
+			MessageBox MB_OK|MB_ICONSTOP "$(Msg_NewVer)"
+			Abort
+		${ElseIf} $1 == "0"
+			MessageBox MB_OK|MB_ICONSTOP "$(Msg_SameVer)"
 			Abort
 		${EndIf}
 
 		${VersionCompare} $Version ${Base_Version} $1
 		${If} $1 == "2"
-			MessageBox MB_OK|MB_ICONSTOP "$(Msg_TooOld) ${Base_Version}"
+			MessageBox MB_OK|MB_ICONSTOP "$(Msg_OldVer) ${Base_Version}"
 			Abort
 		${EndIf}
 	${Else}
-		MessageBox MB_OK|MB_ICONSTOP "$(Msg_NoInstall)"
+		MessageBox MB_OK|MB_ICONSTOP "$(Msg_NotInst)"
 		Abort
 	${EndIf}
 	
@@ -146,12 +151,14 @@ FunctionEnd
 
 ; Language strings
 
-LangString Msg_Downgrade ${LANG_SIMPCHINESE} "系统中安装了更高版本的CTeX！"
-LangString Msg_Downgrade ${LANG_ENGLISH} "Newer version of CTeX is found in the system!"
-LangString Msg_TooOld ${LANG_SIMPCHINESE} "系统中安装的CTeX版本太旧，请先更新到版本："
-LangString Msg_TooOld ${LANG_ENGLISH} "The installed CTeX is too old, please update to version: "
-LangString Msg_NoInstall ${LANG_SIMPCHINESE} "系统中没有安装CTeX！"
-LangString Msg_NoInstall ${LANG_ENGLISH} "Not found CTeX in the system!"
+LangString Msg_NewVer ${LANG_SIMPCHINESE} "系统中安装了更高版本的CTeX！"
+LangString Msg_NewVer ${LANG_ENGLISH} "Newer version of CTeX is found in the system!"
+LangString Msg_SameVer ${LANG_SIMPCHINESE} "系统中已经安装了最新版本的CTeX！"
+LangString Msg_SameVer ${LANG_ENGLISH} "Latest version of CTeX is found in the system!"
+LangString Msg_OldVer ${LANG_SIMPCHINESE} "系统中安装的CTeX版本太旧，请先更新到版本："
+LangString Msg_OldVer ${LANG_ENGLISH} "The installed CTeX is too old, please update to version: "
+LangString Msg_NotInst ${LANG_SIMPCHINESE} "系统中没有安装CTeX！"
+LangString Msg_NotInst ${LANG_ENGLISH} "Not found CTeX in the system!"
 LangString Msg_FontSetup ${LANG_SIMPCHINESE} "必须重新生成中文Type1字库！运行FontSetup？"
 LangString Msg_FontSetup ${LANG_ENGLISH} "Must re-generate Chinese Type1 fonts! Run FontSetup?"
 
