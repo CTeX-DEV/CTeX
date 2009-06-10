@@ -261,7 +261,7 @@ Function SectionInit
 	!insertmacro Update_All_Logs
 !endif
 
-	DetailPrint "Uninstall old configs and files"
+	DetailPrint "Remove old installation"
 	${If} $UN_INSTDIR != ""
 	${AndIf} ${FileExists} "$UN_INSTDIR\Uninstall.exe"
 !ifdef BUILD_REPAIR
