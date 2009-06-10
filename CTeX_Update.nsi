@@ -68,6 +68,7 @@ Section
 	${EndIf}
 
 ; Update MiKTeX
+	DetailPrint "Update MiKTeX"
 	${If} $MiKTeX != ""
 		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +4
 		CopyFiles "$INSTDIR\${MiKTeX_Dir}\miktex\config\update.dat" "$INSTDIR\Update_MiKTeX.exe"

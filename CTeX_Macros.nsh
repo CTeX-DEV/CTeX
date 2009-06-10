@@ -124,6 +124,7 @@ FunctionEnd
 		${CreateURLShortCut} "$9\MiKTeX Project Page" "http://miktex.org/"
 		${CreateURLShortCut} "$9\Support" "http://miktex.org/support"
 
+		DetailPrint "Update MiKTeX settings"
 		nsExec::Exec "$1\mpm.exe --register-components --quiet"
 		nsExec::Exec "$1\initexmf.exe --force --mklinks --quiet"
 	${EndIf}
@@ -381,7 +382,9 @@ FunctionEnd
 	WriteRegStr HKLM "$9" "UninstallString" "$INSTDIR\Uninstall.exe"
 
 	StrCpy $9 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
+	DetailPrint "Update MiKTeX file name database"
 	nsExec::Exec "$9\initexmf.exe --update-fndb --quiet"
+	DetailPrint "Update MiKTeX updmap database"
 	nsExec::Exec "$9\initexmf.exe --mkmaps --quiet"
 
 	!insertmacro UPDATEFILEASSOC
