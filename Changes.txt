@@ -1,3 +1,7 @@
+  - v2.7.0
+  - 在所有 fd 中加入 \CJKnormal
+  - 升级 FontSetup 1.2.1，修正一些小错误
+
 2009.06.09
   - v2.7.0 rc2
   - 升级 FontSetup 1.2，修正 Type1 字库生成错误(未使用FreeType)，改用 Lua 脚本的 CTeXFonts 代替 FontsGen
