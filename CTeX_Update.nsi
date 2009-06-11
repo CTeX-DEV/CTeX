@@ -52,6 +52,9 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\FontSetup.exe
 
+		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\CJK
+		File /r Addons\CJK\tex\latex\CJK\*.*
+
 		${VersionCompare} $Version "2.7.0.36" $1
 		${If} $1 == "2"
 			${If} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song.map
