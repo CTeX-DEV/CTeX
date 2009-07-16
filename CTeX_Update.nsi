@@ -4,7 +4,7 @@
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.7.0.35"
+!define Base_Version "2.7.0.37"
 
 ; Variables
 Var Version
@@ -55,19 +55,9 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\CJK
 		File /r Addons\CJK\tex\latex\CJK\*.*
 
-		${VersionCompare} $Version "2.7.0.36" $1
-		${If} $1 == "2"
-			${If} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-song.map
-			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-fs.map
-			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-hei.map
-			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-kai.map
-			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-li.map
-			${OrIf} ${FileExists} $INSTDIR\${Addons_Dir}\fonts\map\chinese\cjk-you.map
-				DetailPrint "Run FontSetup"
-				MessageBox MB_YESNO|MB_ICONEXCLAMATION "$(Msg_FontSetup)" /SD IDNO IDNO +2
-				nsExec::Exec '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
-			${EndIf}
-		${EndIf}
+		SetOutPath $INSTDIR\${Addons_Dir}
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
+		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 
 ; Update MiKTeX
