@@ -1,3 +1,7 @@
+2009.07.17
+  - v2.7.0.39
+  - 修改宏包 xeCJK 为和 MiKTeX 中的 XeTeX 兼容的 2.2.15 版
+
 2009.07.16
   - v2.7.0.38
   - 更新宏包: ctex, CJKpunct, xeCJK, zhspacing
