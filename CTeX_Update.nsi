@@ -4,7 +4,7 @@
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.7.0.37"
+!define Base_Version "2.8.0.100"
 
 ; Variables
 Var Version
@@ -68,15 +68,6 @@ Section
 		nsExec::Exec "$INSTDIR\Update_MiKTeX.exe"
 		Delete "$INSTDIR\Update_MiKTeX.exe"
 	${EndIf}
-
-; Delete Uninstall.exe older than 2.7.0.29
-	${If} ${FileExists} "$INSTDIR\Uninstall.exe"
-		${GetFileVersion} "$INSTDIR\Uninstall.exe" $0
-		${VersionCompare} $0 "2.7.0.29" $1
-		${If} $1 == "2"
-			Delete "$INSTDIR\Uninstall.exe"
-		${EndIf}
-	${EndIf}		
 
 ; Always do update
 	SetOutPath $INSTDIR
