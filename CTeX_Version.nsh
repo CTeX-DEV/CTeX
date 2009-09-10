@@ -20,8 +20,6 @@
 !define WinEdt_Version      "5.5"
 !define Logs_Dir            "Logs"
 
-!define Obsolete_Version    "2.7.0.0"
-
 
 !macro Set_Version_Information
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "ProductName" "${APP_NAME}"
