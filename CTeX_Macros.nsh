@@ -120,7 +120,7 @@ FunctionEnd
 		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web"
 		CreateDirectory "$9"
 		${CreateURLShortCut} "$9\Give back" "http://miktex.org/giveback"
-		${CreateURLShortCut} "$9\Known Issues" "http://miktex.org/2.7/issues"
+		${CreateURLShortCut} "$9\Known Issues" "http://miktex.org/2.8/issues"
 		${CreateURLShortCut} "$9\MiKTeX Project Page" "http://miktex.org/"
 		${CreateURLShortCut} "$9\Support" "http://miktex.org/support"
 

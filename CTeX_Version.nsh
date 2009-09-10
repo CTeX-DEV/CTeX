@@ -5,12 +5,12 @@
 !define APP_NAME "CTeX"
 !define APP_COMPANY "CTEX.ORG"
 !define APP_COPYRIGHT "Copyright (C) 2009 ${APP_COMPANY}"
-!define APP_VERSION "2.7.0"
+!define APP_VERSION "2.8.0"
 !define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
 
 ; Components information
 !define MiKTeX_Dir          "MiKTeX"
-!define MiKTeX_Version      "2.7"
+!define MiKTeX_Version      "2.8"
 !define Addons_Dir          "CTeX"
 !define Ghostscript_Dir     "Ghostscript"
 !define Ghostscript_Version "8.64"
@@ -19,8 +19,6 @@
 !define WinEdt_Dir          "WinEdt"
 !define WinEdt_Version      "5.5"
 !define Logs_Dir            "Logs"
-
-!define Obsolete_Version    "2.7.0.0"
 
 
 !macro Set_Version_Information

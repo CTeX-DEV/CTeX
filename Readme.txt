@@ -1,4 +1,4 @@
-CTeX 2.7.0
+CTeX 2.8.0
 ==========
 
 目录
@@ -22,7 +22,7 @@ CTeX 2.7.0
 
 本套装软件包中含有如下软件：
 
-        MiKTeX 2.7
+        MiKTeX 2.8
         WinEdt 5.5
         GSview 4.9
         Ghostscript 8.64
