@@ -22,6 +22,14 @@
 !macroend
 !define AddPath "!insertmacro _AddPath"
 
+!macro _AddUserPath DIR
+	SetDetailsPrint none
+	ClearErrors
+	${EnvVarUpdate} $R0 "PATH" "A" "HKCU" "${DIR}"
+	SetDetailsPrint both
+!macroend
+!define AddUserPath "!insertmacro _AddUserPath"
+
 !macro _AddEnvVar NAME VALUE
 	ClearErrors
 	WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}" "${VALUE}"
@@ -93,13 +101,14 @@ FunctionEnd
 		StrCpy $1 "$0\miktex\bin"
 
 		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$MiKTeX"
-		WriteRegStr HKLM "$9\Core" "Install" "$0"
-		WriteRegStr HKLM "$9\Core" "SharedSetup" "1"
-		WriteRegStr HKCU "$9\MPM" "AutoInstall" "2"
-		WriteRegStr HKCU "$9\MPM" "RemoteRepository" "ftp://ftp.ctex.org/CTAN/systems/win32/miktex/tm/packages/"
-		WriteRegStr HKCU "$9\MPM" "RepositoryType" "remote"
+		WriteRegStr HKLM "$9\Core" "CommonInstall" "$0"
+;		WriteRegStr HKLM "$9\Core" "SharedSetup" "1"
+		WriteRegStr HKLM "$9\MPM" "AutoInstall" "2"
+;		WriteRegStr HKLM "$9\MPM" "RemoteRepository" "ftp://ftp.ctex.org/mirrors/CTAN/systems/win32/miktex/tm/packages/"
+;		WriteRegStr HKLM "$9\MPM" "RepositoryType" "remote"
 
 		${AddPath} "$1"
+		${AddUserPath} "$APPDATA\MiKTeX\$MiKTeX\miktex\bin\"
 
 		StrCpy $9 "$1\yap.exe"
 		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
@@ -107,10 +116,20 @@ FunctionEnd
 ; ShortCuts
 		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX"
 		CreateDirectory "$9"
-		CreateShortCut "$9\Browse Packages.lnk" "$1\mpm_mfc.exe"
 		CreateShortCut "$9\Previewer.lnk" "$1\yap.exe"
+		CreateShortCut "$9\TeXworks.lnk" "$1\miktex-texworks.exe"
+
+		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\Maintenance"
+		CreateDirectory "$9"
+		CreateShortCut "$9\Package Manager.lnk" "$1\mpm_mfc.exe"
 		CreateShortCut "$9\Settings.lnk" "$1\mo.exe"
-		CreateShortCut "$9\Update.lnk" "$1\copystart_admin.exe" '"$0\miktex\config\update.dat"'
+		CreateShortCut "$9\Update.lnk" "$1\internal\copystart.exe" '"$1\internal\miktex-update.exe"'
+
+		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\Maintenance (Admin)"
+		CreateDirectory "$9"
+		CreateShortCut "$9\Package Manager (Admin).lnk" "$1\mpm_mfc_admin.exe"
+		CreateShortCut "$9\Settings (Admin).lnk" "$1\mo_admin.exe"
+		CreateShortCut "$9\Update (Admin).lnk" "$1\internal\copystart_admin.exe" '"$1\internal\miktex-update_admin.exe"'
 
 		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\Help"
 		CreateDirectory "$9"
@@ -152,15 +171,14 @@ FunctionEnd
 		StrCpy $0 "$INSTDIR\${Addons_Dir}"
 
 		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$MiKTeX\Core"
-		ReadRegStr $R0 HKLM "$9" "Roots"
+		ReadRegStr $R0 HKLM "$9" "CommonRoots"
 		${If} $R0 == ""
-			ReadRegStr $R1 HKLM "$9" "Install"
-			WriteRegStr HKLM "$9" "Roots" "$0;$R1"
+			WriteRegStr HKLM "$9" "CommonRoots" "$0"
 		${Else}
 			StrCpy $R1 "$0"
 			StrCpy $R2 ";"
 			Call RemoveToken
-			WriteRegStr HKLM "$9" "Roots" "$0;$R9"
+			WriteRegStr HKLM "$9" "CommonRoots" "$0;$R9"
 		${EndIf}
 
 		${AddPath} "$0\ctex\bin"
