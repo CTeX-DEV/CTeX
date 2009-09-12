@@ -144,8 +144,8 @@ FunctionEnd
 		${CreateURLShortCut} "$9\Support" "http://miktex.org/support"
 
 		DetailPrint "Update MiKTeX settings"
-		nsExec::Exec "$1\mpm.exe --register-components --quiet"
-		nsExec::Exec "$1\initexmf.exe --force --mklinks --quiet"
+		nsExec::Exec "$1\mpm.exe --register-components --admin --quiet"
+		nsExec::Exec "$1\initexmf.exe --force --mklinks --admin --quiet"
 	${EndIf}
 !macroend
 
@@ -153,7 +153,7 @@ FunctionEnd
 	${If} $UN_MiKTeX != ""
 		DetailPrint "Uninstall MiKTeX configs"
 
-		nsExec::Exec "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet"
+		nsExec::Exec "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --admin --quiet"
 
 		DeleteRegKey HKLM "Software\MiKTeX.org"
 		DeleteRegKey HKCU "Software\MiKTeX.org"
