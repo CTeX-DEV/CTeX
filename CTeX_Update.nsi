@@ -4,7 +4,7 @@
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.7.0.37"
+!define Base_Version "2.7.0.39"
 
 ; Variables
 Var Version
@@ -48,16 +48,10 @@ Section
 
 	SetOverwrite on
 
-	${If} $Addons != ""
-		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
-		File Addons\CTeX\ctex\bin\FontSetup.exe
-
-		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\CJK
-		File /r Addons\CJK\tex\latex\CJK\*.*
-
-		SetOutPath $INSTDIR\${Addons_Dir}
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
-		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
+	${If} $Ghostscript != ""
+		SetOutPath $INSTDIR\${Ghostscript_Dir}
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
+		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
 	${EndIf}
 
 ; Update MiKTeX

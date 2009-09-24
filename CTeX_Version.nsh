@@ -13,7 +13,7 @@
 !define MiKTeX_Version      "2.7"
 !define Addons_Dir          "CTeX"
 !define Ghostscript_Dir     "Ghostscript"
-!define Ghostscript_Version "8.64"
+!define Ghostscript_Version "8.70"
 !define GSview_Dir          "GSview"
 !define GSview_Version      "4.9"
 !define WinEdt_Dir          "WinEdt"
