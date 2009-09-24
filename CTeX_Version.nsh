@@ -5,7 +5,7 @@
 !define APP_NAME "CTeX"
 !define APP_COMPANY "CTEX.ORG"
 !define APP_COPYRIGHT "Copyright (C) 2009 ${APP_COMPANY}"
-!define APP_VERSION "2.7.0"
+!define APP_VERSION "2.7.1"
 !define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
 
 ; Components information
