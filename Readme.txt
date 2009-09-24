@@ -1,4 +1,4 @@
-CTeX 2.7.0
+CTeX 2.7.1
 ==========
 
 目录
@@ -25,7 +25,7 @@ CTeX 2.7.0
         MiKTeX 2.7
         WinEdt 5.5
         GSview 4.9
-        Ghostscript 8.64
+        Ghostscript 8.70
 
 
 ====================================================
@@ -68,7 +68,7 @@ you     % 幼圆
 在生成 Type1 字库后，pdfTeX 和 pdfLaTeX 将改为使用 Type1 字库，此时要使
 pdfTeX 和 pdfLaTeX 直接使用 TrueType 字库，请在 tex 文件中使用如下命令
 
-\input{cjk-ttf}
+\pdfmapfile{=cjk-ttf.map}
 
 来使用中文 TrueType 字库。
 
