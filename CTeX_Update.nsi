@@ -54,6 +54,12 @@ Section
 		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
 	${EndIf}
 
+	${If} $WinEdt != ""
+		SetOutPath $INSTDIR\${WinEdt_Dir}
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
+		${Install_Files} "WinEdt\*.*" "install_winedt.log"
+	${EndIf}
+
 ; Update MiKTeX
 	DetailPrint "Update MiKTeX"
 	${If} $MiKTeX != ""
