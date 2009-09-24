@@ -1,3 +1,9 @@
+2009.09.24
+  - v2.7.0.40
+  - 更新 MiKTeX 2.7
+  - 更新 Texfriend
+  - 升级 Ghostscript 8.70
+
 2009.07.17
   - v2.7.0.39
   - 修改宏包 xeCJK 为和 MiKTeX 中的 XeTeX 兼容的 2.2.15 版
