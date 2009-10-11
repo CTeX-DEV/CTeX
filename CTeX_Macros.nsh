@@ -339,6 +339,8 @@ FunctionEnd
 	${If} $WinEdt != ""
 		DetailPrint "Install WinEdt configs"
 
+		RMDir /r "$APPDATA\WinEdt"
+
 		StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
 		WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
 		WriteRegStr HKCU "Software\VB and VBA Program Settings\TexFriend\Options" "StartupByWinEdt" "False"
