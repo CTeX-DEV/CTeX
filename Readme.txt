@@ -23,9 +23,9 @@ CTeX 2.8.0
 本套装软件包中含有如下软件：
 
         MiKTeX 2.8
-        WinEdt 5.5
+        WinEdt 5.6 beta1
         GSview 4.9
-        Ghostscript 8.64
+        Ghostscript 8.70
 
 
 ====================================================
