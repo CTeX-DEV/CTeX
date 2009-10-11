@@ -75,10 +75,8 @@ Section
 ; Update MiKTeX
 	DetailPrint "Update MiKTeX"
 	${If} $MiKTeX != ""
-		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +4
-		CopyFiles "$INSTDIR\${MiKTeX_Dir}\miktex\config\update.dat" "$INSTDIR\Update_MiKTeX.exe"
-		nsExec::Exec "$INSTDIR\Update_MiKTeX.exe"
-		Delete "$INSTDIR\Update_MiKTeX.exe"
+		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +2
+		nsExec::Exec '"$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\copystart_admin.exe" "$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\miktex-update_admin.exe"'
 	${EndIf}
 
 ; Always do update
