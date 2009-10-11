@@ -4,7 +4,7 @@
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.8.0.100"
+!define Base_Version "2.8.0.106"
 
 ; Variables
 Var Version
