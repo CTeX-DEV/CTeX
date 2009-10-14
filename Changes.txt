@@ -1,3 +1,9 @@
+2009.10.14
+  - v2.8.0 beta3
+  - 修改 WinEdt 的运行模式为 Windows Console 以解决 MiKTeX on-the-fly 宏包安装的错误
+  - 更新 MiKTeX 2.8
+  - 更新 SumatraPDF 0.9.5 r1429
+
 2009.10.11
   - v2.8.0 beta2
   - 升级安装程序为 NSIS 2.45

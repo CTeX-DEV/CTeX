@@ -4,7 +4,7 @@
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.8.0.106"
+!define Base_Version "2.8.0.109"
 
 ; Variables
 Var Version
@@ -52,24 +52,19 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
 
-		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\CJK
-		File /r Addons\CJK\tex\latex\CJK\*.*
-
-		SetOutPath $INSTDIR\${Addons_Dir}
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
-		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
-	${EndIf}
-
-	${If} $Ghostscript != ""
-		SetOutPath $INSTDIR\${Ghostscript_Dir}
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
-		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
+;		SetOutPath $INSTDIR\${Addons_Dir}
+;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
+;		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 
 	${If} $WinEdt != ""
-		SetOutPath $INSTDIR\${WinEdt_Dir}
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
-		${Install_Files} "WinEdt\*.*" "install_winedt.log"
+		SetOutPath $INSTDIR\${WinEdt_Dir}\Exec\MiKTeX
+		File WinEdt\Exec\MiKTeX\ExeMode.edt
+		File WinEdt\Exec\MiKTeX\ExeMode_Default.edt
+
+;		SetOutPath $INSTDIR\${WinEdt_Dir}
+;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
+;		${Install_Files} "WinEdt\*.*" "install_winedt.log"
 	${EndIf}
 
 ; Update MiKTeX
