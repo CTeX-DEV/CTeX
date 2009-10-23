@@ -1,3 +1,10 @@
+2009.10.17
+  - v2.8.0 beta4
+  - 在 WinEdt 中为所有支持 synctex 的程序加上该参数
+  - 安装前或者卸载后自动删除 MiKTeX 和 WinEdt 用户配置目录
+  - 更新 MiKTeX 2.8
+  - 更新 SumatraPDF 0.9.5 r1430
+
 2009.10.14
   - v2.8.0 beta3
   - 修改 WinEdt 的运行模式为 Windows Console 以解决 MiKTeX on-the-fly 宏包安装的错误
