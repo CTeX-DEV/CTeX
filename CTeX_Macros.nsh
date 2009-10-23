@@ -4,7 +4,7 @@
 !include "EnvVarUpdate.nsh"
 !include "FileAssoc.nsh"
 !include "UninstByLog.nsh"
-
+!include "LogicLib_Ext.nsh"
 
 !macro _CreateURLShortCut URLFile URLSite
 	WriteINIStr "${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
@@ -13,19 +13,26 @@
 
 !macro _AddPath DIR
 	SetDetailsPrint none
-	ClearErrors
-	${EnvVarUpdate} $R0 "PATH" "A" "HKLM" "${DIR}"
-	${If} ${Errors}
+	${If} ${UserIsAdmin}
+		${EnvVarUpdate} $R0 "PATH" "A" "HKLM" "${DIR}"
+	${Else}
 		${EnvVarUpdate} $R0 "PATH" "A" "HKCU" "${DIR}"
 	${EndIf}
 	SetDetailsPrint both
 !macroend
 !define AddPath "!insertmacro _AddPath"
 
+!macro _AddUserPath DIR
+	SetDetailsPrint none
+	${EnvVarUpdate} $R0 "PATH" "A" "HKCU" "${DIR}"
+	SetDetailsPrint both
+!macroend
+!define AddUserPath "!insertmacro _AddUserPath"
+
 !macro _AddEnvVar NAME VALUE
-	ClearErrors
-	WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}" "${VALUE}"
-	${If} ${Errors}
+	${If} ${UserIsAdmin}
+		WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}" "${VALUE}"
+	${Else}
 		WriteRegExpandStr HKCU "Environment" "${NAME}" "${VALUE}"
 	${EndIf}
 !macroend
@@ -84,10 +91,19 @@ FunctionEnd
 !insertmacro Define_Func_RemoveToken ""
 !insertmacro Define_Func_RemoveToken "un."
 
+!macro _Remove_MiKTeX_Roots
+	RMDir /r "$APPDATA\MiKTeX"
+	RMDir /r "$LOCALAPPDATA\MiKTeX"
+	SetShellVarContext all
+	RMDir /r "$APPDATA\MiKTeX"
+	SetShellVarContext current
+!macroend
 
 !macro Install_Config_MiKTeX
 	${If} $MiKTeX != ""
 		DetailPrint "Install MiKTeX configs"
+
+		!insertmacro _Remove_MiKTeX_Roots
 
 		StrCpy $0 "$INSTDIR\${MiKTeX_Dir}"
 		StrCpy $1 "$0\miktex\bin"
@@ -142,6 +158,8 @@ FunctionEnd
 		${${UN}RemovePath} "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin"
 
 		!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.$UN_MiKTeX"
+
+		!insertmacro Remove_MiKTeX_Roots
 	${EndIf}
 !macroend
 
@@ -321,6 +339,8 @@ FunctionEnd
 	${If} $WinEdt != ""
 		DetailPrint "Install WinEdt configs"
 
+		RMDir /r "$APPDATA\WinEdt"
+
 		StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
 		WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
 		WriteRegStr HKCU "Software\VB and VBA Program Settings\TexFriend\Options" "StartupByWinEdt" "False"
@@ -349,10 +369,12 @@ FunctionEnd
 		DeleteRegKey HKCU "Software\VB and VBA Program Settings\TexFriend"
 	
 		${${UN}RemovePath} "$UN_INSTDIR\${WinEdt_Dir}"
-	
+
 		!insertmacro APP_UNASSOCIATE "tex" "CTeX.TeX"
 
 		Delete "$SMPROGRAMS\CTeX\WinEdt.lnk"
+
+		RMDir /r "$APPDATA\WinEdt"
 	${EndIf}
 !macroend
 
