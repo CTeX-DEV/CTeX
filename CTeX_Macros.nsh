@@ -422,9 +422,9 @@ FunctionEnd
 
 	StrCpy $9 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
 	DetailPrint "Update MiKTeX file name database"
-	nsExec::Exec "$9\initexmf.exe --update-fndb --quiet"
+	nsExec::Exec "$9\initexmf.exe --update-fndb --admin --quiet"
 	DetailPrint "Update MiKTeX updmap database"
-	nsExec::Exec "$9\initexmf.exe --mkmaps --quiet"
+	nsExec::Exec "$9\initexmf.exe --mkmaps --admin --quiet"
 
 	!insertmacro UPDATEFILEASSOC
 !macroend
