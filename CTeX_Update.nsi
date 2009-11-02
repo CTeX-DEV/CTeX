@@ -47,6 +47,11 @@ Section
 
 	SetOverwrite on
 
+	${If} $MiKTeX != ""
+		${RemovePath} "$APPDATA\MiKTeX\$MiKTeX\miktex\bin\"
+		!insertmacro _Remove_MiKTeX_Roots
+	${EndIf}
+
 	${If} $Addons != ""
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
@@ -64,13 +69,6 @@ Section
 ;		SetOutPath $INSTDIR\${WinEdt_Dir}
 ;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
 ;		${Install_Files} "WinEdt\*.*" "install_winedt.log"
-	${EndIf}
-
-; Update MiKTeX
-	DetailPrint "Update MiKTeX"
-	${If} $MiKTeX != ""
-		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +2
-		nsExec::Exec '"$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\copystart_admin.exe" "$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\miktex-update_admin.exe"'
 	${EndIf}
 
 ; Always do update
@@ -102,6 +100,12 @@ Section
 	
 	nsExec::Exec "$INSTDIR\Repair.exe /S"
 
+; Update MiKTeX
+	DetailPrint "Update MiKTeX"
+	${If} $MiKTeX != ""
+		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +2
+		nsExec::Exec '"$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\copystart_admin.exe" "$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\miktex-update_admin.exe"'
+	${EndIf}
 SectionEnd
 
 ; On initialization
