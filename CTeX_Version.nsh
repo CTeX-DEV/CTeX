@@ -19,6 +19,7 @@
 !define WinEdt_Dir          "WinEdt"
 !define WinEdt_Version      "5.6"
 !define Logs_Dir            "Logs"
+!define UserData_Dir        "UserData"
 
 
 !macro Set_Version_Information

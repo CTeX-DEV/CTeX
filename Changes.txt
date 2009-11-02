@@ -1,9 +1,11 @@
-2009.10.17
+2009.11.02
   - v2.8.0 beta4
   - 在 WinEdt 中为所有支持 synctex 的程序加上该参数
   - 安装前或者卸载后自动删除 MiKTeX 和 WinEdt 用户配置目录
+  - 将 MiKTeX 的用户配置目录改为安装目录下的 UserData 子目录
+  - 修正 CTeX 开始菜单没有安装在 All Users 目录下的错误
   - 更新 MiKTeX 2.8
-  - 更新 SumatraPDF 0.9.5 r1430
+  - 更新 SumatraPDF 0.9.5 r1439
 
 2009.10.14
   - v2.8.0 beta3
