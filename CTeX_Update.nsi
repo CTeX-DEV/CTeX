@@ -21,7 +21,6 @@ InstallDir "C:\CTEX"
 OutFile "CTeX_${APP_BUILD}_Update.exe"
 
 ; Other settings
-ShowInstDetails nevershow
 RequestExecutionLevel admin
 
 ; Use compression
