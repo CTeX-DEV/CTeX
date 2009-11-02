@@ -59,15 +59,6 @@ Section
 		${Install_Files} "WinEdt\*.*" "install_winedt.log"
 	${EndIf}
 
-; Update MiKTeX
-	DetailPrint "Update MiKTeX"
-	${If} $MiKTeX != ""
-		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +4
-		CopyFiles "$INSTDIR\${MiKTeX_Dir}\miktex\config\update.dat" "$INSTDIR\Update_MiKTeX.exe"
-		nsExec::Exec "$INSTDIR\Update_MiKTeX.exe"
-		Delete "$INSTDIR\Update_MiKTeX.exe"
-	${EndIf}
-
 ; Delete Uninstall.exe older than 2.7.0.29
 	${If} ${FileExists} "$INSTDIR\Uninstall.exe"
 		${GetFileVersion} "$INSTDIR\Uninstall.exe" $0
@@ -106,6 +97,14 @@ Section
 	
 	nsExec::Exec "$INSTDIR\Repair.exe /S"
 
+; Update MiKTeX
+	DetailPrint "Update MiKTeX"
+	${If} $MiKTeX != ""
+		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +4
+		CopyFiles "$INSTDIR\${MiKTeX_Dir}\miktex\config\update.dat" "$INSTDIR\Update_MiKTeX.exe"
+		nsExec::Exec "$INSTDIR\Update_MiKTeX.exe"
+		Delete "$INSTDIR\Update_MiKTeX.exe"
+	${EndIf}
 SectionEnd
 
 ; On initialization
