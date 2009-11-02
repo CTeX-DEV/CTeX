@@ -11,7 +11,7 @@
 !macroend
 !define CreateURLShortCut "!insertmacro _CreateURLShortCut"
 
-!macro _AddPath DIR
+!macro _AppendPath DIR
 	SetDetailsPrint none
 	${If} ${UserIsAdmin}
 		${EnvVarUpdate} $R0 "PATH" "A" "HKLM" "${DIR}"
@@ -20,14 +20,7 @@
 	${EndIf}
 	SetDetailsPrint both
 !macroend
-!define AddPath "!insertmacro _AddPath"
-
-!macro _AddUserPath DIR
-	SetDetailsPrint none
-	${EnvVarUpdate} $R0 "PATH" "A" "HKCU" "${DIR}"
-	SetDetailsPrint both
-!macroend
-!define AddUserPath "!insertmacro _AddUserPath"
+!define AppendPath "!insertmacro _AppendPath"
 
 !macro _AddEnvVar NAME VALUE
 	${If} ${UserIsAdmin}
@@ -97,6 +90,7 @@ FunctionEnd
 	SetShellVarContext all
 	RMDir /r "$APPDATA\MiKTeX"
 	SetShellVarContext current
+	RMDir /r "$INSTDIR\${UserData_Dir}"
 !macroend
 
 !macro Install_Config_MiKTeX
@@ -110,41 +104,45 @@ FunctionEnd
 
 		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$MiKTeX"
 		WriteRegStr HKLM "$9\Core" "CommonInstall" "$0"
-;		WriteRegStr HKLM "$9\Core" "SharedSetup" "1"
+		WriteRegStr HKLM "$9\Core" "CommonData" "$INSTDIR\${UserData_Dir}"
+		WriteRegStr HKLM "$9\Core" "CommonConfig" "$INSTDIR\${UserData_Dir}"
+		WriteRegStr HKLM "$9\Core" "UserData" "$INSTDIR\${UserData_Dir}"
+		WriteRegStr HKLM "$9\Core" "UserConfig" "$INSTDIR\${UserData_Dir}"
+		WriteRegStr HKLM "$9\Core" "UserInstall" "$INSTDIR\${UserData_Dir}"
 		WriteRegStr HKLM "$9\MPM" "AutoInstall" "2"
 ;		WriteRegStr HKLM "$9\MPM" "RemoteRepository" "ftp://ftp.ctex.org/mirrors/CTAN/systems/win32/miktex/tm/packages/"
 ;		WriteRegStr HKLM "$9\MPM" "RepositoryType" "remote"
 
-		${AddPath} "$1"
-		${AddUserPath} "$APPDATA\MiKTeX\$MiKTeX\miktex\bin\"
+		${AppendPath} "$INSTDIR\${UserData_Dir}\miktex\bin"
+		${AppendPath} "$1"
 
 		StrCpy $9 "$1\yap.exe"
 		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
 
 ; ShortCuts
-		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX"
+		StrCpy $9 "$SMCTEX\MiKTeX"
 		CreateDirectory "$9"
 		CreateShortCut "$9\Previewer.lnk" "$1\yap.exe"
 		CreateShortCut "$9\TeXworks.lnk" "$1\miktex-texworks.exe"
 
-		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\Maintenance"
+		StrCpy $9 "$SMCTEX\MiKTeX\Maintenance"
 		CreateDirectory "$9"
 		CreateShortCut "$9\Package Manager.lnk" "$1\mpm_mfc.exe"
 		CreateShortCut "$9\Settings.lnk" "$1\mo.exe"
 		CreateShortCut "$9\Update.lnk" "$1\internal\copystart.exe" '"$1\internal\miktex-update.exe"'
 
-		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\Maintenance (Admin)"
+		StrCpy $9 "$SMCTEX\MiKTeX\Maintenance (Admin)"
 		CreateDirectory "$9"
 		CreateShortCut "$9\Package Manager (Admin).lnk" "$1\mpm_mfc_admin.exe"
 		CreateShortCut "$9\Settings (Admin).lnk" "$1\mo_admin.exe"
 		CreateShortCut "$9\Update (Admin).lnk" "$1\internal\copystart_admin.exe" '"$1\internal\miktex-update_admin.exe"'
 
-		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\Help"
+		StrCpy $9 "$SMCTEX\MiKTeX\Help"
 		CreateDirectory "$9"
 		CreateShortCut "$9\FAQ.lnk" "$0\doc\miktex\faq.chm"
 		CreateShortCut "$9\Manual.lnk" "$0\doc\miktex\miktex.chm"
 
-		StrCpy $9 "$SMPROGRAMS\CTeX\MiKTeX\MiKTeX on the Web"
+		StrCpy $9 "$SMCTEX\MiKTeX\MiKTeX on the Web"
 		CreateDirectory "$9"
 		${CreateURLShortCut} "$9\Give back" "http://miktex.org/giveback"
 		${CreateURLShortCut} "$9\Known Issues" "http://miktex.org/2.8/issues"
@@ -167,10 +165,14 @@ FunctionEnd
 		DeleteRegKey HKCU "Software\MiKTeX.org"
 
 		${${UN}RemovePath} "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin"
+		${${UN}RemovePath} "$UN_INSTDIR\${UserData_Dir}\miktex\bin"
+		${${UN}RemovePath} "$APPDATA\MiKTeX\$UN_MiKTeX\miktex\bin"
 
 		!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.$UN_MiKTeX"
 
-		!insertmacro Remove_MiKTeX_Roots
+		!insertmacro _Remove_MiKTeX_Roots
+		
+		RMDir /r "$SMCTEX\MiKTeX"
 	${EndIf}
 !macroend
 
@@ -191,10 +193,10 @@ FunctionEnd
 			WriteRegStr HKLM "$9" "CommonRoots" "$0;$R9"
 		${EndIf}
 
-		${AddPath} "$0\ctex\bin"
+		${AppendPath} "$0\ctex\bin"
 
 ; Install CCT
-		${AddPath} "$0\cct\bin"
+		${AppendPath} "$0\cct\bin"
 		${AddEnvVar} "CCHZPATH" "$0\cct\fonts"
 		${AddEnvVar} "CCPKPATH" "$0\fonts\pk\modeless\cct\dpi$$d"
 	
@@ -206,7 +208,7 @@ FunctionEnd
 		nsExec::Exec "$0\cct\bin\cctinit.exe"
 
 ; Install TY
-		${AddPath} "$0\ty\bin"
+		${AppendPath} "$0\ty\bin"
 
 		FileOpen $R0 "$0\ty\bin\tywin.cfg" "w"
 		FileWrite $R0 "$0\fonts\tfm\ty\$\r$\n"
@@ -221,9 +223,9 @@ FunctionEnd
 		FileClose $R0
 
 ; ShortCuts
-		CreateShortCut "$SMPROGRAMS\CTeX\FontSetup.lnk" "$0\ctex\bin\FontSetup.exe"
+		CreateShortCut "$SMCTEX\FontSetup.lnk" "$0\ctex\bin\FontSetup.exe"
 
-		StrCpy $9 "$SMPROGRAMS\CTeX\Help"
+		StrCpy $9 "$SMCTEX\Help"
 		StrCpy $8 "$0\ctex\doc"
 		CreateDirectory "$9"
 		CreateShortCut "$9\CTeX FAQ.lnk" "$8\ctex-faq.pdf"
@@ -258,10 +260,11 @@ FunctionEnd
 
 ; Uninstall TY
 		${${UN}RemovePath} "$0\ty\bin"
-	${EndIf}
 
-	Delete "$SMPROGRAMS\CTeX\FontSetup.lnk"
-	RMDir /r "$SMPROGRAMS\CTeX\Help"
+; Uninstall ShortCuts
+		Delete "$SMCTEX\FontSetup.lnk"
+		RMDir /r "$SMCTEX\Help"
+	${EndIf}
 !macroend
 
 !macro Install_Config_Ghostscript
@@ -275,10 +278,10 @@ FunctionEnd
 		WriteRegStr HKLM "$9" "GS_DLL" "$1\bin\gsdll32.dll"
 		WriteRegStr HKLM "$9" "GS_LIB" "$1\lib;$0\fonts;$FONTS"
 	
-		${AddPath} "$1\bin"
+		${AppendPath} "$1\bin"
 	
 ; ShortCuts
-		StrCpy $9 "$SMPROGRAMS\CTeX\Ghostcript"
+		StrCpy $9 "$SMCTEX\Ghostcript"
 		CreateDirectory "$9"
 		CreateShortCut "$9\Ghostscript.lnk" "$1\bin\gswin32.exe" '"-I$1\lib;$0\fonts;$FONTS"'
 		CreateShortCut "$9\Ghostscript Readme.lnk" "$1\doc\Readme.htm"
@@ -293,7 +296,7 @@ FunctionEnd
 	
 		${${UN}RemovePath} "$UN_INSTDIR\${Ghostscript_Dir}\gs$UN_Ghostscript\bin"
 
-		RMDir /r "$SMPROGRAMS\CTeX\Ghostscript"
+		RMDir /r "$SMCTEX\Ghostscript"
 	${EndIf}
 !macroend
 
@@ -316,14 +319,14 @@ FunctionEnd
 		WriteINIStr $9 "$8"	"Configured" "1"
 		Delete "$PROFILE\gsview32.ini"
 	
-		${AddPath} "$0\gsview"
+		${AppendPath} "$0\gsview"
 	
 		StrCpy $9 "$0\gsview\gsview32.exe"
 		!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
 		!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
 	
 ; ShortCuts
-		StrCpy $9 "$SMPROGRAMS\CTeX\Ghostgum"
+		StrCpy $9 "$SMCTEX\Ghostgum"
 		CreateDirectory "$9"
 		CreateShortCut "$9\GSview.lnk" "$0\gsview\gsview32.exe"
 		CreateShortCut "$9\GSview Readme.lnk" "$0\gsview\Readme.htm"
@@ -341,7 +344,7 @@ FunctionEnd
 		!insertmacro APP_UNASSOCIATE "ps" "CTeX.PS"
 		!insertmacro APP_UNASSOCIATE "eps" "CTeX.EPS"
 
-		RMDir /r "$SMPROGRAMS\CTeX\Ghostgum"
+		RMDir /r "$SMCTEX\Ghostgum"
 	${EndIf}
 !macroend
 
@@ -355,16 +358,16 @@ FunctionEnd
 		WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
 		WriteRegStr HKCU "Software\VB and VBA Program Settings\TexFriend\Options" "StartupByWinEdt" "False"
 
-		${AddPath} "$0"
+		${AppendPath} "$0"
 	
 		StrCpy $9 "$0\WinEdt.exe"
 		!insertmacro APP_ASSOCIATE "tex" "CTeX.TeX" "TeX $(Desc_File)" "$9,0" "Open with WinEdt" '$9 "%1"'
 	
 ; ShortCuts
-		StrCpy $9 "$SMPROGRAMS\CTeX"
+		StrCpy $9 "$SMCTEX"
 		CreateDirectory "$9"
 		CreateShortCut "$9\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
-	
+
 		${If} $MiKTeX != ""
 			WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\$MiKTeX\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
 		${EndIf}
@@ -382,9 +385,9 @@ FunctionEnd
 
 		!insertmacro APP_UNASSOCIATE "tex" "CTeX.TeX"
 
-		Delete "$SMPROGRAMS\CTeX\WinEdt.lnk"
-
 		RMDir /r "$APPDATA\WinEdt"
+
+		Delete "$SMCTEX\WinEdt.lnk"
 	${EndIf}
 !macroend
 
@@ -430,7 +433,7 @@ FunctionEnd
 
 	Delete "$UN_INSTDIR\${Logs_Dir}\install.ini"
 
-	RMDir /r "$SMPROGRAMS\CTeX"
+	RMDir /r "$SMCTEX"
 
 	!insertmacro UPDATEFILEASSOC
 !macroend
@@ -643,4 +646,19 @@ FunctionEnd
 		Delete "${LogFile}"
 		Rename "${LogFile}.new" "${LogFile}"
 	${EndIf}
+!macroend
+
+!macro Check_Admin_Rights
+	${IfNot} ${UserIsAdmin}
+		MessageBox MB_OK|MB_ICONSTOP "$(Msg_AdminRequired)"
+		Abort
+	${EndIf}
+!macroend
+
+!macro Get_StartMenu_Dir
+	${If} ${UserIsAdmin}
+		SetShellVarContext all
+	${EndIf}
+	StrCpy $SMCTEX "$SMPROGRAMS\CTeX"
+	SetShellVarContext current
 !macroend

@@ -19,6 +19,7 @@ Var UN_Ghostscript
 Var UN_GSview
 Var UN_WinEdt
 Var UN_CONFIG_ONLY
+Var SMCTEX
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
@@ -39,8 +40,6 @@ BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 !endif
 
 ; Other settings
-ShowInstDetails nevershow
-ShowUninstDetails nevershow
 RequestExecutionLevel admin
 
 ; Use compression
@@ -179,8 +178,8 @@ Section -FinishSection
 	!insertmacro Install_Config_CTeX
 
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
-	CreateDirectory "$SMPROGRAMS\CTeX"
-	CreateShortCut "$SMPROGRAMS\CTeX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
+	CreateDirectory "$SMCTEX"
+	CreateShortCut "$SMCTEX\Uninstall CTeX.lnk" "$INSTDIR\Uninstall.exe"
 
 SectionEnd
 
@@ -223,6 +222,7 @@ Function .onInit
 
 	!insertmacro MUI_LANGDLL_DISPLAY
 
+	!insertmacro Get_StartMenu_Dir
 	!insertmacro Get_Uninstall_Information
 	!insertmacro Restore_Install_Information
 	!insertmacro Set_All_Sections_Selection
@@ -241,6 +241,7 @@ Function onMUIInit
 
 	!insertmacro Check_Obsolete_Version
 	!insertmacro Check_Update_Version
+	!insertmacro Check_Admin_Rights
 
 FunctionEnd
 
@@ -248,6 +249,7 @@ Function un.onInit
 	${GetParameters} $R0
 	${GetOptions} $R0 "/CONFIG_ONLY=" $UN_CONFIG_ONLY
 
+	!insertmacro Get_StartMenu_Dir
 	!insertmacro Get_Uninstall_Information
 	!insertmacro Update_Uninstall_Information
 
@@ -313,6 +315,8 @@ LangString Desc_WinEdt ${LANG_ENGLISH} "WinEdt a well designed text editor with 
 LangString Desc_File ${LANG_SIMPCHINESE} "文档"
 LangString Desc_File ${LANG_ENGLISH} "File"
 
+LangString Msg_AdminRequired ${LANG_SIMPCHINESE} "安装本程序需要管理员权限！"
+LangString Msg_AdminRequired ${LANG_ENGLISH} "Adminstrator rights are required to install the program!"
 LangString Msg_ObsoleteVersion ${LANG_SIMPCHINESE} "在系统中发现旧版的CTeX，请先卸载！"
 LangString Msg_ObsoleteVersion ${LANG_ENGLISH} "Found obsolete version of CTeX installed in the system, please uninstall first!"
 LangString Msg_WrongVersion ${LANG_SIMPCHINESE} "系统中安装了其他版本的CTeX，是否继续？"
