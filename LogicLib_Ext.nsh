@@ -32,11 +32,11 @@
  
         StrCmp $3 0 0 +3
         ## User is an Admin
-            System::Store 'r0 r1 r2 r3'
+            System::Store 'r3 r2 r1 r0'
             Goto `${_f}`
  
         ## User is not an Admin
-            System::Store 'r0 r1 r2 r3'
+            System::Store 'r3 r2 r1 r0'
             Goto `${_t}`
  
     !macroend
