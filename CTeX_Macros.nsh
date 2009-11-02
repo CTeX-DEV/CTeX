@@ -33,7 +33,9 @@
 
 !macro _RemovePath UN DIR
 	SetDetailsPrint none
-	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
+	${If} ${UserIsAdmin}
+		${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKLM" "${DIR}"
+	${EndIf}
 	${${UN}EnvVarUpdate} $R1 "PATH" "R" "HKCU" "${DIR}"
 	SetDetailsPrint both
 !macroend
@@ -41,7 +43,9 @@
 !define un.RemovePath '!insertmacro _RemovePath "un."'
 
 !macro _RemoveEnvVar NAME
-	DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}"
+	${If} ${UserIsAdmin}
+		DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "${NAME}"
+	${EndIf}
 	DeleteRegValue HKCU "Environment" "${NAME}"
 !macroend
 !define RemoveEnvVar "!insertmacro _RemoveEnvVar"
