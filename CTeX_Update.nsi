@@ -56,6 +56,9 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
 
+		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\cct
+		File Addons\CCT\tex\latex\cct\CCT.sty
+
 ;		SetOutPath $INSTDIR\${Addons_Dir}
 ;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
 ;		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
@@ -65,6 +68,9 @@ Section
 		SetOutPath $INSTDIR\${WinEdt_Dir}\Exec\MiKTeX
 		File WinEdt\Exec\MiKTeX\ExeMode.edt
 		File WinEdt\Exec\MiKTeX\ExeMode_Default.edt
+
+		SetOutPath $INSTDIR\${WinEdt_Dir}\Exec
+		File WinEdt\Exec\ExeCompiler.edt
 
 ;		SetOutPath $INSTDIR\${WinEdt_Dir}
 ;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
