@@ -154,8 +154,8 @@ FunctionEnd
 		${CreateURLShortCut} "$9\Support" "http://miktex.org/support"
 
 		DetailPrint "Update MiKTeX settings"
-		nsExec::Exec "$1\mpm.exe --register-components --admin --quiet"
-		nsExec::Exec "$1\initexmf.exe --force --mklinks --admin --quiet"
+		nsExec::Exec "$1\mpm.exe --register-components --quiet --admin"
+		nsExec::Exec "$1\initexmf.exe --force --mklinks --quiet --admin"
 	${EndIf}
 !macroend
 
@@ -422,10 +422,10 @@ FunctionEnd
 
 	StrCpy $9 "$INSTDIR\${MiKTeX_Dir}\miktex\bin"
 	DetailPrint "Update MiKTeX file name database"
-	nsExec::Exec "$9\initexmf.exe --update-fndb --admin --quiet"
+	nsExec::Exec "$9\initexmf.exe --update-fndb --quiet --admin"
 	nsExec::Exec "$9\initexmf.exe --update-fndb --quiet"
 	DetailPrint "Update MiKTeX updmap database"
-	nsExec::Exec "$9\initexmf.exe --mkmaps --admin --quiet"
+	nsExec::Exec "$9\initexmf.exe --mkmaps --quiet --admin"
 
 	!insertmacro UPDATEFILEASSOC
 !macroend

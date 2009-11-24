@@ -55,9 +55,15 @@ Section
 	${If} $Addons != ""
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
+		File Addons\CTeX\ctex\bin\FontSetup.exe
 
 		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\cct
 		File Addons\CCT\tex\latex\cct\CCT.sty
+
+		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
+		File /r Addons\Packages\tex\latex\ctex
+		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
+		File /r Addons\Packages\doc\latex\ctex
 
 ;		SetOutPath $INSTDIR\${Addons_Dir}
 ;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
