@@ -120,9 +120,6 @@ FunctionEnd
 		${AppendPath} "$INSTDIR\${UserData_Dir}\miktex\bin"
 		${AppendPath} "$1"
 
-		StrCpy $9 "$1\yap.exe"
-		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
-
 ; ShortCuts
 		StrCpy $9 "$SMCTEX\MiKTeX"
 		CreateDirectory "$9"
@@ -163,7 +160,7 @@ FunctionEnd
 	${If} $UN_MiKTeX != ""
 		DetailPrint "Uninstall MiKTeX configs"
 
-		nsExec::Exec "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --admin --quiet"
+		nsExec::Exec "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin\mpm.exe --unregister-components --quiet --admin"
 
 		DeleteRegKey HKLM "Software\MiKTeX.org"
 		DeleteRegKey HKCU "Software\MiKTeX.org"
@@ -171,8 +168,6 @@ FunctionEnd
 		${${UN}RemovePath} "$UN_INSTDIR\${MiKTeX_Dir}\miktex\bin"
 		${${UN}RemovePath} "$UN_INSTDIR\${UserData_Dir}\miktex\bin"
 		${${UN}RemovePath} "$APPDATA\MiKTeX\$UN_MiKTeX\miktex\bin"
-
-		!insertmacro APP_UNASSOCIATE "dvi" "MiKTeX.Yap.dvi.$UN_MiKTeX"
 
 		!insertmacro _Remove_MiKTeX_Roots
 		

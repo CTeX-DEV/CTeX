@@ -61,9 +61,12 @@ Section
 		File Addons\CCT\tex\latex\cct\CCT.sty
 
 		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
-		File /r Addons\Packages\tex\latex\ctex
+		File /r Addons\Packages\tex\latex\ctex\*.*
 		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
-		File /r Addons\Packages\doc\latex\ctex
+		File /r Addons\Packages\doc\latex\ctex\*.*
+
+		RMDir /r $INSTDIR\${Addons_Dir}\tex\latex\ctex\ctex
+		RMDir /r $INSTDIR\${Addons_Dir}\doc\latex\ctex\ctex
 
 ;		SetOutPath $INSTDIR\${Addons_Dir}
 ;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
