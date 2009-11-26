@@ -153,6 +153,7 @@ FunctionEnd
 		DetailPrint "Update MiKTeX settings"
 		nsExec::Exec "$1\mpm.exe --register-components --quiet --admin"
 		nsExec::Exec "$1\initexmf.exe --force --mklinks --quiet --admin"
+		nsExec::Exec "$1\yap.exe --register"
 	${EndIf}
 !macroend
 
