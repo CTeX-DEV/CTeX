@@ -4,7 +4,7 @@
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.8.0.109"
+!define Base_Version "2.8.0.123"
 
 ; Variables
 Var Version
@@ -47,43 +47,9 @@ Section
 
 	SetOverwrite on
 
-	${If} $MiKTeX != ""
-		${RemovePath} "$APPDATA\MiKTeX\$MiKTeX\miktex\bin\"
-		!insertmacro _Remove_MiKTeX_Roots
-	${EndIf}
-
 	${If} $Addons != ""
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
-		File Addons\CTeX\ctex\bin\FontSetup.exe
-
-		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\cct
-		File Addons\CCT\tex\latex\cct\CCT.sty
-
-		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
-		File /r Addons\Packages\tex\latex\ctex\*.*
-		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
-		File /r Addons\Packages\doc\latex\ctex\*.*
-
-		RMDir /r $INSTDIR\${Addons_Dir}\tex\latex\ctex\ctex
-		RMDir /r $INSTDIR\${Addons_Dir}\doc\latex\ctex\ctex
-
-;		SetOutPath $INSTDIR\${Addons_Dir}
-;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
-;		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
-	${EndIf}
-
-	${If} $WinEdt != ""
-		SetOutPath $INSTDIR\${WinEdt_Dir}\Exec\MiKTeX
-		File WinEdt\Exec\MiKTeX\ExeMode.edt
-		File WinEdt\Exec\MiKTeX\ExeMode_Default.edt
-
-		SetOutPath $INSTDIR\${WinEdt_Dir}\Exec
-		File WinEdt\Exec\ExeCompiler.edt
-
-;		SetOutPath $INSTDIR\${WinEdt_Dir}
-;		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_winedt.log"
-;		${Install_Files} "WinEdt\*.*" "install_winedt.log"
 	${EndIf}
 
 ; Always do update
