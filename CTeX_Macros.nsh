@@ -112,7 +112,7 @@ FunctionEnd
 		WriteRegStr HKCU "$9\MPM" "RemoteRepository" "ftp://ftp.ctex.org/CTAN/systems/win32/miktex/tm/packages/"
 		WriteRegStr HKCU "$9\MPM" "RepositoryType" "remote"
 
-		${AddPath} "$1"
+		${AppendPath} "$1"
 
 		StrCpy $9 "$1\yap.exe"
 		!insertmacro APP_ASSOCIATE "dvi" "MiKTeX.Yap.dvi.$MiKTeX" "DVI $(Desc_File)" "$9,1" "Open with Yap" '$9 "%1"'
