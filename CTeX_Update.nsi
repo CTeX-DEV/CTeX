@@ -50,6 +50,14 @@ Section
 	${If} $Addons != ""
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
+
+		SetOutPath $INSTDIR\${Addons_Dir}
+		File /r Addons\CCT\*.*
+
+		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
+		File /r Addons\Packages\tex\latex\ctex\*.*
+		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
+		File /r Addons\Packages\doc\latex\ctex\*.*
 	${EndIf}
 
 ; Always do update
