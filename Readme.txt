@@ -1,4 +1,4 @@
-CTeX 2.8.0
+CTeX 2.8.1
 ==========
 
 Ŀ¼
@@ -25,7 +25,7 @@ CTeX 2.8.0
         MiKTeX 2.8
         WinEdt 5.6 beta1
         GSview 4.9
-        Ghostscript 8.70
+        Ghostscript 9.00
 
 
 ====================================================
