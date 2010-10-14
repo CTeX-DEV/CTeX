@@ -1,4 +1,8 @@
 
+; Use compression
+SetCompressor /FINAL /SOLID LZMA
+SetCompressorDictSize 32
+
 !include "CTeX_Version.nsh"
 
 ; Functions and Macros
@@ -22,10 +26,6 @@ OutFile "CTeX_${APP_BUILD}_Update.exe"
 
 ; Other settings
 RequestExecutionLevel admin
-
-; Use compression
-SetCompressor /SOLID LZMA
-SetCompressorDictSize 128
 
 ; Modern interface settings
 !include "MUI2.nsh"
@@ -53,7 +53,7 @@ Section
 
 		SetOverwrite On
 		SetOutPath "$INSTDIR\${Addons_Dir}"
-		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
 		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 
 ;		SetOutPath $INSTDIR\${Addons_Dir}
@@ -68,7 +68,7 @@ Section
 	${If} $Ghostscript != ""
 		SetOverwrite on
 		SetOutPath "$INSTDIR\${Ghostscript_Dir}"
-		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
 		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
 	${EndIf}
 
