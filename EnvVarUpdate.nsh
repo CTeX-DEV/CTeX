@@ -297,7 +297,7 @@ Function ${UN}EnvVarUpdate
     Goto EnvVarUpdate_Restore_Vars
  
   ; "Export" our change
-  SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment"
+  SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
  
   EnvVarUpdate_Restore_Vars:
   ;

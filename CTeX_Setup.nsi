@@ -14,21 +14,7 @@
 !include "CTeX_Macros.nsh"
 
 ; Variables
-Var Version
-Var MiKTeX
-Var Addons
-Var Ghostscript
-Var GSview
-Var WinEdt
-Var UN_INSTDIR
-Var UN_Version
-Var UN_MiKTeX
-Var UN_Addons
-Var UN_Ghostscript
-Var UN_GSview
-Var UN_WinEdt
 Var UN_CONFIG_ONLY
-Var SMCTEX
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
