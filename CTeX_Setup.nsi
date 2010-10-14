@@ -1,4 +1,13 @@
 
+; Use compression
+!ifdef BUILD_FULL
+	SetCompressor /FINAL LZMA
+	SetCompressorDictSize 128
+!else
+	SetCompressor /FINAL /SOLID LZMA
+	SetCompressorDictSize 64
+!endif
+
 !include "CTeX_Version.nsh"
 
 ; Functions and Macros
@@ -41,10 +50,6 @@ BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 
 ; Other settings
 RequestExecutionLevel admin
-
-; Use compression
-SetCompressor /SOLID LZMA
-SetCompressorDictSize 128
 
 ; Modern interface settings
 !include "MUI2.nsh"
