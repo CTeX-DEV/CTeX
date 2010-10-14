@@ -6,6 +6,22 @@
 !include "UninstByLog.nsh"
 !include "LogicLib_Ext.nsh"
 
+; Variables
+Var Version
+Var MiKTeX
+Var Addons
+Var Ghostscript
+Var GSview
+Var WinEdt
+Var UN_INSTDIR
+Var UN_Version
+Var UN_MiKTeX
+Var UN_Addons
+Var UN_Ghostscript
+Var UN_GSview
+Var UN_WinEdt
+Var SMCTEX
+
 !macro _CreateURLShortCut URLFile URLSite
 	WriteINIStr "${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
 !macroend

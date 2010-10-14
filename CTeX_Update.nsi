@@ -11,12 +11,6 @@ SetCompressorDictSize 32
 !define Base_Version "2.8.0.125"
 
 ; Variables
-Var Version
-Var MiKTeX
-Var Addons
-Var Ghostscript
-Var GSview
-Var WinEdt
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION} Update"
@@ -45,15 +39,18 @@ RequestExecutionLevel admin
 
 Section
 
+	!insertmacro Get_StartMenu_Dir
+	!insertmacro Get_Uninstall_Information
+	!insertmacro Update_Uninstall_Information
+
 	SetOverwrite on
 
 	${If} $Addons != ""
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
 
-		SetOverwrite On
 		SetOutPath "$INSTDIR\${Addons_Dir}"
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_packages.log"
+		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
 		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 
 ;		SetOutPath $INSTDIR\${Addons_Dir}
@@ -66,9 +63,9 @@ Section
 	${EndIf}
 	
 	${If} $Ghostscript != ""
-		SetOverwrite on
+		!insertmacro Uninstall_Config_Ghostscript ""
 		SetOutPath "$INSTDIR\${Ghostscript_Dir}"
-		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_ghostscript.log"
+		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
 		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
 	${EndIf}
 
