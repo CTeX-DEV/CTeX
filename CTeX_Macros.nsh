@@ -386,6 +386,7 @@ FunctionEnd
 
 		${If} $MiKTeX != ""
 			WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\$MiKTeX\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
+			WriteINIStr "$INSTDIR\${UserData_Dir}\miktex\config\yap.ini" "Settings" "Editor" 'C:\CTEX\WinEdt\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'
 		${EndIf}
 	${EndIf}
 !macroend
