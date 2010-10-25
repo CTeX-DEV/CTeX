@@ -8,7 +8,7 @@ SetCompressorDictSize 32
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.8.1.130"
+!define Base_Version "2.8.2.140"
 
 ; Variables
 
@@ -49,10 +49,10 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
 
-		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
-		File /r Addons\Packages\tex\latex\ctex\*.*
-		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
-		File /r Addons\Packages\doc\latex\ctex\*.*
+;		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
+;		File /r Addons\Packages\tex\latex\ctex\*.*
+;		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
+;		File /r Addons\Packages\doc\latex\ctex\*.*
 
 ;		SetOutPath $INSTDIR\${Addons_Dir}
 ;		File /r Addons\CCT\*.*
