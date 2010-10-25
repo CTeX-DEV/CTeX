@@ -8,7 +8,7 @@ SetCompressorDictSize 32
 ; Functions and Macros
 !include "CTeX_Macros.nsh"
 
-!define Base_Version "2.9.0.133"
+!define Base_Version "2.9.0.141"
 
 ; Variables
 
@@ -49,10 +49,10 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File Addons\CTeX\ctex\bin\SumatraPDF.exe
 
-		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
-		File /r Addons\Packages\tex\latex\ctex\*.*
-		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
-		File /r Addons\Packages\doc\latex\ctex\*.*
+;		SetOutPath $INSTDIR\${Addons_Dir}\tex\latex\ctex
+;		File /r Addons\Packages\tex\latex\ctex\*.*
+;		SetOutPath $INSTDIR\${Addons_Dir}\doc\latex\ctex
+;		File /r Addons\Packages\doc\latex\ctex\*.*
 
 ;		SetOutPath $INSTDIR\${Addons_Dir}
 ;		File /r Addons\CCT\*.*
@@ -62,11 +62,18 @@ Section
 ;		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 	
-	${If} $Ghostscript != ""
-		!insertmacro Uninstall_Config_Ghostscript ""
-		SetOutPath "$INSTDIR\${Ghostscript_Dir}"
-		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
-		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
+;	${If} $Ghostscript != ""
+;		!insertmacro Uninstall_Config_Ghostscript ""
+;		SetOutPath "$INSTDIR\${Ghostscript_Dir}"
+;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
+;		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
+;	${EndIf}
+
+	${If} $WinEdt != ""
+		!insertmacro Uninstall_Config_WinEdt ""
+		SetOutPath "$INSTDIR\${WinEdt_Dir}"
+		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
+		${Install_Files} "WinEdt\*.*" "install_winedt.log"
 	${EndIf}
 
 ; Always do update
