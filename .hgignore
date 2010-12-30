@@ -1,0 +1,7 @@
+glob:WinEdt/*
+glob:Addons/*
+glob:GSview/*
+glob:Ghostscript/*
+glob:MiKTeX.full/*
+glob:MiKTeX.basic/*
+glob:Patches/*
