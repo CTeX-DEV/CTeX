@@ -4,8 +4,8 @@
 ; Application information
 !define APP_NAME "CTeX"
 !define APP_COMPANY "CTEX.ORG"
-!define APP_COPYRIGHT "Copyright (C) 2010 ${APP_COMPANY}"
-!define APP_VERSION "2.8.2"
+!define APP_COPYRIGHT "Copyright (C) 2011 ${APP_COMPANY}"
+!define APP_VERSION "2.8.3"
 !define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
 
 ; Components information
@@ -13,7 +13,7 @@
 !define MiKTeX_Version      "2.8"
 !define Addons_Dir          "CTeX"
 !define Ghostscript_Dir     "Ghostscript"
-!define Ghostscript_Version "9.00"
+!define Ghostscript_Version "9.04"
 !define GSview_Dir          "GSview"
 !define GSview_Version      "4.9"
 !define WinEdt_Dir          "WinEdt"
