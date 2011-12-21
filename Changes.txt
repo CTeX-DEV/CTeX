@@ -1,3 +1,10 @@
+2011.12.22
+  - v2.8.3
+  - 删除宏包 ctex/xeCJK/zhmetrics，使用 MiKTeX 内含的版本
+  - 更新 SumatraPDF 2.0 r4973
+  - 更新 Ghostscript 9.04
+  - 更新 MiKTeX 2.8
+
 2010.12.13
   - v2.8.2.151
   - 更新 SumatraPDF 1.3 r2448
