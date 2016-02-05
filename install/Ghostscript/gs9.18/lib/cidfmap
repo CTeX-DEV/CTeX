@@ -1,0 +1,24 @@
+%!
+% cidfmap generated automatically by mkcidfm.ps from fonts found in
+%   C:/windows/Fonts
+
+% Substitutions
+/SimHei << /CSI [(GB1) 2] /Path (C:/windows/Fonts/simhei.ttf) /SubfontID 0 /FileType /TrueType >> ;
+/NSimSun << /CSI [(GB1) 2] /Path (C:/windows/Fonts/simsun.ttc) /SubfontID 1 /FileType /TrueType >> ;
+/FangSong << /CSI [(GB1) 2] /Path (C:/windows/Fonts/simfang.ttf) /SubfontID 0 /FileType /TrueType >> ;
+/KaiTi << /CSI [(GB1) 2] /Path (C:/windows/Fonts/simkai.ttf) /SubfontID 0 /FileType /TrueType >> ;
+/SimSun << /CSI [(GB1) 2] /Path (C:/windows/Fonts/simsun.ttc) /SubfontID 0 /FileType /TrueType >> ;
+/MalgunGothicBold << /CSI [(Korea1) 3] /Path (C:/windows/Fonts/malgunbd.ttf) /SubfontID 0 /FileType /TrueType >> ;
+/MalgunGothicRegular << /CSI [(Korea1) 3] /Path (C:/windows/Fonts/malgun.ttf) /SubfontID 0 /FileType /TrueType >> ;
+
+% Aliases
+/STKaiti-Regular /KaiTi ;
+/HYRGoThic-Medium /MalgunGothicRegular ;
+/HYGoThic-Medium /MalgunGothicRegular ;
+/STHeiti-Regular /SimHei ;
+/AdobeSongStd-Light /SimSun ;
+/HYSMyeongJo-Medium /MalgunGothicRegular ;
+/STFangsong-Light /FangSong ;
+/AdobeMyungjoStd-Medium /MalgunGothicRegular ;
+/AdobeHeitiStd-Regular /SimHei ;
+/STSong-Light /SimSun ;

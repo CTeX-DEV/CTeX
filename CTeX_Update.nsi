@@ -9,7 +9,7 @@ SetCompressorDictSize 32
 ; Functions and Macros
 !include "libs\CTeX_Macros.nsh"
 
-!define Base_Version "2.9.1.0"
+!define Base_Version "2.9.2.164"
 
 ; Variables
 
@@ -48,29 +48,35 @@ Section
 
 	${If} $Addons != ""
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
-		File Addons\CTeX\ctex\bin\SumatraPDF.exe
+		File install\Addons\CTeX\ctex\bin\SumatraPDF.exe
 
-;		SetOutPath $INSTDIR\${Addons_Dir}
-;		File /r Addons\CCT\*.*
+		SetOutPath $INSTDIR\${Addons_Dir}
+		File /r install\Addons\CCT\*.*
 
-;		SetOutPath "$INSTDIR\${Addons_Dir}"
-;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
-;		${Install_Files} "Addons\Packages\*.*" "install_packages.log"
+		SetOutPath "$INSTDIR\${Addons_Dir}"
+		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
+		${Install_Files} "install\Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 	
-;	${If} $Ghostscript != ""
-;		!insertmacro Uninstall_Config_Ghostscript ""
-;		SetOutPath "$INSTDIR\${Ghostscript_Dir}"
-;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
-;		${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
+;	${If} $GSview != ""
+;		!insertmacro Uninstall_Config_GSview ""
+;		SetOutPath "$INSTDIR\${GSview_Dir}"
+;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_gsview.log"
+;		${Install_Files} "GSview\*.*" "install_gsview.log"
 ;	${EndIf}
+	
+	${If} $Ghostscript != ""
+		!insertmacro Uninstall_Config_Ghostscript ""
+		SetOutPath "$INSTDIR\${Ghostscript_Dir}"
+		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_ghostscript.log"
+		${Install_Files} "install\Ghostscript\*.*" "install_ghostscript.log"
+	${EndIf}
 
-;	${If} $WinEdt != ""
-;		!insertmacro Uninstall_Config_WinEdt ""
-;		SetOutPath "$INSTDIR\${WinEdt_Dir}"
-;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
-;		${Install_Files} "WinEdt\*.*" "install_winedt.log"
-;	${EndIf}
+	${If} $WinEdt != ""
+		!insertmacro Uninstall_Config_WinEdt ""
+		SetOutPath "$INSTDIR\${WinEdt_Dir}"
+		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
+		${Install_Files} "install\WinEdt\*.*" "install_winedt.log"	${EndIf}
 
 ; Always do update
 	SetOutPath $INSTDIR

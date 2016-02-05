@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>
+GSPRINT - Ghostscript print to Windows printer
+</title>
+<link rel="stylesheet" type="text/css" href="gsview.css" title="GSview Style">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+<h1>
+GSPRINT - Ghostscript print to Windows printer
+</h1>
+<p>
+GSPRINT uses Ghostscript to print a PostScript file to
+a Windows printer.  Using Ghostscript alone you can print
+using a number of inbuilt printer drivers for specific 
+printers (e.g. djet500, ljet4), or you can use the driver
+mswinpr2 which talks to the Windows printer driver.
+The mswinpr2 driver (which I wrote) is very slow for 
+printers that claim to support colour.
+GSPRINT tells Ghostscript to produce a bitmap, and then
+sends this to the Windows printer driver more efficiently
+than the old mswinpr2.
+</p>
+<p>
+GSPRINT requires AFPL Ghostscript 6.50 or later.
+</p>
+
+<h2>
+Usage
+</h2>
+<p>
+Typical usage would be
+</p>
+<blockquote>
+  gsprint golfer.ps
+<br>
+  gsprint -colour colorcir.ps
+</blockquote>
+<p>
+You may need to configure gsprint with a gsprint.cfg file.
+See the configuration section below.
+</p>
+<p>
+Command line options are:
+</p>
+<blockquote>
+<dl>
+ <dt><b>-help</b></dt>
+   <dd>Print usage summary</dd>
+ <dt><b>-mono</b></dt>
+   <dd>Render in monochrome as 1bit/pixel</dd>
+ <dt><b>-grey or -gray</b></dt> 
+   <dd>Render in greyscale as 8bits/pixel</dd>
+ <dt><b>-colour or -color</b></dt>
+   <dd>Render in colour as 24bits/pixel</dd>
+ <dt><b>-query</b></dt> 
+   <dd>Show printer setup dialog</dd>
+ <dt><b>-noquery</b></dt>
+   <dd>Don't show printer setup dialog</dd>
+ <dt><b>-printer "name"</b></dt>
+   <dd>Print to the specified printer</dd>
+ <dt><b>-noprinter</b></dt>
+   <dd>Use default printer</dd>
+ <dt><b>-port "name"</b></dt>
+   <dd>Print to the specified printer port, instead of the default
+     for the printer</dd>
+ <dt><b>-ghostscript "name"</b></dt>
+   <dd>Path and filename of command line Ghostscript</dd>
+ <dt><b>-option "name"</b></dt>
+   <dd>Option for the ghostscript command line</dd>
+ <dt><b>-config "name"</b></dt>
+   <dd>Read options from this file, one argument per line.</dd>
+ <dt><b>-odd</b></dt>
+   <dd>Print only odd pages</dd>
+ <dt><b>-even</b></dt>
+   <dd>Print only even pages</dd>
+ <dt><b>-all</b></dt>
+   <dd>Print all pages</dd>
+ <dt><b>-from NN</b></dt>
+   <dd>First page to print is NN</dd>
+ <dt><b>-to NN</b></dt>
+   <dd>Last page to print is NN</dd>
+ <dt><b>-twoup</b></dt>
+   <dd>Two pages per sheet</dd>
+ <dt><b>-portrait</b></dt>
+   <dd>Portrait orientation</dd>
+ <dt><b>-landscape</b></dt>
+   <dd>Landscape orientation</dd>
+ <dt><b>-duplex_vertical</b></dt>
+   <dd>Duplex (for long edge binding)</dd>
+ <dt><b>-duplex_horizontal</b></dt>
+   <dd>Duplex (for short edge binding)</dd>
+ <dt><b>-copies NN</b></dt>
+   <dd>Print NN copies (if supported by Windows printer driver)</dd>
+ <dt><b>"filename"</b></dt>
+   <dd>The PostScript/PDF file to print</dd>
+ <dt><b>-</b></dt>
+   <dd>Tell Ghostscript to read PostScript from standard input</dd>
+</dl>
+</blockquote>
+<p>
+Defaults are -mono -noquery -noprinter -all
+<br>
+Unrecognised options are passed on to Ghostscript.
+<br>
+The filename to print must be the last option.
+</p>
+<p>
+If neither -query nor -printer are used (the default),
+the default printer will be used.  This is equivalent
+to -noquery and -noprinter.
+</p>
+<p>
+-all overrides -odd, -even, -from and -to.
+<br>
+DSC comments are ignored.
+<br>
+-odd, -even, -from and -to operate by rendering every page
+but only sending the selected pages to the printer.
+<br>
+Printing one page out of a 200 page document using "-from 100 -to 100" 
+will result in a long wait before and after the page is printed.
+<br>
+If using "-from 10 -odd", the first page printed will be 11.
+</p>
+<p>
+The last occurence of -mono, -grey, -colour is used.
+</p>
+<p>
+Page size and margins cannot be set from the command line.
+These are obtained from the printer driver.  To change the 
+page size, change your printer settings.
+</p>
+<p>
+Ghostscript options that must not be used are:
+</p>
+<pre>
+  -r  
+  -g  
+  -sDEVICE=  
+  -sOutputFile=  
+  -sPAPERSIZE=
+</pre>
+<p>
+These are either used by, or interfere with gsprint.
+</p>
+<p>
+Possible future options are:
+</p>
+<pre>
+ -twoup
+ -scale NN.NNN
+ -papersize A4
+</pre>
+
+<h2>
+Configuration
+</h2>
+<p>
+If you installed AFPL Ghostscript 6.50 or later using 
+the self installer, gsprint will automatically use the
+latest copy of Ghostscript on your system.  Otherwise you
+will need to specify <b>-ghostscript name</b>.
+</p>
+
+<p>
+Before reading any command line options, gsprint.exe attempts to 
+read options from gsprint.cfg in the same directory as gsprint.exe.  
+In this file you should place the most common options.  
+For example:
+</p>
+<pre>
+   -mono
+   -ghostscript  
+   "c:\program files\gs\gs8.53\bin\gswin32c.exe"
+   -I"c:\program files\gs\gs8.53\lib;c:\program files\gs\fonts"
+</pre>
+<p>
+With a configuration file like this, you can print a monochrome
+PostScript file with
+</p>
+<blockquote>
+  gsprint golfer.ps
+</blockquote>
+<p>
+or a colour file with
+</p>
+<blockquote>
+  gsprint -colour colorcir.ps
+</blockquote>
+<p>
+Config file options must be one per line.
+Other configuration files may be used with the command line
+option "-config filename.cfg"
+</p>
+
+<h2>
+Licence
+</h2>
+<p>
+GSPRINT is Copyright (C) 1999-2005 Ghostgum Software Pty Ltd.
+</p>
+
+<p>GSPRINT is part of <a href="Readme.htm">GSview</a>.
+GSview is distributed with the Aladdin Free Public Licence.
+This licence is contained in the file 
+    <a href="LICENCE">
+    LICENCE
+    </a>.
+See the <a href="Readme.htm">GSview Readme</a> for more details.
+</p>
+
+<h2>
+Availability
+</h2>
+<p>
+After installing GSview, <b>gsprint.exe</b> should be
+in the same directory as the GSview executable.
+</p>
+<p>
+To use GSPRINT you must have AFPL Ghostscript 6.50 or later, 
+This is available from:
+</p>
+<blockquote>
+  <a href="http://www.cs.wisc.edu/~ghost/">
+    http://www.cs.wisc.edu/~ghost/
+  </a>
+</blockquote>
+
+<h2>
+Bugs, Suggestions
+</h2>
+<p>
+Known bug: -twoup doesn't work for PDF files or any file which 
+  changes the page size in mid document.
+</p>
+
+<p>
+Russell Lang
+<br>
+<a href="http://www.ghostgum.com.au/">http://www.ghostgum.com.au/</a>
+<br>
+2005-10-23
+</p>
+</body>
+</html>

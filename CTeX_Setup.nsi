@@ -83,9 +83,9 @@ Section "MiKTeX" Section_MiKTeX
 
 !ifndef BUILD_REPAIR
 !ifndef BUILD_FULL
-	${Install_Files} "MiKTeX.basic\*.*" "install_miktex.log"
+	${Install_Files} "install\MiKTeX.basic\*.*" "install_miktex.log"
 !else
-	${Install_Files} "MiKTeX.full\*.*" "install_miktex.log"
+	${Install_Files} "install\MiKTeX.full\*.*" "install_miktex.log"
 !endif
 !endif
 
@@ -99,11 +99,11 @@ Section "CTeX Addons" Section_Addons
 	SetOutPath "$INSTDIR\${Addons_Dir}"
 
 !ifndef BUILD_REPAIR
-	${Install_Files} "Addons\CTeX\*.*" "install_ctex.log"
-	${Install_Files} "Addons\CJK\*.*" "install_cjk.log"
-	${Install_Files} "Addons\CCT\*.*" "install_cct.log"
-	${Install_Files} "Addons\TY\*.*" "install_ty.log"
-	${Install_Files} "Addons\Packages\*.*" "install_packages.log"
+	${Install_Files} "install\Addons\CTeX\*.*" "install_ctex.log"
+	${Install_Files} "install\Addons\CJK\*.*" "install_cjk.log"
+	${Install_Files} "install\Addons\CCT\*.*" "install_cct.log"
+	${Install_Files} "install\Addons\TY\*.*" "install_ty.log"
+	${Install_Files} "install\Addons\Packages\*.*" "install_packages.log"
 !endif
 
 	!insertmacro Install_Config_Addons
@@ -121,7 +121,7 @@ Section "Ghostscript" Section_Ghostscript
 	SetOutPath "$INSTDIR\${Ghostscript_Dir}"
 
 !ifndef BUILD_REPAIR
-	${Install_Files} "Ghostscript\*.*" "install_ghostscript.log"
+	${Install_Files} "install\Ghostscript\*.*" "install_ghostscript.log"
 !endif
 
 	!insertmacro Install_Config_Ghostscript
@@ -134,7 +134,7 @@ Section "GSview" Section_GSview
 	SetOutPath "$INSTDIR\${GSview_Dir}"
 
 !ifndef BUILD_REPAIR
-	${Install_Files} "GSview\*.*" "install_gsview.log"
+	${Install_Files} "install\GSview\*.*" "install_gsview.log"
 !endif
 
 	!insertmacro Install_Config_GSview
@@ -147,7 +147,7 @@ Section "WinEdt" Section_WinEdt
 	SetOutPath "$INSTDIR\${WinEdt_Dir}"
 
 !ifndef BUILD_REPAIR
-	${Install_Files} "WinEdt\*.*" "install_winedt.log"
+	${Install_Files} "install\WinEdt\*.*" "install_winedt.log"
 !endif
 
 	!insertmacro Install_Config_WinEdt
