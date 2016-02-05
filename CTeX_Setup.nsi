@@ -161,8 +161,8 @@ Section -FinishSection
 
 !ifndef BUILD_REPAIR
 	${Begin_Install_Files}
-	File Readme.txt
-	File Changes.txt
+	File "texts\Readme.txt"
+	File "texts\Changes.txt"
 	File Repair.exe
 	${End_Install_Files} "install.log"
 !endif
@@ -290,8 +290,8 @@ FunctionEnd
 !insertmacro Set_Version_Information
 
 ; Language strings
-LicenseLangString license ${LANG_SIMPCHINESE} "license\zh.txt"
-LicenseLangString license ${LANG_ENGLISH} "license\en.txt"
+LicenseLangString license ${LANG_SIMPCHINESE} "texts\license_zh.txt"
+LicenseLangString license ${LANG_ENGLISH} "texts\license_en.txt"
 
 LangString Desc_MiKTeX ${LANG_SIMPCHINESE} "Windows下最好用的TeX系统之一，它带有一个很优秀的DVI预览器Yap。"
 LangString Desc_MiKTeX ${LANG_ENGLISH} "One of the best TeX system on Windows platform, with an excellent DVI previewer Yap."
