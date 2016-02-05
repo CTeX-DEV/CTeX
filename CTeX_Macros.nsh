@@ -137,8 +137,8 @@ FunctionEnd
 		WriteRegStr HKLM "$9\Core" "UserConfig" "$INSTDIR\${UserData_Dir}"
 		WriteRegStr HKLM "$9\Core" "UserInstall" "$INSTDIR\${UserData_Dir}"
 		WriteRegStr HKLM "$9\MPM" "AutoInstall" "1"
-;		WriteRegStr HKLM "$9\MPM" "RemoteRepository" "ftp://ftp.ctex.org/mirrors/CTAN/systems/win32/miktex/tm/packages/"
-;		WriteRegStr HKLM "$9\MPM" "RepositoryType" "remote"
+		WriteRegStr HKLM "$9\MPM" "RemoteRepository" "http://mirrors.ustc.edu.cn/CTAN/systems/win32/miktex/tm/packages/"
+		WriteRegStr HKLM "$9\MPM" "RepositoryType" "remote"
 
 		${AppendPath} "$INSTDIR\${UserData_Dir}\miktex\bin"
 		${AppendPath} "$1"
