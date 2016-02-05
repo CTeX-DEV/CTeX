@@ -1,0 +1,10 @@
+// Create Multi User Setup (requires administrator privileges):
+// Startup Macro automatically creates or updates the user profile as required
+
+CopyFile("%B\WinShell\Profiles\Create Startup User Profile.edt",>
+         "%B\WinShell\Create Startup User Profile.edt",1,1);
+
+Prompt("WinEdt is now configured for the automatic creation of user profiles...>
+  Restart the program to proceed with the user profile creation or update!",0,1);
+
+End;

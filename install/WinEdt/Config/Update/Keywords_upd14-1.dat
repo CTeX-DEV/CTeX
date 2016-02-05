@@ -1,0 +1,60 @@
+!9
+/!0
+/!1
+/!2
+/!3
+/!4
+/!5
+/!6
+/!7
+/!8
+/!9
+END_LIST
+
+KEYWORD_GROUP="WinEdt Negative Register"
+  ENABLED=1
+  MODE_FILTER="EDT"
+  BEFORE="%"
+  AFTER=""
+  BOLN_NOT_OK=1
+  EOLN_NOT_OK=0
+  STRICT_PRIORITY=0
+  PRIORITY=8
+  CASE_SENSITIVE=1
+    TEXT_COLOR="RGB_A"
+    DEFAULT_FONT=1
+    BOLD=1
+LIST="END_LIST"
+-0
+-1
+-2
+-3
+-4
+-5
+-6
+-7
+-8
+-9
+/-0
+/-1
+/-2
+/-3
+/-4
+/-5
+/-6
+/-7
+/-8
+/-9
+END_LIST
+
+KEYWORD_GROUP="WinEdt RegEx Tags"
+  ENABLED=1
+  MODE_FILTER="EDT"
+  BEFORE="%"
+  AFTER=""
+  BOLN_NOT_OK=1
+  EOLN_NOT_OK=0
+  STRICT_PRIORITY=0
+  PRIORITY=8
+  CASE_SENSITIVE=1
+    TEXT_COLOR="RGB_8"

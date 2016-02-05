@@ -1,0 +1,1 @@
+    PATH="%P;%p;%@('MPINPUTS');;%$('TeX-Root');\metapost//;"+

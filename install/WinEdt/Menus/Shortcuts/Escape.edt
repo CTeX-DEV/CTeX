@@ -1,0 +1,12 @@
+// @DEFAULT
+SetOK(1);
+SetErrorFlag(0);
+
+AutoPopup(1); // Manually Activate Auto-Completion
+
+// ShowErrorLog(-1);    // Hide Error Interface
+// ShowTree(-1);        // Hide Tree Control
+// ShowGather(-1);      // Hide the Gather Control
+// ShowCollectForm(-1); // Hide Find in Files Interface
+
+End;

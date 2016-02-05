@@ -1,0 +1,103 @@
+// Load All Configuration Scripts
+
+    Requires(20150217);
+
+    Prompt("This macro rebuilds current configuration by loading all ini files...%\>
+It is recommended that you close all files (or project) to make it faster.%\%\>
+                            Continue?",1,0);
+
+    PushTagsandRegisters;
+
+    StartWorking('Rebuilding Current Configuration...');
+    ProcessMessages;
+    SaveSettings;
+
+    // Load Local or Default Scripts
+    LoadConfig("ConfigEx\Colors.ini");
+    LoadConfig("ConfigEx\Images.ini");
+    LoadConfig("ConfigEx\MainMenu.ini");
+    LoadConfig("ConfigEx\PopupMenus.ini");
+    LoadConfig("ConfigEx\Toolbar.ini");
+    LoadConfig("ConfigEx\GUI.ini");
+    LoadConfig("ConfigEx\DocTabs.ini");
+    LoadConfig("ConfigEx\DocList.ini");
+    LoadConfig("ConfigEx\StatusBar.ini");
+    LoadConfig("ConfigEx\Bookmarks.ini");
+    LoadConfig("ConfigEx\Input.ini");
+    LoadConfig("ConfigEx\Tree.ini");
+    LoadConfig("ConfigEx\Gather.ini");
+    LoadConfig("ConfigEx\Folding.ini");
+    LoadConfig("ConfigEx\Wrapping.ini");
+    LoadConfig("ConfigEx\Paragraphs.ini");
+    LoadConfig("ConfigEx\Environments.ini");
+    LoadConfig("ConfigEx\WordCount.ini");
+    LoadConfig("ConfigEx\Font.ini");
+    LoadConfig("ConfigEx\Tabs.ini");
+    LoadConfig("ConfigEx\Caret.ini");
+    LoadConfig("ConfigEx\Fonts.ini");
+    LoadConfig("ConfigEx\Editor.ini");
+    LoadConfig("ConfigEx\MouseInterface.ini");
+    LoadConfig("ConfigEx\Modes.ini");
+    LoadConfig("ConfigEx\Defaults.ini");
+    LoadConfig("ConfigEx\Templates.ini");
+    LoadConfig("ConfigEx\Find.ini");
+    LoadConfig("ConfigEx\Find in Files.ini");
+    LoadConfig("ConfigEx\Replace.ini");
+    LoadConfig("ConfigEx\Incremental Search.ini");
+    LoadConfig("ConfigEx\Errors.ini");
+    LoadConfig("ConfigEx\Delimiters.ini");
+    LoadConfig("ConfigEx\AutoComplete.ini");
+    LoadConfig("ConfigEx\ActiveStrings.ini");
+    LoadConfig("ConfigEx\Abbreviations.ini");
+    LoadConfig("ConfigEx\Language.ini");
+    LoadConfig("ConfigEx\Unicode.ini");
+    LoadConfig("ConfigEx\Sorting.ini");
+    LoadConfig("ConfigEx\TranslationTables.ini");
+    LoadConfig("ConfigEx\Dictionaries.ini");
+    LoadConfig("ConfigEx\Spelling.ini");
+    LoadConfig("ConfigEx\Suggestions.ini");
+    LoadConfig("ConfigEx\IgnoredText.ini");
+    LoadConfig("ConfigEx\SpellingErrors.ini");
+    LoadConfig("ConfigEx\CompoundedWords.ini");
+    LoadConfig("ConfigEx\ColorEffects.ini");
+    LoadConfig("ConfigEx\BackgroundSchemes.ini");
+    LoadConfig("ConfigEx\ColorGrid.ini");
+    LoadConfig("ConfigEx\Selections.ini");
+    LoadConfig("ConfigEx\FilterSets.ini");
+    LoadConfig("ConfigEx\Switches.ini");
+    LoadConfig("ConfigEx\Keywords.ini");
+    LoadConfig("ConfigEx\Columns.ini");
+    LoadConfig("ConfigEx\PrintSchemes.ini");
+    LoadConfig("ConfigEx\PrintDefault.ini");
+    LoadConfig("ConfigEx\PrintAlternative.ini");
+    LoadConfig("ConfigEx\PrintCustom.ini");
+    LoadConfig("ConfigEx\PrintFancy.ini");
+    LoadConfig("ConfigEx\PrintPlain.ini");
+    LoadConfig("ConfigEx\PrintDefault.ini");
+    LoadConfig("ConfigEx\Backup.ini");
+    LoadConfig("ConfigEx\AutoSave.ini");
+    LoadConfig("ConfigEx\Folders.ini");
+    LoadConfig("ConfigEx\FileStatus.ini");
+    LoadConfig("ConfigEx\Project.ini");
+    LoadConfig("ConfigEx\Forms.ini");
+    LoadConfig("ConfigEx\Sounds.ini");
+    LoadConfig("ConfigEx\Preferences.ini");
+    LoadConfig("ConfigEx\Options.ini");
+    LoadConfig("ConfigEx\Events.ini");
+    LoadConfig("ConfigEx\Config.ini");
+    IfFileExists("%b\ConfigEx\UserPreferences.ini",!'LoadConfig("%b\ConfigEx\UserPreferences.ini");');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+    ProcessMessages;
+
+    Exe('%b\Exec\Config.edt');
+    Exe('%b\Exec\%$("Config-Dir");\Load Config.edt');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+
+    PopTagsandRegisters;
+
+    SaveSettings;
+    StopWorking;
+
+    Prompt('Current Configuration has been Rebuilt or Repaired: %\ "%b\WinEdt.dnt"',0,1);
+
+End;

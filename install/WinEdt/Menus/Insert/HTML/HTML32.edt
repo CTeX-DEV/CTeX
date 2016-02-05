@@ -1,0 +1,160 @@
+// HTML 3.2
+
+IfStr('%!0',!'center',!'=',!"JMP(!'center');");
+IfStr('%!0',!'basefont',!'=',!"JMP(!'basefont');");
+IfStr('%!0',!'font_empty',!'=',!"JMP(!'font_empty');");
+IfStr('%!0',!'font_face',!'=',!"JMP(!'font_face');");
+IfStr('%!0',!'font_size',!'=',!"JMP(!'font_size');");
+IfStr('%!0',!'font_face_size',!'=',!"JMP(!'font_face_size');");
+IfStr('%!0',!'s',!'=',!"JMP(!'s');");
+IfStr('%!0',!'strike',!'=',!"JMP(!'strike');");
+IfStr('%!0',!'u',!'=',!"JMP(!'u');");
+IfStr('%!0',!'app',!'=',!"JMP(!'app');");
+
+Prompt('Unknown HTML 3.2 Item: "%!0"');
+
+Exit;
+
+:center:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins("<center>");
+  NewLine;
+  Mark(1);
+  Ins("%!1");
+  NewLine;Ins("</center>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:basefont:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<basefont size="');
+  Mark(1);
+  Ins('">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:font_empty:: =======================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<font>');
+  Mark(1);
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  Ins("</font>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:font_face:: ========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<font face="');
+  Mark(1);
+  Ins('">');
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  Ins("</font>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:font_size:: ========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<font size="');
+  Mark(1);
+  Ins('">');
+  IfStr("%!1","","=","Ins('')",!"Ins('%!1')");
+  Ins("</font>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:font_face_size:: ===================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<font face="');
+  Mark(1);
+  Ins('" size="">');
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  Ins("</font>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:s:: ================================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins("<%!0>");
+  Mark(1);
+  Ins("%!1</%!0>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:strike:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins("<%!0>");
+  Mark(1);
+  Ins("%!1</%!0>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:u:: ================================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins("<%!0>");
+  Mark(1);
+  Ins("%!1</%!0>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:app:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<applet code="');
+  Mark(1);
+  Ins('" width="" height="">');
+  NewLine;
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins("</applet>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

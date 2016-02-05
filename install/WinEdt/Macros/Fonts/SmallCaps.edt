@@ -1,0 +1,12 @@
+// -*- ASCII:EDT -*-
+
+BeginGroup;
+IfSel('0','=',>
+      'SelWord(1);>
+       IfSel(''0'',''='',>
+             ''Ins("\textsc{}");>
+               CharLeft;'',>
+             ''InsLabel("\textsc","{","}")'');',>
+      'InsLabel("\textsc","{","}");');
+EndGroup;
+End;

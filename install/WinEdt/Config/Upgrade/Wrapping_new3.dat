@@ -1,0 +1,3 @@
+  PAR="\subsubsection"
+  PAR="\minisec"
+  PAR="\appendix"

@@ -1,0 +1,42 @@
+// Insert a Link (Mode Dependent)
+// TeX requires something like: \usepackage[colorlinks]{hyperref}
+// Select and Cut a link or name if it is already typed...
+
+IfisMode('TeX','%!m',!'JMP("TeX");');
+IfisMode('HTML;XML;PHP;HHC','%!m',!'JMP("HTML");');
+
+JMP('Default');
+
+:TeX:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  LetReg(0,'');
+  Mark(1);
+  InsText('\href{%!0}{%!0}');
+  IfStr('%!0','','=','Goto(1,1);NextBullet;');
+  EndGroup;
+  SetTracking(1);
+  JMP("Exit");
+
+:HTML:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  LetReg(0,'');
+  Mark(1);
+  InsText('<a href="%!0">%!0</a>');
+  IfStr('%!0','','=','Goto(1,1);NextBullet;');
+  EndGroup;
+  SetTracking(1);
+  JMP("Exit");
+
+:Default:: ==========================================================
+// No Default format ...
+
+  Prompt('No Link Format is defined for mode: "%!m"!');
+
+:Exit:: =============================================================
+// It's OK
+
+End;

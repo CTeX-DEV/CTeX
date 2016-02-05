@@ -1,0 +1,29 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert LaTeX \textcolor[rgb]{?} color
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - \textcolor[rgb]{...}
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// and executes an additional macro %!? if set to non-empty string ...
+// ===============================================================================
+
+ LetReg(-9,'%?');
+ LetTempReg;
+
+ GetColor(-1,"",3,",");
+
+SubstituteInString('%-9',!'\"|{...}|','\"|{%-1}|',11,-10);
+LetTempReg("%-0");
+// No need to execute anything after
+LetTempReg(!"",!"!");
+
+End;
+
+// ===============================================================================

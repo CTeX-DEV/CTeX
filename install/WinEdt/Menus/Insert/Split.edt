@@ -1,0 +1,47 @@
+// Split Environment with bullets %!9 is environment name %!8 label or extras
+ SetTracking(0);
+ BeginGroup;
+ SetSel(0);
+ Mark(1);
+ LetReg(0,"%c");
+ TrimLine;
+ GoToEndOfLine;
+ IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+ TrackCaret;
+ LetReg(0, "%c"); // *** Current Column
+ Ins('\begin{%!9}%!8');
+ NewLine;
+ GotoCol(%!0+2);
+ IfStr("%!9","multline","=",!"Ins(' \\');");
+ IfStr("%!9","multline*","=",!"Ins(' \\');");
+ IfStr("%!9","split","=",!"Ins(' &  \\');");
+ IfStr("%!9","gather","=",!"Ins(' \\');");
+ IfStr("%!9","gather*","=",!"Ins(' \\');");
+ IfStr("%!9","align","=",!"Ins(' &  \\');");
+ IfStr("%!9","align*","=",!"Ins(' &  \\');");
+ IfStr("%!9","alignat","=",!"Ins(' &  \\');");
+ IfStr("%!9","alignat*","=",!"Ins(' &  \\');");
+ IfStr("%!9","flalign","=",!"Ins(' &  \\');");
+ IfStr("%!9","flalign*","=",!"Ins(' &  \\');");
+ NewLine;
+ GotoCol(%!0+2);
+ IfStr("%!9","multline","=",!"Ins('');");
+ IfStr("%!9","multline*","=",!"Ins('');");
+ IfStr("%!9","split","=",!"Ins('  & ');");
+ IfStr("%!9","gather","=",!"Ins('');");
+ IfStr("%!9","gather*","=",!"Ins('');");
+ IfStr("%!9","align","=",!"Ins(' & ');");
+ IfStr("%!9","align*","=",!"Ins(' & ');");
+ IfStr("%!9","alignat","=",!"Ins(' & ');");
+ IfStr("%!9","alignat*","=",!"Ins(' & ');");
+ IfStr("%!9","flalign","=",!"Ins(' & ');");
+ IfStr("%!9","flalign*","=",!"Ins(' & ');");
+ NewLine;
+ GotoCol(%!0);
+ TrimLine;
+ Ins("\end{%!9}");
+ Goto(1,1);
+ NextBullet;
+ EndGroup;
+ SetTracking(1);
+End;

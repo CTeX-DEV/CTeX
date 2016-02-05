@@ -1,0 +1,138 @@
+// HTML Objects
+
+IfStr('%!0',!'img',!'=',!"JMP(!'img');");
+IfStr('%!0',!'data',!'=',!"JMP(!'data');");
+IfStr('%!0',!'app',!'=',!"JMP(!'app');");
+IfStr('%!0',!'apppar',!'=',!"JMP(!'apppar');");
+IfStr('%!0',!'par',!'=',!"JMP(!'par');");
+IfStr('%!0',!'map',!'=',!"JMP(!'map');");
+IfStr('%!0',!'maparea',!'=',!"JMP(!'maparea');");
+IfStr('%!0',!'imagemaparea',!'=',!"JMP(!'imagemaparea');");
+
+Prompt('Unknown object: "%!0"');
+
+Exit;
+
+:img:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<img src="');
+  Mark(1);
+  Ins('" alt="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:data:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<object data="');
+  Mark(1);
+  Ins('" type="">');
+  NewLine;
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins("</object>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:app:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<object codetype="application/java" classid="');
+  Mark(1);
+  Ins('">');
+  NewLine;
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins("</object>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:apppar:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<object codetype="application/java" classid="');
+  Mark(1);
+  Ins('">');
+  NewLine;
+  Ins('<param name="" value="">');
+  NewLine;
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins("</object>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:par:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<param name="');
+  Mark(1);
+  Ins('" value="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:map:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<map name="');
+  Mark(1);
+  Ins('">');
+  NewLine;
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins('</map>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:maparea:: ==========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<area href="');
+  Mark(1);
+  Ins('" alt="" shape="" coords="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:imagemaparea:: =====================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(1,"");
+  EnterReg(1,"Number of areas","Client Side Image Map");
+  Repeat(%!1,'Ins(''<area href="" alt="" shape="" coords="">'');NewLine;');
+  GoToBeginningOfLine;
+  Backspace;
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

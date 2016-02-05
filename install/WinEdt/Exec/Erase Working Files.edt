@@ -1,0 +1,45 @@
+// Erase Working Files Interface
+// =============================
+//
+// Modify the default in this value (if needed):
+//
+//      AddFileItem(Enabled: 0..1, "Description","Filename","Mode Filter");
+//
+// Use the macro EraseWorkingFiles to invoke a GUI for this interface:
+//
+//      EraseWorkingFiles("Folder List;", "Caption", Subfolders: -1..1, Invisible: 0..1);
+
+    ClearFileItems;
+
+    AddFileItem(0,"PDF File","%N.pdf","TeX");
+    AddFileItem(0,"SYNC File","%N%$('PDF-SyncEx');","TeX");
+
+    AddFileItem(1,"DVI File","%N.dvi","TeX");
+    AddFileItem(1,"PS  File","%N.ps","TeX");
+
+    AddFileItem(1,"LOG Files","*.log","");
+    AddFileItem(1,"AUX Files","*.aux","TeX");
+    AddFileItem(1,"BBL Files","*.bbl","TeX");
+    AddFileItem(1,"BLG Files","*.blg","TeX");
+    AddFileItem(1,"IDX Files","*.idx","TeX");
+    AddFileItem(1,"IND Files","*.ind","TeX");
+    AddFileItem(1,"ILG Files","*.ilg","TeX");
+    AddFileItem(1,"GLO Files","*.glo","TeX");
+    AddFileItem(1,"GLS Files","*.gls","TeX");
+    AddFileItem(1,"GLG Files","*.glg","TeX");
+    AddFileItem(1,"LOF Files","*.lof","TeX");
+    AddFileItem(1,"LOT Files","*.lot","TeX");
+    AddFileItem(1,"TOC Files","*.toc","TeX");
+    AddFileItem(1,"OUT Files","*.out","TeX");
+
+    AddFileItem(1,"MPX Files","*.mpx","MetaPost");
+
+    AddFileItem(1,"BAK Files","*.bak","");
+    AddFileItem(1,"SAV Files","*.sav","");
+    AddFileItem(1,"TMP Files","*.tmp","");
+
+    AddFileItem(1,"TEMP Files","_temp.*","TeX");
+
+    EraseWorkingFiles("%P;%O","Erase Output Files",0,0);
+
+End;

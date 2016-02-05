@@ -1,0 +1,86 @@
+// -*- ASCII:EDT -*-
+//
+// Execute BibTeX and MakeIndex for TeXify
+//
+// ==================================================================
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  IfConsoleRunning("ShowConsole(1);FocusConsole(1);Exit;");
+
+  PushTagsandRegisters;
+
+  SetOK(1);  // Just in case ...
+  SetErrorFlag(0);
+
+IfFileExists('%O\%N.aux',!'Relax;',!'JMP("MakeIndex");');
+
+    Assign(!"Compile-Flag",!|2|); // Do not Complain ...
+    Assign("BibTeX-GUI");
+    Assign("BibTeX-Report");
+    Assign("BibTeX-Errors");
+    Assign("BibTeX-Warnings");
+    Assign("BibTeX-ExitCode");
+    Assign("BibTeX-Pause");
+    Assign("BibTeX-Wait","1");
+    Assign("BibTeX-High_Priority","%$('%$(`Pre-Process`);-High_Priority');");
+    Assign("BibTeX-STD_IO","%$('%$(`Pre-Process`);-STD_IO');");
+    Assign("BibTeX-WinEdt_Console","%$('%$(`Pre-Process`);-WinEdt_Console');");
+    Assign("BibTeX-Hidden_Window","%$('%$(`Pre-Process`);-Hidden_Window');");
+    Assign("BibTeX-Background_Window","%$('%$(`Pre-Process`);-Background_Window');");
+    IfStr("%$('BibTeX-WinEdt_Console');","1","<>",!|Assign("BibTeX-Hidden_Window","1");|);
+
+    Exe('%b\Exec\TeX\BibTeX.edt');
+
+:MakeIndex:: ========================================================
+
+  SetOK(1);  // Just in case ...
+  SetErrorFlag(0);
+
+IfFileExists('%O\%N.idx',!'Relax;',!'JMP("MakeGlossary");');
+
+    Assign(!"Compile-Flag",!|2|); // Do not Complain ...
+    Assign("MakeIndex-GUI");
+    Assign("MakeIndex-ExitCode");
+    Assign("MakeIndex-Pause");
+    Assign("MakeIndex-Wait","1");
+    Assign("MakeIndex-High_Priority","%$('%$(`Pre-Process`);-High_Priority');");
+    Assign("MakeIndex-STD_IO","%$('%$(`Pre-Process`);-STD_IO');");
+    Assign("MakeIndex-WinEdt_Console","%$('%$(`Pre-Process`);-WinEdt_Console');");
+    Assign("MakeIndex-Hidden_Window","%$('%$(`Pre-Process`);-Hidden_Window');");
+    Assign("MakeIndex-Background_Window","%$('%$(`Pre-Process`);-Background_Window');");
+    IfStr("%$('MakeIndex-WinEdt_Console');","1","<>",!|Assign("MakeIndex-Hidden_Window","1");|);
+
+    Exe('%b\Exec\TeX\MakeIndex.edt');
+
+:MakeGlossary:: =====================================================
+
+  SetOK(1);  // Just in case ...
+  SetErrorFlag(0);
+
+IfFileExists('%O\%N.glo',!'Relax;',>
+  !'IfFileExists(|%O\%N.acn|,!|Relax;|,>
+      !|IfFileExists(`%O\%N.acr`,!`Relax;`,!`JMP("Cleanup");`);|);');
+
+    Assign(!"Compile-Flag",!|2|); // Do not Complain ...
+    Assign("MakeGlossary-GUI");
+    Assign("MakeGlossary-ExitCode");
+    Assign("MakeGlossary-Pause");
+    Assign("MakeGlossary-Wait","1");
+    Assign("MakeGlossary-High_Priority","%$('%$(`Pre-Process`);-High_Priority');");
+    Assign("MakeGlossary-STD_IO","%$('%$(`Pre-Process`);-STD_IO');");
+    Assign("MakeGlossary-WinEdt_Console","%$('%$(`Pre-Process`);-WinEdt_Console');");
+    Assign("MakeGlossary-Hidden_Window","%$('%$(`Pre-Process`);-Hidden_Window');");
+    Assign("MakeGlossary-Background_Window","%$('%$(`Pre-Process`);-Background_Window');");
+    IfStr("%$('MakeGlossary-WinEdt_Console');","1","<>",!|Assign("MakeGlossary-Hidden_Window","1");|);
+
+    Exe('%b\Exec\TeX\MakeGlossary.edt');
+
+:Cleanup:: ==========================================================
+
+  Assign(!"Compile-Flag");
+  PopTagsandRegisters;
+  SetOK(1);  // Just in case ...
+  SetErrorFlag(0);
+
+End;

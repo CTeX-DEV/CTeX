@@ -1,0 +1,122 @@
+________________________________________________________________________________
+
+Searching for Executables:
+==========================
+
+WinEdt will try to locate external executables based on the PATH Environment Variable and Windows Registry. If some components are not found follow the instructions. Some applications such as, for example, GS or GSView are optional; you can safely ignore any messages about the "missing" accessories that you are not intending to use...
+
+*
+******************************************************************
+WinEdt is currently not configured for a TeX System (MiKTeX or TeX Live). If you want to use WinEdt for TeX-ing install a TeX System of your choice (MiKTeX or TeX Live) and then load the appropriate configuration from the Options -> Configurations Menu.
+
+WinEdt will not be able to launch any TeX Accessories until a TeX System is installed and the appropriate TeX Configuration is loaded (MiKTeX is a default WinEdt configuration).
+******************************************************************
+*
+******************************************************************
+WinEdt did not detect your TeX System in Windows Registry or PATH Environmental Variable. First make sure that TeX System is actually installed on your computer and that you are running a proper WinEdt Configuration (as displayed in this report). If not, load the MiKTeX or TeX Live configuration from the Options -> Configurations Menu and then recreate this report by pressing "Diagnose the System" button.
+
+If a TeX System is installed on your computer but the problem persists start the Execution Mode interface. Disable the "Auto Detect" option for the TeX Root folder and manually enter the location, such as:
+
+  C:\Program Files\MiKTeX 2.9
+
+Press the "Apply" button and as far as WinEdt is concerned the connection with your TeX System has been established!
+
+WinEdt will not be able to launch any TeX Accessories until the problem is corrected.
+******************************************************************
+*
+******************************************************************
+TeX Binary folder does not exist. This almost certainly indicates that TeX System is not properly installed and you will not be able to launch TeX accessories such as LaTeX or PDFLaTeX. Reinstalling your TeX System and restarting WinEdt after that will likely be required in order to fix this problem...
+
+WinEdt will not be able to launch any TeX Accessories until the problem is corrected.
+******************************************************************
+*
+******************************************************************
+TeX Documentation and Help folder has not been initialized. To correct the problem change the settings in the Execution Modes. If the Auto detection fails enter the folder manually, eg.:
+
+  C:\Program Files\MiKTeX 2.9\doc
+
+Until the problem is corrected you will not be able to use LaTeX Help Item in WinEdt's Help Menu but the rest of TeX functionality is not affected by this issue...
+******************************************************************
+*
+******************************************************************
+TeX Documentation and Help folder is missing. To correct the problem change the settings in the Execution Modes. If the Auto detection fails enter the folder manually, eg.:
+
+  C:\Program Files\MiKTeX 2.9\doc
+
+Until the problem is corrected you will not be able to use LaTeX Help Item in WinEdt's Help Menu but the rest of TeX and WinEdt functionality is not affected by this issue...
+******************************************************************
+*
+******************************************************************
+WinEdt did not find the expected documentation in TeX's Help folder. To correct the problem install extra TeX Documentation (eg. with MiKTeX's Package Manager or TeX Live Manager) or reinstall a complete (reasonably up-to-date) TeX System. Otherwise you will not be able to use TeX-Related Help Items in WinEdt's Help Menu.
+******************************************************************
+*
+******************************************************************
+DVI Previewer (YAP for MiKTeX or dviout for TeX Live Configuration) has not been initialized. Assuming that your TeX System is installed and that you have loaded the appropriate WinEdt Configuration (MiKTeX or TeX Live) you should enter the dvi previewer manually in Executions Modes Interface.
+
+If you are not interested in previewing dvi files you can ignore this message.
+******************************************************************
+*
+******************************************************************
+DVI Previewer (YAP for MiKTeX or dviout for TeX Live Configuration)was not found. Assuming that your TeX System is installed and that you have loaded the appropriate WinEdt Configuration (MiKTeX or TeX Live) you should enter the dvi previewer manually in Executions Modes Interface.
+
+If you are not interested in previewing dvi files you can ignore this message.
+******************************************************************
+*
+******************************************************************
+Recent versions of MiKTeX and TeX Live come with their own version Ghostscript and by default WinEdt does not use this application. Unless you have special needs that require custom installed GS you can ignore this message...
+
+Ghostscript is used mainly to handle graphics (ps and eps files) and to convert ps files to pdf. If custom GS is installed make sure that its Bin directory is on your PATH. WinEdt did not find any trace of installed GS in Windows Registry or on your PATH. If necessary, enter the GS Binary Folder manually in the Ghostscript Tab Page of the Execution Modes interface. Depending on your version of GS disable the Auto Detection and enter something like:
+
+  C:\Program Files\gs\gs9.07\bin
+
+******************************************************************
+*
+******************************************************************
+PS viewer (GSView) is determined in Startup Macro from the Windows Registry. WinEdt did not find any valid application associated with "*.ps" files. You should make sure that the "*.ps" files are associated with the ps previewer installed on your system. You can start GSView, choose "Options -> Advanced Configure" menu command, associate the ps files with GSView, and then restart WinEdt. Alternatively, you can enter the GSView executable manually in the Ghostscript Tab Page of the Execution Modes interface. Depending on your version of GSView disable the Auto Detection and enter something like:
+
+  "C:\Program Files\Ghostgum\gsview\gsview64.exe"
+
+or (for 32-bit version):
+
+  "C:\Program Files\Ghostgum\gsview\gsview32.exe"
+
+Quotes are required if the filename contains spaces...
+
+If you are not interested in previewing ps files you can ignore this message.
+******************************************************************
+*
+******************************************************************
+PDF Viewer (eg. SumatraPDF, PDF-XChange or Adobe Reader) is determined in Startup Macro from the Windows Registry. WinEdt did not find any valid application associated with "*.pdf" files. You should make sure that the "*.pdf" files are associated with the pdf previewer installed on your system.
+
+If auto detection fails you can enter the executable manually in the PDF Viewer Tab Page of the Execution Modes interface. Depending on your choice of the previewer disable the Auto Detection and enter something like:
+
+  "C:\Program Files\SumatraPDF\SumatraPDF.exe"
+or
+  "C:\Program Files\Tracker Software\PDF Viewer\PDFXCview.exe"
+or
+  "C:\Program Files\Adobe\Reader 11.0\Reader\AcroRd32.exe"
+
+Quotes are required if the filename contains spaces...
+
+******************************************************************
+*
+
+Summary :-(
+===========
+
+There are some problems with your TeX installation. Depending on your intended use of WinEdt and TeX you may have to install additional software, or missing TeX Components...
+________________________________________________________________________________
+*
+
+Summary :-)
+===========
+
+Your TeX installation appears to be fine. If you experience problems after an application has been launched this usually isn't a WinEdt-related matter. In such case, you should test a problematic application from the Command Prompt, consult the documentation that comes with your (TeX) software, and try to locate the real source of your problem...
+________________________________________________________________________________
+*
+================================================================================
+
+Help in this interface contains additional guidelines on how to correct the most commonly encountered problems and how to further customize and configure external applications that are launched from WinEdt...
+
+================================================================================
+*

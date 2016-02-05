@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+  Created with WinEdt
+  http://www.winedt.com
+*/
+
+html{overflow-y: scroll;}
+
+.code{font-family: "Courier New", monospaced; font-size: normal;
+  font-weight: bold; color: #005680; background-color: #F2F2F2;}
+
+.arg_req{font-weight: normal;}
+.arg_opt{ font-weight: normal; font-style: oblique;}
+.des_req{font-style: normal;}
+.des_opt{font-style: oblique; color: #004488;}
+
+.name_hdr{width: 20%;}
+.type_hdr{width: 10%;}
+.name_ini_hdr{width: 25%;}
+.type_ini_hdr{width: 10%;}
+
+.tex{font-weight: normal; color: black; background-color: #EAEAEA;}
+.edt{font-weight: normal; color: black; background-color: #ECECFF;}
+.ini{font-weight: normal; color: black; background-color: #ECECEC;}
+.txt{font-weight: normal; color: black; background-color: #ECECEC;}
+.dat{font-weight: normal; color: black; background-color: #ECECEC;}
+.none{font-weight: normal; color: navy; background-color: #EEEEEF;}
+.edtex{font-weight: normal; color: black; background-color: #E8E8FF;}
+
+.hk{color: #007788; font-weight: normal;}
+.opt{color: #006040;}
+.cmd{color: #003388;}
+.red{color: #FA0000;}
+.arg{color: #002080; font-family: "Courier New", monospaced;
+     font-size: 10.5pt;}
+.mcr{color: #202280; font-family: "Courier New", monospaced;
+     font-size: 10.5pt; font-weight: bold;}
+.sec{color: #7000DF; font-family: "Courier New", monospaced;
+     font-size: 10.5pt; font-weight: bold;}
+
+TABLE.tb_desc{
+  border-style: solid;
+  border-color: #C0C0C0;
+}
+
+TH.name_hdr, TH.type_hdr, TH.name_ini_hdr, TH.type_ini_hdr, TH.desc_hdr{
+  border-width: 1;
+  border-style: solid;
+  padding: 2px 2px 6px 8px;
+  border-color: #FFFFFF;
+  background-color: #C0C0C0;
+}
+
+TD.arg_name, TD.arg_name_list, TD.arg_name1, TD.arg_name_list1,
+TD.arg_name2, TD.arg_name_list2, TD.arg_type, TD.arg_desc
+  {border-width: 1; border-style: solid; border-color: #C0C0C0;
+  background-color: #F0F0F0;}
+TD.arg_name{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: navy; background-color: #F8F8F8;
+  padding: 0px 12px 0px 4px;}
+TD.arg_name_list{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: navy; background-color: #E8E8E8;
+  padding: 0px 12px 0px 4px;}
+TD.arg_name1{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: #0000CC; background-color: #F8F8F8;
+  padding: 0px 12px 0px 24px;}
+TD.arg_name_list1{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: #0000CC; background-color: #E8E8E8;
+  padding: 0px 12px 0px 24px;}
+TD.arg_name2{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: #0055AA; background-color: #F8F8F8;
+  padding: 0px 12px 0px 44px;}
+TD.arg_name_list2{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: #0055AA; background-color: #E8E8E8;
+  padding: 0px 12px 0px 44px;}
+TD.arg_name3{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: #0066EE; background-color: #F8F8F8;
+  padding: 0px 12px 0px 64px;}
+TD.arg_name_list3{font-family: "Courier New", monospaced; font-size: 10.5pt;
+  font-weight: normal; color: #0066EE; background-color: #E8E8E8;
+  padding: 0px 12px 0px 64px;}
+TD.arg_type{width: 10%; white-space:nowrap; color: darkslateblue;
+  background-color: #F8F8FA; padding: 0px 12px 0px 4px;}
+TD.arg_desc{width: 75%; font-size: normal; background-color: #F8F8FF;
+  padding: 0px 8px 4px 8px;}
+
+TD.tb_arg_l, TD.tb_arg_r{border-width: 0; border-style: none; padding: 2;}
+TD.tb_arg_l{font-weight: normal; color: #003C78; text-align: right; width: 5%;}
+TD.tb_arg_r{width: 95%;}
+
+PRE{font-family: "Courier New", monospaced; color: rgb(0, 40, 100);
+  font-size: normal; font-weight: normal; background-color: #F2F2F2;}
+CODE{font-family: "Courier New", monospaced; color: rgb(40, 80, 120);
+  font-size: 10.5pt; font-weight: normal;}
+TT{font-family: "Courier New", monospaced; color: rgb(0, 30, 120);
+  font-size: 10.5pt; font-weight: normal;}
+
+.boldit{font-weight: bold; font-style: oblique;}
+.graybg{background-color: #EAEAEA;}
+.examplecode{background-color: #EAEAEA; font-family: "Courier New", monospaced;
+  font-size: normal; font-weight: normal;}
+
+body{
+  padding: 0;
+  margin-top: 0px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 10pt;
+  font-weight: normal;
+  text-align:justify;
+}
+
+table{
+  font-size: normal;
+  width: 100%;
+}
+
+.header{
+  margin-top: 8px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  background-color: #E0E1E2;
+  height: 104px;
+  font-size:18.0px;
+}
+
+.header_text{
+  padding: 0px 0px 0px 8px;
+  font-size:50.5px;
+}
+
+.box{
+  border-color: black;
+  border-width: 1px;
+  border-style: dotted;
+  width: 2em;
+  height: 2em;
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+.cursor{
+  border-color: white;
+  border-width: 0;
+  vertical-align: middle;
+  padding: 2px;
+}
+
+#footer{
+  margin:0;
+  padding:8px 8px 8px 8px;
+  font-size:9pt;
+  text-align: center;
+}

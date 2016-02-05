@@ -1,0 +1,109 @@
+// HTML Lists
+
+IfStr('%!0',!'items',!'=',!"JMP(!'items');");
+IfStr('%!0',!'make_items',!'=',!"JMP(!'make_items');");
+IfStr('%!0',!'term',!'=',!"JMP(!'term');");
+IfStr('%!0',!'wizard',!'=',!"JMP(!'wizard');");
+
+Prompt('Unknown List Property: "%!0"');
+
+Exit;
+
+:items:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(1,"");
+  EnterReg(1,"Number of list items:","List items");
+  Repeat(%!1,!'Ins("<li></li>");NewLine;');
+  GoToBeginningOfLine;
+  Backspace;
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:make_items:: =======================================================
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  IfStr("%!1","","=",'Prompt("You have to select something!",1,1);Exit;');
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  SetReplaceNotify(0);
+  SetNotFoundNotify(0);
+  SetSearchForward(1);
+  SetSearchCaseSensitive(0);
+  SetSearchEntire(1);
+  SetSearchCyclic(0);
+  SetSearchRelaxed(0);
+  SetSearchWholeWords(0);
+  SetSearchInline(0);
+  SetSearchSelected;
+  SetRegEx(1);
+  SetReplaceRespectCaps(0);
+  SetReplacePrompt(0);
+  SetFindStr("<\(1@ \)\(2*\)@ >");
+  SetReplaceStr("\1\<li\>\2\</li\>>");
+  SearchReset;
+  ReplaceAll;
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+  Exit;
+
+:term:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(1,"");
+  EnterReg(1,"Number of terms:","Definition");
+  Repeat(%!1,!'Ins("<dt></dt>");NewLine;Tab;Ins("<dd></dd>");NewLine;Backspace;');
+  GoToBeginningOfLine;
+  Backspace;
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:wizard:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  LetReg(1,"3");
+  Mark(1);
+  Interface("Choose List Type");
+  Item("Unordered List",|Ins("<ul");Interface("Choose Item Marker");Item("None","Relax;");>
+      Item("Defult (Disc)",'Ins(: type="disc":);');>
+      Item("Circle",'Ins(: type="circle":);');>
+      Item("Square",'Ins(: type="square":);');ShowList(0,1,"Do('%%%%?')","");>
+      EnterReg(1,"Number of List Items:","Unordered List");Ins(">");NewLine;>
+      Tab;Repeat(%%!1,"Ins('<li>');InsertBullet;Ins('</li>');NewLine;");>
+      Backspace;Ins("</ul>");|);
+  Item("Ordered List",|Ins("<ol");Interface("Choose Number Marker");Item("None","Relax;");>
+      Item("Defult (Arabic numbers)",'Ins(: type="1":);');>
+      Item("Lower Alpha",'Ins(: type="a":);');>
+      Item("Upper Alpha",'Ins(: type="A":);');>
+      Item("Lower Roman",'Ins(: type="i":);');>
+      Item("Upper Roman",'Ins(: type="I":);');ShowList(0,1,"Do('%%%%?')","");>
+      EnterReg(1,"Number of List Items:","Ordered List");Ins(">");NewLine;>
+      Tab;Repeat(%%!1,"Ins('<li>');InsertBullet;Ins('</li>');NewLine;");>
+      Backspace;Ins("</ol>");|);
+  Item("Definition List",|Ins("<dl>");>
+      EnterReg(1,"Number of List Items:","Definition List");NewLine;>
+      Tab;Repeat(%%!1,"Ins('<dt>');InsertBullet;Ins('</dt>');NewLine;Tab;>
+          Ins('<dd>');InsertBullet;Ins('</dd>');NewLine;Backspace;");>
+      Backspace;Ins("</dl>");|);
+  ShowList(0,1,"Do(*%%?*);","");
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

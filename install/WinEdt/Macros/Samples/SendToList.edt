@@ -1,0 +1,36 @@
+ // is Power User?
+  Exe('%B\WinShell\isPowerUser.edt');
+
+  // Get OS info
+  Assign(`OS_Type`, "%@('OS');");
+  IfIStr("%$(`OS_Type`);", "Windows_NT", "=", !*>
+    Assign(`OS_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'CurrentVersion');");>
+    Assign(`OS_SP`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'CSDVersion');");>
+    Assign(`OS_Build`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'CurrentBuildNumber');");>
+    Assign(`OS_Name`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'ProductName');");>
+    Assign(`IE_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Internet Explorer', 'Version');");>
+  *, *>
+    Assign(`OS_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'VersionNumber');");>
+    Assign(`OS_SP`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'SubVersionNumber');");>
+    Assign(`OS_Build`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'Plus! VersionNumber');");>
+    Assign(`OS_Name`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'ProductName');");>
+    Assign(`IE_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Internet Explorer', 'Version');");>
+  *);
+
+  // Get WinEdt info
+  GetBuild(0);
+  GetVersion(1);
+  Assign(`WinEdt_Ver`, "%!1");
+  Assign(`WinEdt_Build`, "%!0");
+
+Assign(`Temp_File`, "%@(`TEMP`);\WinEdt_GetSupport.txt");
+OpenOutput("%$(`Temp_File`);");
+WrL("I am using WinEdt version %$(`WinEdt_Ver`); build %$(`WinEdt_Build`); on");
+WrL("%$(`OS_Name`); version %$(`OS_Ver`); %$(`OS_SP`); (%$(`OS_Build`);)");
+CloseOutput;
+
+ReadFile("%$(`Temp_File`);", 9);
+
+// Prompt("%!9",0,0);
+
+SendMail('WinEdt',"%!9", "WinEdt List|winedt+list@wsg.net");

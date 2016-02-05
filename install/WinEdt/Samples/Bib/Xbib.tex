@@ -1,0 +1,29 @@
+% -----------------------------------------------------------------------------
+% -*-TeX-*- -*-Soft-*- Soft Wrapping
+% -----------------------------------------------------------------------------
+% AMS-LaTeX Bibliography
+% -----------------------------------------------------------------------------
+\documentclass[11pt]{amsart}
+% **** ------------------------------------------------------------------------
+\vfuzz1pc % Don't bother to report overfull boxes if over-edge is < 1pc
+\hfuzz1pc % Don't bother to report overfull boxes if over-edge is < 1pc
+%%% TITLE ---------------------------------------------------------------------
+\title[Bibliography Revisited]{Bibliography Revisited}
+\author{Aleksander Simoni\v{c}}
+\address[A. Simoni\v{c}]{
+  Department of Mathematics, Statistics, \& Computing Science~ \\
+  Dalhousie University ~ \\
+  Halifax, Nova Scotia ~ \\
+  B3H~3J5, ~ Canada}
+\email[A. Simoni\v{c}]{alex@cs.dal.ca}
+\date{\today}
+% -----------------------------------------------------------------------------
+\begin{document}
+\maketitle
+% -----------------------------------------------------------------------------
+\nocite{*}
+% -----------------------------------------------------------------------------
+\bibliographystyle{amsalpha}
+\bibliography{xbib}
+\end{document}
+% -----------------------------------------------------------------------------

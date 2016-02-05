@@ -1,0 +1,28 @@
+// -*- ASCII:EDT -*-
+// TeX2HTML ...
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+  Assign('ExitCode-OK','0'); // OK Exit Code
+  LetReg(9,'TeX2HTML'); // Execution Modes Compiler
+  LetReg(8,'log');      // Log File (or empty)
+  LetReg(7,'html');     // Output Format
+  LetReg(6,'%O');       // Startup Folder
+
+  // Display a Dialog for Extra Switches:
+  IfStr("%$('%!9-GUI');","1","=",>
+    !|GetString("Switches: ","%!9 Switches","%$('%!9--Switches');");>
+      IfOK(!`Assign('%!9--Switches','%!?');`,!`PopTagsandRegisters;Exit;`);|,>
+    !|Release('%!9--Switches');|);
+  // C Style Errors?
+  IfStr("%$('%!9-C-style-errors');","1",!"=",>
+    !"LetReg(3,'--file-line-error');",!"LetReg(3,'--interaction=nonstopmode');");
+  // Build the Command Line ...
+  LetReg(5, |%$('%!9-Executable'); %$('%!9-Parameters'); "%$('%!9-Switches');,%$('%!9--Switches');" "" "%N" "%!3"|);
+
+  // Use Execution Modes to determine the flow of execution...
+  Exe('%b\Exec\ExeCompiler.edt');
+  PopTagsandRegisters;
+
+End;

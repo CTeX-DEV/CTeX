@@ -1,0 +1,10 @@
+  ITEM="Common Macros..."
+    ICON="Macro"
+    ACTION="$Help"
+      MACRO="HTMLHelp('%B\Doc\Help\WinEdt.chm',1,0,"+
+            "'Config/Advanced.html#Common_Macros');"
+    ITEM="Create Filetype Associations"
+      ICON="Explorer"
+      FILENAME="WinShell\Create WinEdt Filetypes.edt"
+    END="Create Filetype Associations"
+    ITEM="Erase Working Files"

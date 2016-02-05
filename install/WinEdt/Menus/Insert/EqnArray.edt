@@ -1,0 +1,36 @@
+// %!x: Columns and %!y: Rows Registers are set through GetDim;
+// Repeat(count, "Macro") is used to produce n x m environments.
+ GetCounter("Equations:", "Equation array");
+ SetTracking(0);
+ BeginGroup;
+ Mark(1);
+ SetIndent(1); // Assumes Auto Indent Mode (to be restored)
+ SetSel(0);
+ TrackCaret;
+ LetReg(0, "%c"); // *** Current Column
+ InsText("\begin{eqnarray%!9}");
+ NewLine;
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText("%% \nonumber to remove numbering (before each equation)");
+ NewLine;
+ GotoCol(%!0);
+ TrimLine;
+ Repeat(%!z,>
+   'GotoCol(%!0+2);>
+    InsText(" &=&  \\");>
+    NewLine;');
+ GoToBeginningOfLine;
+ Backspace;
+ Backspace;
+ Backspace;
+ NewLine;
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText("\end{eqnarray%!9}");
+ RestoreIndent;                   // Restore Auto Indent
+ Goto(1,1);
+ NextBullet;
+ EndGroup;
+ SetTracking(1);
+End;

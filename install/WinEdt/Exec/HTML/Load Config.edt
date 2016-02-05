@@ -1,0 +1,27 @@
+// HTML Configuration for WinEdt
+
+    Requires(20140413);   // Build number (About Dialog)
+
+    SetPanelVisible(!'Source Specials',-1); // Hide Source Specials
+    UpdateStatus;
+
+    SetDefExt(".html");
+    SetDefMode("HTML");
+    SetDefPath(!"%p");
+
+    SetConfig('HTML',1); // Configuration
+    SetCaption('WinEdt # | HTML',1); // Caption
+
+    SaveSettings;
+
+    // Copy HTML Configuration File
+    IfFileExists('%b\Exec\HTML\Config.edt',>
+      !"CopyFile('%b\Exec\HTML\Config.edt',>
+                 '%b\Exec\Config.edt',1,1);",>
+      !"CopyFile('%B\Exec\HTML\Config.edt',>
+                 '%b\Exec\Config.edt',1,1);");
+
+    // Load the HTML Configuration Options...
+    Exe('%b\Exec\Config.edt'); // Must Exist!
+
+End;

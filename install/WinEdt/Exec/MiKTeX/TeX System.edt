@@ -1,0 +1,111 @@
+// -*- ASCII:EDT -*-
+// TeX System.edt
+// MiKTeX System
+// Last modified on:
+//  Sunday, January 20, 2013  18:34
+
+  Requires(20130125); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+Assign('TeX System','MiKTeX');
+SetCPPErr(1,1,"");    // C-style Errors: On
+
+// Auto-Detect TeX System (new in 5.5)
+Exe('%b\Exec\MiKTeX\ExeModeAutoDetect.edt'); // Current Auto Detection Settings
+
+// Original PATH
+SetEnvVar('PATH','%$(`xPATH`)'); // The Original Local PATH
+Assign("TeX-PATH");
+
+// TeX Root =========================================================
+
+LetReg(3,'\miktex\bin');
+IfFileExists("%$('TeX-Root');\miktex\bin\x86\tex.exe",!"LetReg(3,'\miktex\bin\x86');");
+IfFileExists("%$('TeX-Root');\miktex\bin\x64\tex.exe",!"LetReg(3,'\miktex\bin\x64');");
+
+IfStr("%$('TeXAuto-Root');","0","=","JMP('no_Auto-Root');");
+
+// Search for tex.exe or texify.exe or yap.exe
+// to see if MiKTeX\Bin is already on your PATH
+  Assign("TeX-Root");
+  SearchForFile(0,'tex.exe');
+  IfOK("Relax;","LetReg(0);");
+  FindInString('%!0','\(0*\)\(1\\miktex\\bin*\)\\tex\.exe',1,2,1,0);
+  IfOK(!"LetReg(0,'%#0');",!"LetReg(0);");
+  Assign("TeX-Root","%!0");
+  LetReg(3,'%#1');
+  IfFileExists("%$('TeX-Root');%!3\tex.exe","JMP('no_Auto-Root');");
+  Assign("TeX-Root");
+  SearchForFile(0,'texify.exe');
+  IfOK("Relax;","LetReg(0);");
+  FindInString('%!0','\(0*\)\(1\\miktex\\bin*\)\\texify\.exe',1,2,1,0);
+  IfOK(!"LetReg(0,'%#0');",!"LetReg(0);");
+  Assign("TeX-Root","%!0");
+  LetReg(3,'%#1');
+  IfFileExists("%$('TeX-Root');%!3\tex.exe","JMP('no_Auto-Root');");
+  Assign("TeX-Root");
+  SearchForFile(0,'yap.exe');
+  IfOK("Relax;","LetReg(0);");
+  FindInString('%!0','\(0*\)\(1\\miktex\\bin*\)\\yap\.exe',1,2,1,0);
+  IfOK(!"LetReg(0,'%#0');",!"LetReg(0);");
+  Assign("TeX-Root","%!0");
+  LetReg(3,'%#1');
+  IfFileExists("%$('TeX-Root');%!3\tex.exe","JMP('no_Auto-Root');");
+  Assign("TeX-Root");
+  LetReg(3,'\miktex\bin');
+
+  // Oh well: where is MiKTeX!
+  Assign("TeX-Root","%H:\MiKTeX");
+
+:no_Auto-Root:: =====================================================
+
+IfStr("%$('TeXAuto-Bin');",!"0",!"<>",>
+  !|Assign(!"TeX-Bin","%$(!'TeX-Root');%!3");|,>
+  !|Assign(!"TeX-Bin","%$(!'TeX-BinDef');");|);
+
+IfStr("%$('TeXAuto-Help');",!"0",!"<>",>
+  !|Assign(!"TeX-Help","%$(!'TeX-Root');\doc");|,>
+  !|Assign(!"TeX-Help","%$(!'TeX-HelpDef');");|);
+
+IfStr("%$('TeXAuto-DVI');",!"0",!"<>",>
+  !|Assign(!"DVIView",!"yap.exe");|,>
+  !|Assign(!"DVIView","%$(!'DVIViewDef');");|);
+
+Assign(!"TeX-Local",@@"%$(!'TeX-LocalDef');");
+
+// ==================================================================
+
+  // Insert MiKTeX to the beginning of the PATH (if required)...
+  SearchForFile(0,'tex.exe'); // Bin folder on PATH?
+  IfOK("Relax;","LetReg(0);");
+  IfIStr('%!0','%$("TeX-Bin");\tex.exe','=','JMP("PATH_OK");');
+
+  SearchForFile(0,'tex.exe','%$("TeX-Bin");');
+  IfOK("Relax;","LetReg(0);");
+  IfIStr('%!0','%$("TeX-Bin");\tex.exe','<>','JMP("PATH_OK");');
+
+  IfFileExists("%$('TeX-Bin');\",!|Assign("TeX-PATH","%$('TeX-Bin')");|); // TeX Bin
+
+:PATH_OK:: ==========================================================
+
+// "e" Response with Environment Variable:
+  SetEnvVar('MIKTEX_EDITOR', !'WinEdt.exe "[Open(|%f|);SelPar(%l,7);]"');
+  SetEnvVar('MPEDIT', !'WinEdt.exe "[Open(|%s|);SelPar(%d,7);]"');
+
+  Exe('%b\Config\PATH.edt');
+  Exe('%b\Config\EnvVar.edt');
+  Exe('%b\Config\PATH.edt');
+  Exe('%b\Config\PDF.edt');
+  Exe('%b\Config\GS.edt');
+  Exe('%b\Config\PATH.edt');
+
+  PopTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+End;

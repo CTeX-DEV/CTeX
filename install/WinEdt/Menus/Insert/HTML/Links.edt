@@ -1,0 +1,136 @@
+// HTML Links
+
+IfStr('%!0',!'link',!'=',!"JMP(!'link');");
+IfStr('%!0',!'link_name',!'=',!"JMP(!'link_name');");
+IfStr('%!0',!'link_href',!'=',!"JMP(!'link_href');");
+IfStr('%!0',!'link_anchor',!'=',!"JMP(!'link_anchor');");
+IfStr('%!0',!'link_name_href',!'=',!"JMP(!'link_name_href');");
+IfStr('%!0',!'mail',!'=',!"JMP(!'mail');");
+IfStr('%!0',!'mail_address',!'=',!"JMP(!'mail_address');");
+IfStr('%!0',!'base',!'=',!"JMP(!'base');");
+IfStr('%!0',!'wizard',!'=',!"JMP(!'wizard');");
+
+Prompt('Unknown Link: "%!0"');
+
+Exit;
+
+:link:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<a href="');
+  Mark(1);
+  Ins('"></a>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:link_name:: ========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<a href="');
+  Mark(1);
+  Ins('">%!1</a>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:link_href:: ========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<a href="%!1">');
+  Mark(1);
+  Ins('</a>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:link_anchor:: ======================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<a name="');
+  Mark(1);
+  Ins('">%!1</a>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:link_name_href:: ===================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<a href="%!1">%!1</a>');
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:mail:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<a href="mailto:%!1">');
+  Mark(1);
+  Ins('</a>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:mail_address:: =====================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<a href="mailto:%!1">%!1</a>');
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:base:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<base href="');
+  Mark(1);
+  Ins('">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:wizard:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Mark(1);
+  LetReg(1,"http://");
+  LetReg(2,"Link");
+  LetReg(3,"anchor");
+  LetReg(4,"Anchor");
+  LetReg(5,"joe@site.com");
+  Interface("Choose Link Type");
+  Item("Link","EnterReg(1,'Enter URL/anchor:','Link');>
+      EnterReg(2,'Enter text which will represent the hyperlink to URL/anchor:','Link');Ins('<a href=""%%!1"">%%!2</a>');");
+  Item("Anchor","EnterReg(3,'Enter anchor name:','Anchor');>
+      EnterReg(4,'Enter text which will represent the anchor:','Anchor');Ins('<a name=""%%!3"">%%!4</a>');");
+  Item("Mail","EnterReg(5,'Enter mail address:','Mail');>
+      Ins('<a href=""mailto:%%!5"">%%!5</a>');");
+  ShowList(0,1,"Do(*%%?*);","");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

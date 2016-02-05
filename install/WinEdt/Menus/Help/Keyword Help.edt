@@ -1,0 +1,54 @@
+//  Mode-sensitive call to HTMLHelp Keyword
+
+// @BEGIN: TeX
+IfisMode('TeX','%!m',>
+  !|IfFileExists("%B\Doc\LaTeXHelpBook\LaTeX2e.chm",>
+     !||HTMLHelp("%B\Doc\LaTeXHelpBook\LaTeX2e.chm",1,4,'',1);Exit;||);|);
+// @END: TeX
+
+// @BEGIN: BibTeX
+IfisMode('BibTeX','%!m',>
+  !|IfFileExists("%B\Doc\LaTeXHelpBook\Bibtex.chm",>
+     !||HTMLHelp("%B\Doc\LaTeXHelpBook\Bibtex.chm",1,4,'',1);Exit;||);|);
+// @END: BibTeX
+
+// @BEGIN: BST (BibTeX Style Files)
+IfisMode('BST','%!m',>
+  !|IfFileExists("%B\Doc\LaTeXHelpBook\Bibtex.chm",>
+     !||HTMLHelp("%B\Doc\LaTeXHelpBook\Bibtex.chm",1,4,'Designing BibTeX Styles');Exit;||);|);
+// @END: BST
+
+// @BEGIN: IST (MakeIndex Style Files)
+IfisMode('IST','%!m',>
+  !|IfFileExists("%B\Doc\LaTeXHelpBook\Makeindex.chm",>
+     !||HTMLHelp("%B\Doc\LaTeXHelpBook\Makeindex.chm",1,4,'Style file');Exit;||);|);
+// @END: IST
+
+// @BEGIN: HHC (HTML Help Compiler HTML Submode)
+IfisMode('HHC','%!m',>
+  !|IfFileExists("%@('WINDIR');\Help\htmlhelp.chm",>
+     !||HTMLHelp("%@('WINDIR');\Help\htmlhelp.chm",1,4,'',1);Exit;||);|);
+// @END: HHC
+
+// @BEGIN: HTML
+IfisMode('HTML;XML;PHP','%!m',>
+  !|IfFileExists("%@('WINDIR');\Help\htmlref.chm",>
+     !||HTMLHelp("%@('WINDIR');\Help\htmlref.chm",1,4,'',1);Exit;||);|);
+// @END: HTML
+
+// @BEGIN: NSIS
+IfisMode('NSIS','%!m',>
+  !|IfFileExists("%$('NSIS-Root');\NSIS.chm",>
+     !||HTMLHelp("%$('NSIS-Root');\NSIS.chm",1,4,'',1);Exit;||);|);
+// @END: NSIS
+
+// @BEGIN: EDT (WinEdt Macro Functions)
+IfisMode('EDT','%!m',>
+  !|IfFileExists("%B\Doc\Help\WinEdt.chm",>
+     !||HTMLHelp("%B\Doc\Help\WinEdt.chm",1,4,'',1);Exit;||);|);
+// @END: EDT
+
+// @DEFAULT
+HTMLHelp('%B\Doc\Help\WinEdt.chm',1,4,'',1);
+
+End;

@@ -1,0 +1,7 @@
+// Teletype
+
+  IfisMode('TeX;BibTeX','%!m',!'InsLabel("\texttt","{","}");Exit;');
+  IfisMode('HTML;PHP;XML','%!m',!'InsLabel("","<tt>","</tt>");Exit;');
+  InsLabel("\texttt","{","}");
+
+End;

@@ -1,0 +1,36 @@
+// List Bookmarks sorted according to source lines
+
+  LetReg(7,"");
+  LetReg(8,"");
+  LetRegNum(9,0);
+  Loop(!`BookMarkLineNumber(0,%!9);>
+         IfNum(%!0,-1,"=",>
+           !"Relax;",>
+           !"LetRegNum(0,%!0+1,9);>
+             LetReg(7, '%!7%!0 %!9%\');");>
+         IfNum(%!9,9,"=",>
+           !"Stop;",>
+           !"LetRegNum(9,%!9+1);");`);
+
+  IfStr("%!7","","=",>
+    !"Prompt('No Bookmarks set.',0,1);Exit;");
+
+  SortLines('%!7', 1111, 1, 7);
+
+  Interface("Bookmarks");
+  LetRegNum(3,0);
+  FindInString('%!7', '+[0-9]', 1, 2, 1011, %!3);
+  Loop(!`ExtractByIndex(0,'%!7',%!1,%!2);>
+         LetRegNum(0, %!0, 3);>
+         LetRegNum(3, %!2+1);>
+         FindInString('%!7', '+[0-9]', 1, 2, 1011, %!3);>
+         ExtractByIndex(9,'%!7',%!1,%!2);>
+         GetLine(8,%!0);>
+         Item('%!9 (line %!0): %!8','GOTOBookMark(%!9,2,0)');>
+         LetRegNum(3, %!2+1);>
+         FindInString('%!7', '+[0-9]', 1, 2, 1011, %!3);>
+         IfOK('Relax;','Stop;');`);
+
+  ShowList(1,0,'Do(''%%?'');','Exit;');
+
+End;

@@ -1,0 +1,32 @@
+// Execution Modes - TeX Live
+// TeX System Auto Detection Data
+
+  Assign(!"TeXAuto-Root", !"1");
+  Assign(!"TeX-Root");
+  Release(!"TeX-RootDef");
+
+  Assign(!"TeXAuto-Bin", !"1");
+  Assign(!"TeX-Bin");
+  Release(!"TeX-BinDef");
+
+  Assign(!"TeXAuto-Help", !"1");
+  Assign(!"TeX-Help");
+  Release(!"TeX-HelpDef");
+
+  Assign(!"TeXAuto-DVI", !"1");
+  Assign(!"DVIView");
+  Release(!"DVIViewDef");
+
+  Assign(!"^TeXOutput", !"%P\TeXAux");
+  Assign(!"^TeXOutputMustExist", !"1");
+
+  Release(!"TeX-Local");
+  Release(!"TeX-LocalDef");
+
+  Assign(!"Max-TeXify-Iterations", !"3");
+  Assign(!"PDFTeXify-Method", !"0");
+  Assign(!"CS-Output", !"0");
+
+  SetEnvVar("PDFLATEX",!"pdflatex.exe");
+
+End;

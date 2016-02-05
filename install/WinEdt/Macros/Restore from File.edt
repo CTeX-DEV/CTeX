@@ -1,0 +1,6 @@
+// Restore contents of currently active document for its file
+
+    Prompt("Restore contents of this document from its file%\""%f""?",>
+           1,3,"UpdateDoc;","Relax;");
+
+End;

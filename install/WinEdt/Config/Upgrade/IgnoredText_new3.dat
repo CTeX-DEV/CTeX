@@ -1,0 +1,13 @@
+  ENVIRONMENT="%%?"
+    START="%%"
+    SCOPE=2
+  // No Spell Checking for Environment Names
+  ENVIRONMENT="\begin{?}"
+    START="\begin{"
+    STOP="}"
+    SCOPE=1
+  ENVIRONMENT="\end{?}"
+    START="\end{"
+    STOP="}"
+    SCOPE=1
+  // Skip the rest of the line after this ...

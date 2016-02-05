@@ -1,0 +1,3 @@
+    MENU="NSIS_Macro"
+  BUTTON="|"
+  BUTTON="NSIS:Compile_NSIS_Script"

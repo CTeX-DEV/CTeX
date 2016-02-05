@@ -1,0 +1,27 @@
+// Generic Configuration for WinEdt
+
+    Requires(20140413);   // Build number (About Dialog)
+
+    SetPanelVisible(!'Source Specials',-1); // Hide Source Specials
+    UpdateStatus;
+
+    SetDefExt(".txt");
+    SetDefMode("ASCII");
+    SetDefPath(!"%p");
+
+    SetConfig('ASCII',1); // Configuration
+    SetCaption('WinEdt # | ASCII',1); // Caption
+
+    SaveSettings;
+
+    // Copy Generic Configuration File
+    IfFileExists('%b\Exec\ASCII\Config.edt',>
+      !"CopyFile('%b\Exec\ASCII\Config.edt',>
+                 '%b\Exec\Config.edt',1,1);",>
+      !"CopyFile('%B\Exec\ASCII\Config.edt',>
+                 '%b\Exec\Config.edt',1,1);");
+
+    // Load the Generic Configuration Options...
+    Exe('%b\Exec\Config.edt'); // Must Exist!
+
+End;

@@ -1,0 +1,4 @@
+  BUTTON="Center_Env"
+    TYPE=6
+    CONFIG_FILTER="Default;MiKTeX;TeX Live"
+    MENU="Center_Env"

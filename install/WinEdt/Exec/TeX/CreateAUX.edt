@@ -1,0 +1,35 @@
+// TeX assumes that directory structure inside aux folder mimics
+// the structure of the sources. If the sources are organized into
+// subdirectories this becomes an issue as LaTeX fails unless the
+// aux folder also contains subdirectories with the same name.
+// This macro will try to take care of this based on the source
+// folder structure....
+
+  PushTagsandRegisters;
+
+  IfFileExists('%O\',!'Relax;',!'CreateFolders("%O",1);');
+  IfFileExists('%O\',!'Relax;',!'Prompt(|Error Creating AUX Folder "%O"!|,3,1);>
+    PopTagsandRegisters;Exit;');
+
+  // MetaPost and MetaFont don't need any directory structure...
+
+  FindInString('%!9','Meta',5,6,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+
+  // Try to create subfolders from the documents in source folder...
+
+  ListFolderFiles(0,"%P","tex;ltx;texi",1,1);
+  LstEnum('%!0','%\');
+  LstGetCount(1);
+  Repeat(%!1,>
+    !`LstGetItem(2,%!c-1);>
+      GetFilePath('%!2',3);>
+      IfStr('%!3','','<>',!'IfFileExists(|%O\%!3\|,>
+        !|Relax;|,!|CreateFolders("%O\%!3",1);|);');>
+      ProcessMessages;>
+     `);
+  LstRelease;
+
+  PopTagsandRegisters;
+
+End;

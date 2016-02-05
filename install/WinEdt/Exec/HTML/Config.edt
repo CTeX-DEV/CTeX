@@ -1,0 +1,18 @@
+// HTML Configuration for Execution Modes
+
+  Requires(20120413);
+
+  // Configuration
+  SetConfig('HTML');
+  Assign('Config-Dir','HTML');
+  Assign('Exec-Dir','HTML');
+
+  // Execution Modes
+  Exe('%b\Exec\%$("Exec-Dir");\ExeMode.edt');
+
+  // No TeX System for HTML Configuration
+  Assign('TeX System');  // Not in TeX Mode
+  Assign('TeX-Bin');     // No TeX Bin Folder
+  Assign('DVIView');     // No DVI Viewer
+
+End;

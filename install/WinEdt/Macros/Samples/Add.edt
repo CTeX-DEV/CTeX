@@ -1,0 +1,45 @@
+// ---------------------------------------------------------------
+// This macro assumes that a block (column) of numbers is selected
+// The numbers are added and the result is stored in the Clipboard
+// Suitable for at most a few hundred selected numbers (slow!!)...
+
+IfSel(1,'=','','Sel(0)');
+
+StartWorking('Adding...');
+
+LetRegNum(0,0);
+
+IfNum(%l,%y, '<',>
+  'LetRegNum(1, %l);LetRegNum(2, %y);',>
+  'LetRegNum(2, %l);LetRegNum(1, %y);');
+IfNum(%c,%x, '<',>
+  'LetRegNum(3, %c);LetRegNum(4, %x);',>
+  'LetRegNum(4, %c);LetRegNum(3, %x);');
+LetRegNum(5,%!1);
+
+Loop(!"IfNum(%!1, %!2, '>', 'Stop',>
+  !'Sel(0);>
+    GotoCL(%!3,%!1);>
+    Sel(2);>
+    GotoCol(%!4);>
+    LetRegNum(0, ''%!0+(%S)'');>
+    LetRegNum(1, %!1+1)');");
+
+Sel(0);
+Mark;
+InsText('%!0');
+SelectFromMark;
+Cut;
+GotoCL(%!3,%!5);
+Sel(1);
+GotoCL(%!4,%!1-1);
+RefreshSel;
+TrackCaret;
+
+StopWorking;
+
+// Prompt('Total = %!0');
+
+End;
+
+// ---------------------------------------------------------------

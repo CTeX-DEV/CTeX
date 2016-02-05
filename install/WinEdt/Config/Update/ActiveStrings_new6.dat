@@ -1,0 +1,3 @@
+  DBL_CLICK_MACRO="[Exe('%b\Macros\Active Strings\GetShortcut.edt');]"
+
+STRING="%INCLUDE=""?"""

@@ -1,0 +1,7 @@
+// -*- ASCII:EDT -*-
+
+ GetSel(0,0);
+ InsLabel("","%!6","%!7");
+ // GDIShow;
+ GDISetPage("%!8","%!0"); // Only if visible...
+End;

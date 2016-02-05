@@ -1,0 +1,35 @@
+// Case environment
+ GetCounter("Items:","Cases");
+ SetTracking(0);
+ BeginGroup;
+ SetSel(0);
+ Mark(1);
+ LetReg(0,"%c");
+ TrimLine;
+ GoToEndOfLine;
+ IfNum(%!0,%c,'<>','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+ TrackCaret;
+ LetReg(0, "%c"); // *** Current Column
+ InsText("\left\{");
+ NewLine;
+ GotoCol(%!0);                     // *** Original Column
+ InsText("  \begin{array}{ll}");
+ NewLine;
+ Repeat(%!z-1,!'GotoCol(%!0+4);Ins(", & \hbox{;} \\");NewLine;');
+ GotoCol(%!0+4);Ins(", & \hbox{.}");NewLine;
+ IfNum(%c, '1', '>', 'Backspace;'); // Unindent
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText("  \end{array}");
+ NewLine;
+ IfNum(%c, '1', '>', 'Backspace;'); // Unindent
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText("\right.");
+ InsLine(4);
+ RestoreIndent;                   // Restore Auto Indent
+ Goto(1,1);
+ NextBullet;
+ EndGroup;
+ SetTracking(1);
+End;

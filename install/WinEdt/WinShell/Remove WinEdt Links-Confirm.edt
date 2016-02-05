@@ -1,0 +1,9 @@
+// Remove WinEdt Filetype Associations
+
+Requires(20010724); // Requires this build of WinEdt to work properly
+
+Prompt("You are about to remove all links and shortcuts to WinEdt from your system...",1,0);
+
+Exe('%B\WinShell\Remove WinEdt Links.edt');
+
+End;

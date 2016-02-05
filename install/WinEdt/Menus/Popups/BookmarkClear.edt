@@ -1,0 +1,8 @@
+// Clear this Bookmark
+
+    LetRegNum(9,0);
+    Loop(!`BookMarkLineNumber(0,%!9);>
+      IfNum(%!0+1,%l,"=","SetBookMark(%!9);Exit;");>
+      IfNum(%!9,9,"=","Exit;","LetRegNum(9,%!9+1);");`);
+
+End;

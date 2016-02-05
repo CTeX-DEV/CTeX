@@ -1,0 +1,19 @@
+// Open a Local Copy of current document
+// if it is located inside %B and not inside %b...
+
+  FindInString("%f","%b",-11,-11,10,0);
+  IfOK(!"Exit");
+  FindInString("%f","%B",-11,-11,10,0);
+  IfOK(!"Relax;",!"Exit");
+
+  LetReg(-1,"%f");
+  SubstituteInString("%-1","%B","%b",10,-1);
+  IfOK(!"Relax;",!"Exit");
+
+  // Relative filename specification
+  IfFileExists('%-1',>
+    !'Relax;',>
+    !'CopyFile("%f","%-1",0,1);');
+  Open('%-1');
+
+End;

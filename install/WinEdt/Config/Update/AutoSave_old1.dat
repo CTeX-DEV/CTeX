@@ -1,0 +1,3 @@
+// Document Menu allows you to open the saved file!
+// Defaults simply put it in the same folder ...
+AUTO_SAVE_FILENAME="%p\%n%t.sav"

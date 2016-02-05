@@ -1,0 +1,153 @@
+// -*- ASCII:EDT -*-
+//
+// Print a compilation report
+//
+// Input Parameters:
+// -----------------
+// %!9 contains the compiler declared and defined in the Execution Modes:
+//     [PDF]TeXify, [PDF]TeX, [PDF]LaTeX, AMSTeX, ...
+//
+// ==================================================================
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  LetReg(7,"_____________________________________________________________________");
+  LetReg(8);
+
+// HHC? =============================================================
+
+  FindInString("%!9","HHC",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_HHC');");
+
+  GetErrorCount(1,-1,-1,3,$$010000000); // Errors
+  GetErrorCount(2,-1,-1,3,$$100000000); // Warnings
+
+  LetReg(8," %!9 Compilation Report%\%\ Errors: %!1   Warnings: %!2");
+  JMP(!"Print_Report");
+
+:not_HHC:: ==========================================================
+
+// BibTeX? ==========================================================
+
+  FindInString("%!9","BibTeX",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_BibTeX');");
+
+  GetErrorCount(1,-1,-1,3,$$000100000); // Errors
+  GetErrorCount(2,-1,-1,3,$$001000000); // Warnings
+
+  LetReg(8," %!9 Compilation Report%\%\ Errors: %!1   Warnings: %!2");
+  JMP(!"Print_Report");
+
+:not_BibTeX:: =======================================================
+
+// MetaPost? ========================================================
+
+  FindInString("%!9","MetaPost",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_MetaPost');");
+
+  GetErrorCount(1,0,-1,3,$$000000001);  // Errors
+
+  GetPageCount(0,"<\(@{[0-9]}\) output file* written:",99,0);
+  IfStr("%!0","","=",!"LetRegNum(0,0)");
+
+  LetReg(8," %!9 Compilation Report (Figures: %!0)%\%\ Errors: %!1");
+  JMP(!"Print_Report");
+
+:not_MetaPost:: =====================================================
+
+// MetaFont? ========================================================
+
+  FindInString("%!9","MetaFont",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_MetaFont');");
+
+  GetErrorCount(1,0,-1,3,$$000000001);  // Errors
+
+  GetPageCount(0,"<Output written on *(\(@{[0-9]}\) character*)\.",99,0);
+  IfStr("%!0","","=",!"LetRegNum(0,0)");
+
+  LetReg(8," %!9 Compilation Report (Characters: %!0)%\%\ Errors: %!1");
+  JMP(!"Print_Report");
+
+:not_MetaFont:: =====================================================
+
+// TeX2HTML? ========================================================
+
+  FindInString("%!9","TeX2HTML",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_TeX2HTML');");
+
+  GetErrorCount(1,0,-1,3,$$000001001);  // Real Errors
+  GetErrorCount(2,-1,-1,3,$$000010100); // Warnings
+  GetErrorCount(3,-1,-1,3,$$000000010); // Bad Boxes
+  GetErrorCount(4,0,0,3,$$000001001);   // Errors
+  LetRegNum(2,%!2+%!4-%!1);
+
+  LetReg(8," %!9 Compilation Report%\%\ Errors: %!1   Warnings: %!2   Bad Boxes: %!3");
+  JMP(!"Print_Report");
+
+:not_TeX2HTML:: =====================================================
+
+// TeX? =============================================================
+
+  FindInString("%!9","TeX",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_TeX');");
+
+  GetErrorCount(1,0,-1,3,$$000001001);  // Real Errors
+  GetErrorCount(2,-1,-1,3,$$000010100); // Warnings
+  GetErrorCount(3,-1,-1,3,$$000000010); // Bad Boxes
+  GetErrorCount(4,0,0,3,$$000001001);   // Errors
+  LetRegNum(2,%!2+%!4-%!1);
+
+  GetPageCount(0,"<Output written on *(\(@{[0-9]}\) page*)\.",99,0);
+  IfStr("%!0","","=",!'GetPageCount(0,"<mkiv lua stats*\(@{[0-9]}\) shipped page*",99,0);');
+  IfStr("%!0","","=",!"LetRegNum(0,0)");
+
+  LetReg(8," %!9 Compilation Report (Pages: %!0)%\%\ Errors: %!1   Warnings: %!2   Bad Boxes: %!3");
+  JMP(!"Print_Report");
+
+:not_TeX:: ==========================================================
+
+// dvi2ps, ps2pdf, dvi2pdf? =========================================
+
+  FindInString("%!9","2",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_2');");
+  IfStr("%$('Post-Process');","","=",!"JMP(!'Print_Report');",!"LetReg(9,|%$('Post-Process');|);");
+
+  GetErrorCount(1,0,-1,3,$$000001001);  // Real Errors
+  GetErrorCount(2,-1,-1,3,$$000010100); // Warnings
+  GetErrorCount(3,-1,-1,3,$$000000010); // Bad Boxes
+  GetErrorCount(4,0,0,3,$$000001001);   // Errors
+  LetRegNum(2,%!2+%!4-%!1);
+
+  GetPageCount(0,"<Output written on *(\(@{[0-9]}\) page*)\.",99,0);
+  IfStr("%!0","","=",!"LetRegNum(0,0)");
+
+  LetReg(8," %!9 Compilation Report (Pages: %!0)%\%\ Errors: %!1   Warnings: %!2   Bad Boxes: %!3");
+  JMP(!"Print_Report");
+
+:not_2:: ============================================================
+
+  Relax;
+
+:Print_Report:: =====================================================
+
+  ErrorLogUpdate(0,"%!8");
+
+  IfStr("%!8","","=",!"JMP(!'Report_Done');");
+  IfStr("%$('%!9-WinEdt_Console');","1","=",!"JMP(!'Console');");
+  Prompt("%!8",0,1);
+  JMP(!'Report_Done');
+:Console:: ==========================================================
+  GetConsoleSize(0);
+  IfNum(%!0,7,!">",!"LetReg(1,'%\');",!"LetReg(1);");
+  IfNum(%!0,6,!">",!"LetReg(2,'%\');",!"LetReg(2);");
+  IfNum(%!0,5,!">",!"LetReg(3,'%\%!7');",!"LetReg(3,'%\');");
+  IfNum(%!0,4,!"<",!"LetReg(3);");
+  SetConsoleText("%\%!7%\%\%!8%!3%!1%!2",1,1);
+
+:Report_Done:: ======================================================
+
+  PopTagsandRegisters;
+
+End;

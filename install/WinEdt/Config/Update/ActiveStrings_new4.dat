@@ -1,0 +1,9 @@
+STRING="lamda"
+  DELAY=1
+  BEFORE=1
+  START_FILTER="\"
+  AFTER=1
+  END_FILTER="~Alpha"
+  ENABLED=1
+  MODE_FILTER="TeX"
+  MACRO="[BeginGroup;Backspace(3);Ins('bda%?');EndGroup;]"

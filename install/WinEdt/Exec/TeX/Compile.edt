@@ -1,0 +1,161 @@
+// Compiles TeX Document based on the preferences in the Execution Modes
+
+  Requires(20120413); // Requires this build of WinEdt to work properly
+
+  IfConsoleRunning("Relax;","JMP('not_Running');");
+  ShowConsole(1);
+  Prompt("Another Application is already running in WinEdt's Console.>
+ Terminate the application or wait for the execution to finish!");
+  FocusConsole(1);
+  Exit;
+
+:not_Running:: ======================================================
+  PushTagsandRegisters;
+  Assign('Compile-Flag','');
+  SetOK(1);  // Just in case ...
+  SetErrorFlag(0);
+
+  //  By assigning value 1 ro registers 9 and/or 8 you can establish an
+  //  alternative compiler behavior which searches for compile directive
+  //  in the preamble or executes the currently selected compiler in the
+  //  drop-down TeX Compile Button...
+
+  // Assign 1 if you want to process preamble for compiler directive
+  // % !Compiler:: "foo"
+  // and execute Exec\TeX\foo.edt instead!
+  // By default it is disabled:
+  LetReg(9,!'0');
+
+  // Assign 1 if you want to execute the currently selected compiler in
+  // TeX Compile drop-down button.
+  // By default it is disabled:
+  LetReg(8,!'0');
+
+  IfStr('%!9',!'1',!'<>',!'JMP(!"Current_Compiler");');
+  // If the preamble contains a comment like:
+  // % !Compiler:: "foo"
+  // Then WinEdt will execute Exec\TeX\foo.edt foo.edt compiler if it exists, eg.:
+  // TeXify,TeX,AMSTeX,LaTeX,PDFTeXify,PDFTeX,PDFLaTeX,XeTeX,XeLaTeX,LuaTeX,LuaLaTeX,...
+  GetPreamble("\begin{document}",0); // Get Preamble in Register 0
+  IfOK(!'Relax;',!'JMP(!"Current_Compiler");');
+  FindInString("%!0", !'!Compiler:: "\(*\)"', 1,1, 11);
+  IfOK(!'Relax;',!'JMP(!"Current_Compiler");');
+
+  // Try local instance of the macro first:
+  IfFileExists('%b\Exec\TeX\%#0.edt',!'Relax;',!'JMP(!"Global_Macro");');
+  Exe('%b\Exec\TeX\%#0.edt');
+  PopTagsandRegisters;
+  Exit;
+
+:Global_Macro:: =====================================================
+  IfFileExists('%B\Exec\TeX\%#0.edt',!'Relax;',!'JMP(!"Current_Compiler");');
+  Exe('%B\Exec\TeX\%#0.edt');
+  PopTagsandRegisters;
+  Exit;
+
+:Current_Compiler:: =================================================
+  IfStr('%!8',!'1',!'<>',!'JMP(!"Default_Compiler");');
+  // Execute the currently selected compiler in drop-down TeX Compile button
+  BtnClick('TeX Compile');
+  PopTagsandRegisters;
+  Exit;
+
+:Default_Compiler:: =================================================
+
+// ==================================================================
+// Default TeX compiler and method as defined in the Execution Modes
+// ==================================================================
+
+  Assign('Compile-Flag','');
+  SetOK(1);  // Just in case ...
+  SetErrorFlag(0);
+
+  IfStr("%$('CS-Output');","2","=",!|JMP('dvi2ps');|);
+  JMP('Start');
+
+:dvi2ps:: ===========================================================
+  SetExitHandler('Exit_Handler');
+  JMP('Start');
+
+:Exit_Handler:: =====================================================
+// Restore the Execution Modes even if execution
+// is canceled or goes badly wrong for some reason ...
+  Assign('Compile-Flag'); // Not inside a (multiple conversion) compile...
+  Assign("External-Call");
+  Assign("Pre-Process");
+  Assign("Post-Process");
+  IfStr("%$('Force-Focus');","1","<>",!|FocusConsole(-1);|);
+  Exe("%b\Exec\%$(|Exec-Dir|);\ExeMode.edt");
+  PopTagsandRegisters;
+  SetExitHandler;
+Return;
+
+:Start:: ============================================================
+  IfStr("%$('CS-Output');","1","=",!|JMP('DVI');|);
+  IfStr("%$('CS-Output');","2","=",!|JMP('PS');|);
+
+:PDF:: ==============================================================
+  Exe('%b\Exec\TeX\PDFTeXify.edt');
+  JMP('Cleanup');
+
+:DVI:: ==============================================================
+  Exe('%b\Exec\TeX\TeXify.edt');
+  JMP('Cleanup');
+
+:PS:: ===============================================================
+  // TeXify
+  IfFileExists("%P\%N.ps",!"DeleteFile('%P\%N.ps')");
+  IfFileExists("%O\%N.ps",!"DeleteFile('%O\%N.ps')");
+  Assign("_TeXify-Wait","%$('TeXify-Wait');");
+  Assign("TeXify-Wait","1");
+  Assign("_TeXify-Viewer","%$('TeXify-Viewer');");
+  Assign("TeXify-Viewer");
+  Assign("_TeXify-Pause","%$('TeXify-Pause');");
+  IfStr("%$('TeXify-WinEdt_Console');","1","=",!|Assign("TeXify-Pause","1");|);
+  Assign("External-Call","1");
+  Assign("Pre-Process","TeXify");
+  Exe('%b\Exec\TeX\TeXify.edt');
+  Assign("Pre-Process");
+  Assign("External-Call");
+  Assign("TeXify-Wait","%$('_TeXify-Wait');");
+  Assign("_TeXify-Wait");
+  Assign("TeXify-Viewer","%$('_TeXify-Viewer');");
+  Assign("_TeXify-Viewer");
+  Assign("TeXify-Pause","%$('_TeXify-Pause');");
+  Assign("_TeXify-Pause");
+  Assign("PSTeXify-WinEdt_Console","%$('TeXify-WinEdt_Console');");
+  IfStr("%$('Compile Status');",!"OK",!"<>",>
+    !"IfStr(`%$('Compile Status');`,`Run Error`,`<>`,>
+        !`IfStr(|%$('TeXify-Report');|,|1|,|=|,>
+            !|LetReg(9,'PSTeXify');Exe('%b\Exec\ShowReport.edt');|);`);>
+      Exit;");
+  IfFileExists("%P\%N.dvi",!"Relax;",!"Exit;");
+
+  // dvi2ps
+  Assign('Compile-Flag','1');
+  Assign("dvi2ps-GUI");
+  Assign("dvi2ps-High_Priority","%$('TeXify-High_Priority');");
+  Assign("dvi2ps-Wait","%$('TeXify-Wait');");
+  Assign("dvi2ps-ExitCode","%$('TeXify-ExitCode');");
+  Assign("dvi2ps-Viewer","%$('TeXify-Viewer');");
+  Assign("dvi2ps-View_Search","%$('TeXify-View_Search');");
+  Assign("dvi2ps-STD_IO","%$('TeXify-STD_IO');");
+  Assign("dvi2ps-Clean_Build","1");
+  Assign("dvi2ps-WinEdt_Console","%$('TeXify-WinEdt_Console');");
+  Assign("dvi2ps-Hidden_Window","%$('TeXify-Hidden_Window');");
+  Assign("dvi2ps-Background_Window","%$('TeXify-Background_Window');");
+  Assign("dvi2ps-Pause","%$('TeXify-Pause');");
+  Assign("dvi2ps-Report","%$('TeXify-Report');");
+  Assign("PSTeXify-WinEdt_Console","%$('TeXify-WinEdt_Console');");
+  Assign("Post-Process","PSTeXify");
+  Exe('%b\Exec\TeX\dvi2ps.edt');
+  Assign("Post-Process");
+Exit;
+
+:Cleanup:: ==========================================================
+  IfStr("%$('Force-Focus');","1","<>",!|FocusConsole(-1);|);
+  SetExitHandler;
+  PopTagsandRegisters;
+  Assign('Compile-Flag','');
+
+End;

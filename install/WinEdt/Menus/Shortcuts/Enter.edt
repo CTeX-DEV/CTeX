@@ -1,0 +1,8 @@
+// @BEGIN: DTX
+IfisMode('DTX','%!m',!'Exe("%b\Menus\Shortcuts\DTXEnter.edt");Exit;');
+// @END: DTX
+
+// @DEFAULT
+Enter;
+
+End;

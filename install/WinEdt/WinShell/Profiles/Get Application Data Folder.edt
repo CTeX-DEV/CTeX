@@ -1,0 +1,44 @@
+// WinEdt\WinShell\Profiles\Get Application Data Folder.edt
+// ========================================================
+// Returns the Application Data folder in Register %!0
+// The actual value for the current user can be inspected
+// in the Configuration Wizard (Profiles) Dialog.
+
+// Modify this if necessary to specify the
+// Application Data folder for the current user
+// on your system...
+
+// Example 1:
+// LetReg(0,"%@('USERPROFILE');\Application Data");
+//           ^^^ change this value (if required)
+
+// Example 2:
+// LetReg(0,"F:\%@('USERNAME');\Application Data");
+
+// Example 3:
+// LetReg(0,"H:\Application Data");
+
+// Registry is not reliable (VISTA problems!)
+// Get the Application Data folder from the Windows Registry:
+//  LetReg(0,>
+//    "%@('HKEY_CURRENT_USER',>
+//        'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders',>
+//        'AppData');");
+
+// SHGetFolderPath:
+//     the recommended way to get it directly from Windows Shell API
+// WinEdt's Macro interface:
+//     GetAppDataFolder(Register: 0..9, Local: 0..1);
+
+// Check if it is already in the Registry?
+  LetReg(0,"%@('HKCU','Software\WinEdt 9','AppData');");
+  // Prompt('%!0'); // For Debugging Purposes...
+  IfStr('%!0','','>','Exit;');
+
+// Get the default
+  GetAppDataFolder(0,0); // Roaming Application Data
+  LetReg(0,'%!0\WinEdt Team\WinEdt 9');
+
+// Prompt('%!0'); // For debugging purposes
+
+End;

@@ -1,0 +1,52 @@
+// DTX Checksum
+// based upon schlicht's checksum.edt
+
+    PushTagsandRegisters;
+
+    GetDocAsString(0,"%f");
+    FindInString("%!0","\\CheckSum\{+$Numeric$\}",3,4,11);
+    IfOK("JMP(!'not_Found');");
+
+    SetTracking(0);
+    BeginGroup;
+    IfSel(1,'=','SetSel(0);');
+    IfNum(%c,'1','>','InsLine;');
+    Ins("%% \CheckSum{0}");
+    MoveBy(1);IfNum(%c,'1','>','MoveBy(-1);InsLine;');
+    EndGroup;
+    SetTracking(1);
+
+
+:not_Found:: ========================================================
+
+    LetReg(9,"%F");
+    IfStr("%!9","%f","<>",!"SetMainFile;");
+    IfFileExists("%O\%N.log",!"ReadFile('%O\%N.log',0);","JMP(!'Exit');");
+
+    FindInString("%!0","<\* Checksum passed \*>",1,2,1);
+    IfOK("JMP(!'Exit');");
+    FindInString("%!0","<! Package doc Error: Checksum not passed (+$Numeric$\<\>\(+$Numeric$\))\.>",1,2,1);
+    IfOK(!"LetReg(2,'%#0');JMP('Insert');");
+    FindInString("%!0","<\* The checksum should be \(+$Numeric$\)!>",1,2,1);
+    IfOK(!"LetReg(2,'%#0');JMP('Insert');");
+
+    JMP(!'Exit');
+
+:Insert:: ===========================================================
+
+    GetDocAsString(0,"%f");
+    FindInString("%!0","\\CheckSum\{+$Numeric$\}",3,4,11);
+    IfOK(!"SetSel(0);>
+        IndexToCL('%!3+10',5,6,'%!0');>
+        GotoCL(%!5,%!6);>
+        Repeat('%!4-%!3-10','SelCharRight;');",>
+        !"LetReg(2,'\CheckSum{%!2}');");
+    InsText('%!2');
+
+:Exit:: =============================================================
+
+    IfStr("%!9","%f","<>",!"SetMainFile('%!9');");
+
+    PopTagsandRegisters;
+
+End;

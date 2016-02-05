@@ -1,0 +1,11 @@
+    MENU="Appendix"
+  BUTTON="H1"
+    TYPE=6
+    CONFIG_FILTER="HTML"
+    MENU="H1"
+    MENU="H2"
+    MENU="H3"
+    MENU="H4"
+    MENU="H5"
+    MENU="H6"
+  BUTTON="|"

@@ -1,0 +1,10 @@
+// This Macro simulates pressing Alt F N sequence on the keyboard
+// to activate the New command
+// Has to use Send (not Post) because the order of messages
+// matters. You should change the name of the application...
+ SendMessage(" WinEdt", $0104, $12, $20000001); // Alt Down
+ SendMessage(" WinEdt", $0105, $12, $20000001); // Alt Up
+ // We are in the Menu Mode now
+ SendMessage(" WinEdt", $0102, 70, 1); // Char: F -> File Menu
+ SendMessage(" WinEdt", $0102, 78, 1); // Char: N -> New Command
+End;

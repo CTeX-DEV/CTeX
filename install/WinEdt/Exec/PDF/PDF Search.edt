@@ -1,0 +1,136 @@
+// -*- ASCII:EDT -*-
+// %b\Exec\PDF\PDF Search.edt
+/////////////////////////////
+
+// ----------------------------------------------------------------------------
+//           ***   Forward search for PDF documents   ***
+//   (Adobe Reader, Acrobat Professional, Sumatra PDF Viewer, Foxit Reader)
+//   (Now also PDF-XChange v2 or later!)
+//
+// The document should be compiled with
+//  * with a recent pdftex (>= 1.40.8) called with "--synctex=-1"
+// (WinEdt --src panel can be used to turn this option on and off!)
+// PDF file will be opened on the page corresponding to the current
+// location of the caret.
+// Otherwise, or in case the page could not be figured out, the default macro
+// "PDF Preview.edt" will be executed, jumping back to the last viewed page.
+// ----------------------------------------------------------------------------
+
+  Requires(20130513); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  // SyncTeX File exists?
+  IfFileExists("%P\%N%$('PDF-SyncEx');",!"Relax;",!"JMP('Fallback');");
+
+  // --------------------------------------------------------------------------
+  // The free Sumatra PDF viewer <http://blog.kowalczyk.info/software/sumatrapdf/>
+  // has built-in support for forward and inverse (!) search.
+  // It supports synctex.
+  FindInString(`%$('PDF-View');`,'Sumatra',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP('not_Sumatra');");
+
+  // DDE command that can force a refresh in SumatraPDF...
+  // If Sumatra is not already running this may take a few seconds...
+  DDEOpen("%$('PDF-View');","SUMATRA","control",1);
+  // Open("Filename.pdf", NewWindow,SetFocus,ForceRefresh: 0..1)
+  DDEExe('[Open("%P\%N.pdf",0,1,1)]');
+  DDEExe('[ForwardSearch("%P\%N.pdf","%p\%n%t",%!l,0)]');
+  DDEClose;
+  PopTagsandRegisters;
+  Exit;
+
+:not_Sumatra:: ======================================================
+
+  IfFileOlder("%P\%N%$('PDF-SyncEx');","%f",>
+     "StartWorking('SyncTeX file is not up to date!');",>
+     "StartWorking('SyncTeX: getting current page...');");
+
+  GetSyncScreenInfo("%P\%N%$(!'PDF-SyncEx');","%F","%f",%!l,>
+    !"SYNC_page",!"SYNC_y",!"SYNC_h",!"SYNC_b",!"SYNC_x",!"SYNC_w",!"SYNC_r",!"pt",!"1.0",2,0);
+  // Testing ...
+  // Prompt("%!0");
+  // Prompt(|X,W,R, Y,H,B: %$(!'SYNC_x');,%$(!'SYNC_w');,%$(!'SYNC_r'); %$(!'SYNC_y');,%$(!'SYNC_h');,%$(!'SYNC_b');|);
+
+  StopWorking;
+  IfOK(!"Relax;",!"JMP('Fallback');");
+  IfStr("%$('SYNC_page');","","=","JMP('Fallback');");
+
+// PDF-XChange ======================================================
+
+  FindInString(`%$('PDF-View');`,'PDFX',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP('not_PDFX');");
+  Run('%$("PDF-View"); /A "page=%$(|SYNC_page|);&usept=yes&>
+  highlight=%$(!|SYNC_x|);,%$(!|SYNC_r|);,%$(!|SYNC_y|);,%$(!|SYNC_b|);" "%P\%N.pdf"');
+  // In PDFX v.2.5 it is now possible to (properly) highlight a box using pt as a unit!
+  // Version 3 should support both forward and inverse search...
+  // or so I have been promised by the Tracker Development Team!
+  PopTagsandRegisters;
+  Exit;
+
+:not_PDFX:: =========================================================
+
+  FindInString(`%$('PDF-View');`,'Foxit',1,2,1000,1);
+  IfOK(!`Run('%$("PDF-View"); "%P\%N.pdf" -n %$("SYNC_page"); ','%P');>
+         PopTagsandRegisters;>
+         Exit;`);
+
+  FindInString(`%$('PDF-View');`,!'Adobe',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+  FindInString(`%$('PDF-View');`,!'Acrobat.exe',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+  FindInString(`%$('PDF-View');`,!'AcroRd',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+
+  // No Search ability for this PDF Viewer (GSView, etc...)
+  JMP(!'Fallback');
+
+:Adobe:: ============================================================
+
+  StartWorking(!'Adobe Search...');
+
+// Shift Key should not be down or else Adobe might fail!
+// Wait until Shift (VK_SHIFT=16) is released ...
+//  ProcessMessages;
+//  LetRegNum(0,0);
+//  Loop(!|>
+//    LetRegNum(0,%!0+1);>
+//    IfNum(%!0,111,'>',!"Stop;");>
+//    IfKeyDown(16,0,0,!"WaitForMessage(111,2);",!"Stop;");>
+//  |);
+//  ProcessMessages;
+
+  Run('%$("PDF-View"); "%P\%N.pdf"','%P');
+  LetRegNum(0,"%$('SYNC_page');-1"); // Acrobat pages are 0-based
+  Wait(11); // Sync Problems (again)!
+
+    DDEOpen("%$('PDF-View');","%$('Acro-DDE_Service');","%$('Acro-DDE_Topic');");
+    DDEExe('[DocOpen("%P\%N.pdf")]');
+    DDEExe('[DocOpen("%P\%N.pdf")]');
+    //DDEExe('[FileOpen("%P\%N.pdf")]');
+    DDEExe('[DocGoTo("%P\%N.pdf","%!0")]');
+    //DDEExe('[DocScrollTo("%P\%N.pdf","0","%$(|SYNC_y|);")]'); // no good, as it depends on zoom factor...
+    //DDEExe('[AppShow()]');
+  DDEClose;
+
+  ProcessMessages;
+  // Fix Focus:
+  SendMessage("%$('PDF-Caption');", $0000, $0000);
+  IfOK(!|SetFocus("%$('PDF-Caption');");|);
+  SendMessage("%N.pdf - %$('PDF-Caption');", $0000, $0000);
+  IfOK(!|SetFocus("%N.pdf - %$('PDF-Caption');");|);
+  SendMessage("%$('PDF-Caption'); - [%N.pdf]", $0000, $0000);
+  IfOK(!|SetFocus("%$('PDF-Caption'); - [%N.pdf]");|);
+  ProcessMessages;
+
+  PopTagsandRegisters;
+  StopWorking;
+  Exit;
+
+:Fallback:: =========================================================
+
+  PopTagsandRegisters;
+  Exe("%b\Exec\PDF\PDF Preview.edt");
+  Exit;
+
+End;

@@ -1,0 +1,11 @@
+// MDI Open Event Handler
+
+  Requires(20040806);
+  PushTagsandRegisters;
+
+  // MDIOpen-Before Handlers detects the mode!
+  // Exe("%b\Macros\GetMode.edt");
+
+  PopTagsandRegisters;
+
+End;

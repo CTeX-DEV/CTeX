@@ -1,0 +1,25 @@
+STRING="\bibliographystyle{?}"
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="TeX|AUX"
+  DBL_CLICK_MACRO="[Assign('LaTeXDoc','Active');"+
+                   "Exe('%b\Macros\Doc\LaTeXDoc.edt');]"
+
+// In case when options span over many lines {?} has to be parsed
+// in an extended number of lines...
+
+STRING="\documentclass"
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="TeX|AUX"
+  DBL_CLICK_MACRO="Exe('%b\Macros\Doc\LaTeXDocEx.edt');]"
+
+STRING="\usepackage"
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="TeX|AUX"
+  DBL_CLICK_MACRO="Exe('%b\Macros\Doc\LaTeXDocEx.edt');]"
+
+STRING="\bibliographystyle"
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="TeX|AUX"
+  DBL_CLICK_MACRO="Exe('%b\Macros\Doc\LaTeXDocEx.edt');]"
+
+STRING="\url{?}"

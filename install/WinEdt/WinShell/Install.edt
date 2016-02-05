@@ -1,0 +1,21 @@
+// Install WinEdt
+
+Requires(20010724); // Requires this build of WinEdt to work properly
+
+Open("%B\WinShell\Install.txt",1);
+
+// is Power User?
+Exe('%B\WinShell\isPowerUser.edt');
+
+  ProcessMessages;
+  Wait(99);
+  SetFocus;
+  ProcessMessages;
+
+  // Show Wizard
+  WinEdtWizard('WinEdt Configuration and Installation Wizard');
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+End;

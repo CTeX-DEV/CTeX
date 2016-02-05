@@ -1,0 +1,109 @@
+// -*- ASCII:EDT -*-
+// changeEnv.edt
+// changes the current
+// environment
+// (schlicht 20010703)
+// -----------------------------
+// Modified by alex: 200011107
+// Active String: \begin{?}>
+// Either Complete or Change if \end{something} is there
+// Store the last changed environment name in the variable Replace_env
+///////////////////////
+
+
+LetRegNum(0,%l*1000+%c);
+SetTracking(0);
+Mark(0);
+
+// Anything preselected? Then give the macro
+// a chance to find the environment again:
+IfSel(0,">","CharRight;");
+
+// Called by an Active String?
+SelCharLeft;
+IfStr("%S",">","=",>
+  !`FindInString("%L","{", 1,2, 1110, %c-2);>
+    FindInString("%L","\begin{", 1,3, 1110, %c-2);>
+    IfNum(%!2,%!3,"<>","Goto(0);SetTracking(1);Exit;");`);
+
+IfStr("%S",">","=","Delete;","CharRight;");
+
+SaveFind;
+SetFindTextSelect(1);
+SetNotFoundNotify(1);
+SetSearchSelected;
+SetSearchCurrentDoc;
+SetSearchCyclic(0);
+SetSearchEntire(0);
+SetSearchForward(0);
+SetRegEx(1);
+SetSearchCaseSensitive(1);
+SetFindStr("\\begin\{\(*\)\}");
+IfFound('Relax;','SetTracking(1);Refresh(1);RestoreFind;Exit;');
+
+IfisMode("DTX","%!m",>
+ !"IfStr('%?','macrocode','=',>
+    !'LetReg(6,!|%    |);>
+      LetReg(7,||);',>
+    !'LetReg(6,!|% |);>
+      LetReg(7,!|%   |);');>
+   ",>
+ !"LetReg(6,'');>
+   LetReg(7,'  ');");
+
+BeginGroup;
+
+  Mark(1);>
+  GetSel(0,1);>
+  MatchDelimiter(0,0,1,1);>
+  IfOK(>
+    !`>
+      IfNum(%l*1000+%c-1,%!0,'>=',>
+       !'SetTracking(1);>
+         Goto(1);>
+         MatchDelimiter(0,0,1,1);>
+         GetTag(0, 9); // Get the Current Environment Name in the local Register 9<>
+         //Restore the last replacement!<>
+         IfStr("%$(""Replace_env"");","",">","LetReg(9,""%$(''Replace_env'');"");");>
+         EnterReg(9,''Change current environment to:'',>
+             ''Change Environment'');>
+         IfOK(''Assign("Replace_env","%!9");'');>
+         SetTracking(0);>
+         GetSel(0,2);>
+         GetLength(8,''%!1'');>
+         ReplaceInString(''%!1'',''%!9'',7,%!8-2,0,1);>
+         GetLength(7,''%!2'');>
+         ReplaceInString(''%!2'',''%!9'',5,%!7-2,0,2);>
+         SelCharLeft(%!7);>
+         Delete;>
+         Ins(''%!2'');>
+         Goto(1);>
+         SelCharRight(%!8);>
+         Delete;>
+         Ins(''%!1'');>
+         SetTracking(1);>
+         MatchDelimiter(0,0,1,1);>
+        ',>
+       !'SetTracking(1);>
+         MatchDelimiter(0,0,1,1);');>
+     `,>
+    !`>
+      NewLine;>
+      InsertBullet;>
+      NewLine;>
+      Ins('%!6\end{%?}');>
+      LineUp(2);>
+      TrackCaret;>
+      NextBullet;>
+      CharLeft;>
+      Ins('%!7');//Indent it<>
+      NextBullet;>
+      SetTracking(1);>
+     `);
+
+EndGroup;
+RestoreFind;
+
+Refresh(1);
+
+End;

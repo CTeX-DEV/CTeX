@@ -1,0 +1,69 @@
+// Sample code to copy found items into clipboard
+
+  PushTagsandRegisters;
+  StartWorking('Copying...');
+  LetReg(1,'');
+  FindNext(-4,-1,1);
+
+  Loop(!|>
+    GetFindItem(0,1);>
+    IfOK(!'>
+      LetReg(1,"%!1%!0%\");>
+    ',>
+    'Stop;');>
+    FindNext(1,-1,0);|);
+
+  CopyToClipboard("%!1");
+  FindNext(-4,-1,1);
+  LetReg(1,'');
+  LetReg(0,'');
+  StopWorking;
+  PopTagsandRegisters;
+
+End;
+
+// Macros for Find in Files functionality behind the scenes:
+// =========================================================
+//
+//   FindNext(Direction: -4..4; Track: -1..1; TrackListView: 0..1);
+//
+//   Direction:
+//        0 Stay where you are
+//     +/-1 Next/Previous instance
+//     +/-2 Next/Previous line
+//     +/-3 Next/Previous file
+//     +/-4 the last/first item
+//   Track:
+//     -1..1: Off, Default, On
+//   TrackListView:
+//     0..1: Off, On
+//      If List is Visible tracking the selected item in the list
+//      makes macros slow due to unnecessary refreshing and
+//      scrolling in the list...
+//
+//   GetFindItem(Reg: 0..9; Object: 0..6);
+//
+//   Object:
+//     0 Current Item Actual Found String:
+//               After this call with tagged RegEx one can use FindInString
+//               and after that GetTag macros to process parameters...
+//     1 Current Item (as displayed in the list)
+//     2 Current Item File
+//     3 Current Item Line/ Paragraph (Soft) Index
+//     4 Current Item Column/ Paragraph Offset (Soft) Index
+//     5 Current Item Index
+//     6 Total Number of Items
+//
+// IfOK is responding properly to allow safe iteration...
+//
+// Less selective Copy:
+//
+//  StartWorking('Copying...');
+//  PushTagsandRegisters;
+//  FindNext(-4,-1,1);
+//  GetSearchData(1,1);
+//  // Any Extra Processing ?
+//  CopyToClipboard("%!1");
+//  LetReg(1,'');
+//  PopTagsandRegisters;
+//  StopWorking;

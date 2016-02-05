@@ -1,0 +1,9 @@
+  RECURSE_TYPE_FILTER="tex;ltx;texi"
+  // WinEdt by default "understands" specifications
+  // relative to the main file (%P) and
+  // relative to the current document (%p).
+  // Depending on the packages that you are using TeX usually only
+  // recognises specifications relative to the main file!
+  // Remove lowercase %p; form the PATH specifications
+  // if you want WinEdt to behave this way!
+  DIRECTIVE="\include{""?""}"

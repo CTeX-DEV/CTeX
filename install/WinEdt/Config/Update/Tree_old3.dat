@@ -1,0 +1,3 @@
+    ACTION="Insert"
+      IMAGE="Insert"
+      MACRO="GlobalReturn;SetSel(0);Ins('%?');GlobalMark;"

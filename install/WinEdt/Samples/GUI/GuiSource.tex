@@ -1,0 +1,1287 @@
+% -----------------------------------------------------------------------------
+% -*-TeX-*- -*-Hard-*- Smart Wrapping
+% -----------------------------------------------------------------------------
+% This is the LaTeX file used to produce the GUI bitmaps for WinEdt.
+% Feel free to change it in any way you like....
+% -----------------------------------------------------------------------------
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc} % UTF-8: PDFLaTeX
+\usepackage{array}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsxtra}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{dsfont}  % for \mathds{N}
+\usepackage{eurosym} % for \euro
+% -----------------------------------------------------------------------------
+% This file was compiled with PDFLaTeX to produce special symbols
+% that can be inserted through WinEdt's GUI Page Control.
+%
+% The images were copied from Adobe Reader at 125%.
+%
+% Please note that WinEdt's GUI can only handle the buttons of the same
+% dimension (in one group). It is therefore important that all the columns in
+% tabular environment have the same width (the last line consisting of "00..."
+% takes care of that...
+% -----------------------------------------------------------------------------
+\extrarowheight 7pt
+\newlength{\mine}
+\newlength{\niz}
+\setlength{\mine}{7pt}
+\setlength{\niz}{7pt}
+\def\pmb{}
+\newcommand{\demowidth}[1]{\rule{0.3pt}{1.3ex}\rule{#1}{0.3pt}}
+\newcommand{\negdemowidth}[1]{\rule{#1}{0.3pt}\rule{0.3pt}{1.3ex}}
+\hfuzz99pt % Don't report over-full h-boxes if over-edge is small
+% -----------------------------------------------------------------------------
+\begin{document}
+
+\textbf{Math1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccccc|}
+  \hline
+   $\pmb *         $&
+   $\pmb\sum       $&
+   $\pmb\prod      $&
+   $\pmb\coprod    $&
+   $\pmb\int       $&
+   $\pmb\oint      $&
+   $\pmb\bigcap    $&
+   $\pmb\bigcup    $\\[\mine]
+   $\pmb *         $&
+   $\pmb\bigsqcup  $&
+   $\pmb\bigvee    $&
+   $\pmb\bigwedge  $&
+   $\pmb\bigodot   $&
+   $\pmb\bigotimes $&
+   $\pmb\bigoplus  $&
+   $\pmb\biguplus  $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Math2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb{\mathbf{B}}$&
+   $\pmb{\mathds{N}}$&
+   $\pmb{\mathbb{B}}$&
+   $\pmb{\mathbf{B}}$\\[\mine]
+   $\pmb{\mathfrak{F}}$&
+   $\pmb{\mathcal{C}}$&
+   $\pmb{\mathrm{T}}$&
+   $\pmb{\mathfrak{F}}$\\[\niz]
+  \hline\hline
+  000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Math3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|c|}
+  \hline
+   $\pmb{\hat{a} } $&
+   $\pmb{x^{k}}$\\[\mine]
+   $\pmb *$&
+   $\pmb{x_{k}}$\\[\niz]
+  \hline\hline
+  000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{MathAcc}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccc|}
+  \hline
+   $\pmb{\hat{a}  } $&
+   $\pmb{\hat{a}  } $&
+   $\pmb{\check{a}} $&
+   $\pmb{\breve{a}} $&
+   $\pmb{\acute{a}} $&
+   $\pmb{\grave{a}} $\\[\mine]
+   $\pmb{\bar{a}  } $&
+   $\pmb{\tilde{a}} $&
+   $\pmb{\bar{a}  } $&
+   $\pmb{\vec{a}  } $&
+   $\pmb{\dot{a}  } $&
+   $\pmb{\ddot{a} } $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{MathCon1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|c|}
+  \hline \rule{0pt}{7mm}
+   $\pmb{\sqrt{abc} }$&
+   $\pmb{\sqrt{abc} }$\\[\mine]
+   $\pmb{\sqrt{abc} }$&
+   $\pmb{\sqrt[n]{abc} }$\\[\niz]
+  \hline\hline
+  000000&000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{MathCon2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|c|}
+  \hline \rule{0pt}{7mm}
+   $\pmb{\overline{abc} }$&
+   $\pmb{\overline{abc} }$\\[\mine]
+   $\pmb{abc }$&
+   $\pmb{\underline{abc} }$\\[\niz]
+  \hline\hline
+  000000&000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{MathCon3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline \rule{0pt}{7mm}
+   $\pmb{\overleftarrow{abc} }$&
+   $\pmb{\overleftarrow{abc} }$&
+   $\pmb{\overrightarrow{abc} }$\\[\mine]
+   $\pmb{\widetilde{abc} }$&
+   $\pmb{\widetilde{abc} }$&
+   $\pmb{\widehat{abc} }$\\[\niz]
+  \hline\hline
+  000000&000000&000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{MathCon4}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|c|}
+  \hline \rule{0pt}{7mm}
+   $\pmb{\overbrace{abc} }$&
+   $\pmb{\overbrace{abc} }$\\[\mine]
+   $\pmb{\underbrace{abc} }$&
+   $\pmb{\underbrace{abc} }$\\[\niz]
+  \hline\hline
+  000000&000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{MathCon5}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|c|}
+  \hline \rule{0pt}{7mm}
+   $\pmb{\binom{m}{k}} $&
+   $\pmb{\binom{m}{k}} $\\[\mine]
+   $\pmb{\frac{abc}{xyz} }$&
+   $\pmb{\frac{abc}{xyz} }$\\[\niz]
+  \hline\hline
+  000000&000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{GreekUpp}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccc|}
+  \hline
+   $\pmb\Gamma     $&
+   $\pmb\Gamma     $&
+   $\pmb\Delta     $&
+   $\pmb\Theta     $&
+   $\pmb\Lambda    $&
+   $\pmb\Xi        $&
+   $\pmb\Pi        $\\[\mine]
+   $\pmb\Gamma     $&
+   $\pmb\Sigma     $&
+   $\pmb\Upsilon   $&
+   $\pmb\Phi       $&
+   $\pmb\Psi       $&
+   $\pmb\Omega     $&
+   $\pmb\$         $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{GreekLow}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccccccccccccc|}
+  \hline
+   $\pmb\beta      $&
+   $\pmb\alpha     $&
+   $\pmb\beta      $&
+   $\pmb\gamma     $&
+   $\pmb\delta     $&
+   $\pmb\epsilon   $&
+   $\pmb\varepsilon$&
+   $\pmb\zeta      $&
+   $\pmb\eta       $&
+   $\pmb\theta     $&
+   $\pmb\vartheta  $&
+   $\pmb\iota      $&
+   $\pmb\kappa     $&
+   $\pmb\lambda    $&
+   $\pmb\mu        $&
+   $\pmb\nu        $\\[\mine]
+   $\pmb\beta      $&
+   $\pmb\xi        $&
+   $\pmb o         $&
+   $\pmb\pi        $&
+   $\pmb\varpi     $&
+   $\pmb\rho       $&
+   $\pmb\varrho    $&
+   $\pmb\sigma     $&
+   $\pmb\varsigma  $&
+   $\pmb\tau       $&
+   $\pmb\upsilon   $&
+   $\pmb\phi       $&
+   $\pmb\varphi    $&
+   $\pmb\chi       $&
+   $\pmb\psi       $&
+   $\pmb\omega     $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Hebrew}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline
+   $\pmb *       $&
+   $\pmb\digamma $&
+   $\pmb\beth    $\\[\mine]
+   $\pmb *       $&
+   $\pmb\gimel   $&
+   $\pmb\daleth  $\\[\niz]
+  \hline\hline
+  0000&0000&0000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{Sym1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccccccccccc|}
+  \hline
+   $\pmb *           $&
+   $\pmb\aleph       $&
+   $\pmb\hbar        $&
+   $\pmb\imath       $&
+   $\pmb\jmath       $&
+   $\pmb\ell         $&
+   $\pmb\wp          $&
+   $\pmb\Re          $&
+   $\pmb\Im          $&
+   $\pmb\prime       $&
+   $\pmb\emptyset    $&
+   $\pmb\angle       $&
+   $\pmb\mho         $&
+   $\pmb\cdot        $\\[\mine]
+   $\pmb *           $&
+   $\pmb\infty       $&
+   $\pmb\partial     $&
+   $\pmb\nabla       $&
+   $\pmb\triangle    $&
+   $\pmb\forall      $&
+   $\pmb\exists      $&
+   $\pmb\neg         $&
+   $\pmb\surd        $&
+   $\pmb\top         $&
+   $\pmb\bot         $&
+   $\pmb\backslash   $&
+   $\pmb\Box         $&
+   $\pmb\diamond     $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Sym2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccc|}
+  \hline
+   $\pmb *    $&
+   \dag        &
+   \ddag       &
+   \S          &
+   \P          &
+   \maltese    \\[\mine]
+   $\pmb *    $&
+   \copyright  &
+   \circledR   &
+   \pounds     &
+   \yen        &
+   \checkmark  \\[\niz]
+  \hline\hline
+  000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Sym3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccc|}
+  \hline
+   $\pmb *           $&
+   $\pmb\flat        $&
+   $\pmb\natural     $&
+   $\pmb\sharp       $&
+   $\pmb\|           $\\[\mine]
+   $\pmb *           $&
+   $\pmb\clubsuit    $&
+   $\pmb\diamondsuit $&
+   $\pmb\heartsuit   $&
+   $\pmb\spadesuit   $\\[\niz]
+  \hline\hline
+  000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Sym4}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline
+   $\pmb\ulcorner $&
+   $\pmb\ulcorner $&
+   $\pmb\urcorner $\\[\mine]
+   $\pmb\llcorner $&
+   $\pmb\llcorner $&
+   $\pmb\lrcorner $\\[\niz]
+  \hline\hline
+  000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Sym5}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline
+   $\pmb *       $&
+   $\pmb\ldots   $&
+   $\pmb\cdots   $\\[\mine]
+   $\pmb *       $&
+   $\pmb\vdots   $&
+   $\pmb\ddots   $\\[\niz]
+  \hline\hline
+  0000&0000&0000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{Foreign1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccccc|}
+  \hline
+   $\pmb *$&
+   \`{o} &
+   \'{o} &
+   \^{o} &
+   \"{o} &
+   \~{o} &
+   \={o} &
+   \.{o} \\[\mine]
+   $\pmb *$&
+   \u{o} &
+   \v{o} &
+   \H{o} &
+   \t{oo}&
+   \c{o} &
+   \d{o} &
+   \b{o} \\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Foreign2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline
+   $\pmb *$&
+   \c{c}   &
+   ?`      \\[\mine]
+   $\pmb *$&
+   \c{C}   &
+   !`      \\[\niz]
+  \hline\hline
+  00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Foreign3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccc|}
+  \hline
+   $\pmb *$&
+   \oe  &
+   \ae  &
+   \aa  &
+   \o   &
+   \l   &
+   \i   \\[\mine]
+   A    &
+   \OE  &
+   \AE  &
+   \AA  &
+   \O   &
+   \L   &
+   \euro \\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Foreign4}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccccc|}
+  \hline
+   $\pmb *$&
+   \"{a} &
+   \"{e} &
+   \"{\i} &
+   \"{o} &
+   \"{u} &
+   \"{y} &
+   \ss   \\[\mine]
+   \AA  &
+   \"{A} &
+   \"{E} &
+   \"{I} &
+   \"{O} &
+   \"{U} &
+   \"{Y} &
+   {\large\ss} \\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Foreign5}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccccccccccccc|}
+  \hline
+   $\pmb *$&
+   \`{a} &
+   \'{a} &
+   \^{a} &
+   \`{e} &
+   \'{e} &
+   \^{e} &
+   \`{\i} &
+   \'{\i} &
+   \^{\i} &
+   \`{o} &
+   \'{o} &
+   \^{o} &
+   \`{u} &
+   \'{u} &
+   \^{u} \\[\mine]
+   \AA  &
+   \`{A} &
+   \'{A} &
+   \^{A} &
+   \`{E} &
+   \'{E} &
+   \^{E} &
+   \`{I} &
+   \'{I} &
+   \^{I} &
+   \`{O} &
+   \'{O} &
+   \^{O} &
+   \`{U} &
+   \'{U} &
+   \^{U} \\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{Typeface}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccc|}
+  \hline
+    $\pmb *         $&
+    \emph{Emph}      &
+    \textrm{Roman}   &
+    \textbf{Bold}    &
+    \textsf{Sans}    &
+    \texttt{TT}      \\[\mine]
+    $\pmb *         $&
+    \textmd{Medium}  &
+    \textit{Italic}  &
+    \textsc{Caps}    &
+    \textsl{Slanted} &
+    \verb"Verbatim"  \\[\niz]
+  \hline\hline
+  0000000000&0000000000&0000000000&0000000000&0000000000&0000000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{Funct1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb *      $&
+   $\pmb\arccos $&
+   $\pmb\arcsin $&
+   $\pmb\arctan $\\[\mine]
+   $\pmb *      $&
+   $\pmb\lim    $&
+   $\pmb\liminf $&
+   $\pmb\limsup $\\[\niz]
+  \hline\hline
+  0000000&0000000&0000000&0000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Funct2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccc|}
+  \hline
+   $\pmb *      $&
+   $\pmb\arg    $&
+   $\pmb\cos    $&
+   $\pmb\cosh   $&
+   $\pmb\cot    $&
+   $\pmb\coth   $&
+   $\pmb\csc    $\\[\mine]
+   $\pmb *      $&
+   $\pmb\ker    $&
+   $\pmb\lg     $&
+   $\pmb\ln     $&
+   $\pmb\log    $&
+   $\pmb\max    $&
+   $\pmb\min    $\\[\niz]
+  \hline\hline
+  00000&00000&00000&00000&00000&00000&00000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Funct3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccc|}
+  \hline
+   $\pmb *      $&
+   $\pmb\det    $&
+   $\pmb\dim    $&
+   $\pmb\exp    $&
+   $\pmb\gcd    $&
+   $\pmb\hom    $&
+   $\pmb\inf    $\\[\mine]
+   $\pmb *      $&
+   $\pmb\sec    $&
+   $\pmb\sin    $&
+   $\pmb\sinh   $&
+   $\pmb\sup    $&
+   $\pmb\tan    $&
+   $\pmb\tanh   $\\[\niz]
+  \hline\hline
+  00000&00000&00000&00000&00000&00000&00000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{Delim}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccc|}
+  \hline
+   $\pmb *             $&
+   $\pmb (             $&
+   $\pmb [             $&
+   $\pmb\{             $&
+   $\pmb\lfloor        $&
+   $\pmb\lceil         $&
+   $\pmb\langle        $&
+   $\pmb /             $&
+   $\pmb |             $\\[\mine]
+   $\pmb *             $&
+   $\pmb )             $&
+   $\pmb ]             $&
+   $\pmb\}             $&
+   $\pmb\rfloor        $&
+   $\pmb\rceil         $&
+   $\pmb\rangle        $&
+   $\pmb\backslash     $&
+   $\pmb\|             $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{DelimLR}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|c|}
+  \hline
+   $\pmb *         $&
+   \small\verb"\"$\mathrm{left}$\\[\mine]
+   $\pmb *         $&
+   \small\verb"\"$\mathrm{right}$\\[\niz]
+  \hline\hline
+  000000000&000000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Quad}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb *         $&
+   $\demowidth{1em}$&
+   $\demowidth{2em}$&
+   $\negdemowidth{0.166em}$\\[\mine]
+   $\pmb *         $&
+   $\demowidth{0.166em}$&
+   $\demowidth{0.222em}$&
+   $\demowidth{0.277em}$\\[\niz]
+  \hline\hline
+  0000000&0000000&0000000&0000000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{Rel1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccccc|}
+  \hline
+   $\pmb *         $&
+   $\pmb <         $&
+   $\pmb\leq       $&
+   $\pmb\prec      $&
+   $\pmb\preceq    $&
+   $\pmb\ll        $&
+   $\pmb\subset    $&
+   $\pmb\subseteq  $&
+   $\pmb\sqsubseteq$&
+   $\pmb\in        $&
+   $\pmb\vdash     $\\[\mine]
+   $\pmb *         $&
+   $\pmb >         $&
+   $\pmb\geq       $&
+   $\pmb\succ      $&
+   $\pmb\succeq    $&
+   $\pmb\gg        $&
+   $\pmb\supset    $&
+   $\pmb\supseteq  $&
+   $\pmb\sqsupseteq$&
+   $\pmb\ni        $&
+   $\pmb\dashv     $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Rel2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccc|}
+  \hline
+   $\pmb *         $&
+   $\pmb\equiv     $&
+   $\pmb\sim       $&
+   $\pmb\simeq     $&
+   $\pmb\asymp     $&
+   $\pmb\approx    $&
+   $\pmb\cong      $&
+   $\pmb\neq       $&
+   $\pmb\doteq     $\\[\mine]
+   $\pmb *         $&
+   $\pmb\models    $&
+   $\pmb\perp      $&
+   $\pmb\mid       $&
+   $\pmb\parallel  $&
+   $\pmb\smile     $&
+   $\pmb\frown     $&
+   $\pmb\propto    $&
+   $\pmb\bowtie    $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Rel3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline
+   $\pmb *       $&
+   $\pmb\lhd     $&
+   $\pmb\rhd     $\\[\mine]
+   $\pmb *       $&
+   $\pmb\unlhd   $&
+   $\pmb\unrhd   $\\[\niz]
+  \hline\hline
+  0000&0000&0000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{MathOper}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccccccccccc|}
+  \hline
+   $\pmb *              $&
+   $\pmb\pm             $&
+   $\pmb\mp             $&
+   $\pmb\times          $&
+   $\pmb\div            $&
+   $\pmb\ast            $&
+   $\pmb\star           $&
+   $\pmb\circ           $&
+   $\pmb\bullet         $&
+   $\pmb\cdot           $&
+   $\pmb\cap            $&
+   $\pmb\cup            $&
+   $\pmb\uplus          $&
+   $\pmb\sqcap          $&
+   $\pmb\sqcup          $&
+   $\pmb\vee            $&
+   $\pmb\wedge          $\\[\mine]
+   $\pmb *              $&
+   $\pmb\oplus          $&
+   $\pmb\ominus         $&
+   $\pmb\otimes         $&
+   $\pmb\oslash         $&
+   $\pmb\odot           $&
+   $\pmb\bigcirc        $&
+   $\pmb\setminus       $&
+   $\pmb\wr             $&
+   $\pmb\diamond        $&
+   $\pmb\bigtriangleup  $&
+   $\pmb\bigtriangledown$&
+   $\pmb\triangleleft   $&
+   $\pmb\triangleright  $&
+   $\pmb\amalg          $&
+   $\pmb\dagger         $&
+   $\pmb\ddagger        $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{ArrowsUpDown1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb *             $&
+   $\pmb\uparrow       $&
+   $\pmb\downarrow     $&
+   $\pmb\updownarrow   $\\[\mine]
+   $\pmb *             $&
+   $\pmb\Uparrow       $&
+   $\pmb\Downarrow     $&
+   $\pmb\Updownarrow   $\\[\niz]
+  \hline\hline
+  000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{ArrowsUpDown2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb *                $&
+   $\pmb\upharpoonleft    $&
+   $\pmb\upharpoonright   $&
+   $\pmb\upuparrows       $\\[\mine]
+   $\pmb *                $&
+   $\pmb\downharpoonleft  $&
+   $\pmb\downharpoonright $&
+   $\pmb\downdownarrows   $\\[\niz]
+  \hline\hline
+  000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{ArrowsDiag}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline
+   $\pmb *               $&
+   $\pmb\nearrow         $&
+   $\pmb\searrow         $\\[\mine]
+   $\pmb *               $&
+   $\pmb\nwarrow         $&
+   $\pmb\swarrow         $\\[\niz]
+  \hline\hline
+  00000&00000&00000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{ArrowsLong}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccc|}
+  \hline
+   $\pmb *                  $&
+   $\pmb\longleftarrow      $&
+   $\pmb\longrightarrow     $&
+   $\pmb\longleftrightarrow $&
+   $\pmb\longmapsto         $\\[\mine]
+   $\pmb *                  $&
+   $\pmb\Longleftarrow      $&
+   $\pmb\Longrightarrow     $&
+   $\pmb\Longleftrightarrow $&
+   $                        $\\[\niz]
+  \hline\hline
+  00000&00000&00000&00000&00000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{ArrowsShort}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb *              $&
+   $\pmb\leftarrow      $&
+   $\pmb\rightarrow     $&
+   $\pmb\leftrightarrow $\\[\mine]
+   $\pmb *              $&
+   $\pmb\Leftarrow      $&
+   $\pmb\Rightarrow     $&
+   $\pmb\Leftrightarrow $\\[\niz]
+  \hline\hline
+  000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{ArrowsShortNeg}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb *               $&
+   $\pmb\nleftarrow      $&
+   $\pmb\nrightarrow     $&
+   $\pmb\nleftrightarrow $\\[\mine]
+   $\pmb *               $&
+   $\pmb\nLeftarrow      $&
+   $\pmb\nRightarrow     $&
+   $\pmb\nLeftrightarrow $\\[\niz]
+  \hline\hline
+  000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Arrows1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccc|}
+  \hline
+   $\pmb *                 $&
+   $\pmb\leftarrowtail     $&
+   $\pmb\twoheadleftarrow  $&
+   $\pmb\hookleftarrow     $&
+   $\pmb\leftharpoonup     $&
+   $\pmb\leftharpoondown   $&
+   $\pmb\leftrightharpoons $&
+   $\pmb\leftleftarrows    $&
+   $\pmb\leftrightarrows   $\\[\mine]
+   $\pmb *                 $&
+   $\pmb\rightarrowtail    $&
+   $\pmb\twoheadrightarrow $&
+   $\pmb\hookrightarrow    $&
+   $\pmb\rightharpoonup    $&
+   $\pmb\rightharpoondown  $&
+   $\pmb\rightleftharpoons $&
+   $\pmb\rightrightarrows  $&
+   $\pmb\rightleftarrows   $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Arrows2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccc|}
+  \hline
+   $\pmb *                 $&
+   $\pmb\Lleftarrow        $&
+   $\pmb\looparrowleft     $&
+   $\pmb\curvearrowleft    $&
+   $\pmb\circlearrowleft   $&
+   $\pmb\Lsh               $\\[\mine]
+   $\pmb *                 $&
+   $\pmb\Rrightarrow       $&
+   $\pmb\looparrowright    $&
+   $\pmb\curvearrowright   $&
+   $\pmb\circlearrowright  $&
+   $\pmb\Rsh               $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Arrows3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccc|}
+  \hline
+   $\pmb *                   $&
+   $\pmb\dashleftarrow       $&
+   $\pmb\leftrightsquigarrow $&
+   $\pmb\mapsto              $\\[\mine]
+   $\pmb *                   $&
+   $\pmb\dashrightarrow      $&
+   $\pmb\rightsquigarrow     $&
+   $\pmb\multimap            $\\[\niz]
+  \hline\hline
+  0000&0000&0000&0000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{Ams1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccccccccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\hbar $&
+   $\pmb\hslash $&
+   $\pmb\backprime $&
+   $\pmb\varnothing $&
+   $\pmb\vartriangle $&
+   $\pmb\triangledown $&
+   $\pmb\angle $&
+   $\pmb\sphericalangle $&
+   $\pmb\measuredangle $&
+   $\pmb\Game$&
+   $\pmb\Finv $&
+   $\pmb\exists $&
+   $\pmb\nexists $\\[\mine]
+   $\pmb *$&
+   $\pmb\square $&
+   $\pmb\blacksquare $&
+   $\pmb\lozenge $&
+   $\pmb\blacklozenge $&
+   $\pmb\blacktriangle $&
+   $\pmb\blacktriangledown $&
+   $\pmb\bigstar $&
+   $\pmb\complement $&
+   $\pmb\mho $&
+   $\pmb\eth $&
+   $\pmb\Bbbk $&
+   $\pmb\diagup $&
+   $\pmb\diagdown $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Ams2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\dotplus $&
+   $\pmb\smallsetminus $&
+   $\pmb\ltimes $&
+   $\pmb\rtimes $&
+   $\pmb\leftthreetimes $&
+   $\pmb\rightthreetimes $&
+   $\pmb\divideontimes $&
+   $\pmb\Cap $&
+   $\pmb\Cup $&
+   $\pmb\circledS $&
+   $\pmb\intercal $&
+   $\pmb\centerdot $\\[\mine]
+   $\pmb *$&
+   $\pmb\curlywedge $&
+   $\pmb\curlyvee $&
+   $\pmb\barwedge $&
+   $\pmb\veebar $&
+   $\pmb\doublebarwedge $&
+   $\pmb\boxplus $&
+   $\pmb\boxminus $&
+   $\pmb\boxtimes $&
+   $\pmb\boxdot $&
+   $\pmb\circledast $&
+   $\pmb\circleddash $&
+   $\pmb\circledcirc $\\[\niz]
+  \hline\hline
+  00&00&00&00&00&00&00&00&00&00&00&00&00\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{Ams3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cc|}
+  \hline
+   $\pmb *$&
+   $\pmb\blacktriangleleft $&
+   $\pmb\blacktriangleright $\\[\mine]
+   $\pmb *$&
+   $\pmb\therefore $&
+   $\pmb\because $\\[\niz]
+  \hline\hline
+  0000&0000&0000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{AmsRel0}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\lessgtr $&
+   $\pmb\gtrless $&
+   $\pmb\lesseqgtr $&
+   $\pmb\gtreqless $\\[\mine]
+   $\pmb *$&
+   $\pmb\lesseqqgtr $&
+   $\pmb\gtreqqless $&
+   $\pmb\lll $&
+   $\pmb\ggg $\\[\niz]
+  \hline\hline
+  000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{AmsRel1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\leqq $&
+   $\pmb\geqq $&
+   $\pmb\leqslant $&
+   $\pmb\geqslant $&
+   $\pmb\eqslantless $&
+   $\pmb\eqslantgtr $&
+   $\pmb\lesssim $&
+   $\pmb\gtrsim $\\[\mine]
+   $\pmb *$&
+   $\pmb\precapprox $&
+   $\pmb\succapprox $&
+   $\pmb\precsim $&
+   $\pmb\succsim $&
+   $\pmb\preccurlyeq $&
+   $\pmb\succcurlyeq $&
+   $\pmb\curlyeqprec $&
+   $\pmb\curlyeqsucc $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{AmsRel2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\lessapprox $&
+   $\pmb\gtrapprox $&
+   $\pmb\lessdot $&
+   $\pmb\gtrdot $&
+   $\pmb\vartriangleleft $&
+   $\pmb\vartriangleright $&
+   $\pmb\trianglelefteq $&
+   $\pmb\trianglerighteq $\\[\mine]
+   $\pmb *$&
+   $\pmb\Subset $&
+   $\pmb\Supset $&
+   $\pmb\sqsubset $&
+   $\pmb\sqsupset $&
+   $\pmb\subseteq $&
+   $\pmb\supseteq $&
+   $\pmb\subseteqq $&
+   $\pmb\supseteqq $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{AmsRel3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\eqcirc $&
+   $\pmb\circeq $&
+   $\pmb\doteqdot $&
+   $\pmb\risingdotseq $&
+   $\pmb\fallingdotseq $&
+   $\pmb\triangleq $&
+   $\pmb\bumpeq $&
+   $\pmb\Bumpeq $&
+   $\pmb\vDash $&
+   $\pmb\Vdash $&
+   $\pmb\Vvdash $&
+   $\pmb\between $\\[\mine]
+   $\pmb *$&
+   $\pmb\backsim $&
+   $\pmb\thicksim $&
+   $\pmb\backsimeq $&
+   $\pmb\thickapprox $&
+   $\pmb\approxeq $&
+   $\pmb\varpropto $&
+   $\pmb\smallsmile $&
+   $\pmb\smallfrown $&
+   $\pmb\shortmid $&
+   $\pmb\shortparallel $&
+   $\pmb\pitchfork $&
+   $\pmb\backepsilon $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000&000&000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\newpage
+
+\textbf{AmsNegRel1}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\nless $&
+   $\pmb\ngtr $&
+   $\pmb\nleq $&
+   $\pmb\ngeq $&
+   $\pmb\nleqslant $&
+   $\pmb\ngeqslant $&
+   $\pmb\nleqq $&
+   $\pmb\ngeqq $&
+   $\pmb\lneq $&
+   $\pmb\gneq $\\[\mine]
+   $\pmb *$&
+   $\pmb\nprec $&
+   $\pmb\nsucc $&
+   $\pmb\npreceq $&
+   $\pmb\nsucceq $&
+   $\pmb\precneqq $&
+   $\pmb\succneqq $&
+   $\pmb\precnsim $&
+   $\pmb\succnsim $&
+   $\pmb\precnapprox $&
+   $\pmb\succnapprox $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{AmsNegRel2}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|cccccccccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\lneqq $&
+   $\pmb\gneqq $&
+   $\pmb\lvertneqq $&
+   $\pmb\gvertneqq $&
+   $\pmb\lnsim $&
+   $\pmb\gnsim $&
+   $\pmb\lnapprox $&
+   $\pmb\gnapprox $&
+   $\pmb\ntriangleleft $&
+   $\pmb\ntriangleright $&
+   $\pmb\ntrianglelefteq $&
+   $\pmb\ntrianglerighteq $\\[\mine]
+   $\pmb *$&
+   $\pmb\nsubseteq $&
+   $\pmb\nsupseteq $&
+   $\pmb\nsubseteqq $&
+   $\pmb\nsupseteqq $&
+   $\pmb\subsetneq $&
+   $\pmb\supsetneq $&
+   $\pmb\varsubsetneq $&
+   $\pmb\varsupsetneq $&
+   $\pmb\subsetneqq $&
+   $\pmb\supsetneqq $&
+   $\pmb\varsubsetneqq $&
+   $\pmb\varsupsetneqq $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000&000&000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\textbf{AmsNegRel3}
+\par\nobreak\vspace{2mm}
+\begin{tabular}{|c|ccccc|}
+  \hline
+   $\pmb *$&
+   $\pmb\nsim $&
+   $\pmb\nshortmid $&
+   $\pmb\nshortparallel $&
+   $\pmb\nmid $&
+   $\pmb\nparallel $\\[\mine]
+   $\pmb *$&
+   $\pmb\ncong $&
+   $\pmb\nvdash $&
+   $\pmb\nvDash $&
+   $\pmb\nVdash $&
+   $\pmb\nVDash $\\[\niz]
+  \hline\hline
+  000&000&000&000&000&000\\
+  \hline
+\end{tabular}
+\goodbreak\par\vspace{3mm}
+
+\end{document}
+
+% -----------------------------------------------------------------------------

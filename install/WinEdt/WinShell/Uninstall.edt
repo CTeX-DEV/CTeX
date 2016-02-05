@@ -1,0 +1,20 @@
+// Uninstall WinEdt
+
+Requires(20120317); // Requires this build of WinEdt to work properly
+
+// This macro calls WinEdt Uninstaller (UAC-Enabled)...
+
+  Prompt("This macro will uninstall WinEdt 9 from your system...",1,0);
+
+  Exe('%B\WinShell\Remove WinEdt Links.edt');
+  LetReg(9,'0');  // Root
+  Exe('%B\WinShell\Remove WinEdt Filetypes.edt');
+  LetReg(9,'1');  // Machine
+  Exe('%B\WinShell\Remove WinEdt Filetypes.edt');
+  LetReg(9,'2');  // User
+  Exe('%B\WinShell\Remove WinEdt Filetypes.edt');
+
+  ShellExecute('open','%B\Uninstall.exe'); // Required for UAC!
+  IfOK("QuitWinEdt;"); // Quit
+
+End;

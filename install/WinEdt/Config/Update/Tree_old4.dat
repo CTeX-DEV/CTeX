@@ -1,0 +1,2 @@
+    ON_CTRL_CLICK_MACRO="GlobalMark;TreeTrack(2);"
+    ON_CLICK_MACRO="TreeTrack(2,1);"

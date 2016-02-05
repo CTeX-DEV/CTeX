@@ -1,0 +1,3 @@
+    ON_CTRL_CLICK_MACRO="GlobalMark;TreeTrack(2);"
+    ON_CTRL_DBL_CLICK_MACRO="Exe('%b\Macros\Gather\GraphicsPreview.edt');"
+    ON_CLICK_MACRO="TreeTrack(2,1);"

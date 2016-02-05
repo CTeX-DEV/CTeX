@@ -1,0 +1,4 @@
+    ON_CLICK_MACRO="GlobalMark(1);GDITrack;"
+    ON_ICON_CLICK_MACRO="SetSel(0);Ins('%?');GlobalMark;"
+    ON_CTRL_CLICK_MACRO="GlobalMark;GDITrack;"
+    ON_DBL_CLICK_MACRO="GlobalReturn;SetSel(0);Ins('%?');GlobalMark;"

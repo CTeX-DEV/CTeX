@@ -1,0 +1,65 @@
+// This Macro displays a special dialog providing a graphic
+// interface to MiKTeX's dvips allowing you to choose the range.
+//
+// ExternalPrint("Macro", "Parameter", "Caption",
+//               "From", "To", "Portrait", "Landscape");
+//
+// The menu command dvips32 should be defined as a utility:
+//     dvips.exe %? %N.dvi
+// and possibly placed in one of the invisible Menus since it is
+// called indirectly through this macro...
+//
+// User can specify the first and last page, and optional parameters
+// (referred to as "#0"). The values are converted into a string
+// parameter "%?" that is passed as a command line to the application
+// (dvips). If the page number specification is left empty the
+// corresponding parameter does not get appended otherwise the value
+// is appended immediately after the string (keyword) for "From" or
+// "To"...
+//
+// "#3" refers to the Orientation value which in our case is disabled
+// since both Portrait and Landscape keywords are specified as empty.
+//
+// For users' convenience a list of recently used parameters is
+// available in a drop-down list.
+//
+// If you want to take advantage of this interface please define
+// dvi2ps menu item as the following Macro:
+// [Exe("%B\Macros\Samples\Dvips.edt")]
+// and check the usual Options (Requires Input, etc...)
+
+ ExternalPrint("Menu('dvips32')", "#0 #3 #1 #2",>
+   "Dvips...", "-p","-l","","");
+
+End;
+______________________________________________________________________
+
+An interface to "dvihplj" can be implemented in a similar manner:
+
+ ExternalPrint("Menu('dvihplj')", "#0 #3 #1 #2",>
+   "Dvihplj...", "/b","/l","","");
+
+(I don't know the keywords for Landscape and Portrait.)
+
+If you want to define a similar interface to any other command
+line oriented utility you should consult its documentation
+pertaining to admissible options and command line parameters and
+use this information to fill-in the parameters to WinEdt's
+ExternalPrint Macro function.
+
+
+Should this function prove insufficient for a particular
+application and you insist on a GUI you'll have to write a plug-in
+utility for WinEdt. I have no plans or time to write more such
+(application) specific interfaces and build them into WinEdt.
+Please note that general method to supply parameters to non GUI
+applications is to enable the Option "Confirm Command" in the
+definition of the associated WinEdt's Menu Item and simply enter
+the required parameters. This Option should also be enabled if you
+experience problems with your definition since it allows you to
+see and modify the exact command that is about to be executed.
+While this might not appeal to everyone please bare in mind that
+the lack of GUI is the "other" application's fault and you should
+not expect WinEdt and me to care or to be familiar with
+particulars of a potentially wide range of applications that
+different users might use in conjunction with WinEdt..

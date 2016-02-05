@@ -1,0 +1,5 @@
+// The following are not used by default (faster!):
+// Remove the comment to enable any of these handlers!
+//ON_DOC_OPEN_AFTER="%b\Macros\Events\MDIOpen.edt"
+//ON_DOC_ACTIVATE="%b\Macros\Events\MDIActivate.edt"
+//ON_DOC_SAVE="%b\Macros\Events\MDISave.edt"

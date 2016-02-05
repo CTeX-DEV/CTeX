@@ -1,0 +1,48 @@
+
+ Requires(20110428);
+
+ OpenOutput("%f.tmp");        // Open temporary file
+ WrL("/"+"/ Graphics inclusions from %f");
+ WrL;
+
+ SaveFind;
+ SearchReset;
+ SetSearchCurrentDoc;
+ SetSearchEntire(0);
+ SetSearchForward(1);
+ SetSearchCaseSensitive(1);
+ SetSearchInline(1);
+ SetNotFoundNotify(0);
+ SetReplacePrompt(0);
+ SetRegEx(1);
+ SetFindStr('\includegraphics*\{');
+
+ LetRegNum(0,0);
+ LetRegNum(4,0);
+ StartWorking('Extracting Graphic Files');
+ SetTracking(0);    // Turn off Screen Refreshing
+ GoToBeginningOfFile;
+ Loop(!*IfFound(!|MatchDelimiter(1);LetRegNum(0,%!0+1);>
+                  GetLength(2, "%S");>
+                  ExtractByIndex(1, "%S", 1, %!2-2);>
+// Convert to DOS!
+                  UnixToDos("%!1", 1);>
+                  WrL("%!1");|,>
+                !|Stop;|)*);
+ StopWorking;
+ SetTracking(1); // Turn on Screen Refreshing
+ SetOK(1);       // It's OK
+ RestoreFind;
+ CloseOutput;                       // Close temporary file
+ Prompt("Processed Graphic Inclusions: %!0");
+ Open("%f.tmp");        // Open temporary file for Editing
+End;
+
+Test Sample:
+============
+
+ \includegraphics*[width=\textwidth]{C:/dir1/dir2/picture1.ps}
+ \includegraphics*[width=\textwidth]{C:/dir1/dir2/picture2.ps}
+ \includegraphics*[width=\textwidth]{C:/dir1/dir2/picture3.ps}
+ \includegraphics*[width=\textwidth]{C:/dir1/dir2/picture4.ps}
+ \includegraphics*[width=\textwidth]{C:\dir1\dir2\pictur5.ps}

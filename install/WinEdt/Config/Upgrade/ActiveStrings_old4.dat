@@ -1,0 +1,27 @@
+STRING="\end{{"
+  ENABLED=1
+  MODE_FILTER="TeX|AUX"
+  MACRO="[Exe('%b\Macros\Active Strings\CompleteEnv.edt');]"
+
+STRING="\begin{"
+  ENABLED=0
+  MODE_FILTER="TeX"
+  MACRO="[Relax;]"
+
+STRING="\begin{tabular}"
+  ENABLED=0
+  MODE_FILTER="TeX|DTX;INS;STY;AUX"
+  MACRO="[Exe('%b\Macros\Active Strings\Tabular.edt');]"
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="TeX"
+  DBL_CLICK_MACRO="[MatchDelimiter(1,1,1);]"
+
+STRING="\begin{array}"
+  ENABLED=0
+  MODE_FILTER="TeX|DTX;INS;STY;AUX"
+  MACRO="[Exe('%b\Macros\Active Strings\Array.edt');]"
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="TeX"
+  DBL_CLICK_MACRO="[MatchDelimiter(1,1,1);]"
+
+STRING="\begin{?}}"

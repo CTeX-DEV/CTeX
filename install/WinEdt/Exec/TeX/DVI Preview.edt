@@ -1,0 +1,16 @@
+// DVI Preview (TeX System - dependent)
+
+  IfStr("%$('TeX System');",!"MiKTeX",!"=",!"JMP(!'MiKTeX_DVI_Preview');");
+  IfStr("%$('TeX System');",!"TeX Live",!"=",!"JMP(!'TeXLive_DVI_Preview');");
+  Prompt("No DVI Viewer for %$('TeX System'); is currently defined!");
+  Exit;
+
+:MiKTeX_DVI_Preview:: ===============================================
+  Run(|%$('DVIView'); -1 "%P\%N.dvi"|,'%P');
+  Exit;
+
+:TeXLive_DVI_Preview:: ==============================================
+  Run(|%$('DVIView'); "%P\%N.dvi"|,'%P',0,1,'%N.dvi - dviout',1,1);
+  Exit;
+
+End;

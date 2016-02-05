@@ -1,0 +1,51 @@
+// ---------------------------------------------------------------
+// %b\Macros\RegEx\isVerbatim.edt
+// ==============================
+//
+// RegEx like:
+//
+//   <something>\E{isVerbatim}
+//
+// a shorter form of:
+//
+//   <something>\X{\"|Exe('%b\Macros\RegEx\isVerbatim.edt');|}
+//
+// matches <something> only inside Verbatim-like Environments!
+//
+// Switches (as defined in Syntax Highlighting) are used to
+// determine whether a match is inside such an environment...
+// ---------------------------------------------------------------
+  PushTagsandRegisters;
+  GetSwitchStack(1,!'`');
+  IfOK(!'Relax;',!'PopTagsandRegisters;SetOK(0);Exit;');
+
+  FindInString('`%!1`',!'`\verb"?"`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`\verb|?|`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`\verb/?/`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`\begin{verbatim} .. \end{verbatim}`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`\begin{verbatim*} .. \end{verbatim*}`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`\begin{comment} .. \end{comment}`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`\begin{macrocode} .. \end{macrocode}`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`DTX ^^A Comment`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`DTX |verbatim|`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`HTML/XML Comment`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('`%!1`',!'`/* NSIS Comment */`',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+
+  // Add any other verbatim-like environments (switches) here!
+
+  // Not in Verbatim-like Environment ...
+  PopTagsandRegisters;
+  SetOK(0);
+  Exit; // Must Exit or else End; will reset the OK flag!
+End;

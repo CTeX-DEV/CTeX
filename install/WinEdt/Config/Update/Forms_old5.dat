@@ -1,0 +1,6 @@
+  // Use default Window Background
+  DEFAULT_BACKGROUND=1
+  CUSTOM_BACKGROUND_RGB="$FFFFFF"
+  // Use default Font Color
+  DEFAULT_FONT_COLOR=1
+  CUSTOM_FONT_RGB="$000000"

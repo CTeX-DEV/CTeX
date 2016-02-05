@@ -1,0 +1,23 @@
+//  Change Toolbar
+
+  PushTagsandRegisters;
+
+  IfFileExists('%b\ConfigEx\Toolbar.ini',>
+    !'Relax;',>
+    !'CopyFile("%B\ConfigEx\Toolbar.ini","%b\ConfigEx\Toolbar.ini",1,1);');
+  ReadFile('%b\ConfigEx\Toolbar.ini',0);
+  SubstituteInString('%!0',>
+    '<@{ }%%%%INCLUDE',>
+    '/'+'/ %%%%INCLUDE',>
+    11);
+  SubstituteInString('%!0',>
+    '<@{ }/'+'/@{ }%%%%INCLUDE="ConfigEx\\Toolbar%$(|TOOLBAR|);\.ini"',>
+    '   %%%%INCLUDE="ConfigEx\\Toolbar%$(|TOOLBAR|);.ini"',>
+    11);
+  WriteFile('%b\ConfigEx\Toolbar.ini','%!0');
+
+  LoadConfig("ConfigEx\Toolbar.ini");
+
+  PopTagsandRegisters;
+
+End;

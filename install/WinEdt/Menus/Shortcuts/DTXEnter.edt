@@ -1,0 +1,39 @@
+// DTX Enter
+// based upon schlicht's enter.edt
+
+Requires(20041213);
+PushTagsandRegisters;
+BeginGroup;
+GetLine(0,%l);
+
+// after "\begin{macrocode}": no percent, no indentation
+FindInString("%!0","\begin{macrocode}",1,2,10);
+IfOK(!"Enter;JMP('done');");
+
+// after "\end{macrocode}": insert percent, no indentation
+FindInString("%!0","\end{macrocode}",1,2,10);
+IfOK(!"Enter;InsText('%%');JMP('done');");
+
+// after guard: no percent, no indentation
+ExtractByIndex(1,"%!0",0,1);
+IfStr("%!1","%%<","=",!"Enter;JMP('done');");
+
+// else: insert percent (single or double), keep indentation level
+LetRegNum(1,%c);
+Enter;
+IfNum(%!1,1,">",!`>
+   ExtractByIndex(1,"%!0",0,1);>
+   IfStr("%!1","%%%","=",!">
+      FindInString('%!0','%%%%\(@{ }\)^{ }',0,1,1);>
+      IfOK(!'GetTag(0,0);','LetReg(0,||);');>
+      Ins('%%%%%!0');JMP('done');");>
+   ExtractByIndex(1,"%!0",0,0);>
+   IfStr("%!1","%%","=",!">
+      FindInString('%!0','%%\(@{ }\)^{ }',0,1,1);>
+      IfOK(!'GetTag(0,0);','LetReg(0,||);');>
+      Ins('%%%!0');");`);
+
+:done:: =============================================================
+EndGroup;
+PopTagsandRegisters;
+End;

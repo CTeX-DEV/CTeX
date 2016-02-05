@@ -1,0 +1,9 @@
+// Import Selected Text into HTML Document as <pre> </pre> environment (Translate Tags)
+
+  Translate(0,"HTML","%S",0,"HTML_Export");
+  Delete;
+  Mark(0);
+  Ins("%!0");
+  SelectFromMark;
+
+End;

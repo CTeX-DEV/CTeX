@@ -1,0 +1,11 @@
+// Project Open Event Handler
+
+  Requires(20040806);
+  PushTagsandRegisters;
+
+  IfStr('%!F',!'',!'<>',!'BuildTree;',!'DeleteTree;');
+  Assign('MAIN_FILE','%!F');
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,9 @@
+  // Gather Input Directives (Comments)
+  DIRECTIVE="%input ""?"""
+    EXTENSION="*;.tex"
+    PATH="%P;%@('TEXINPUTS');"
+  // Obsolete: For (<5.4) compatibility's sake ...
+  DIRECTIVE="%GATHER{?}"
+  DIRECTIVE="\INPUT{?}"
+  DIRECTIVE="\Input{?}"
+END="TeX"

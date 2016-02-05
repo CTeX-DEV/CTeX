@@ -1,0 +1,364 @@
+// -*- ASCII:EDT -*-
+// LaTeXDoc.edt
+// finds documentation for TeX packages
+// (schlicht 20020108)
+//////////////////////
+
+// This macro searches for documentation in the TeXMF trees.
+// It can also be used to find .sty, .cls and .bst files (or all other files)
+//    (suggested by Arnout Standaert <arnoutstandaert@hotmail.com>).
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+//                   USAGE
+//                   -----
+//    If you are using this macro to find documentation, it will first  search  in  the  \doc
+//    directory  for  printable  files (pdf,ps,dvi,txt). If it didn't find any files, it will
+//    search in the \source and the package's directory, and will also search for the sources
+//    of the documentation (tex,dtx,sty).
+//  * You can force the macro to search for doc sources already on the first run by appending
+//    "!" to the package name, e.g. "apacite!".
+//  * If the macro only finds the documented source (extension: .dtx) of the package, it will
+//    automatically create a dvi file from it, put it in the correct place, and open the dvi.
+//  * You can also use Regular Expressions, e.g. "euro*", which will find  documentation  for
+//    the packages: "euro", "eurosans", "eurofont", "euroitc" etc.
+//  * Finally, you can also use this macro to find a specific file (of whatever type), if you
+//    include its extension, when entering it. E.g. "jurabib.cfg" will find all "jurabib.cfg"
+//    files *anywhere* in the TeXMF trees.
+//  * New: The macro will store the TeXMF  trees  in  memory  (until  the  end  of  a  WinEdt
+//    session),  so  that  search  will  be  much  faster.  If you have installed a new LaTeX
+//    package, you can force the macro to read the trees again, by preceding the package name
+//    with "+", e.g. "+memoir".
+//
+// Note:  If this macro does not find any documentation for a package, it is very likely that
+// the package's documentation is in the wrong place. Usually, documentation should be in the
+// TeXMF/doc/ subdirectories. If it isn't, complain to the maintainer of your TeX system.
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+//                INSTALLATION
+//                ------------
+// There are two ways to call this macro:
+//    1. through a menu entry
+//    2. by double-clicking on an Active String
+// 1. To set this macro up as a menu entry, go to Options | Menu Setup, double-click  on  the
+//    desired menu (e.g., "Help") and insert a new Item -> "Macro". If you want to search for
+//    documentation, the "Macro" field should contain:
+//        [Assign("getLaTeX","doc");Exe("%b\Macros\Doc\LaTeXDoc.edt");]
+//    Defining a shortcut for this menu item might be convenient. My suggestion: ALT-F1
+//    If you want to find the sources, the definition should read:
+//        [Assign("getLaTeX","source");Exe("%b\Macros\Doc\LaTeXDoc.edt");]
+//    Finally, you can also set up an entry to search for BibTeX style files. Here, the Macro
+//    field must contain:
+//        [Assign("getLaTeX","bst");Exe("%b\Macros\Doc\LaTeXDoc.edt");]
+// 2. The macro can also be set up as the Double-Click response to Active Strings:
+//    * Insert one or more of these strings:
+//        \usepackage?{?}
+//        \documentclass?{?}
+//        \bibliographystyle{?}
+//      as a new Item in "Options | Settings | Active Strings",
+//    * check the field before "Dbl-Click:",
+//    * and put "TeX" in the next field.
+//    * The "Macro" field must contain this line:
+//        [Assign("LaTeXDoc","Active"); Exe("%b\Macros\Doc\LaTeXDoc.edt");]
+//    Now, if you double-click on "\documentclass?{?}" or "\usepackage?{?}", the  macro  will
+//    provide  you with the documentation, or the source, of the respective class or package.
+//    Whether it will search for documentation or source, depends on the  following  settings
+//    (uncomment a line of your choice):
+IfStr("%$('getLaTeX');","","=",!">
+   Assign('getLaTeX','doc');       // search for documentation <>
+//   Assign('getLaTeX','source');  // search for .sty or .cls files <>
+//   Assign('getLaTeX','ask');     // ask me what to do <>
+");
+//    The Active String "\bibliographystyle{?}" will find the .bst file for you.
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Requires(20020223);
+// This macro also requires that the following registers be defined:
+// * TeX-Root        the path to the root TeXMF
+// * TeX-Local       the path to the local TeXMF (optionally)
+// * PDF-View        the pdf viewer accessory
+// * PDF-Caption     the caption of the pdf viewer
+// * GSView          the ps viewer accessory
+// * DVIView         the dvi viewer accessory
+//
+// In a sane setup of WinEdt, all these variables are defined.
+// If you encounter problems, you should change the TeX Configuration macro
+// %B\Exec\<your TeX System>\TeX System.edt (for the first two variables)
+// or the startup macro %B\Config\Startup.edt (for the last four variables).
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// Alternative Behaviour (using texdoc.exe and FNDB)?
+
+JMP(!"CustomTeXDoc"); // Jump to custom processing...
+
+// Open links to documentation in IE using texdoc.exe accessory:
+
+PushTagsandRegisters;
+LetReg(9,'%$(|LaTeXDoc|);');
+EnterReg(9,"Find documentation for LaTeX package:",>
+           "LaTeX package documentation");
+Assign("LaTeXDoc","%!9");
+WinExe("",|texdoc.exe --quiet "%!9"|,"","",1000);
+PopTagsandRegisters;
+Exit;
+
+:CustomTeXDoc:: ==================================================================
+
+PushTagsandRegisters;
+
+IfStr("%$('TeX-Root');","","=",>
+  !"Prompt('I don''t know where TeX''s root folder is!%\I cannot continue!',3,1);PopTagsandRegisters;Exit;");
+// If you are not using MiKTeX, either assign the variable manually
+// in the file %B\Exec\<your TeX System>\TeX System.edt, like this:
+//Assign("TeX-Local","C:\localtexmf");
+// or comment out the next line, if you don't have a local TeXMF tree:
+//IfStr("%$('TeX-Local');","","=","Prompt('I don''t know where TeX''s local folder is!',2,0);");
+//TeX Local no longer exists in MiKTeX 2.5
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// That's it.
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+IfStr("%$('LaTeXDoc');","Active","=",>
+  !`Release("LaTeXDoc");>
+    GetSel(0,1);>
+    IfStr("%!1","\bibliographystyle","=","Assign('getLaTeX','bst');",!">
+      IfStr('%$(|getLaTeX|);','ask','=','Prompt(''Doc (YES) or Source (NO)?'',0,4,>
+         ''Assign(|getLaTeX|,|doc|);'',>
+         ''Assign(|getLaTeX|,|source|);'',>
+         ''Release(|getLaTeX|);PopTagsandRegisters;Exit;'');');>
+    ");>
+    LetReg(0,"%?");>
+    LetRegNum(2,-1);>
+    LetRegNum(3,-1);>
+    LetRegNum(4,0);>
+    LetReg(9,"");>
+    Loop(!"// extract packages <>
+       FindInString('%!0','{~,}*,',1,2,1001,%!2+1);>
+       IfOK(>
+         !'ExtractByIndex(5,''%!0'',%!1,%!2-1);',>
+         !'ExtractByIndex(5,''%!0'',%!3+1,%!2+1);>
+           IfNum(%!4,0,''>'',!''LetReg(9,|%!9||%!5|);'',!''LetReg(9,|%!5|);'');>
+           Stop;');>
+       LetRegNum(3,%!2);>
+       LetRegNum(4,%!4+1);">
+    );`,>
+  !`IfStr("%$('LaTeXDoc');","secondRun","<>",!">
+       LetReg(9,'%$(|LaTeXDoc|);');>
+       IfStr('%$(|getLaTeX|);','doc','=',>
+         'EnterReg(9,''Find Documentation for Package:'',''LaTeXDoc'');',>
+         'EnterReg(9,''Find Source for Package:'',''LaTeXDoc'');');>
+       IfStr('%!9','','=','PopTagsandRegisters;Exit;');>
+       GetLength(5,'%!9');>
+       ExtractByIndex(0,'%!9',%!5-1,%!5);>
+       IfStr('%!0','!','=',// search source, as well <>
+         !'Assign(''LaTeXDoc'',''secondRun'');>
+           ReplaceInString(''%!9'','''',%!5-1,%!5,0,9);',>
+         !'Assign(''LaTeXDoc'',''%!9'');'>
+       );>
+       FindInString('%!9','\.*',3,4,111);>
+       IfOK(!'// single file <>
+           ExtractByIndex(0,''%!9'',%!3+1,%!4);>
+           Assign(''LaTeXDocExt'',''%!0'');>
+           Assign(''getLaTeX'',''%!0'');>
+           ReplaceInString(''%!9'','''',%!3,%!4,0,9);'>
+       );>
+       ExtractByIndex(0,'%!9',0,0);>
+       IfStr('%!0','+','=',// forget old results <>
+         !'ReplaceInString(''%!9'','''',0,0,0,9);>
+           IfStr(''%$(|LaTeXDoc|);'',''secondRun'',''<>'',>
+             !''Release(|LaTeXDoc-%!9-secondRun-%$(*getLaTeX*);|);>
+                Assign(|LaTeXDoc|,|%!9|);'',>
+              ''Release(|LaTeXDoc-%!9-%!9-%$(*getLaTeX*);|);'');>
+           Release(''LaTeXDoc-%!9-%$(|LaTeXDoc|);-%$(|getLaTeX|);'');>
+           Assign(''LaTeXDoc-new'',''yes'');',>
+         !'Release(''LaTeXDoc-new'');'>
+       );">
+    );`>
+);
+
+
+// new (1.2): Already searched for this package?:
+IfStr("%$('LaTeXDoc-%!9-%$(|LaTeXDoc|);-%$(|getLaTeX|);');","","<>",!`>
+   LetRegNum(2,0);>
+   LetRegNum(4,0);>
+   Interface("Docs for the ""%!9"" package");>
+   Loop(!">
+      SetOK(1);>
+      FindInString('%$(|LaTeXDoc-%!9-%$(*LaTeXDoc*);-%$(*getLaTeX*);|);','<\(*\)>',1,2,1001,%!2);>
+      IfOK(!'GetTag(0,1);>
+         Do(''%!1'');>
+         LetRegNum(4,%!4+1);',>
+        'Stop;');>
+   ");>
+   IfNum(%!4,1,">",>
+    !"ShowList(0,1,!'Do(|%?|);');",>
+    !"SetOK(1);>
+      FindInString('%$(|LaTeXDoc-%!9-%$(*LaTeXDoc*);-%$(*getLaTeX*);|);','Item(''*'',''\(0*\)'');',7,8,1);>
+      IfOK(!'>
+         GetTag(0,7);>
+         Do(''%!7'');');");>
+   Assign("LaTeXDoc","%!9");>
+   Release("getLaTeX");>
+   PopTagsandRegisters;Exit;>
+`);
+
+
+Interface('Source of "%!9"');
+IfStr("%$('LaTeXDoc');","secondRun","=",">
+   StartWorking('Searching for ""%!9"" doc sources...');>
+   LetReg(6,'doc');>
+   Assign('LaTeXDocExt','dvi;.pdf;.ps;.txt;.README;.tex;.dtx;.sty;.gz'); >
+   Assign('findLaTeXDoc','\\%!9{{{{\.}|{\\+{+^{>|\.}\.}}}{tex|dtx|sty|dvi|README|pdf|txt|ps@{\.ps|\.gz}}}|\\README}>');>
+   Interface('Docs for the ""%!9"" package');",>
+ !"StartWorking('Searching for ""%!9"" %$(|getLaTeX|); ...');>
+   LetReg(6,''); // new (1.1): search the whole tree, if an extension is specified <>
+   Assign('findLaTeXDoc','\\{%!9}\.%$(|LaTeXDocExt|);>');>
+   IfStr('%$(|getLaTeX|);','bst','=','LetReg(6,''bibtex'');Assign(''findLaTeXDoc'',''\\{%!9}\.bst>'');Assign(''LaTeXDocExt'',''bst'');');>
+   IfStr('%$(|getLaTeX|);','source','=','LetReg(6,''tex'');Assign(''findLaTeXDoc'',''\\{%!9}\.{sty|tex|cls}>''); Assign(''LaTeXDocExt'',''sty;.tex;.cls'');');>
+   IfStr('%$(|getLaTeX|);','doc','=','LetReg(6,''doc'');>
+      Assign(''LaTeXDocExt'',''dvi;.pdf;.ps;.txt;.README;.gz'');>
+      Assign(''findLaTeXDoc'',''\\%!9{{{{\.}|{\\+{+^{>|\.}\.}}}{dvi|README|pdf|txt|ps@{\.ps|\.gz}}}|\\README}>'');>
+      Interface(''Docs for the ""%!9"" package'');');>
+");
+IfStr("%$('LaTeXDoc-new');","yes","=",!">
+   Release('LaTeXDoc-%!6-%$(|LaTeXDocExt|);');>
+   Release('LaTeXDoc-secondRun');");
+
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Change this if Doc folder is somewhere else...
+// Eg. TeX Live 2009:
+// Assign(!"TeX-DocRoot","%$('TeX-Root');\texmf-dist");
+Assign(!"TeX-DocRoot","%$('TeX-Root');");
+IfStr("%$('TeX System');",!"TeX Live",!"=",!|Assign(!"TeX-DocRoot","%$('TeX-Root');\texmf-dist");|);
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+LetReg(0,"");
+// new (1.2): save trees, so that we don't have to list them every time:
+IfStr("%$('LaTeXDoc-%!6-%$(|LaTeXDocExt|);');","","=",!`>
+   SetOK(1);>
+   // don't list the current directory, if we're inside the TeXMF tree:
+   FindInString("%/p","{%/$(|TeX-Local|);/%!6/}|{%/$(|TeX-DocRoot|);}",1,2,1);>
+   IfOK("",!"ListFolderFiles(0,'%p','.%$(|LaTeXDocExt|);',1,0);");>
+   IfStr("%$('TeX-Local');","","<>",!"ListFolderFiles(1,'%$(|TeX-Local|);\%!6\','.%$(|LaTeXDocExt|);',1,0);");>
+   LetReg(0,"%!0%\%!1");>
+   ListFolderFiles(1,"%$('TeX-DocRoot');\%!6\",".%$('LaTeXDocExt');",1,0);>
+   LetReg(0,"%!0%\%!1");>
+   Assign("LaTeXDoc-%!6-%$('LaTeXDocExt');","%!0");>
+   `,>
+ !`LetReg(0,"%$('LaTeXDoc-%!6-%$(|LaTeXDocExt|);');");`);
+// Search in TeXMF\sources\ directory on the second run
+IfStr("%$('LaTeXDoc');","secondRun","=",!`>
+   LetReg(2,"");>
+   // ...if we didn't do this already, that is
+   IfStr("%$('LaTeXDoc-secondRun');","","=",!``>
+      IfStr("%$('TeX-Local');","","<>",!*>
+         ListFolderFiles(1,"%$('TeX-Local');\tex\latex\",".%$('LaTeXDocExt');",1,0);>
+         LetReg(2,"%!1");*);>
+      ListFolderFiles(1,"%$('TeX-DocRoot');\tex\latex\",".%$('LaTeXDocExt');",1,0);>
+      LetReg(2,"%!2%\%!1");>
+      IfStr("%$('TeX-Local');","","<>",!*>
+         ListFolderFiles(1,"%$('TeX-Local');\source\",".%$('LaTeXDocExt');",1,0);>
+         LetReg(2,"%!2%\%!1");*);>
+      ListFolderFiles(1,"%$('TeX-DocRoot');\source\",".%$('LaTeXDocExt');",1,0);>
+      LetReg(2,"%!2%\%!1");>
+      Assign("LaTeXDoc-secondRun","%!2");>
+      ``,>
+   !``LetReg(2,"%$('LaTeXDoc-secondRun');");``);>
+   LetReg(0,"%!0%\%!2");>
+`);
+//IfStr("%!6","","=","Assign('LaTeXDoc','secondRun');");
+
+LetRegNum(2,0);
+LetRegNum(4,0);
+LetReg(7,"");
+Loop(!`>
+   SetOK(1);>
+   FindInString("%!0","%$('findLaTeXDoc');",1,2,1001,%!2);>
+   IfOK(!">
+      SetOK(1);>
+      FindInString('%!0','<*>',1,3,1101,%!2);>
+      ExtractByIndex(8,'%!0',%!1,%!3-2);>
+      LetRegNum(1,0);>
+      GetFileType('%!8',7);>
+      // appropriate actions for file types:
+      IfIStr('%!7','.pdf','=',!'LetRegNum(1,1);LetReg(7,''Run(|%$(*PDF-View*); ""%!8""|,"""",0,0,""%$(*PDF-Caption*);"");'');');>
+      IfIStr('%!7','.ps','=',!'LetRegNum(1,1);LetReg(7,''Run(|%$(*GSView*); ""%!8""|,"""",0,0,""%N.ps - GSview"",1,1);'');');>
+      IfIStr('%!7','.gz','=',!'LetRegNum(1,1);LetReg(7,''Run(|%$(*GSView*); ""%!8""|,"""",0,0,""%N.ps.gz - GSview"",1,1);'');');>
+      IfIStr('%!7','.dvi','=',!'LetRegNum(1,1);LetReg(7,''Run(|%$(*DVIView*); -1 ""%!8""|,"""",0,0,"""",1,1);'');');>
+      IfIStr('%!7','.dtx','=',!'// new (1.1): automatically create the documentation from dtx files: <>
+         LetRegNum(1,1);>
+         GetFileName(|%!8|,6);>
+         SetOK(1);>
+         FindInString(''%!9'',''%!6'',5,7,0);>
+         IfOK(!''LetReg(3,|%!6|);'',''GetFileName(|%!8|,3);'');>
+         IfStr(|%$(*TeX-Local*);|,||,|=|,|LetReg(5,||%$(*TeX-DocRoot*);||);|,|LetReg(5,||%$(*TeX-Local*);||);|);>
+         GetFilePath(|%!8|,7);>
+         LetReg(7,''>
+            StartWorking(|creating %!6 doc...|);>
+            WinExe(||,|latex.exe -interaction nonstopmode ""%!6.dtx""|,|%!7|,||,11100,1);>
+            WinExe(||,|latex.exe -interaction nonstopmode ""%!6.dtx""|,|%!7|,||,11100,1);>
+            IfStr(|%!7\%!6.dvi|,|%!5\doc\latex\%!9\%!6.dvi|,|<>|,!|>
+               CopyFile(||%!7\%!6.dvi||,||%!5\doc\latex\%!9\%!6.dvi||,1,1);>
+               DeleteFile(||%!7\%!6.dvi||);|);>
+            DeleteFile(|%!7\%!6.aux|);DeleteFile(|%!7\%!6.idx|);DeleteFile(|%!7\%!6.glo|);DeleteFile(|%!7\%!6.log|);>
+            Assign(|LaTeXDoc-%!9-%!9-%$(*getLaTeX*);|,>
+               |%%$(*LaTeXDoc-%!9-%!9-%$(:getLaTeX:);*);Item(*%!8*,*Run(||%$(:DVIView:); -1 ""%!5\doc\latex\%!3\%!6.dvi""||,||||,0,0,||||,1,1);*);%%\|);>
+            StopWorking;>
+            Run(|%$(*DVIView*); -1 ""%!5\doc\latex\%!3\%!6.dvi""|,||,0,0,||,1,1);''>
+         );>
+         LetReg(8,''%!8 -> dvi'');',>
+       !'IfNum(%!1,0,''='',''LetReg(7,''''Open(|%!8|,1,0,-1);'''');'');'>
+      );>
+      // shorten path:
+      FindInString('%!8','%$(|TeX-DocRoot|);\',3,6,0);>
+      IfOK(!'ReplaceInString(''%!8'',''[TeXMF]\'',%!3,%!6,0,8);');>
+      FindInString('%!8','%$(|TeX-Local|);\',3,6,0);>
+      IfOK(!'ReplaceInString(''%!8'',''[LocalTeXMF]\'',%!3,%!6,0,8);');>
+      // remember it for later:
+      Assign('LaTeXDoc-%!9-%$(|LaTeXDoc|);-%$(|getLaTeX|);','%$(|LaTeXDoc-%!9-%$(*LaTeXDoc*);-%$(*getLaTeX*);|);Item(''%!8'',''%!7'');%\');>
+      LetRegNum(4,%!4+1);>
+     ",>
+    !"// new (1.2) sort list: <>
+      SortLines('%$(|LaTeXDoc-%!9-%$(*LaTeXDoc*);-%$(*getLaTeX*);|);',1101,1,0);>
+      Assign('LaTeXDoc-%!9-%$(|LaTeXDoc|);-%$(|getLaTeX|);','%!0');>
+      LetRegNum(2,0);>
+      Loop(!'>
+         SetOK(1);>
+         FindInString(''%$(|LaTeXDoc-%!9-%$(*LaTeXDoc*);-%$(*getLaTeX*);|);'',''<\(0~{>}*\)>'',1,2,1001,%!2);>
+         IfOK(!''GetTag(0,3);>
+            Do(|%!3|);'',>
+          ''Stop;'');>
+      ');>
+      Stop;">
+   );>
+`);
+StopWorking;
+
+IfNum(%!4,0,"=",!">
+   IfStr('%$(|LaTeXDoc|);','secondRun','=',>
+     !'Assign(''LaTeXDoc'',''%!9''); >
+       Release(''getLaTeX'');>
+       Prompt(''I didn''''t find any documentation for the ""%!9"" package!'',3,1);>
+       PopTagsandRegisters;Exit;',>
+     !'IfStr(''%$(|LaTeXDocExt|);'',''dvi;.pdf;.ps;.txt;.README;.gz'',''='',!''>
+          Assign(|LaTeXDoc|,|secondRun|);>
+          Exe(|%b\Macros\Doc\LaTeXDoc.edt|);>
+          Assign(|LaTeXDoc|,|%!9|);>
+          Release(|getLaTeX|);>
+          PopTagsandRegisters;Exit;>
+        '',!''>
+          Assign(|LaTeXDoc|,|%!9|); >
+          Release(|getLaTeX|);>
+          Prompt(|I didn''''t find the source of ""%$(*LaTeXDoc*);"" !|,3,1);>
+          PopTagsandRegisters;Exit;''>
+       );'>
+   );">
+);
+Assign("LaTeXDoc","%!9");
+Release("getLaTeX");
+IfNum(%!4,1,">",!"ShowList(0,1,!'Do(''%?'');');",!"Do('%!7');");
+
+PopTagsandRegisters;
+
+End;
+$Id: LaTeXDoc.edt,v 1.6 2005-02-17 13:56:38+01 schlicht Exp schlicht $

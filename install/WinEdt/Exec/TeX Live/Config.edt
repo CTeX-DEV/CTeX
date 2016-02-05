@@ -1,0 +1,16 @@
+// TeX Live Configuration for Execution Modes
+
+  Requires(20120413);
+
+  // Configuration
+  SetConfig('TeX Live');
+  Assign('Config-Dir','TeX Live');
+  Assign('Exec-Dir','TeX Live');
+
+  // Execution Modes
+  Exe('%b\Exec\%$("Exec-Dir");\ExeMode.edt');
+
+  // Detect TeX System for TeX Live Configuration
+  Exe('%b\Exec\%$("Exec-Dir");\TeX System.edt');
+
+End;

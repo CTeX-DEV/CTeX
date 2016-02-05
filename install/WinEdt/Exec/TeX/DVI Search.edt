@@ -1,0 +1,17 @@
+// DVI Search (TeX System - dependent)
+
+  IfStr("%$('TeX System');",!"MiKTeX",!"=",!"JMP(!'MiKTeX_DVI_Preview');");
+  IfStr("%$('TeX System');",!"TeX Live",!"=",!"JMP(!'TeXLive_DVI_Preview');");
+  Prompt("No DVI Viewer for %$('TeX System'); is currently defined!");
+  Exit;
+
+:MiKTeX_DVI_Preview:: ===============================================
+  Run(|%$('DVIView'); -1 -s "%!l %p\%n%t" "%P\%N.dvi"|,'%P');
+  Exit;
+
+:TeXLive_DVI_Preview:: ==============================================
+  WinExe('',|%$('DVIView'); "%P\%N.dvi" # %!l "%/Q%n%t"|,'','',1000);
+  SetFocus('%N.dvi - dviout');
+  Exit;
+
+End;

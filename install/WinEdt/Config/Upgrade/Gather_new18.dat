@@ -1,0 +1,13 @@
+PAGE="Ref-DTX"
+  PAGE_CAPTION="Ref"
+  PAGE_MODE_FILTER="DTX"
+  PAGE_SORTED=0
+  PAGE_CASE_SENSITIVE=1
+  PAGE_IGNORE_COMMENTS=1
+  PAGE_IGNORE_VERBATIM=1
+  PAGE_ON_ACTIVATE_MACRO="GlobalMark;"
+  PAGE_ON_SHOW_MACRO="GlobalMark;"
+  PAGE_FILTER="Label-DTX"          // Search for labels
+  PAGE_FILTER_FOUND_PREFIX=""
+  PAGE_FILTER_NOT_FOUND_PREFIX="?" // Prefix for undefined references
+  ITEM="\ref{?}"

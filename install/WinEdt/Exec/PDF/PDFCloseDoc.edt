@@ -1,0 +1,99 @@
+// -*- ASCII:EDT -*-
+// Close PDF Document ...
+
+  Requires(20130513); // Requires this build of WinEdt to work properly
+
+  IfFileExists("%P\%N.pdf", !"Relax;",!"Exit;");
+  IfFileLocked("%P\%N.pdf", 11111, !"Relax;",!"Exit;");
+
+  PushTagsandRegisters;
+
+  // PDF-XChange Viewer or Adobe is locking the file?
+  FindInString(`%$('PDF-View');`,!'PDFX',1,2,1000,1);
+  IfOK(!"JMP(!'PDFX');");
+
+  FindInString(`%$('PDF-View')`,!'Adobe',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+  FindInString(`%$('PDF-View')`,!'Acrobat.exe',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+  FindInString(`%$('PDF-View')`,!'AcroRd',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+
+  // What is locking it (I don't know)...
+  JMP(!'Done');
+
+:PDFX:: =============================================================
+
+  StartWorking(!'Closing PDF Document...');
+
+  // This works with version 2 of PDF-XChange (nice and clean!)
+  Run('%$("PDF-View"); /close:discard "%P\%N.pdf"');
+  JMP(!'Sync');
+
+:Adobe:: ============================================================
+
+  StartWorking(!'Closing PDF Document...');
+
+// Shift Key should not be down or else Adobe might fail!
+// Wait until Shift (VK_SHIFT=16) is released ...
+//  ProcessMessages;
+//  LetRegNum(0,0);
+//  Loop(!|>
+//    LetRegNum(0,%!0+1);>
+//    IfNum(%!0,111,'>',!"Stop;");>
+//    IfKeyDown(16,0,0,!"WaitForMessage(111,2);",!"Stop;");>
+//  |);
+//  ProcessMessages;
+//
+//  IfFileExists("%P\%N.pdf", !"Relax;",!"JMP(!'Done');");
+//  IfFileLocked("%P\%N.pdf", 11111, !"Relax;",!"JMP(!'Done');");
+
+// DDE ==============================================================
+  DDEOpen("%$('PDF-View')","%$('Acro-DDE_Service');","%$('Acro-DDE_Topic');");
+  IfOK(!"Relax;",!"DDEClose;JMP('Done');");
+  DDEExe('[AppHide()]');
+  // As of Acrobat 8 DocOpen must be done twice or else Adobe Crashes!
+  DDEExe('[DocOpen("%P\%N.pdf")]');
+  DDEExe('[DocClose("%P\%N.pdf")]');
+:DDE_Close:: ========================================================
+  //DDEExe('[AppHide()]');   // This does not work in V 11
+  DDEClose;
+  ProcessMessages;
+  SetFocus;
+  ProcessMessages;
+  SetFocus;
+  Wait(33);
+  SetFocus;
+
+:Sync:: =============================================================
+
+  // Sync problem - wait until the file is released:
+  // Acrobat Reader may take some time to release the pdf file!
+  IfFileLocked("%P\%N.pdf", 00110,!'Relax;',!'JMP(!"Done");');
+  Wait(11);
+  IfFileLocked("%P\%N.pdf", 00110,!'Relax;',!'JMP(!"Done");');
+  Wait(22);
+  IfFileLocked("%P\%N.pdf", 00110,!'Relax;',!'JMP(!"Done");');
+  Wait(33);
+  IfFileLocked("%P\%N.pdf", 00110,!'Relax;',!'JMP(!"Done");');
+  SetFocus;
+  ProcessMessages;
+  SetFocus;
+  // Still Closing?
+  LetRegNum(0,0);
+  Loop( // Prevent an Infinite Loop: 4 sec. max<>
+     !|LetRegNum(0,%!0+1);IfNum(%!0,111,'>',!'Stop;');>
+       IfFileLocked("%P\%N.pdf", 00110,>
+         !'SetFocus;ProcessMessages;Wait(33);',>
+         !'Stop;',!'Stop;');>
+      |);
+  // Prompt('Required Iterations: %!0.'); // Testing for Problems
+  SetFocus;
+  StopWorking;
+
+:Done:: =============================================================
+
+  PopTagsandRegisters;
+  ProcessMessages;
+
+End;

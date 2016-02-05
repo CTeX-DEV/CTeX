@@ -1,0 +1,12 @@
+// -*- ASCII:EDT -*-
+
+BeginGroup;
+IfSel('0','=',>
+      'SelWord(1);>
+       IfSel(''0'',''='',>
+             ''Ins("\textsf{}");>
+               CharLeft;'',>
+             ''InsLabel("\textsf","{","}")'');',>
+      'InsLabel("\textsf","{","}");');
+EndGroup;
+End;

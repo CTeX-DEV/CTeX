@@ -1,0 +1,30 @@
+// -*- ASCII:EDT -*-
+// Mode-Sensitive Preview
+
+// @BEGIN: TeX
+IfisMode("TeX","%!M",!"Exe('%b\Exec\TeX\Preview.edt');Exit;");
+// @END: TeX
+
+// @BEGIN: NSIS
+IfisMode("NSIS","%!M",!"Exe('%b\Exec\NSIS\Preview.edt');Exit;");
+// @END: NSIS
+
+// @BEGIN: XWE (HTML Help Compiler for Macro Manual
+IfisMode("XWE","%!M",!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+// @END: XWE
+
+// @BEGIN: HHC (HTML Help Compiler)
+IfisMode("HHC","%!M",!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+IfIStr("%F","%P\%N.hhp",'=',!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+// @END: HHC (HTML Help Compiler)
+
+// @BEGIN: HTML
+IfisMode("HTML","%!M",!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+// @END: HTML
+
+// Add any custom previewers here ...
+
+// @DEFAULT
+Relax; // No Default Previewer (Perhaps ShellExecute)!
+
+End;

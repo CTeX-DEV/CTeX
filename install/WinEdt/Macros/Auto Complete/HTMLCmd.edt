@@ -1,0 +1,24 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert HTML <tag> with bullets for options and arguments
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - command name
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// and executes an additional macro %!? if set to non-empty string ...
+// ===============================================================================
+
+// This will be inserted by the event handler
+LetTempReg("<%?");
+// No need to execute anything after
+LetTempReg(!"",!"!");
+
+End;
+
+// ===============================================================================

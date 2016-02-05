@@ -1,0 +1,52 @@
+// Expand the Main File by inserting all included files...
+
+PushTagsandRegisters;
+
+SetTag(0,'%F'); // The Main File
+OpenOutput('%P\%N-Expanded%T'); // Expanded Main File
+
+// Expand the Main File and Recurse through input files...
+Call('Expand_a_File');
+
+CloseOutput;
+Open('%P\%N-Expanded%T');
+PopTagsandRegisters;
+Exit;
+
+:Expand_a_File:: ====================================================
+  PushTagsandRegisters;
+  LetRegNum(0,0);
+  LetReg(1,'');
+  GetTag(0,8); // File Name is in Tag 0
+  // Find the full specification ...
+  SearchForFile(9,'%!8','%P');
+  IfOK("JMP('Read_File');");
+  SearchForFile(9,'%!8.tex','%P');
+  IfOK("JMP('Read_File');");
+  GetFullPath(9,'%!8','%P');
+  IfFileExists("JMP('Read_File');");
+  GetFullPath(9,'%!8.tex','%P');
+  IfFileExists("JMP('Read_File');");
+  // Input Cannot be found?
+:Read_File:: ========================================================
+  LetReg(8,'');
+  ReadFile('%!9',8);
+  IfOK('Relax;',"Prompt('File %!9 not found!');PopTagsandRegisters;Exit;");
+:Search_Input:: =====================================================
+  FindInString('%!8','{{\\input\{\(*\)\}}|{\\include\{\(*\)\}}}*>',2,3,1011,%!0);
+  IfOK('Relax;',"JMP('Done');");
+  ExtractByIndex(5,'%!8',%!0,%!2-1);
+  WrS('%!5');
+  ExtractByIndex(5,'%!8',%!2,%!3);
+  WrL('%%%% %!5'); // Write it as a comment!
+  Call('Expand_a_File');  // Recursive!
+  LetRegNum(0,%!3+1);
+  JMP('Search_Input');
+:Done:: =============================================================
+  GetLength(2,"%!8");
+  ExtractByIndex(5,'%!8',%!0,%!2-1);
+  WrL('%!5');
+  PopTagsandRegisters;
+Return;
+
+End;

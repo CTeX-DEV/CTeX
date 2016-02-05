@@ -1,0 +1,41 @@
+// Active String: color="INIcolor"
+
+  LetReg(9);
+  IfKeyDown(17,0,0,!"LetReg(9,!'RGB_');");
+  LetReg(1,'%S');
+  // Allow empty argument (SysNone) only if active string ends with COLOR
+  FindInString("%!1%\",!"COLOR>",-11,-11,11);
+  IfOK(!"Relax;",!"IfStr('%?',!'',!'=',!'Exit;');");
+  GetColorRGB(0,"%?");
+  IfOK(!"Relax;",!"Exit;");
+  // The argument is a properly defined color...
+  GetColor(0,"%!0");
+  IfOK(!"Relax;",!"Exit;");
+    LetReg(0,'#%!0');
+    // If Ctrl Key was down use RGB_ name when basic color is selected...
+    GetColorName(0,'%!0','%!9');
+    SetTracking(0);
+    BeginGroup;
+    SaveFind;
+    SetFindTextSelect(1);
+    SetNotFoundNotify(1);
+    SetSearchCurrentDoc;
+    SetSearchCyclic(0);
+    SetSearchEntire(0);
+    SetSearchForward(1);
+    SetSearchCaseSensitive(1);
+    SetRegEx(0);
+    SetSearchCaseSensitive(1);
+    SetFindStr('"%?"');
+    IfFound(!'Relax;',!'TrackCaret;EndGroup;SetTracking(1);RestoreFind;Exit;');
+    Delete;
+    Ins('"%!0"');
+    SetSearchForward(0);
+    SetFindStr("%!1");
+    Find(0,-1);
+    RestoreFind;
+    EndGroup;
+    SetTracking(1);
+    TrackCaret;
+    Refresh(0);
+End;

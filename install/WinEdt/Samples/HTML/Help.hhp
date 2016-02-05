@@ -1,0 +1,24 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=Help.chm
+Contents file=Help.hhc
+Default Font=Tahoma,8,0
+Default Window=Help
+Default topic=Help.html
+Display compile progress=No
+Error log file=Help.log
+Full-text search=Yes
+Index file=Help.hhk
+Language=0x409 English (United States)
+Title=HTML Help Sample
+
+[WINDOWS]
+Help=,"Help.hhc","Help.hhk","Help.html","Help.html",,,,,0x2520,,0x304e,,,,,,,,0
+
+
+[FILES]
+Help.html
+
+[MERGE FILES]
+
+[INFOTYPES]

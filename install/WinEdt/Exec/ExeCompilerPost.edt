@@ -1,0 +1,119 @@
+// -*- ASCII:EDT -*-
+//
+// Execute tasks after calling Exe Compiler
+//
+// Input Parameters:
+// -----------------
+// %!9 contains the compiler declared and defined in the Execution Modes:
+//     [PDF]TeXify, [PDF]TeX, [PDF]LaTeX, AMSTeX, ...
+// %!7 must contain the type of the compiled document / output (dvi, ps, pdf, bbl, etc...)
+//
+// ==================================================================
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+// NSIS? ============================================================
+
+  FindInString("%!9","NSIS",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_NSIS');");
+    // Compile failed?
+    GetConsoleText(0);
+    FindInString('%!0',!'\(+$Numeric$\) -- aborting creation process',1,2,11);
+    IfOK(!'LetReg(1,"%#0");Open("%F");SelPar("%!1",7);');
+  JMP(!"Post_Done");
+
+:not_NSIS:: =========================================================
+
+// BibTeX? ==========================================================
+
+  FindInString("%!9","BibTeX",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_BibTeX');");
+    // Multiple bibliography?
+    Exe("%b\Exec\TeX\BibTeXMulti.edt");
+  JMP(!"Post_Done");
+
+:not_BibTeX:: =======================================================
+
+// MakeIndex? =======================================================
+
+  FindInString("%!9","MakeIndex",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_MakeIndex');");
+    // Multiple index?
+    Exe("%b\Exec\TeX\MakeIndexMulti.edt");
+  JMP(!"Post_Done");
+
+:not_MakeIndex:: ====================================================
+
+// MakeGlossary? ====================================================
+
+  FindInString("%!9","MakeGlossary",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_MakeGlossary');");
+    // Multiple glossary?
+    Exe("%b\Exec\TeX\MakeGlossaryMulti.edt");
+  JMP(!"Post_Done");
+
+:not_MakeGlossary:: =================================================
+
+// MetaFont? ========================================================
+
+  FindInString("%!9","MetaFont",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_MetaFont');");
+  IfStr("%O","%P","=",!"JMP(!'Post_Done');");
+    // Move output files
+    IfFileExists("%O\%N.tfm",!"CopyFile('%O\%N.tfm','%P\%N.tfm',1);DeleteFile('%O\%N.tfm');");
+  JMP(!"Post_Done");
+
+:not_MetaFont:: =====================================================
+
+// TeX2HTML? ========================================================
+
+  FindInString("%!9","TeX2HTML",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_TeX2HTML');");
+  IfStr("%O","%P","=",!"JMP(!'Post_Done');");
+    // Move output files
+    IfFileExists("%O\%N.%!7",!"CopyFile('%O\%N.%!7','%P\%N.%!7',1);DeleteFile('%O\%N.%!7');");
+    IfFileExists("%O\%N.css",!"CopyFile('%O\%N.css','%P\%N.css',1);DeleteFile('%O\%N.css');");
+    ListFolderFiles(0,'%O','.html',0,1);
+    LstEnum('%!0','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !`LstGetItem(2,%!c-1);>
+        GetFileName('%!2',3);>
+        FindInString('%!3','<%N+$Numeric$~$~[]$',5,6,1);>
+        IfOK(!|CopyFile("%O\%!2","%P\%!2",1);DeleteFile("%O\%!2");|);>
+        ProcessMessages;>
+       `);
+    LstRelease;
+  JMP(!"Post_Done");
+
+:not_TeX2HTML:: =====================================================
+
+// ConTeXt? =========================================================
+
+  FindInString("%!9","ConTeXt",1,2,10);
+  IfOK(!"JMP(!'Post_Done');",!"JMP(!'not_ConTeXt');");
+
+:not_ConTeXt:: ======================================================
+
+// TeX? =============================================================
+
+  FindInString("%!9","TeX",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_TeX');");
+  IfStr("%O","%P","=",!"JMP(!'Post_Done');");
+    // Move output files
+    IfFileExists("%O\%N.%!7",!"CopyFile('%O\%N.%!7','%P\%N.%!7',1);DeleteFile('%O\%N.%!7');");
+    IfFileExists("%O\%N%$('PDF-SyncEx');",>
+      !"CopyFile('%O\%N%$(|PDF-SyncEx|);','%P\%N%$(|PDF-SyncEx|);',1);DeleteFile('%O\%N%$(|PDF-SyncEx|);');");
+  JMP(!"Post_Done");
+
+:not_TeX:: ==========================================================
+
+  Relax;
+
+:Post_Done:: ========================================================
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,125 @@
+////////////////////////////////////////////////
+// \over 2 \frac
+// This macro file converts the TeX command
+// {a \over b} to the LaTeX \frac{a}{b}
+//
+// Set search parameters:
+Requires(20000405);
+SaveFind;
+SetSearchCurrentDoc;
+SetSearchEntire(0);
+SetSearchForward(1);
+SetRegEx(0);
+SetSearchCaseSensitive(1);
+SetSearchInline(0);
+SetNotFoundNotify(1);
+SetFindStr(" \over ");
+StartWorking('Replacing \over -> \frac');
+SetTracking(0); // Turn off Screen Refreshing
+BeginGroup;
+// The above BeginGroup allows to undo
+// the replacements at once. If you
+// want to undo all the replacments obe by one,
+// place the BeginGroup and the corresponding
+// EndGroup Inside the Loop...
+ Loop(!*>
+ IfFound(!|>
+// If \over is found...
+  SetSel(1);>
+// \over was found. Lets select it...
+  Delete;>
+// delete it...
+  Ins("}{");>
+// and insert '}{' in its place.
+// Now, instead of {a \over b}
+// we have {a }{ b}.
+  CharLeft;>
+// Place the cursor between the '}{'
+  MatchDelimiter(0,0);>
+// match left sel=0, no delay; and find the opening '{'
+  Ins("\frac");>
+// write \frac to the left of the '{'
+//  SearchAgain;>
+ |,|Stop|);>
+// if \over not found, stop.
+*); // end loop
+// end of macro
+EndGroup;
+SetTracking(1);
+StopWorking;
+RestoreFind;
+End;
+
+///////////////////////////////
+
+-----Original Message-----
+ From: Paulo Abreu <paulotex@geocities.com>
+ To: winedt+list@wsg.net <winedt+list@wsg.net>; juanleal@cantv.net
+ <juanleal@cantv.net>; degt@fen.bilkent.edu.tr <degt@fen.bilkent.edu.tr>
+ Date: Monday, July 05, 1999 10:21 PM
+ Subject: [WinEdt] \over to \frac: the solution
+
+Here is the solution I found to replace the TeX command
+{a \over b}
+with the LaTeX command
+\frac{a}{b}.
+
+The idea is to create a macro that:
+1. searches for '\over';
+2. replaces it with '}{';
+3. goes back to find the opening '{' that matches the '}' just
+inserted;
+4. before the opening '{' inserts '\frac'.
+
+This macro took me a whole afternoon to code because
+I forgot about the 'Match Delimiter" command. I made a routine to
+found the matching '{'. The hardest part was to understand the
+register and referencing mechanism in WinEdt macro language, and the
+expansionof the %variables. To make it simple, I just didn't
+understand when to use %!0, %%!0, %%%%!0, !'%!0', etc... I finally
+understood that ! before a _macro_ in a string prevents the inside
+&!0 to be expanded, and that did the trick.
+
+So here's my 'Match Curly Brace' macro. Insert it instead of the
+  MatchDelimiter(1,1,1);>
+line above, and see it working: it runs so slow, you can actually see
+the cursor checking every char backwards until the matching brace is
+found. I'm posting this just for my fun and pleasure. It took me so
+long to code, I just want to show it to everybody
+:-D
+
+// Remember we are between the '}{'
+CharLeft;>
+// Now we are to the left of the '}{'.
+// Moving left from this point:
+// '}' increases register 0;
+// '{' decreases it;
+// when register 0 is -1,
+// we've found the 'unmatched {'
+// we were looking for:
+ LetRegNum(0,0);>
+// Reset the counter
+ Loop(!">
+  SetSel(0);>
+  SelCharLeft;>
+// Select the char to the left
+  GetSel(0,1);>
+// store it in register 1
+  IfStr('%!1','}','=',!'LetRegNum(0,%!0+1);','');>
+// If the contents of register 1 is '}'
+// then increase register 0 by 1
+  IfStr('%!1','{','=',!'LetRegNum(0,%!0-1);','');>
+// If the contents of register 1 is '{'
+// then decrease register 0 by 1
+  IfNum('%!0',0,'<','Stop','');>
+// If register 0 is negative,
+// then we've found the matching '{',
+// so stop
+ ");>
+
+But the time was not wasted. I feel much more secure using the macro
+language now then before!
+
+Have fun
+
+Paulo

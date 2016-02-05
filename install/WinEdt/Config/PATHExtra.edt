@@ -1,0 +1,9 @@
+// Extra PATH Data
+
+  Assign(!"Extra_PATHEnab", !"1");
+  Assign(!"Extra-PATH",!"%B");
+
+  Assign(!"GS_PATHEnab", !"1");
+  Assign(!"TeX_PATHEnab", !"1");
+
+End;

@@ -1,0 +1,11 @@
+STRING="HREF=""?"""
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="HTML;XML"
+  DBL_CLICK_MACRO="[Exe('%b\Macros\Active Strings\hrefOpen.edt');]"
+
+STRING="<>"
+  ENABLED=1
+  MODE_FILTER="HTML"
+  MACRO="[CharLeft;AutoPopup;]"
+
+STRING="<?>>"

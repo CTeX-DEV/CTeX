@@ -1,0 +1,24 @@
+// Remove WinEdt Filetype Associations
+
+Requires(20010724); // Requires this build of WinEdt to work properly
+
+// HKEY_CLASSES_ROOT ...
+LetReg(8,'Classes Root');
+
+// HKEY_LOCAL_MACHINE?
+IfStr('%!9','1','=',>
+  `>
+    LetReg(8,'Local Machine');>
+  `);
+
+// HKEY_CURRENT_USER?
+IfStr('%!9','2','=',>
+  `>
+    LetReg(8,'Current User');>
+  `);
+
+Prompt("You are about to remove all filetype associations with WinEdt from Windows Registry (%!8)...",1,0);
+
+Exe('%B\WinShell\Remove WinEdt Filetypes.edt');
+
+End;

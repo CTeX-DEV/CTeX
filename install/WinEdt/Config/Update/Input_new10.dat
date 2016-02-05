@@ -1,0 +1,1 @@
+    FILENAME="%[!|Exe('%b\Macros\Input\IncludeFrom.edt');|];%-0"

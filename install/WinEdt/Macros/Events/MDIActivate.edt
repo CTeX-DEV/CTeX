@@ -1,0 +1,36 @@
+// MDI Activate Event Handler
+
+  Requires(20050913);
+
+  Assign("MDI-Locked","1");
+  // ============================================================
+  // Use this test to exit a custom handler in case another one
+  // has been triggered (eg. before doing something time-consuming
+  // like updating the menu)...
+  ProcessMessages;
+  // Another MDI Activate Event has been triggered?
+  IfNum("%$('MDI-Locked');","0","=","Exit;");
+  // ============================================================
+
+  PushTagsandRegisters;
+
+//   // Treat current document as the main file
+//   IfisMode(!'Main','%!m',!'Relax;',!'JMP(!"Reset");');
+//
+//   SetMainFile("%f");
+//   JMP(!"Done");
+//
+// :Reset:: ========================================================
+//
+//   // Restore the main file (if previously set)
+//   IfStr('%$(!"MAIN_FILE");',!'?',!'<>',>
+//     !'SetMainFile(|%$(!"MAIN_FILE");|);');
+//
+// :Done:: =========================================================
+
+  Relax; // OK
+
+  PopTagsandRegisters;
+  Assign("MDI-Locked","0");
+
+End;

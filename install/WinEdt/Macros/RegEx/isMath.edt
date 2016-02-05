@@ -1,0 +1,66 @@
+// ---------------------------------------------------------------
+// %b\Macros\RegEx\isMath.edt
+// ==========================
+//
+// RegEx like:
+//
+//   <something>\E{isMath}
+//
+// a shorter form of:
+//
+//   <something>\X{\"|Exe('%b\Macros\RegEx\isMath.edt');|}
+//
+// matches <something> only inside Math Environments!
+//
+// Switches (as defined in Syntax Highlighting) are used to
+// determine whether a match is inside such an environment...
+// ---------------------------------------------------------------
+  PushTagsandRegisters;
+  GetSwitchStack(1,!'|');
+  IfOK(!'Relax;',!'PopTagsandRegisters;SetOK(0);Exit;');
+
+  FindInString('|%!1|',!'|$?$|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|$$?$$|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\[?\]|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\(?\)|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{equation} .. \end{equation}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{equation*} .. \end{equation*}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{eqnarray} .. \end{eqnarray}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{eqnarray*} .. \end{eqnarray*}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  // And some more AMS Math Environments ...
+  FindInString('|%!1|',!'|\begin{align} .. \end{align}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{align*} .. \end{align*}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{alignat} .. \end{alignat}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{alignat*} .. \end{alignat*}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{flalign} .. \end{flalign}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{flalign*} .. \end{flalign*}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{gather} .. \end{gather}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{gather*} .. \end{gather*}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{multline} .. \end{multline}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+  FindInString('|%!1|',!'|\begin{multline*} .. \end{multline*}|',0,0,10);
+  IfOK(!'PopTagsandRegisters;Exit;');
+
+  // Add any other math environments (switches) here!
+
+  // Not in Math Environment ...
+  PopTagsandRegisters;
+  SetOK(0);
+  Exit; // Must Exit or else End; will reset the OK flag!
+End;

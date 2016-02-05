@@ -1,0 +1,29 @@
+// Active String: SHORTCUT="Keyboard Shortcut"
+
+  LetReg(1,'%S');
+  GetShortcut("%?",0,0);
+  IfOK("Relax;","Exit;");
+    SetTracking(0);
+    BeginGroup;
+    SaveFind;
+    SetFindTextSelect(1);
+    SetNotFoundNotify(1);
+    SetSearchCurrentDoc;
+    SetSearchCyclic(0);
+    SetSearchEntire(0);
+    SetSearchForward(1);
+    SetSearchCaseSensitive(1);
+    SetRegEx(0);
+    SetSearchCaseSensitive(1);
+    SetFindStr('"%?"');
+    IfFound('Relax;','TrackCaret;EndGroup;SetTracking(1);RestoreFind;Exit;');
+    IfStr("%?","%!0","<>",!|Delete;Ins('"%!0"');|);
+    SetSearchForward(0);
+    SetFindStr("%!1");
+    Find(0,-1);
+    RestoreFind;
+    EndGroup;
+    SetTracking(1);
+    TrackCaret;
+    Refresh(0);
+End;

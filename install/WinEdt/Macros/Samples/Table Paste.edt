@@ -1,0 +1,28 @@
+// %-*- ASCII -*- -*- EDT -*-
+//
+// Paste Table and covert it to LaTeX format:
+//  Tab  -> &Tab
+//  EOLN -> \\EOLN
+
+  Requires(20010317);  // Requires WinEdt 5 Build 20010317 (or later)
+
+  CopyFromClipboard(0);  // Get the Clipboard Text Data (eg. Excel)
+
+  // Convert Tab to &Tab
+  LetRegNum(2, -2);
+  Loop(!|>
+    FindInString("%!0", "$[#9]$", 1,2, 1011, %!2+2);>
+    IfOK(!'ReplaceInString("%!0", "&$[#9]$", %!1, %!2, 1, 0);',!'Stop;')|);
+
+  // Convert EOLN to \\EOLN
+  LetRegNum(2, -3);
+  Loop(!|>
+    FindInString("%!0", ">", 1,2, 1011, %!2+3);>
+    IfOK(!'ReplaceInString("%!0", "\\\\>", %!1, %!2, 1, 0);',!'Stop;')|);
+
+  InsText("%!0"); // Insert with no wrapping
+
+End;
+
+// WinEdt also has a Block/ Column mode selection than can come
+// handy when manipulating aligned tables...

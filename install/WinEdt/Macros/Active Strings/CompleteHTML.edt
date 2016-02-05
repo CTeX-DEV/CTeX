@@ -1,0 +1,31 @@
+// -*- ASCII:EDT -*-
+// Complete HTML tag
+
+SetTracking(0);
+BeginGroup;
+Backspace;
+Mark(1);
+CharLeft;
+SelToBeginningOfFile;
+GetSel(0,1);
+Goto(1);
+SetSel(0);
+GetLength(8,"%!1");
+LetRegNum(8,%!8-1);
+LetRegNum(3,0);
+LetRegNum(4,1);
+StartWorking("Closing <html> element...");
+Loop(!`>
+    SetOK(1);>
+    FindInString("%!1", "\<\({{[a-zA-Z]@[a-zA-Z0-9]}|/}\)*\(1{/\>|\>}\)", 8, 9, 1101, %!8-1);>
+    IfOK("","StopWorking;SetTracking(1);Prompt('Too many end tags!%\Probably outside <html> element.',3,1);Undo;Exit;");>
+    IfStr("%#1",">","=",>
+      !'IfStr("%#0","/","=",!"LetRegNum(4,""%!4+1"");","LetRegNum(3,""%!3+1"");");');>
+    //FindInString("%!2", "<{area|base|basefont|br|col|frame|hr|img|input|isindex|link|meta|param}", 6, 7, 1);>
+    //IfOK(!"LetRegNum(4,""%!4+1"");");>
+    IfStr("%!3","%!4","=",!"Goto(1);Ins('/%#0>');Stop;");>
+`);
+StopWorking;
+EndGroup;
+SetTracking(1);
+End;

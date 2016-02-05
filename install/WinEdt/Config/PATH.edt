@@ -1,0 +1,53 @@
+// -*- ASCII:EDT -*-
+// PATH Environmental Variable for WinEdt
+// and applications launched from within it...
+// Last modified on:
+//  Sunday, December 30, 2012  15:56
+
+  Requires(20130125);
+
+  PushTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+// Extras for the PATH
+Exe('%b\Config\PATHExtra.edt');
+
+// The Original PATH
+IfStr("%$('xPATH')","","=",>
+  !"Assign('xPATH','%@(`PATH`)')",>
+  !"SetEnvVar('PATH','%$(`xPATH`)')");
+
+// ==================================================================
+
+// Fix the Path: TeX Bin!
+
+IfStr("%$('TeX_PATHEnab');","0","=","JMP('no_TeX-PATH');");
+  LetReg(0,@@"%$('TeX-PATH');");
+  IfStr('%!0','','>',!|SetEnvVar("PATH","%!0;%@('PATH');");|);
+
+:no_TeX-PATH:: ======================================================
+
+// Fix the Path: GS Bin!
+
+IfStr("%$('GS_PATHEnab');","0","=","JMP('no_GS-PATH');");
+  LetReg(0,@@"%$('GS-PATH');");
+  IfStr('%!0','','>',!|SetEnvVar("PATH","%!0;%@('PATH');");|);
+
+:no_GS-PATH:: =======================================================
+
+// Fix the Path for applications launched from within WinEdt...
+
+IfStr("%$('Extra_PATHEnab');","0","=","JMP('no_Extra-PATH');");
+  LetReg(0,@@"%$('Extra-PATH');");
+  IfStr('%!0','','>',!|SetEnvVar("PATH","%!0;%@('PATH');");|);
+
+:no_Extra-PATH:: ====================================================
+
+  PopTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+End;

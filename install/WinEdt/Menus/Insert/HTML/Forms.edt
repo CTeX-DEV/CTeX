@@ -1,0 +1,275 @@
+// HTML Forms
+
+IfStr('%!0',!'form',!'=',!"JMP(!'form');");
+IfStr('%!0',!'fieldset',!'=',!"JMP(!'fieldset');");
+IfStr('%!0',!'legend',!'=',!"JMP(!'legend');");
+IfStr('%!0',!'button',!'=',!"JMP(!'button');");
+IfStr('%!0',!'select',!'=',!"JMP(!'select');");
+IfStr('%!0',!'multi_select',!'=',!"JMP(!'multi_select');");
+IfStr('%!0',!'options',!'=',!"JMP(!'options');");
+IfStr('%!0',!'make_options',!'=',!"JMP(!'make_options');");
+IfStr('%!0',!'option_n',!'=',!"JMP(!'option_n');");
+IfStr('%!0',!'option_group',!'=',!"JMP(!'option_group');");
+IfStr('%!0',!'text_area',!'=',!"JMP(!'text_area');");
+IfStr('%!0',!'label',!'=',!"JMP(!'label');");
+IfStr('%!0',!'wizard',!'=',!"JMP(!'wizard');");
+
+Prompt('Unknown Form: "%!0"');
+
+Exit;
+
+:form:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<form action="');
+  Mark(1);
+  Ins('" method="GET">');
+  NewLine;
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins("</form>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:fieldset:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<fieldset>');
+  NewLine;
+  Mark(1);
+  Ins('%!1');
+  NewLine;
+  Ins("</fieldset>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:legend:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<legend>');
+  Mark(1);
+  Ins('%!1');
+  Ins("</legend>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:button:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<button type="');
+  Mark(1);
+  Ins('" name="">');
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  Ins("</button>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:select:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<select name="');
+  Mark(1);
+  Ins('">');
+  NewLine;
+  IfStr("%!1","","=",>
+    !">
+      Tab;>
+      LetReg(1,'3');>
+      EnterReg(1,'Number of options','Selection list');>
+      Repeat(%!1,'Ins(''<option></option>'');NewLine;');>
+      Backspace;>
+    ",>
+    !"Ins('%!1');NewLine;");
+  Ins('</select>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:multi_select:: =====================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<select multiple name="');
+  Mark(1);Ins('">');
+  NewLine;
+  IfStr("%!1","","=",>
+    !">
+      Tab;>
+      LetReg(1,'3');>
+      EnterReg(1,'Number of options','Selection list');>
+      Repeat(%!1,'Ins(''<option></option>'');NewLine;');>
+      Backspace;>
+    ",>
+    !"Ins('%!1');NewLine;");
+  Ins('</select>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:options:: ==========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins("<option>");
+  Mark(1);
+  Ins("%!1</option>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:make_options:: =====================================================
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  IfStr("%!1","","=",!'Prompt("You have to select something!",1,1);Exit;');
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  SetReplaceNotify(0);
+  SetNotFoundNotify(0);
+  SetSearchForward(1);
+  SetSearchCaseSensitive(0);
+  SetSearchEntire(1);
+  SetSearchCyclic(0);
+  SetSearchRelaxed(0);
+  SetSearchWholeWords(0);
+  SetSearchInline(0);
+  SetSearchSelected;
+  SetRegEx(1);
+  SetReplaceRespectCaps(0);
+  SetReplacePrompt(0);
+  SetFindStr("<\(1@ \)\(2*\)@ >");
+  SetReplaceStr("\1\<option\>\2\</option\>>");
+  SearchReset;
+  ReplaceAll;
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+  Exit;
+
+:option_n:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(1,"");
+  EnterReg(1,"Number of options","Selection list");
+  Repeat(%!1,'Ins(''<option></option>'');NewLine;');
+  GoToBeginningOfLine;
+  Backspace;
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:option_group:: =====================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<optgroup label="');
+  Mark(1);Ins('">');
+  NewLine;
+  IfStr("%!1","","=","Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins('</optgroup>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:text_area:: ========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<textarea name="');
+  Mark(1);
+  Ins('" rows="" cols="">');
+  NewLine;IfStr("%!1","","=","Ins('')",!"Ins('%!1')");
+  NewLine;
+  Ins('</textarea>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:label:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<label for="');
+  Mark(1);
+  Ins('">');
+  IfStr("%!1","","=","Ins('')",!"Ins('%!1')");
+  Ins('</label>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:wizard:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  LetReg(1,"/cgi-bin/");
+  Mark(1);
+  EnterReg(1,"Enter the script name:","Form action");
+  Interface("Choose the method type");
+  Item("POST",'LetReg(2,"POST");');
+  Item("GET",'LetReg(2,"GET");');
+  ShowList(0,1,"Do('%%?')","");
+  Ins('<form action="%!1" method="%!2">');
+  NewLine;
+  Loop(*>
+  Interface("Insert a form field");>
+  Item("Text field",|Ins('<input type="text" name="" size="">');NewLine;|);>
+  Item("Password field",|Ins('<input type="password" name="" size="">');NewLine;|);>
+  Item("Checkbox",|Ins('<input type="checkbox" name="" value="">');NewLine;|);>
+  Item("Radio button",|Ins('<input type="radio" name="" value="">');NewLine;|);>
+  Item("Submit button",|Ins('<input type="submit" value="">');NewLine;|);>
+  Item("Reset button",|Ins('<input type="reset" value="">');NewLine;|);>
+  Item("Push button",|Ins('<input type="button" value="">');NewLine;|);>
+  Item("Hidden value",|Ins('<input type="hidden" name="" value="">');NewLine;|);>
+  Item("Text area",|Ins('<textarea name="" rows="" cols="">');NewLine;Tab;Ins("");NewLine;Backspace;Ins("</textarea>");NewLine;|);>
+  Item("Selection menu",|Ins('<select name="">');>
+      EnterReg(3,"Number of Options:","Selection menu");NewLine;>
+      Tab;Repeat(%%%%!3,"Ins('<option>');InsertBullet;Ins('</option>');NewLine;");>
+      Backspace;Ins("</select>");NewLine;|);>
+  Item("Done",|Stop;|);>
+  ShowList(0,1,"Do('%%%%?')","");>
+  *);
+  NewLine;
+  Ins('</form>');
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

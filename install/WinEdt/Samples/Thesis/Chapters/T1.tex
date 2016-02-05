@@ -1,0 +1,747 @@
+% -----------------------------------------------------------------------------
+% -*-TeX-*- -*-Hard-*- Smart Wrapping
+% -----------------------------------------------------------------------------
+\def\baselinestretch{1}
+
+\chapter{The Space of Lomonosov Functions}
+
+\def\baselinestretch{1.66}
+
+
+%%% ---------------------------------------------------------------------------
+
+In this chapter we give a constructive proof of an abstract approximation
+theorem, inspired by the celebrated result of V.I.\,Lomonosov~\cite{Lom73}.
+This theorem is applied to obtain an alternative proof of some recent
+characterizations of the invariant subspace problem, given in \cite{AAB95}.
+We also establish density of non--cyclic vectors for certain convex sets of
+compact quasinilpotent operators, and conclude with a related open question.
+In Chapter 2 we extend the techniques introduced in this chapter to
+non--compact operators acting on a Hilbert space.
+
+\smallskip
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+\section{Introduction}
+
+V.I.~Lomonosov in his paper \cite{Lom91} conjectured that the adjoint of a
+bounded operator on a Banach space has a non--trivial closed invariant
+subspace. In view of the known examples of operators without an invariant
+subspace \cite{Enf87,Rea85}, this is the strongest version of the invariant
+subspace problem that can possibly have an affirmative answer. In particular,
+if the Lomonosov conjecture is true, then every operator on a reflexive
+Banach space has a non--trivial invariant subspace.
+
+\bigskip
+\goodbreak
+
+Considering the strong influence of Lomonosov's results on the theory of
+invariant subspaces, it is not surprising that both the conjecture and the
+techniques developed in the interesting paper \cite{Lom91} received further
+attention. L.~de~Branges used this result to obtain a characterization of the
+invariant subspace problem in terms of density of certain functions. This
+stimulated another characterization of the invariant subspace problem given
+by Y.A.~Abramovich, C.D.~Aliprantis, and O.~Burkinshaw ~in~\cite{AAB95}.
+Section~1.4 presents a more detailed account of this work.
+
+We take a slightly different approach. First we give a constructive proof of
+the approximation theorem, inspired by the well known Lomonosov construction
+used in \cite{Lom73,RR73}. This theorem is then applied to give an
+alternative proof of the main result in \cite{AAB95}. Our proof applies to
+both real and complex Banach spaces, while the original result was
+established for complex Banach spaces only. The alternative proof somehow
+explains the role of compact operators that appear in the characterizations
+of the invariant subspace problem~\cite{AAB95}.
+
+\medskip
+
+One may notice that the weak*--compactness of the unit ball in dual Banach
+spaces plays an important role in \cite{AAB95,dB59,dB93,Lom91}, as well as in
+the applications given in this chapter. In other words, if the Lomonosov
+conjecture is true, then the compactness of the unit ball, with respect to
+the weak* topology, is likely to be an important ingredient of its proof.
+
+\smallskip
+
+In the last section we put this observation to the test. A straightforward
+application of the approximation theorem obtained in Section~1.3, together
+with the Schauder--Tychonoff Fixed Point Theorem, yields density of
+non--cyclic vectors for the dual of a convex set of compact quasinilpotent
+operators. We end with the open problem of obtaining a similar result for the
+original set, rather than its dual.
+
+\bigskip
+
+This work is more or less self--contained and the notation and terminology
+used in it is (supposed to be) standard. However, here are a few conventions
+that hold throughout this chapter:
+
+\bigskip
+
+By an operator we always mean a bounded linear operator acting on a real or
+complex Banach space. If $\A$ is a set of operators and $K$ is a fixed
+operator then $\A{}K$ stands for the set $\set{A{}K\,\,|\,\,\,A\in\A}$.
+Saying that a set of operators $\A$, acting on a Banach space $X$, admits an
+invariant subspace, means that there exists a non--trivial closed subspace of
+$X$ that is invariant under all operators in $\A$. The space of all linear
+operators on a Banach space $X$ is denoted by $\mathbf{B}(X)$, while $C(S,X)$
+stands for the set of all continuous functions $f\colon{}S\To{}X$. If $S$ is
+a subset of a Banach space $X$, then in saying that a linear operator $A$ is
+in $C(S,X)$, we actually refer to the restriction of the operator $A$ to the
+set $S$.
+
+\bigskip
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+
+\def\baselinestretch{1.1}
+
+\section{Reflexive Topological Spaces and Continuous Indicator Functions}
+
+This section introduces some topological preliminaries that lead to a fairly
+general treatment of the approximation theory in the next section, where an
+important role is played by the partition of unity and the ``continuous
+indicator functions'' associated with a basis for the topology on a compact
+domain of certain functions. The existence of continuous indicator functions
+can be characterized by a purely topological property of the underlying
+space, which is defined as ``reflexivity'' of the topological space. In this
+section we introduce both concepts and establish the connection between them.
+
+\def\baselinestretch{1.66}
+
+\bigskip
+\goodbreak
+\newpage
+
+\begin{defn}
+Let $S=(S,\tau)$ be a topological space and denote by $C(S,\Real)$ the space
+of all continuous real--valued functions on $S$. A topological space $S$ is
+called {\em reflexive} if the topology $\tau$ coincides with the weakest
+topology $\tau_w$ on $S$ for which all the functions in $C(S,\Real)$ are
+continuous.
+\end{defn}
+
+\begin{rem}
+The reflexivity of topological spaces is not to be confused with the
+corresponding concept of the reflexivity of Banach spaces. Indeed, we
+conclude this section by showing that every subset of a locally convex space
+is reflexive.
+\end{rem}
+
+\begin{prop}
+Reflexivity is a hereditary property; \, i.e. a subspace $S$ of a reflexive
+topological space $X$ is reflexive with the relative topology.
+\end{prop}
+
+\begin{proof}
+Consider the restrictions of the functions in $C(X,\Real)$ to the subset $S$,
+and observe that they induce the relative topology on $S$, whenever $X$ is
+reflexive.
+\end{proof}
+
+\begin{defn}
+Suppose $U$ is an open subset of a topological space $S$. A continuous
+function $\Gamma\colon S \To \RPlus$ is called a {\em continuous indicator
+function} of $U$ in $S$ if
+\[ U = \set{s\in S \,\,|\,\,\, \Gamma(s) > 0}.  \]
+\end{defn}
+
+\begin{rem}
+If $X$ is a metric space then every open ball
+\[ U=U(x_0,r)=\set{x\in X \,\,|\,\,\, d(x,x_0) < r}, \]
+admits a continuous indicator function $\Gamma_U\colon{X}\To\RPlus$, defined
+by
+\[ \Gamma_U(x) = \max\set{0, \, r - d(x,x_0) }. \]
+Furthermore, suppose $f \in C(S,X)$. Then the open set $V=f^{-1}(U)\subset S$
+``inherits'' an indicator function from $U$ by setting:
+$\Gamma_V(s)=\Gamma_U(f(s))$.
+\end{rem}
+
+\smallskip
+\goodbreak
+
+This yields the following characterization of reflexivity.
+
+\begin{prop} \label{p:REFLEX}
+A topological space $S=(S,\tau)$ is reflexive if and only if there exists an
+open basis $\cal B$ for the topology $\tau$ such that each set $V\in\cal B$
+admits a continuous indicator function $\Gamma_V\colon{}S\To\RPlus$.
+\end{prop}
+
+\begin{proof}
+By definition of reflexivity, the family
+\[ \cal B_0 = \set{f^{-1}(U) \,\,|\,\,\, f \in C(S,\Real) \text { and }
+   U=(a,b) \subset \Real } \]
+is a sub--basis for the topology $\tau$ on a reflexive space $S$. Clearly,
+\[ \Gamma_U(t) = \max\set{0, \, \tfrac{b-a}{2}-\abs{\tfrac{a+b}{2}-t}} \]
+is a continuous indicator function of the open interval $U=(a,b)$ in $\Real$.
+Consequently, $\Gamma_V(s) = \Gamma_U\big(f(s)\big)$ is a continuous
+indicator function for the set $V=f^{-1}(U)$ in $S$. Let $V=V_1
+\cap\ldots\cap V_n$ for $V_k\in\cal{B}_0$. A continuous indicator function of
+$V$ can be defined by
+\[ \Gamma_V(s) = \prod_{k=1}^n \Gamma_{V_k}(s). \]
+Therefore, each set in a basis
+\[ \cal B = \set{V_1 \cap\ldots\cap V_n \,\,|\,\,\, V_k\in\cal{B}_0;
+   \,\, n < \infty}, \]
+admits a continuous indicator function.
+
+\smallskip
+
+The other direction is trivial, because the continuous indicator functions
+form a subset of $C(S,\Real)$.
+\end{proof}
+
+\smallskip
+
+\begin{rem}
+The argument in the proof of Proposition~\ref{p:REFLEX} shows that the space
+$\Real$ can be replaced by any metric vector space over $\Real$ in the
+definition of reflexivity. In particular, considering the complex valued
+functions would not change the definition of reflexivity.
+\end{rem}
+
+\smallskip
+\goodbreak
+
+\begin{rem}
+While an open set $U$ is uniquely determined by any of its continuous
+indicator functions, the converse is of course not true. However,
+Proposition~\ref{p:REFLEX} allows us to choose a basis $\cal B$, and a
+corresponding family
+\[ \Gamma_{\cal B}=\set{\Gamma_U\colon S\To \RPlus
+           \,\,|\,\,\, U\in\cal B} \]
+of continuous indicator functions associated with the basis $\cal B$ for the
+topology on a reflexive topological space $S$. In that sense, the
+correspondence between the elements of $\cal B$ and an associated family of
+continuous indicator functions $\Gamma_{\cal B}$ can be established.
+\end{rem}
+
+\medskip
+
+Although not all topological spaces are reflexive (consider for example the
+topology of finite complements on any infinite set) the next proposition
+shows that convex balanced neighborhoods in a locally convex space admit
+continuous indicator functions, and consequently, all locally convex spaces
+are reflexive.
+
+\smallskip
+
+\begin{prop}
+Every locally convex vector space $X$ is reflexive (as a topological space).
+\end{prop}
+
+\begin{proof}
+Suppose $\cal B$ is a base for the topology on $X$ consisting of open convex
+balanced sets. Then for each $U\in\cal{B}$:
+\[ U = \set{x \in X \,\,|\,\,\, \mu_U(x) < 1}, \]
+where $\mu_U$ is the Minkowski functional of $U$. The function
+\[ \Gamma_U(x) =\max\set{0, \, 1-\mu_U(x)} \]
+is a continuous indicator function for $U$. By Proposition~\ref{p:REFLEX},
+$X$ is reflexive.
+\end{proof}
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+\section{Lomonosov Functions}
+
+The proof of the celebrated result of V.I. Lomonosov \cite{Lom73,RR73} was
+based on the ingenious idea of defining a continuous function with compact
+domain in a Banach space, assuming that certain local conditions are met. In
+this section we generalize this idea in the form of an approximation theorem.
+Since our construction was greatly inspired by the proof of Lomonosov's
+Lemma~\cite{Lom73,RR73}, we suggest the following definition.
+
+\begin{defn}
+Let $\A \subset C(S,X)$ be a subset of the space of continuous functions from
+a topological space $S$ to a locally convex space $X$. The convex subset
+$\cal{L}(\A) \subset C(S,X)$, defined by
+\[ \cal{L}(\A) = \set{ \sum_{k=1}^n \alpha_k A_k \,\,|\,\,\, A_k\in\A,
+   \alpha_k\in C(S,[0,1]) \text{ and } \sum_{k=1}^n\alpha_k \equiv 1;
+   \,\, n < \infty}. \]
+is called the {\em Lomonosov space} associated with the set $\A$, and a
+function $\Lambda \in \cal{L}(\A)$ is called a {\em Lomonosov function}.
+\end{defn}
+
+\medskip
+
+Recall that the {\em uniform topology} on $C(S,X)$ is induced by the topology
+on a linear space $X$. If $\cal{B}$ is a local basis for the topology on $X$
+then the sets
+\[ \widehat{U}=\set{f\in C(S,X) \,\,|\,\,\, f(S)\subset U\in\cal{B}} \]
+define a local basis for the uniform topology on $C(S,X)$. If $X$ is a
+locally convex space then so is $C(S,X)$. In particular, if $X$ is a Banach
+space then $C(S,X)$ with the uniform topology is a Banach space, as well.
+
+\medskip
+
+We are now ready to give a construction of the Lomonosov function that
+uniformly approximates a continuous function within a given neighborhood.
+
+\smallskip
+
+\begin{lem} \label{l:APPROXI}
+Let $\A \subset C(S,X)$ be a subset of continuous functions from a reflexive
+compact topological space $S$ to a locally convex space $X$. Fix an open
+convex neighborhood $U$ of \, $0$ in $X$. Suppose $f\colon{}S\To{X}$ is a
+continuous function that at each point of $S$ can be approximated within $U$
+by some element of $\A$; \, i.e. for every point $s \in S$ there exists a
+function $A_s \in\A$ such that $A_s(s)-f(s)\in{U}$. Then there exists a
+finite subset $\set{A_1,\ldots,A_n}$ of $\A$, together with continuous
+nonnegative functions $\alpha_k\colon{}S\To[0,1]$, such that
+$\sum_{k=1}^n\alpha_k\equiv1$, and the Lomonosov function
+$\Lambda\in\cal{L}(\A)$, defined by
+\[ \Lambda(s) = \sum_{k=1}^n \alpha_k(s) A_k(s), \]
+lies in the prescribed neighborhood $\widehat{U}$ of $f$ in $C(S,X)$; \, i.e.
+$\Lambda(s)-f(s)\in{U}$ for every $s\in{S}$.
+\end{lem}
+
+\begin{proof}
+By the hypothesis, for every point $s\in{S}$ there exists a function
+$A_s\in\A$ such that $A_s(s)-f(s)\in{U}$. Continuity of the functions $f$ and
+$A_s$ implies the existence of a (basic) neighborhood $W_s$ of $s$ in $S$
+such that $A_s(w)-f(w)\in{U}$ for every $w\in{W_s}$. In this way we obtain an
+open cover for $S$ with the sets $W_s$. Compactness of $S$ yields a finite
+subcover: $W_{s_1}\cup\ldots\cup{W_{s_n}}\supset{S}$.
+
+\smallskip
+
+Each set $W_s$ is associated with a continuous indicator function
+$\Gamma_{W_s}\colon S \To \RPlus$. Every point in $S$ lies in at least one
+neighborhood $W_{s_k}$; therefore the sum $\sum_{j=1}^n \Gamma_{W_{s_j}}(s)$
+is strictly positive for all elements $s \in S$. Consequently, the functions
+$\alpha_k\colon S \To [0,1]$, defined by
+\[ \alpha_k(s) =
+   \frac{\Gamma_{W_{s_k}}(s)}{\sum_{j=1}^n \Gamma_{W_{s_j}}(s)}
+   \quad\quad   (k=1,\ldots,n), \]
+are well defined and continuous on $S$. Also, $\sum_{k=1}^n\alpha_k(s)=1$ for
+every $s \in S$, and $\alpha_k(s)>0$ if and only if $s \in W_{s_k}$.
+Therefore, $\alpha_k(s)>0$ implies that $A_{s_k}(s)-f(s)\in{U}$.
+
+Set $A_k=A_{s_k}$ $(k=1,\ldots,n)$. Continuity of the functions
+$\alpha_k\colon S\To[0,1]$ and $A_k\colon S \To X$ implies that the Lomonosov
+function $\Lambda\in\cal{L}(\A)$, defined by
+\[ \Lambda(s) = \sum_{k=1}^n \alpha_k(s) A_k(s), \]
+is continuous. Observe that
+\[ \Lambda(s) - f(s) = \sum_{k=1}^n \alpha_k(s)
+       \big(A_k(s)-f(s)\big) \]
+is a convex combination of the elements in $U$, because only those
+coefficients $\alpha_k(s)$ for which $A_k(s)-f(s)\in{U}$ are nonzero. Since
+$U$ is a convex set, it follows that the image of $\Lambda-f$ is contained in
+$U$. In other words, $\Lambda$ lies in the prescribed neighborhood
+$\widehat{U}$ of $f$ in $C(S,X)$.
+\end{proof}
+
+\smallskip
+
+\begin{rem}
+The proof of Lomonosov's Lemma~\cite{Lom73,RR73} introduces a special case of
+the above construction: $S$ is a compact set in a Banach space $X$, defined
+as the closure of the image of the unit ball around a fixed vector $x_0$,
+under a given nonzero compact operator $K$. Furthermore, the vector $x_0$ is
+chosen so that the set $S$ doesn't contain the zero vector; $\A$ is the
+restriction to $S$ of an algebra of bounded linear operators on $X$ that
+admits no invariant subspaces. Under the stated hypothesis a construction of
+the function $\Lambda\colon{S}\To{X}$ is given such that
+$\Lambda\in\cal{L}(\A{K})$ maps $S$ into the unit ball around $x_0$; or
+equivalently, the constant function $f\equiv{x_0}$ can be approximated on $S$
+within $1$ by the elements of $\cal{L}(\A{K})$. It is clear from the original
+construction as well as from Theorem~\ref{t:APPROX} that in that case the set
+$S$ can be mapped into an arbitrary small neighborhood of $x_0$; or
+equivalently, the function $f\equiv{x_0}$ is in the closure of the space
+$\cal{L}(\A{K})$.
+\end{rem}
+
+\medskip
+\goodbreak
+
+The following approximation theorem follows immediately from
+Lemma~\ref{l:APPROXI}.
+
+\smallskip
+
+\begin{thm}\label{t:APPROX}
+Let $\A \subset C(S,X)$ be a subset of continuous functions from a reflexive
+compact topological space $S$ to a locally convex space $X$. Suppose that
+$f\colon S \To X$ is a continuous function that at each point of $S$ can be
+approximated by some element of $\A$; \, i.e. for every $s\in{S}$ and every
+neighborhood $U$ of \, $0$ in $X$ there exists a function $A_s\in\A$ such
+that $A_s(s)-f(s)\in{U}$. Then the function $f$ can be approximated uniformly
+on $S$ by the elements of the associated Lomonosov space $\cal{L}(\A)$.
+\end{thm}
+
+\smallskip
+
+In the next section we employ Theorem~\ref{t:APPROX} to obtain an alternative
+proof of a characterization of the existence of invariant subspaces for
+algebras of bounded linear operators acting on a real or complex Banach
+space. The complex version of this theorem was first established in
+\cite{AAB95}, using rather different techniques built on the result of
+L.\,de~Branges~\cite{dB93}.
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+
+\def\baselinestretch{1.1}
+
+\section{A Characterization of the Invariant Subspace Problem}
+
+We introduce some basic concepts and notation that is consistent with
+\cite{AAB95}. However, for more details and further references on the {\em
+invariant subspace problem}, the reader is advised to consult the nicely
+written and comprehensible original~\cite{AAB95}.
+
+\def\baselinestretch{1.66}
+\medskip
+
+In this section $X$ stands for a real or complex Banach space of dimension
+greater than one and $X'$ for its norm dual. The algebra of all bounded
+linear operators on $X$ is denoted by $\mathbf{B}(X)$. If $\A$ is any subset
+of $\mathbf{B}(X)$, then the adjoint set $\A'$ of $\A$ is defined by
+$\A'=\set{A'\,\,|\,\,\, A\in\A}$, where $A'$ is the Banach adjoint of $A$.
+
+\medskip
+\goodbreak
+
+The set $S=\set{x\in X'\,\,|\,\,\,\norm{x}\leq1}$ denotes the unit ball in
+the dual space $X'$, equipped with its weak* topology.
+
+\begin{defn}
+The vector space of all continuous functions from $S$ to $X'$, where both
+spaces are equipped with the weak* topology, is denoted by $C(S,X')$. As
+usual, $C(S)$ denotes the commutative Banach algebra of all continuous
+complex valued functions on $S$ with the uniform norm.
+\end{defn}
+
+Note that for each $T\in \mathbf{B}(X)$ the restriction of the adjoint
+operator $T'\colon S\To X'$ is a member of $C(S,X')$. The vector space
+$C(S,X')$, equipped with the norm
+\[ \norm{f} = \sup_{s\in S} \norm{f(s)}, \]
+is a Banach space.
+
+\smallskip
+
+The Banach space $C(S,X')$ played the central role in
+\cite{AAB95,dB93,Lom91}. Lomonosov~\cite{Lom91} based his proof of an
+interesting extension of Burnside's Theorem on the characterization of the
+extreme points of the unit ball in the norm dual of $C(S,X')$ using the
+argument of the celebrated de~Branges' proof of the Stone--Weierstrass
+Theorem~\cite{dB59}. Louis~de~Branges~\cite{dB93} performed a deep analysis
+of the behaviour of these extreme points that yielded a vector generalization
+of the Weierstrass approximation theorem, similar to the approximation
+theorem in the previous section. This approach resulted in a characterization
+of the existence of a nontrivial invariant subspace for the algebra $\A'$ in
+terms of density of the linear span of the set
+\[ \set{ \alpha A'\,\,|\,\,\, \alpha \in C(S) \text{ and } A \in \A}, \]
+in the space of restrictions of the adjoint operators to $S$, with respect to
+a topology in $C(S,X')$, introduced by L.\,de~Branges.
+
+\smallskip
+
+Building upon this work, Y.A.~Abramovich, C.D.~Aliprantis, and O.~Burkinshaw
+in~\cite{AAB95}, obtained the following characterizations of the existence of
+a non--trivial invariant subspace for an algebra $\A$ of bounded linear
+operators acting on a complex Banach space $X$:
+
+\smallskip
+
+\begin{thm}[Y.A.~Abramovich, C.D.~Aliprantis, and O.~Burkinshaw]
+\label{t:AAB1} There is a non--trivial closed $\A$--invariant subspace of $X$
+if and only if there exists an operator $T\in \mathbf{B}(X)$ and a compact
+operator $K\in \mathbf{B}(X)$ such that $K'T'$ does not belong to the norm
+closure of the vector subspace of $C(S,X')$ generated by the collection
+\[ \set{\alpha K'A'\,\,|\,\,\, \alpha \in C(S) \text{ and } A \in \A}. \]
+\end{thm}
+
+\smallskip
+
+\begin{thm}[Y.A.~Abramovich, C.D.~Aliprantis, and O.~Burkinshaw]
+\label{t:AAB2} There is a non--trivial closed $\A'$--invariant subspace of
+$X'$ if and only if there exists an operator $T\in \mathbf{B}(X)$ and a
+compact operator $K\in \mathbf{B}(X)$ such that $T'K'$ does not belong to the
+norm closure of the vector subspace of $C(S,X')$ generated by the collection
+\[ \set{\alpha A'K'\,\,|\,\,\, \alpha \in C(S) \text{ and } A \in \A}. \]
+\end{thm}
+
+\medskip
+
+We will give a short proof of both theorems as an application of
+Theorem~\ref{t:APPROX}. Our proof applies to real or complex Banach spaces,
+where in the case of a real Banach space, $C(S)$ stands for the Banach
+algebra of all real--valued continuous functions on the set $S$.
+
+\smallskip
+
+Observe that the Lomonosov spaces $\cal{L}(K'\A')$ and $\cal{L}(\A'K')$, as
+defined in the previous section, are subsets of the linear manifolds
+introduced in Theorems~\ref{t:AAB1}~and~\ref{t:AAB2}.
+
+\medskip
+
+\begin{defn}
+The vector $x$ in a Banach space $X$ is {\em cyclic} for the set of operators
+$\A\subset \mathbf{B}(X)$ whenever the orbit
+\[ \A x = \set{Ax\,\,|\,\,\, A \in \A} \]
+is a dense subset of $X$. If every nonzero vector is cyclic for $\A$, we say
+that $\A$ acts {\em transitively} on $X$. The terms {\em $\tau$--cyclic} and
+{\em $\tau$--transitive} are defined in the same way, by considering the
+space $X$ equipped with a topology $\tau$, instead of the norm.
+\end{defn}
+
+\medskip
+
+The following well known characterizations of the existence of a non--trivial
+invariant subspace for an algebra $\A \subset \mathbf{B}(X)$ follow
+immediately from the definition.
+
+\begin{prop} \label{p:ISC}
+Suppose $\A\subset \mathbf{B}(X)$ is a subalgebra of bounded linear operators
+on $X$. The following are equivalent:
+  \begin{enumerate}
+    \item $\A$ admits no nontrivial closed invariant subspace.
+    \item $\A$ acts weak--transitively on $X$.
+    \item $\A$ acts transitively on $X$.
+    \item $\A'$ admits no nontrivial weak*--closed invariant subspace.
+    \item $\A'$ acts weak*--transitively on $X'$.
+  \end{enumerate}
+\end{prop}
+
+\medskip
+
+As in \cite{AAB95} we introduce the subspace of completely continuous
+functions in $C(S,X')$.
+
+\begin{defn}
+A function $f\in C(S,X')$ is said to be {\em completely continuous} if it is
+continuous with respect to the weak* topology on $S$ and the norm topology on
+$X'$. The subspace of all completely continuous functions is denoted by $\cal
+K(S,X')$.
+\end{defn}
+
+Note that $K'\colon S \To X'$ is completely continuous whenever
+$K\in\mathbf{B}(X)$ is a compact operator on $X$
+(Theorem~6~\cite[p.\,486]{DS57}).
+
+\medskip
+
+We are now ready to give a short proof of
+Theorems~\ref{t:AAB1}~and~\ref{t:AAB2}.
+
+\medskip
+\goodbreak
+
+\noindent{\em Proof of Theorems~\ref{t:AAB1}~and~\ref{t:AAB2}. }
+
+\bigskip
+
+We start with Theorem~\ref{t:AAB2}, which is an almost straightforward
+consequence of Proposition~\ref{p:ISC} and Theorem~\ref{t:APPROX}, applied to
+the space $\cal K(S,X')$.
+
+\medskip
+
+Suppose $\A'$ has a non--trivial closed  invariant subspace. Then by
+Proposition~\ref{p:ISC}, there exists a pair of nonzero vectors $x',y' \in S$
+such that $\norm{A'x' - y'} \geq \eps > 0$ for all $A'\in\A'$. Choose any
+vector $x \in X$ such that $\seq{x',x}=1$, and define the rank--one operators
+$K=x\otimes x'$ and $T=x\otimes y'$. Clearly $T'K'x' = y'$, and since $T'K'$
+cannot be approximated by the operators $A'K'$ at the point $x'$, it follows
+that $T'K'$ is not in the norm closure of the linear space generated by
+$\set{ \alpha A' K'\,\,|\,\,\, \alpha \in C(S) \text{ and } A \in \A}$.
+
+\smallskip
+
+Conversely, suppose $\A'$ admits no non--trivial closed invariant subspaces.
+Therefore, $\A'$ acts transitively on $X'$, and consequently, every operator
+$T'K'$ can be approximated by $A'K'$ at each point of $S$. Furthermore, since
+$K$ is a compact operator in $\mathbf{B}(X)$, it follows that $T'K' \in \cal
+K(S,X')$. Theorem~\ref{t:APPROX} implies that $T'K'$ is in the norm closure
+of the Lomonosov space $\cal{L}(\A'K')$ and thus completes the proof.
+
+\bigskip
+
+The proof of Theorem~\ref{t:AAB1} is just slightly more complicated.
+
+\medskip
+
+Suppose the algebra $\A$ admits a nontrivial closed invariant subspace $\cal
+M$. Then $\cal M^\perp$ is an invariant subspace for $\A'$. Fix a nonzero
+vector $x \in \cal M$ and a nonzero functional $y'\in\cal{}M^\perp$, and
+choose a vector $y \in X$ such that $\seq{y',y}=1$ and a functional $x'\in
+X'$, with $\seq{x',x}=1$. Define the rank--one operators $K=x\otimes y'$ and
+$T=y \otimes x'$. Then $K'T'y'=y'\neq0$, while $K' A' y' = 0$ for every $A'
+\in \A'$. Consequently, the operator $K'T'$ is not in the norm closure of the
+linear span of the completely continuous functions $\set{ \alpha K' A'
+\,\,|\,\,\, \alpha \in C(S) \text{ and } A \in \A}$.
+
+\smallskip
+
+Conversely, suppose that there exists a compact operator $K$ and an operator
+$T$ such that $K'T'$ is not in the closure of the linear subspace generated
+by the completely continuous functions $\set{ \alpha K' A' \,\,|\,\,\, \alpha
+\in C(S) \text{ and } A \in \A}$. Theorem~\ref{t:APPROX} implies that there
+exists a nonzero vector $x'\in{}S$ such that the orbit
+$\cal{M}=\set{K'A'x'\,\,|\,\,\, A\in\A}$ is not a norm--dense manifold in the
+closure of the subspace $\cal{N}=\set{K'T'x'\,\,|\,\,\, T\in\mathbf{B}(X)}$.
+By the Hahn--Banach Theorem there exists a functional $y''\in X''$ such that
+$\seq{y'',K'A'x'}=0$ for every $A'\in\A'$, and $\seq{y'',K'T'x'}=1$ for some
+$T \in \mathbf{B}(X)$. Consequently, $K''y''\neq0$. Compactness of $K$
+implies that $y=K''y''\in X$, where $X$ is considered naturally embedded in
+its second dual $X''$ (Theorem~5.5~\cite[p.\,185]{Con90} or
+Theorem~2~\cite[p.\,482]{DS57}). From $\seq{x',A{}y}=0$ for all $A\in\A$, it
+follows that the algebra $\A$ admits a non--trivial closed invariant
+subspace. \qed
+
+\medskip
+
+It is possible to obtain similar characterizations that do not involve
+compact operators, by considering some other topology on $C(S,X')$.
+Theorem~3.1 in \cite{AAB95} and Theorem~6 in \cite{dB93} are examples of
+results in that direction. We conclude this section by giving yet another
+characterization of transitivity for an algebra $\A$ in terms of the closure
+of the Lomonosov space $\cal{L}(\A')$ with respect to the {\em uniform}\,
+topology $\tau_{w^*}$, induced on $C(S,X')$ by the weak* topology on the dual
+Banach space $X'$.
+
+\begin{thm} \label{t:ISAC}
+Suppose $\A\subset{}\mathbf{B}(X)$ is a set of bounded linear operators on
+$X$. Then the dual set $\A'=\set{A'\,\,|\,\,\,A\in\A}$ acts
+weak*--transitively on $S$ if and only if the $\tau_{w^*}$--closure of the
+Lomonosov space $\cal{L}(\A')$ is equal to the subspace
+\[ C_0(S,X') = \set{f\in C(S,X')\,\,|\,\,\, f(0) = 0 }. \]
+\end{thm}
+
+\begin{proof}
+The proof is almost identical to those of
+Theorems~\ref{t:AAB1}~and~\ref{t:AAB2} except that Theorem~\ref{t:APPROX} is
+now applied to the space $C(S,X')$ equipped with the topology $\tau_{w^*}$,
+instead of ${\cal K}(S,X')$ with the norm topology.
+
+If the set $\A'$ does not act weak*--transitively on $X'$ then there exists a
+nonzero vector $x' \in S$ together with a weak* neighborhood $W$ of $y'$ in
+$S$ such that $A' x' \not\in W$ for all $A'\in \A'$. Choose a vector $x \in
+X$ such that $\seq{x',x}=1$ and let $T=x\otimes{}y'$. Then $T' x' = y'$, and
+since $T'\in C_0(S,X')$ cannot be approximated by the operators in $\A'$ at
+the point $x'$, it follows that $T'$ is not in the $\tau_{w^*}$--closure of
+the associated Lomonosov space $\cal{L}(\A')$.
+
+Conversely, if the set $\A'$ acts weak*--transitively on $S$ it follows from
+Theorem~\ref{t:APPROX} that every function $f\in{}C_0(S,X')$ can be uniformly
+approximated by the elements of $\cal{L}(\A')$, and thus $f$ is in the
+$\tau_{w^*}$--closure of the Lomonosov space $\cal{L}(\A')$.
+\end{proof}
+
+\begin{cor} \label{c:ISYAC}
+The algebra $\A$ admits no non--trivial closed invariant subspace if and only
+if the $\tau_{w^*}$--closure of the Lomonosov space $\cal{L}(\A')$ is equal
+to the subspace
+\[ C_0(S,X') = \set{f\in C(S,X')\,\,|\,\,\, f(0) = 0 }. \]
+\end{cor}
+
+\begin{proof}
+By Proposition~\ref{p:ISC}, the fact that $\A$ admits no non--trivial
+invariant subspace is equivalent to $\A'$ acting weak*--transitively on $S$.
+The result now follows from Theorem~\ref{t:ISAC}.
+\end{proof}
+
+\medskip
+
+Note that the $\tau_{w^*}$--closure of the Lomonosov space
+$\cal{L}(\mathbf{B}(X)')$ is always equal to $C_0(S,X')$. This observation
+yields a few alternative formulations of Corollary~\ref{c:ISYAC}, which are
+left to the reader.
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+
+\def\baselinestretch{1}
+
+\section{On Convex Sets of Compact Quasinilpotent Operators}
+
+In this section we combine Lemma~\ref{l:APPROXI} with the Schauder--Tychonoff
+Fixed Point Theorem, to establish a density result for non--cyclic vectors
+for the dual of a convex set of compact quasinilpotent operators. We discuss
+in what sense this result generalizes the celebrated Lomonosov
+Lemma~\cite{Lom73}, and conclude with a problem of establishing a similar
+result for the original set, rather than its dual.
+
+\def\baselinestretch{1.66}
+\smallskip
+
+Recall that an operator is called {\em quasinilpotent} if $0$ is the only
+point in its spectrum.
+
+\begin{thm}\label{t:QC}
+Suppose $\A$ is a convex set of compact quasinilpotent operators acting on a
+real or complex Banach space $X$, and let $\A'=\set{A'\,\,|\,\,\,A\in\A}$ be
+its dual in $\mathbf{B}(X')$. Then the set of non--cyclic vectors for $\A'$
+is dense in $X'$.
+\end{thm}
+
+\begin{proof}
+Suppose not; then there exists a functional $x_0\in{X'}$ and a positive
+number $r > 0$ such that all vectors in the ball $S = \set{x \in X'\,|\,\,
+\norm{x-x_0} \leq r}$ are cyclic for $\A'$. In particular, for every
+functional $x \in S$ there exists an operator $A' \in \A'$ such that
+$\norm{A'x - x_0} < r$. By Lemma~\ref{l:APPROXI} it follows that there exists
+a Lomonosov function $\Lambda\in\cal{L}(\A')$ such that
+$\norm{\Lambda(x)-x_0}<r$ for all $x\in{}S$. Consequently, $\Lambda$ maps $S$
+into itself (weak*--continuously).
+
+The Schauder--Tychonoff Fixed Point Theorem~\cite[p.\,456]{DS57} implies that
+$\Lambda$ has a fixed point $x_1=\Lambda(x_1)$ in $S$. By the definition of
+the Lomonosov space
+\[ \Lambda = \sum_{k=1}^n \alpha_k A'_k,
+   \,\,\, \text{ where } A_k\in\A, \,
+   \alpha_k\in C(S,[0,1]) \text{ and } \sum_{k=1}^n\alpha_k \equiv 1;
+   \,\, n < \infty . \]
+Therefore $A'=\sum_{k=1}^n \alpha_k(x_1) A'_k$ is an operator in the convex
+set $\A'$. From $\Lambda(x_1)=x_1$, we conclude that $A'x_1=x_1$. Since
+$x_1\neq0$, it follows that $1$ is an eigenvalue for $A'$, contradicting the
+assumption that $A'$ is a quasinilpotent operator.
+\end{proof}
+
+\goodbreak
+
+\begin{rem}
+Note that (unless $\A$ is assumed to be an algebra) it is not enough to
+require that the operators in $\A'$ have no common invariant subspace, in
+order to ensure that $\A'$ acts transitively on $X'$. It is indeed possible
+to give examples of manifolds of nilpotent operators without a non--trivial
+closed common invariant subspace. For such examples on finite--dimensional
+vector spaces see \cite{MOR91}. By Theorem~\ref{t:QC} a manifold of such
+operators cannot act transitively on the underlying space.
+\end{rem}
+
+Theorem~\ref{t:QC} does not follow from the original work of
+V.I.\,Lomonosov~\cite{Lom73}. On the other hand, Lomonosov's
+Lemma~\cite{Lom73} easily follows from Theorem~\ref{t:QC}, in the case when
+the underlying Banach space is reflexive. In that sense Theorem~\ref{t:QC} is
+a generalization of the Lomonosov Lemma.
+
+{\nobreak This discussion suggests the following question, which we have not
+been able to resolve: \nobreak
+\begin{quote}
+  {\em Does there exist a convex set $\A$ of compact quasinilpotent
+  operators acting on a real or complex Banach space $X$ such that the set
+  of non--cyclic vectors for $\A$ is {\em not} dense in $X$? }
+\end{quote}
+}
+
+\medskip
+
+By Theorem~\ref{t:QC} the underlying Banach space in such an example (if it
+exists) cannot be reflexive. Furthermore, Lomonosov's Lemma implies that the
+set $\A$ cannot be of the form $\A K$ or $K \A$, where $K$ is a fixed compact
+operator. In particular, the set $\A$ in such an example can never be an
+algebra.
+
+\medskip
+
+Since, according to Theorems~\ref{t:AAB1}~and~\ref{t:AAB2}, compact operators
+are closely related to the existence of invariant subspaces for algebras of
+operators, the answer to the above question might be of some interest to the
+theory of invariant subspaces.
+
+%%% ---------------------------------------------------------------------------

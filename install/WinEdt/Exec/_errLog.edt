@@ -1,0 +1,106 @@
+// ==================================================================
+//
+// Custom Log File Parser:
+// -----------------------
+//
+// Some compilers might produce log files in a format
+// that WinEdt cannot directly parse for errors ...
+//
+// This macro is executed before the log file (%E) is loaded.
+// This gives you a chance to rewrite the file into a C-style format
+// that WinEdt can understand, such as:
+//     ! Error
+//     morris.tex(9) : ...something is wrong!!!
+//
+// Alternatively, (and better) you should leave the original log
+// file as is and assign _errLogFile variable with the contents of
+// processed log file. If non-empty than this variable is loaded by
+// WinEdt's Error Search Interface (rather than the actual log file).
+// This can be done when original log file is really scrambled
+// and full of trash that you don't want to see in the Errors Interface.
+//
+// Optional processed errors and warnings can be assigned to the variable
+// _errLog. It should consist of lines like:
+//
+// !E:log_line_num["source file"[:source_line_num[+offset][:select_string]]]
+// !W:log_line_num["source file"[:source_line_num[+offset][:select_string]]]
+//
+// where [...] marks optional additional information (when available).
+// This way you can unleash the power of WinEdt's RegEx to
+// parse of some pretty non-standard log files without introducing
+// new types of errors and warnings directly in WinEdt...
+//
+// The contents of _errLog (if non-empty) is not displayed but it is used
+// by WinEdt to locate Errors and Warnings and highlight them in the Errors
+// Interface which loads the log file or _errLogFile variable (when non-empty).
+//
+// ==================================================================
+
+  Requires(20061120);
+
+  // This variable contains processed error file
+  Assign('_errLogFile');
+  // This variable contains pointers to errors and warnings
+  Assign('_errLog');
+
+  // Log File Exists?
+  IfFileExists('%E',!'Relax;',!'Exit;');
+
+// @DEFAULT
+// Use built-in error processor...
+Relax;
+
+End;
+
+=====================================================================
+
+Example to add a new mode:
+
+// @BEGIN: Fortran
+// @DATE: 2006-12-06
+// @AUTHOR: Anonymous ...
+// ==================================================================
+    IfisMode("Fortran","%!m","Exe('%b\Exec\Fortran\_errLog.edt');Exit;");
+// ==================================================================
+// @END: Fortran
+
+Where "%b\Exec\Fortran\_errLog.edt" looks something like:
+
+// ==================================================================
+// Error Processing for Fortran Compiler
+// ==================================================================
+
+  PushTagsandRegisters; // Clean Macro writing...
+
+  ReadFile("%E",0);
+  //  LetReg(1,'WinEdt LOG pre-processor: "%E"%\');
+  //  GetDate(9, '(Created: dd-mm-yyyy  hh:nn)');
+  //  GetBuild(8);
+  //  LetReg(1,'%!1   [Build: %!8]  %!9 %\%\');
+  //  // This variable contains processed error file
+  //  Assign('_errLogFile',"%!1%!0%\");
+
+  // starts with an empty line (just in case if there are no errors or warnings!)
+  LetReg(1,'%\');
+
+  LstEnum('%!0', '%&10;'); // LF: if log file is in UNIX format %\ may not do!
+  LstGetCount(2);
+  Repeat(%!2,>
+    !`LstGetItem(3,%!c-1);>
+      FindInString('%!3',>
+      'Error:@{ }\(*\)@{ }:@{ }\(1@[0-9]\)@{ }:@{ }\.\.\.@{ }"\(2*\)"',9,9,11);>
+      IfOK(!'LetReg(1,''%!1!E:%!c"%#0":%#1:%#2%\'');Break(2);');>
+      FindInString('%!3','Error:@{ }\(*\)@{ }:@{ }\(1@[0-9]\)',9,9,11);>
+      IfOK(!'LetReg(1,''%!1!E:%!c"%#0":%#1%\'');Break(2);');>
+      FindInString('%!3','Warning:@{ }\(*\)@{ }:@{ }\(1@[0-9]\)',9,9,11);>
+      IfOK(!'LetReg(1,''%!1!W:%!c"%#0":%#1%\'');Break(2);');>
+     `);
+  LstRelease;
+
+  Assign('_errLog','%!1');
+
+  PopTagsandRegisters; // Clean Macro writing...
+
+End;
+
+=====================================================================

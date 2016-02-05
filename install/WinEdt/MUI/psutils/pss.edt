@@ -1,0 +1,398 @@
+// MUI Interface for psselect accessory
+// =================================
+//
+//     pss.edt
+//     Jim Schummer
+//     Email schummer at northwestern
+
+Requires(20061028);
+PushTagsandRegisters;
+
+  // Settings for this interface
+  // Used by MUILoad(); and MUISave();
+  // It does not have to exists if defaults are OK...
+  // This works with profiles (%b<>%B) ...
+  LetReg(1, "%b\MUI\psutils");
+  GetFileName('%X',0);
+  CreateFolders("%!1",1);
+  LetReg(4, "%!1\%!0.mui");
+
+  MUIReset('psselect...');
+  // Main Form Size and Position
+  MUISet('','width','460');
+  MUISet('','height','440');
+  MUISet('','position','1'); // Main Form Center
+//
+  MUIGet('','client width',9); // Get the form size
+  MUIGet('','client height',8);
+//
+//  // Options are in the Page Control ------------------------------
+//
+  MUIAdd(8,8,%!9-16,%!8-8-40,'PageControl','TPageControl');
+//
+//  // OK/Cancel (aligned -> independent of the dialog size) --------
+//
+//  // Modal OK and Cancel Buttons (aligned bottom right)
+  MUIAdd(0,0,0,40, 'Bottom_Panel','TPanel');
+    MUISet('Bottom_Panel','aligned', 'alBottom');
+    MUISet('Bottom_Panel','inner bevel', '0');
+    MUISet('Bottom_Panel','outer bevel', '0');
+    MUIAdd(0,0,164,0, 'Modal_Panel','TPanel','Bottom_Panel');
+      MUISet('Modal_Panel','aligned', 'alRight');
+      MUIAdd(0,8,0,0, 'OK','TButton','Modal_Panel','&OK');
+        MUISet('OK','default', '1');
+        MUISet('OK','on click', !'MUIHide(1);');
+      MUIGet('OK','width',7);
+      MUIAdd(%!7+8,8,0,0, 'Cancel','TButton','Modal_Panel','Cancel');
+        MUISet('Cancel','cancel', '1'); // ESCAPE
+        MUISet('Cancel','on click', !'MUIHide(2);');
+      LetRegNum(6,16+2*%!7);
+      MUISet('Modal_Panel','width','%!6');
+      MUIGet('OK','height',7);
+      LetRegNum(6,16+%!7);
+      MUISet('Bottom_Panel','height','%!6');
+//
+//  // Fancy URL and e-mail Label with event handler(s) -------------
+//  // Comment out if not wanted...
+//
+//  MUIAdd(10,4,0,0,'email','TLabel','Bottom_Panel','alex@winedt.com');
+//    MUISet('email','font color','clBlue');
+//    MUISet('email','font underline','1');
+//    MUISet('email','cursor','crHandPoint');
+//    MUISet('email','on click',!"Call('email');");
+//    MUISet('email','hint',"Send an email to the author...");
+//  MUIAdd(10,20,0,0,'http','TLabel','Bottom_Panel','http:/%_/www.winedt.org');
+//    MUISet('http','font color','clBlue');
+//    MUISet('http','font underline','1');
+//    MUISet('http','cursor','crHandPoint');
+//    MUISet('http','on click',!"Call('http');");
+//    MUISet('http','hint',"Check for the latest downloads...");
+//
+
+//  // Pages and Options --------------------------------------------
+//
+  MUIAdd(0,0,0,0,'Page1','TTabSheet','PageControl','Options');
+  MUIAdd(0,0,0,0,'Page2','TTabSheet','PageControl','Advanced');
+  MUIGet('Page1','client width',7);
+  LetRegNum(9,24);           // Check Box Height+Vertical Spacing
+  MUIGet('','text width',8,'Output Paper Size: ');
+  LetRegNum(8,%!8+12);
+
+// Select Pages
+//
+//  MUIGet('GroupBox_Options','height',9);
+//  MUIGet('GroupBox_Options','top',8);
+  LetRegNum(9,'8');
+  MUIAdd(8,8,%!7-16, 134, 'B_Page_Range','TGroupBox','Page1','Pages (enter a comma-separated list: 5,9-13,8-,_1)');
+    // Page range drop box
+    MUIAdd(8,24,%!7-32, 0, 'therange','TComboBox','B_Page_Range');
+      MUISet('therange','hint','Hint: "_3" refers to the 3rd-last page.');
+      MUISet('therange','style','1');
+//      MUISet('therange','index','3');
+      MUISet('therange','save mode','3'); // maintain the list of 9 recent files
+//      MUISet('therange','on change',!'Call("Output");');
+    MUIGet('therange','client width',6);
+//// Even/Odd -------------------------------------------------------
+    LetRegNum(9,24);   // Check Box Height+Vertical Spacing
+    MUIGet('therange','client height',8);
+    LetRegNum(8,%!8+34);   // Top Margin
+//    LetRegNum(6, '(%!7-28)'); // Radio Button Width
+    // Divide by two if using two columns of options:
+    LetRegNum(6, '(%!7-28)/2'); // Radio Button Width
+    MUIAdd(8,%!8,%!6,0, 'even_pages','TRadioButton','B_Page_Range','&Even pages only');
+//    MUIAdd(%!6+8,%!8,%!6-16,0, 'therangehelp','TLabel','B_Page_Range',"(Use underscore character to count pages from the end.)");
+    MUISet('even_pages','hint','Selects only the Even pages within the specified range.');
+    LetRegNum(8, %!8+%!9);
+    MUIAdd(8,%!8,%!6,0, 'odd_pages','TRadioButton','B_Page_Range','&Odd pages only');
+    MUISet('odd_pages','hint','Selects only the Odd pages within the specified range.');
+    LetRegNum(8, %!8+%!9);
+    MUIAdd(8,%!8,%!6,0, 'all_pages','TRadioButton','B_Page_Range','&All pages in range');
+    MUISet('all_pages','checked','1'); // The first one is checked by default
+    MUIAdd(%!6+8,%!8,%!6-16,0, 'reversed_pages','TCheckBox','B_Page_Range',"&Reverse page order");
+//    MUIAdd(8,%!8,%!6-10,0, 'reversed_pages','TCheckBox','B_Options','&Reverse page order');
+      MUISet('reversed_pages','checked','0');
+
+//
+// Input File
+//
+  MUIGet('B_Page_Range','height',9);
+  MUIGet('B_Page_Range','top',8);
+  LetRegNum(9,'%!9+%!8+8');
+  MUIAdd(8,%!9,%!7-16, 60, 'GroupBox_Input','TGroupBox','Page1','Input File (Postscript)');
+    MUIAdd(8,24,%!7-32-16-24, 0, 'InputFile','TComboBox','GroupBox_Input');
+      MUISet('InputFile','style','1');
+      MUISet('InputFile','save mode','3'); // maintain the list of 9 recent files
+      MUISet('InputFile','on change',!'Call("Output");');
+    MUIAdd(%!7-32-24,21,30,28, 'Browse','TSpeedButton','GroupBox_Input');
+      MUISet('Browse','hint','Browse for Input File...');
+      MUISet('Browse','glyph','Browse');
+      MUISet('Browse','on click',!'Call("Browse");');
+
+// Output File
+//
+  MUIGet('GroupBox_Input','height',8);
+  MUIGet('GroupBox_Input','top',9);
+//  MUIGet('B_Options','height',9);
+//  MUIGet('B_Options','top',8);
+  LetRegNum(9,'%!9+%!8+8');
+  MUIAdd(8,%!9,%!7-16, 108, 'B_Output','TGroupBox','Page1','Output File');
+//    MUIAdd(8,24,%!7-32-16-24, 0, 'OutputFile','TEdit','B_Output');
+    MUIAdd(8,24,%!7-32, 0, 'OutputFile','TEdit','B_Output');
+      MUISet('OutputFile','auto select','1');
+    MUIGet('OutputFile','height',9);
+    MUIGet('OutputFile','top',8);
+    LetRegNum(9,'%!9+%!8+8');
+    MUIAdd(8,%!9,'(%!7-32-24)/2', 0, 'AutoOutput','TCheckBox','B_Output','Auto-generate Output Filename');
+      MUISet('AutoOutput','checked','1');
+      MUISet('AutoOutput','on click',!'Call("Output");');
+    MUIAdd('8+(%!7-32)/2',%!9,'(%!7-32)/2', 0, 'PromptOverwrite','TCheckBox','B_Output','Prompt to overwrite output file');
+      MUISet('PromptOverwrite','checked','0');
+    MUIGet('AutoOutput','height',8);
+    LetRegNum(9,'%!9+%!8+8');
+    MUIAdd(8,%!9,%!7-30,0, 'CB_Ghostview','TCheckBox','B_Output','Open Output in &Ghostview');
+      MUISet('CB_Ghostview','checked','1');
+
+//  MUIAdd(0,0,0,52, 'Action_Panel','TPanel','Page1');
+//    PushTagsandRegisters;
+//    MUISet('Action_Panel','aligned', 'alBottom');
+//    MUISet('Action_Panel','inner bevel', '0');
+//    MUISet('Action_Panel','outer bevel', '0');
+//      MUIGet('Action_Panel','client width',9); // Panel Width
+//      MUIGet('','text width', 8, '    Clear Input    '); // Button Width
+//      LetRegNum(7, %!8+8);       // Button Width + Horizontal Spacing
+//      LetRegNum(6, %!9 - 4*%!7); // Left
+//      LetRegNum(9, 8);
+//      MUIAdd(%!6+0*%!7,12,%!8,0, 'Compile','TButton','Action_Panel','Co&mpile ...');
+//        MUISet('Compile','on click',!"Call('Compile');Call('Enable');");
+//      MUIAdd(%!6+1*%!7,12,%!8,0, 'Preview','TButton','Action_Panel','Pre&view ...');
+//        MUISet('Preview','on click',!"Call('GSView');");
+//      MUIAdd(%!6+2*%!7,12,%!8,0, 'Clear','TButton','Action_Panel','Clear Input');
+//        MUISet('Clear','on click',!"MUISet('InputFile','text','');MUISet('InputFile','items','');Call('Output');");
+//      MUIAdd(%!6+3*%!7,12,%!8,0, 'Save','TButton','Action_Panel','Save Settings');
+//        MUISet('Save','on click',!"MUISave('%!4');Call('Enable');");
+//    PopTagsandRegisters;
+//
+//  // Advanced Options ---------------------------------------------
+//
+//  MUIAdd(10,8,0,0,'Label','TLabel','Page2','Create a postscript file with multiple pages per sheet...');
+//    MUISet('Label','font color','clMaroon');
+//  MUIAdd(10,24,0,0,'Labelpsnup','TLabel','Page2','See the documentation for psnup (TeX) accessory!!!');
+//
+//  MUIAdd(8,48,%!7-16, 144, 'GroupBox_Output','TGroupBox','Page2','Output File');
+//    MUIAdd(8,24,%!7-32, 0, 'OutputFile','TEdit','GroupBox_Output');
+//    MUIAdd(8,56,%!7-32, 0, 'AutoOutput','TCheckBox','GroupBox_Output','Automatic Output Filename Generator');
+//      MUISet('AutoOutput','checked','1');
+//      MUISet('AutoOutput','on click',!'Call("Output");');
+//    MUIAdd(8,80,%!7-32, 0, 'PromptOverwrite','TCheckBox','GroupBox_Output','Prompt before overwriting the output');
+//      MUISet('PromptOverwrite','checked','0');
+//    MUIAdd(8,108,0,0, 'DeleteOutput','TButton','GroupBox_Output','Delete Output');
+//      MUIGet('DeleteOutput','width',9);
+//      LetRegNum(9,%!9+64);
+//      MUISet('DeleteOutput','width',"%!9");
+//      MUISet('DeleteOutput','on click',!"MUIGet('OutputFile','text',0);DeleteFile('%!0');Call('Enable');");
+//    MUIAdd(19+%!9,108,%!9,0, 'DeleteAll','TButton','GroupBox_Output','Delete All *-up Files');
+//      MUISet('DeleteAll','on click',!"Call('DeleteAll');Call('Enable');");
+//
+//  MUIGet('GroupBox_Output','height',9);
+//  MUIGet('GroupBox_Output','top',8);
+//  MUIAdd(8,%!9+%!8+8,%!7-16, 72, 'GroupBox_Exec','TGroupBox','Page2','Execution Mode');
+  MUIAdd(8,8,%!7-16, 72, 'GroupBox_Exec','TGroupBox','Page2','Execution Mode');
+    MUIAdd(8,20,'(%!7-16)/2', 0, 'Detached','TCheckBox','GroupBox_Exec','Run Detached');
+      MUISet('Detached','checked','1');
+    MUIAdd(8,44,'(%!7-16)/2', 0, 'ExitCode','TCheckBox','GroupBox_Exec','Detect Exit Code');
+      MUISet('ExitCode','checked','1');
+    MUIAdd(%!7/2+8,20,'(%!7-16)/2-20', 0, 'Pause','TCheckBox','GroupBox_Exec','Pause');
+      MUISet('Pause','checked','0');
+    MUIAdd(%!7/2+8,44,'(%!7-16)/2-20', 0, 'High_Priority','TCheckBox','GroupBox_Exec','High Priority');
+      MUISet('High_Priority','checked','0');
+
+  JMP('End_Events');
+
+//// Event Handlers for email and http label
+//:email:: ============================================================
+//  // Send an email about this MUI
+//  MUIHide(2); // MS Outlook focuses the main window instead of MUI...
+//  SendMail('MUI - psnup...','',"Aleksander Simonic|alex@winedt.com","",1000);
+//  Return;
+//
+//:http:: =============================================================
+//  // Start the internet browser
+//  ShellExecute("Open", "http:/%_/www.winedt.org", "", "", 1);
+//  Return;
+//
+//:Edit:: =============================================================
+//  // Profile-friendly edit (make a local copy!)
+//  IfFileExists('%b\MUI\psmup\psnup.edt',!'Relax;',>
+//    !|CopyFile("%X","%b\MUI\psnup\psnup.edt",1,1);|);
+//  Open("%b\MUI\psnup\psnup.edt");
+//  Return;
+
+:Browse:: ===========================================================
+  // Start the Browse Open Dialog...
+  MUIGet('InputFile','text',9);
+  GetFilePath("%!9",9);
+  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%P')");
+  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%!P');");
+  Browse(9,'Postscript files|*.ps;*.eps|All Files|*.*','%!9');
+  IfOK(!|MUISet('InputFile','text','%!9');|);
+  Call('Output');
+  Return;
+
+:BrowseOut:: ========================================================
+  // Start the Browse Open Dialog...
+  MUIGet('OutputFile','text',9);
+  GetFilePath("%!9",9);
+  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%P')");
+  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%!P');");
+  Browse(9,'Postscript files|*.ps;*.eps|All Files|*.*','%!9');
+  IfOK(!|MUISet('OutputFile','text','%!9');|);
+  Return;
+
+:Output:: ===========================================================
+  // Fix the output filename from the current input
+  MUIGet('AutoOutput','checked','9');
+  IfNum(%!9,'1','<>',!"MUISet('OutputFile','readonly','0');Return;");
+  MUISet('OutputFile','readonly','1');
+  MUIGet('InputFile','text',9);
+  IfStr('%!9','','>',>
+    !|GetFilePath('%!9',8);>
+      GetFileName('%!9',7);>
+      LetReg(8,'%!8\%!7-select');>
+      GetFileType('%!9',9);>
+      LetReg(9,'%!8%!9');>
+     |);
+  MUISet('OutputFile','text','%!9');
+//  Call('Enable');
+  Return;
+
+//:Enable:: ===========================================================
+//  // Enable controls depending on the current input...
+//  MUIGet('InputFile','text',9);
+//  IfFileExists('%!9',!'LetRegNum(9,1);',!'LetRegNum(9,0);');
+//  MUISet('Compile','enabled','%!9');
+//  MUIGet('InputFile','count',9);
+//  IfNum('%!9','0','>',!'LetRegNum(9,1);',!'LetRegNum(9,0);');
+//  MUISet('Clear','enabled','%!9');
+//  MUIGet('InputFile','text',9);
+//  IfStr('%!9','','>',!"MUISet('Clear','enabled','1');");
+//  MUIGet('OutputFile','text',9);
+//  IfFileExists('%!9',!'LetRegNum(9,1);',!'LetRegNum(9,0);');
+//  MUISet('Preview','enabled','%!9');
+//  MUISet('DeleteOutput','enabled','%!9');
+//  // Only enabled if some other -nup file exists
+//  MUISet('DeleteAll','enabled','0');
+//  MUIGet('InputFile','text',9);
+//  MUIGet('OutputFile','text',5);
+//  GetFilePath('%!9',8);
+//  GetFileName('%!9',7);
+//  GetFileType('%!9',6);
+//  LetReg(9,'%!8\%!7-up%!6');
+//  IfStr('%!9','%!5','=',!"LetReg(9,'');");
+//  IfFileExists('%!9',!"MUISet('DeleteAll','enabled','1');");
+//  LetReg(9,'%!8\%!7-2up%!6');
+//  IfStr('%!9','%!5','=',!"LetReg(9,'');");
+//  IfFileExists('%!9',!"MUISet('DeleteAll','enabled','1');");
+//  LetReg(9,'%!8\%!7-4up%!6');
+//  IfStr('%!9','%!5','=',!"LetReg(9,'');");
+//  IfFileExists('%!9',!"MUISet('DeleteAll','enabled','1');");
+//  LetReg(9,'%!8\%!7-6up%!6');
+//  IfStr('%!9','%!5','=',!"LetReg(9,'');");
+//  IfFileExists('%!9',!"MUISet('DeleteAll','enabled','1');");
+//  LetReg(9,'%!8\%!7-8up%!6');
+//  IfStr('%!9','%!5','=',!"LetReg(9,'');");
+//  IfFileExists('%!9',!"MUISet('DeleteAll','enabled','1');");
+//  Return;
+
+:GSView:: ===========================================================
+
+  MUIGet('OutputFile','text',9);
+  GetFileName("%!9",8);
+  GetFileType("%!9",7);
+  GetFilePath("%!9",6);
+  LetReg(8,"%!8%!7");
+  Run(|%$('GSView'); "%!9"|,'%!6',0,0,'%!8 - GSview',1,1);
+  Return;
+
+:Compile:: ==========================================================
+
+  MUIGet('InputFile','text',9);
+  MUIGet('OutputFile','text',8);
+
+  LetReg(7,'');
+  MUIGet('even_pages','checked',0);
+  IfNum(%!0,0,'>',!'LetReg(7,"%!7 -e");');
+  MUIGet('odd_pages','checked',0);
+  IfNum(%!0,0,'>',!'LetReg(7,"%!7 -o");');
+  //  MUIGet('all_pages','checked',0);
+  //  IfNum(%!0,0,'>',!'LetReg(7,"%!7");'); // Default: no switch
+  MUIGet('reversed_pages','checked',0);
+  IfNum(%!0,0,'>',!'LetReg(7,"%!7 -r");');
+  MUIGet('therange','text',0);
+  IfStr("%!0","",'>',!'LetReg(7,"%!7 -p%!0");');
+
+  MUIGet('PromptOverwrite','checked',0);
+  IfNum(%!0,'0','=',!'JMP("no_Prompt");');
+  IfFileExists("%!8",>
+      !'Prompt("Overwrite ""%!8""?",2,0,"Relax;","PopTagsandRegisters;Exit;");');
+:no_Prompt:: ========================================================
+
+  MUIGet('Detached','checked',0);
+  LetRegNum(1,00000100);
+  IfNum(%!0,0,'>',!'LetRegNum(1,%!1+1000);');
+  MUIGet('High_Priority','checked',2);
+  MUIGet('Pause','checked',3);
+  IfNum(%!3,0,'>',!'LetRegNum(3,111);',!'LetRegNum(3,000);');
+
+  GetFilePath("%!9",6);
+
+// psselect -q -e -o -r -pPages infile outfile
+  WinExe("",'psselect.exe %!7 "%!9" "%!8"',"%!6",>
+    "psselect...",%!1,%!2,'','','',%!3);
+
+  // Exit Code: Errors (zero return)?
+  MUIGet('ExitCode','checked',0);
+  IfNum(%!0,0,'>',>
+   !|>
+      GetExitCode(0);>
+      IfNum('%!0','0','=',!'Relax;',>
+        !'Prompt("psselect.exe returned nonzero Exit Code (%!0) indicating that some problems might have occurred during the compilation...");');>
+    |);
+
+  IfFileExists("%!8",'Relax;',>
+        !'Prompt(|psselect.exe failed to create output file "%!8".>
+          %\For possible explanations start the accessory from the Command Prompt and consult psselect''s Documentation!|);>
+          PopTagsandRegisters;Exit;');
+
+  MUIGet('CB_Ghostview','checked',0);
+  IfNum(%!0,0,'>',>
+   !|Call('GSView');|);
+
+  Return;
+//
+:End_Events:: =======================================================
+//
+//  // Load Previous Values ....
+  MUILoad('%!4'); // It does not have to exist...
+  // Except the Input File:
+  IfFileExists("%P\%N.ps",>
+    !|MUISet('InputFile','text','%P\%N.ps');|);
+  Call('Output'); // Fix Output File Name and Enable Actions
+
+  MUIShow; // Show Modal Dialog
+//
+  IfOK('Relax;','PopTagsandRegisters;Exit;');
+//
+//  // Save the Current Values ....
+  MUISave('%!4');
+// input-Error check
+  MUIGet('therange','text',9);
+  IfStr('%!9','','=',!'Prompt("You did not specify any pages.%\Use a dash (-) to choose the entire document.%\Try again?",3,0,!"Exe(`%X`);PopTagsandRegisters;Exit;")');
+  MUIGet('InputFile','text',9);
+  IfStr('%!9','','=',!'Prompt("You did not choose an input file.  %\Try again?",3,0,!"Exe(`%X`);PopTagsandRegisters;Exit;")');
+  IfFileExists('%!9','Relax;',!'Prompt("Input file%\%!9%\does not exist!  Try again?",3,0,!"Exe(`%X`);PopTagsandRegisters;Exit;")');
+//
+  Call('Compile');
+
+PopTagsandRegisters;
+
+End;

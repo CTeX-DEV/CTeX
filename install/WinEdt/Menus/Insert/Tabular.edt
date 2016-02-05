@@ -1,0 +1,76 @@
+// %!x: Columns and %!y: Rows Registers are set through GetDim;
+// Repeat(count, "Macro") is used to produce n x m environments.
+
+ GetDim;
+ SetTracking(0);
+ BeginGroup;
+ SetSel(0);
+ Mark(1);
+ LetReg(0,"%c");
+ TrimLine;
+ GoToEndOfLine;
+ IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+ TrackCaret;
+ LetReg(0, "%c"); // *** Current Column
+ Mark(1);
+
+ IfisMode('HTML;XML;PHP;HHC','%!m',!'JMP("HTML");');
+ IfisMode('TeX','%!m','JMP("TeX");');
+
+:TeX:: ==============================================================
+
+ InsText("\begin{tabular}{|");
+ Repeat(%!x,!'InsText("|")');
+  // by default entries are centered
+  // if you use "l" and "r" (left and right) aligned entries
+  // frequently, replace this by Repeat(%!x,'InsertBullet;');
+ InsText("}");
+ NewLine;
+ GotoCol(%!0+2);
+ TrimLine;
+ InsText("\hline");
+ NewLine;
+ GotoCol(%!0+2);
+ InsText(!"% after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...");
+ NewLine;
+ Repeat(%!y,>
+   !'GotoCol(%!0+2); // *** Original Column indented by 2<>
+     InsText(" ");>
+     Repeat(%!x-1,!"InsText(""&  "")");>
+     InsText("\\");>
+     NewLine;');
+ GotoCol(%!0+2);
+ TrimLine;
+ InsText("\hline");
+ NewLine;
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText("\end{tabular}");
+ InsLine(4);
+ JMP('Exit');
+
+:HTML:: =============================================================
+
+ InsText(!'<table cellspacing="2" cellpadding="1" border="1" align="center">');
+ NewLine;
+ GotoCol(%!0+2);
+ TrimLine;
+ Repeat(%!y,>
+   !'GotoCol(%!0+2); // *** Original Column indented by 2<>
+     InsText("<tr>");>
+     Repeat(%!x,!"InsText("" <td></td>"")");>
+     InsText(" </tr>");>
+     NewLine;');
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText(!"</table>");
+ InsLine(4);
+ JMP('Exit');
+
+:Exit:: =============================================================
+ Goto(1,1);
+ NextBullet;
+ EndGroup;
+ SetTracking(1);
+
+End;

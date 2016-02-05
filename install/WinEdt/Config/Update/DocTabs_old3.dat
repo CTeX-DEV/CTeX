@@ -1,0 +1,12 @@
+HOT_TRACK=1 // Ignored by Windows
+
+// The following Properties are Obsolete
+// They may be ignored by Windows or else
+// they may impair the appearance of Tabs
+CUSTOM_COLORS=0
+NORMAL_RGB="$800000"
+ACTIVE_RGB="$FF0000"
+MODIFIED_RGB="$000080"
+ACTIVE_MODIFIED_RGB="$0000FF"
+
+FONT_SIZE=0 // Use Default Font Size!

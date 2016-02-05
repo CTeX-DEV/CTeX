@@ -1,0 +1,18 @@
+// NSIS Configuration for Execution Modes
+
+  Requires(20120413);
+
+  // Configuration
+  SetConfig('NSIS');
+  Assign('Config-Dir','NSIS');
+  Assign('Exec-Dir','NSIS');
+
+  // Execution Modes
+  Exe('%b\Exec\%$("Exec-Dir");\ExeMode.edt');
+
+  // No TeX System for NSIS Configuration
+  Assign('TeX System');  // Not in TeX Mode
+  Assign('TeX-Bin');     // No TeX Bin Folder
+  Assign('DVIView');     // No DVI Viewer
+
+End;

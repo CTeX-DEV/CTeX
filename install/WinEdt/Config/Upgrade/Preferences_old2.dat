@@ -1,0 +1,4 @@
+MDI_CLIENT_HANDLER=1
+// No need to specify top margin (it looks better without it)
+TOP_MARGIN=0
+// Dealing with Corrupted Line terminators

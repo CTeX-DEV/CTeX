@@ -1,0 +1,31 @@
+// TeX Preview Macro
+
+// Execution Modes Selection for Compile TeX Format (pdf, dvi or ps)
+  IfStr("%$('CS-Output');","1","=",!|JMP('DVI');|);
+  IfStr("%$('CS-Output');","2","=",!|JMP('PS');|);
+
+:PDF:: ==============================================================
+  IfFileExists('%P\%N.pdf',!"Exe('%b\Exec\PDF\PDF Preview.edt');Exit;");
+  JMP("Else");
+:DVI:: ==============================================================
+  IfFileExists('%P\%N.dvi',!"Exe('%b\Exec\TeX\DVI Preview.edt');Exit;");
+  JMP("Else");
+:PS:: ===============================================================
+  IfFileExists('%P\%N.ps',!"Exe('%b\Exec\TeX\GSView.edt');Exit;");
+  IfFileExists('%P\%N.eps',!"Exe('%b\Exec\TeX\GSView.edt');Exit;");
+  JMP("Else");
+:Else:: =============================================================
+// Try a few things ...
+  IfFileExists('%P\%N.pdf',!"Exe('%b\Exec\PDF\PDF Preview.edt');Exit;");
+  IfFileExists('%P\%N.dvi',!"Exe('%b\Exec\TeX\DVI Preview.edt');Exit;");
+  IfFileExists('%P\%N.ps',!"Exe('%b\Exec\TeX\GSView.edt');Exit;");
+  IfFileExists('%P\%N.eps',!"Exe('%b\Exec\TeX\GSView.edt');Exit;");
+  IfFileExists('%p\%n.eps',!"Exe('%b\Exec\TeX\GSView.edt');Exit;");
+  IfFileExists('%P\%N.html',!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+  IfFileExists('%P\%N.htm',!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+  IfFileExists('%p\%n.html',!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+  IfFileExists('%p\%n.htm',!"Exe('%b\Exec\HTML\Preview.edt');Exit;");
+
+// Nothing to preview?
+
+End;

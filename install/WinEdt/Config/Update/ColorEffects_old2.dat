@@ -1,0 +1,4 @@
+// These options can suppress "fancy" Background Scheme Values!
+// You must specify colors for "special effects" in the Background Scheme.
+
+// 0=OFF; 1=Text Attributes only (eg. Bold) 2=Text Attributes & Colors

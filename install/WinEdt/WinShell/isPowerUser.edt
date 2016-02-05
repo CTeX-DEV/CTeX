@@ -1,0 +1,10 @@
+// Try to add a key to HKEY_CLASSES_ROOT registry
+// If this fails the user is not power user ...
+
+  SetRegKey("HKEY_CLASSES_ROOT","WinEdt.test", "WinEdt.test: you can delete this key");
+  IfOK('RegDeleteKey("HKEY_CLASSES_ROOT","","WinEdt.test");>
+        Assign("isPowerUser","1");',>
+       'Assign("isPowerUser","0");');
+//  Prompt("Power User Status: %$('isPowerUser');");
+
+End;

@@ -1,0 +1,35 @@
+// -*- ASCII:EDT -*-
+// DTX CloseGuard
+// close last opened DTX guard
+// ----------------------
+// based upon schlicht's CloseGuard.edt
+/////////////////////////
+
+    PushTagsandRegisters;
+
+    GetDocAsString(0,"%f");
+    SetCLStart(2);
+    CLToIndex(%c,%l,1,"%!0");
+    ExtractByIndex(0,"%!0",0,%!1);
+
+    LetReg(3,"");
+    Loop(!`>
+        SetOK(1);>
+        FindInString("%!0","<%%\<\*\(*\)\>",1,2,1101,%!1-1);>
+        IfOK(!">
+            FindInString('%!0','<%%\</\0\>',2,2,1001,%!1);>
+            IfOK('','GetTag(0,3);Stop;');",>
+            "Stop;");>
+        `);
+    IfStr("%!3","","=",!"PopTagsandRegisters;Exit;");
+
+    SetTracking(0);
+    BeginGroup;
+    Backspace;
+    InsText('/%!3>');
+    EndGroup;
+    SetTracking(1);
+
+    PopTagsandRegisters;
+
+End;

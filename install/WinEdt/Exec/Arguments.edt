@@ -1,0 +1,14 @@
+// Toggle the Global Register %0 empty or --src
+
+  IfStr("%0","--src","=","LetStr(0,'')","LetStr(0,'--src')");
+
+// Alternative cycle empty  --src  --c-style  --src --c-style
+
+//  IfStr("%0","", "=", "LetStr(0,'--src')",>
+//    |IfStr("%0","--src", "=", "LetStr(0,'--c-style')",>
+//      *IfStr("%0", "--c-style", "=", "LetStr(0,'--src --c-style')",>
+//         "LetStr(0,'')")*)|);
+
+  UpdateStatus;
+
+End;

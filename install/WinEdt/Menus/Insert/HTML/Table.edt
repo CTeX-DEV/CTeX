@@ -1,0 +1,198 @@
+// HTML Table
+
+IfStr('%!0',!'table',!'=',!"JMP(!'table');");
+IfStr('%!0',!'col_group',!'=',!"JMP(!'col_group');");
+IfStr('%!0',!'col_span',!'=',!"JMP(!'col_span');");
+IfStr('%!0',!'col_spec',!'=',!"JMP(!'col_spec');");
+IfStr('%!0',!'rows',!'=',!"JMP(!'rows');");
+IfStr('%!0',!'data',!'=',!"JMP(!'data');");
+IfStr('%!0',!'headers',!'=',!"JMP(!'headers');");
+IfStr('%!0',!'nxm',!'=',!"JMP(!'nxm');");
+IfStr('%!0',!'wizard',!'=',!"JMP(!'wizard');");
+
+Prompt('Unknown Table Property: "%!0"');
+
+Exit;
+
+:table:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<table cellspacing="');
+  Mark(1);
+  Ins('" cellpadding="" border="" align="">');
+  NewLine;
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;Ins("</table>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:col_group:: ========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<colgroup span="');
+  Mark(1);
+  Ins('" width="">');
+  NewLine;
+  Mark(1);
+  IfStr("%!1","","=",!"Ins('')",!"Ins('%!1')");
+  NewLine;Ins("</colgroup>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:col_span:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<colgroup span="');
+  Mark(1);
+  Ins('" width="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:col_spec:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<col span="');
+  Mark(1);
+  Ins('" width="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:rows:: =============================================================
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  IfStr("%!1","","=",'Prompt("You have to select something!",1,1);Exit;');
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  SetReplaceNotify(0);
+  SetNotFoundNotify(0);
+  SetSearchForward(1);
+  SetSearchCaseSensitive(0);
+  SetSearchEntire(1);
+  SetSearchCyclic(0);
+  SetSearchRelaxed(0);
+  SetSearchWholeWords(0);
+  SetSearchInline(0);
+  SetSearchSelected;
+  SetRegEx(1);
+  SetReplaceRespectCaps(0);
+  SetReplacePrompt(0);
+  SetFindStr("<\(1@ \)\(2*\)@ >");
+  SetReplaceStr("\1\<tr\>\<td\>\2\</td\>\</tr\>>");
+  SearchReset;
+  ReplaceAll;
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+  Exit;
+
+:data:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(1,"");
+  EnterReg(1,"Number of cells:","Table cells");
+  Repeat(%!1,'Ins("<td></td>")');
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:headers:: ==========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(1,"");
+  EnterReg(1,"Number of headers:","Table headers");
+  Repeat(%!1,'Ins("<th></th>")');
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:nxm:: ==============================================================
+  GetDim;
+  SetTracking(0);
+  BeginGroup;
+  Mark(1);
+  SetIndent(1);
+  SetSel(0);
+  TrackCaret;
+  Mark(1);
+  InsText("<tr>");
+  Repeat(%!x,"InsText(""<td></td>"");");
+  InsText("</tr>");
+  SetSel(1);
+  Goto(1);
+  Copy;
+  GoToEndOfLine;
+  Repeat(%!y-1,'NewLine;Paste;');
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:wizard:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Mark(1);
+  LetReg(1,"2");
+  EnterReg(1,"Cellspacing (in pixels)","Table");
+  LetReg(2,"1");
+  EnterReg(2,"Cellpadding (in pixels)","Table");
+  LetReg(3,"0");
+  EnterReg(3,"Border width (in pixels)","Table");
+  Ins('<table cellspacing="%!1" cellpadding="%!2" border="%!3"');
+  Interface("Alignment");
+  Item("None","Relax;");>
+  Item("Defult (left)",'Ins(: align="left":);');>
+  Item("Center",'Ins(: align="center":);');>
+  Item("Right",'Ins(: align="right":);');>
+  ShowList(0,1,"Do(*%%?*);","");
+  Ins(">");
+  NewLine;
+  Tab;
+  GetDim;
+  SetIndent(1);
+  SetSel(0);
+  Mark(2);
+  InsText("<tr>");
+  Repeat(%!x,"InsText(""<td></td>"");");
+  InsText("</tr>");
+  SetSel(1);
+  Goto(2);
+  Copy;
+  GoToEndOfLine;
+  Repeat(%!y-1,'NewLine;Paste;');
+  NewLine;
+  Backspace;
+  Ins("</table>");
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

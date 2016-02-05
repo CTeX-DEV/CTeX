@@ -1,0 +1,37 @@
+// Open Sample
+
+  IfFileExists('%b\%!9','JMP("_Open")');
+  IfFileExists('%B\%!9','JMP("_Copy")');
+
+  Prompt('Specified sample files does not exist: %\ "%!9"');
+  Exit;
+
+:_Copy:: ============================================================
+
+  GetFilePath("%!9",8);
+
+  // Copy Global Files ...
+  ListFolderFiles(0,'%B\%!8','',1,1,1);
+  LstEnum('%!0','%\');
+  LstGetCount(1);
+  Repeat(%!1,>
+    !|LstGetItem(3,%!c-1);>
+      CopyFile("%B\%!8\%!3", "%b\%!8\%!3", 1,1);>
+      ProcessMessages;>
+     |);
+  LstRelease;
+  IfFileExists('%b\%!9',!'JMP("_Open")');
+
+  Prompt('Access to Local Settings Denied!');
+  Exit;
+
+:_Open:: ============================================================
+
+  Open('%b\%!9');
+  ProcessMessages;
+  SetMainFile('%b\%!9');
+  ProcessMessages;
+  BuildTree(1,1);
+  ProcessMessages;
+
+End;

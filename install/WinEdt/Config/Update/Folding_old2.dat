@@ -1,0 +1,1 @@
+  COLLECT="%[!|Exe('%b\Macros\Gather\MetaFontChars.edt');|];%$('FontGather');"

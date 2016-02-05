@@ -1,0 +1,25 @@
+GUI_HEIGHT=64 // Default height at 100% button size
+
+// Specify how buttons and images should be scaled:
+//   If zero then WinEdt determines the actual value
+//   depending on your screen resolution (recommended)!
+// Default settings provide bitmap images scaled at
+// 125% (Gui125 buttons at 100%) and 200% (Gui200 buttons at 150%).
+// Other values will not look quite as sharp because bitmaps do not scale well!
+//   ... unless you create a set of images that were scaled as vector
+//   graphics by Adobe Reader at magnification of your choice...
+//
+// NOTE: 96 dpi is default resolution at Windows 100% magnification.
+//
+//   Reasonable values (IMAGES and BUTTONS):
+//   =======================================
+//
+//      Small:   100% 80%  (default at dpi less than 120 - scaled down from 125%)
+//      Normal:  125% 100% (default at dpi 120-143 - Gui125 folder)
+//      Large:   150% 120% (default at dpi 144-191 - scaled down from 200%)
+//      Huge:    200% 150% (default at dpi 192 or more -- Gui200 folder)
+
+SCALED_IMAGES=0
+SCALED_BUTTONS=0
+
+PAGE="Math"

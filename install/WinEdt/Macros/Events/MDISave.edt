@@ -1,0 +1,12 @@
+// MDI Save Event Handler
+
+  Requires(20040806);
+  PushTagsandRegisters;
+
+  Relax; // No Default Handler
+  // Here is where you can update any Time Stamps (Last Modified, etc...)
+  // If format is Mode-Dependent use the IfisMode() function!
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,2 @@
+  COLLECT="%[!|Assign('GatherType','Function');"+
+              "Exe('%b\Macros\Gather\NSISFunctions.edt');|];%-0"

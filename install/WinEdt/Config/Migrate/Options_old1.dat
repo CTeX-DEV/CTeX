@@ -1,0 +1,3 @@
+  REQ_FILTER="<%f>%p\MainMenu.ini?<%f>%p\PopupMenus.ini?<%f>%p\Toolbar.ini?"+
+             "<%f>%p\DocTabs.ini?<%f>%p\Bookmarks.ini?<%f>%p\Input.ini?"+
+             "<%f>%p\Tree.ini?<%f>%p\Gather.ini?<%f>%p\Options.ini"

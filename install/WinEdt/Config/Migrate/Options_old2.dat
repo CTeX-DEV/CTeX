@@ -1,0 +1,6 @@
+ITEM="Menus and Toolbar..."
+  ICON="MenuToolbar"
+  ACTION="$Help"
+    MACRO="HTMLHelp('%B\Doc\Help\WinEdt.chm',1,0,"+
+          "'Config/MenuandToolbar.html#page_top');"
+  ITEM="Main Menu"

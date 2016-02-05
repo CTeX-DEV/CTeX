@@ -1,0 +1,27 @@
+// Execute or Load Current Macro or INI Script
+
+IfStr("%!m",!"ASCII:EDT",!"=",!"JMP('_EXE');");
+IfStr("%!m",!"DATA:INI:EDT",!"=",!"JMP('_LOAD');");
+IfisMode(!"DATA:INI:EDT","%!m",!"JMP('_LOAD');");
+IfisMode(!"ASCII:EDT","%!m",!"JMP('_EXE');");
+IfisMode(!"INI","%!m",!"JMP('_LOAD');");
+IfisMode(!"EDT","%!m",!"JMP('_EXE');");
+Exit;
+
+:_EXE:: =============================================================
+SetModified(1,1);
+IfOK(!"SaveDoc(1)");
+SetNew(1,1);
+IfOK(!"SaveDoc;");
+Exe('%f','%p');
+Exit;
+
+:_LOAD:: ============================================================
+SetModified(1,1);
+IfOK(!"SaveDoc(1);");
+SetNew(1,1);
+IfOK(!"SaveDoc;");
+LoadConfig('%f');
+Exit;
+
+End;

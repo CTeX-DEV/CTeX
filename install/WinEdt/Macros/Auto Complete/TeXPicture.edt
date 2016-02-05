@@ -1,0 +1,38 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert LaTeX picture Environment
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - environment name
+// %!? - indentation of the trigger
+// %-0..%-9 - can be manually set for macros that insert objects
+//            (by default they are empty)
+//
+// Temporary registers (manually set):
+// ===================================
+// %-1 (indentation)
+// %-2 (extra info after \begin{...} such as dimensions and offset
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// ===============================================================================
+
+
+LetReg(-9,'%?');
+LetTempReg;
+
+LetReg(-10, '\begin{%-9}%-2%\');
+LetReg(-10, '%-0%!?%-1%% Dimensions and offset: (width,height)(x offset,y offset)%\');
+LetReg(-10, '%-0%!?%-1%% Insert picture commands (\line,\circle, etc...) here:%\');
+LetReg(-10, '%-0%!?%-1  %\');
+LetReg(-10, '%-0%!?\end{%-9}');
+
+LetTempReg("%-0");
+
+End;
+
+// ===============================================================================

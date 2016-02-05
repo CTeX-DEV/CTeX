@@ -1,0 +1,19 @@
+// Project Close Event Handler
+
+  Requires(20041221);
+  PushTagsandRegisters;
+
+  DeleteTree(1, $$0000);
+  // DeleteTree(UseFlag: 0..1, Flag: $$0000..$$1111);
+  //  UseFlag: 0..1
+  //    0 delete the tree (as before)
+  //    1 use flags to select the tasks
+  //      Binary Flags from left to right $$0000..$$1111:
+  //        Clear Gather Control
+  //        Delete the Tree
+  //        Clear File List
+  //        Remove persistent Main File
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,34 @@
+// %!x: Columns and %!y: Rows Registers are set through GetDim;
+// Repeat(count, "Macro") is used to produce n x m environments.
+ GetDim;
+ SetTracking(0);
+ BeginGroup;
+ SetSel(0);
+ Mark(1);
+ SetIndent(1); // Assumes Auto Indent Mode (to be restored)
+ LetReg(0,"%c");
+ GoToEndOfLine;
+ IfNum(%!0,%c,'<>','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+ TrackCaret;
+ LetReg(0, "%c"); // *** Current Column
+ InsText("\begin{%!9matrix}");
+ NewLine;
+ InsText("  "); // Indent the environment
+ //Note the use of ""Quotes"" inside "Quotes"
+ //> at the end of line concatenates lines before executing them
+ Repeat(%!y,>
+   'GotoCol(%!0+2); // *** Original Column indented by 2<>
+    InsText(" ");>
+    Repeat(%!x-1,"InsText(""&  "")");>
+    InsText("\\");NewLine;');
+ IfNum(%c, '1', '>', 'Backspace;'); // Unindent
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText("\end{%!9matrix}");
+ InsLine(4);
+ RestoreIndent;                   // Restore Auto Indent
+ Goto(1,1);
+ NextBullet;
+ EndGroup;
+ SetTracking(1);
+End;

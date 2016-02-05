@@ -1,0 +1,15 @@
+// DTX Changes
+
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'=','SetSel(0);');
+  IfNum(%c,'1','>','InsLine;');
+  Mark(1);
+  Ins("%% \changes{}{}{}");
+  MoveBy(1);IfNum(%c,'1','>','MoveBy(-1);InsLine;');
+  Goto(1,1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+
+End;

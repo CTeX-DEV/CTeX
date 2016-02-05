@@ -1,0 +1,138 @@
+// HTML Input Controls
+
+IfStr('%!0',!'input',!'=',!"JMP(!'input');");
+IfStr('%!0',!'text',!'=',!"JMP(!'text');");
+IfStr('%!0',!'password',!'=',!"JMP(!'password');");
+IfStr('%!0',!'checkbox',!'=',!"JMP(!'checkbox');");
+IfStr('%!0',!'radio',!'=',!"JMP(!'radio');");
+IfStr('%!0',!'submit',!'=',!"JMP(!'submit');");
+IfStr('%!0',!'reset',!'=',!"JMP(!'reset');");
+IfStr('%!0',!'push',!'=',!"JMP(!'push');");
+IfStr('%!0',!'hidden',!'=',!"JMP(!'hidden');");
+IfStr('%!0',!'image',!'=',!"JMP(!'image');");
+
+Prompt('Unknown Input Control: "%!0"');
+
+Exit;
+
+:input:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input name="');
+  Mark(1);
+  Ins('" type="" value="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:text:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="text" name="');
+  Mark(1);
+  Ins('" size="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:password:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="password" name="');
+  Mark(1);
+  Ins('">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:checkbox:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="checkbox" name="');
+  Mark(1);
+  Ins('" value="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:radio:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="radio" name="');
+  Mark(1);
+  Ins('" value="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:submit:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="submit" value="');
+  Mark(1);
+  Ins('">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:reset:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="reset" value="');
+  Mark(1);
+  Ins('">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:push:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="button" name="');
+  Mark(1);
+  Ins('" value="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:hidden:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="hidden" name="');
+  Mark(1);
+  Ins('" value="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:image:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<input type="image" src="');
+  Mark(1);
+  Ins('" alt="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

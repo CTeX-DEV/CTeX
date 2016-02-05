@@ -1,0 +1,27 @@
+// Requires: %P\%N.chm?%P\%N.php?%P\%N.htm?%P\%N.html?%p\%n.php?%p\%n.htm?%p\%n.html
+// Which file to preview? (change the order if this is not your choice)...
+
+  IfIStr('%t','.php','=','JMP("HTML");'); // currently editing .php file
+  IfIStr('%t','.htm','=','JMP("HTML");'); // currently editing .htm file
+  IfIStr('%t','.html','=','JMP("HTML");'); // currently editing .html file
+  // HTML Help!
+  IfisMode("XWE","%!M",!"JMP('CHM');");
+  IfisMode("HHC","%!M",!"JMP('CHM');");
+  IfIStr("%F","%P\%N.hhp",'=',!"JMP('CHM');");
+  // TeX -> HTML ?
+  JMP("Else");
+
+:CHM:: ==============================================================
+  IfFileExists("%P\%N.chm",!|HTMLHelp('%P\%N.chm',1,1);Exit;|);
+  JMP("Else");
+:HTML:: =============================================================
+  // To save or not to save?
+  SaveAllDoc;
+  ShellExecute("Open", "%n%t","","%p",1);
+  Exit;
+:Else:: =============================================================
+  IfFileExists("%P\%N.php",!|ShellExecute("Open", "%N.php","","%P",1);Exit;|);
+  IfFileExists("%P\%N.htm",!|ShellExecute("Open", "%N.htm","","%P",1);Exit;|);
+  IfFileExists("%P\%N.html",!|ShellExecute("Open", "%N.html","","%P",1);Exit;|);
+
+End;

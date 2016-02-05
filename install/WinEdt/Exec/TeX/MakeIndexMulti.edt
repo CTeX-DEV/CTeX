@@ -1,0 +1,99 @@
+// -*- ASCII:EDT -*-
+//
+// Support for 'multiple index' packages:
+// splitindex, index
+//
+// ============================================
+
+  Requires(20130125); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  IfIStr("%$('MakeIndex-Executable');","splitindex.exe","=",!"PopTagsandRegisters;Exit;");
+  JMP('MakeIndex_Extra');
+
+:MakeIndex_Run:: ====================================================
+  IfStr("%$('MakeIndex-file');","%N.idx","=",!"Return;");
+
+  // Build the Command Line ...
+  LetReg(5,`%$('MakeIndex-Executable'); %$('MakeIndex-Switches'); %!3 %$('MakeIndex--Switches'); "%$('MakeIndex-file');"`);
+  TrimCommandLine(@@'%!5',5); // Expand Command Line (twice!) and Remove Extra Spaces
+
+  IfStr("%$('MakeIndex-WinEdt_Console');",'1','<>',!'JMP("Windows_Console");');
+
+:WinEdt_Console:: ===================================================
+  GetConsoleText(3);
+  IfStr('%!3','','<>',!'LetReg(3,"%!3%\");');
+
+  LetReg(4,!'0');
+:Run_Again:: ========================================================
+  SetConsoleText('%!3Command Line:   %!5%\Startup Folder: %O%\%\',1);
+  RunConsole('%!5','%O','MakeIndex ...',1,1,0,%!4,%!4);
+
+  // Blues with MiKTeX's GUI Framework?
+  IfStr("%$('TeX System');",!"MiKTeX",!"<>",!"Return;");
+  GetConsoleText(4);
+  FindInString("%!4",!"GUI framework cannot be initialized",-1,-1,10);
+  IfOK(!"ResetConsole;LetReg(4,!'1');JMP(!'Run_Again');");
+Return;
+
+:Windows_Console:: ==================================================
+  LetReg(0, !"0");
+  LetReg(1, !"0");
+  LetReg(2, !"0");
+  IfStr("%$('MakeIndex-Wait');",             "1","=",!|LetRegNum(0,"%!0+00100");|);
+  IfStr("%$('MakeIndex-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+01000");|);
+  IfStr("%$('MakeIndex-Background_Window');","1","=",!|LetRegNum(0,"%!0+10000");|);
+  IfStr("%$('MakeIndex-STD_IO');",           "1","=",!|LetRegNum(0,"%!0+00010");|);
+  IfStr("%$('MakeIndex-Pause');",            "1","=",!|LetRegNum(1,"%!1+111");|);
+  IfStr("%$('MakeIndex-High_Priority');",    "1","=",!|LetReg(2,'1');|);
+
+  WinExe('','%!5','%O','MakeIndex ...', %!0, %!2,>
+         '', '%b\_Out.log', '%b\_Err.log',%!1);
+Return;
+
+:MakeIndex_Do:: =====================================================
+  FindInString("%!9","<@{ }\\usepackage@{\[**\]}\{@^{\}|%%|%$('MakeIndex-package');}%$('MakeIndex-package');{,| |\}}",7,8,11);
+  IfNum(%!7,%!8,"<",!">
+        Call('MakeIndex_%$(|MakeIndex-package|);');>
+        JMP('MakeIndex_EndExtra');");
+Return;
+
+:MakeIndex_splitidx:: ===============================================
+  LetRegNum(8,0);
+  Loop(!|>
+       FindInString("%!9","<@{ }\\newindex@{\[*\]}\{\(0*\)\}",7,8,1011,%!8);>
+       IfOK(!`IfFileExists('%O\%N-%#0.idx',!'>
+                Assign(''MakeIndex-file'',''%N-%#0.idx'');>
+                LetReg(3,'''');>
+                Call(''MakeIndex_Run'');');`,>
+             `Stop;`);>
+        |);
+Return;
+
+:MakeIndex_index:: ==================================================
+  LetRegNum(8,0);
+  Loop(!|>
+       FindInString("%!9","<@{ }\\@{re}newindex@{\[*\]}@{\*}\{*\}\{\(0*\)\}\{\(1*\)\}",7,8,1011,%!8);>
+       IfOK(!`IfFileExists('%O\%N.%#0',!'>
+                Assign(''MakeIndex-file'',''%N.%#0'');>
+                LetReg(3,''-o "%N.%#1"'');>
+                Call(''MakeIndex_Run'');');`,>
+             `Stop;`);>
+        |);
+Return;
+
+:MakeIndex_Extra:: ==================================================
+  GetPreamble("\begin{document}",9);
+  Assign("MakeIndex-package","splitidx");Call("MakeIndex_Do");
+  Assign("MakeIndex-package","index");   Call("MakeIndex_Do");
+
+:MakeIndex_EndExtra:: ===============================================
+
+// ==================================================================
+// MakeIndex is Done ...
+// ==================================================================
+
+  PopTagsandRegisters;
+
+End;

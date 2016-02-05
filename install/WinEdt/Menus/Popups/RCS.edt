@@ -1,0 +1,7 @@
+// Insert RCS Mark...
+
+  IfSel(!"0",!"=",>
+    !"Ins('\RCS%!0{}');CharLeft;",>
+    !"InsLabel('\RCS%!0','{','}');");
+
+End;

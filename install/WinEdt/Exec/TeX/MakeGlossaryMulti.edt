@@ -1,0 +1,101 @@
+// -*- ASCII:EDT -*-
+//
+// Support for 'multiple glossary' packages:
+// glossary, glossaries
+//
+// ============================================
+
+  Requires(20130125); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  IfIStr("%$('MakeGlossary-Executable');","makeglossaries.exe","=",!"PopTagsandRegisters;Exit;");
+  JMP('MakeGlossary_Extra');
+
+:MakeGlossary_Run:: =================================================
+  IfStr("%$('MakeGlossary-file');","%N.glo","=",!"Return;");
+
+  // Build the Command Line ...
+  LetReg(5,`%$('MakeGlossary-Executable'); %$('MakeGlossary-Switches'); %$('MakeGlossary--Switches'); "%$('MakeGlossary-file');"`);
+  SubstituteInString("%!5",!"%N.glg",!"%N.%#1",0,5);
+  SubstituteInString("%!5",!"%N.gls",!"%N.%#2",0,5);
+  TrimCommandLine(@@'%!5',5); // Expand Command Line (twice!) and Remove Extra Spaces
+
+  IfStr("%$('MakeGlossary-WinEdt_Console');",'1','<>',!'JMP("Windows_Console");');
+
+:WinEdt_Console:: ===================================================
+  GetConsoleText(3);
+  IfStr('%!3','','<>',!'LetReg(3,"%!3%\");');
+
+  LetReg(4,!'0');
+:Run_Again:: ========================================================
+  SetConsoleText('%!3Command Line:   %!5%\Startup Folder: %O%\%\',1);
+  RunConsole('%!5','%O','MakeGlossary ...',1,1,0,%!4,%!4);
+
+  // Blues with MiKTeX's GUI Framework?
+  IfStr("%$('TeX System');",!"MiKTeX",!"<>",!"Return;");
+  GetConsoleText(4);
+  FindInString("%!4",!"GUI framework cannot be initialized",-1,-1,10);
+  IfOK(!"ResetConsole;LetReg(4,!'1');JMP(!'Run_Again');");
+Return;
+
+:Windows_Console:: ==================================================
+  LetReg(0, !"0");
+  LetReg(1, !"0");
+  LetReg(2, !"0");
+  IfStr("%$('MakeGlossary-Wait');",             "1","=",!|LetRegNum(0,"%!0+00100");|);
+  IfStr("%$('MakeGlossary-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+01000");|);
+  IfStr("%$('MakeGlossary-Background_Window');","1","=",!|LetRegNum(0,"%!0+10000");|);
+  IfStr("%$('MakeGlossary-STD_IO');",           "1","=",!|LetRegNum(0,"%!0+00010");|);
+  IfStr("%$('MakeGlossary-Pause');",            "1","=",!|LetRegNum(1,"%!1+111");|);
+  IfStr("%$('MakeGlossary-High_Priority');",    "1","=",!|LetReg(2,'1');|);
+
+  WinExe('','%!5','%O','MakeGlossary ...', %!0, %!2,>
+         '', '%b\_Out.log', '%b\_Err.log',%!1);
+Return;
+
+:MakeGlossary_Do:: ==================================================
+  FindInString("%!9","<@{ }\\usepackage@{\[**\]}\{@^{\}|%%|%$('MakeGlossary-package');}%$('MakeGlossary-package');{,|-| |\}}",7,8,11);
+  IfNum(%!7,%!8,"<",!">
+        Call('MakeGlossary_%$(|MakeGlossary-package|);');>
+        JMP('MakeGlossary_EndExtra');");
+Return;
+
+:MakeGlossary_glossaries:: ==========================================
+  IfFileExists("%O\%N.aux",!"ReadFile('%O\%N.aux',9);",!"PopTagsandRegisters;Exit;");
+  LetRegNum(8,0);
+  Loop(!|>
+       FindInString("%!9","<\\\@newglossary\{\(0*\)\}\{\(1*\)\}\{\(2*\)\}\{\(3*\)\}",7,8,1011,%!8);>
+       IfOK(!`IfFileExists('%O\%N.%#3',!'>
+                Assign(''MakeGlossary-file'',''%N.%#3'');>
+                Call(''MakeGlossary_Run'');');`,>
+             `Stop;`);>
+       |);
+Return;
+
+:MakeGlossary_glossary:: ============================================
+  IfFileExists("%O\%N.aux",!"ReadFile('%O\%N.aux',9);",!"PopTagsandRegisters;Exit;");
+  LetRegNum(8,0);
+  Loop(!|>
+       FindInString("%!9","<\\\@newglossarytype \[\(1*\)\]\{\(0*\)\}\{\(3*\)\}\{\(2*\)\}",7,8,1011,%!8);>
+       IfOK(!`IfFileExists('%O\%N.%#3',!'>
+                Assign(''MakeGlossary-file'',''%N.%#3'');>
+                Call(''MakeGlossary_Run'');');`,>
+             `Stop;`);>
+       |);
+Return;
+
+:MakeGlossary_Extra:: ===============================================
+  GetPreamble("\begin{document}",9);
+  Assign("MakeGlossary-package","glossaries");Call("MakeGlossary_Do");
+  Assign("MakeGlossary-package","glossary");  Call("MakeGlossary_Do");
+
+:MakeGlossary_EndExtra:: ============================================
+
+// ==================================================================
+// MakeGlossary is Done ...
+// ==================================================================
+
+  PopTagsandRegisters;
+
+End;

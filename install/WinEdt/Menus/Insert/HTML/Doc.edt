@@ -1,0 +1,145 @@
+// HTML Document
+
+IfStr('%!0',!'meta',!'=',!"JMP(!'meta');");
+IfStr('%!0',!'meta_http',!'=',!"JMP(!'meta_http');");
+IfStr('%!0',!'meta_charset',!'=',!"JMP(!'meta_charset');");
+IfStr('%!0',!'link_rel',!'=',!"JMP(!'link_rel');");
+IfStr('%!0',!'link_style',!'=',!"JMP(!'link_style');");
+IfStr('%!0',!'script',!'=',!"JMP(!'script');");
+IfStr('%!0',!'wizard',!'=',!"JMP(!'wizard');");
+
+Prompt('Unknown Document Property: "%!0"');
+
+Exit;
+
+:meta:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<meta name="');
+  Mark(1);
+  Ins('" content="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:meta_http:: ========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<meta http-equiv="');
+  Mark(1);
+  Ins('" content="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:meta_charset:: =====================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<meta http-equiv="Content-Type" content="text/html; charset=');
+  Mark(1);
+  Ins('">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:link_rel:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<link rel="');
+  Mark(1);
+  Ins('" href="">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:link_style:: =======================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<link rel="Stylesheet" type="text/css" href="');
+  Mark(1);
+  Ins('.css">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:script:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<script type="text/javascript">');
+  NewLine;Mark(1);
+  Ins("%!1");
+  NewLine;
+  Ins("</script>");
+  NewLine;
+  Ins('<noscript>');
+  NewLine;
+  Ins('');
+  NewLine;
+  Ins('</noscript>');
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:wizard:: ===========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Mark(1);
+  Ins("<html>");
+  NewLine;
+  Tab;
+  Ins("<head>");
+  NewLine;
+  Tab;
+  LetReg(1,"Title");
+  EnterReg(1,"Enter Document Title:","Document Title");
+  Ins("<title>%!1</title>");
+  NewLine;
+  LetReg(2,"iso-8859-1");
+  EnterReg(2,"Enter Document Code Page:","Code Page");
+  Ins('<meta http-equiv="Content-Type" content="text/html;charset=%!2">');
+  NewLine;
+  Prompt("Link external stylesheet file?",0,3,>
+      "LetReg(3);EnterReg(3,'File name:','Stylesheet file');Ins('<link rel=""Stylesheet"" type=""text/css"" href=""%%!3"">');",>
+      "Prompt('Add Stylesheet?',0,3,'Ins(:<style type=""text/css"">:);NewLine;Ins(:<!--:);NewLine;Tab;>
+      InsertBullet;NewLine;Backspace;Ins(:-->:);NewLine;Ins(:</style>:)','');");
+  Prompt("Add Script?",0,3,>
+      "NewLine;Ins(:<script type=""text/javascript"">:);NewLine;Ins(:<!--:);>
+      NewLine;Tab;InsertBullet;NewLine;Backspace;Ins(:// -->:);NewLine;>
+      Ins(:</script>:);NewLine;Ins(:<noscript>:);NewLine;Tab;InsertBullet;NewLine;Backspace;>
+      Ins(:</noscript>:);NewLine;","");
+  NewLine;
+  Backspace;
+  Ins("</head>");
+  NewLine;
+  Ins("<body>");
+  NewLine;
+  Tab;
+  InsertBullet;
+  NewLine;
+  Backspace;
+  Ins("</body>");
+  NewLine;
+  Backspace;
+  Ins("</html>");
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

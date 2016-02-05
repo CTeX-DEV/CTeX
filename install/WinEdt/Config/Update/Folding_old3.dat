@@ -1,0 +1,1 @@
+  COLLECT="%[!|Exe('%b\Macros\Gather\NSISSections.edt');|];%$('NSISGather');"

@@ -1,0 +1,5 @@
+STRING="TEh"
+  START_FILTER="~Alpha"
+  END_FILTER="~Alpha"
+  ENABLED=0
+  MACRO="[BeginGroup;Backspace(3);Ins('he ');EndGroup;]"

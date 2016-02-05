@@ -1,0 +1,6 @@
+ICON="NSIS"
+  TYPE_FILTER="nsi;nsh"
+ICON="DocASCII"
+  TYPE_FILTER="ini"
+
+//  BEGINNING_OF_LINE_ONLY

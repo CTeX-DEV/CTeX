@@ -1,0 +1,9 @@
+// Create a User Profile for Networks or Multi-User Setup
+
+Requires(20010724); // Requires this build of WinEdt to work properly
+
+Prompt("You are about to create or update your personal profile for WinEdt...",1,0);
+
+Exe('%B\WinShell\Profiles\Create User Profile.edt');
+
+End;

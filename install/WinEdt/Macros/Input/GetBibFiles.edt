@@ -1,0 +1,44 @@
+// GetBibFiles.edt
+// ======================
+// Expand Filename containing TeX Definitions:
+//   \def\rootpath{c:\TeX\Lectures}
+//   \def\mypath{\rootpath/folder}
+//   ...
+//   \include{\mypath/filename}
+// =====================================================
+// %?  = the last wildcard
+// %!? = the whole line span containing the directive...
+// =====================================================
+
+  PushTagsandRegisters;
+  LetReg(0,'%?'); // \include{\path/filename}
+  FindInString("%!0","\\\(@[a-z]\)", 1,1, 1);
+  IfOK(!'Relax;',!'JMP("Assign");'); // contains control sequences?
+  GetPreamble(!"\begin{document}",9); // Get Preamble in Register 9
+  LetRegNum(6,0);         // counter to prevent an infinite loop
+
+:More:: =============================================================
+
+  LetRegNum(6,%!6+1);
+  IfNum(%!6,9,'>',!'JMP("Assign");'); // way too deep: cannot be resolved...
+  GetTag(0,8); // Control Sequence
+  FindInString("%!9","\\def\\%!8\{\(1*\)\}",1,1,11);
+  IfOK(!'Relax;',!'JMP("Assign");'); // Not Found?
+  GetTag(1,7); // Control Sequence definition
+  SubstituteInString("%!0","\%!8","%!7",10,0);
+  FindInString("%!0","\\\(@[a-z]\)", 1,2, 1);
+  IfOK(!'JMP("More");');
+
+:Assign:: ===========================================================
+
+  SubstituteInString("%!0","\jobname","%N",10,0);
+
+  // Remove Comments at the end of lines:
+  // LaTeX does not allow spaces and multi-line inclusions must end with
+  // comment % at the end of each line ...
+  SubstituteInString("%!0","% ","",10,0);
+
+  LetReg(-10,"%!0");
+  PopTagsandRegisters;
+
+End;

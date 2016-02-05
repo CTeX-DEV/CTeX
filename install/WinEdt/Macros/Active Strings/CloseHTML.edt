@@ -1,0 +1,29 @@
+// -*- ASCII:EDT -*-
+// Close last opened HTML tag
+
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  CharLeft;
+  Mark(1);
+  SetSearchCyclic(0);
+  SetSearchCurrentDoc;
+  SetSearchEntire(0);
+  SetRegEx(1);
+  SetFindStr('\<+[a-zA-Z0-9]');
+  SetSearchForward(0);
+  Find;
+  GetSel(0,9);
+  Sel(0);
+  Goto(1);
+  CharRight;
+  Ins('%!9>');
+  Goto(1);
+  CharRight(2);
+  Ins('/');
+  Goto(1);
+  CharRight;
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+End;

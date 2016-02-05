@@ -1,0 +1,32 @@
+// Test Macro
+
+// Generate a table of Squares in 25 rows and 4 columns
+JMP("Start");   // Skip procedures
+
+:a_Row:: ============================================================
+
+  InsText("  ");
+  LetRegNum(9,"(%!c-1)*4-1");
+  Repeat(4,>
+    !`>
+      LetRegNum(9,%!9+1,2);  // Index<>
+      LetRegNum(8,%!9*%!9,4);    // Index^2<>
+      InsText("$%!9^2=%!8$ &");  // Insert it<>
+     `);
+  Backspace;
+  InsText("\cr %%Row: %!c");
+  NewLine;
+  Return;
+// End :a_Row:: =====================================================
+
+:Start:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetIndent(-1); // No Auto Indent Mode (to be restored)
+  SetSel(0);
+  NewLine;
+  Repeat(25,!`Call("a_Row");`); // Call another loop to insert a row<>
+  RestoreIndent;    // Restore Auto Indent
+  EndGroup;
+  SetTracking(1);
+End;

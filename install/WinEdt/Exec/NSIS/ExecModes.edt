@@ -1,0 +1,25 @@
+// Create Execution Modes GUI Interface for NSIS Configuration
+// This interface can be used to control the execution flow for console applications
+
+  Requires(20120413);
+
+  ClearApplications;
+
+  AddApplication(!'NSIS',        // Name<>
+                 !'%$("NSIS-Exe");',// Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0001011000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+
+  ShowExecutionModes('Execution Modes - NSIS',>
+    '%b\Exec\NSIS\ExeMode.edt',>
+    '%b\Exec\NSIS\ExeMode_Backup.edt',>
+    '%b\Exec\NSIS\ExeMode_Custom.edt',>
+    '%b\Exec\NSIS\ExeMode_Default.edt');
+
+End;

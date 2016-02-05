@@ -1,0 +1,36 @@
+  BACKGROUND_MODE=2
+    // BACKGROUND_COLOR=15               // MODE=1
+    BACKGROUND_RGB="$E0E0E0"
+    // Large Gradient (999 is max) can result in slow refreshing!
+    GRADIENT=256
+    GRADIENT_RGB="$FFF4F4"
+    // BACKGROUND_BITMAP="Dots-Blue.bmp" // MODE=3
+  BOOKMARK_MODE=2
+    BACKGROUND_RGB="$EFE0E0"
+  TEXT_MODE=0
+    // Background comes handy if you want to see trailing spaces and such
+    // BACKGROUND_RGB="$FFFFFF" // MODE=2
+    // BACKGROUND_COLOR=15      // MODE=1
+    DEFAULT_FONT=1
+    // TEXT_COLOR=0
+    // ITALIC=0
+    // BOLD=0
+    // UNDERLINE=0
+    // STRIKEOUT=0
+  LINE_NUMBERS_MODE=2
+    BACKGROUND_RGB="$F0E0E0"
+    DEFAULT_FONT=0
+    TEXT_COLOR=0
+    BOLD=0
+  // Set Mode to 0 if you don't want current line highlighted
+  CURRENT_LINE_MODE=2
+    BACKGROUND_RGB="$F0E0E0"
+    DEFAULT_FONT=1
+    TEXT_COLOR=0
+  RIGHT_MARGIN_MODE=2
+    BACKGROUND_RGB="$FFE0E0"
+    DEFAULT_FONT=1
+    TEXT_COLOR=0
+  RIGHT_MARGIN_OFFSET=2
+  // Disable this if you don't want fixed right margin column
+  RIGHT_MARGIN_ENABLED=1

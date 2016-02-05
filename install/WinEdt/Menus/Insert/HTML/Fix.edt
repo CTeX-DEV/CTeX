@@ -1,0 +1,116 @@
+// HTML Fix Code
+
+IfStr('%!0',!'quote',!'=',!"JMP(!'quote');");
+IfStr('%!0',!'upper_tags',!'=',!"JMP(!'upper_tags');");
+IfStr('%!0',!'lower_tags',!'=',!"JMP(!'lower_tags');");
+IfStr('%!0',!'upper_att',!'=',!"JMP(!'upper_att');");
+IfStr('%!0',!'lower_att',!'=',!"JMP(!'lower_att');");
+IfStr('%!0',!'upper_val',!'=',!"JMP(!'upper_val');");
+IfStr('%!0',!'lower_val',!'=',!"JMP(!'lower_val');");
+IfStr('%!0',!'amp',!'=',!"JMP(!'amp');");
+IfStr('%!0',!'lt',!'=',!"JMP(!'lt');");
+IfStr('%!0',!'gt',!'=',!"JMP(!'gt');");
+IfStr('%!0',!'quot',!'=',!"JMP(!'quot');");
+
+Prompt('Unknown Code Property: "%!0"');
+
+Exit;
+
+:quote:: ============================================================
+  LetReg(0,!'=\(+[a-zA-Z0-9+\-]\)');
+  LetReg(1,!'="\0"');
+  JMP(!'Fix_RegEx');
+:upper_tags:: =======================================================
+  LetReg(0,!'\(\<{/|}+[a-z0-9]\)');
+  LetReg(1,!'\U0');
+  JMP(!'Fix_RegEx');
+:lower_tags:: =======================================================
+  LetReg(0,!'\(\<{/|}+[A-Z0-9]\)');
+  LetReg(1,!'\L0');
+  JMP(!'Fix_RegEx');
+:upper_att:: ========================================================
+  LetReg(0,!'\(+[\-a-z0-9]=\)');
+  LetReg(1,!'\U0');
+  JMP(!'Fix_RegEx');
+:lower_att:: ========================================================
+  LetReg(0,!'\(+[\-A-Z0-9]=\)');
+  LetReg(1,!'\L0');
+  JMP(!'Fix_RegEx');
+:upper_val:: ========================================================
+  LetReg(0,!'\(="+[a-zA-Z0-9]"\)');
+  LetReg(1,!'\U0');
+  JMP(!'Fix_RegEx');
+:lower_val:: ========================================================
+  LetReg(0,!'\(="+[a-zA-Z0-9]"\)');
+  LetReg(1,!'\L0');
+  JMP(!'Fix_RegEx');
+
+:amp:: ==============================================================
+  LetReg(0,!'&');
+  LetReg(1,!'&amp;');
+  JMP(!'Fix_Char');
+:lt:: ===============================================================
+  LetReg(0,!'<');
+  LetReg(1,!'&lt;');
+  JMP(!'Fix_Char');
+:gt:: ===============================================================
+  LetReg(0,!'>');
+  LetReg(1,!'&gt;');
+  JMP(!'Fix_Char');
+:quot:: =============================================================
+  LetReg(0,!'"');
+  LetReg(1,!'&quot;');
+  JMP(!'Fix_Char');
+
+:Fix_RegEx:: ========================================================
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  Mark(1);
+  SetRegEx(1);
+  SetSearchForward(1);
+  SetSearchCaseSensitive(1);
+  SetSearchEntire(0);
+  SetSearchCyclic(0);
+  SetReplaceNotify(0);
+  SetNotFoundNotify(0);
+  SetSearchCurrentDoc;
+  SetReplacePrompt(0);
+  SetFindStr("%!0");
+  SetReplaceStr("%!1");
+  ReplaceAll;
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+  Exit;
+
+:Fix_Char:: =========================================================
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  Mark(1);
+  SetRegEx(0);
+  SetSearchForward(1);
+  SetSearchCaseSensitive(1);
+  SetSearchEntire(1);
+  SetSearchCyclic(0);
+  SetSearchRelaxed(0);
+  SetSearchWholeWords(0);
+  SetSearchInline(1);
+  SetSearchSelected;
+  SetReplaceNotify(0);
+  SetNotFoundNotify(0);
+  SetReplaceRespectCaps(0);
+  SetReplacePrompt(0);
+  SearchReset;
+  SetFindStr("%!0");
+  SetReplaceStr("%!1");
+  ReplaceAll;
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+  Exit;
+
+End;

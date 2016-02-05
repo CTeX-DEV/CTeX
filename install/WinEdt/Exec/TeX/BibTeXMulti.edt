@@ -1,0 +1,170 @@
+// -*- ASCII:EDT -*-
+//
+// Support for 'multiple bibliography' packages [RS]:
+// biblatex, bibtopic, bibunits, chapterbib, multibib, multibbl
+//
+// ==================================================================
+
+  Requires(20130125); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  IfIStr("%$('BibTeX-Executable');","biber.exe","=",!"PopTagsandRegisters;Exit;");
+  JMP('BibTeX_Extra');
+
+:BibTeX_Run:: =======================================================
+  IfStr("%$('BibTeX-file');","%N","=",!"Return;");
+
+  // Aux Directory?
+  LetReg(3);
+  IfStr("%$('TeX System');","MiKTeX","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(3,'--include-directory="%P"');`);|);
+  // Only for bibtex.exe (bibtex8 and biber do not support this switch)
+  IfIStr("%$('BibTeX-Executable');","bibtex.exe","<>",!"LetReg(3);");
+  // Build the Command Line ...
+  LetReg(5,`%$('BibTeX-Executable'); %$('BibTeX-Switches'); %!3 %$('BibTeX--Switches'); "%$('BibTeX-file');"`);
+  TrimCommandLine(@@'%!5',5); // Expand Command Line (twice!) and Remove Extra Spaces
+
+  IfStr("%$('BibTeX-WinEdt_Console');",'1','<>',!'JMP("Windows_Console");');
+
+:WinEdt_Console:: ===================================================
+  GetConsoleText(3);
+  IfStr('%!3','','<>',!'LetReg(3,"%!3%\");');
+
+  LetReg(4,!'0');
+:Run_Again:: ========================================================
+  SetConsoleText('%!3Command Line:   %!5%\Startup Folder: %O%\%\',1);
+  RunConsole('%!5','%O','BibTeX ...',1,1,0,%!4,%!4);
+
+  // Blues with MiKTeX's GUI Framework?
+  IfStr("%$('TeX System');",!"MiKTeX",!"<>",!"Return;");
+  GetConsoleText(4);
+  FindInString("%!4",!"GUI framework cannot be initialized",-1,-1,10);
+  IfOK(!"ResetConsole;LetReg(4,!'1');JMP(!'Run_Again');");
+Return;
+
+:Windows_Console:: ==================================================
+  LetReg(0, !"0");
+  LetReg(1, !"0");
+  LetReg(2, !"0");
+  IfStr("%$('BibTeX-Wait');",             "1","=",!|LetRegNum(0,"%!0+00100");|);
+  IfStr("%$('BibTeX-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+01000");|);
+  IfStr("%$('BibTeX-Background_Window');","1","=",!|LetRegNum(0,"%!0+10000");|);
+  IfStr("%$('BibTeX-STD_IO');",           "1","=",!|LetRegNum(0,"%!0+00010");|);
+  IfStr("%$('BibTeX-Pause');",            "1","=",!|LetRegNum(1,"%!1+111");|);
+  IfStr("%$('BibTeX-High_Priority');",    "1","=",!|LetReg(2,'1');|);
+
+  WinExe('','%!5','%O','BibTeX ...', %!0, %!2,>
+         '', '%b\_Out.log', '%b\_Err.log',%!1);
+Return;
+
+:BibTeX_Do:: ========================================================
+  FindInString("%!9","<@{ }\\usepackage@{\[**\]}\{@^{\}|%%|%$('BibTeX-package');}%$('BibTeX-package');{,|-| |\}}",7,8,11);
+  IfNum(%!7,%!8,"<",!">
+        Call('BibTeX_%$(|BibTeX-package|);');>
+        JMP('BibTeX_EndExtra');");
+Return;
+
+:BibTeX_NumLoop:: ===================================================
+  LetRegNum(8,1);
+  Loop(!`>
+       Assign("BibTeX-file","%$('BibTeX-loopfile1');%!8%$('BibTeX-loopfile2');");>
+       IfFileExists("%O\%$('BibTeX-file');.aux",!">
+            Call('BibTeX_Run');>
+            LetRegNum(8,%!8+1);",>
+            "Stop;");>
+       `);
+Return;
+
+:BibTeX_OtherLoop:: =================================================
+  Loop(!`SetOK(1);>
+      Do("%$('BibTeX-find');");>
+      IfOK(!"GetTag(0,7);>
+          Do('%$(|BibTeX-findafter|);');>
+          IfFileExists('%O\%!7.aux',!'>
+                Assign(''BibTeX-file'',''%!7'');>
+                Call(''BibTeX_Run'');');",>
+          "Stop;");>
+      `);
+Return;
+
+// packages that number the sub-bibliographies consecutively are easy to handle
+:BibTeX_biblatex:: ==================================================
+  Assign("BibTeX-loopfile1","%N");
+  Assign("BibTeX-loopfile2","-blx");
+  Call("BibTeX_NumLoop");
+Return;
+
+:BibTeX_bibtopic:: ==================================================
+  Assign("BibTeX-loopfile1","%N");
+  Call("BibTeX_NumLoop");
+Return;
+
+:BibTeX_bibunits:: ==================================================
+  Assign("BibTeX-loopfile1","bu");
+  Call("BibTeX_NumLoop");
+Return;
+
+// these packages require more work
+:BibTeX_multibbl:: ==================================================
+  LetRegNum(8,-1);
+  Assign("BibTeX-find",!"FindInString('%!9','<@{ }\\newbibliography\{\(0*\)\}',7,8,1011,%!8+1);");
+  Call("BibTeX_OtherLoop");
+Return;
+
+:BibTeX_multibib:: ==================================================
+  // Supports multiple \newcites ...
+  // Call("BibTeX_TreeLoop"); // necessary?
+  LetRegNum(8,-1);
+:BibTeX_multibib_Loop:: =============================================
+  FindInString("%!9","<@{ }\\newcites\{\(0*\)\}",7,8,1011,%!8+1);
+  IfOK(!`PushTagsandRegisters;>
+      GetTag(0,8);>
+      LetRegNum(9,-1);>
+      Assign("BibTeX-find",!"FindInString('%!8,','\(0*\),',7,9,1001,%!9+1);");>
+      Call("BibTeX_OtherLoop");>
+      PopTagsandRegisters;>
+      JMP("BibTeX_multibib_Loop");`);
+Return;
+
+:BibTeX_chapterbib:: ================================================
+  Call("BibTeX_TreeLoop");
+Return;
+
+:BibTeX_TreeLoop:: ==================================================
+  PushTagsandRegisters;
+  BuildTree;
+  GetTree(8);
+  LetRegNum(9,0);
+  Assign("BibTeX-find",!"FindInString('%!8','<\* ""\""?%P?\\\(0*\)\.tex"">',7,9,1001,%!9);");
+  Assign("BibTeX-findafter",!"// extract subdir <>
+        GetFilePath('%#0','6');>
+        IfStr('%!6','','<>',>
+            !'DosToUnix(|%P\%!6|,5);>
+              SetEnvVar(|BIBINPUTS|,|%!5;%@(`BIBINPUTS`);|);>
+              SetEnvVar(|BSTINPUTS|,|%!5;%@(`BSTINPUTS`);|);');");
+  Call("BibTeX_OtherLoop");
+  PopTagsandRegisters;
+Return;
+
+:BibTeX_Extra:: =====================================================
+  Assign("BibTeX-findafter","Relax;");
+  Assign("BibTeX-loopfile1");
+  Assign("BibTeX-loopfile2");
+  GetPreamble("\begin{document}",9);
+  Assign("BibTeX-package","biblatex");  Call("BibTeX_Do");
+  Assign("BibTeX-package","bibtopic");  Call("BibTeX_Do");
+  Assign("BibTeX-package","bibunits");  Call("BibTeX_Do");
+  Assign("BibTeX-package","chapterbib");Call("BibTeX_Do");
+  Assign("BibTeX-package","multibbl");  Call("BibTeX_Do");
+  Assign("BibTeX-package","multibib");  Call("BibTeX_Do");
+
+:BibTeX_EndExtra:: ==================================================
+
+// ==================================================================
+// BibTeX is Done ...
+// ==================================================================
+
+  PopTagsandRegisters;
+
+End;

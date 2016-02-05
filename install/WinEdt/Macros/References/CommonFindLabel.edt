@@ -1,0 +1,14 @@
+// -*- ASCII:EDT -*-
+
+ SetupLine;
+ SetTracking(0);
+ FindInString('%L','~{$Alpha+Numeric+[":"]$}',0,0,1111,%c-2);
+ IfNum(%!0,0,'<','LetRegNum(0,-2)'); // Beginning of line fix
+ GotoCol(%!0+3);
+ SetSel(1);
+ FindInString('%L','~{$Alpha+Numeric+[":"]$}',0,0,1011,%c-1);
+ GotoCol(%!0+2);
+ SetTracking(1);
+ TrackCaret;
+ RefreshLine;
+End;

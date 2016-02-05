@@ -1,0 +1,188 @@
+// Configuration Wizard can now diagnose the situation better ...
+
+  Requires(20020112);
+
+  // is Power User?
+  Exe('%B\WinShell\isPowerUser.edt');
+
+  // Get OS info
+  Assign(`OS_Type`, "%@('OS');");
+  IfIStr("%$(`OS_Type`);", "Windows_NT", "=", !*>
+    Assign(`OS_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'CurrentVersion');");>
+    Assign(`OS_SP`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'CSDVersion');");>
+    Assign(`OS_Build`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'CurrentBuildNumber');");>
+    Assign(`OS_Name`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows NT\CurrentVersion', 'ProductName');");>
+    Assign(`IE_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Internet Explorer', 'Version');");>
+  *, *>
+    Assign(`OS_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'VersionNumber');");>
+    Assign(`OS_SP`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'SubVersionNumber');");>
+    Assign(`OS_Build`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'Plus! VersionNumber');");>
+    Assign(`OS_Name`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Windows\CurrentVersion', 'ProductName');");>
+    Assign(`IE_Ver`, "%@('HKEY_LOCAL_MACHINE','Software\Microsoft\Internet Explorer', 'Version');");>
+  *);
+
+  // Get WinEdt info
+  GetBuild(0);
+  GetVersion(1);
+  Assign(`WinEdt_Ver`, "%!1");
+  Assign(`WinEdt_Build`, "%!0");
+
+  // Get Application Data Folder in Register %!0
+  Exe('%B\WinShell\Profiles\Get Application Data Folder.edt');
+  Assign(`WinEdt_Folder`, "%!0");
+
+  Assign(`WinEdt_Reg_Name`,"%@('HKEY_CURRENT_USER','Software', 'WinEdt', 'Name');");
+  Assign(`WinEdt_Reg_Init`,"%@('HKEY_CURRENT_USER','Software\WinEdt\INIT', ' ');");
+
+  // Get GS info
+  // AFPL or GNU Ghostscript?
+  IfStr("%@('HKEY_LOCAL_MACHINE','SOFTWARE','AFPL Ghostscript','   ');", "", "<>", "Assign(`GS_Type`, 'AFPL');");
+  IfStr("%@('HKEY_LOCAL_MACHINE','SOFTWARE','GNU Ghostscript','   ');", "", "<>", "Assign(`GS_Type`, 'GNU');");
+
+  // Get the last Key (the latest installed version!):
+  Assign(`GS_Ver`,"%@('HKEY_LOCAL_MACHINE','SOFTWARE','%$(`GS_Type`); Ghostscript','   ');");
+  IfStr("%$('GS_Ver')",'','=',>
+    !|Assign(`GS_Ver`,"%@('HKEY_CURRENT_USER','SOFTWARE','%$(`GS_Type`); Ghostscript','   ');");|);
+  Assign(`GS_Bin`,"%@('HKEY_LOCAL_MACHINE','SOFTWARE','%$(`GS_Type`); Ghostscript','%$(|GS_Ver|)','GS_DLL');");
+  Assign(`GS_Lib`,"%@('HKEY_LOCAL_MACHINE','SOFTWARE','%$(`GS_Type`); Ghostscript','%$(|GS_Ver|)','GS_LIB');");
+  GetFilePath("%$('GS_Bin')", 0);
+  Assign(`GS_Bin`,"%!0");
+  // Get GSView info
+  LetRegNum(4,1);
+  Loop(!*>
+    IfNum("%!4", "9", ">", "Stop;", !|>
+        LetRegNum(5,0);>
+        Loop(!:>
+            IfNum("%!5", "9", ">", "Stop;", !`>
+                LetReg(9, "%@('HKEY_LOCAL_MACHINE','SOFTWARE\Ghostgum\GSView','%!4.%!5');");>
+                IfStr("%!9","", "<>", "Assign('GSV_Ver','%!4.%!5');Assign('GSV_Bin','%!9\GSView\gsview32.exe');");>
+                LetRegNum(5, %!5 + 1);>
+            `);>
+        :);>
+        LetRegNum(4, %!4 + 1);>
+    |);>
+  *);
+
+  // Acrobat Reader info
+  Assign(`AcroRead_Ver`, "%@('HKEY_LOCAL_MACHINE','SOFTWARE\Adobe\Acrobat Reader','   ');");
+  IfIStr("%$(`AcroRead_Ver`);", "", "<>", !:>
+    Assign(`AcroRead_Bin`, "%@('HKEY_LOCAL_MACHINE','SOFTWARE\Adobe\Acrobat Reader\%$(`AcroRead_Ver`);\InstallPath', ' ');\AcroRd32.exe");>
+  :);
+
+
+  Assign("TeX_Test","%@('HKEY_LOCAL_MACHINE','SOFTWARE','MiK','MiKTeX','CurrentVersion','MiKTeX','Install Root');");
+  IfStr("%$(`TeX_Test`);", "", "=", *>
+    Assign("TeX_Test","%@('HKEY_LOCAL_MACHINE','SOFTWARE','TeX Users Group','TeXLive','   ');");>
+    IfStr("%$(`TeX_Test`);", "", "=", :>
+        Assign("TeX_Test","None");>
+    :, "Assign('TeX_System','TeX Live');");>
+  *, "Assign('TeX_System','MiKTeX');");
+
+  IfIStr("%$(`TeX_System`);", "MiKTeX", "=", !:>
+    Assign("TeX_Root","%@('HKEY_LOCAL_MACHINE','SOFTWARE','MiK','MiKTeX','CurrentVersion','MiKTeX','Install Root');");>
+    Assign("TeX_Local","%@('HKEY_LOCAL_MACHINE','SOFTWARE','MiK','MiKTeX','CurrentVersion','MiKTeX','Local Root');");>
+    Assign("TeX_Bin","%$('TeX_Root');\miktex\bin");>
+    Assign('TeX_DVI','%$(`TeX_Bin`);\yap.exe');>
+    :);
+
+  IfIStr("%$(`TeX_System`);", "TeX Live", "=", !:>
+    LetReg(0,"%@('HKEY_LOCAL_MACHINE','SOFTWARE','TeX Users Group','TeXLive','   ');");>
+    Assign("TeX_Root","%@('HKEY_LOCAL_MACHINE','SOFTWARE','TeX Users Group','TeXLive','%!0','Root');");>
+    IfStr("%$('TeX_Root')",'','=',>
+        !|LetReg(0,"%@('HKEY_LOCAL_MACHINE','SOFTWARE','TeX Users Group','TeX-Live','   ');");>
+        Assign("TeX_Root","%@('HKEY_LOCAL_MACHINE','SOFTWARE','TeX Users Group','TeX-Live','%!0','Root');");|);>
+    Assign("TeX_Bin","%$('TeX-Root');\bin\win32");>
+    Assign('TeX_DVI','%$(`TeX_Bin`);\windvi.exe');>
+  :);
+
+
+Assign(`Temp_File`, "%@(`TEMP`);\WinEdt_GetSupport.txt");
+OpenOutput("%$(`Temp_File`);");
+WrL("OS info:");
+WrL("");
+WrL("Is power user:         %$('isPowerUser');");
+WrL("Name:                  %$('OS_Name');");
+WrL("Version:               %$('OS_Ver');");
+WrL("Service Pack:          %$('OS_SP');");
+WrL("Build:                 %$('OS_Build');");
+WrL("IE Version:            %$('IE_Ver');");
+WrL("Command interpreter:   %@('COMSPEC');");
+WrL("");
+WrL("WinEdt info:");
+WrL("");
+WrL("Version:               %$('WinEdt_Ver');");
+WrL("Build:                 %$('WinEdt_Build');");
+WrL("Folder:                %$('WinEdt_Folder');");
+WrL("Ini file:              %$('WinEdt_Reg_Init');");
+WrL("Registered to:         %$('WinEdt_Reg_Name');");
+WrL("");
+IfIStr("%$(`TeX_System`);" ,"", "<>", !|>
+    WrL("TeX info:");>
+    WrL("");>
+    WrL("System:                %$('TeX_System');");>
+    WrL("Root:                  %$('TeX_Root');");>
+    WrL("Bin:                   %$('TeX_Bin');");>
+    WrL("Local:                 %$('TeX_Local');");>
+    WrL("DVI:                   %$('TeX_DVI');");>
+    WrL("");>
+|);
+IfIStr("%$(`GS_Type`);" ,"", "<>", !|>
+    WrL("GS info:");>
+    WrL("");>
+    WrL("Type:                  %$('GS_Type');");>
+    WrL("Version:               %$('GS_Ver');");>
+    WrL("Bin:                   %$('GS_Bin');");>
+    WrL("Lib:                   %$('GS_Lib');");>
+    WrL("");>
+|);
+IfIStr("%$(`GSV_Ver`);" ,"", "<>", !|>
+    WrL("GSView info:");>
+    WrL("");>
+    WrL("Version:               %$('GSV_Ver');");>
+    WrL("Bin:                   %$('GSV_Bin');");>
+    WrL("");>
+|);
+IfIStr("%$(`AcroRead_Ver`);" ,"", "<>", !|>
+    WrL("Acrobat Reader info:");>
+    WrL("");>
+    WrL("Version:               %$('AcroRead_Ver');");>
+    WrL("Bin:                   %$('AcroRead_Bin');");>
+|);
+
+CloseOutput;
+
+ReadFile("%$(`Temp_File`);", 9);
+
+// Prompt("%!9",0,0);
+
+SendMail('WinEdt ',"%!9", "WinEdt Team|support@winedt.com");
+
+
+Release(`OS_Ver`);
+Release(`OS_SP`);
+Release(`OS_Build`);
+Release(`OS_Name`);
+Release(`IE_Ver`);
+Release(`isPowerUser`);
+Release(`WinEdt_Ver`);
+Release(`WinEdt_Build`);
+Release(`WinEdt_Folder`);
+Release(`WinEdt_Reg_Init`);
+Release(`WinEdt_Reg_Name`);
+Release(`GS_Type`);
+Release(`GS_Ver`);
+Release(`GS_Bin`);
+Release(`GS_Lib`);
+Release(`GSV_Ver`);
+Release(`GSV_Bin`);
+Release(`AcroRead_Ver`);
+Release(`AcroRead_Bin`);
+Release(`TeX_System`);
+Release(`TeX_Root`);
+Release(`TeX_Bin`);
+Release(`TeX_Local`);
+Release(`TeX_DVI`);
+Release(`TeX_Test`);
+
+
+End;

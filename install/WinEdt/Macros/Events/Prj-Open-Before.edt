@@ -1,0 +1,10 @@
+// Project Before Open Event Handler
+
+  Requires(20040806);
+  PushTagsandRegisters;
+
+  Assign('MAIN_FILE','?');
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,8 @@
+// Make a platform-dependent copy of WinEdt.exe
+// ready for the installer ...
+  PushTagsandRegisters;
+  IfWinEdt64(!"LetReg(0,!'64');",!"LetReg(0,!'32');");
+  CopyFile('%B\WinEdt.exe','%B\WinEdt-%!0.exe',1);
+  Prompt('%!0-bit version has been copied');
+  PopTagsandRegisters;
+End;

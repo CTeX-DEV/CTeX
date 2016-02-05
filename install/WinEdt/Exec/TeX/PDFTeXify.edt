@@ -1,0 +1,237 @@
+// -*- ASCII:EDT -*-
+// TeX: PDFTeXify ...
+
+  Requires(20120413); // Requires this build of WinEdt to work properly
+
+  IfConsoleRunning("Relax;","JMP('not_Running');");
+  ShowConsole(1);
+  Prompt("Another Application is already running in WinEdt's Console.>
+ Terminate the application or wait for the execution to finish!");
+  FocusConsole(1);
+  Exit;
+
+:not_Running:: ======================================================
+  SetExitHandler('Exit_Handler');
+
+  // Clean the files
+  IfFileExists("%O\%N.blg",!"DeleteFile('%O\%N.blg');");
+  IfFileExists("%O\%N.ilg",!"DeleteFile('%O\%N.ilg');");
+  IfFileExists("%O\%N.glg",!"DeleteFile('%O\%N.glg');");
+  IfStr("%$('PDFTeXify-Clean_Build');","1","=",>
+    !|IfFileExists("%O\%N.bbl",!"DeleteFile('%O\%N.bbl');");>
+      IfFileExists("%O\%N.ind",!"DeleteFile('%O\%N.ind');");>
+      IfFileExists("%O\%N.idx",!"DeleteFile('%O\%N.idx');");>
+      IfFileExists("%O\%N.gls",!"DeleteFile('%O\%N.gls');");>
+      IfFileExists("%O\%N.glo",!"DeleteFile('%O\%N.glo');");>
+      IfFileExists("%O\%N.toc",!"DeleteFile('%O\%N.toc');");>
+      IfFileExists("%O\%N.lof",!"DeleteFile('%O\%N.lof');");>
+      IfFileExists("%O\%N.lot",!"DeleteFile('%O\%N.lot');");>
+      IfFileExists("%O\%N.aux",!"DeleteFile('%O\%N.aux');");>
+      IfFileExists("%O\%N.out",!"DeleteFile('%O\%N.out');");>
+     |);
+  UpdateStatus;
+
+  IfStr("%$('PDFTeXify-WinEdt_Console');",'1','<>',!'JMP(!"Windows_Console");');
+
+:WinEdt_Console:: ===================================================
+  // Running from TeXify / Compile Macro?
+  IfStr("%$('Compile-Flag');",'','=',>
+   !|>
+      IfStr("%$('PDFTeXify-Hidden_Window');",'1','=',!"ResetConsole;",!"ResetConsole;ShowConsole(1);");>
+      IfStr("%$('PDFTeXify-Background_Window');",'1','=',!"FocusConsole(-1);",!"FocusConsole(1);");>
+    |);
+  JMP('Console_OK');
+
+:Windows_Console:: ==================================================
+  IfStr("%$('Compile-Flag');",'','=',>
+    !|IfStr("%$('PDFTeXify-STD_IO');","1","=",!"ResetConsole;");|);
+
+:Console_OK:: =======================================================
+  IfStr("%$('PDFTeXify-Method');","1","=",!|JMP('Start');|);
+  IfStr("%$('PDFTeXify-Method');","2","=",!|JMP('Start');|);
+  JMP('PDFLaTeX');
+
+:Exit_Handler:: =====================================================
+// Restore the Execution Modes even if execution
+// is canceled or goes badly wrong for some reason ...
+  Assign('Compile-Flag'); // Not inside a (multiple conversion) compile...
+  Assign("External-Call");
+  Assign("Pre-Process");
+  Assign("Post-Process");
+  IfStr("%$('Force-Focus');","1","<>",!|FocusConsole(-1);|);
+  Exe("%b\Exec\%$(|Exec-Dir|);\ExeMode.edt");
+  PopTagsandRegisters;
+  SetExitHandler;
+Return;
+
+:Start:: ============================================================
+  // TeXify
+  IfFileExists("%P\%N.pdf",!"DeleteFile('%P\%N.pdf')");
+  IfFileExists("%O\%N.pdf",!"DeleteFile('%O\%N.pdf')");
+  Assign("TeXify-GUI","%$('PDFTeXify-GUI');");
+  Assign("TeXify-High_Priority","%$('PDFTeXify-High_Priority');");
+  Assign("TeXify-Wait","1");
+  Assign("TeXify-Report","%$('PDFTeXify-Report');");
+  Assign("TeXify-Errors","%$('PDFTeXify-Errors');");
+  Assign("TeXify-Warnings","%$('PDFTeXify-Warnings');");
+  Assign("TeXify-ExitCode","%$('PDFTeXify-ExitCode');");
+  Assign("TeXify-Viewer");
+  Assign("TeXify-STD_IO","%$('PDFTeXify-STD_IO');");
+  Assign("TeXify-No_Interaction","%$('PDFTeXify-No_Interaction');");
+  Assign("TeXify-C-style-errors","%$('PDFTeXify-C-style-errors');");
+  Assign("TeXify-Clean_Build","%$('PDFTeXify-Clean_Build');");
+  Assign("TeXify-WinEdt_Console","%$('PDFTeXify-WinEdt_Console');");
+  Assign("TeXify-Hidden_Window","%$('PDFTeXify-Hidden_Window');");
+  Assign("TeXify-Background_Window","%$('PDFTeXify-Background_Window');");
+  Assign("TeXify-Pause","%$('PDFTeXify-Pause');");
+  IfStr("%$('TeXify-WinEdt_Console');","1","=",!|Assign("TeXify-Pause","1");|);
+  Assign("External-Call","1");
+  Assign("Pre-Process","PDFTeXify");
+  Exe('%b\Exec\TeX\TeXify.edt');
+  Assign("Pre-Process");
+  Assign("External-Call");
+  IfStr("%$('Compile Status');",!"OK",!"<>",>
+    !"IfStr(`%$('Compile Status');`,`Run Error`,`<>`,>
+        !`IfStr(|%$('PDFTeXify-Report');|,|1|,|=|,>
+            !|LetReg(9,'PDFTeXify');Exe('%b\Exec\ShowReport.edt');|);`);>
+      Exit;");
+  IfFileExists("%P\%N.dvi",!"Relax;",!"Exit;");
+  IfStr("%$('PDFTeXify-Method');","2","=",!|JMP('dvi2ps');|);
+
+  // dvi2pdf
+  Assign('Compile-Flag','1');
+  Assign("dvi2pdf-GUI");
+  Assign("dvi2pdf-High_Priority","%$('PDFTeXify-High_Priority');");
+  Assign("dvi2pdf-Wait","%$('PDFTeXify-Wait');");
+  Assign("dvi2pdf-ExitCode","%$('PDFTeXify-ExitCode');");
+  Assign("dvi2pdf-Viewer","%$('PDFTeXify-Viewer');");
+  Assign("dvi2pdf-View_Search","%$('PDFTeXify-View_Search');");
+  Assign("dvi2pdf-STD_IO","%$('PDFTeXify-STD_IO');");
+  Assign("dvi2pdf-Clean_Build","1");
+  Assign("dvi2pdf-WinEdt_Console","%$('PDFTeXify-WinEdt_Console');");
+  Assign("dvi2pdf-Hidden_Window","%$('PDFTeXify-Hidden_Window');");
+  Assign("dvi2pdf-Background_Window","%$('PDFTeXify-Background_Window');");
+  Assign("dvi2pdf-Pause","%$('PDFTeXify-Pause');");
+  Assign("dvi2pdf-Report","%$('PDFTeXify-Report');");
+  Assign("Post-Process","PDFTeXify");
+  Exe('%b\Exec\TeX\dvi2pdf.edt');
+  Assign("Post-Process");
+Exit;
+
+:dvi2ps:: ===========================================================
+  // dvi2ps
+  Assign('Compile-Flag','1');
+  Assign("dvi2ps-GUI");
+  Assign("dvi2ps-High_Priority","%$('PDFTeXify-High_Priority');");
+  Assign("dvi2ps-Wait","1");
+  Assign("dvi2ps-ExitCode","%$('PDFTeXify-ExitCode');");
+  Assign("dvi2ps-Viewer");
+  Assign("dvi2ps-STD_IO","%$('PDFTeXify-STD_IO');");
+  Assign("dvi2ps-Clean_Build","1");
+  Assign("dvi2ps-WinEdt_Console","%$('PDFTeXify-WinEdt_Console');");
+  Assign("dvi2ps-Hidden_Window","%$('PDFTeXify-Hidden_Window');");
+  Assign("dvi2ps-Background_Window","%$('PDFTeXify-Background_Window');");
+  Assign("dvi2ps-Pause","%$('PDFTeXify-Pause');");
+  IfStr("%$('dvi2ps-WinEdt_Console');","1","=",!|Assign("dvi2ps-Pause","1");|);
+  Exe('%b\Exec\TeX\dvi2ps.edt');
+  IfStr("%$('Compile Status');",!"OK",!"<>",>
+    !"IfStr(`%$('Compile Status');`,`Run Error`,`<>`,>
+        !`IfStr(|%$('PDFTeXify-Report');|,|1|,|=|,>
+            !|LetReg(9,'PDFTeXify');Exe('%b\Exec\ShowReport.edt');|);`);>
+      Exit;");
+  IfFileExists("%P\%N.ps",!"Relax;",!"Exit;");
+
+  // ps2pdf
+  Assign('Compile-Flag','1');
+  Assign("ps2pdf-GUI");
+  Assign("ps2pdf-High_Priority","%$('PDFTeXify-High_Priority');");
+  Assign("ps2pdf-Wait","%$('PDFTeXify-Wait');");
+  Assign("ps2pdf-ExitCode","%$('PDFTeXify-ExitCode');");
+  Assign("ps2pdf-Viewer","%$('PDFTeXify-Viewer');");
+  Assign("ps2pdf-View_Search","%$('PDFTeXify-View_Search');");
+  Assign("ps2pdf-STD_IO","%$('PDFTeXify-STD_IO');");
+  Assign("ps2pdf-Clean_Build","1");
+  Assign("ps2pdf-WinEdt_Console","%$('PDFTeXify-WinEdt_Console');");
+  Assign("ps2pdf-Hidden_Window","%$('PDFTeXify-Hidden_Window');");
+  Assign("ps2pdf-Background_Window","%$('PDFTeXify-Background_Window');");
+  Assign("ps2pdf-Pause","%$('PDFTeXify-Pause');");
+  Assign("ps2pdf-Report","%$('PDFTeXify-Report');");
+  Assign("Post-Process","PDFTeXify");
+  Exe("%b\Exec\TeX\ps2pdf.edt");
+  Assign("Post-Process");
+Exit;
+
+:PDFLaTeX:: =========================================================
+  PushTagsandRegisters;
+  Assign('ExitCode-OK','0'); // OK Exit Code
+  LetReg(9,'PDFTeXify');// Execution Modes Compiler
+  LetReg(8,'log');      // Log File (or empty)
+  LetReg(7,'pdf');      // Output Format
+  LetReg(6,'%O');       // Startup Folder
+
+  // MiKTeX's texify.exe?
+  IfIStr("%$('%!9-Executable');",!"texify.exe",!"=",!"Assign(!'TeX-Opt',!'--tex-option=');",!"Assign(!'TeX-Opt');");
+
+  // Display a Dialog for Extra Switches:
+  IfStr("%$('%!9-GUI');","1","=",>
+    !|GetString("Switches: ","%!9 Switches","%$('%!9--Switches');");>
+      IfOK(!`Assign('%!9--Switches','%!?');`,!`PopTagsandRegisters;Exit;`);|,>
+    !|Release('%!9--Switches');|);
+  LetReg(3, "%$('%!9-Executable'); %$('%!9-Switches');");
+  IfIStr("%$('%!9-Executable');",!"texify.exe",!"<>",!"JMP('no_Batch');");
+  IfStr("%$('%!9-No_Interaction');","1",!"=",!|LetReg(3,'%!3 --batch');|);
+  SetEnvVar("BIBTEX","%$('BibTeX-Executable');");
+  SetEnvVar("MAKEINDEX","%$('MakeIndex-Executable');");
+:no_Batch:: =========================================================
+  // Non-Stop Mode?
+  IfStr("%$('%!9-No_Interaction');","1",!"=",>
+    !|LetReg(4,'%$("TeX-Opt");--interaction=nonstopmode');|,>
+    !|LetReg(4,'%$("TeX-Opt");--interaction=errorstopmode');|);
+  // C Style Errors?
+  IfStr("%$('%!9-C-style-errors');","1",!"=",!|LetReg(4,'%!4 %$("TeX-Opt");--file-line-error');|);
+  // Aux Directory?
+  IfStr("%$('TeX System');","MiKTeX","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(4,'%!4 --include-directory="%P"');`);|,>
+    !|IfStr('%O','%P','<>',!`DosToUnix('%O',5);LetReg(4,'%!4 --output-directory="%!5"');`);|);
+  // TeX Sync?
+  Assign('Sync');
+  IfStr('%0',!'--src',!'<>',!'JMP("no_Sync");');
+  IfStr('%$("PDF-SyncTeX");',!'1',!'<>',!'JMP("no_Sync");');
+  IfStr('%$("PDF-Sync");',!'',!'=',!'JMP("no_Sync");');
+  Assign('Sync','%$("TeX-Opt");%$("PDF-Sync");');
+:no_Sync:: ==========================================================
+  // Build the Command Line ...
+  LetReg(5, "%!3 %!4 %$('Sync'); %$('%!9--Switches'); %$('%!9-Parameters');");
+
+:Execute:: ==========================================================
+  Assign('Report-Shown','');
+  Assign('Force-Focus','');
+  Assign("TeXify-Iterations","%$('Max-TeXify-Iterations');");
+
+:TeXify_Iterate:: ===================================================
+  LetReg(3,"%$('TeXify-Iterations');");
+  Assign("Pre-Process","PDFTeXify");
+  IfNum("%!3",!"0",!">",!|Exe('%b\Exec\TeX\BibTeXify.edt');|);
+  Assign("Pre-Process");
+  // Use Execution Modes to determine the flow of execution...
+  Assign(!"Compile-Flag",!"3");
+  Exe('%b\Exec\ExeCompiler.edt');
+  IfStr("%$('Compile Status');",!"OK",!"<>",>
+    !"IfStr(`%$('Compile Status');`,`Output`,`<>`,!`JMP('TeXify_Done');`);");
+  LetReg(3,"%$('TeXify-Iterations');");
+  LetRegNum(3,"%!3-1");
+  Assign("TeXify-Iterations","%!3");
+  IfNum("%!3",!"0",!">",!"JMP('TeXify_Iterate');");
+
+:TeXify_Done:: ======================================================
+  IfStr("%$('Report-Shown');",!"1",!"<>",>
+    !"IfStr(`%$('Compile Status');`,`Run Error`,`<>`,>
+        !`IfStr(|%$('%!9-Report');|,|1|,|=|,!|Exe('%b\Exec\ShowReport.edt');|);`);");
+  IfStr("%$('Force-Focus');","1","<>",!|FocusConsole(-1);|);
+  SetExitHandler;
+  PopTagsandRegisters;
+  // Restore the execution modes ...
+  Exe("%b\Exec\%$(|Exec-Dir|);\ExeMode.edt");
+  Assign('Compile-Flag','');
+
+End;

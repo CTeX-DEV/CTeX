@@ -1,0 +1,41 @@
+// -*- ASCII:EDT -*-
+// TeX: AMSTeX ...
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+  Assign('ExitCode-OK','0'); // OK Exit Code
+  LetReg(9,'AMSTeX');   // Execution Modes Compiler
+  LetReg(8,'log');      // Log File (or empty)
+  LetReg(7,'dvi');      // Output Format
+  LetReg(6,'%O');       // Startup Folder
+
+  // Display a Dialog for Extra Switches:
+  IfStr("%$('%!9-GUI');","1","=",>
+    !|GetString("Switches: ","%!9 Switches","%$('%!9--Switches');");>
+      IfOK(!`Assign('%!9--Switches','%!?');`,!`PopTagsandRegisters;Exit;`);|,>
+    !|Release('%!9--Switches');|);
+  // Non-Stop Mode?
+  IfStr("%$('%!9-No_Interaction');","1",!"=",>
+    !"LetReg(3,'--interaction=nonstopmode');",!"LetReg(3,'--interaction=errorstopmode');");
+  // C Style Errors?
+  IfStr("%$('%!9-C-style-errors');","1",!"=",!"LetReg(3,'%!3 --file-line-error');");
+  // Aux Directory?
+  IfStr("%$('TeX System');","MiKTeX","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(3,'%!3 --include-directory="%P"');`);|,>
+    !|IfStr('%O','%P','<>',!`DosToUnix('%O',5);LetReg(3,'%!3 --output-directory="%!5"');`);|);
+  // TeX Sync?
+  Assign('Sync');
+  IfStr('%0',!'--src',!'<>',!'JMP("no_Sync");');
+  IfStr('%$("PDF-SyncTeX");',!'1',!'<>',!'JMP("no_Sync");');
+  IfStr('%$("PDF-Sync");',!'',!'=',!'JMP("no_Sync");');
+  Assign('Sync','%$("PDF-Sync");');
+:no_Sync:: ==========================================================
+  // Build the Command Line ...
+  LetReg(5, "%$('%!9-Executable'); %$('%!9-Switches'); %!3 %$('Sync'); %$('%!9--Switches'); %$('%!9-Parameters');");
+
+  // Use Execution Modes to determine the flow of execution...
+  Exe('%b\Exec\ExeCompiler.edt');
+  PopTagsandRegisters;
+
+End;

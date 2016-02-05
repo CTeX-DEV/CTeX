@@ -1,0 +1,32 @@
+// IncludeFrom.edt
+// ======================
+// Parse the full filename for
+//   \import{dir}{file}
+//   \includefrom{dir}{file}
+// input directives
+// =====================================================
+// %?  = the last wildcard
+// %!? = the whole line span containing the directive...
+// =====================================================
+
+  PushTagsandRegisters;
+  FindInString('%!?','\\import\{\(*\)\}\{*\}',0,0,11);
+  IfOK(!'GetTag(0,0);JMP("OK");',!'LetReg(0);');
+  FindInString('%!?','\\includefrom\{\(*\)\}\{*\}',0,0,11);
+  IfOK(!'GetTag(0,0);JMP("OK");',!'LetReg(0);');
+
+:OK:: ===============================================================
+
+  FormatString('%!0',0,'trimboth');
+  GetLength(1,'%!0');
+  IfNum(%!1,0,'<=','JMP("Assign");');
+  FindInString('%!0','/',1,1,1011,%!1-1);
+  IfOK(!'Relax;',!'LetReg(0,"%!0/");'); // Append / to the Path if necessary
+
+:Assign:: ===========================================================
+
+  LetReg(0,'%!0%?');  // %!0 contains dir/file
+  LetReg(-10,"%!0");
+  PopTagsandRegisters;
+
+End;

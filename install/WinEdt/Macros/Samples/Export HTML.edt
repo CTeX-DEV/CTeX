@@ -1,0 +1,36 @@
+// ==================================================================
+//
+// Export Highlighted Document in HTML Format
+//
+// Translation Table should be defined to take care of:
+//
+//   "&" -> "&amp;"
+//   "<" -> "&lt;"
+//   ">" -> "&gt;"
+//
+// ==================================================================
+
+  PushTagsandRegisters;
+
+  ExportDoc(0,           // Output Register<>
+    0,                   // HEX RGB Format<>
+    '',                  // RGB Color: Delimiter<>
+    '">',                // RGB Color: Trailing String<>
+    '<font color="#',    // RGB Color: Start + RGB<>
+    '</font>',           // RGB Color: End<>
+    '<i>',               // Font: Start Italic<>
+    '</i>',              // Font: End Italic<>
+    '<b>',               // Font: Start Bold<>
+    '</b>',              // Font: End Bold<>
+    '<u>',               // Font: Start Underline<>
+    '</u>',              // Font: End Underline<>
+    '<s>',               // Font: Start Strikeout<>
+    '</s>',              // Font: End Strikeout<>
+    '<br/>',             // Line Break (or present as <pre> ... </pre>)<>
+    'HTML_Tag_Import');  // Translation Table: Char -> String!!!
+
+  WriteFile("%f.html","%!0");
+
+  PopTagsandRegisters;
+
+End;

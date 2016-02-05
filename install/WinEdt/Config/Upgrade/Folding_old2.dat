@@ -1,0 +1,6 @@
+  START="\part*{"
+  STOP="\end{document}"
+  STOP="\part{"
+  STOP="\part["
+  STOP="\part*{"
+END="Part-TeX"

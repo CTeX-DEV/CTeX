@@ -1,0 +1,407 @@
+// Remove WinEdt Filetype Associations
+
+Requires(20080814); // Requires this build of WinEdt to work properly
+
+// is Power User?
+Exe('%B\WinShell\isPowerUser.edt');
+
+// Remove filetype associations with WinEdt
+StartWorking('Modifying the Registry...');
+
+// The register %!9: 0..2 determines on which level
+// the associations are made...
+
+// HKEY_CLASSES_ROOT ...
+LetReg(1,'HKEY_CLASSES_ROOT');
+LetReg(0,'');
+
+// HKEY_LOCAL_MACHINE?
+IfStr('%!9','1','=',>
+  `>
+    LetReg(1,'HKEY_LOCAL_MACHINE');>
+    LetReg(0,'Software\Classes\');>
+  `);
+
+// HKEY_CURRENT_USER?
+IfStr('%!9','2','=',>
+  `>
+    LetReg(1,'HKEY_CURRENT_USER');>
+    LetReg(0,'Software\Classes\');>
+  `);
+
+  IfStr('%@("%!1","%!0.prj"," ")','WinEdt.prj','=',>
+    'SetRegKey("%!1","%!0.prj","");>
+     RegDeleteKey("%!1","%!0",".prj");');>
+  RegDeleteKey("%!1","%!0WinEdt.prj\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.prj\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.prj","shell");
+  RegDeleteKey("%!1","%!0WinEdt.prj","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.prj");
+
+  IfStr('%@("%!1","%!0.edt"," ")','WinEdt.edt','=',>
+    'SetRegKey("%!1","%!0.edt","");>
+     RegDeleteKey("%!1","%!0",".edt");');>
+  RegDeleteKey("%!1","%!0WinEdt.edt\shell\Run with WinEdt","Command");
+  RegDeleteKey("%!1","%!0WinEdt.edt\shell","Run with WinEdt");
+  RegDeleteKey("%!1","%!0WinEdt.edt\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.edt\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.edt","shell");
+  RegDeleteKey("%!1","%!0WinEdt.edt","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.edt");
+
+  IfStr('%@("%!1","%!0.txt"," ")','WinEdt.txt','=',>
+    'SetRegKey("%!1","%!0.txt","");>
+     RegDeleteKey("%!1","%!0",".txt");');>
+  RegDeleteKey("%!1","%!0WinEdt.txt\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.txt\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.txt","shell");
+  RegDeleteKey("%!1","%!0WinEdt.txt","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.txt");
+
+  IfStr('%@("%!1","%!0.tex"," ")','WinEdt.tex','=',>
+    'SetRegKey("%!1","%!0.tex","");>
+     RegDeleteKey("%!1","%!0",".tex");');>
+  RegDeleteKey("%!1","%!0WinEdt.tex\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.tex\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.tex","shell");
+  RegDeleteKey("%!1","%!0WinEdt.tex","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.tex");
+
+  IfStr('%@("%!1","%!0.ltx"," ")','WinEdt.ltx','=',>
+    'SetRegKey("%!1","%!0.ltx","");>
+     RegDeleteKey("%!1","%!0",".ltx");');>
+  RegDeleteKey("%!1","%!0WinEdt.ltx\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.ltx\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.ltx","shell");
+  RegDeleteKey("%!1","%!0WinEdt.ltx","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.ltx");
+
+  IfStr('%@("%!1","%!0.aux"," ")','WinEdt.aux','=',>
+    'SetRegKey("%!1","%!0.aux","");>
+     RegDeleteKey("%!1","%!0",".aux");');>
+  RegDeleteKey("%!1","%!0WinEdt.aux\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.aux\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.aux","shell");
+  RegDeleteKey("%!1","%!0WinEdt.aux","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.aux");
+
+  IfStr('%@("%!1","%!0.bbl"," ")','WinEdt.bbl','=',>
+    'SetRegKey("%!1","%!0.bbl","");>
+     RegDeleteKey("%!1","%!0",".bbl");');>
+  RegDeleteKey("%!1","%!0WinEdt.bbl\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.bbl\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.bbl","shell");
+  RegDeleteKey("%!1","%!0WinEdt.bbl","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.bbl");
+
+  IfStr('%@("%!1","%!0.bib"," ")','WinEdt.bib','=',>
+    'SetRegKey("%!1","%!0.bib","");>
+     RegDeleteKey("%!1","%!0",".bib");');>
+  RegDeleteKey("%!1","%!0WinEdt.bib\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.bib\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.bib","shell");
+  RegDeleteKey("%!1","%!0WinEdt.bib","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.bib");
+
+  IfStr('%@("%!1","%!0.blg"," ")','WinEdt.blg','=',>
+    'SetRegKey("%!1","%!0.blg","");>
+     RegDeleteKey("%!1","%!0",".blg");');>
+  RegDeleteKey("%!1","%!0WinEdt.blg\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.blg\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.blg","shell");
+  RegDeleteKey("%!1","%!0WinEdt.blg","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.blg");
+
+  IfStr('%@("%!1","%!0.bst"," ")','WinEdt.bst','=',>
+    'SetRegKey("%!1","%!0.bst","");>
+     RegDeleteKey("%!1","%!0",".bst");');>
+  RegDeleteKey("%!1","%!0WinEdt.bst\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.bst\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.bst","shell");
+  RegDeleteKey("%!1","%!0WinEdt.bst","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.bst");
+
+  IfStr('%@("%!1","%!0.clo"," ")','WinEdt.clo','=',>
+    'SetRegKey("%!1","%!0.clo","");>
+     RegDeleteKey("%!1","%!0",".clo");');>
+  RegDeleteKey("%!1","%!0WinEdt.clo\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.clo\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.clo","shell");
+  RegDeleteKey("%!1","%!0WinEdt.clo","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.clo");
+
+  IfStr('%@("%!1","%!0.cls"," ")','WinEdt.cls','=',>
+    'SetRegKey("%!1","%!0.cls","");>
+     RegDeleteKey("%!1","%!0",".cls");');>
+  RegDeleteKey("%!1","%!0WinEdt.cls\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.cls\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.cls","shell");
+  RegDeleteKey("%!1","%!0WinEdt.cls","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.cls");
+
+  IfStr('%@("%!1","%!0.def"," ")','WinEdt.def','=',>
+    'SetRegKey("%!1","%!0.def","");>
+     RegDeleteKey("%!1","%!0",".def");');>
+  RegDeleteKey("%!1","%!0WinEdt.def\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.def\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.def","shell");
+  RegDeleteKey("%!1","%!0WinEdt.def","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.def");
+
+  IfStr('%@("%!1","%!0.dtx"," ")','WinEdt.dtx','=',>
+    'SetRegKey("%!1","%!0.dtx","");>
+     RegDeleteKey("%!1","%!0",".dtx");');>
+  RegDeleteKey("%!1","%!0WinEdt.dtx\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.dtx\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.dtx","shell");
+  RegDeleteKey("%!1","%!0WinEdt.dtx","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.dtx");
+
+  IfStr('%@("%!1","%!0.drv"," ")','WinEdt.drv','=',>
+    'SetRegKey("%!1","%!0.drv","");>
+     RegDeleteKey("%!1","%!0",".drv");');>
+  RegDeleteKey("%!1","%!0WinEdt.drv\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.drv\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.drv","shell");
+  RegDeleteKey("%!1","%!0WinEdt.drv","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.drv");
+
+  IfStr('%@("%!1","%!0.ins"," ")','WinEdt.ins','=',>
+    'SetRegKey("%!1","%!0.ins","");>
+     RegDeleteKey("%!1","%!0",".ins");');>
+  RegDeleteKey("%!1","%!0WinEdt.ins\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.ins\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.ins","shell");
+  RegDeleteKey("%!1","%!0WinEdt.ins","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.ins");
+
+  IfStr('%@("%!1","%!0.fdd"," ")','WinEdt.fdd','=',>
+    'SetRegKey("%!1","%!0.fdd","");>
+     RegDeleteKey("%!1","%!0",".fdd");');>
+  RegDeleteKey("%!1","%!0WinEdt.fdd\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.fdd\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.fdd","shell");
+  RegDeleteKey("%!1","%!0WinEdt.fdd","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.fdd");
+
+  IfStr('%@("%!1","%!0.fd"," ")','WinEdt.fd','=',>
+    'SetRegKey("%!1","%!0.fd","");>
+     RegDeleteKey("%!1","%!0",".fd");');>
+  RegDeleteKey("%!1","%!0WinEdt.fd\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.fd\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.fd","shell");
+  RegDeleteKey("%!1","%!0WinEdt.fd","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.fd");
+
+  IfStr('%@("%!1","%!0.idx"," ")','WinEdt.idx','=',>
+    'SetRegKey("%!1","%!0.idx","");>
+     RegDeleteKey("%!1","%!0",".idx");');>
+  RegDeleteKey("%!1","%!0WinEdt.idx\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.idx\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.idx","shell");
+  RegDeleteKey("%!1","%!0WinEdt.idx","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.idx");
+
+  IfStr('%@("%!1","%!0.ilg"," ")','WinEdt.ilg','=',>
+    'SetRegKey("%!1","%!0.ilg","");>
+     RegDeleteKey("%!1","%!0",".ilg");');>
+  RegDeleteKey("%!1","%!0WinEdt.ilg\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.ilg\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.ilg","shell");
+  RegDeleteKey("%!1","%!0WinEdt.ilg","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.ilg");
+
+  IfStr('%@("%!1","%!0.ind"," ")','WinEdt.ind','=',>
+    'SetRegKey("%!1","%!0.ind","");>
+     RegDeleteKey("%!1","%!0",".ind");');>
+  RegDeleteKey("%!1","%!0WinEdt.ind\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.ind\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.ind","shell");
+  RegDeleteKey("%!1","%!0WinEdt.ind","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.ind");
+
+  IfStr('%@("%!1","%!0.ist"," ")','WinEdt.ist','=',>
+    'SetRegKey("%!1","%!0.ist","");>
+     RegDeleteKey("%!1","%!0",".ist");');>
+  RegDeleteKey("%!1","%!0WinEdt.ist\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.ist\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.ist","shell");
+  RegDeleteKey("%!1","%!0WinEdt.ist","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.ist");
+
+  IfStr('%@("%!1","%!0.glo"," ")','WinEdt.glo','=',>
+    'SetRegKey("%!1","%!0.glo","");>
+     RegDeleteKey("%!1","%!0",".glo");');>
+  RegDeleteKey("%!1","%!0WinEdt.glo\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.glo\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.glo","shell");
+  RegDeleteKey("%!1","%!0WinEdt.glo","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.glo");
+
+  IfStr('%@("%!1","%!0.glg"," ")','WinEdt.glg','=',>
+    'SetRegKey("%!1","%!0.glg","");>
+     RegDeleteKey("%!1","%!0",".glg");');>
+  RegDeleteKey("%!1","%!0WinEdt.glg\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.glg\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.glg","shell");
+  RegDeleteKey("%!1","%!0WinEdt.glg","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.glg");
+
+  IfStr('%@("%!1","%!0.gls"," ")','WinEdt.gls','=',>
+    'SetRegKey("%!1","%!0.gls","");>
+     RegDeleteKey("%!1","%!0",".gls");');>
+  RegDeleteKey("%!1","%!0WinEdt.gls\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.gls\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.gls","shell");
+  RegDeleteKey("%!1","%!0WinEdt.gls","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.gls");
+
+  IfStr('%@("%!1","%!0.nlo"," ")','WinEdt.nlo','=',>
+    'SetRegKey("%!1","%!0.nlo","");>
+     RegDeleteKey("%!1","%!0",".nlo");');>
+  RegDeleteKey("%!1","%!0WinEdt.nlo\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.nlo\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.nlo","shell");
+  RegDeleteKey("%!1","%!0WinEdt.nlo","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.nlo");
+
+  IfStr('%@("%!1","%!0.nlg"," ")','WinEdt.nlg','=',>
+    'SetRegKey("%!1","%!0.nlg","");>
+     RegDeleteKey("%!1","%!0",".nlg");');>
+  RegDeleteKey("%!1","%!0WinEdt.nlg\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.nlg\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.nlg","shell");
+  RegDeleteKey("%!1","%!0WinEdt.nlg","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.nlg");
+
+  IfStr('%@("%!1","%!0.nls"," ")','WinEdt.nls','=',>
+    'SetRegKey("%!1","%!0.nls","");>
+     RegDeleteKey("%!1","%!0",".nls");');>
+  RegDeleteKey("%!1","%!0WinEdt.nls\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.nls\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.nls","shell");
+  RegDeleteKey("%!1","%!0WinEdt.nls","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.nls");
+
+  IfStr('%@("%!1","%!0.lof"," ")','WinEdt.lof','=',>
+    'SetRegKey("%!1","%!0.lof","");>
+     RegDeleteKey("%!1","%!0",".lof");');>
+  RegDeleteKey("%!1","%!0WinEdt.lof\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.lof\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.lof","shell");
+  RegDeleteKey("%!1","%!0WinEdt.lof","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.lof");
+
+  IfStr('%@("%!1","%!0.log"," ")','WinEdt.log','=',>
+    'SetRegKey("%!1","%!0.log","");>
+     RegDeleteKey("%!1","%!0",".log");');>
+  RegDeleteKey("%!1","%!0WinEdt.log\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.log\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.log","shell");
+  RegDeleteKey("%!1","%!0WinEdt.log","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.log");
+
+  IfStr('%@("%!1","%!0.lot"," ")','WinEdt.lot','=',>
+    'SetRegKey("%!1","%!0.lot","");>
+     RegDeleteKey("%!1","%!0",".lot");');>
+  RegDeleteKey("%!1","%!0WinEdt.lot\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.lot\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.lot","shell");
+  RegDeleteKey("%!1","%!0WinEdt.lot","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.lot");
+
+  IfStr('%@("%!1","%!0.mf"," ")','WinEdt.mf','=',>
+    'SetRegKey("%!1","%!0.mf","");>
+     RegDeleteKey("%!1","%!0",".mf");');>
+  RegDeleteKey("%!1","%!0WinEdt.mf\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.mf\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.mf","shell");
+  RegDeleteKey("%!1","%!0WinEdt.mf","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.mf");
+
+  IfStr('%@("%!1","%!0.mp"," ")','WinEdt.mp','=',>
+    'SetRegKey("%!1","%!0.mp","");>
+     RegDeleteKey("%!1","%!0",".mp");');>
+  RegDeleteKey("%!1","%!0WinEdt.mp\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.mp\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.mp","shell");
+  RegDeleteKey("%!1","%!0WinEdt.mp","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.mp");
+
+  IfStr('%@("%!1","%!0.mpx"," ")','WinEdt.mpx','=',>
+    'SetRegKey("%!1","%!0.mpx","");>
+     RegDeleteKey("%!1","%!0",".mpx");');>
+  RegDeleteKey("%!1","%!0WinEdt.mpx\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.mpx\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.mpx","shell");
+  RegDeleteKey("%!1","%!0WinEdt.mpx","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.mpx");
+
+  IfStr('%@("%!1","%!0.sty"," ")','WinEdt.sty','=',>
+    'SetRegKey("%!1","%!0.sty","");>
+     RegDeleteKey("%!1","%!0",".sty");');>
+  RegDeleteKey("%!1","%!0WinEdt.sty\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.sty\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.sty","shell");
+  RegDeleteKey("%!1","%!0WinEdt.sty","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.sty");
+
+  IfStr('%@("%!1","%!0.toc"," ")','WinEdt.toc','=',>
+    'SetRegKey("%!1","%!0.toc","");>
+     RegDeleteKey("%!1","%!0",".toc");');>
+  RegDeleteKey("%!1","%!0WinEdt.toc\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.toc\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.toc","shell");
+  RegDeleteKey("%!1","%!0WinEdt.toc","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.toc");
+
+  IfStr('%@("%!1","%!0.tfm"," ")','WinEdt.tfm','=',>
+    'SetRegKey("%!1","%!0.tfm","");>
+     RegDeleteKey("%!1","%!0",".tfm");');>
+  RegDeleteKey("%!1","%!0WinEdt.tfm\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.tfm\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.tfm","shell");
+  RegDeleteKey("%!1","%!0WinEdt.tfm","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.tfm");
+
+  IfStr('%@("%!1","%!0.pk"," ")','WinEdt.pk','=',>
+    'SetRegKey("%!1","%!0.pk","");>
+     RegDeleteKey("%!1","%!0",".pk");');>
+  RegDeleteKey("%!1","%!0WinEdt.pk\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.pk\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.pk","shell");
+  RegDeleteKey("%!1","%!0WinEdt.pk","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.pk");
+
+  IfStr('%@("%!1","%!0.vf"," ")','WinEdt.vf','=',>
+    'SetRegKey("%!1","%!0.vf","");>
+     RegDeleteKey("%!1","%!0",".vf");');>
+  RegDeleteKey("%!1","%!0WinEdt.vf\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.vf\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.vf","shell");
+  RegDeleteKey("%!1","%!0WinEdt.vf","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.vf");
+
+  IfStr('%@("%!1","%!0.synctex"," ")','WinEdt.synctex','=',>
+    'SetRegKey("%!1","%!0.synctex","");>
+     RegDeleteKey("%!1","%!0",".synctex");');>
+  RegDeleteKey("%!1","%!0WinEdt.synctex\shell\open","command");
+  RegDeleteKey("%!1","%!0WinEdt.synctex\shell","open");
+  RegDeleteKey("%!1","%!0WinEdt.synctex","shell");
+  RegDeleteKey("%!1","%!0WinEdt.synctex","DefaultIcon");
+  RegDeleteKey("%!1","%!0","WinEdt.synctex");
+
+  // Clear the default open command for manual associations:
+  RegDeleteKey("%!1","%!0Applications\WinEdt.exe\shell\open","command");
+  RegDeleteKey("%!1","%!0Applications\WinEdt.exe\shell","open");
+  RegDeleteKey("%!1","%!0Applications\WinEdt.exe","shell");
+  RegDeleteKey("%!1","%!0Applications","WinEdt.exe");
+
+// Force the Explorer to Refresh the associated Icons
+// Only for Power Users (Win2K/XP)!!!
+// IfStr("%$('isPowerUser');","1","=",>
+//   !`ShellExecute("Install",'%B\WinShell\Icons\_Icons.inf','','',0);`);
+
+StopWorking;
+
+End;

@@ -1,0 +1,25 @@
+// -*- ASCII:EDT -*-
+// TeX: MakeGlossary ...
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+  Assign('ExitCode-OK','0'); // OK Exit Code
+  LetReg(9,'MakeGlossary'); // Execution Modes Compiler
+  LetReg(8,'glg');      // Log File (or empty)
+  LetReg(7,'gls');      // Output Format
+  LetReg(6,'%O');       // Startup Folder
+
+  // Display a Dialog for Extra Switches:
+  IfStr("%$('%!9-GUI');","1","=",>
+    !|GetString("Switches: ","%!9 Switches","%$('%!9--Switches');");>
+      IfOK(!`Assign('%!9--Switches','%!?');`,!`PopTagsandRegisters;Exit;`);|,>
+    !|Release('%!9--Switches');|);
+  // Build the Command Line ...
+  LetReg(5, `%$('%!9-Executable'); -s gglo.ist -t "%N.glg" -o "%N.gls" %$('%!9--Switches'); %$('%!9-Parameters');`);
+
+  // Use Execution Modes to determine the flow of execution...
+  Exe('%b\Exec\ExeCompiler.edt');
+  PopTagsandRegisters;
+
+End;

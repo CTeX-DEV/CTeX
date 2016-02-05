@@ -1,0 +1,52 @@
+// ------------------------------------------------------------------
+// Graphics.edt
+// ============
+//
+// Use ShellExecute for active string: \includegraphics?{?}
+// If the graphics is associated with any application it gets opened
+// Define double-click response for \includegraphics?{?}
+//     [Exe("%b\Macros\Active Strings\Graphics.edt");]
+// ------------------------------------------------------------------
+
+  PushTagsandRegisters;
+
+  // Prompt('%?');
+  UnixToDos("%?", 0);  // Convert the UNIX PATH (if necessary)
+  GetFilePath("%!0",1);
+
+  // Try specification relative to the Main File if full PATH is missing
+  IfStr("%!1","","=",!"LetReg(1,'%P');");
+  IfFileExists("%!1\",!"Relax;",!"LetReg(1, '%P\%!1');");
+  // If you have defined special PATH for graphics try your graphics folder(s)
+  // WinEdt does not know about your special directories...
+
+  GetFileName("%!0",2);
+  LetReg(1,"%!1\%!2");
+  GetFileType("%!0",2);
+  LetReg(1,"%!1%!2");
+
+  LetReg(0,"%!1");
+  // Try common extensions (if needed)
+  // Relax; can be replaced by a direct call to executable
+  // (eg. "Run('My favorite viewer.exe ""%!0""');Exit;")...
+  IfFileExists("%!0",!"Relax;",!"LetReg(0, '%!1.pdf');");
+  IfFileExists("%!0",!"Relax;",!"LetReg(0, '%!1.png');");
+  IfFileExists("%!0",!"Relax;",!"LetReg(0, '%!1.jpg');");
+  IfFileExists("%!0",!"Relax;",!"LetReg(0, '%!1.jpeg');");
+  IfFileExists("%!0",!"Relax;",!"LetReg(0, '%!1.eps');");
+  IfFileExists("%!0",!"Relax;",!"LetReg(0, '%!1.ps');");
+  IfFileExists("%!0",!"Relax;",!"LetReg(0, '%!1.bmp');");
+  // etc... for your common graphics formats in your preferred order
+
+  IfFileExists("%!0",!"Relax;",>
+    !"Prompt('Graphics file ""%!1"" not found!');PopTagsandRegisters;Exit;");
+
+  ShellExecute("Open","%!0","","%P",1);
+  // Cleanup
+  LetReg(0,"");
+  LetReg(1,"");
+  LetReg(2,"");
+
+  PopTagsandRegisters;
+
+End;

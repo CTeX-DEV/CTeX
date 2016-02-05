@@ -1,0 +1,77 @@
+// %!x: Columns and %!y: Rows Registers are set through GetDim;
+// Repeat(count, "Macro") is used to produce n x m environments.
+
+ GetDim;
+ SetTracking(0);
+ BeginGroup;
+ SetSel(0);
+ Mark(1);
+ LetReg(0,"%c");
+ TrimLine;
+ GoToEndOfLine;
+ IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+ TrackCaret;
+ LetReg(0, "%c"); // *** Current Column
+ Mark(1);
+
+ IfisMode('HTML;XML;PHP;HHC','%!m',!'JMP("HTML");');
+ IfisMode('TeX','%!m','JMP("TeX");');
+
+:TeX:: ==============================================================
+
+ LetReg(0, "%c"); // *** Current Column
+ InsText("\left(");
+ NewLine;
+ GotoCol(%!0);                     // *** Original Column
+ InsText("  \begin{array}{");
+ Repeat(%!x,'InsText("c")');
+  // by default entries are centered
+  // if you use "l" and "r" (left and right) aligned entries
+  // frequently, replace this by Repeat(%!x,'InsertBullet;');
+ InsText("}");
+ NewLine;
+ InsText("  "); // Indent the environment
+ //Note the use of ""Quotes"" inside "Quotes"
+ //> at the end of line concatenates lines before executing them
+ Repeat(%!y,>
+   'GotoCol(%!0+4); // *** Original Column indented by 4<>
+    InsText(" ");>
+    Repeat(%!x-1,"InsText(""&  "")");>
+    InsText("\\");NewLine;');
+ IfNum(%c, '1', '>', 'Backspace;'); // Unindent
+ GotoCol(%!0);                     // *** Original Column
+ InsText("  \end{array}");
+ NewLine;
+ IfNum(%c, '1', '>', 'Backspace;'); // Unindent
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText("\right)");
+ InsLine(4);
+ JMP('Exit');
+
+:HTML:: =============================================================
+
+ InsText(!'<table cellspacing="" cellpadding="" border="" width="" align="">');
+ NewLine;
+ GotoCol(%!0+2);
+ TrimLine;
+ Repeat(%!y,>
+   !'GotoCol(%!0+2); // *** Original Column indented by 2<>
+     InsText("<tr>");>
+     Repeat(%!x,!"InsText("" <td></td>"")");>
+     InsText(" </tr>");>
+     NewLine;');
+ IfNum(%c, '1', '>', 'Backspace;'); // Unindent
+ GotoCol(%!0);                     // *** Original Column
+ TrimLine;
+ InsText(!"</table>");
+ InsLine(4);
+ JMP('Exit');
+
+:Exit:: =============================================================
+ Goto(1,1);
+ NextBullet;
+ EndGroup;
+ SetTracking(1);
+
+End;

@@ -1,0 +1,29 @@
+// On Doc Click Event Handler
+
+  Requires(20140115);
+
+  PushTagsandRegisters;
+
+  // Only of you click on the current bookmark (->)
+  GetLastClickArea(0);
+    // -1 -- undefined
+    // 0 = text area
+    // 1 = folding margin
+    // 2 = line number
+    // 3 = bookmark area
+    // 4 = current bookmark
+  // Undefined or else mouse was moved after the click:
+  IfStr('%!0',!'-1',!'=',!'JMP(!"Done");');
+  IfStr('%!0',!'4',!'=',!'Relax;',!'JMP(!"Done");');
+
+  // Only if Alt key (VK_MENU) is down?
+  // IfKeyDown(18, 0,0, !'Relax;', !'JMP(!"Done");');
+
+  // Initiate forward PDF Search...
+  Menu("PDF_Search");
+
+:Done:: ===========================================================
+
+  PopTagsandRegisters;
+
+End;

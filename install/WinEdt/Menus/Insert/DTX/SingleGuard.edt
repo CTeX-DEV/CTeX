@@ -1,0 +1,16 @@
+// DTX Single Guard
+
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'=','GetSel(0,1);Delete;','SetSel(0);GetSel(0,1);');
+  IfNum(%c,'1','>','InsLine;');
+  Mark(1);
+  Ins("%%<%!9> ");
+  IfStr("%!1","","=","Ins('');",!"Ins('%!1');");
+  MoveBy(1);IfNum(%c,'1','>','MoveBy(-1);InsLine;');
+  Goto(1,1);
+  IfStr("%!1","","=","NextBullet;");
+  EndGroup;
+  SetTracking(1);
+
+End;

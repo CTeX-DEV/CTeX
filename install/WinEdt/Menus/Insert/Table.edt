@@ -1,0 +1,69 @@
+// Insert a Table Environment (Mode Dependent)
+
+PushTagsandRegisters;
+
+IfisMode('TeX','%!m',!'JMP("TeX");');
+IfisMode('HTML;XML;PHP;HHC','%!m',!'JMP("HTML");');
+
+JMP('Default');
+
+:TeX:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(0,"%c");
+  TrimLine;
+  GoToEndOfLine;
+  IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+  TrackCaret;
+  ReadFile("%B\Templates\LaTeX\Table.ltx",9);
+  GoToBeginningOfLine;
+  Mark(1);
+  InsText("%!9");
+  Goto(1,1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  JMP("Exit");
+
+:HTML:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(0,"%c");
+  TrimLine;
+  GoToEndOfLine;
+  IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+  TrackCaret;
+  InsText(!'<table cellspacing="2" cellpadding="1" border="1" width="95%" align="center">');
+  NewLine;
+  TrimLine;
+  GotoCol(%!0+2);
+  InsText("<tr> <td></td><td></td> </tr>");>
+  NewLine;
+  GotoCol(%!0+2);
+  InsText("<tr> <td></td><td></td> </tr>");>
+  NewLine;
+  GotoCol(%!0);                     // *** Original Column
+  TrimLine;
+  InsText(!"</table>");
+  InsLine(4);
+  Goto(1,1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  JMP('Exit');
+
+:Default:: ==========================================================
+// No Default format ...
+
+  Prompt('No Table Environments are defined for mode: "%!m"!');
+
+:Exit:: =============================================================
+// It's OK
+
+  PopTagsandRegisters;
+
+End;

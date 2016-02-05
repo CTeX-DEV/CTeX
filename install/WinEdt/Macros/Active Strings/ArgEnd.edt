@@ -1,0 +1,11 @@
+// -*- ASCII:EDT -*-
+// Move After }
+
+  PushTagsandRegisters;
+  LetReg(0,'%c');
+  Sel(0);
+  FindInString("%L","}",0,0,1010, %!0);
+  IfOK(!"GotoCol(%!0+2);");
+  TrackCaret;
+  PopTagsandRegisters;
+End;

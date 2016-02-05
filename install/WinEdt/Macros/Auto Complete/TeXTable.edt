@@ -1,0 +1,37 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert LaTeX floating table Environment
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - environment name
+// %!? - indentation of the trigger
+// %-0..%-9 - can be manually set for macros that insert objects
+//
+// Temporary registers (manually set):
+// ===================================
+// %-1 (item with a bullet placeholder and optional extra indentation)
+// %-2 (extra info after \begin{...} such as floating placement [htbp]
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// ===============================================================================
+
+LetReg(-9,'%?');
+LetTempReg;
+
+LetReg(-10, '\begin{%-9}%-2%\');
+LetReg(-10, '%-0%!?%-1\centering%\');
+LetReg(-10, '%-0%!?%-1%\');
+LetReg(-10, '%-0%!?%-1\caption{}\label{}%\');
+LetReg(-10, '%-0%!?\end{%-9}');
+
+// This will be inserted by the AutoPopup Exit Event Handler:
+LetTempReg("%-0");
+
+End;
+
+// ===============================================================================

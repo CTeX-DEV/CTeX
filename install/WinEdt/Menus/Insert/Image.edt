@@ -1,0 +1,64 @@
+// Insert a figure (Mode Dependent)
+
+PushTagsandRegisters;
+
+IfisMode('TeX','%!m',!'JMP("TeX");');
+IfisMode('HTML;XML;PHP;HHC','%!m',!'JMP("HTML");');
+
+JMP('Default');
+
+:TeX:: ==============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(0,"%c");
+  TrimLine;
+  GoToEndOfLine;
+  IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+  TrackCaret;
+  ReadFile("%B\Templates\LaTeX\Figure.ltx",9);
+  GoToBeginningOfLine;
+  Mark(1);
+  InsText("%!9");
+  Goto(1,1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  JMP("Exit");
+
+:HTML:: =============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(0,"%c");
+  TrimLine;
+  GoToEndOfLine;
+  IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+  TrackCaret;
+  InsText('<p align="center">');
+  NewLine;
+  Mark(1);
+  Ins('<img src="" alt="">');
+  InsLine;
+  InsText('</p>');
+  NewLine;
+  Goto(1,1);
+  Ins('  ');
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  JMP("Exit");
+
+:Default:: ==========================================================
+// No Default format ...
+
+  Prompt('No Image Format is defined for mode: "%!m"!');
+
+:Exit:: =============================================================
+// It's OK
+
+  PopTagsandRegisters;
+
+End;

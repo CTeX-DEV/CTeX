@@ -1,0 +1,28 @@
+// Execution Modes - NSIS
+
+// NSIS
+    Assign(!"NSIS-Executable", !|%$("NSIS-Exe");|);
+    Release(!"NSIS-Switches");
+    Assign(!"NSIS-Parameters", !|"%N%T"|);
+    Release(!"NSIS-Paper_Size");
+    Release(!"NSIS-Paper_Custom_Size");
+    Release(!"NSIS-Landscape");
+    Release(!"NSIS-GUI");
+    Release(!"NSIS-High_Priority");
+    Assign(!"NSIS-Wait", !|1|);
+    Release(!"NSIS-Report");
+    Release(!"NSIS-Errors");
+    Release(!"NSIS-Warnings");
+    Release(!"NSIS-ExitCode");
+    Release(!"NSIS-Viewer");
+    Release(!"NSIS-View_Search");
+    Release(!"NSIS-STD_IO");
+    Release(!"NSIS-No_Interaction");
+    Release(!"NSIS-C-style-errors");
+    Release(!"NSIS-Clean_Build");
+    Assign(!"NSIS-WinEdt_Console", !|1|);
+    Release(!"NSIS-Hidden_Window");
+    Release(!"NSIS-Background_Window");
+    Assign(!"NSIS-Pause", !|1|);
+
+End;

@@ -1,0 +1,24 @@
+// Insert Color Tag for TeX or HTML;XML Mode
+// HEX #RRGGBB String for other modes
+
+  PushTagsandRegisters;
+
+  IfisMode(!'TeX','%!m',>
+    !'GetColor(0,"%S",3,",");>
+      IfOK(!`InsLabel(''\textcolor[rgb]{%!0}'',"{","}");`);JMP(!"Done");');
+
+  IfisMode(!'HTML;XML;PHP','%!m',>
+    !'GetColor(0,"%S");>
+      IfOK(!`InsLabel(''<FONT color="#%!0"'',">","</FONT>");`);JMP(!"Done");');
+
+  IfisMode(!'INI;EDT','%!m',>
+    !'GetColorRGB(1,"%S");GetColor(0,"%!1");>
+      IfOK(!`BeginGroup;Ins("#%!0");EndGroup;`);JMP(!"Done");');
+
+  GetColor(0,"%S");IfOK("BeginGroup;Ins('#%!0');EndGroup;");
+
+:Done:: ======================================================================
+
+  PopTagsandRegisters;
+
+End;

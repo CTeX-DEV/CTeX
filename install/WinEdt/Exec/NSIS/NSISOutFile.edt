@@ -1,0 +1,32 @@
+// -*- ASCII:EDT -*-
+// Search for NSIS Output file
+
+  PushTagsandRegisters;
+
+  // Find Output File
+  ReadFile('%F',9);
+  FindInString('%!9','\(OutFile*\)',1,2,1);
+  LetReg(9,"%#0");
+
+  FindInString(|%!9|,|OutFile+$[#9,#32]$"\(+$~[]-[#0..#8,#10..#31,#34]$\)"|,1,2,1);
+  IfOK(!'LetReg(9,"%#0");JMP(!"Found");');
+  FindInString(|%!9|,|OutFile+$[#9,#32]$'\(+$~[]-[#0..#8,#10..#31,#39]$\)'|,1,2,1);
+  IfOK(!'LetReg(9,"%#0");JMP(!"Found");');
+  FindInString(|%!9|,|OutFile+$[#9,#32]$`\(+$~[]-[#0..#8,#10..#31,#96]$\)`|,1,2,1);
+  IfOK(!'LetReg(9,"%#0");JMP(!"Found");');
+  FindInString(|%!9|,|OutFile+$[#9,#32]$\($~[]-[#0..#32,#34,#35,#39,#47,#59,#96]$@$~[]-[#0..#32]$\)|,1,2,1);
+  IfOK(!'LetReg(9,"%#0");',!'LetReg(9,"");');
+
+:Found:: ============================================================
+  // Full path or not? If not, set to full
+  FindInString('%!9',':\',1,2,0);
+  IfOK(!'Relax;',!'IfStr(|%!9|,||,|<>|,!|LetReg(9,"%P\%!9");|);');
+
+  // Assign NSIS Env vars
+  Assign("%F-NSIS-Source","%F");
+  IfStr(|%!9|,||,|<>|,!|Assign("%F-NSIS-Installer","%!9");|,!|Assign("%F-NSIS-Installer",":");|);
+  // Prompt("%$('%F-NSIS-Installer');");  // Debugging
+
+  PopTagsandRegisters;
+
+End;

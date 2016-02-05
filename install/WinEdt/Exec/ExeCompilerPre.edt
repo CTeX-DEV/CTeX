@@ -1,0 +1,161 @@
+// -*- ASCII:EDT -*-
+//
+// Execute tasks before calling Exe Compiler
+//
+// Input Parameters:
+// -----------------
+// %!9 contains the compiler declared and defined in the Execution Modes:
+//     [PDF]TeXify, [PDF]TeX, [PDF]LaTeX, AMSTeX, ...
+//
+// ==================================================================
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  DosToUnix("%P",8);
+
+// NSIS? ============================================================
+
+  FindInString("%!9","NSIS",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_NSIS');");
+    // Find output file
+    Exe("%b\Exec\NSIS\NSISOutFile.edt");
+    // Delete output file
+    IfFileExists(|%$('%F-NSIS-Installer');|,!|DeleteFile("%$('%F-NSIS-Installer');");|);
+  JMP(!"Pre_Done");
+
+:not_NSIS:: =========================================================
+
+// BibTeX? ==========================================================
+
+  FindInString("%!9","BibTeX",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_BibTeX');");
+  IfStr("%O","%P","=",!"JMP(!'Pre_Done');");
+    // Add %P to environment variable
+    SetEnvVar(!"BIBINPUTS","%!8;%$('OLDBIBINPUTS');");
+    SetEnvVar(!"BSTINPUTS","%!8;%$('OLDBSTINPUTS');");
+  JMP(!"Pre_Done");
+
+:not_BibTeX:: =======================================================
+
+// MetaPost? ========================================================
+
+  FindInString("%!9","MetaPost",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_MetaPost');");
+    // Delete output files
+    ListFolderFiles(0,'%O','',0,1);
+    LstEnum('%!0','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !`LstGetItem(2,%!c-1);>
+        GetFileName('%!2',3);>
+        GetFileType('%!2',4);>
+        FindInString('%!4','<\.+$Numeric$~$~[]$',5,6,1);>
+        IfOK(!|IfStr('%!3','%N','=',!'DeleteFile("%O\%!2");');|);>
+        ProcessMessages;>
+       `);
+    LstRelease;
+  IfStr("%O","%P","=",!"JMP(!'Pre_Done');");
+    Exe("%b\Exec\TeX\CreateAUX.edt");
+    // Add %P to environment variable
+    SetEnvVar(!"MPINPUTS","%!8;%$('OLDMPINPUTS');");
+  JMP(!"Pre_Done");
+
+:not_MetaPost:: =====================================================
+
+// MetaFont? ========================================================
+
+  FindInString("%!9","MetaFont",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_MetaFont');");
+    // Delete output files
+    IfFileExists("%P\%N.tfm",!"DeleteFile('%P\%N.tfm');");
+    ListFolderFiles(0,'%O','',0,1);
+    LstEnum('%!0','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !`LstGetItem(2,%!c-1);>
+        GetFileName('%!2',3);>
+        GetFileType('%!2',4);>
+        FindInString('%!4','<\.+$Numeric$gf~$~[]$',5,6,1);>
+        IfOK(!|IfStr('%!3','%N','=',!'DeleteFile("%O\%!2");');|);>
+        ProcessMessages;>
+       `);
+    LstRelease;
+  IfStr("%O","%P","=",!"JMP(!'Pre_Done');");
+    Exe("%b\Exec\TeX\CreateAUX.edt");
+    // Add %P to environment variable
+    SetEnvVar(!"MFINPUTS","%!8;%$('OLDMFINPUTS');");
+  JMP(!"Pre_Done");
+
+:not_MetaFont:: =====================================================
+
+// TeX2HTML? ========================================================
+
+  FindInString("%!9","TeX2HTML",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_TeX2HTML');");
+    CreateFolders("%P\Images",1);
+    // TeX4ht configuration
+    CopyFile("%B\Templates\TeX4ht\tex4ht.dat","%O\tex4ht.env",1);
+    ReadFile("%O\tex4ht.env",0);
+    SubstituteInString("%!0","Images/%%%%3",'"%!8/Images/%%%%3"');
+    WriteFile("%O\tex4ht.env","%!0");
+    // Delete output files
+    IfFileExists("%P\%N.css",!"DeleteFile('%P\%N.css')");
+    ListFolderFiles(0,'%P','.html',0,1);
+    LstEnum('%!0','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !`LstGetItem(2,%!c-1);>
+        GetFileName('%!2',3);>
+        FindInString('%!3','<%N+$Numeric$~$~[]$',5,6,1);>
+        IfOK(!|DeleteFile("%P\%!2");|);>
+        ProcessMessages;>
+       `);
+    LstRelease;
+    // Delete image files
+    ListFolderFiles(0,'%P\Images','',0,1);
+    LstEnum('%!0','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !`LstGetItem(2,%!c-1);>
+        GetFileName('%!2',3);>
+        FindInString('%!3','<%N+$Numeric$x~$~[]$',5,6,1);>
+        IfOK(!|DeleteFile("%P\Images\%!2");|);>
+        ProcessMessages;>
+       `);
+    LstRelease;
+  IfStr("%O","%P","=",!"JMP(!'Pre_Done');");
+    Exe("%b\Exec\TeX\CreateAUX.edt");
+    // Add %P to environment variable
+    SetEnvVar(!"TEXINPUTS","%!8;%$('OLDTEXINPUTS');");
+  JMP(!"Pre_Done");
+
+:not_TeX2HTML:: =====================================================
+
+// ConTeXt? =========================================================
+
+  FindInString("%!9","ConTeXt",1,2,10);
+  IfOK(!"JMP(!'Pre_Done');",!"JMP(!'not_ConTeXt');");
+
+:not_ConTeXt:: ======================================================
+
+// TeX? =============================================================
+
+  FindInString("%!9","TeX",1,2,10);
+  IfOK(!"Relax;",!"JMP(!'not_TeX');");
+  IfStr("%O","%P","=",!"JMP(!'Pre_Done');");
+    Exe("%b\Exec\TeX\CreateAUX.edt");
+    // Add %P to environment variable
+    SetEnvVar(!"TEXINPUTS","%!8;%$('OLDTEXINPUTS');");
+  JMP(!"Pre_Done");
+
+:not_TeX:: ==========================================================
+
+  Relax;
+
+:Pre_Done:: =========================================================
+
+  PopTagsandRegisters;
+
+End;

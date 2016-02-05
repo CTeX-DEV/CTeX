@@ -1,0 +1,21 @@
+ACTION="$Insert_RGB"
+  CAPTION="Insert RGB Color"
+  IMAGE="Colors"
+  MACRO="Exe('%b\Macros\Active Strings\ChangeRGBColorSel.edt');"
+  REQ_DOCUMENT=1
+  REQ_FILTER="<%f>%p\DocTabs.ini?<%f>%p\SpellingErrors.ini?"+
+             "<%f>%p\CompoundedWords.ini?<%f>%p\BackgroundSchemes.ini?"+
+             "<%f>%p\ColorGrid.ini?<%f>%p\Selections.ini?<%f>%p\FilterSets.ini?"+
+             "<%f>%p\Switches.ini?<%f>%p\Keywords.ini?<%f>%p\Columns.ini?"+
+             "<%f>%p\PrintDefault.ini?<%f>%p\PrintCustom.ini?"+
+             "<%f>%p\PrintAlternative.ini?<%f>%p\PrintFancy.ini?"+
+             "<%f>%p\PrintPlain.ini?<%f>%p\Forms.ini"
+ACTION="$Insert_Color"
+  CAPTION="Insert Basic Color"
+  IMAGE="ColorsDefault"
+  MACRO="Exe('%b\Macros\Active Strings\ChangeIndexColorSel.edt');"
+  REQ_DOCUMENT=1
+  REQ_FILTER="<%f>%p\SpellingErrors.ini?<%f>%p\CompoundedWords.ini?"+
+             "<%f>%p\BackgroundSchemes.ini?<%f>%p\Selections.ini?"+
+             "<%f>%p\FilterSets.ini?<%f>%p\Switches.ini?<%f>%p\Keywords.ini?"+
+             "<%f>%p\Columns.ini"

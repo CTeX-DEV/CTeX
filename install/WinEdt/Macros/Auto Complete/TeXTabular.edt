@@ -1,0 +1,53 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert LaTeX tabular Environment
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - environment name
+// %!? - indentation of the trigger
+// %-0..%-9 - can be manually set for macros that insert objects
+//
+// Temporary registers (manually set):
+// ===================================
+// %-1 (indentation)
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// ===============================================================================
+
+LetReg(-9,'%?');
+LetTempReg;
+
+GetDim;
+LetReg(-8,"%!y");
+LetReg(-7,"%!x");
+IfNum(%-8,!'1',!'<',!"LetReg(-8,!'1');");
+IfNum(%-7,!'1',!'<',!"LetReg(-7,!'1');");
+IfNum(%-8,!'99',!'>',!"LetReg(-8,!'99');");
+IfNum(%-7,!'99',!'>',!"LetReg(-7,!'99');");
+
+LetReg(-10, '\begin{%-9}{|');
+Repeat(%-7,!"LetReg(-10, '%-0|');");
+LetReg(-10, '%-0}%\');
+LetReg(-10,'%-0%!?%-1\hline%\');
+LetReg(-10,'%-0%!?%-1%% after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...%\');
+Repeat(%-8-1,>
+  !"LetReg(-10,'%-0%!?%-1 ');>
+    Repeat(%-7-1,!|LetReg(-10,'%-0&  ');|);>
+    LetReg(-10,'%-0\\%\');>
+   ");
+LetReg(-10,'%-0%!?%-1 ');
+Repeat(%-7-1,!|LetReg(-10,'%-0&  ');|);
+LetReg(-10,'%-0\\%\');
+LetReg(-10,'%-0%!?%-1\hline%\');
+LetReg(-10, '%-0%!?\end{%-9}');
+
+LetTempReg("%-0");
+
+End;
+
+// ===============================================================================

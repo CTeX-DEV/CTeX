@@ -1,0 +1,22 @@
+// Frame.edt
+// =========
+// Parse %? for the Beamer Frame Caption
+// =====================================
+
+    PushTagsandRegisters;
+
+    LetReg(0,"%?");
+    // Replace the last tagged wildcard "*" with "@{{\{*\}}|^\}}"
+    // if you need even deeper nesting of braces in the title...
+    LetReg(3,!"@{\<*\>}@{\[\<*\>\]}@{\[*\]}"+>
+              "\{\(@{{\{@{{\{@{{\{*\}}|^\}}\}}|^\}}\}}|^\}}\)\}");
+    FindInString("%!0","%!3",1,2,1);
+    IfStr("%#0",!'',!'=',>
+      !'LetReg(0,"(untitled)");',>
+      !'LetReg(0,"%#0");');
+    FormatString("%!0",0,!"trimboth");
+    LetReg(-10,"%!0");
+
+    PopTagsandRegisters;
+
+End;

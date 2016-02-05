@@ -1,0 +1,34 @@
+// -*- ASCII:EDT -*-
+
+ SetTracking(0);
+ GetRM(0);
+     SaveFind;
+     SetFindStr("%!9");
+     SetSearchForward(0);
+     SetSearchCaseSensitive(1);
+     SetSearchEntire(0);
+     SetSearchCyclic(1);
+     SetSearchRelaxed(0);
+     SetSearchWholeWords(1);
+     SetSearchInline(0);
+     SetSearchCurrentDoc;
+     SetRegEx(0);
+     SearchReset;
+ InsLabel("","%!9","}");
+ Mark(1);
+ Find;
+ RestoreFind;
+ Mark(0);
+ GotoCol(%!0);
+ SelToBeginningOfLine;
+ SetBlock(1);
+ FormatParagraph;
+ RestoreBlock;
+ LineDown;
+ FormatParagraph;
+ Goto(1);
+ SelectFromMark;
+ SetSel(2);
+ SetTracking(1);
+ Refresh;
+End;

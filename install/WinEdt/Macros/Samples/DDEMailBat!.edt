@@ -1,0 +1,18 @@
+// File DDEMailBat!.edt
+//
+// It adds the standard "send to" functionality to WinEdt by
+// means of DDE exchange with The Bat! <http://www.ritlabs.com>
+// The only thing to do here is to change the path to the
+// The Bat! executable. Works fine --- and no need for MAPI.
+//
+// Open DDE: Server Application, Service, Topic
+      DDEOpen("f:\bat!\thebat.exe", "thebat", "tbDDE");
+      DDEExe("S=[WinEdt]:%f;A=%f;EDIT");
+      DDEClose;
+End;
+
+// Needs to have a macro menu item Send Mail defined like:
+//
+// [Exe('%B\Macros\Samples\DDEMailBat!.edt');]
+//
+// with "Requires Opened File" Option Checked...

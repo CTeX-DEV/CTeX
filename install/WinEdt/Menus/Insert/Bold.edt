@@ -1,0 +1,7 @@
+// Bold Font
+
+  IfisMode('TeX;BibTeX','%!m',!'InsLabel("\textbf","{","}");Exit;');
+  IfisMode('HTML;XML;PHP','%!m',!'InsLabel("","<b>","</b>");Exit;');
+  InsLabel("\textbf","{","}");
+
+End;

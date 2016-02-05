@@ -1,0 +1,58 @@
+% ------------------------------------------------------------------------
+% File: xrcs.sty
+%       ========
+%
+% A (very) simple Revision Control System for LaTeX2e/WinEdt
+%
+% Version 0.002 2005/01/30 by Aleksander Simonic
+%
+% This package comes with no guarantees and no reserved rights.
+% You can use or modify this file at your own risk.
+%
+% ************************************************************************
+%
+% Examples of Usage:
+% ==================
+%
+%\usepackage[active,new,old,marker]{xrcs} % Old and New
+%\usepackage[active]{xrcs} % Only Additions - in blue colors
+%\usepackagep[active,old,nonew]{xrcs} % Old text - in red
+%\usepackage[nomarker}{xrcs} % Only Additions - no colors: final version
+%
+% In your preamble you have to also include the color package:
+%
+% \usepackage{color}
+%
+% In WinEdt mark your deletions and additions as:
+%
+% ... \RCSDel{Old Text} \RCSAdd{New Text}
+%
+% To highlight with a yellow marker use \RCSMark{Highlighted Text}
+%
+% ------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{xrcs}[2005/01/30 v0.002 RCS]
+\RequirePackage{color}
+\newif\ifMarker \Markertrue
+\newif\ifRemarks\Remarkstrue
+\newif\ifAddDel \AddDeltrue
+\newif\ifAddNew \AddNewtrue
+\newif\ifAddOld \AddOldfalse
+\DeclareOption{active}{\AddDeltrue}
+\DeclareOption{inactive}{\AddDelfalse}
+\DeclareOption{marker}{\Markertrue}
+\DeclareOption{nomarker}{\Markerfalse}
+\DeclareOption{remarks}{\Remarkstrue}
+\DeclareOption{noremarks}{\Remarksfalse}
+\DeclareOption{new}{\AddNewtrue}
+\DeclareOption{nonew}{\AddNewfalse}
+\DeclareOption{old}{\AddOldtrue}
+\DeclareOption{noold}{\AddOldfalse}
+\ExecuteOptions{inactive,noold,noremarks,new,marker}
+\ProcessOptions
+% ------------------------------------------------------------------------
+\def\RCSMark#1{\ifMarker{\colorbox{yellow}{#1}}\else#1\fi}
+\def\RCSRem#1{\ifRemarks{\textsf{#1}}\fi}
+\def\RCSDel#1{\ifAddOld\ifAddDel{\color{red}#1}\else#1\fi\fi}
+\def\RCSAdd#1{\ifAddNew\ifAddDel{\color{blue}#1}\else#1\fi\fi}
+%------------------------------------------------------------------------

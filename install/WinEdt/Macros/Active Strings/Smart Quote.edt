@@ -1,0 +1,14 @@
+// Smart Quotes (toggle Active String " between `` and '')
+
+  IfStr('%$(|Smart_Quote|)','``','=',>
+    "Assign(|Smart_Quote|,|''|)",>
+    'Assign(|Smart_Quote|,|``|)');
+
+  SetTracking(0);
+  BeginGroup;
+  Backspace;
+  Ins('%$(|Smart_Quote|);');
+  EndGroup;
+  SetTracking(1);
+
+End;

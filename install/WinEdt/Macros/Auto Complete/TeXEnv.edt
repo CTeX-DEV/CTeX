@@ -1,0 +1,46 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert Generic LaTeX Environment
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - environment name
+// %!? - indentation of the trigger
+// %-0..%-9 - can be manually set for macros that insert objects
+//            (by default they are empty)
+//
+// Temporary registers (manually set):
+// ===================================
+// %-1 (item with a bullet placeholder and optional extra indentation)
+// %-2 (extra info after \begin{...} such as \label{})
+//
+// Must be initialized before the call to this macro:
+//    DICTIONARY="LaTeX User Environments" // \newtheorem{foo}
+//      MACRO="LetReg(-1,!'');"+          // Content placeholder (optionally indented)
+//            "LetReg(-2,!'\label{}');"+  // Extra info after \begin{foo}
+//            "Exe('%b\Macros\Auto Complete\InsertEnv.edt');"
+//
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// Return empty string LetTempReg; is you take care of inserting...
+// ===============================================================================
+
+LetReg(-9,'%?');
+LetTempReg;
+
+FindInString('%-9',' (args: \(1*\))',-11,-11,11);
+IfOK(!'SubstituteInString("%-9"," (args: *)","",11,-9);LetReg(-2,"%#1");');
+
+LetReg(-10,'\begin{%-9}%-2%\');
+LetReg(-10,'%-0%!?%-1%\');
+LetReg(-10,'%-0%!?\end{%-9}');
+
+LetTempReg("%-0");
+
+End;
+
+// ===============================================================================

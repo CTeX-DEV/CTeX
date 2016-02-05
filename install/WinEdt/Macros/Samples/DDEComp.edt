@@ -1,0 +1,40 @@
+// This WinEdt macro passes currently selected text to
+// XLISP-STAT for evaluation and inserts the result in
+// currently active document...
+
+// WinEdt acts as a DDE Client.
+
+//Open DDE: Server Application, Service, Topic
+//Assumed running or else specify the application
+//        (eg. xlisp-stat.exe)
+ DDEOpen("", "XLISP-STAT", "XLISP-STAT");
+ DDEExe("%S");  // Let Server Execute Selected Text
+ SetSel(0);     // De-select the text - avoid overwriting!
+// Request the Result and Store it in %!9 Register
+ DDERequest("VALUE",9);
+ DDEClose;
+ InsText("%!9"); // Insert the Result without any wrapping
+ LetReg(9,"");   // Release Memory (%!9 Str Register)
+ SetFocus("");   // Set Focus to WinEdt (just in case)
+End;
+
+// This Macro is based on the following information provided by
+// Luke Tierneythe, the author of the package XLISP-STAT.
+//
+// {\b Dynamic Data Exchange}
+//
+//    A very minimal DDE interface is provided. The interface is
+//    very simple and based on the DDEML library. As a server,
+//    WXLS allows connections to the topic {XLISP-STAT} under
+//    the service name {XLISP-STAT}. It accepts two kinds of
+//    transactions:
+//
+//       Execute transactions in which the command is a sequence
+//       of lisp expressions. The LSPEDIT application sends the
+//       current selection as an execute transaction when the
+//       {Eval Selection} menu item is chosen.
+//
+//       Request transactions for the item {VALUE}. This returns a
+//       string with a printed representation of the value
+//       returned by the last expression in the most recent
+//       execute transaction of the conversation.

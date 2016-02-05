@@ -1,0 +1,25 @@
+// DTX Macro
+
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'=','GetSel(0,1);Delete;','SetSel(0);GetSel(0,1);');
+  IfNum(%c,'1','>','InsLine;');
+  Mark(1);
+  LetReg(0,"%c"); // *** Current Column
+  Ins('%% \begin{macro}{\%!9}');
+  NewLine;
+  GotoCol(%!0);                     // *** Original Column
+  TrimLine;
+  IfStr("%!1","","=",!"Ins('%% ');",!"Ins('%!1');");
+  IfStr("%!1","","=","Ins('%\');",>
+    "IfNum(%c,'1','>','Ins(''%\'');');");
+  GotoCol(%!0);                     // *** Original Column
+  TrimLine;
+  Ins("%% \end{macro}");
+  MoveBy(1);IfNum(%c,'1','>','MoveBy(-1);InsLine;');
+  Goto(1,1);
+  IfStr("%!1","","=","NextBullet;");
+  EndGroup;
+  SetTracking(1);
+
+End;

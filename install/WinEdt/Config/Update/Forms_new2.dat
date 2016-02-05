@@ -1,0 +1,19 @@
+// Dimensions refer to the current display dpi
+DEFAULT_DPI=0
+
+// Main Window Size and Position...
+// By default WinEdt restores WinEdt at the last size and position
+// If this is not wanted (why?) you can load the following
+// to suppress the default behavior
+// MAIN_MAXIMIZED=1
+// MAIN_TOP=0
+// MAIN_LEFT=0
+// MAIN_WIDTH=1080
+// MAIN_HEIGHT=720
+
+// They can be resized by moving the Splitters...
+// Depending on your screen these are suitable values:
+// LEFT_PANEL_WIDTH=320
+// RIGHT_PANEL_WIDTH=320
+// TOP_PANEL_HEIGHT=100
+// BOTTOM_PANEL_HEIGHT=164

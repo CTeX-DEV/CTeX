@@ -1,0 +1,7 @@
+// Emphasize
+
+  IfisMode('TeX;BibTeX','%!m',!'InsLabel("\emph","{","}");Exit;');
+  IfisMode('HTML;PHP;XML','%!m',!'InsLabel("","<em>","</em>");Exit;');
+  InsLabel("\emph","{","}");
+
+End;

@@ -1,0 +1,54 @@
+// ==================================================================
+//
+// WinEdt Local Startup Macro
+// ==========================
+//
+// This macro is called from the global Startup Macro
+//
+// After Changes to the Local Startup Macro you should execute the
+// menu command: Macros -> Run Startup Macro (or restart WinEdt)
+// to make the changes effective!
+//
+// ==================================================================
+
+  Requires(20100922);
+
+  PushTagsandRegisters;
+
+// ==================================================================
+// Global Startup Macro is subject to changes...
+// Add your custom code here!
+// You can Assign Global Variables, Environmental Variables, Registry Fixes, etc...
+// ==================================================================
+
+// Examples:
+// =========
+
+// WinEdt Variable:
+// Assign(!"My Documents","C:\My Documents");
+// Prompt("%$(!'My Documents');");
+
+// Environment Variable:
+// SetEnvVar(!"BIBINPUTS","C:\MyBibFiles");
+// Prompt("%@(!'BIBINPUTS');");
+
+// MiKTeX Editor (Registry Fix):
+//
+// MiKTeX 2.9:
+//  SetRegStr('HKCU','Software\MiKTeX.org\MiKTeX\2.9\YAP\Settings','Editor',!'WinEdt.exe "[Open(|%f|);SelPar(%l,7);]"');
+//
+// YAP's Auto Detect of WinEdt:
+//  SetRegStr('HKCU','Software\WinEdt','Install Root','%B');
+
+// etc...
+
+// ==================================================================
+// Done...
+// ==================================================================
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+  PopTagsandRegisters;
+
+End;

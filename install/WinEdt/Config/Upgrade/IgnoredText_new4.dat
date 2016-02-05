@@ -1,0 +1,4 @@
+  ENVIRONMENT="\begin{array}{?"
+    START="\begin{array}{"
+    SCOPE=1
+  ENVIRONMENT="\bibliography?"

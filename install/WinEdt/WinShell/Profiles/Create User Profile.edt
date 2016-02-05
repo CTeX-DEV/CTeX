@@ -1,0 +1,104 @@
+// Create a User Profile for Networks or Multi / Restricted - User Setup
+// Most users (except portable installations) should use profiles ...
+
+  Requires(20111017);
+
+  PushTagsandRegisters;
+
+  // Get Application Data Folder in Register %!0
+  // Modify this macro if required ...
+  Exe('%B\WinShell\Profiles\Get Application Data Folder.edt');
+  LetReg(2);
+  IfStr('%!0','','=',!"JMP('_DefAppData');");
+  IfFileExists("%!0\",!"JMP('_AppDataOK');");
+
+  // If required Create the Application Data folder(s):
+  LetReg(2,' created');
+  CreateFolders("%!0",1);
+  IfFileExists("%!0\",!"JMP('_AppDataOK');");
+
+:_DefAppData:: ======================================================
+  // Try default (in case there are problems with Registry key)!
+  GetAppDataFolder(0,0); // Roaming Application Data
+  LetReg(0,'%!0\WinEdt Team\WinEdt 9');
+  IfFileExists("%!0\",!"JMP('_AppDataOK');");
+
+  // If required Create the default Application Data folder(s):
+  LetReg(2,' created (default)');
+  CreateFolders("%!0",1);
+  IfFileExists("%!0\",!"JMP('_AppDataOK');");
+
+  Prompt('User Application Data Folder "%!0" does not exist and cannot be created!',3,1);
+  PopTagsandRegisters;
+  Exit;
+
+:_AppDataOK:: =======================================================
+
+  GetLongFilename("%!0\WinEdt.dnt",1); // Local WinEdt.dnt
+  IfFileExists("%!1",!"JMP('_Upgrade');");
+  IfStr('%!2','','=',!'LetReg(2," upgraded");');
+  CopyFile("%B\WinEdt.dnt","%!0\WinEdt.dnt",0,1);
+
+:_Upgrade:: =========================================================
+
+  LetReg(3);
+  IfFileExists('%!0\User Profile.dat',>
+    !|ReadFile('%!0\User Profile.dat','3');|);
+  IfStr('%!3','1','<>',>
+    !|WriteFile('%!0\User Profile.dat','1');>
+      IfStr('%!2','','=',!'LetReg(2," upgraded");');|);
+
+  LetReg(4, "%@('HKCU','Software\WinEdt 9','AppData');");
+  IfStr('%!0','%!4','<>',>
+    !|SetRegStr('HKCU','Software\WinEdt 9','AppData','%!0');>
+      IfStr('%!2','','=',!'LetReg(2," upgraded");');|);
+
+// ==================================================================
+// Update User Profile for the New Build ...
+
+   GetBuild(3);
+   LetReg(4);
+   IfFileExists('%!0\User Profile Build.dat',>
+     !|ReadFile('%!0\User Profile Build.dat',4);|);
+
+   // New Build?
+   IfStr("%!3","%!4","=",!"JMP('no_Update');");
+
+   WriteFile('%!0\User Profile Build.dat','%!3');
+
+   // Copy any files that have to be updated for the new build...
+   //   CopyFile("%B\Samples\GUI\GuiSource.tex","%!0\Samples\GUI\GuiSource.tex",1,1);
+   //
+   //   IfStr("%!2","",">",!"JMP('no_Update');");
+   //   IfStr("%!4","","=",>
+   //     !"Prompt('Your Local Settings have been upgraded to WinEdt''s Build %!3.');",>
+   //     !"Prompt('Your Local Settings have been upgraded from WinEdt''s Build %!4 to Build %!3.');");
+
+:no_Update:: ========================================================
+
+  IfStr('%b','%!0','<>', !'LetReg(2," changed");');
+  IfStr('%!2','','=', !'PopTagsandRegisters;Exit;');
+  LetReg(9,'%b');
+
+  IfFileExists("%!1",!"JMP('_OK');");
+  SetFocus;
+  Prompt("Errors occurred while your Personal Profile for WinEdt has been %!2. %\>
+    Folder:  ""%!0""      %\ >
+    INI:     ""%!1""      %\ >
+    OS:      ""%@('OS');""    %\ %\ >
+  Denied access or missing files are a possible cause for failure!",0,0);
+  SetFocus;
+  PopTagsandRegisters;
+  Exit;
+
+:_OK:: ==============================================================
+
+  SetRegStr("HKCU","Software\WinEdt","Install Root","%B"); // YAP uses this key!
+
+  SetIniData('%!1',1);
+  UpdateStatus;
+  // User Application Data Folder has Changed:
+  IfStr('%!9','%b',!'<>',!'Exe("%b\Config\Startup.edt");');
+  PopTagsandRegisters;
+
+End;

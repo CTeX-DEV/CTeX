@@ -1,0 +1,157 @@
+// !Mode:: "ASCII:EDT"
+//
+// Used in the MDI Open-Before Event Handler in order to
+// ensure proper handling of a document. Also used when
+// collecting data in non-opened file...
+//
+// Determines the document mode (and submodes) from
+// the comment in the beginning of the file.
+//
+// WinEdt Modes are specified as a comment:
+// ...  !Mode:: "Mode:Submode:Submode" ...
+//
+// Also supports Emacs convention:
+// -*- Mode: TeX -*-
+//
+// Uses LaTeX preamble to determine the language and/ or coding!
+//
+// Determine Language Submodes from babel:
+// \usepackage[french,german,italian,spanish]{babel}
+//
+// Determine Coding (UTF-8) from the preamble:
+// \usepackage[utf8]{inputenc}
+//
+// ==================================================================
+
+  // Requires WinEdt 5 Build 20070109 (or later)
+  Requires(20070313);
+  PushTagsandRegisters;
+
+  // Has to be somewhere in the beginning:
+  // increase the line limit if required!
+  LetReg(0);
+  LetRegNum(1,0);
+  Loop(!`>
+    LetRegNum(1,%!1+1);         // Increase the Line Counter<>
+    GetLine(2,%!1);             // Get the line<>
+    LetReg(0,'%!0%!2%\');       // Add to the buffer<>
+    IfNum(%!1,99,!">",!"Stop"); // Line limit: increase if required!<>
+    `);
+
+// ==================================================================
+// Some files have TeX format but strange extensions.....
+
+  IfisMode(!"DATA","%!m",!"Relax;",>
+    !"IfisMode(!`ASCII`,`%!m`,!`Relax;`,!`JMP(!'Known-Mode');`);");
+  FindInString("%!0", !'%% generated with the docstrip utility',2,3,10);
+    IfOK(!"SetFileMode('TeX:STY',1);JMP(!'Known-Mode');");
+  FindInString("%!0", !'\ProvidesFile',2,3,10);
+    IfOK(!"SetFileMode('TeX:STY',1);JMP(!'Known-Mode');");
+  FindInString("%!0", !'\ProvidesExplFile',2,3,10);
+    IfOK(!"SetFileMode('TeX:STY',1);JMP(!'Known-Mode');");
+  FindInString("%!0", !'\ProvidesLanguage',2,3,10);
+    IfOK(!"SetFileMode('TeX:STY',1);JMP(!'Known-Mode');");
+  FindInString("%!0", !'\ProvidesDictionary',2,3,10);
+    IfOK(!"SetFileMode('TeX:STY',1);JMP(!'Known-Mode');");
+
+:Known-Mode:: =======================================================
+// WinEdt convention:
+// ...  !Mode:: "Mode:Submode:Submode" ...
+// Case-sensitive !Mode:: (ending with a space)!
+
+  FindInString("%!0", !'!Mode:: "',2,3,10);
+  IfOK(!"Relax;",!"JMP(!'Emacs');");
+
+  FindInString("%!0", !'{"\(*\)"}|{\(\)>}', 2,3, 1011, %!3);
+  IfOK(!'LetReg(1,"%#0");',!"JMP(!'Exit');");
+
+  IfStr("%!1","","=",!"JMP(!'Exit');");
+  IfStr("%!1","%!m","=",!"JMP(!'Exit');");
+  SetFileMode('%!1',1);
+  JMP(!'Exit');
+  // If found search no more (faster!) ...
+
+:Emacs:: ============================================================
+// Loose Emacs convention:
+// -*- Mode: TeX -*-
+
+  FindInString("%!0",!"-*-",2,3,10);
+  IfOK(!"Relax;",!"JMP(!'Babel');");
+
+  LetReg(4,'%!2');
+  FindInString("%!0", ">", 2,3, 1001, %!3+1);
+  ExtractByIndex(9, "%!0", %!4,%!2-1); // Has to be in one line!
+  SetOK(1);
+  LetReg(1);
+  LetRegNum(3,-1);
+  Loop(!|FindInString("%!9", !"-\*-@{ }@{Mode:}", 2,3, 1001, %!3+1);>
+   IfOK(!'LetRegNum(4,%!3+1);>
+    FindInString("%!9", "-*-", 2,3, 1010, %!3+1);>
+    IfOK(>
+     !||ExtractByIndex(5, "%!9", %!4,%!2-1);>
+        FormatString("%!5", 5, !"trimboth");>
+        IfIStr("%!5",!"LaTeX","=",!"LetReg(5,!''TeX'');");>
+        IfStr("%!1","","=",!"LetReg(1,""%!5"");",!"LetReg(1,""%!1:%!5"");");>
+        IfStr("%!5","","=",!"LetReg(1);Stop;");||,>
+     !||LetReg(1);Stop;||);',>
+   !'Stop;');>
+  |);
+  FindInString("%!1", " ",2,3,10);
+  IfOK(!'LetReg(1)'); // Contains Spaces: not OK
+  FindInString("%!1", !"coding:",2,3);
+  IfOK(!'LetReg(1)'); // not Mode!
+  // There may be more Emacs keywords that do not qualify...
+  IfStr("%!1","%!m","=",!"LetReg(1);"); // Already in that mode: OK!
+  IfStr("%!1","",">",!"SetFileMode('%!1',1);");
+
+  // Emacs Coding:
+  // % -*-coding: utf-8 -*-
+
+  FindInString("%!0", !"-\*-@{ }{Coding:}", 2,3, 1001, 0);
+  IfOK(!"Relax;",!"JMP(!'Babel');");
+
+  FindInString("%!0", !'{@{ }\(*\)@{ }-\*-}|{\(\)>}', 2,3, 1011, %!3+1);
+  IfOK(!'LetReg(1,"%#0");',!"JMP(!'Babel');");
+  IfIStr('%!1',!'utf-8','=',!'LetReg(1,!"UTF-8");');
+  IfIStr('%!1',!'utf8','=',!'LetReg(1,!"UTF-8");');
+  IfIStr('%!1',!'ACP','=',!'LetReg(1,!"ACP");');
+  IfStr("%!1","",">",!"SetFileMode('%!1',1,1);"); // Append if necessary!
+
+:Babel:: ============================================================
+
+  IfisMode(!"TeX","%!m",!"Relax;",!"JMP(!'Exit');");
+
+// ==================================================================
+// Determine Language Submodes from babel:
+// \usepackage[french,german,italian,spanish]{babel}
+
+  FindInString("%!0", !"<\\usepackage\[\(*\)\]\{babel\}",2,2,0011);
+  IfOK(!"LetReg(1,'%#0');",!"JMP(!'UTF');");
+
+  FindInString('%!1', !'french', 2,3);
+  IfOK(!"SetFileMode(!'FR',1,1);");
+  FindInString('%!1', !'german', 2,3);
+  IfOK(!"SetFileMode(!'DE',1,1);");
+  FindInString('%!1', !'italian', 2,3);
+  IfOK(!"SetFileMode(!'IT',1,1);");
+  FindInString('%!1', !'spanish', 2,3);
+  IfOK(!"SetFileMode(!'ES',1,1);");
+  // add more (or remove some) language modes if required ...
+
+:UTF:: ==============================================================
+// Determine Coding (UTF-8) from the preamble:
+// \usepackage[utf8]{inputenc}
+
+  FindInString("%!0", !"<\\usepackage\[@{ }\(*\)@{ }\]\{inputenc\}",2,3,0011);
+  IfOK(!"LetReg(1,'%#0');",!"JMP(!'Exit');");
+
+  FindInString('%!1',!'utf8',2,3);
+  IfOK(!"SetFileMode(!'UTF-8',1,1);");
+  // FindInString('%!1',!'ansinew',2,3);
+  // IfOK(!"SetFileMode(!'ACP',1,1);");
+
+:Exit:: =============================================================
+
+  PopTagsandRegisters;
+
+End;

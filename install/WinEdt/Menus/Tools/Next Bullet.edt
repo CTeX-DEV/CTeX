@@ -1,0 +1,25 @@
+// Select either a Description... or a simple bullet 
+
+ NextBullet;
+ IfOK('Relax;','Exit;');
+ ExtractByIndex(0,"%L","%c-1","%c-1");
+ IfStr('%!0','','=','CharLeft;','Exit;');
+ SaveFind;
+ SetFindStr("\+^{\}\");
+ SetSearchForward(1);
+ SetSearchCaseSensitive(0);
+ SetSearchEntire(0);
+ SetSearchCyclic(0);
+ SetSearchRelaxed(0);
+ SetSearchWholeWords(0);
+ SetSearchInline(0);
+ SetSearchCurrentDoc;
+ SetRegEx(1);
+ SetNotFoundNotify(0);
+ SearchReset;
+ Find;
+ IfOK("SetSel(1);","NextBullet;");
+ RestoreFind;
+End;
+
+Name  Date

@@ -1,0 +1,302 @@
+//
+// MUI implantation of include graphics plug-in
+// The proper way in MUI
+// Denis Stancer, November 2006
+//
+
+Requires(20060622);
+PushTagsandRegisters;
+
+Assign(`g_margin`, "5");
+Assign(`g_pad`, "10");
+Assign(`g_cor`, "3");
+Assign(`g_button_w`, "75");
+Assign(`g_button_h`, "25");
+Assign(`g_mbutton_w`, "30");
+
+CreateFolders("%b\MUI\Graphics",1);
+GetFileName('%X',0);
+Assign(`grSettings`, `%b\MUI\Graphics\%!0.mui`);
+
+//LetReg(9,"%$(`g_button_h`);");
+LetRegNum(9,"%$(`g_button_h`);+2*%$(`g_margin`);");
+Assign(`g_btmpnl_height`, "%!9");
+
+MUIReset('Include Graphics');
+
+// Main Form Size and Position
+MUISet('','width','400');
+MUISet('','height','320');
+MUISet('','position','1'); // Main Form Center
+
+MUIGet('','client width',9); // Get the form size
+MUIGet('','client height',8);
+Assign(`g_width`, "%!9");
+Assign(`g_height`, "%!8");
+
+// Main panel and OK,Cancel buttons
+MUIAdd(0,0,0,"%$(`g_btmpnl_height`);", 'pnl_bottom','TPanel');
+    MUISet('pnl_bottom','aligned', 'alBottom');
+    MUIAdd(0,0,"2*%$(`g_button_w`);+2*%$(`g_margin`);",0, 'pnl_modal','TPanel','pnl_bottom');
+    MUISet('pnl_modal','aligned', 'alRight');
+      MUIAdd(0,"%$(`g_margin`);",0,0, 'btn_ok','TButton','pnl_modal','&OK');
+        MUISet('btn_ok','default', '1');
+        MUISet('btn_ok','width', '%$(`g_button_w`);');
+        MUISet('btn_ok','height', '%$(`g_button_h`);');
+        MUISet('btn_ok','on click', !'Call(`evt_ok`);');
+      MUIAdd("%$(`g_button_w`);+%$(`g_margin`);","%$(`g_margin`);",0,0, 'btn_cancel','TButton','pnl_modal','Cancel');
+        MUISet('btn_cancel','cancel', '1'); // ESCAPE
+        MUISet('btn_cancel','on click', !'MUIHide(2);');
+
+// The main controls on the dialog
+MUIAdd("%$(`g_margin`);","%$(`g_margin`);","%$(`g_width`);-2*%$(`g_margin`);","%$(`g_height`);-%$(`g_margin`);-%$(`g_btmpnl_height`);",'panel','TPanel');
+    MUIGet('panel', 'width', 1);
+    Assign(`pnl_wd`, '%!1');
+    MUIAdd("%$(`g_margin`);","%$(`g_margin`);+1",0,0,'lbl_file','TLabel','panel','File:');
+        MUIGet('lbl_file', 'width', 7);
+    MUIAdd("%!7+2*%$(`g_margin`);","%$(`g_margin`);-%$(`g_cor`);+1","%$(`pnl_wd`);-4*%$(`g_margin`);-%!7-%$(`g_mbutton_w`);",0, 'edt_file','TEdit','panel');
+        MUIGet('edt_file', 'width', 6);
+    MUIAdd("%!7+%!6+3*%$(`g_margin`);","%$(`g_margin`);-2*%$(`g_cor`);",30,28, 'btn_browse','TSpeedButton','panel');
+        MUISet('btn_browse','glyph','Browse');
+        MUISet('btn_browse','on click',!'Call("evt_browse");');
+        MUIGet('edt_file', 'top', 9);
+        MUIGet('edt_file', 'height', 8);
+    MUIAdd("%$(`g_margin`);","%!9+%!8+%$(`g_pad`);",100,0, 'cb_aspect','TCheckBox','panel','Keep aspect ratio');
+    MUIAdd("%$(`g_margin`);+%$(`pnl_wd`);/2","%!9+%!8+%$(`g_pad`);",0,0, 'cb_draft','TCheckBox','panel','Draft');
+        MUIGet('cb_aspect', 'top', 9);
+        MUIGet('cb_aspect', 'height', 8);
+
+    MUIAdd("%$(`g_margin`);","%!9+%!8+%$(`g_margin`);","%$(`pnl_wd`);/2-%$(`g_margin`);",110, 'grp_env','TGroupBox','panel','Environment');
+    MUIAdd("%$(`g_margin`);","3*%$(`g_margin`);",150,0, 'cb_figenv','TCheckBox','grp_env','Use Figure Environment');
+        MUISet('cb_figenv', 'checked', '1');
+        MUISet('cb_figenv', 'on click', !'Call("evt_figure");');
+        MUIGet('cb_figenv', 'top', 9);
+        MUIGet('cb_figenv', 'height', 8);
+    MUIAdd("%$(`g_margin`);","%!9+%!8+%$(`g_pad`);",0,0,'lbl_envcap','TLabel','grp_env','Caption:');
+        MUIGet('lbl_envcap', 'width', 7);
+    MUIAdd("%!7+2*%$(`g_margin`);","%!9+%!8+2*%$(`g_cor`);","%$(`pnl_wd`);/2-5*%$(`g_margin`);-%!7+2",0, 'edt_envcap','TEdit','grp_env');
+        MUIGet('lbl_envcap', 'top', 9);
+        MUIGet('lbl_envcap', 'height', 8);
+    MUIAdd("%$(`g_margin`);","%!9+%!8+%$(`g_pad`);",0,0,'lbl_envlab','TLabel','grp_env','Label:');
+        //MUIGet('lbl_envlab', 'width', 7);
+    MUIAdd("%!7+2*%$(`g_margin`);","%!9+%!8+2*%$(`g_cor`);","%$(`pnl_wd`);/2-5*%$(`g_margin`);-%!7+2",0, 'edt_envlab','TEdit','grp_env');
+        MUIGet('lbl_envlab', 'top', 9);
+        MUIGet('lbl_envlab', 'height', 8);
+    MUIAdd("%$(`g_margin`);","%!9+%!8+%$(`g_pad`);",150,0, 'cb_center','TCheckBox','grp_env','Center Picture');
+        MUIGet('grp_env', 'width', 9);
+        MUIGet('grp_env', 'left', 8);
+        MUIGet('grp_env', 'top', 7);
+        MUIGet('grp_env', 'height', 6);
+
+    MUIAdd("%!9+%!8+%$(`g_margin`);","%!7","%$(`pnl_wd`);/2-2*%$(`g_margin`);",110, 'grp_size','TGroupBox','panel','Size');
+        MUIAdd("%$(`g_margin`);","3*%$(`g_margin`);",0,0,'lbl_size','TLabel','grp_size','Size:');
+        MUIGet('lbl_size', 'width', 7);
+        MUIGet('lbl_size', 'top', 9);
+    MUIAdd("%!7+2*%$(`g_margin`);","%!9-%$(`g_cor`);",0,0,'cmb_size','TComboBox','grp_size','Default|Fixed|Scale');
+        MUISet('cmb_size', 'on change', !'Call("evt_size");');
+        MUISet('cmb_size', 'index', '0');
+        MUIGet('grp_size', 'width', 8);
+        LetRegNum(8,"%!8-%!7-4*%$(`g_margin`);+2");
+        MUISet('cmb_size', 'width', "%!8");
+        MUIGet('cmb_size', 'height', 8);
+    LetRegNum(5,28);
+    MUIAdd("%$(`g_margin`);+%!5","%!9+%!8+%$(`g_pad`);-%$(`g_cor`);",0,0,'lbl_fixwd','TLabel','grp_size','Fixed Size Width:');
+        MUIGet('lbl_fixwd', 'width', 7);
+    MUIAdd("%!7+2*%$(`g_margin`);+3+%!5","%!9+%!8+3",50,0, 'edt_fixwd','TEdit','grp_size');
+        MUISet('edt_fixwd' ,'max length' ,'6');
+        MUIGet('lbl_fixwd', 'top', 9);
+        MUIGet('lbl_fixwd', 'height', 8);
+    MUIAdd("%$(`g_margin`);+%!5","%!9+%!8+%$(`g_pad`);",0,0,'lbl_fixht','TLabel','grp_size','Fixed Size Height:');
+        // MUIGet('lbl_fixht', 'width', 7);
+    MUIAdd("%!7+2*%$(`g_margin`);+3+%!5","%!9+%!8+2*%$(`g_cor`);",50,0, 'edt_fixht','TEdit','grp_size');
+        MUISet('edt_fixht' ,'max length' ,'6');
+        MUIGet('lbl_fixht', 'top', 9);
+        MUIGet('lbl_fixht', 'height', 8);
+    MUIAdd("%$(`g_margin`);+%!5","%!9+%!8+%$(`g_pad`);",0,0,'lbl_scale','TLabel','grp_size','Scale Factor:');
+        // MUIGet('lbl_scale', 'width', 7);
+    MUIAdd("%!7+2*%$(`g_margin`);+3+%!5","%!9+%!8+2*%$(`g_cor`);",50,0, 'edt_scale','TEdit','grp_size');
+        MUISet('edt_scale' ,'max length' ,'5');
+        MUIGet('grp_env', 'top', 7);
+        MUIGet('grp_env', 'height', 6);
+
+    MUIAdd("%$(`g_margin`);","%!7+%!6+%$(`g_margin`);","%$(`pnl_wd`);/2-%$(`g_margin`);",75, 'grp_rot','TGroupBox','panel','Rotation');
+        MUIAdd("%$(`g_margin`);","4*%$(`g_margin`);",0,0,'lbl_rotang','TLabel','grp_rot','Angle:');
+        MUIGet('lbl_rotang', 'width', 7);
+        MUIGet('lbl_rotang', 'top', 9);
+        MUIGet('lbl_rotang', 'height', 8);
+    MUIAdd("%!7+2*%$(`g_margin`);","%!9-%$(`g_cor`);",40,0, 'edt_rotang','TEdit','grp_rot');
+        MUISet('edt_rotang' ,'max length' ,'3');
+        MUIGet('edt_rotang', 'top', 7);
+        MUIGet('edt_rotang', 'height', 8);
+     MUIAdd("%$(`g_margin`);","%!8+%!7+%$(`g_pad`);",0,0,'lbl_rotorig','TLabel','grp_rot','Origin:');
+        MUIGet('lbl_rotorig', 'left', 7);
+        MUIGet('lbl_rotang', 'width', 8);
+        MUIGet('lbl_rotorig', 'top', 9);
+     MUIAdd("%!7+%!8+%$(`g_margin`);","%!9-%$(`g_cor`);",80,0, 'edt_rotorig','TEdit','grp_rot');
+        MUISet('edt_rotorig' ,'max length' ,'15');
+        MUIGet('grp_rot', 'width', 9);
+        MUIGet('grp_rot', 'left', 8);
+        MUIGet('grp_rot', 'top', 7);
+
+    MUIAdd("%!9+%!8+%$(`g_margin`);","%!7","%$(`pnl_wd`);/2-2*%$(`g_margin`);",75, 'grp_bb','TGroupBox','panel','Bounding Box');
+    MUIAdd("%$(`g_margin`);","4*%$(`g_margin`);",0,0,'lbl_llx','TLabel','grp_bb','LLX: ');
+        MUIGet('lbl_llx', 'width', 7);
+        MUIGet('lbl_llx', 'top', 9);
+        MUIGet('lbl_llx', 'height', 8);
+    MUIAdd("%!7+2*%$(`g_margin`);","4*%$(`g_margin`);-%$(`g_cor`);",50,0, 'edt_llx','TEdit','grp_bb');
+        MUISet('edt_llx' ,'max length' ,'6');
+        MUIGet('grp_bb', 'width', 7);
+    MUIAdd("%!7/2+%$(`g_margin`);","4*%$(`g_margin`);",0,0,'lbl_lly','TLabel','grp_bb','LLY:');
+        MUIGet('lbl_lly', 'left', 6);
+        MUIGet('lbl_llx', 'width', 7);
+        MUIGet('lbl_lly', 'top', 9);
+        MUIGet('lbl_lly', 'height', 8);
+    MUIAdd("%!6+%!7+1*%$(`g_margin`);","%!9-%$(`g_cor`);",50,0, 'edt_lly','TEdit','grp_bb');
+        MUISet('edt_lly' ,'max length' ,'6');
+    MUIAdd("%$(`g_margin`);","%!9+%!8+5*%$(`g_cor`);",0,0,'lbl_urx','TLabel','grp_bb','URX:');
+        MUIGet('lbl_llx', 'width', 7);
+        MUIGet('lbl_urx', 'top', 9);
+        MUIGet('lbl_urx', 'height', 8);
+    MUIAdd("%!7+2*%$(`g_margin`);","%!9-%$(`g_cor`);",50,0, 'edt_urx','TEdit','grp_bb');
+        MUISet('edt_urx' ,'max length' ,'6');
+        MUIGet('grp_bb', 'width', 7);
+    MUIAdd("%!7/2+%$(`g_margin`);","%!9",0,0,'lbl_ury','TLabel','grp_bb','URY:');
+        MUIGet('lbl_ury', 'left', 6);
+        MUIGet('lbl_llx', 'width', 7);
+        MUIGet('lbl_ury', 'top', 9);
+        MUIGet('lbl_ury', 'height', 8);
+    MUIAdd("%!7+%!6+%$(`g_margin`);","%!9-%$(`g_cor`);",50,0, 'edt_ury','TEdit','grp_bb');
+        MUISet('edt_ury' ,'max length' ,'6');
+
+
+JMP('evt_end_all');
+
+:evt_browse:: =======================================================
+  // Start the Browse Open Dialog...
+  MUIGet('edt_file','text',5);
+  GetFilePath("%!5",5);
+  IfFileExists("%!5\",!"Relax;",!"LetReg(5,'%P')");
+  IfFileExists("%!5\",!"Relax;",!"LetReg(5,'%!P');");
+  Browse(5,'Encapsulated Postscript  (*.eps)|*.eps|Postscript (*.ps)|*.ps|All files (*.*)|*.*','%!5');
+  IfOK(!|MUISet('edt_file','text','%!5');|);
+  Return;
+
+:evt_figure:: =======================================================
+    MUIGet('cb_figenv','checked',5);
+    IfIStr("%!5", "1", "=", ">
+        MUISet('edt_envcap' ,'enabled' ,'1');>
+        MUISet('lbl_envcap' ,'enabled' ,'1');>
+        MUISet('edt_envlab' ,'enabled' ,'1');>
+        MUISet('lbl_envlab' ,'enabled' ,'1');>
+        ",!">
+        MUISet('edt_envcap' ,'enabled' ,'0');>
+        MUISet('lbl_envcap' ,'enabled' ,'0');>
+        MUISet('edt_envlab' ,'enabled' ,'0');>
+        MUISet('lbl_envlab' ,'enabled' ,'0');");
+    Return;
+
+:evt_size:: =========================================================
+    // Enable fields
+    MUIGet('cmb_size','text',5);
+    IfIStr("%!5", "default", "=", !">
+        MUISet('edt_fixwd' ,'enabled' ,'0');>
+        MUISet('lbl_fixwd' ,'enabled' ,'0');>
+        MUISet('edt_fixht' ,'enabled' ,'0');>
+        MUISet('lbl_fixht' ,'enabled' ,'0');>
+        MUISet('edt_scale' ,'enabled' ,'0');>
+        MUISet('lbl_scale' ,'enabled' ,'0');");
+    IfIStr("%!5", "fixed", "=", !">
+        MUISet('edt_fixwd' ,'enabled' ,'1');>
+        MUISet('lbl_fixwd' ,'enabled' ,'1');>
+        MUISet('edt_fixht' ,'enabled' ,'1');>
+        MUISet('lbl_fixht' ,'enabled' ,'1');>
+        MUISet('edt_scale' ,'enabled' ,'0');>
+        MUISet('lbl_scale' ,'enabled' ,'0');");
+    IfIStr("%!5", "scale", "=", !">
+        MUISet('edt_fixwd' ,'enabled' ,'0');>
+        MUISet('lbl_fixwd' ,'enabled' ,'0');>
+        MUISet('edt_fixht' ,'enabled' ,'0');>
+        MUISet('lbl_fixht' ,'enabled' ,'0');>
+        MUISet('edt_scale' ,'enabled' ,'1');>
+        MUISet('lbl_scale' ,'enabled' ,'1');");
+    Return;
+
+:evt_ok:: ===========================================================
+    // OK
+    Assign(`grEnvBeg`, ``);
+    Assign(`grEnvEnd`, ``);
+    Assign(`grFECaption`, ``);
+    Assign(`grFELabel`, ``);
+    Assign(`grIncOpt`, ``);
+    Assign(`grFile`, ``);
+    Assign(`grError`, ``);
+    Assign(`grPage`, ``);
+
+    MUIGet('edt_file','text',5);
+    IfStr("%!5", "", "=", 'Assign(`grError`, "No filename specified!");Assign(`grPage`, "0");',>
+        !*IfFileExists("%!5", "Assign(`grFile`, '%!5');", !'Assign(`grError`, "File %!5 does not exist!");Assign(`grPage`, "0");');*>
+    );
+    MUIGet('cb_figenv', 'checked', 1);
+    IfStr("%!1", "1", "=", "Assign(`grEnvBeg`, `\begin{figure}%\`);Assign(`grEnvEnd`, `\end{figure}%\`);");
+    MUIGet('cb_center', 'checked', 1);
+    IfStr("%!1", "1", "=", !"Assign(`grEnvBeg`, `%$('grEnvBeg');\begin{center}%\`);Assign(`grEnvEnd`, `\end{center}%\%$('grEnvEnd');`);");
+    MUIGet('edt_envcap', 'text', 1);
+    IfStr("%!1", "", "=", "", !"Assign(`grFECaption`, `\caption{%!1}%\`);");
+    MUIGet('edt_envlab', 'text', 1);
+    IfStr("%!1", "", "=", "", !"Assign(`grFELabel`, `\label{%!1}%\`);");
+    MUIGet('cb_aspect', 'checked', 1);
+    IfStr("%!1", "1", "=", !"Assign(`grIncOpt`, `keepaspectratio=true`);");
+    IfStr("%$(`grIncOpt`);", "Relax;", "=", "Assign(`grComma`, '');", "Assign(`grComma`, ',');");
+    MUIGet('cb_draft', 'checked', 1);
+    IfStr("%!1", "0", "=", "Relax;", !"Assign(`grIncOpt`, '%$(`grIncOpt`);%$(`grComma`);draftmode=true');");
+    IfStr("%$(`grIncOpt`);", "", "=", "Assign(`grComma`, '');", "Assign(`grComma`, ',');");
+    MUIGet('cmb_size', 'text', 1);
+    MUIGet('edt_fixwd', 'text', 2);
+    MUIGet('edt_fixht', 'text', 3);
+    IfIStr("%!1", "fixed", "=", !|>
+        IfStr("%!2", "", "=", !'Assign(`grError`, "Width is missing for fixed size!");Assign(`grPage`, "2");');>
+        IfStr("%!3", "", "=", !'Assign(`grError`, "%$(`grError`);%\Height is missing for fixed size!");Assign(`grPage`, "2");');>
+        IfStr("%$(`grError`);", "", "=", 'Assign(`grIncOpt`, "%$(`grIncOpt`);%$(`grComma`);width=%!2,height=%!3")');>
+    |);
+    MUIGet('edt_scale', 'text', 2);
+    IfIStr("%!1", "scale", "=", !|>
+        IfStr("%!2", "", "=", 'Assign(`grError`, "Scale factor is missing for scale size!");Assign(`grPage`, "2");',>
+         'Assign(`grIncOpt`, "%$(`grIncOpt`);%$(`grComma`);scale=%!2")');>
+    |);
+    IfStr("%$(`grIncOpt`);", "", "=", "Assign(`grComma`, '');", "Assign(`grComma`, ',');");
+    MUIGet('edt_rotang', 'text', 1);
+    IfStr("%!1", "", "=", "", 'Assign(`grIncOpt`, "%$(`grIncOpt`);%$(`grComma`);angle=%!1")');
+    IfStr("%$(`grIncOpt`);", "", "=", "Assign(`grComma`, '');", "Assign(`grComma`, ',');");
+    MUIGet('edt_rotorig', 'text', 1);
+    IfStr("%!1", "", "=", "", 'Assign(`grIncOpt`, "%$(`grIncOpt`);%$(`grComma`);origin=%!1")');
+    IfStr("%$(`grIncOpt`);", "", "=", "Assign(`grComma`, '');", "Assign(`grComma`, ',');");
+    MUIGet('edt_llx', 'text', 1);
+    MUIGet('edt_lly', 'text', 2);
+    MUIGet('edt_urx', 'text', 3);
+    MUIGet('edt_ury', 'text', 4);
+    LetRegNum(9,0);
+    IfStr("%!1", "", "=", "LetRegNum(9,1);");
+    IfStr("%!2", "", "=", "LetRegNum(9,%!9+10);");
+    IfStr("%!3", "", "=", "LetRegNum(9,%!9+100);");
+    IfStr("%!4", "", "=", "LetRegNum(9,%!9+1000);");
+    IfNum("%!9", "1111","<",!|IfNum("%!9","0",">",!"Assign(`grError`,'One of bounding box coordinates is missing!');Assign(`grPage`, '4');",>
+        'Assign(`grIncOpt`, "%$(`grIncOpt`);%$(`grComma`);bb=%!1 %!2 %!3 %!4")');|);
+    IfStr("%$(`grIncOpt`);", "", "=", "", "Assign(`grIncOpt`, '[%%$(`grIncOpt`);]');");
+    IfStr("%$(`grError`);", "", "=", "Ins('%$(`grEnvBeg`);\includegraphics%$(`grIncOpt`);{%/$(`grFile`);}%\%$(`grFECaption`);%$(`grFELabel`);%$(`grEnvEnd`);');MUIHide(1);",>
+     "Prompt('%$(`grError`);', 3, 1);");
+    Return;
+
+:evt_end_all:: ======================================================
+
+MUILoad('%$(`grSettings`);');
+Call('evt_size');
+Call('evt_figure');
+MUIShow; // Show Modal Dialog
+
+MUISave('%$(`grSettings`);');
+
+IfOK('Relax;','PopTagsandRegisters;Exit;');
+
+PopTagsandRegisters;
+
+End;

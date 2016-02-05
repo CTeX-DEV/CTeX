@@ -1,0 +1,27 @@
+// Start a GSView with a preview of the currently open .eps or .ps file
+// or else open the compiled main .ps or .pdf file ...
+//
+// Set the Required File Filter for GSView to:
+//
+// %P\%N.ps?%P\%N.pdf?"%t=.eps"?"%t=.ps"
+//
+// ==================================================================
+
+  IfIStr('%t','.eps','=','JMP("EPS");'); // currently editing .eps file
+  IfIStr('%t','.ps', '=','JMP("EPS");'); // currently editing .ps file
+  // Reverse the next two lines if pdf has a greater priority than ps
+  IfFileExists('%P\%N.ps', 'JMP("PS");');
+  IfFileExists('%P\%N.pdf','JMP("PDF");');
+
+:PS:: ===============================================================
+  Run(|%$('GSView'); "%P\%N.ps"|,'%P',0,0,'%N.ps - GSview',1,1);
+  Exit;
+
+:PDF:: ==============================================================
+  Run(|%$('GSView'); "%P\%N.pdf"|,'%P',0,0,'%N.pdf - GSview',1,1);
+  Exit;
+
+:EPS:: ==============================================================
+  Run(|%$('GSView'); "%f"|,'%p',0,0,'%n%t - GSview',1,1);
+
+End;

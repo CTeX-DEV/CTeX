@@ -1,0 +1,43 @@
+// -*- ASCII:EDT -*-
+// LaTeXDocEx.edt
+//////////////////////
+
+// In case options span over many lines {?} has to be parsed
+// in an extended number of lines because active strings are
+// limited to two lines in scope and
+//
+//   STRING="\usepackage?{?}"
+//   STRING="\documentclass?{?}"
+//
+// may not be found for definitions like:
+//
+//     \usepackage[
+//         option1=bla,
+//         option2=blub,
+//             ]{testpackage}
+//
+// In such case respond to
+//
+//   STRING="\usepackage"
+//   STRING="\documentclass"
+//
+// and parse document for an argument {*} after the options...
+//
+// ===============================================================================
+
+LetReg(-1);
+LetRegNum(-2,%l);
+// Surely the argument {*} is within 31 lines?
+Repeat(31,>
+  !|GetLine(-3,%-2);>
+    LetRegNum(-2,%-2+1);>
+    LetReg(-1,'%-1%-3 ');|);
+FindInString("%-1",!"\{\(0*\)\}",-11,-11,11);
+IfOK(!"Relax;",!"Exit;");
+LetTempReg("%#0");
+LetTempReg("{%#0}",!"!");
+
+Assign(!'LaTeXDoc',!'Active');
+Exe('%b\Macros\Doc\LaTeXDoc.edt');
+
+End;

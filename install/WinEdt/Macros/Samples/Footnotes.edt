@@ -1,0 +1,58 @@
+ // The macro extracts footnotes from the source document, processes them for citations
+ // and saves the result to a temporary file %f.tmp which is opened for editing...
+
+ Requires(20110428);
+
+ OpenOutput("%f.tmp");        // Open temporary file
+ WrL("/"+"/ Footnotes from %f");
+ WrL;
+
+ SaveFind;
+ SearchReset;
+ SetSearchCurrentDoc;
+ SetSearchEntire(0);
+ SetSearchForward(1);
+ SetSearchCaseSensitive(1);
+ SetSearchInline(1);
+ SetNotFoundNotify(0);
+ SetReplacePrompt(0);
+ SetRegEx(0);
+ SetFindStr('\footnote{');
+
+ LetRegNum(0,0);
+ LetRegNum(4,0);
+ StartWorking('Extracting Footnotes');
+ SetTracking(0);    // Turn off Screen Refreshing
+ GoToBeginningOfFile;
+ Loop(!*IfFound(!|MatchDelimiter(1);LetRegNum(0,%!0+1);>
+//                WrL('\footnote%S');|,>
+// Let's Extract the citations with references to pages
+                    LetRegNum(2,0);>
+                    Loop(!'FindInString("%S", "\cite{", 1,2, 1010, %!2);>
+                           IfOK(!||FindInString("%S", "}", 1,3, 1010, %!2);>
+                                   IfOK(!**ExtractByIndex(1, "%S", %!2+1, %!3-1);WrS("%!1");>
+                                          FindInString("%S", "[0-9]\.", 1,2, 1011, %!3);>
+                                          IfOK(!''ExtractByIndex(1, "%S", %!3+1, %!2-1);WrS("%!1")'');>
+                                          WrL(" ");LetRegNum(4,%!4+1)**,>
+                                         **Stop**)||,>
+                                 ||Stop||)')|,>
+                !|Stop;|)*);
+ StopWorking;
+ SetTracking(1); // Turn on Screen Refreshing
+ SetOK(1);       // It's OK
+ RestoreFind;
+ CloseOutput;                       // Close temporary file
+ Prompt("Processed Footnotes: %!0%\Extracted Citations: %!4");
+ Open("%f.tmp");        // Open temporary file for Editing
+End;
+
+\footnote{Vgl. \cite{Meier(1999)}, S.~124. Meier explains ...} -> Meier(1999), S.~124
+
+Test Sample:
+============
+
+  \footnote{Vgl. \cite{Meier(1999)}, S.~124. Meier explains ...
+           \cite{Meier(1997)}, S.~1124. Meier tries to explain...}
+  \footnote{Vgl. \cite{Meier(1998)}, S.~128. Meier explains ...}
+  \footnote{Vgl. \cite{Meier(1995)}, S.~1333. Meier explains ...}
+  \footnote{Vgl. \cite{Meier(1990)}, S.~10. Meier explains ...}

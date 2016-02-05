@@ -1,0 +1,13 @@
+// Span
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins("<span class=""");
+  Mark(1);Ins(""">");
+  IfStr("%!1","","=",!"Ins('');");
+  Ins("%!1</span>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+End;

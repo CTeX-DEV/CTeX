@@ -1,0 +1,28 @@
+// MiKTeX Configuration for WinEdt
+
+    Requires(20140413);   // Build number (About Dialog)
+
+    LetStr(0,'--src');    // Enable SRC Specials
+    SetPanelVisible(!'Source Specials',1); // Show Source Specials
+    UpdateStatus;
+
+    SetDefExt(!".tex");
+    SetDefMode(!"TeX");
+    SetDefPath(!"%P");
+
+    SetConfig('MiKTeX',1); // Configuration
+    SetCaption('WinEdt # | MiKTeX',1); // Caption
+
+    SaveSettings;
+
+    // Copy MiKTeX Configuration File
+    IfFileExists('%b\Exec\MiKTeX\Config.edt',>
+      !"CopyFile('%b\Exec\MiKTeX\Config.edt',>
+                 '%b\Exec\Config.edt',1,1);",>
+      !"CopyFile('%B\Exec\MiKTeX\Config.edt',>
+                 '%b\Exec\Config.edt',1,1);");
+
+    // Load the MiKTeX Configuration Options...
+    Exe('%b\Exec\Config.edt'); // Must Exist!
+
+End;

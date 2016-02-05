@@ -1,0 +1,50 @@
+// Works with WinEdt 5
+// Replaces "double quotes" with ``smart quotes''
+// Resets the count at the beginning of each paragraph
+//        to reduce the risk of runaway arguments
+//        Ignores \"...
+// Alerts about possible oddities
+
+ Requires(20000413);
+ SaveFind;
+ SearchReset;
+ SetSearchCurrentDoc;
+ SetSearchEntire(0);
+ SetSearchForward(1);
+ SetSearchCaseSensitive(1);
+ SetSearchInline(1);
+ SetSearchCyclic(0);
+ SetNotFoundNotify(0);
+ SetReplacePrompt(0);
+ SetRegEx(1);
+ SetFindStr('{"}|{<@{ }>}|{\\par}|{\\"}');
+
+ BeginGroup;
+  LetRegNum(0,0);
+  LetRegNum(1,0);
+  StartWorking('Replacing Smart Quotes');
+  SetOK(1);          // Just in case
+  Assign('LQ',|``|); // Smart Left  Quote - change if needed
+  Assign('RQ',|''|); // Smart Right Quote - change if needed
+  SetTracking(0);    // Turn off Screen Refreshing
+  Loop(!*>
+    SetReplaceStr('%$("LQ")');>
+    IfFound(!|>
+       IfStr(||%S||,||"||,||=||,>
+         !||SwapCaretSelect;Replace;LetRegNum(0,%!0+1);SetReplaceStr('%$("RQ")');>
+           IfFound(!'IfStr(''%S'',''"'',''='',>
+             ''SwapCaretSelect;");Replace;LetRegNum(1,%!1+1);'')',>
+// You can replace Relax with some other action when an error is detected:
+// Prompt and Stop or Ins('???');
+           'Relax');||>
+       );|,>
+    |Stop|);>
+  *);
+
+  StopWorking;
+  SetTracking(1); // Turn on Screen Refreshing
+  SetOK(1);       // It's OK
+ EndGroup;
+ RestoreFind;
+ Prompt(" Left quotes: %!0%\ Right quotes: %!1");
+End;

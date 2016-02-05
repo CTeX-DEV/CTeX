@@ -1,0 +1,12 @@
+FILTER_SET="Math"
+  ENABLED=1
+  MODE_FILTER="*|Binary"
+  SET=:["+-*/^<>=(){}&#[]"]
+  BEFORE=""
+  AFTER=""
+  BOLN_NOT_OK=0
+  EOLN_NOT_OK=0
+  STRICT_PRIORITY=0
+  PRIORITY=5
+    TEXT_COLOR=4
+    DEFAULT_FONT=1

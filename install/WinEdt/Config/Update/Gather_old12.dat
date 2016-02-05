@@ -1,0 +1,1 @@
+      MACRO="GetFullPath(1, '%?', '%p');ShellExecute('Open','%!1');"

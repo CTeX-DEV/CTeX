@@ -1,0 +1,167 @@
+// Rollback Personal Configuration
+
+    Requires(20150217);
+    IfStr('%b','%B','=',>
+      !"Prompt('You are using Global Configuration!');Exit;");
+
+    Prompt("This macro restores your configuration backup...%\>
+It is recommended that you close all files (or project) to make it faster.%\%\>
+                            Continue?",1,0);
+
+    PushTagsandRegisters;
+
+    StartWorking('Restoring Configuration Backup...');
+    ProcessMessages;
+    SaveSettings;
+
+// Cleanup ==========================================================
+
+    ListFolderFiles(1,'%b','.ini',1,1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\%!3",>
+          !"ReadFile('%b\%!3',4);>
+            ReadFile('%B\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\%!3`);');");>
+        LetReg(8,'%b\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"Relax;",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    ListFolderFiles(1,'%b','.edt',1,1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\%!3",>
+          !"ReadFile('%b\%!3',4);>
+            ReadFile('%B\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\%!3`);');");>
+        LetReg(8,'%b\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"Relax;",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+// Restore Files ====================================================
+
+    CreateFolders("%b\ConfigEx",1);
+    ListFolderFiles(1,'%b\Config\Update%$(`Up-Build`);','.ini',0,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        CopyFile('%b\Config\Update%$(`Up-Build`);\%!3','%b\ConfigEx\%!3',1);>
+        DeleteFile('%b\Config\Update%$(`Up-Build`);\%!3');>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    RemoveDirectory("%b\Config\Update%$(`Up-Build`);");
+    IfFileExists("%b\Upgrade%$(`Up-Build`);.log",>
+      !"CloseFile('%b\Upgrade%$(`Up-Build`);.log',1);>
+        DeleteFile('%b\Upgrade%$(`Up-Build`);.log');");
+
+// Rebuild All ======================================================
+
+    LoadConfig("ConfigEx\Colors.ini");
+    LoadConfig("ConfigEx\Images.ini");
+    LoadConfig("ConfigEx\MainMenu.ini");
+    LoadConfig("ConfigEx\PopupMenus.ini");
+    LoadConfig("ConfigEx\Toolbar.ini");
+    LoadConfig("ConfigEx\GUI.ini");
+    LoadConfig("ConfigEx\DocTabs.ini");
+    LoadConfig("ConfigEx\DocList.ini");
+    LoadConfig("ConfigEx\StatusBar.ini");
+    LoadConfig("ConfigEx\Bookmarks.ini");
+    LoadConfig("ConfigEx\Input.ini");
+    LoadConfig("ConfigEx\Tree.ini");
+    LoadConfig("ConfigEx\Gather.ini");
+    LoadConfig("ConfigEx\Folding.ini");
+    LoadConfig("ConfigEx\Wrapping.ini");
+    LoadConfig("ConfigEx\Paragraphs.ini");
+    LoadConfig("ConfigEx\Environments.ini");
+    LoadConfig("ConfigEx\WordCount.ini");
+    LoadConfig("ConfigEx\Font.ini");
+    LoadConfig("ConfigEx\Tabs.ini");
+    LoadConfig("ConfigEx\Caret.ini");
+    LoadConfig("ConfigEx\Fonts.ini");
+    LoadConfig("ConfigEx\Editor.ini");
+    LoadConfig("ConfigEx\MouseInterface.ini");
+    LoadConfig("ConfigEx\Modes.ini");
+    LoadConfig("ConfigEx\Defaults.ini");
+    LoadConfig("ConfigEx\Templates.ini");
+    LoadConfig("ConfigEx\Find.ini");
+    LoadConfig("ConfigEx\Find in Files.ini");
+    LoadConfig("ConfigEx\Replace.ini");
+    LoadConfig("ConfigEx\Incremental Search.ini");
+    LoadConfig("ConfigEx\Errors.ini");
+    LoadConfig("ConfigEx\Delimiters.ini");
+    LoadConfig("ConfigEx\AutoComplete.ini");
+    LoadConfig("ConfigEx\ActiveStrings.ini");
+    LoadConfig("ConfigEx\Abbreviations.ini");
+    LoadConfig("ConfigEx\Language.ini");
+    LoadConfig("ConfigEx\Unicode.ini");
+    LoadConfig("ConfigEx\Sorting.ini");
+    LoadConfig("ConfigEx\TranslationTables.ini");
+    LoadConfig("ConfigEx\Dictionaries.ini");
+    LoadConfig("ConfigEx\Spelling.ini");
+    LoadConfig("ConfigEx\Suggestions.ini");
+    LoadConfig("ConfigEx\IgnoredText.ini");
+    LoadConfig("ConfigEx\SpellingErrors.ini");
+    LoadConfig("ConfigEx\CompoundedWords.ini");
+    LoadConfig("ConfigEx\ColorEffects.ini");
+    LoadConfig("ConfigEx\BackgroundSchemes.ini");
+    LoadConfig("ConfigEx\ColorGrid.ini");
+    LoadConfig("ConfigEx\Selections.ini");
+    LoadConfig("ConfigEx\FilterSets.ini");
+    LoadConfig("ConfigEx\Switches.ini");
+    LoadConfig("ConfigEx\Keywords.ini");
+    LoadConfig("ConfigEx\Columns.ini");
+    LoadConfig("ConfigEx\PrintSchemes.ini");
+    LoadConfig("ConfigEx\PrintDefault.ini");
+    LoadConfig("ConfigEx\PrintAlternative.ini");
+    LoadConfig("ConfigEx\PrintCustom.ini");
+    LoadConfig("ConfigEx\PrintFancy.ini");
+    LoadConfig("ConfigEx\PrintPlain.ini");
+    LoadConfig("ConfigEx\PrintDefault.ini");
+    LoadConfig("ConfigEx\Backup.ini");
+    LoadConfig("ConfigEx\AutoSave.ini");
+    LoadConfig("ConfigEx\Folders.ini");
+    LoadConfig("ConfigEx\FileStatus.ini");
+    LoadConfig("ConfigEx\Project.ini");
+    LoadConfig("ConfigEx\Forms.ini");
+    LoadConfig("ConfigEx\Sounds.ini");
+    LoadConfig("ConfigEx\Preferences.ini");
+    LoadConfig("ConfigEx\Options.ini");
+    LoadConfig("ConfigEx\Events.ini");
+    LoadConfig("ConfigEx\Config.ini");
+    IfFileExists("%b\ConfigEx\UserPreferences.ini",!'LoadConfig("%b\ConfigEx\UserPreferences.ini");');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+    ProcessMessages;
+
+    Exe('%b\Exec\Config.edt');
+    Exe('%b\Exec\%$("Config-Dir");\Load Config.edt');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+
+    PopTagsandRegisters;
+
+    SaveSettings;
+    StopWorking;
+
+    Prompt("Your personal configuration has been restored.",0,1);
+
+End;

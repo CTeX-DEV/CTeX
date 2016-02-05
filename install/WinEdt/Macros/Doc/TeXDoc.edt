@@ -1,0 +1,10 @@
+// -*- ASCII:EDT -*-
+// TeX: TeXDoc ...
+// finds LaTeX package documentation
+
+  PushTagsandRegisters;
+  Assign("getLaTeX","doc");
+  Exe("%b\Macros\Doc\LaTeXDoc.edt");
+  PopTagsandRegisters;
+
+End;

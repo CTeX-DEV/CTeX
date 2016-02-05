@@ -1,0 +1,268 @@
+// Upgrade Personal Configuration
+
+    Requires(20150217);
+    IfStr('%b','%B','=',>
+      !"Prompt('You are using Global Configuration!');Exit;");
+
+    Prompt("This macro upgrades your personal configuration to the current Build...%\>
+It is recommended that you close all files (or project) to make it faster.%\%\>
+                            Continue?",1,0);
+
+    PushTagsandRegisters;
+
+    StartWorking('Upgrading Current Configuration...');
+    ProcessMessages;
+    SaveSettings;
+
+    JMP(!"Upgrade_Start");
+
+:Upgrade_Do:: =======================================================
+
+    WrL('=========================================================%\');
+    WrL('%!3.ini%\');
+
+    // Read the old file!
+    ReadFile('%b\ConfigEx\%!3.ini',0);
+
+    // Upgrade!
+    Call('Upgrade_Execute');
+
+    // Write the modified file!
+    WriteFile('%b\ConfigEx\%!3.ini','%!0');
+
+Return;
+
+:Upgrade_Execute:: ==================================================
+
+    LetRegNum(7,1);
+    Loop(!`>
+      IfFileExists('%B\Config\Upgrade\%!3_new%!7.dat',>
+        !|ReadFile('%B\Config\Upgrade\%!3_old%!7.dat',4);>
+          ReadFile('%B\Config\Upgrade\%!3_new%!7.dat',5);>
+          Call('Upgrade_Sub');>
+          LetRegNum(7,%!7+1);|,>
+        !|Stop;|);`);
+
+Return;
+
+:Upgrade_Sub:: ======================================================
+
+    SubstituteInString('%!0','%!4','%!5',10);
+    IfOK(!"WrL('---------------------------OK!---------------------------%\%\>
+The following lines%\%\%!4%\have been substituted with%\%\%!5');",>
+         !"Call('Upgrade_Sub_Fail');");
+
+Return;
+
+:Upgrade_Sub_Fail:: =================================================
+
+    FindInString("%!0","%!5",-1,-1,10);
+    IfOK(!"WrL('---------------------------OK!---------------------------%\%\>
+The following lines%\%\%!5%\were already up-to-date%\');",>
+         !"Call('Upgrade_Fail');");
+
+Return;
+
+:Upgrade_Fail:: =====================================================
+
+    Assign('Warn-Found','1');
+    LetReg(4,'The following lines%\%\%!4%\as well as the following%\%\%!5');
+    LetRegNum(8,1);
+    Loop(!`>
+      IfFileExists('%B\Config\Upgrade\%!3_upd%!7-%!8.dat',>
+        !|ReadFile('%B\Config\Upgrade\%!3_upd%!7-%!8.dat',5);>
+          FindInString("%!0","%!5",-1,-1,10);>
+          IfOK(!"WrL('---------------------------OK!---------------------------%\%\>
+The following lines%\%\%!5%\were already up-to-date%\');>
+                 Assign('Warn-Found','0');>
+                 Stop;",>
+               !"LetRegNum(8,%!8+1);>
+                 LetReg(4,'%!4%\as well as the following%\%\%!5');");|,>
+        !|Stop;|);`);
+    SubstituteInString("%!4","%\as well as the following%\%\%!5","",10,4);
+    IfStr('%$("Warn-Found");','1',!'=',>
+      !|WrL('------------------------WARNING!!------------------------%\%\>
+%!4%\have not been found...%\>
+A correctly upgraded %!3.ini should contain the following lines%\%\%!5');>
+        LetRegNum(9,%!9+1);|);
+
+Return;
+
+:Upgrade_Start:: ====================================================
+
+// Cleanup ==========================================================
+
+    ListFolderFiles(1,'%b','.ini',1,1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\%!3",>
+          !"ReadFile('%b\%!3',4);>
+            ReadFile('%B\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\%!3`);');");>
+        LetReg(8,'%b\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"Relax;",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    ListFolderFiles(1,'%b','.edt',1,1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\%!3",>
+          !"ReadFile('%b\%!3',4);>
+            ReadFile('%B\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\%!3`);');");>
+        LetReg(8,'%b\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"Relax;",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+// Backup ===========================================================
+
+    CreateFolders("%b\Config\Update%$(`Up-Build`);",1);
+    ListFolderFiles(1,'%b\ConfigEx','.ini',0,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        CopyFile('%b\ConfigEx\%!3','%b\Config\Update%$(`Up-Build`);\%!3',1);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+// Upgrade ==========================================================
+
+    // Create the Log File
+    OpenOutput('%b\Upgrade%$(`Up-Build`);.log');
+
+    // Insert the general information
+    GetDate(9, 'dddd, mmmm d, yyyy "at" hh:nn'); // Date Stamp
+    WrL('Upgrade%$(`Up-Build`);.log%\');
+    WrL('%!9%\%\');
+
+    LetRegNum(9,0);
+    ListFolderFiles(1,'%b\ConfigEx','.ini',0,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(2,%!c-1);>
+        GetFileName('%!2',3);>
+        Call('Upgrade_Do');>
+        ProcessMessages;>
+       |);
+    LstRelease;
+    Assign('Warn-Count','%!9');
+
+    // Save the Log File
+    CloseOutput;
+
+// Rebuild All ======================================================
+
+    LoadConfig("ConfigEx\Colors.ini");
+    LoadConfig("ConfigEx\Images.ini");
+    LoadConfig("ConfigEx\MainMenu.ini");
+    LoadConfig("ConfigEx\PopupMenus.ini");
+    LoadConfig("ConfigEx\Toolbar.ini");
+    LoadConfig("ConfigEx\GUI.ini");
+    LoadConfig("ConfigEx\DocTabs.ini");
+    LoadConfig("ConfigEx\DocList.ini");
+    LoadConfig("ConfigEx\StatusBar.ini");
+    LoadConfig("ConfigEx\Bookmarks.ini");
+    LoadConfig("ConfigEx\Input.ini");
+    LoadConfig("ConfigEx\Tree.ini");
+    LoadConfig("ConfigEx\Gather.ini");
+    LoadConfig("ConfigEx\Folding.ini");
+    LoadConfig("ConfigEx\Wrapping.ini");
+    LoadConfig("ConfigEx\Paragraphs.ini");
+    LoadConfig("ConfigEx\Environments.ini");
+    LoadConfig("ConfigEx\WordCount.ini");
+    LoadConfig("ConfigEx\Font.ini");
+    LoadConfig("ConfigEx\Tabs.ini");
+    LoadConfig("ConfigEx\Caret.ini");
+    LoadConfig("ConfigEx\Fonts.ini");
+    LoadConfig("ConfigEx\Editor.ini");
+    LoadConfig("ConfigEx\MouseInterface.ini");
+    LoadConfig("ConfigEx\Modes.ini");
+    LoadConfig("ConfigEx\Defaults.ini");
+    LoadConfig("ConfigEx\Templates.ini");
+    LoadConfig("ConfigEx\Find.ini");
+    LoadConfig("ConfigEx\Find in Files.ini");
+    LoadConfig("ConfigEx\Replace.ini");
+    LoadConfig("ConfigEx\Incremental Search.ini");
+    LoadConfig("ConfigEx\Errors.ini");
+    LoadConfig("ConfigEx\Delimiters.ini");
+    LoadConfig("ConfigEx\AutoComplete.ini");
+    LoadConfig("ConfigEx\ActiveStrings.ini");
+    LoadConfig("ConfigEx\Abbreviations.ini");
+    LoadConfig("ConfigEx\Language.ini");
+    LoadConfig("ConfigEx\Unicode.ini");
+    LoadConfig("ConfigEx\Sorting.ini");
+    LoadConfig("ConfigEx\TranslationTables.ini");
+    LoadConfig("ConfigEx\Dictionaries.ini");
+    LoadConfig("ConfigEx\Spelling.ini");
+    LoadConfig("ConfigEx\Suggestions.ini");
+    LoadConfig("ConfigEx\IgnoredText.ini");
+    LoadConfig("ConfigEx\SpellingErrors.ini");
+    LoadConfig("ConfigEx\CompoundedWords.ini");
+    LoadConfig("ConfigEx\ColorEffects.ini");
+    LoadConfig("ConfigEx\BackgroundSchemes.ini");
+    LoadConfig("ConfigEx\ColorGrid.ini");
+    LoadConfig("ConfigEx\Selections.ini");
+    LoadConfig("ConfigEx\FilterSets.ini");
+    LoadConfig("ConfigEx\Switches.ini");
+    LoadConfig("ConfigEx\Keywords.ini");
+    LoadConfig("ConfigEx\Columns.ini");
+    LoadConfig("ConfigEx\PrintSchemes.ini");
+    LoadConfig("ConfigEx\PrintDefault.ini");
+    LoadConfig("ConfigEx\PrintAlternative.ini");
+    LoadConfig("ConfigEx\PrintCustom.ini");
+    LoadConfig("ConfigEx\PrintFancy.ini");
+    LoadConfig("ConfigEx\PrintPlain.ini");
+    LoadConfig("ConfigEx\PrintDefault.ini");
+    LoadConfig("ConfigEx\Backup.ini");
+    LoadConfig("ConfigEx\AutoSave.ini");
+    LoadConfig("ConfigEx\Folders.ini");
+    LoadConfig("ConfigEx\FileStatus.ini");
+    LoadConfig("ConfigEx\Project.ini");
+    LoadConfig("ConfigEx\Forms.ini");
+    LoadConfig("ConfigEx\Sounds.ini");
+    LoadConfig("ConfigEx\Preferences.ini");
+    LoadConfig("ConfigEx\Options.ini");
+    LoadConfig("ConfigEx\Events.ini");
+    LoadConfig("ConfigEx\Config.ini");
+    IfFileExists("%b\ConfigEx\UserPreferences.ini",!'LoadConfig("%b\ConfigEx\UserPreferences.ini");');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+    ProcessMessages;
+
+    Exe('%b\Exec\Config.edt');
+    Exe('%b\Exec\%$("Config-Dir");\Load Config.edt');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+
+    PopTagsandRegisters;
+
+    SaveSettings;
+    StopWorking;
+
+    Prompt("Your personal configuration has been upgraded.%\%\>
+WARNINGS: %$(`Warn-Count`);%\%\View the LOG file?",1,3,>
+      !"Open('%b\Upgrade%$(`Up-Build`);.log',1);");
+
+    Release('Warn-Count');
+    Release('Warn-Found');
+
+End;

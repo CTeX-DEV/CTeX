@@ -1,0 +1,12 @@
+  BUTTON="Button"
+    TYPE=6
+    CONFIG_FILTER="HTML"
+    MENU="Button"
+    MENU="Select"
+    MENU="Multiple_Select"
+    MENU="Text_Area"
+    MENU="Text_Field"
+    MENU="Checkbox"
+    MENU="Radio"
+  BUTTON="|"
+  BUTTON="Windows_Explorer"

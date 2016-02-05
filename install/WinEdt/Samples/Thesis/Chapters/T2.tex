@@ -1,0 +1,908 @@
+% -----------------------------------------------------------------------------
+% -*-TeX-*- -*-Hard-*- Smart Wrapping
+% -----------------------------------------------------------------------------
+\def\baselinestretch{1}
+
+\chapter{An Extension of Burnside's Theorem}
+
+\def\baselinestretch{1.66}
+
+
+%%% ---------------------------------------------------------------------------
+
+In this chapter we combine differentiability of the Hilbert norm with the
+Schauder--Tychonoff Fixed Point Theorem to show that for every weakly closed
+subalgebra $\A\neq\BH$, acting on a real or complex Hilbert space $\h$, there
+exist nonzero vectors $f,g\in\h$ such that for every $A\in\A$:
+\[ \abs{\RE\seq{A f,g}}\leq\essnorm{\RE A}\seq{f,g}. \]
+This result generalizes an extension of Burnside's Theorem, recently obtained
+by V.I.\,Lomonosov, using rather different techniques. The theory developed
+in this chapter has an interesting application to the invariant subspace
+problem for essentially self--adjoint operators which is given in the last
+chapter.
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+\section{Introduction}
+
+In the first chapter we defined the {\em Lomonosov space} and gave a
+constructive proof of the approximation theorem inspired by the well known
+result of V.I.~Lomonosov~\cite{Lom73}. This theorem was then applied to
+obtain a connection between the existence of invariant subspaces for the norm
+dual of an algebra of bounded operators on a Banach space, and density of the
+associated Lomonosov space in certain function spaces. These results cover
+recent characterizations of the invariant subspace problem by
+Y.A.~Abramovich, C.D.~Aliprantis, and O.~Burkinshaw in~\cite{AAB95}, who
+obtained their results using the techniques introduced in~\cite{Lom91} and
+further exploited in~\cite{dB93}.
+
+\medskip
+
+In this chapter we combine differentiability of the Hilbert norm with a
+construction of the Lomonosov functions and the Schauder--Tychonoff Fixed
+Point Theorem to establish a connection between the Lomonosov space and the
+transitive algebra problem~\cite{RR73}.
+
+\medskip
+
+We start by briefly introducing a simplified Hilbert space terminology, that
+is consistent with the first chapter, where the corresponding terms are
+defined in more general, Banach space setting.
+
+\smallskip
+
+\begin{defn}
+Suppose $\s$ is a bounded closed convex subset of a real or complex Hilbert
+space $\h$, equipped with the relative weak topology. The set of all
+continuous functions $f\colon\s\To\h$, where both spaces are equipped with
+the weak topology, is denoted by $C(\s,\h)$. Similarly, $C(\s,[0,1])$ stands
+for the set of all weakly--continuous functions $f\colon\s\To[0,1]$.
+\end{defn}
+
+\smallskip
+
+\begin{rem}
+Recall that a bounded closed convex subset $\s$ in a Hilbert space is weakly
+compact. Observe also, that a bounded linear operator $A\in\BH$ is in
+$C(\s,\h)$. Whenever we say that $A$ is in $C(\s,\h)$, we actually refer to
+the restriction of the operator $A\in\BH$ to the subset $\s\subset\h$.
+\end{rem}
+
+\bigskip
+
+\goodbreak
+
+\begin{defn}
+Let $\A$ be a subset of $C(\s,\h)$. The convex set $\cal{L}(\A) \subset
+C(\s,\h)$, defined by
+\[ \cal{L}(\A) = \set{ \sum_{k=1}^n \alpha_k A_k\,\,|\,\,\, A_k\in\A,\,
+   \alpha_k\in C(\s,[0,1]) \text{ and } \sum_{k=1}^n\alpha_k \equiv 1;
+    \,\, n < \infty} \]
+is called the {\em Lomonosov space} associated with the set $\A$, and a
+function $\Lambda\in\cal{L}(\A)$ is called a {\em Lomonosov function}.
+\end{defn}
+
+\medskip
+
+\begin{defn}
+Let $\W$ be a basic weak neighborhood of a vector $f\in\h$:
+\begin{equation}\label{e:WeakBase}
+ \W=\set{g\in\h\,\,|\,\,\,\abs{\seq{f-g,h_k}} < 1, ~~ h_k\in\h, ~~~~
+    k=1,\ldots,n; \,\, n < \infty}.
+\end{equation}
+A continuous nonnegative function $\Gamma_\W\colon\h\To[0,1]$, defined by
+\begin{equation}\label{e:CIF}
+  \Gamma_\W(g)= \prod_{k=1}^n \max\set{0,1-\abs{\seq{f-g,h_k}}},
+\end{equation}
+is called a {\em continuous indicator function} of $\W$.
+\end{defn}
+
+\medskip
+
+\begin{rem}
+Clearly, $\Gamma_\W$ is a nonnegative weakly continuous function and
+\[ \W = \set{g\in\h\,\,|\,\,\,\Gamma_\W(g)>0}. \]
+\end{rem}
+
+\bigskip
+
+The following proposition and its corollary introduce the idea that will lead
+to the main result of this chapter.
+
+\medskip
+
+\goodbreak
+\newpage
+
+\begin{prop} \label{p:wAPPROX}
+Let $\s$ be a closed bounded and convex subset of $\h$. Suppose the set
+$\A\subset{}C(\s,\h)$ satisfies the following property:
+\begin{quote}
+  {For every $s\in\s$ there exists a function $A_s\in\A$ together with a
+  weak neighborhood $\W_s$ of $s$ such that $A_s(\W_s)\subset\s$.}
+\end{quote}
+Then there exists a Lomonosov function $\Lambda\in\cal{L}(\A)$ that maps the
+set $\s$ into itself.
+\end{prop}
+
+\begin{proof}
+By the hypothesis for every point $s\in\s$ there exists a function $A_s$
+together with a basic weak neighborhood $\W_s$ of $s$ such that
+$A_s(\W_s)\subset\s$. In this way we obtain an open cover of $\s$. Since $\s$
+is a weakly compact set there exists a finite subcover $\W_1,\ldots,\W_n$,
+together with functions $A_1,\ldots,A_n$, with the property that
+$A_k(\W_k)\subset\s$ for $k=1,\ldots,n$.
+
+Let $\Gamma_k:\s\To[0,1]$ denote the continuous indicator function of $\W_k$
+as defined by~(\ref{e:CIF}). Each point $s\in\s$ lies at least in one
+neighborhood $\W_k$ $(k=1,\ldots,n)$, therefore the sum
+$\sum_{j=1}^n\Gamma_j(s)$ is strictly positive for all vectors $s\in\s$.
+Hence, the functions $\alpha_k\colon\s\To[0,1]$, defined by
+\[ \alpha_k(s) =
+   \frac{\Gamma_k(s)}{\sum_{j=1}^n \Gamma_j(s)}
+   \quad\quad   (k=1,\ldots,n), \]
+are well defined and weakly continuous on $\s$. Also,
+$\sum_{k=1}^n\alpha_k(s)=1$ for every $s\in\s$, and $\alpha_k(s)>0$ if and
+only if $s\in\W_k$.
+
+\smallskip
+
+The Lomonosov function $\Lambda\colon\s\To\s$, in the Lomonosov space
+$\cal{L}(\A)$, associated with the set of functions $\A\subset{}C(\s,\h)$, is
+defined by
+\[ \Lambda(s) = \sum_{k=1}^n \alpha_k(s) A_k(s). \]
+Observe that $\Lambda(s)$ is a convex combination of the elements in $\s$,
+and consequently, $\Lambda$ maps the set $\s$ into itself
+(weak--continuously).
+\end{proof}
+
+\medskip
+
+\goodbreak
+
+\begin{cor} \label{c:wAPPROX}
+Suppose $\A$ is a convex subset of $C(\s,\h)$ satisfying the condition of
+Proposition~\ref{p:wAPPROX}. Then there exists an element $A\in\A$ with a
+fixed point $s\in\s$.
+\end{cor}
+
+\begin{proof}
+By the Schauder--Tychonoff Fixed Point Theorem the Lomonosov function
+$\Lambda:\s\To\s$, constructed in the proof of Proposition~\ref{p:wAPPROX},
+has a fixed point $s\in\s$. Let $A=\sum_{k=1}^n\alpha_k(s)A_k$. Convexity of
+the set $\A$ implies that $A\in\A$. Furthermore, from $\Lambda(s)=s$ it
+follows that $A(s)=s$.
+\end{proof}
+
+\begin{rem}
+In our applications we will consider the situations when $\s$ is a closed
+ball of radius $r\in(0,1)$ around a fixed unit vector $f_0\in\h$, and $\A$ is
+a convex subset of $\BH$. If the set $\A$ satisfies the condition of
+Proposition~\ref{p:wAPPROX} then Corollary~\ref{c:wAPPROX} implies that the
+set $\A$ contains an operator $A$ with an eigenvalue $1$.
+
+\medskip
+
+This gives rise to the following two questions:
+
+\smallskip
+
+1.~ {\em When does the set $\A$ satisfy the condition of
+Proposition~\ref{p:wAPPROX}?}
+
+2.~ {\em When is the operator $A$ in Corollary~\ref{c:wAPPROX} different from
+the identity operator? }
+
+\smallskip
+
+Complete continuity of compact operators, restricted to $\s$, yields an
+affirmative answer to the first question whenever $\A$ is a set of compact
+operators with the property that for every $s\in\s$ there exists an operator
+$A_s\in\s$ such that $\norm{A_s s - f_0}<r$. Furthermore, if the space $\h$
+is assumed to be infinite--dimensional then an affirmative answer to the
+second question follows from the fact that the identity is not a compact
+operator. However, compactness of the operators in $\A$ is much too strong an
+assumption. In the next two sections we develop conditions based on the
+properties of the essential spectrum and differentiability of the Hilbert
+norm that will replace the condition of Proposition~\ref{p:wAPPROX}.
+\end{rem}
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+\section{On the Essential Spectrum}
+
+In this section we state some well known properties of the essential spectrum
+in the form applicable to the situations arising later. We start with a few
+definitions and introduce notation and terminology that is consistent
+throughout this chapter.
+
+\begin{defn}
+Suppose $\h$ is a real or complex Hilbert space. The algebra of all bounded
+linear operators on $\h$ is denoted by $\BH$, while $\KH$ stands for the
+ideal of compact operators in $\BH$. The {\em spectral radius} of the
+operator $A\in\BH$ is denoted by $r(A)$ and its {\em essential norm}, i.e.
+the norm of $A$ in the {\em Calkin algebra}\, $\BH/\KH$, is denoted by
+$\essnorm{A}$.
+\end{defn}
+
+\begin{defn}
+If $\lambda\in\Complex$ is a complex number then $\RE\lambda$ and
+$\IM\lambda$ denote its real and imaginary parts respectively, i.e.
+$\lambda=\RE\lambda+i\IM\lambda$. On the other hand, for a bounded linear
+operator $A\in\BH$, $\RE{A}$ and $\IM{A}$ stand for its real and imaginary
+parts:
+\[ \RE{A}=\frac{A+A^*}{2} \quad \text{ and } \quad
+   \IM{A}=\frac{A-A^*}{2}, \]
+where $A^*$ is the Hilbert adjoint of $A$ in $\BH$.
+\end{defn}
+
+Clearly, for every $A\in\BH$ we have $A=\RE{A}+\IM{A}$. Furthermore, this
+decomposition makes sense on a real or complex Hilbert space, and
+\begin{equation}\label{e:EssIE}
+  \essnorm{\RE A} \leq \essnorm{A} \leq \norm{A}.
+\end{equation}
+
+\begin{prop} \label{p:EssNR}
+Suppose $\delta$ and $M$ are positive numbers, and $A$ is a fixed operator in
+$\BH$. Then there exists a weak neighborhood $\W$ of $0$ in $\h$ such that
+every vector $f\in\W$ with $\norm{f}\leq{}M$, satisfies the inequality
+\[ \abs{\RE\seq{A f,f}} < \essnorm{\RE{}A}\norm{f}^2 + \delta. \]
+\end{prop}
+
+\begin{proof}
+From $\RE\seq{A f,f}=\seq{(\RE{A})f,f}$ and $(\RE{A})=(\RE{A})^*$ it follows
+that
+\[ \norm{\RE{}A} = \sup_{f\neq0}
+   \abs{\RE\seq{A f,f}}\norm{f}^{-2}. \]
+By definition of the essential norm, we have
+\[ \essnorm{\RE A} = \inf_{K\in\KH} \norm{(\RE A)+K} =
+   \inf_{K\in\KH} \norm{\RE(A+K)}. \]
+Hence, there exists a compact operator $K$ such that
+\[ \essnorm{\RE A} > \norm{\RE(A+K)}    - \tfrac{1}{2}\delta M^{-2} \geq
+   \abs{\RE\seq{(A+K)f,f}}\norm{f}^{-2} - \tfrac{1}{2}\delta M^{-2} . \]
+The proposition now follows by the mixed (weak--to--norm) continuity of
+compact operators on bounded sets.
+\end{proof}
+
+The following proposition plays an important role in the subsequent sections.
+
+\begin{prop}\label{p:ESSPECT}
+Suppose $\h$ is a real or complex Hilbert space, and $\lambda\in\Complex$ is
+a point in the spectrum of the operator $A\in\BH$, such that
+\begin{equation} \label{e:ESSINEQ}
+ \abs{\RE\lambda} > \essnorm{\RE{}A}.
+\end{equation}
+Then the norm closure of the algebra generated by $A$ contains a nonzero
+finite--rank operator.
+\end{prop}
+
+\begin{proof}
+We may assume that the Hilbert space $\h$ is complex, as long as we can
+construct a finite--rank operator in the closure of the {\em real} algebra
+generated by $A$.
+
+Clearly, (\ref{e:ESSINEQ}) implies that $\lambda$ is not in the essential
+spectrum of $A$. From the well known properties of the essential spectrum
+(for example, Theorem~6.8 and Proposition~6.9 in~\cite[p.~366]{Con90}), it
+follows that every point in the spectrum of the operator $A$, satisfying the
+condition~(\ref{e:ESSINEQ}) is an isolated eigenvalue of $A$, and the
+corresponding Riesz projection has finite rank.
+
+\goodbreak
+
+After first replacing the operator $A$ by $-A$ in the case when
+$\RE\lambda<0$, and then substituting the translation
+$A-\max\set{\RE\lambda\,\,|\,\,\,\lambda\in\sigma(A)}$ for $A$, we may assume
+that $\max_{\lambda\in\sigma(A)}{\RE\lambda}=0$. The condition
+(\ref{e:ESSINEQ}) implies that
+\[ \sigma_0(A)=\set{\lambda\in\sigma(A)\,\,|\,\,\,\RE\lambda=0}, \]
+is a nonempty finite set, consisting of eigenvalues of $A$ with finite
+multiplicity. By the Riesz Decomposition Theorem~\cite[p.~31]{RR73}, the
+space $\h$ can be decomposed as $\h=\h_1\oplus\h_2$, where
+$\dim(\h_1)<\infty$, and the operator $A$ is similar to the operator
+$A_1\oplus{}A_2$, corresponding to this decomposition. Furthermore, the
+spectrum of $A_1$ is $\sigma_0(A)$, and the spectrum of $A_2$ lies in the
+open left complex half--plane. Therefore $r(e^{t{}A_2})<1$ for $t>0$, while
+$r(e^{t{}A_1})=1$ for any real argument $t$. By Rota's
+Theorem~\cite[p.~136]{Pau86}, the operator $e^{A_2}$ is similar to a strict
+contraction. Consequently,
+\[ \lim_{n\To\infty}\frac{ e^{n{}A_2} }{ \norm{e^{n{}A_1}} }=0. \]
+On the other hand, finite--dimensionality of $\h_1$ implies that the sequence
+\[ T_n = \frac{e^{n{}A_1}}{\norm{e^{n{}A_1}}}, ~
+         \qquad n=0,1,\ldots, \]
+has a subsequence converging in norm to a nonzero finite--rank operator.
+\end{proof}
+
+\begin{rem}
+Recall that the exponential function $e^A$ admits the power series:
+\[ e^A = \sum_{n=0}^{\infty} \frac{A^n}{n!}. \]
+Hence, the finite--rank operator constructed in the proof of
+Proposition~\ref{p:ESSPECT} is indeed contained in the norm closure of the
+{\em real} algebra, generated by $A$.
+\end{rem}
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+\section{Preliminary Geometric Results}
+
+{
+\def\baselinestretch{1.6}
+
+This section contains preliminary results that are needed in the constructive
+proof of the main theorem, given in the next section. The results presented
+here are mostly easy observations and the proofs are somehow tedious and
+straightforward calculations, involving the standard ``$\eps,\delta$''
+arguments.
+
+\smallskip
+
+Throughout this section we make the following conventions:
+
+$\h$ is a real or complex Hilbert space. Fix a unit vector $f_0\in\h$ and
+choose a positive number $r\in(0,1)$. The set $\s$ is defined as follows:
+\[ \s = \set{f\in\h\,\,|\,\,\, \norm{f_0-f}\leq r}. \]
+
+\begin{lem} \label{l:APPROX}
+Let $\W$ be a subset of $\s$ and let $A$ be a bounded linear operator on
+$\h$. Suppose that
+\[ \RE\seq{A{}f,f_0-f}\geq\delta>0, \quad \text{\em for all $f\in\W$.} \]
+Then there exists a positive number $\mu>0$, such that for any
+$\eps\in(0,\mu)$:
+\[ \norm{f_0 - (I+\eps A)f} < \norm{f_0 - f},
+   \quad \text{\em for all $f\in\W$.} \]
+\end{lem}
+
+\begin{proof}
+Note that $f\in\s$ implies $\norm{f} \leq 1 + r < 2$. Therefore for all
+$f\in\s$:
+\[ \norm{A{}f} \leq \norm{A}\norm{f} \leq (1+r) \norm{A} < 2\norm{A}. \]
+Set $\mu=\tfrac{\delta}{2\norm{A}^2}$. For any $\eps\in(0,\mu)$ and $f\in\W$
+we have:
+\begin{equation*}
+  \begin{split}
+    \norm{f_0 - (I+\eps A)f}^2 &= \norm{f_0-f - \eps A f}^2 \\
+     & = \norm{f_0-f}^2 - 2\eps\RE\seq{A{}f,f_0-f} + \eps^2\norm{A{}f}^2 \\
+     & < \norm{f_0-f}^2 - 2\eps\delta + \eps^2 4\norm{A}^2 \\
+     & = \norm{f_0-f}^2 - 2\eps(\delta - \eps 2\norm{A}^2) < \norm{f_0-f}^2.
+  \end{split}
+\end{equation*}
+Hence $\mu$ is the required positive number.
+\end{proof}
+
+\def\baselinestretch{1.66}
+}
+
+\newpage
+
+\begin{rem}
+Let $\psi'(0)$ denote the derivative of the function
+\[ \psi(t)=\norm{(I+t{A})f-f_0}^2, \]
+with respect to $t$, at the point $t=0$. A straightforward calculation yields
+\[ \psi'(0)=-2\RE\seq{A{f},f_0-f}. \]
+Therefore the statement of Lemma~\ref{l:APPROX} corresponds to the well known
+fact that a real function with (strictly) negative derivative is (strictly)
+decreasing. Note, however, that positivity of $\RE\seq{A{f},f_0-f}$ does not
+imply that the mapping $\Psi(f)=(I+\eps A)f$ is a contraction, as a function
+from $\W$ to $\s$.
+\end{rem}
+
+\medskip
+
+Lemma~\ref{l:APPROX} gives a numerical criterion for the subset $\W\subset\s$
+to be mapped into $\s$, namely positivity of the function
+$\Phi(f)=\RE\seq{A{}f,f_0-f}$ on $\W$. Since $\Phi(f_0)=0$, this criterion
+cannot be employed at the point $f_0$. However, the problem of constructing a
+function $\Lambda\colon\s\To\s$ can be easily reduced to the subset of $\s$
+not containing the point $f_0$. A simple observation in $\Real^2$ suggests
+the following definition.
+
+\newcommand{\Polar}{{\cal P}_{\s}}
+\begin{defn}
+For a fixed ball $\s=\set{f\in\h\,\,|\,\,\, \norm{f_0-f}\leq r}$ around the
+unit vector $f_0\in\h$, the {\em polar hyperplane} $\Polar$, of the origin
+with respect to $\s$, is defined by the following set:
+\[ \Polar = \set{f\in\h\,\,|\,\,\, \seq{f,f_0}=1-r^2}. \]
+\end{defn}
+
+\begin{rem}
+Every vector $f$ in $\Polar\cap\s$ can be decomposed as\, $ f = (1-r^2)f_0 +
+g$, where $g\perp f_0$ and $\norm{g}^2\leq r^2(1-r^2)$. In particular, the
+boundary of $\Polar\cap\s$:
+\[ \Polar \cap \partial \s = \set{(1-r^2)f_0 + g\,\,\big|\,\,\,
+   g\perp f_0 \quad\text{ and }\quad \norm{g}^2=r^2(1-r^2)}, \]
+contains exactly the points where the tangents from the origin to the ball
+$\s$ intersect the set $\s$. Recall that in $\Real^2$ such a line is called a
+{\em polar},\, and our definition is just a straightforward generalization of
+this geometric term to the higher dimensional Hilbert spaces.
+\end{rem}
+
+\medskip
+
+The following lemma will reduce the problem of constructing a Lomonosov
+function $\Lambda\colon\s\To\s$ to the polar hyperplane.
+
+\begin{lem} \label{l:SCALE}
+The function $\Lambda_0\colon \s \To \s$, defined by
+\[ \Lambda_0(f) = \frac{1}{r^2+\seq{f,f_0}} f, \]
+maps the set $\s = \set{f\in\h\,\,|\,\,\, \norm{f-f_0}\leq r}$
+weak--continuously into itself. Furthermore, the set of all fixed points for
+$\Lambda_0$ is equal to $\Polar \cap \s$.
+\end{lem}
+
+\begin{proof}
+Since $\RE\seq{f,f_0}>0$ for $f\in\s$, it follows that $\Lambda_0$ is well
+defined and weakly continuous on $\s$. Clearly, $f\in\s$ is a fixed point for
+$\Lambda_0$ if and only if $r^2 + \seq{f,f_0}=1$. By the definition of the
+polar hyperplane, that is equivalent to $f\in\Polar\cap\s$.
+
+We have to prove that $\norm{\Lambda_0(f)-f_0}\leq r$ for all $f\in\s$.
+
+Every vector $f\in\s$ can be decomposed as $f=\seq{f,f_0}f_0+g$, where $g
+\perp f_0$ and $\norm{g}^2\leq r^2 - \abs{1-\seq{f,f_0}}^2$.
+
+A straightforward calculation, using this decomposition, yields:
+\begin{equation*}
+  \begin{split}
+    \norm{\Lambda_0(f)-f_0}^2
+    &= \norm{\frac{1}{r^2+\seq{f,f_0}} f - f_0}^2
+        = \frac{1}{\abs{r^2+\seq{f,f_0}}^2} \left(r^4+\norm{g}^2\right)\\
+    &\leq \frac{1}{\abs{r^2+\seq{f,f_0}}^2}
+          \left(r^4+r^2-\abs{1-\seq{f,f_0}}^2\right).
+  \end{split}
+\end{equation*}
+The conclusion follows if we can establish the following inequality:
+\[ r^4+r^2 - \abs{1-\seq{f,f_0}}^2 \leq r^2\abs{r^2+\seq{f,f_0}}^2. \]
+Setting $\seq{f,f_0}=x+i{}y$, this can be translated to
+\[ r^4+r^2 - (1-x)^2 - y^2 \leq r^2(r^2 + x)^2 + r^2y^2, \]
+or equivalently,
+\begin{equation*}
+  \begin{split}
+   (1+r^2)y^2 &\geq r^4+r^2 - (1-x)^2 - r^2(r^2 + x)^2\\
+              & =  (r^4+r^2-1-r^6) + 2(1-r^4)x - (1+r^2)x^2  \\
+              & = -(1+r^2)\big((1-r^2) - x\big)^2.
+  \end{split}
+\end{equation*}
+The last inequality is obviously always satisfied, with the strict inequality
+holding everywhere, except in the polar hyperplane $\Polar$.
+\end{proof}
+
+\smallskip
+
+\begin{defn}
+For every operator $A$ in $\BH$ define a real function
+$\Delta_A\colon\s\To\Real$ as follows:
+\[ \Delta_A(f) = \frac{1}{r^2(1-r^2)}\RE\seq{A{}f, f_0-f}. \]
+\end{defn}
+
+\begin{rem}
+Note that $\Delta_A$ is a ``normalization'' of the function $\RE\seq{A{}f,
+f_0-f}$ in Lemma~\ref{l:APPROX}.
+
+From the definition of the set $\Polar$ it follows that every vector $f$ in
+$\Polar\cap\s$ can be decomposed as $f=(1-r^2)f_0 + r\sqrt{1-r^2} g$, where
+$g \perp f_0$ and $\norm{g}\leq 1$. Consequently,
+\begin{equation}\label{e:NUMERICAL}
+  \begin{split}
+   ~~ \quad ~~
+   \Delta_A(f) &= \RE\seq{A\left(f_0+\tfrac{r}{\sqrt{1-r^2}}g\right),
+                        f_0-\tfrac{\sqrt{1-r^2}}{r}g}\\
+             &= \RE\seq{A f_0, f_0} - \RE\seq{A g, g} -
+                \RE\seq{\left(\tfrac{\sqrt{1-r^2}}{r}A
+                             -\tfrac{r}{\sqrt{1-r^2}}A^*\right) f_0, g}.
+  \end{split}
+\end{equation}
+In particular, for the identity operator $I$ on $\h$, we have $\Delta_I(f) =
+1 - \norm{g}^2$. Therefore, $\Delta_I\geq0$ on $\Polar\cap\s$, with the
+equality $\Delta_I(f)=0$ holding if an only if $f\in\Polar\cap\partial\s$.
+
+Observe that the function $\Delta_A\colon\s\To\Real$ is norm continuous, but
+it is in general not weakly continuous, due to the presence of the quadratic
+form $\RE\seq{A g,g} = \seq{(\RE{A})g, g}$ in~(\ref{e:NUMERICAL}).
+\end{rem}
+
+\smallskip
+
+The next lemma imposes an additional condition on the operator $A$ that
+guarantees the existence of a weak neighborhood of $f$ in $\s$ on which
+$\Delta_A$ is positive.
+
+\begin{lem} \label{l:ESS}
+Suppose $f$ is a vector in the polar hyperplane $\Polar\cap\s$, satisfying
+the following {\em strict} inequality for some $A \in \BH$:
+\[ \Delta_A(f) > \essnorm{\RE{}A} \Delta_I(f). \]
+Then there exists a positive number $\delta>0$, together with a weak
+neighborhood $\W$ of $f$, such that for every $h\in\W\cap\s$:
+\[ \Delta_A(h) > \essnorm{\RE{}A}\abs{\Delta_I(h)} + \delta. \]
+\end{lem}
+
+\begin{proof}
+By the hypothesis, there exists a positive number $\delta>0$ such that:
+\begin{equation}\label{e:EC1}
+  \Delta_A(f) > \essnorm{\RE{}A}\Delta_I(f) + 5\delta.
+\end{equation}
+For any positive number $0<\eps<r^2$, define a weak neighborhood $\W_\eps$ of
+$\Polar$:
+\[ \W_\eps = \set{h\in\h\,\,|\,\,\,\abs{1-r^2-\seq{h,f_0}} < \eps}. \]
+Every vector $h\in\W_\eps\cap\s$ can be decomposed as $h=\seq{h,f_0}f_0+g$,
+where $g \perp f_0$ and
+\[ \norm{g}^2 \leq r^2 - \abs{1-\seq{h,f_0}}^2 < r^2 - (r^2 -\eps)^2. \]
+Estimating roughly, we conclude:
+\begin{equation*}
+  \begin{split}
+   \Delta_I(h) &=
+    \frac{\RE\big(\seq{h,f_0}(1-\overline{\seq{h,f_0}})\big)
+         -\norm{g}^2}{r^2(1-r^2)}\\
+    &>\frac{(1-r^2-\eps)(r^2-\eps)-r^2+(r^2-\eps)^2}{r^2(1-r^2)} >
+    -\frac{3\eps}{r^2(1-r^2)}.
+  \end{split}
+\end{equation*}
+Therefore, a weak neighborhood $\W_\eps$ of $\Polar$, such that
+$\essnorm{\RE{}A} \Delta_I(h) > -\delta$, for every vector
+$h\in\W_\eps\cap\s$, can be obtained by setting
+\[ \eps=\frac{\delta{}r^2(1-r^2)}{1+3\essnorm{\RE{}A}}. \]
+
+A straightforward calculation yields:
+\begin{equation}\label{e:EC2} ~
+  ~\Delta_A(f+g) = \Delta_A(f) + \tfrac{1}{r^2(1-r^2)}\left(
+   \RE\seq{A g,f_0-f} - \RE\seq{A f,g} - \RE\seq{A g,g} \right).
+\end{equation}
+Proposition~\ref{p:EssNR} implies the existence of a weak neighborhood $\W_1$
+of $0$, such that for every vector $g\in\W_1$, with $\norm{g}\leq2$:
+\begin{equation}\label{e:EC3}
+  \RE\seq{A g,g} < \essnorm{\RE{}A} \norm{g}^2 + r^2(1-r^2)\delta.
+\end{equation}
+Clearly, by the weak--continuity of both sides of the inequality, there
+exists a weak neighborhood $\W_2$ of $0$, such that for $g\in\W_2$:
+\begin{equation}\label{e:EC4}
+  \begin{split}
+    \RE\seq{A g,f_0-f} & - \RE\seq{A f,g} > \\
+     & \essnorm{\RE{}A}\big(\RE\seq{g,f_0-f}-\RE\seq{f,g}\big)
+       -r^2(1-r^2)\delta.
+  \end{split}
+\end{equation}
+Let $\W = \W_\eps\cap\big(f + \W_1\cap\W_2\big)$ be a weak neighborhood of
+$f$. Every vector $h$ in $\W\cap\s$ can be written as $h=f+g$, where $g \in
+\W_1\cap\W_2$ and $\norm{g}<2$. Putting the inequalities
+(\ref{e:EC1}\,--\,\ref{e:EC4}) together, and using $\essnorm{\RE{}A}
+\Delta_I(h) > -\delta$, implies:
+\begin{equation*}
+  \begin{split}
+   \Delta_A(h) &= \Delta_A(f+g)\\
+   &= \Delta_A(f) + \tfrac{1}{r^2(1-r^2)}\left(
+        \RE\seq{A g,f_0-f} - \RE\seq{A f,g} - \RE\seq{A g,g}\right)\\
+   &> \essnorm{\RE{}A}\big( \Delta_I(f) + \tfrac{1}{r^2(1-r^2)}(
+        \RE\seq{g,f_0-f} - \RE\seq{f,g} - \RE\seq{g,g})\big) + 3\delta\\
+   &= \essnorm{\RE{}A} \Delta_I(f+g) + 3\delta\\
+   &= \essnorm{\RE{}A} \Delta_I(h) + 3\delta\\
+   &> \essnorm{\RE{}A} \abs{\Delta_I(h)} + \delta.
+  \end{split}
+\end{equation*}
+Consequently,\, $\W$ is a weak neighborhood of $f$, with the required
+property.
+\end{proof}
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+\section{The Main Result}
+
+We are now ready to give the main result of this chapter, which is quite
+technical, but applicable to several situations discussed later.
+
+\smallskip
+
+\begin{prop} \label{p:ESS}
+Let $\A\subset\BH$ be a convex subset of bounded linear operators acting on a
+real or complex Hilbert space $\h$. Fix a unit vector $f_0\in\h$ and choose a
+positive number $r\in(0,1)$. Suppose that for every vector $g\perp{}f_0$ and
+$\norm{g}\leq1$, there exists an operator $A\in\A$, satisfying the following
+strict inequality:
+\begin{equation}\label{e:ESSCON}
+  \RE\seq{A\left(f_0+\tfrac{r}{\sqrt{1-r^2}}g\right),
+                 f_0-\tfrac{\sqrt{1-r^2}}{r}g} >
+  \essnorm{\RE{}A}(1 - \norm{g}^2).
+\end{equation}
+Then $\A$ contains an operator $A_0$, with an eigenvector in the set
+\[ \s=\set{f\in\h\,\,|\,\,\,\norm{f_0-f}\leq{}r}, \]
+and the corresponding eigenvalue $\lambda$ satisfies the condition:
+$\abs{\RE\lambda}>\essnorm{\RE{}A_0}$.
+\end{prop}
+
+\begin{proof}
+Introducing the polar hyperplane $\Polar$ as before, observe that by
+(\ref{e:NUMERICAL}) the condition~(\ref{e:ESSCON}) implies that every vector
+in $\Polar\cap\s$ satisfies the hypothesis of Lemma~\ref{l:ESS} for some
+operator $A\in\A$. Consequently, for every vector $f$ in $\Polar\cap\s$ there
+exists an operator $A\in\A$, together with a (basic) weak neighborhood $\W$
+of $f$, and a positive number $\delta$, such that for every $h\in\W\cap\s$:
+\[ \Delta_A(h) > \essnorm{\RE{}A}\abs{\Delta_I(h)} + \delta. \]
+By Lemma~\ref{l:APPROX} there exists a positive number $\mu$ such that the
+operator $I+\eps A$ maps the set $\W\cap\s$ into $\s$ whenever
+$\eps\in(0,\mu)$.
+
+\goodbreak
+\def\baselinestretch{1.5}
+\setlinespacing{1.5}
+
+In this way we obtain a weakly open cover of $\Polar\cap\s$ with basic
+neighborhoods. By the weak--compactness of the set $\Polar\cap\s$, there
+exists a finite subcover $\W_1,\ldots,\W_n$, together with the operators
+$A_k$ in $\A$, and positive numbers $\mu_k>0$, such that for
+$\eps\in(0,\mu_k)$ the operator $I+\eps{}A_k$ maps the set $\W_k\cap\s$ into
+$\s$, and
+\begin{equation}\label{e:EINEQ}
+  \Delta_{A_k}(h) > \essnorm{\RE{}A_k} \abs{\Delta_I(h)},
+\end{equation}
+for every $h\in\W_k\cap\s$.
+
+Define the weakly open set $
+\W_0=\set{f\in\h\,\,|\,\,\,\abs{\seq{f,f_0}-(1-r^2)}>0}$. Associated with the
+set $\W_0$ is its continuous indicator function $\Gamma_0\colon\h\To\RPlus$:
+\[ \Gamma_0(f)=\abs{\seq{f-f_0}-(1-r^2)}, \]
+and the function $\Lambda_0\colon\s\To\s$, defined in Lemma~\ref{l:SCALE}:
+$\Lambda_0(f) = \big(r^2+\seq{f,f_0}\big)^{-1}f$.
+
+\smallskip
+
+Fix a positive number $\eps\in(0,\min\set{\mu_1,\ldots,\mu_n})$, and recall
+that every basic weak neighborhood $\W_k$ admits a continuous indicator
+function $\Gamma_k\colon\s\To[0,1]$, defined by~(\ref{e:CIF}). Each point
+$f\in\s$ lies at least in one neighborhood $\W_k$ $(k=0,\ldots,n)$, therefore
+the sum $\sum_{j=0}^n\Gamma_j(f)$ is strictly positive for all vectors
+$f\in\s$. Hence, the functions $\alpha_k\colon\s\To[0,1]$,
+\[ \alpha_k(f) =
+   \frac{\Gamma_k(f)}{\sum_{j=0}^n \Gamma_j(f)}
+   \quad\quad   (k=0,\ldots,n), \]
+are well defined and weakly continuous on $\s$. Also,
+$\sum_{k=0}^n\alpha_k(f)=1$ for every $f \in \s$, and $\alpha_k(f)>0$ if and
+only if $f\in\W_k$.
+
+\smallskip
+
+The Lomonosov function $\Lambda\colon\s\To\s$, in the Lomonosov space
+$\cal{L}({\A\cup\Lambda_0})$, associated with the set of functions
+$\A\cup\Lambda_0\subset{}C(\s,\h)$, is defined by
+\[ \Lambda(f) = \frac{\alpha_0(f)}{r^2+\seq{f,f_0}} f +
+   \sum_{k=1}^n \alpha_k(f) (I+\eps A_k)f. \]
+Observe, that $\Lambda(f)$ is a convex combination of the elements in $\s$,
+and consequently, $\Lambda$ maps the set $\s$ into itself
+(weak--continuously).
+
+\setlinespacing{1.5}
+\def\baselinestretch{1.66}
+\goodbreak
+
+The Schauder--Tychonoff Fixed Point Theorem implies that the Lomonosov
+function $\Lambda\colon\s\To\s$ has a fixed point $f_1\in\s$. From
+$\Lambda(f_1)=f_1$, we conclude:
+\begin{equation*}
+  \begin{split}
+     \eps \big(\sum_{k=1}^n \alpha_k(f_1) A_k\big)f_1 & =
+     \big(1-\frac{\alpha_0(f_1)}{r^2+\seq{f_1,f_0}} -
+     \sum_{k=1}^n \alpha_k(f_1)\big)f_1 \\
+     & = \alpha_0(f_1)\big(1 -  \frac{1}{r^2+\seq{f_1,f_0}}\big)f_1.
+  \end{split}
+\end{equation*}
+Outside the set $\W_1\cup\ldots\cup\W_n$ the function $\Lambda$ equals
+$\Lambda_0$ and has no fixed points. Consequently, $f_1\in\W_k$ for at least
+one index $k\in\set{1,\ldots,n}$, and $\sum_{j=1}^n\alpha_j(f_1)>0$. Set
+\[ \beta_k=\frac{\alpha_k(f_1)}{\sum_{j=1}^n \alpha_j(f_1)}=
+           \frac{\alpha_k(f_1)}{1-\alpha_0(f_1)},
+           \qquad (k=1,\ldots,n). \]
+Then $A_0=\sum_{k=1}^n \beta_k A_k$ is an operator in the convex set $\A$.
+Clearly, $f_1\in\s$ is an eigenvector for $A_0$, corresponding to the
+eigenvalue $\lambda$:
+\begin{equation}\label{e:LAMBDA}
+   \lambda = \frac{\alpha_0(f_1)}{\eps\big(1-\alpha_0(f_1)\big)}\big(1 -
+   \frac{1}{r^2+\seq{f_1,f_0}}\big).
+\end{equation}
+Recall that by (\ref{e:EINEQ}) the strict inequality $\Delta_{A_k}(f_1) >
+\essnorm{\RE{}A_k}\abs{\Delta_I(f_1)}$ is satisfied whenever
+$\alpha_k(f_1)>0$ (or equivalently $\beta_k>0$). Therefore, nonnegativity of
+the coefficients $\beta_k$ and subadditivity of the essential norm, imply
+\begin{equation*}
+   \Delta_{A_0}(f_1) =
+   \sum_{k=1}^n \beta_k \Delta_{A_k}(f_1)
+   > \sum_{k=1}^n \beta_k \essnorm{\RE{}A_k}\abs{\Delta_I(f_1)}
+   \geq \essnorm{\RE{}A_0}\abs{\Delta_I(f_1)}.
+\end{equation*}
+By~(\ref{e:LAMBDA}) the sign of $\IM\lambda$ is the same as the sign of
+$\IM\seq{f_1,f_0}=\IM\seq{f_1,f_0-f_1}$. Hence, from $A_0f_1=\lambda{}f_1$
+and $\Delta_{A_0}(f_1)>\essnorm{\RE{}A_0}\abs{\Delta_I(f_1)}$, we conclude:
+\begin{equation*}
+  \begin{split}
+     \abs{\RE\lambda}\abs{\Delta_I(f_1)} &\geq (\RE\lambda)\Delta_I(f_1) =
+         \tfrac{1}{r^2(1-r^2)}\RE\lambda \RE\seq{f_1, f_0-f_1} \\
+   &\geq \tfrac{1}{r^2(1-r^2)}\big(\RE\lambda\RE\seq{f_1, f_0-f_1}-
+                                   \IM\lambda\IM\seq{f_1, f_0-f_1}\big) \\
+   &= \tfrac{1}{r^2(1-r^2)}\RE\seq{\lambda f_1,f_0-f_1} = \Delta_{A_0}(f_1)
+    > \essnorm{\RE{}A_0}\abs{\Delta_I(f_1)}.
+  \end{split}
+\end{equation*}
+The strict inequality implies that $\Delta_I(f_1)\neq0$, and consequently
+$\lambda$ satisfies the required condition:
+$\abs{\RE\lambda}>\essnorm{\RE{}A_0}$.
+\end{proof}
+
+%%% ---------------------------------------------------------------------------
+\goodbreak
+\section{Burnside's Theorem Revisited}
+
+V.I.\,Lomonosov~\cite{Lom91} established the following extension of
+Burnside's Theorem to infinite--dimensional Banach spaces:
+
+\begin{thm}[V.I.\,Lomonosov, 1991]\label{t:LOMBUR}
+Suppose $X$ is a complex Banach space and let $\A$ be a weakly closed proper
+subalgebra of $\mathbf{B}(X)$, $\A\neq\mathbf{B}(X)$. Then there exists
+$x\in{X''}$ and $y\in{X'}$, $x\neq0$ and $y\neq0$, such that for every
+$A\in\A$
+\begin{equation}\label{e:LB}
+ \abs{\seq{x,A'y}}\leq\essnorm{A}.
+\end{equation}
+\end{thm}
+
+\medskip
+
+The techniques introduced in the proof of this theorem, based on the argument
+of the celebrated de~Branges' proof of the Stone--Weierstrass
+Theorem~\cite{dB59}, received further attention in \cite{AAB95,dB93}.
+Although in the Hilbert space case Theorem~\ref{t:LOMBUR} is equivalent to
+another theorem, also given in \cite{Lom91}, we take a different point of
+view and employ Proposition~\ref{p:ESS} to obtain a stronger extension of
+Burnside's Theorem to infinite--dimensional Hilbert spaces.
+
+\medskip
+
+The condition (\ref{e:LB}) is equivalent to the existence of {\em unit}
+elements $x\in{X''}$ and $y\in{X'}$, and a nonnegative constant $C$
+(depending on $\A$), such that
+\begin{equation}\label{e:LBC}
+ \abs{\seq{x,A'y}}\leq C \essnorm{A}, \qquad \text{ for all $A\in\A$}.
+\end{equation}
+
+In general, the constant $C$ depends on the space $X$, and the algebra $\A$.
+It is not clear that on every Banach space there exists an upper bound for
+$C$, satisfying the condition (\ref{e:LBC}), with respect to all proper
+weakly closed subalgebras of $\mathbf{B}(X)$. An example of such a space
+would certainly be of some interest. On the other hand, an affirmative answer
+to the Transitive Algebra Problem~\cite{RR73} is equivalent to $C=0$.
+
+\medskip
+
+At the moment we can provide no results concerning the estimates for the
+constant $C$ in any infinite--dimensional Banach space, other than a Hilbert
+space. The next theorem implies that on a complex Hilbert space the constant
+$C$ is at most one.
+
+\begin{thm}\label{t:UNIFBURN}
+Suppose $\h$ is a complex Hilbert space and let $\A$ be a weakly closed
+subalgebra of $\BH$, $\A\neq\BH$. Then there exist nonzero vectors
+$f,h\in\h$, such that for all $A\in\A$:
+\begin{equation}\label{e:ReESS}
+  \abs{\RE\seq{A f,h}}\leq\essnorm{\RE A}\seq{f,h}.
+\end{equation}
+\end{thm}
+
+\begin{proof}
+Suppose not; then the hypothesis of Proposition~\ref{p:ESS} is satisfied for
+every unit vector $f_0$ and any positive number $r\in(0,1)$. Consequently,
+the algebra $\A$ contains an operator $A_0$ with an eigenvalue $\lambda$,
+satisfying the condition:
+\[ \abs{\RE\lambda}>\essnorm{\RE{A}}. \]
+Proposition~\ref{p:ESSPECT} implies that the algebra $\A$ contains a nonzero
+finite--rank operator. Therefore~\cite[Theorem~8.2]{RR73}, the (transitive)
+algebra $\A$ is weakly dense in $\BH$, contradicting the assumption
+$\A\neq\BH$.
+\end{proof}
+
+\begin{rem}
+Note that (after arbitrary choosing the unit vector $f_0$ and then letting
+$r\To0$) the argument in the proof of Theorem~\ref{t:UNIFBURN} shows that the
+set of all vectors $f\in\h$ for which there exists a nonzero vector $g\in\h$
+satisfying the condition (\ref{e:ReESS}) is {\em dense} in $\h$.
+\end{rem}
+
+\begin{cor}\label{c:UNIFBURN}
+Suppose $\h$ is a complex Hilbert space and let $\A$ be a weakly closed
+subalgebra of $\BH$, $\A\neq\BH$. Then there exist {\em unit} vectors
+$f,h\in\h$, such that for all $A\in\A$:
+\begin{equation}\label{e:AbsESS}
+  \abs{\seq{A f,h}}\leq\essnorm{A}.
+\end{equation}
+\end{cor}
+
+\begin{proof}
+By Theorem~\ref{t:UNIFBURN} there exist unit vectors $f,h\in\h$, such that
+for every $A\in\A$
+\[ \abs{\RE{\seq{A f,h}}}\leq\essnorm{\RE{A}}. \]
+Set
+\[ \xi = \left\lbrace
+           \begin{array}{c l}
+             1 & \text{if $\seq{A{}f,h}=0$},\\
+             \tfrac{\seq{A{}f,h}}{\abs{\seq{A{}f,h}}} & \text{otherwise}.
+           \end{array}
+         \right. \]
+Then
+\[ \abs{\seq{A f,h}} = \abs{\RE\seq{\xi A f,h}} \leq \essnorm{\RE(\xi A)}
+   \leq \essnorm{\xi A} = \essnorm{A}, \]
+and consequently, the condition (\ref{e:AbsESS}) is weaker than
+(\ref{e:ReESS}).
+\end{proof}
+
+\smallskip
+
+The following definition yields an alternative formulation of the extended
+Burnside's Theorem.
+
+\begin{defn}\label{d:ESSTRANS}
+A vector $f\in\h$ is called {\em essentially cyclic} for an algebra
+$\A\subset\BH$, if for every nonzero vector $h\in\h$ there exists an operator
+$A\in\A$ such that
+\begin{equation*}
+  \RE{\seq{A f,h}} > \essnorm{\RE{A}}\norm{f}\norm{h}.
+\end{equation*}
+We say that a subalgebra $\A$ of $\BH$ is {\em essentially transitive} if
+every nonzero vector is essentially cyclic for $\A$.
+\end{defn}
+
+\begin{rem}
+Note that our definition of essentially transitive algebras does not coincide
+with the definition in~\cite{Lom91}. In view of the discussion preceding
+Theorem~\ref{t:UNIFBURN}, we required that $C$ is at most one in the
+definition of essential transitivity, while the definition in~\cite{Lom91}
+assumes no upper bound on $C$.
+
+\smallskip
+
+According to Definition~\ref{d:ESSTRANS}, every essentially cyclic vector
+$f\in\h$ is also cyclic for $\A$, i.e. the orbit
+$\set{A{f}\,\,|\,\,\,A\in\A}$ is dense in $\h$. Consequently, an essentially
+transitive algebra is also transitive, as defined in~\cite{RR73}.
+\end{rem}
+
+\medskip
+
+Theorem~\ref{t:UNIFBURN} can be restated as the following solution of the
+``Essentially Transitive Algebra Problem''.
+
+\begin{thm}\label{t:ESSBURN}
+An essentially transitive algebra of operators acting on a complex Hilbert
+space $\h$, is weakly dense in $\BH$.
+\end{thm}
+
+\begin{rem}
+The reader may have noticed that, by
+Propositions~\ref{p:ESS}~and~\ref{p:ESSPECT}, an essentially transitive
+algebra $\A$, acting on a {\em real}\, Hilbert space, still contains a
+finite--rank operator in its norm closure. However, in the case of a real
+Hilbert space this is not enough in order to conclude that $\A$ is weakly
+dense in $\BH$. A commutative algebra $\cal{J}$, generated by the matrix
+\[ J= \left[
+        \begin{array}{r r}
+          0 & -1 \\
+          1 &  0
+        \end{array}
+  \right], \]
+is an example of a proper essentially transitive algebra acting on $\Real^2$.
+The tensor product $\BH\otimes\cal{J}$ is an example of such an algebra
+acting on $\h\oplus\h$. However, the existence of a nonzero finite--rank
+operator in the closure of an essentially transitive algebra, implies the
+following commutative version of Theorem~\ref{t:ESSBURN}, which holds on real
+or complex infinite--dimensional Hilbert spaces.
+\end{rem}
+
+\medskip
+
+\begin{thm}\label{t:COMBURN}
+A commutative algebra $\A$, of operators acting on a real or complex
+infinite--dimensional Hilbert space, is {\em never} essentially transitive.
+\end{thm}
+
+\begin{proof}
+By Propositions~\ref{p:ESS}~and~\ref{p:ESSPECT} the (norm) closure of every
+essentially transitive algebra contains a nonzero finite--rank operator $T$.
+Since $T{}A=A{}T$ for every $A\in\A$, it follows that the range of $T$ is a
+nontrivial (finite--dimensional) invariant subspace for $\A$, contradicting
+the (essential) transitivity of $\A$.
+\end{proof}
+
+%%% ---------------------------------------------------------------------------

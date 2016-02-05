@@ -1,0 +1,9 @@
+// Toggle Character
+  IfSel(1,"=",>
+   !"ToggleCase;",>
+   !"Sel(0);>
+     SelCharRight;>
+     ToggleCase;>
+     Sel(0);>
+    ");
+End;

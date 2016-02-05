@@ -1,0 +1,49 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert different matrix array Environments
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - environment name
+// %!? - indentation of the trigger
+// %-0..%-9 - can be manually set for macros that insert objects
+//
+// Temporary registers (manually set):
+// ===================================
+// %-1 (indentation)
+// %-2 (actual environment name)
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// ===============================================================================
+
+LetReg(-9,'%-2');
+LetTempReg;
+
+GetDim;
+LetReg(-8,"%!y");
+LetReg(-7,"%!x");
+IfNum(%-8,!'1',!'<',!"LetReg(-8,!'1');");
+IfNum(%-7,!'1',!'<',!"LetReg(-7,!'1');");
+IfNum(%-8,!'99',!'>',!"LetReg(-8,!'99');");
+IfNum(%-7,!'99',!'>',!"LetReg(-7,!'99');");
+
+LetReg(-10, '\begin{%-9}%\');
+Repeat(%-8-1,>
+  !"LetReg(-10, '%-0%!?%-1 ');>
+    Repeat(%-7-1,!|LetReg(-10, '%-0&  ');|);>
+    LetReg(-10, '%-0\\%\');>
+   ");
+LetReg(-10, '%-0%!?%-1 ');
+Repeat(%-7-1,!|LetReg(-10, '%-0&  ');|);
+LetReg(-10, '%-0%\');
+LetReg(-10, '%-0%!?\end{%-9}');
+
+LetTempReg("%-0");
+
+End;
+
+// ===============================================================================

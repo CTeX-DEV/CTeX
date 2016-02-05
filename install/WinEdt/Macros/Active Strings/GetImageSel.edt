@@ -1,0 +1,15 @@
+// Get Image (filename is selected)
+
+  IfSel(2,'>','SetSel(0);');
+  IfSel(0,'>',!"IfNum('%l','%y','=','SetSel(1);','SetSel(0);');");
+  LetReg(1,'%S');
+  GetImage("%S",0);
+  IfOK("Relax;","Exit;");
+    SetTracking(0);
+    BeginGroup;
+    Ins('%!0');
+    EndGroup;
+    SetTracking(1);
+    TrackCaret;
+    Refresh(0);
+End;

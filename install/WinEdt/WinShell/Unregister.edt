@@ -1,0 +1,17 @@
+// Remove WinEdt Code from the Registry...
+
+Requires(20010724); // Requires this build of WinEdt to work properly
+
+Prompt("This macro will remove WinEdt Registration Data from this machine...",1,0);
+
+   RegDeleteValue("HKEY_CURRENT_USER","Software\WinEdt 9","Code");
+   RegDeleteValue("HKEY_CURRENT_USER","Software\WinEdt 9","Date");
+   RegDeleteValue("HKEY_CURRENT_USER","Software\WinEdt 9","Name");
+   RegDeleteValue("HKEY_CURRENT_USER","Software\WinEdt 9","Inst");
+
+IfFileExists('%B\WinEdt.skd',!'DeleteFile("%B\WinEdt.skd");');
+IfFileExists('%b\WinEdt.skd',!'DeleteFile("%b\WinEdt.skd");');
+
+Prompt("WinEdt is no longer registered...",0,1);
+
+End;

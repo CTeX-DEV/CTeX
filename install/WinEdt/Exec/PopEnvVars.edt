@@ -1,0 +1,15 @@
+// -*- ASCII:EDT -*-
+// Restore Environment Variables
+
+  SetEnvVar(!"TEXINPUTS","%$('OLDTEXINPUTS');");
+  Release("OLDTEXINPUTS");
+  SetEnvVar(!"BIBINPUTS","%$('OLDBIBINPUTS');");
+  Release("OLDBIBINPUTS");
+  SetEnvVar(!"BSTINPUTS","%$('OLDBSTINPUTS');");
+  Release("OLDBSTINPUTS");
+  SetEnvVar(!"MPINPUTS","%$('OLDMPINPUTS');");
+  Release("OLDMPINPUTS");
+  SetEnvVar(!"MFINPUTS","%$('OLDMFINPUTS');");
+  Release("OLDMFINPUTS");
+
+End;

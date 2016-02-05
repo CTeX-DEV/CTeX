@@ -1,0 +1,26 @@
+ITEM="Advanced Configuration..."
+  ICON="MacroTestRun"
+  ACTION="$Help"
+    MACRO="HTMLHelp('%B\Doc\Help\WinEdt.chm',1,0,"+
+          "'Config/Advanced.html#page_top');"
+  ACTION="$LocalCopy"
+    CAPTION="Create and Open Local Copy"
+    IMAGE="MacroActivate"
+    MACRO="Exe('%b\Config\OpenLocalCopyEx.edt');"
+    REQ_FILTER=:"%!m=ASCII:EDT"?"%!m=DATA:INI:EDT"
+    REQ_DOCUMENT=1
+    REQ_FILE=1
+  ACTION="$BrowseInstall"
+    CAPTION="Browse Install Folder (%B)"
+    IMAGE="MacroView"
+    MACRO=:Run(|explorer.exe /n,/e, "%B"|,"%B");
+    REQ_FILTER=:|"%b=%B"
+  BUTTON="$Load_Script"
+  BUTTON="|"
+  BUTTON="$Browse"
+  BUTTON="|"
+  BUTTON="$BrowseInstall"
+  BUTTON="$LocalCopy"
+  BUTTON="|"
+  BUTTON="$Help"
+  ITEM="Preferences"

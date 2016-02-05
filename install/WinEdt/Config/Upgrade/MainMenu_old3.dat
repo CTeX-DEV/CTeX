@@ -1,0 +1,12 @@
+  SUBMENU="MDI_Shortcuts>"
+      CAPTION="MDI &Shortcuts"
+      IMAGE="Keyboard"
+      REQ_DOCUMENT=1
+    ITEM="Toggle_Window"
+      CAPTION="&Toggle Windows"
+      IMAGE="Invert"
+      MACRO="ActivateNextChild(1,1);"
+      SHORTCUT="113::F2"
+      REQ_DOCUMENT=1
+    ITEM="-"
+    ITEM="Next_Window"

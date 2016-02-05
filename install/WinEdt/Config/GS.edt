@@ -1,0 +1,123 @@
+// -*- ASCII:EDT -*-
+// GS (GSView and Ghostscript)
+// Last modified on:
+//  Sunday, December 30, 2012  15:55
+
+  Requires(20120413);
+
+  PushTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+// Auto-Detect GS (new in 5.5)
+Exe('%b\Config\GSAutoDetect.edt');
+
+// Original PATH
+SetEnvVar('PATH','%$(`xPATH`)'); // The Original Local PATH
+Assign("GS-PATH");
+
+// GSView ===========================================================
+
+IfStr("%$('GSAuto-View');","0","=","JMP('no_Auto-View');");
+  // GSView Executable (/E refreshes the file)
+  LetReg(0,`%@('HKLM','SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\gsview64.exe',' ');`);
+  IfStr("%!0","",!"=",!"LetReg(0,`%@('HKLM','SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\gsview32.exe',' ');`);");
+  IfStr("%!0","",!"=",!"JMP('PS');");
+  FindInString('%!0',!'"',1,2,1010,0);
+  IfOK(!'Relax;',!'LetReg(0,''"%!0"'');');
+  SubstituteInString("%!0",!'"',!'',10,1);
+  IfFileExists('%!1',!"JMP('PS_OK');");
+:PS:: ===============================================================
+  // Try File Type associations with .ps files
+  LetReg(1,`%@('HKCR','.ps',' ');`);
+  IfStr('%!1','','=','LetReg(1,"psfile");');
+  LetReg(0,`%@('HKCR','%!1\shell\open\command',' ');`);
+:PS_OK:: ============================================================
+  IfStr('%!0',' ','=',>
+    !|LetReg(0,`%@('HKLM','SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\gsview64.exe',' ');`);>
+      IfStr("%!0","",!"=",!"LetReg(0,`%@('HKLM','SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\gsview32.exe',' ');`);");>
+      FindInString('%!0','"',1,2,1010,0);>
+      IfOK(!'Relax;',!'LetReg(0,''"%!0"'');');>
+     |);
+  // Prompt(`%!0`);  // Debugging
+  FindInString('%!0','"',1,2,1010,0);
+  IfNum("%!1","0","=",>
+    !`FindInString('%!0','"',1,2,1010,1)`,>
+    !`FindInString('%!0','%%',1,2,1010,0);>
+      IfOK(!``FindInString('%!0',' ',1,2,1110,%!1-1);LetRegNum(1,"%!1-1")``,!``LetReg(1,"0");``)`);
+  IfNum("%!1","0",">",!"ExtractByIndex(0,`%!0`,0,%!1)");
+  GetLength(1,"%!0");
+  IfNum(%!1,9,"<","LetReg(0,'')");
+  Assign('GSView',`%!0`);
+  // Assign('GSView',`%!0 /E`); // One Instance
+  // Prompt(`%$('GSView');`);  // Debugging
+  IfStr("%$('GSView');","","=",>
+    !"Assign('GSView','gsview32.exe')"); // GSView not associated with ps files?
+  // Prompt(`%$('GSView');`);  // Debugging
+
+:no_Auto-View:: =====================================================
+
+IfStr("%$('GSAuto-Bin');","0","=","JMP('no_Auto-Bin');");
+  // Get Ghostscript from Windows Registry
+  // GPL (formerly AFPL) or GNU Ghostscript?
+  IfStr("%@('HKLM','SOFTWARE\AFPL Ghostscript','   ');",>
+        "%@('HKLM','SOFTWARE\GPL Ghostscript','   ');",>
+        ">",!"LetReg(1,'AFPL');",!"LetReg(1,'GPL');");
+  IfStr("%@('HKLM','SOFTWARE\%!1 Ghostscript','   ');",>
+        "%@('HKLM','SOFTWARE\GNU Ghostscript','   ');",>
+        ">",!"Relax;",!"LetReg(1,'GNU');");
+  // Get the last Key (the latest installed version!):
+  LetReg(0,"%@('HKLM','SOFTWARE\%!1 Ghostscript','   ');"); // Version?
+  Assign("GS-Bin","%@('HKLM','SOFTWARE\%!1 Ghostscript\%!0','GS_DLL');");
+  GetFilePath("%$('GS-Bin');", 0);
+  Assign("GS-Bin","%!0");
+  // Prompt("%$('GS-Bin');");  // Debugging
+  IfStr("%$('GS-Bin');","",!"<>",!"JMP('no_Auto-Bin');");
+  // WinEdt 64-bit and Ghostscript 32-bit?
+  IfWinEdt64(!"Relax;",!"JMP('no_Auto-Bin');");
+  IfStr("%@('HKLM','SOFTWARE\Wow6432Node\AFPL Ghostscript','   ');",>
+        "%@('HKLM','SOFTWARE\Wow6432Node\GPL Ghostscript','   ');",>
+        ">",!"LetReg(1,'AFPL');",!"LetReg(1,'GPL');");
+  IfStr("%@('HKLM','SOFTWARE\Wow6432Node\%!1 Ghostscript','   ');",>
+        "%@('HKLM','SOFTWARE\Wow6432Node\GNU Ghostscript','   ');",>
+        ">",!"Relax;",!"LetReg(1,'GNU');");
+  // Get the last Key (the latest installed version!):
+  LetReg(0,"%@('HKLM','SOFTWARE\Wow6432Node\%!1 Ghostscript','   ');"); // Version?
+  Assign("GS-Bin","%@('HKLM','SOFTWARE\Wow6432Node\%!1 Ghostscript\%!0','GS_DLL');");
+  GetFilePath("%$('GS-Bin');", 0);
+  Assign("GS-Bin","%!0");
+  // Prompt("%$('GS-Bin');");  // Debugging
+
+:no_Auto-Bin:: ======================================================
+
+  // Insert GS\Bin to the beginning of the PATH (if required)...
+  // gswin64c.exe or gswin32c.exe
+  // (used for ps2pdf or dvipdfm.exe eps graphics conversion)
+  SearchForFile(0,'gswin64c.exe'); // Bin folder on PATH?
+  IfOK("Relax;","LetReg(0);");
+  IfIStr('%!0','%$("GS-Bin");\gswin64c.exe','=','JMP("PATH_OK");');
+
+  SearchForFile(0,'gswin32c.exe'); // Bin folder on PATH?
+  IfOK("Relax;","LetReg(0);");
+  IfIStr('%!0','%$("GS-Bin");\gswin32c.exe','=','JMP("PATH_OK");');
+
+  SearchForFile(0,'gswin64c.exe','%$("GS-Bin");');
+  IfOK("Relax;",>
+    !|SearchForFile(0,'gswin32c.exe','%$("GS-Bin");');>
+      IfOK(!"SubstituteInString('%!0','32','64');","LetReg(0);");>
+     |);
+  IfIStr('%!0','%$("GS-Bin");\gswin64c.exe','<>','JMP("PATH_OK");');
+
+  IfFileExists("%$('GS-Bin');\",!|Assign("GS-PATH","%$('GS-Bin');");|); // GS Bin
+
+:PATH_OK:: ==========================================================
+
+  Exe('%b\Config\PATH.edt');
+
+  PopTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+End;

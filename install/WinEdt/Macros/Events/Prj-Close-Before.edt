@@ -1,0 +1,10 @@
+// Project Before Close Event Handler
+
+  Requires(20040806);
+  PushTagsandRegisters;
+
+  Relax;
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,102 @@
+// Load Default Configuration Scripts
+
+    Requires(20150217);
+
+    Prompt("This macro rebuilds current configuration by loading default ini files...%\>
+It is recommended that you close all files (or project) to make it faster.%\%\>
+                            Continue?",1,0);
+
+    PushTagsandRegisters;
+
+    StartWorking('Rebuilding Default Configuration...');
+    ProcessMessages;
+    SaveSettings;
+
+    // Load Default Scripts
+    LoadConfig("%B\ConfigEx\Colors.ini");
+    LoadConfig("%B\ConfigEx\Images.ini");
+    LoadConfig("%B\ConfigEx\MainMenu.ini");
+    LoadConfig("%B\ConfigEx\PopupMenus.ini");
+    LoadConfig("%B\ConfigEx\Toolbar.ini");
+    LoadConfig("%B\ConfigEx\GUI.ini");
+    LoadConfig("%B\ConfigEx\DocTabs.ini");
+    LoadConfig("%B\ConfigEx\DocList.ini");
+    LoadConfig("%B\ConfigEx\StatusBar.ini");
+    LoadConfig("%B\ConfigEx\Bookmarks.ini");
+    LoadConfig("%B\ConfigEx\Input.ini");
+    LoadConfig("%B\ConfigEx\Tree.ini");
+    LoadConfig("%B\ConfigEx\Gather.ini");
+    LoadConfig("%B\ConfigEx\Folding.ini");
+    LoadConfig("%B\ConfigEx\Wrapping.ini");
+    LoadConfig("%B\ConfigEx\Paragraphs.ini");
+    LoadConfig("%B\ConfigEx\Environments.ini");
+    LoadConfig("%B\ConfigEx\WordCount.ini");
+    LoadConfig("%B\ConfigEx\Font.ini");
+    LoadConfig("%B\ConfigEx\Tabs.ini");
+    LoadConfig("%B\ConfigEx\Caret.ini");
+    LoadConfig("%B\ConfigEx\Fonts.ini");
+    LoadConfig("%B\ConfigEx\Editor.ini");
+    LoadConfig("%B\ConfigEx\MouseInterface.ini");
+    LoadConfig("%B\ConfigEx\Modes.ini");
+    LoadConfig("%B\ConfigEx\Defaults.ini");
+    LoadConfig("%B\ConfigEx\Templates.ini");
+    LoadConfig("%B\ConfigEx\Find.ini");
+    LoadConfig("%B\ConfigEx\Find in Files.ini");
+    LoadConfig("%B\ConfigEx\Replace.ini");
+    LoadConfig("%B\ConfigEx\Incremental Search.ini");
+    LoadConfig("%B\ConfigEx\Errors.ini");
+    LoadConfig("%B\ConfigEx\Delimiters.ini");
+    LoadConfig("%B\ConfigEx\AutoComplete.ini");
+    LoadConfig("%B\ConfigEx\ActiveStrings.ini");
+    LoadConfig("%B\ConfigEx\Abbreviations.ini");
+    LoadConfig("%B\ConfigEx\Language.ini");
+    LoadConfig("%B\ConfigEx\Unicode.ini");
+    LoadConfig("%B\ConfigEx\Sorting.ini");
+    LoadConfig("%B\ConfigEx\TranslationTables.ini");
+    LoadConfig("%B\ConfigEx\Dictionaries.ini");
+    LoadConfig("%B\ConfigEx\Spelling.ini");
+    LoadConfig("%B\ConfigEx\Suggestions.ini");
+    LoadConfig("%B\ConfigEx\IgnoredText.ini");
+    LoadConfig("%B\ConfigEx\SpellingErrors.ini");
+    LoadConfig("%B\ConfigEx\CompoundedWords.ini");
+    LoadConfig("%B\ConfigEx\ColorEffects.ini");
+    LoadConfig("%B\ConfigEx\BackgroundSchemes.ini");
+    LoadConfig("%B\ConfigEx\ColorGrid.ini");
+    LoadConfig("%B\ConfigEx\Selections.ini");
+    LoadConfig("%B\ConfigEx\FilterSets.ini");
+    LoadConfig("%B\ConfigEx\Switches.ini");
+    LoadConfig("%B\ConfigEx\Keywords.ini");
+    LoadConfig("%B\ConfigEx\Columns.ini");
+    LoadConfig("%B\ConfigEx\PrintSchemes.ini");
+    LoadConfig("%B\ConfigEx\PrintDefault.ini");
+    LoadConfig("%B\ConfigEx\PrintAlternative.ini");
+    LoadConfig("%B\ConfigEx\PrintCustom.ini");
+    LoadConfig("%B\ConfigEx\PrintFancy.ini");
+    LoadConfig("%B\ConfigEx\PrintPlain.ini");
+    LoadConfig("%B\ConfigEx\PrintDefault.ini");
+    LoadConfig("%B\ConfigEx\Backup.ini");
+    LoadConfig("%B\ConfigEx\AutoSave.ini");
+    LoadConfig("%B\ConfigEx\Folders.ini");
+    LoadConfig("%B\ConfigEx\FileStatus.ini");
+    LoadConfig("%B\ConfigEx\Project.ini");
+    LoadConfig("%B\ConfigEx\Forms.ini");
+    LoadConfig("%B\ConfigEx\Sounds.ini");
+    LoadConfig("%B\ConfigEx\Preferences.ini");
+    LoadConfig("%B\ConfigEx\Options.ini");
+    LoadConfig("%B\ConfigEx\Events.ini");
+    LoadConfig("%B\ConfigEx\Config.ini");
+    LoadConfig("%B\ConfigEx\UserPreferences.ini");
+    LoadConfig("%B\ConfigEx\Private.ini");
+    ProcessMessages;
+
+    Exe('%b\Exec\Config.edt');
+    Exe('%b\Exec\%$("Config-Dir");\Load Config.edt');
+
+    PopTagsandRegisters;
+
+    SaveSettings;
+    StopWorking;
+
+    Prompt('Current Configuration has been Rebuilt or Repaired: %\ "%b\WinEdt.dnt"',0,1);
+
+End;

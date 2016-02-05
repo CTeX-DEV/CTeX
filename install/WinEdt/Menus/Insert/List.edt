@@ -1,0 +1,94 @@
+// Sore Prompt Caption in %!9 and environment name in %!8
+
+// %!x: Columns and %!y: Rows Registers are set through GetDim;
+// Repeat(count, "Macro") is used to produce n x m environments.
+
+ IfisMode('HTML;XML;PHP;HHC','%!m',!'JMP("HTML");');
+ IfisMode('TeX','%!m','JMP("TeX");');
+
+:TeX:: ==============================================================
+
+  LetReg(1,"3");
+  EnterReg(1,"Number of %!9:","%!9");
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(0,"%c");
+  TrimLine;
+  GoToEndOfLine;
+  IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+  TrackCaret;
+  LetReg(0, "%c"); // *** Current Column
+  Mark(1);
+  SetIndent(1); // Assumes Auto Indent Mode (to be restored)
+  SetSel(0);
+  Mark(1);
+  Ins("\begin{%!8}");
+  NewLine;
+  Tab;
+  LetReg(7,'\item ');
+  IfStr('%!8','description','=',!"LetReg(7,'\item[] ');");
+  Repeat(%!1,!'GotoCol(%!0+2);Ins("%!7");NewLine;');
+  GotoCol(%!0);
+  TrimLine;
+  Ins("\end{%!8}");
+  InsLine(4);
+  Goto(1,1);
+  NextBullet;
+  RestoreIndent;                   // Restore Auto Indent
+  EndGroup;
+  SetTracking(1);
+  JMP('Exit');
+
+:HTML:: =============================================================
+
+  GetCounter("Items:", "List");
+  LetReg(7,'ul');
+  IfStr('%!8','enumerate','=',"LetReg(7,'ol');");
+  IfStr('%!8','description','=',"LetReg(7,'dl');");
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(0,"%c");
+  TrimLine;
+  GoToEndOfLine;
+  IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
+  TrackCaret;
+  LetReg(0, "%c"); // *** Current Column
+  Mark(1);
+  InsText('<%!7>');
+  NewLine;
+  GotoCol(%!0+2);
+  TrimLine;
+  IfStr('%!8','description','=',"JMP('DES');");
+  Repeat(%!z,>
+    !'GotoCol(%!0+2); // *** Original Column indented by 2<>
+      InsText("<li></li>");>
+      NewLine;');
+  JMP('NODES');
+:DES:: ==============================================================
+  Repeat(%!z,>
+    !'GotoCol(%!0+2); // *** Original Column indented by 2<>
+      TrimLine;>
+      InsText("<dt></dt>");>
+      NewLine;>
+      GotoCol(%!0+4); // *** Original Column indented by 4<>
+      TrimLine;>
+      InsText("<dd></dd>");>
+      NewLine;');
+:NODES:: ============================================================
+  GotoCol(%!0);                     // *** Original Column
+  TrimLine;
+  InsText("</%!7>");
+  InsLine(4);
+  Goto(1,1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  JMP('Exit');
+
+:Exit:: =============================================================
+
+End;

@@ -1,0 +1,311 @@
+// Create Execution Modes GUI Interface for MiKTeX Configuration
+// This interface can be used to control the execution flow for console applications
+
+  Requires(20120413);
+
+  ClearApplications;
+
+  AddApplication(!'LaTeX',       // Name<>
+                 !'latex.exe',   // Executable<>
+                 !'%0',          // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+//               $$1000000000000 - Clean Build
+//               $$0100000000000 - C-Style Errors
+//               $$0010000000000 - No Interaction
+//               $$0001000000000 - Redirect Console I/O (should be done with Detached)
+//               $$0000100000000 - Start viewer at the current edit position
+//               $$0000010000000 - Start viewer if OK
+//               $$0000001000000 - Ignore Exit Code
+//               $$0000000100000 - Detect Warnings
+//               $$0000000010000 - Detect Errors
+//               $$0000000001000 - Show Compilation Report
+//               $$0000000000100 - Wait For Execution to Finish
+//               $$0000000000010 - High Priority Process
+//               $$0000000000001 - Show Custom GUI
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+//               $$1000          - Pause
+//               $$0100          - Background Window
+//               $$0010          - Hidden Window
+//               $$0001          - WinEdt Console
+
+  AddApplication(!'TeX',         // Name<>
+                 !'tex.exe',     // Executable<>
+                 !'%0',          // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'AMSTeX',      // Name<>
+                 !'amstex.exe',  // Executable<>
+                 !'%0',          // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'PDFLaTeX',    // Name<>
+                 !'pdflatex.exe',// Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'PDFTeX',      // Name<>
+                 !'pdftex.exe',  // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'XeLaTeX',     // Name<>
+                 !'xelatex.exe', // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'XeTeX',       // Name<>
+                 !'xetex.exe',   // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'LuaLaTeX',    // Name<>
+                 !'lualatex.exe',// Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'LuaTeX',      // Name<>
+                 !'luatex.exe',  // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'TeXify',      // Name<>
+                 !'texify.exe',  // Executable<>
+                 !'%0',          // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$1111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'PDFTeXify',   // Name<>
+                 !'texify.exe',  // Executable<>
+                 !'--pdf',       // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$1111111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'BibTeX',      // Name<>
+                 !'bibtex.exe',  // Executable<>
+                 !'',            // Switches<>
+                 !'"%N"',        // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0001001111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'MakeIndex',   // Name<>
+                 !'makeindex.exe',// Executable<>
+                 !'',            // Switches<>
+                 !'"%N.idx"',    // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0001001000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'MakeGlossary',// Name<>
+                 !'makeindex.exe',// Executable<>
+                 !'-s "%N.ist" -t "%N.glg" -o "%N.gls"',// Switches<>
+                 !'"%N.glo"',    // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0001001000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'dvi2ps',      // Name<>
+                 !'dvips.exe',   // Executable<>
+                 !'-P pdf',      // Switches<>
+                 !'"%N.dvi"',    // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 1,              // Paper Size Switch Enabled<>
+                 1,              // Landscape Switch Enabled<>
+                 $$1001011000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'dvi2pdf',     // Name<>
+                 !'dvipdfm.exe', // Executable<>
+                 !'',            // Switches<>
+                 !'"%N.dvi"',    // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 1,              // Paper Size Switch Enabled<>
+                 1,              // Landscape Switch Enabled<>
+                 $$1001111000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'ps2pdf',      // Name<>
+                 !'gswin32c.exe',// Executable<>
+                 // Switches<>
+                 !'-dBATCH -dNOPAUSE -sDEVICE=pdfwrite -r600 -dCompatibilityLevel=1.4',>
+                 !'-sOutputFile="%N.pdf" -c save pop -f "%N.ps"',// Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 1,              // Paper Size Switch Enabled<>
+                 1,              // Landscape Switch Enabled<>
+                 $$1001111000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'ConTeXt',     // Name<>
+                 !'texexec.exe', // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0011111111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'MetaFont',    // Name<>
+                 !'mf.exe',      // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111001111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'MetaPost',    // Name<>
+                 !'mpost.exe',   // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0111001111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'LaTeX2HTML',  // Name<>
+                 !'htlatex.exe', // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0101011111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'TeX2HTML',    // Name<>
+                 !'httex.exe',   // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0101011111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'TtH',         // Name<>
+                 !'tth.exe',     // Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0001011000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'HHC',         // Name<>
+                 !'%$("HHC");',  // Executable<>
+                 !'',            // Switches<>
+                 !'"%N"',        // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0001011111111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  AddApplication(!'NSIS',        // Name<>
+                 !'%$("NSIS-Exe");',// Executable<>
+                 !'',            // Switches<>
+                 !'"%N%T"',      // Parameters<>
+                 !'',            // Environmental Variable <-- Executable<>
+                 0,              // Paper Size Switch Enabled<>
+                 0,              // Landscape Switch Enabled<>
+                 $$0001011000111,// Enable Flags (13)<>
+                 $$1111);        // Enable Pause..WinEdt Console Flags (4)
+
+  ShowExecutionModes('Execution Modes - MiKTeX',>
+    '%b\Exec\MiKTeX\ExeMode.edt',>
+    '%b\Exec\MiKTeX\ExeMode_Backup.edt',>
+    '%b\Exec\MiKTeX\ExeMode_Custom.edt',>
+    '%b\Exec\MiKTeX\ExeMode_Default.edt',>
+      1); // Extended Mode with Extra Pages for TeX System and TeX Output
+
+End;
+
+Sample Variables in response to the selection for LaTeX:
+========================================================
+
+// LaTeX
+    Assign(!"LaTeX-Executable", !|latex.exe|);
+    Assign(!"LaTeX-Switches", !|%0|);
+    Assign(!"LaTeX-Parameters", !|"%N%T"|);
+    Release(!"LaTeX-Paper_Size");
+    Release(!"LaTeX-Paper_Custom_Size");
+    Release(!"LaTeX-Landscape");
+    Release(!"LaTeX-GUI");
+    Release(!"LaTeX-High_Priority");
+    Assign(!"LaTeX-Wait", !|1|);
+    Assign(!"LaTeX-Report", !|1|);
+    Release(!"LaTeX-Errors");
+    Release(!"LaTeX-Warnings");
+    Release(!"LaTeX-ExitCode");
+    Release(!"LaTeX-Viewer");
+    Release(!"LaTeX-View_Search");
+    Release(!"LaTeX-STD_IO");
+    Release(!"LaTeX-No_Interaction");
+    Release(!"LaTeX-C-style-errors");
+    Release(!"LaTeX-Clean_Build");
+    Assign(!"LaTeX-WinEdt_Console", !|1|);
+    Release(!"LaTeX-Hidden_Window");
+    Release(!"LaTeX-Background_Window");
+    Assign(!"LaTeX-Pause", !|1|);

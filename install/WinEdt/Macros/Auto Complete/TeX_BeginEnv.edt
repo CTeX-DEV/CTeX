@@ -1,0 +1,25 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert LaTeX \begin{} environment and start auto-completion
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - \begin{...}
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// and executes an additional macro %!? if set to non-empty string ...
+// ===============================================================================
+
+SubstituteInString('%?',!'\{*\}','\{\}',11,-10);
+// This will be inserted by the event handler
+LetTempReg("%-0");
+// And this will be executed after...
+LetTempReg(!"Delete;AutoPopup;",!"!");
+
+End;
+
+// ===============================================================================

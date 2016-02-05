@@ -1,0 +1,21 @@
+// DTX Character Table
+
+    PushTagsandRegisters;
+
+    GetDocAsString(0,"%f");
+    FindInString("%!0","\\CharacterTable",1,2,11);
+    IfOK(!"PopTagsandRegisters;Exit;");
+
+    SetTracking(0);
+    BeginGroup;
+    IfSel(1,'=','SetSel(0);');
+    IfNum(%c,'1','>','InsLine;');
+    ReadFile('%B\Templates\DTX\CharacterTable.dat',0);
+    InsText('%!0');Backspace;
+    MoveBy(1);IfNum(%c,'1','>','MoveBy(-1);InsLine;');
+    EndGroup;
+    SetTracking(1);
+
+    PopTagsandRegisters;
+
+End;

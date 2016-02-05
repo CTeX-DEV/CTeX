@@ -1,0 +1,27 @@
+// Remove Personal Profile
+
+  // Get Application Data Folder in Register %!0
+  Exe('%B\WinShell\Profiles\Get Application Data Folder.edt');
+
+  IfStr('%!0','','=',>
+    !|Prompt('User Application Data Folder is not properly specified: "%!0".');Exit;'|);
+
+  IfFileExists("%!0\",!"Relax;",!"Prompt('User Application Data Folder is not properly specified: ""%!0"".');Exit;");
+
+  DeleteFile('%!0\User Profile.dat');
+  DeleteFile('%!0\User Profile Build.edt');
+
+  Prompt("Your Personal Profile for WinEdt has been disabled.%\>
+Delete WinEdt's Application Data Folder from Windows Explorer...%\%\>
+Press OK and restart WinEdt!",0,0);>
+
+  IfOK(!'Relax;',!'Exit;');
+
+  Run('explorer.exe /n,/e, "%!0"','%!0');
+
+  ProcessMessages;
+  Wait(99);
+
+  IfStr("%B","%b","<>",!"Wait(999);QuitWinEdt;"); // Quit
+
+End;

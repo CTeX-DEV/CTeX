@@ -1,0 +1,7 @@
+  ITEM="$u"
+    CAPTION="&u"
+    MACRO="Chr(249,'ù');"
+    SHORTCUT="85::U"
+    REQ_DOCUMENT=1
+  ITEM="-"
+  ITEM="${"

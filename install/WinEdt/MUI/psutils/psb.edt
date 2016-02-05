@@ -1,0 +1,280 @@
+// MUI Interface for psselect accessory
+// =================================
+//
+//     pss-beta.edt
+//     Jim Schummer
+//     Email schummer at northwestern
+
+Requires(20061028);
+PushTagsandRegisters;
+
+  // Settings for this interface
+  // Used by MUILoad(); and MUISave();
+  // It does not have to exists if defaults are OK...
+  // This works with profiles (%b<>%B) ...
+  LetReg(1, "%b\MUI\psutils");
+  GetFileName('%X',0);
+  CreateFolders("%!1",1);
+  LetReg(4, "%!1\%!0.mui");
+
+  MUIReset('psbook(let)...');
+  // Main Form Size and Position
+  MUISet('','width','460');
+  MUISet('','height','398');
+  MUISet('','position','1'); // Main Form Center
+//
+  MUIGet('','client width',9); // Get the form size
+  MUIGet('','client height',8);
+//
+//  // Options are in the Page Control ----------------------------------
+//
+  MUIAdd(8,8,%!9-16,%!8-8-40,'PageControl','TPageControl');
+//
+//  // OK/Cancel (aligned -> independent of the dialog size) ------------
+//
+//  // Modal OK and Cancel Buttons (aligned bottom right)
+  MUIAdd(0,0,0,40, 'Bottom_Panel','TPanel');
+    MUISet('Bottom_Panel','aligned', 'alBottom');
+    MUISet('Bottom_Panel','inner bevel', '0');
+    MUISet('Bottom_Panel','outer bevel', '0');
+    MUIAdd(0,0,164,0, 'Modal_Panel','TPanel','Bottom_Panel');
+      MUISet('Modal_Panel','aligned', 'alRight');
+      MUIAdd(0,8,0,0, 'OK','TButton','Modal_Panel','&OK');
+        MUISet('OK','default', '1');
+        MUISet('OK','on click', !'MUIHide(1);');
+      MUIGet('OK','width',7);
+      MUIAdd(%!7+8,8,0,0, 'Cancel','TButton','Modal_Panel','Cancel');
+        MUISet('Cancel','cancel', '1'); // ESCAPE
+        MUISet('Cancel','on click', !'MUIHide(2);');
+      LetRegNum(6,16+2*%!7);
+      MUISet('Modal_Panel','width','%!6');
+      MUIGet('OK','height',7);
+      LetRegNum(6,16+%!7);
+      MUISet('Bottom_Panel','height','%!6');
+
+//  // Pages and Options --------------------------------------------
+//
+  MUIAdd(0,0,0,0,'Page1','TTabSheet','PageControl','Options');
+  MUIAdd(0,0,0,0,'Page2','TTabSheet','PageControl','Advanced');
+  MUIGet('Page1','client width',7);
+  LetRegNum(9,24);           // Check Box Height+Vertical Spacing
+  MUIGet('','text width',8,'Output Paper Size: ');
+  LetRegNum(8,%!8+12);
+  LetRegNum(6,%!7-%!8-8);
+
+// Input File
+//
+  LetRegNum(9,'8');
+  MUIAdd(8,%!9,%!7-16, 64, 'GroupBox_Input','TGroupBox','Page1','Input File (Postscript)');
+    MUIAdd(8,24,%!7-32-16-24, 0, 'InputFile','TComboBox','GroupBox_Input');
+      MUISet('InputFile','style','1');
+      MUISet('InputFile','save mode','3'); // maintain the list of 9 recent files
+      MUISet('InputFile','on change',!'Call("Output");');
+    MUIAdd(%!7-32-24,21,30,28, 'Browse','TSpeedButton','GroupBox_Input');
+      MUISet('Browse','hint','Browse for Input File...');
+      MUISet('Browse','glyph','Browse');
+      MUISet('Browse','on click',!'Call("Browse");');
+
+
+// Add paper size here.
+
+  MUIGet('GroupBox_Input','height',8);
+  MUIGet('GroupBox_Input','top',9);
+  LetRegNum(9,'%!9+%!8+8');
+  MUIAdd(8,%!9,%!7-16, 24+16+24, 'PaperBox','TGroupBox','Page1','Paper Size');
+    MUIAdd(8,24,120,0,'Input_Paper','TComboBox','PaperBox','|letter|legal|a3|a4|a5|b5|tabloid|statement|executive|folio|quarto|10x14');
+      MUISet('Input_Paper','style','1');
+      MUISet('Input_Paper','index','0');
+
+// Output File
+//
+  MUIGet('PaperBox','height',8);
+  MUIGet('PaperBox','top',9);
+  LetRegNum(9,'%!9+%!8+8');
+  MUIAdd(8,%!9,%!7-16, 108, 'B_Output','TGroupBox','Page1','Output File');
+    MUIAdd(8,24,%!7-32, 0, 'OutputFile','TEdit','B_Output');
+      MUISet('OutputFile','auto select','1');
+    MUIGet('OutputFile','height',9);
+    MUIGet('OutputFile','top',8);
+    LetRegNum(9,'%!9+%!8+8');
+    MUIAdd(8,%!9,'(%!7-32-24)/2', 0, 'AutoOutput','TCheckBox','B_Output','Auto-generate Output Filename');
+      MUISet('AutoOutput','checked','1');
+      MUISet('AutoOutput','on click',!'Call("Output");');
+    MUIAdd('8+(%!7-32)/2',%!9,'(%!7-32)/2', 0, 'PromptOverwrite','TCheckBox','B_Output','Prompt to overwrite output file');
+      MUISet('PromptOverwrite','checked','0');
+    MUIGet('AutoOutput','height',8);
+    LetRegNum(9,'%!9+%!8+8');
+    MUIAdd(8,%!9,%!7-30,0, 'CB_Ghostview','TCheckBox','B_Output','Open Output in &Ghostview');
+      MUISet('CB_Ghostview','checked','1');
+
+  MUIAdd(8,8,%!7-16, 72, 'GroupBox_Exec','TGroupBox','Page2','Execution Mode');
+    MUIAdd(8,20,'(%!7-16)/2', 0, 'Detached','TCheckBox','GroupBox_Exec','Run Detached');
+      MUISet('Detached','checked','1');
+    MUIAdd(8,44,'(%!7-16)/2', 0, 'ExitCode','TCheckBox','GroupBox_Exec','Detect Exit Code');
+      MUISet('ExitCode','checked','1');
+    MUIAdd(%!7/2+8,20,'(%!7-16)/2-20', 0, 'Pause','TCheckBox','GroupBox_Exec','Pause');
+      MUISet('Pause','checked','0');
+    MUIAdd(%!7/2+8,44,'(%!7-16)/2-20', 0, 'High_Priority','TCheckBox','GroupBox_Exec','High Priority');
+      MUISet('High_Priority','checked','0');
+
+  MUIGet('GroupBox_Exec','height',9);
+  MUIGet('GroupBox_Exec','top',8);
+  MUIAdd(8,%!9+%!8+8,%!7-16, 60, 'SigBox','TGroupBox','Page2','Signature override (-s#)');
+    MUIAdd(8,24,100, 0, 'Sigs','TEdit','SigBox');
+    // Comment this line if you want to save "#signatures state"
+      MUISet('Sigs','save mode','-1'); // No Saving
+      MUISet('Sigs','hint','Enter a number divisible by 4.');
+    MUIAdd(116,16,0, 0, 'SigLabel1','TLabel','SigBox','#pages/book.  Leave blank for default!');
+    MUIAdd(116,32,0, 0, 'SigLabel2','TLabel','SigBox','This option is not saved.');
+
+  JMP('End_Events');
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+:Browse:: ===========================================================
+  // Start the Browse Open Dialog...
+  MUIGet('InputFile','text',9);
+  GetFilePath("%!9",9);
+  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%P')");
+  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%!P');");
+  Browse(9,'Postscript files|*.ps;*.eps|All Files|*.*','%!9');
+  IfOK(!|MUISet('InputFile','text','%!9');|);
+  Call('Output');
+  Return;
+
+//:BrowseOut:: ========================================================
+//  // Start the Browse Open Dialog...
+//  MUIGet('OutputFile','text',9);
+//  GetFilePath("%!9",9);
+//  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%P')");
+//  IfFileExists("%!9\",!"Relax;",!"LetReg(9,'%!P');");
+//  Browse(9,'Postscript files|*.ps;*.eps|All Files|*.*','%!9');
+//  IfOK(!|MUISet('OutputFile','text','%!9');|);
+//  Return;
+
+:Output:: ===========================================================
+  // Fix the output filename from the current input
+  MUIGet('AutoOutput','checked','9');
+  IfNum(%!9,'1','<>',!"MUISet('OutputFile','readonly','0');Return;");
+  MUISet('OutputFile','readonly','1');
+  MUIGet('InputFile','text',9);
+  IfStr('%!9','','>',>
+    !|GetFilePath('%!9',8);>
+      GetFileName('%!9',7);>
+      LetReg(8,'%!8\%!7-booklet');>
+      GetFileType('%!9',9);>
+      LetReg(9,'%!8%!9');>
+     |);
+  MUISet('OutputFile','text','%!9');
+//  Call('Enable');
+  Return;
+
+:GSView:: ===========================================================
+
+  MUIGet('OutputFile','text',9);
+  GetFileName("%!9",8);
+  GetFileType("%!9",7);
+  GetFilePath("%!9",6);
+  LetReg(8,"%!8%!7");
+  Run(|%$('GSView'); "%!9"|,'%!6',0,0,'%!8 - GSview',1,1);
+  Return;
+
+:Compile:: ==========================================================
+
+  MUIGet('InputFile','text',9);
+  MUIGet('OutputFile','text',8);
+
+  LetReg(7,'');
+
+  MUIGet('PromptOverwrite','checked',0);
+  IfNum(%!0,'0','=',!'JMP("no_Prompt");');
+  IfFileExists("%!8",>
+      !'Prompt("Overwrite ""%!8""?",2,0,"Relax;","PopTagsandRegisters;Exit;");');
+:no_Prompt:: ========================================================
+
+  MUIGet('Detached','checked',0);
+  LetRegNum(1,00000100);
+  IfNum(%!0,0,'>',!'LetRegNum(1,%!1+1000);');
+  MUIGet('High_Priority','checked',2);
+  MUIGet('Pause','checked',3);
+  IfNum(%!3,0,'>',!'LetRegNum(3,111);',!'LetRegNum(3,000);');
+
+  MUIGet('Sigs','text',5);
+  IfStr('%!5','','=',"LetReg(5,'');","LetReg(5,'-s%!5');");
+
+  GetFilePath("%!9",6);
+
+  // psbook -q -s signature infile outfile
+  WinExe("",'psbook %!5 "%!9" "%!8_temp_book.ps"',"%!6",>
+    "psbook...",%!1,%!2,'','','',%!3);
+
+  // Exit Code: Errors (zero return)?
+  MUIGet('ExitCode','checked',0);
+  IfNum(%!0,0,'>',>
+   !|>
+      GetExitCode(0);>
+      IfNum('%!0','0','=',!'Relax;',>
+        !'Prompt("psbook.exe returned nonzero Exit Code (%!0) indicating that some problems might have occurred during the compilation...");');>
+    |);
+
+  IfFileExists("%!8_temp_book.ps",'Relax;',>
+        !'Prompt(|psbook.exe failed to create an output file.>
+          %\For possible explanations start the accessory from the Command Prompt and consult psbook''s Documentation!|);>
+          PopTagsandRegisters;Exit;');
+
+  MUIGet('Input_Paper','text',5);
+  IfStr('%!5','','=',"LetReg(5,'');","LetReg(5,'-p%!5 -P%!5');");
+
+  // psnup -2  infile outfile
+  WinExe("",'psnup -2 %!5 "%!8_temp_book.ps" "%!8"',"%!6",>
+    "psnup...",%!1,%!2,'','','',%!3);
+
+  // Exit Code: Errors (zero return)?
+  MUIGet('ExitCode','checked',0);
+  IfNum(%!0,0,'>',>
+   !|>
+      GetExitCode(0);>
+      IfNum('%!0','0','=',!'Relax;',>
+        !'Prompt("psnup.exe returned nonzero Exit Code (%!0) indicating that some problems might have occurred during the compilation...");');>
+    |);
+
+  IfFileExists("%!8",'Relax;',>
+        !'Prompt(|psnup.exe failed to create output file "%!8".>
+          %\For possible explanations start the accessory from the Command Prompt and consult psnup''s Documentation!|);>
+          PopTagsandRegisters;Exit;');
+
+  DeleteFile("%!8_temp_book.ps");  // Cleanup.  Not totally necessary; save a little disk space.
+
+  MUIGet('CB_Ghostview','checked',0);
+  IfNum(%!0,0,'>',>
+   !|Call('GSView');|);
+
+  Return;
+
+:End_Events:: =======================================================
+
+//  // Load Previous Values ....
+  MUILoad('%!4'); // It does not have to exist...
+  // Except the Input File:
+  IfFileExists("%P\%N.ps",>
+    !|MUISet('InputFile','text','%P\%N.ps');|);
+  Call('Output'); // Fix Output File Name and Enable Actions
+
+  MUIShow; // Show Modal Dialog
+//
+  IfOK('Relax;','PopTagsandRegisters;Exit;');
+//
+//  // Save the Current Values ....
+  MUISave('%!4');
+// input-Error check
+//  MUIGet('therange','text',9);
+//  IfStr('%!9','','=',!'Prompt("You did not specify any pages.%\Use a dash (-) to choose the entire document.%\Try again?",3,0,!"Exe(`%X`);PopTagsandRegisters;Exit;")');
+  MUIGet('InputFile','text',9);
+  IfStr('%!9','','=',!'Prompt("You did not choose an input file.  %\Try again?",3,0,!"Exe(`%X`);PopTagsandRegisters;Exit;")');
+  IfFileExists('%!9','Relax;',!'Prompt("Input file%\%!9%\does not exist!  Try again?",3,0,!"Exe(`%X`);PopTagsandRegisters;Exit;")');
+//
+  Call('Compile');
+
+PopTagsandRegisters;
+
+End;

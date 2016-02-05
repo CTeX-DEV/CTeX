@@ -1,0 +1,6 @@
+    ALT="\chapter*{?}"
+    ALT="\chapter*[?]{?}"
+    ALT="\addchap{?}"
+    ALT="\addchap[?]"
+    ALT="\addchap*{?}"
+    MODE_FILTER="TeX"

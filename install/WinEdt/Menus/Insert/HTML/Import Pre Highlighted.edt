@@ -1,0 +1,25 @@
+// Import Selected Text into HTML Document as <pre> </pre> environment (Translate Tags)
+
+  ExportDoc(0,       // Register<>
+  0,                 // HEX RGB Format<>
+  '',                // RGB Color: Delimiter<>
+  '">',              // RGB Color: Trailing String<>
+  '<font color="#',  // RGB Color: Start + RGB<>
+  '</font>',         // RGB Color: End<>
+  '<i>',             // Font: Start Italic<>
+  '</i>',            // Font: End Italic<>
+  '<b>',             // Font: Start Bold<>
+  '</b>',            // Font: End Bold<>
+  '<u>',             // Font: Start Underline<>
+  '</u>',            // Font: End Underline<>
+  '<s>',             // Font: Start Strikeout<>
+  '</s>',            // Font: End Strikeout<>
+  '',                // Line Break (<br/> or '' if inside <pre> ... </pre>)<>
+  'HTML_Tag_Import', // Translation Table: Char -> String!!!<>
+  '%S');             // String to be exported ...
+  Delete;
+  Mark(0);
+  Ins("%!0");
+  SelectFromMark;
+
+End;

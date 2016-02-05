@@ -1,0 +1,15 @@
+// Upgrade WinEdt
+
+Requires(20010724); // Requires this build of WinEdt to work properly
+
+Open("%B\WinShell\Upgrade.txt",1);
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+  ProcessMessages;
+  Wait(99);
+  SetFocus;
+  ProcessMessages;
+
+End;

@@ -1,0 +1,13 @@
+// Browse for Macro File to be executed and remember the folder for the next time
+// The first time start in WinEdt's Macro Folder...
+
+  SaveRegisters(1111111111); // Clean Macro writing...
+  IfStr("%$('Exe_Macro-Folder');","","=",!"Assign('Exe_Macro-Folder','%b\Macros');");
+  IfFileExists("%$('Exe_Macro-Folder');\",!"Relax;",!"Assign('Exe_Macro-Folder');");
+  Browse(0,"WinEdt Macro Files|*.edt|All Files|*.*","%$('Exe_Macro-Folder');");
+  IfOK(!"Relax;",!"Exit;");
+  GetFilePath("%!0", 1);
+  Assign('Exe_Macro-Folder','%!1');
+  Exe("%!0");
+  RestoreRegisters(1111111111);
+End;

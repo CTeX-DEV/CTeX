@@ -1,0 +1,35 @@
+// Default Configuration for Execution Modes
+
+  PushTagsandRegisters;
+
+  // Original PATH
+  SetEnvVar('PATH','%$(`xPATH`)'); // The Original Local PATH
+
+  SearchForFile(0,'tex.exe');
+  IfOK("Relax;","LetReg(0);");
+  FindInString('%!0','miktex',1,2,0,0);
+  IfOK(!"JMP('MiKTeX');");
+  FindInString('%!0','texlive',1,2,0,0);
+  IfOK(!"JMP('TeXLive');");
+  GetFilePath('%!0',0);
+  IfFileExists('%!0\yap.exe',!"JMP('MiKTeX');");
+  IfFileExists('%!0\texify.exe',!"JMP('MiKTeX');");
+  IfFileExists('%!0\dviout.exe',!"JMP('TeXLive');");
+
+  // Is TeX System properly installed?
+
+:MiKTeX:: ===========================================================
+  Exe('%b\Exec\Default-MiKTeX\Config.edt');
+  JMP('Done');
+
+:TeXLive:: ==========================================================
+  Exe('%b\Exec\Default-TeX Live\Config.edt');
+  JMP('Done');
+
+:Done:: =============================================================
+
+  PopTagsandRegisters;
+
+  Assign('Config-Dir','Default');
+
+End;

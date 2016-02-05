@@ -1,0 +1,32 @@
+// Swap two characters at the cursor (similar to emacs Ctrl-T)
+ GetLength(0, "%L");
+ IfNum(%!0,2,'<','Exit;');  // Nothing to Swap: line is shorter than 2 characters
+ IfNum(%c,1,'<=','CharRight;');  // OK if at the beginning of line
+ IfNum(%c,%!0,'>','CharLeft;');  // OK if past the end of the line
+ ExtractByIndex(1, "%L", %c-1, %c-1);   // Current Character in %!1
+ BeginGroup;  // Undo in one stroke
+ SetupLine;
+ SetSel(0);
+ Delete;
+ CharLeft;
+ Ins("%!1");
+ RefreshLine;
+ EndGroup;
+End;
+
+// Swap two characters at the left of the cursor (similar to emacs Ctrl-T)
+ GetLength(0, "%L");
+ IfNum(%!0,2,'<','Exit;');  // Nothing to Swap: line is shorter than 2 characters
+ IfNum(%c,1,'<=','CharRight;');  // OK if at the beginning of line
+ IfNum(%c,2,'<=','CharRight;');  // OK if at the beginning of line
+ ExtractByIndex(1, "%L", %c-2, %c-2);   // Current Character in %!1
+ BeginGroup;  // Undo in one stroke
+ SetupLine;
+ SetSel(0);
+ Backspace;
+ CharLeft;
+ Ins("%!1");
+ CharRight;
+ RefreshLine;
+ EndGroup;
+End;

@@ -1,0 +1,115 @@
+// Remove Local ini and edt files if they are empty or the same as global
+
+// Users probably forget to do this before upgrading
+// so it is best to keep it tidy as we go...
+
+    IfStr('%b','%B','=',!"Exit;");
+
+    ProcessMessages;
+    SetFolder('%b');
+
+    PushTagsandRegisters;
+
+    ListFolderFiles(1,'%b\ConfigEx','.ini',0,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\ConfigEx\%!3",>
+          !"ReadFile('%b\ConfigEx\%!3',4);>
+            ReadFile('%B\ConfigEx\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\ConfigEx\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\ConfigEx\%!3`);');");>
+        LetReg(8,'%b\ConfigEx\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    ListFolderFiles(1,'%b\Exec','.edt',1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\Exec\%!3",>
+          !"ReadFile('%b\Exec\%!3',4);>
+            ReadFile('%B\Exec\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\Exec\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\Exec\%!3`);');");>
+        LetReg(8,'%b\Exec\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    ListFolderFiles(1,'%b\Config','.edt',1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\Config\%!3",>
+          !"ReadFile('%b\Config\%!3',4);>
+            ReadFile('%B\Config\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\Config\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\Config\%!3`);');");>
+        LetReg(8,'%b\Config\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    ListFolderFiles(1,'%b\Menus','.edt',1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\Menus\%!3",>
+          !"ReadFile('%b\Menus\%!3',4);>
+            ReadFile('%B\Menus\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\Menus\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\Menus\%!3`);');");>
+        LetReg(8,'%b\Menus\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    ListFolderFiles(1,'%b\Macros','.edt',1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\Macros\%!3",>
+          !"ReadFile('%b\Macros\%!3',4);>
+            ReadFile('%B\Macros\%!3',5);>
+            IfStr('%!4','%!5',!'=',!'DeleteFile(`%b\Macros\%!3`);');>
+            IfStr('%!4',!'',!'=',!'DeleteFile(`%b\Macros\%!3`);');");>
+        LetReg(8,'%b\Macros\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+
+    PopTagsandRegisters;
+
+End;

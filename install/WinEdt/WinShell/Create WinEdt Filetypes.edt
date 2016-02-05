@@ -1,0 +1,1602 @@
+// Icons and Filetype Associations
+
+Requires(20110503); // Requires this build of WinEdt to work properly
+
+// is Power User?
+Exe('%B\WinShell\isPowerUser.edt');
+
+Assign('WinEdt-Exe','"%B\WinEdt.exe"');
+// If there are problems assign the string that your Windows can handle
+// Assign('WinEdt-Exe','%~B\WinEdt.exe');
+
+Assign('WinEdt-Icons','%B\WinShell\Icons');
+
+// The register %!9: 0..2 determines on which level
+// the associations are made...
+
+// HKEY_CLASSES_ROOT ...
+LetReg(1,'HKEY_CLASSES_ROOT');
+LetReg(0,'');
+LetReg(8,'Classes Root');
+
+// HKEY_LOCAL_MACHINE?
+IfStr('%!9','1','=',>
+  !`>
+    LetReg(1,'HKEY_LOCAL_MACHINE');>
+    LetReg(0,'Software\Classes\');>
+    LetReg(8,'Local Machine');>
+   `);
+
+// HKEY_CURRENT_USER?
+IfStr('%!9','2','=',>
+  !`>
+    LetReg(1,'HKEY_CURRENT_USER');>
+    LetReg(0,'Software\Classes\');>
+    LetReg(8,'Current User');>
+   `);
+
+// Command Line Switches:
+// Affects the first instance of WinEdt
+// -V: Temporary Project
+// -0: Do not restore other documents
+// Empty: default...
+// Can be customized on per-filetype basis:
+//        Search for %!7 or %$('WinEdt-Exe');
+//        and add, remove or change the switch
+// Default Command Line Switch: Assigned in the Dialog...
+LetReg(7,"%$('WinEdt-Switches');");
+
+ClearIconList;
+
+IfStr('%@("%!1","%!0.edt"," ")','WinEdt.edt','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.edt\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.edt\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\WinEdt-Edt.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".edt","WinEdt Macro File",>
+  "%$('WinEdt-Icons');\WinEdt-Edt.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.prj"," ")','WinEdt.prj','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.prj\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); -V ""[OpenPrj(|%%1|);]""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.prj\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\WinEdt-Prj.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".prj","WinEdt Project File",>
+  "%$('WinEdt-Icons');\WinEdt-Prj.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.txt"," ")','WinEdt.txt','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.txt\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.txt\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\WinEdt.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".txt","Text File",>
+  "%$('WinEdt-Icons');\WinEdt.ico",0,1,1);
+
+IfStr('%@("%!1","%!0.tex"," ")','WinEdt.tex','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.tex\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.tex\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\tex.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".tex","TeX Document",>
+  "%$('WinEdt-Icons');\tex.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.ltx"," ")','WinEdt.ltx','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.ltx\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.ltx\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\ltx.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".ltx","LaTeX Document",>
+  "%$('WinEdt-Icons');\ltx.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.aux"," ")','WinEdt.aux','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.aux\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.aux\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\ltxaux.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".aux","LaTeX Auxiliaries",>
+  "%$('WinEdt-Icons');\ltxaux.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.bbl"," ")','WinEdt.bbl','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.bbl\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.bbl\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\bbl.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".bbl","BibTeX Bibliography",>
+  "%$('WinEdt-Icons');\bbl.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.bib"," ")','WinEdt.bib','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.bib\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.bib\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\bib.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".bib","BibTeX Data Base",>
+  "%$('WinEdt-Icons');\bib.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.blg"," ")','WinEdt.blg','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.blg\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.blg\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\blg.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".blg","BibTeX Log",>
+  "%$('WinEdt-Icons');\blg.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.bst"," ")','WinEdt.bst','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.bst\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.bst\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\bst.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".bst","BibTeX Bibliography Style",>
+  "%$('WinEdt-Icons');\bst.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.clo"," ")','WinEdt.clo','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.clo\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.clo\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\clo.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".clo","LaTeX Class Option",>
+  "%$('WinEdt-Icons');\clo.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.cls"," ")','WinEdt.cls','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.cls\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.cls\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\cls.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".cls","LaTeX Class",>
+  "%$('WinEdt-Icons');\cls.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.def"," ")','WinEdt.def','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.def\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.def\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\def.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".def","LaTeX Encoding Definitions",>
+  "%$('WinEdt-Icons');\def.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.dtx"," ")','WinEdt.dtx','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.dtx\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.dtx\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\dtx.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".dtx","LaTeX Package Source",>
+  "%$('WinEdt-Icons');\dtx.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.drv"," ")','WinEdt.drv','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.drv\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.drv\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\drv.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".drv","LaTeX Source Driver",>
+  "%$('WinEdt-Icons');\drv.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.ins"," ")','WinEdt.ins','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.ins\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.ins\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\ins.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".ins","LaTeX Source Installer",>
+  "%$('WinEdt-Icons');\ins.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.fdd"," ")','WinEdt.fdd','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.fdd\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.fdd\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\dtx.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".fdd","LaTeX Font Source",>
+  "%$('WinEdt-Icons');\dtx.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.fd"," ")','WinEdt.fd','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.fd\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.fd\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\fd.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".fd","LaTeX Font Definitions",>
+  "%$('WinEdt-Icons');\fd.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.idx"," ")','WinEdt.idx','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.idx\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.idx\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\idx.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".idx","MakeIndex Index Entries",>
+  "%$('WinEdt-Icons');\idx.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.ilg"," ")','WinEdt.ilg','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.ilg\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.ilg\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\ilg.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".ilg","MakeIndex Log",>
+  "%$('WinEdt-Icons');\ilg.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.ind"," ")','WinEdt.ind','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.ind\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.ind\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\ind.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".ind","MakeIndex Index",>
+  "%$('WinEdt-Icons');\ind.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.ist"," ")','WinEdt.ist','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.ist\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.ist\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\ist.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".ist","MakeIndex Index Style",>
+  "%$('WinEdt-Icons');\ist.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.glo"," ")','WinEdt.glo','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.glo\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.glo\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\glo.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".glo","MakeIndex Glossary Entries",>
+  "%$('WinEdt-Icons');\glo.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.glg"," ")','WinEdt.glg','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.glg\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.glg\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\glg.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".glg","MakeIndex Glossary Log",>
+  "%$('WinEdt-Icons');\glg.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.gls"," ")','WinEdt.gls','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.gls\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.gls\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\gls.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".gls","MakeIndex Glossary",>
+  "%$('WinEdt-Icons');\gls.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.nlo"," ")','WinEdt.nlo','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.nlo\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.nlo\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\nlo.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".nlo","MakeIndex Nomenclature Entries",>
+  "%$('WinEdt-Icons');\nlo.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.nlg"," ")','WinEdt.nlg','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.nlg\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.nlg\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\nlg.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".nlg","MakeIndex Nomenclature Log",>
+  "%$('WinEdt-Icons');\nlg.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.nls"," ")','WinEdt.nls','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.nls\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.nls\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\nls.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".nls","MakeIndex Nomenclature",>
+  "%$('WinEdt-Icons');\nls.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.lof"," ")','WinEdt.lof','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.lof\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.lof\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\lof.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".lof","LaTeX List of Figures",>
+  "%$('WinEdt-Icons');\lof.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.log"," ")','WinEdt.log','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.log\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.log\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\log.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".log","Log File",>
+  "%$('WinEdt-Icons');\log.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.lot"," ")','WinEdt.lot','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.lot\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.lot\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\lot.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".lot","LaTeX List of Tables",>
+  "%$('WinEdt-Icons');\lot.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.mf"," ")','WinEdt.mf','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.mf\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.mf\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\mf.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".mf","Metafont File",>
+  "%$('WinEdt-Icons');\mf.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.mp"," ")','WinEdt.mp','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.mp\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.mp\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\mp.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".mp","Metapost File",>
+  "%$('WinEdt-Icons');\mp.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.mpx"," ")','WinEdt.mpx','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.mpx\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.mpx\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\mpx.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".mpx","Metapost Auxiliaries",>
+  "%$('WinEdt-Icons');\mpx.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.sty"," ")','WinEdt.sty','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.sty\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.sty\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\sty.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".sty","LaTeX Style/Package",>
+  "%$('WinEdt-Icons');\sty.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.toc"," ")','WinEdt.toc','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.toc\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.toc\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\toc.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".toc","LaTeX Table of Contents",>
+  "%$('WinEdt-Icons');\toc.ico",1,1,1);
+
+IfStr('%@("%!1","%!0.tfm"," ")','WinEdt.tfm','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.tfm\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.tfm\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\tfm.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".tfm","TeX Font Metric",>
+  "%$('WinEdt-Icons');\tfm.ico",1,0,1);
+
+IfStr('%@("%!1","%!0.pk"," ")','WinEdt.pk','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.pk\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.pk\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\pk.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".pk","TeX Packed Font",>
+  "%$('WinEdt-Icons');\pk.ico",1,0,1);
+
+IfStr('%@("%!1","%!0.vf"," ")','WinEdt.vf','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.vf\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.vf\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\vf.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".vf","TeX Virtual Font",>
+  "%$('WinEdt-Icons');\vf.ico",1,0,1);
+
+IfStr('%@("%!1","%!0.synctex"," ")','WinEdt.synctex','=',>
+  'LetReg(2,"1");','LetReg(2,"0");');
+IfStr('%@("%!1","%!0WinEdt.synctex\shell\open\command"," ")',>
+  "%$('WinEdt-Exe'); %!7""%%1""",'=',>
+  'LetReg(3,"1");','LetReg(3,"0");');
+IfStr('%@("%!1","%!0WinEdt.synctex\DefaultIcon"," ")',>
+  "%$('WinEdt-Icons');\synctex.ico,0",'=',>
+  'LetReg(4,"1");','LetReg(4,"0");');
+AddIconItem(%!2,%!3,%!4,".synctex","TeX-PDF Synchronization File",>
+  "%$('WinEdt-Icons');\synctex.ico",1,0,1);
+
+// Show the Options
+  ShowIconList("WinEdt TeX Icons and Filetype Associations - %!8");
+  IfOK('Relax;','Exit;'); // Continue?
+
+// Process the filetypes preferences
+StartWorking('Modifying the Registry...');
+
+// Default Command Line Switch: Assigned in the Dialog...
+LetReg(7,"%$('WinEdt-Switches');");
+LetReg(9,"-1");
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.edt","WinEdt.edt");>
+     SetRegKey("%!1","%!0WinEdt.edt","WinEdt Macro File");>
+     SetRegKey("%!1","%!0WinEdt.edt\shell\Run with WinEdt");>
+     SetRegKey("%!1","%!0WinEdt.edt\shell\Run with WinEdt\Command",>
+               "%$('WinEdt-Exe'); -V ""[GetFilePath('%%1', 0);Exe('%%1','%%%%!0');]""");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.edt\shell");>
+          SetRegKey("%!1","%!0WinEdt.edt\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.edt\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.edt\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.edt\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.edt","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.edt\DefaultIcon","%$('WinEdt-Icons');\WinEdt-Edt.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.edt","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.edt"," ")','WinEdt.edt','=',>
+       'SetRegKey("%!1","%!0.edt","");>
+        RegDeleteKey("%!1","%!0",".edt");');>
+     RegDeleteKey("%!1","%!0WinEdt.edt\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.edt\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.edt","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.edt","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.edt");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.prj","WinEdt.prj");>
+     SetRegKey("%!1","%!0WinEdt.prj","WinEdt Project File");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.prj\shell");>
+          SetRegKey("%!1","%!0WinEdt.prj\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.prj\shell\open\command","%$('WinEdt-Exe'); -V ""[OpenPrj(|%%1|);]""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.prj\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.prj\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.prj","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.prj\DefaultIcon","%$('WinEdt-Icons');\WinEdt-Prj.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.prj","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.prj"," ")','WinEdt.prj','=',>
+       'SetRegKey("%!1","%!0.prj","");>
+        RegDeleteKey("%!1","%!0",".prj");');>
+     RegDeleteKey("%!1","%!0WinEdt.prj\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.prj\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.prj","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.prj","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.prj");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.txt","WinEdt.txt");>
+     SetRegKey("%!1","%!0WinEdt.txt","Text File");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.txt\shell");>
+          SetRegKey("%!1","%!0WinEdt.txt\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.txt\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.txt\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.txt\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.txt","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.txt\DefaultIcon","%$('WinEdt-Icons');\WinEdt.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.txt","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.txt"," ")','WinEdt.txt','=',>
+       'SetRegKey("%!1","%!0.txt","");>
+        RegDeleteKey("%!1","%!0",".txt");');>
+     RegDeleteKey("%!1","%!0WinEdt.txt\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.txt\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.txt","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.txt","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.txt");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.tex","WinEdt.tex");>
+     SetRegKey("%!1","%!0WinEdt.tex","TeX Document");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.tex\shell");>
+          SetRegKey("%!1","%!0WinEdt.tex\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.tex\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.tex\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.tex\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.tex","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.tex\DefaultIcon","%$('WinEdt-Icons');\tex.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.tex","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.tex"," ")','WinEdt.tex','=',>
+       'SetRegKey("%!1","%!0.tex","");>
+        RegDeleteKey("%!1","%!0",".tex");');>
+     RegDeleteKey("%!1","%!0WinEdt.tex\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.tex\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.tex","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.tex","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.tex");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.ltx","WinEdt.ltx");>
+     SetRegKey("%!1","%!0WinEdt.ltx","LaTeX Document");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.ltx\shell");>
+          SetRegKey("%!1","%!0WinEdt.ltx\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.ltx\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ltx\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.ltx\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.ltx","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.ltx\DefaultIcon","%$('WinEdt-Icons');\ltx.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ltx","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.ltx"," ")','WinEdt.ltx','=',>
+       'SetRegKey("%!1","%!0.ltx","");>
+        RegDeleteKey("%!1","%!0",".ltx");');>
+     RegDeleteKey("%!1","%!0WinEdt.ltx\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.ltx\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.ltx","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.ltx","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.ltx");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.aux","WinEdt.aux");>
+     SetRegKey("%!1","%!0WinEdt.aux","LaTeX Auxiliaries");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.aux\shell");>
+          SetRegKey("%!1","%!0WinEdt.aux\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.aux\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.aux\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.aux\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.aux","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.aux\DefaultIcon","%$('WinEdt-Icons');\ltxaux.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.aux","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.aux"," ")','WinEdt.aux','=',>
+       'SetRegKey("%!1","%!0.aux","");>
+        RegDeleteKey("%!1","%!0",".aux");');>
+     RegDeleteKey("%!1","%!0WinEdt.aux\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.aux\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.aux","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.aux","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.aux");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.bbl","WinEdt.bbl");>
+     SetRegKey("%!1","%!0WinEdt.bbl","BibTeX Bibliography");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.bbl\shell");>
+          SetRegKey("%!1","%!0WinEdt.bbl\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.bbl\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.bbl\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.bbl\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.bbl","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.bbl\DefaultIcon","%$('WinEdt-Icons');\bbl.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.bbl","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.bbl"," ")','WinEdt.bbl','=',>
+       'SetRegKey("%!1","%!0.bbl","");>
+        RegDeleteKey("%!1","%!0",".bbl");');>
+     RegDeleteKey("%!1","%!0WinEdt.bbl\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.bbl\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.bbl","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.bbl","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.bbl");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.bib","WinEdt.bib");>
+     SetRegKey("%!1","%!0WinEdt.bib","BibTeX Data Base");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.bib\shell");>
+          SetRegKey("%!1","%!0WinEdt.bib\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.bib\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.bib\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.bib\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.bib","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.bib\DefaultIcon","%$('WinEdt-Icons');\bib.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.bib","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.bib"," ")','WinEdt.bib','=',>
+       'SetRegKey("%!1","%!0.bib","");>
+        RegDeleteKey("%!1","%!0",".bib");');>
+     RegDeleteKey("%!1","%!0WinEdt.bib\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.bib\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.bib","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.bib","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.bib");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.blg","WinEdt.blg");>
+     SetRegKey("%!1","%!0WinEdt.blg","BibTeX Log");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.blg\shell");>
+          SetRegKey("%!1","%!0WinEdt.blg\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.blg\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.blg\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.blg\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.blg","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.blg\DefaultIcon","%$('WinEdt-Icons');\blg.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.blg","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.blg"," ")','WinEdt.blg','=',>
+       'SetRegKey("%!1","%!0.blg","");>
+        RegDeleteKey("%!1","%!0",".blg");');>
+     RegDeleteKey("%!1","%!0WinEdt.blg\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.blg\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.blg","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.blg","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.blg");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.bst","WinEdt.bst");>
+     SetRegKey("%!1","%!0WinEdt.bst","BibTeX Bibliography Style");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.bst\shell");>
+          SetRegKey("%!1","%!0WinEdt.bst\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.bst\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.bst\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.bst\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.bst","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.bst\DefaultIcon","%$('WinEdt-Icons');\bst.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.bst","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.bst"," ")','WinEdt.bst','=',>
+       'SetRegKey("%!1","%!0.bst","");>
+        RegDeleteKey("%!1","%!0",".bst");');>
+     RegDeleteKey("%!1","%!0WinEdt.bst\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.bst\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.bst","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.bst","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.bst");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.clo","WinEdt.clo");>
+     SetRegKey("%!1","%!0WinEdt.clo","LaTeX Class Option");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.clo\shell");>
+          SetRegKey("%!1","%!0WinEdt.clo\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.clo\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.clo\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.clo\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.clo","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.clo\DefaultIcon","%$('WinEdt-Icons');\clo.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.clo","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.clo"," ")','WinEdt.clo','=',>
+       'SetRegKey("%!1","%!0.clo","");>
+        RegDeleteKey("%!1","%!0",".clo");');>
+     RegDeleteKey("%!1","%!0WinEdt.clo\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.clo\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.clo","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.clo","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.clo");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.cls","WinEdt.cls");>
+     SetRegKey("%!1","%!0WinEdt.cls","LaTeX Class");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.cls\shell");>
+          SetRegKey("%!1","%!0WinEdt.cls\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.cls\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.cls\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.cls\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.cls","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.cls\DefaultIcon","%$('WinEdt-Icons');\cls.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.cls","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.cls"," ")','WinEdt.cls','=',>
+       'SetRegKey("%!1","%!0.cls","");>
+        RegDeleteKey("%!1","%!0",".cls");');>
+     RegDeleteKey("%!1","%!0WinEdt.cls\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.cls\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.cls","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.cls","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.cls");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.def","WinEdt.def");>
+     SetRegKey("%!1","%!0WinEdt.def","LaTeX Encoding Definitions");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.def\shell");>
+          SetRegKey("%!1","%!0WinEdt.def\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.def\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.def\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.def\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.def","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.def\DefaultIcon","%$('WinEdt-Icons');\def.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.def","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.def"," ")','WinEdt.def','=',>
+       'SetRegKey("%!1","%!0.def","");>
+        RegDeleteKey("%!1","%!0",".def");');>
+     RegDeleteKey("%!1","%!0WinEdt.def\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.def\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.def","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.def","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.def");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.dtx","WinEdt.dtx");>
+     SetRegKey("%!1","%!0WinEdt.dtx","LaTeX Package Source");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.dtx\shell");>
+          SetRegKey("%!1","%!0WinEdt.dtx\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.dtx\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.dtx\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.dtx\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.dtx","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.dtx\DefaultIcon","%$('WinEdt-Icons');\dtx.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.dtx","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.dtx"," ")','WinEdt.dtx','=',>
+       'SetRegKey("%!1","%!0.dtx","");>
+        RegDeleteKey("%!1","%!0",".dtx");');>
+     RegDeleteKey("%!1","%!0WinEdt.dtx\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.dtx\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.dtx","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.dtx","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.dtx");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.drv","WinEdt.drv");>
+     SetRegKey("%!1","%!0WinEdt.drv","LaTeX Source Driver");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.drv\shell");>
+          SetRegKey("%!1","%!0WinEdt.drv\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.drv\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.drv\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.drv\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.drv","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.drv\DefaultIcon","%$('WinEdt-Icons');\drv.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.drv","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.drv"," ")','WinEdt.drv','=',>
+       'SetRegKey("%!1","%!0.drv","");>
+        RegDeleteKey("%!1","%!0",".drv");');>
+     RegDeleteKey("%!1","%!0WinEdt.drv\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.drv\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.drv","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.drv","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.drv");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.ins","WinEdt.ins");>
+     SetRegKey("%!1","%!0WinEdt.ins","LaTeX Source Installer");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.ins\shell");>
+          SetRegKey("%!1","%!0WinEdt.ins\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.ins\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ins\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.ins\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.ins","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.ins\DefaultIcon","%$('WinEdt-Icons');\ins.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ins","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.ins"," ")','WinEdt.ins','=',>
+       'SetRegKey("%!1","%!0.ins","");>
+        RegDeleteKey("%!1","%!0",".ins");');>
+     RegDeleteKey("%!1","%!0WinEdt.ins\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.ins\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.ins","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.ins","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.ins");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.fdd","WinEdt.fdd");>
+     SetRegKey("%!1","%!0WinEdt.fdd","LaTeX Font Source");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.fdd\shell");>
+          SetRegKey("%!1","%!0WinEdt.fdd\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.fdd\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.fdd\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.fdd\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.fdd","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.fdd\DefaultIcon","%$('WinEdt-Icons');\dtx.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.fdd","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.fdd"," ")','WinEdt.fdd','=',>
+       'SetRegKey("%!1","%!0.fdd","");>
+        RegDeleteKey("%!1","%!0",".fdd");');>
+     RegDeleteKey("%!1","%!0WinEdt.fdd\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.fdd\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.fdd","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.fdd","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.fdd");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.fd","WinEdt.fd");>
+     SetRegKey("%!1","%!0WinEdt.fd","LaTeX Font Definitions");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.fd\shell");>
+          SetRegKey("%!1","%!0WinEdt.fd\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.fd\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.fd\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.fd\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.fd","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.fd\DefaultIcon","%$('WinEdt-Icons');\fd.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.fd","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.fd"," ")','WinEdt.fd','=',>
+       'SetRegKey("%!1","%!0.fd","");>
+        RegDeleteKey("%!1","%!0",".fd");');>
+     RegDeleteKey("%!1","%!0WinEdt.fd\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.fd\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.fd","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.fd","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.fd");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.idx","WinEdt.idx");>
+     SetRegKey("%!1","%!0WinEdt.idx","MakeIndex Index Entries");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.idx\shell");>
+          SetRegKey("%!1","%!0WinEdt.idx\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.idx\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.idx\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.idx\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.idx","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.idx\DefaultIcon","%$('WinEdt-Icons');\idx.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.idx","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.idx"," ")','WinEdt.idx','=',>
+       'SetRegKey("%!1","%!0.idx","");>
+        RegDeleteKey("%!1","%!0",".idx");');>
+     RegDeleteKey("%!1","%!0WinEdt.idx\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.idx\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.idx","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.idx","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.idx");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.ilg","WinEdt.ilg");>
+     SetRegKey("%!1","%!0WinEdt.ilg","MakeIndex Log");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.ilg\shell");>
+          SetRegKey("%!1","%!0WinEdt.ilg\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.ilg\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ilg\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.ilg\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.ilg","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.ilg\DefaultIcon","%$('WinEdt-Icons');\ilg.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ilg","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.ilg"," ")','WinEdt.ilg','=',>
+       'SetRegKey("%!1","%!0.ilg","");>
+        RegDeleteKey("%!1","%!0",".ilg");');>
+     RegDeleteKey("%!1","%!0WinEdt.ilg\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.ilg\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.ilg","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.ilg","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.ilg");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.ind","WinEdt.ind");>
+     SetRegKey("%!1","%!0WinEdt.ind","MakeIndex Index");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.ind\shell");>
+          SetRegKey("%!1","%!0WinEdt.ind\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.ind\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ind\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.ind\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.ind","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.ind\DefaultIcon","%$('WinEdt-Icons');\ind.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ind","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.ind"," ")','WinEdt.ind','=',>
+       'SetRegKey("%!1","%!0.ind","");>
+        RegDeleteKey("%!1","%!0",".ind");');>
+     RegDeleteKey("%!1","%!0WinEdt.ind\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.ind\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.ind","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.ind","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.ind");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.ist","WinEdt.ist");>
+     SetRegKey("%!1","%!0WinEdt.ist","MakeIndex Index Style");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.ist\shell");>
+          SetRegKey("%!1","%!0WinEdt.ist\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.ist\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ist\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.ist\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.ist","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.ist\DefaultIcon","%$('WinEdt-Icons');\ist.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.ist","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.ist"," ")','WinEdt.ist','=',>
+       'SetRegKey("%!1","%!0.ist","");>
+        RegDeleteKey("%!1","%!0",".ist");');>
+     RegDeleteKey("%!1","%!0WinEdt.ist\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.ist\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.ist","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.ist","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.ist");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.glo","WinEdt.glo");>
+     SetRegKey("%!1","%!0WinEdt.glo","MakeIndex Glossary Entries");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.glo\shell");>
+          SetRegKey("%!1","%!0WinEdt.glo\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.glo\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.glo\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.glo\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.glo","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.glo\DefaultIcon","%$('WinEdt-Icons');\glo.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.glo","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.glo"," ")','WinEdt.glo','=',>
+       'SetRegKey("%!1","%!0.glo","");>
+        RegDeleteKey("%!1","%!0",".glo");');>
+     RegDeleteKey("%!1","%!0WinEdt.glo\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.glo\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.glo","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.glo","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.glo");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.glg","WinEdt.glg");>
+     SetRegKey("%!1","%!0WinEdt.glg","MakeIndex Glossary Log");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.glg\shell");>
+          SetRegKey("%!1","%!0WinEdt.glg\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.glg\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.glg\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.glg\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.glg","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.glg\DefaultIcon","%$('WinEdt-Icons');\glg.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.glg","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.glg"," ")','WinEdt.glg','=',>
+       'SetRegKey("%!1","%!0.glg","");>
+        RegDeleteKey("%!1","%!0",".glg");');>
+     RegDeleteKey("%!1","%!0WinEdt.glg\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.glg\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.glg","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.glg","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.glg");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.gls","WinEdt.gls");>
+     SetRegKey("%!1","%!0WinEdt.gls","MakeIndex Glossary");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.gls\shell");>
+          SetRegKey("%!1","%!0WinEdt.gls\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.gls\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.gls\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.gls\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.gls","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.gls\DefaultIcon","%$('WinEdt-Icons');\gls.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.gls","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.gls"," ")','WinEdt.gls','=',>
+       'SetRegKey("%!1","%!0.gls","");>
+        RegDeleteKey("%!1","%!0",".gls");');>
+     RegDeleteKey("%!1","%!0WinEdt.gls\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.gls\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.gls","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.gls","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.gls");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.nlo","WinEdt.nlo");>
+     SetRegKey("%!1","%!0WinEdt.nlo","MakeIndex Nomenclature Entries");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.nlo\shell");>
+          SetRegKey("%!1","%!0WinEdt.nlo\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.nlo\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.nlo\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.nlo\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.nlo","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.nlo\DefaultIcon","%$('WinEdt-Icons');\nlo.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.nlo","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.nlo"," ")','WinEdt.nlo','=',>
+       'SetRegKey("%!1","%!0.nlo","");>
+        RegDeleteKey("%!1","%!0",".nlo");');>
+     RegDeleteKey("%!1","%!0WinEdt.nlo\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.nlo\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.nlo","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.nlo","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.nlo");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.nlg","WinEdt.nlg");>
+     SetRegKey("%!1","%!0WinEdt.nlg","MakeIndex Nomenclature Log");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.nlg\shell");>
+          SetRegKey("%!1","%!0WinEdt.nlg\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.nlg\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.nlg\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.nlg\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.nlg","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.nlg\DefaultIcon","%$('WinEdt-Icons');\nlg.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.nlg","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.nlg"," ")','WinEdt.nlg','=',>
+       'SetRegKey("%!1","%!0.nlg","");>
+        RegDeleteKey("%!1","%!0",".nlg");');>
+     RegDeleteKey("%!1","%!0WinEdt.nlg\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.nlg\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.nlg","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.nlg","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.nlg");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.nls","WinEdt.nls");>
+     SetRegKey("%!1","%!0WinEdt.nls","MakeIndex Nomenclature");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.nls\shell");>
+          SetRegKey("%!1","%!0WinEdt.nls\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.nls\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.nls\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.nls\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.nls","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.nls\DefaultIcon","%$('WinEdt-Icons');\nls.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.nls","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.nls"," ")','WinEdt.nls','=',>
+       'SetRegKey("%!1","%!0.nls","");>
+        RegDeleteKey("%!1","%!0",".nls");');>
+     RegDeleteKey("%!1","%!0WinEdt.nls\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.nls\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.nls","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.nls","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.nls");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.lof","WinEdt.lof");>
+     SetRegKey("%!1","%!0WinEdt.lof","LaTeX List of Figures");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.lof\shell");>
+          SetRegKey("%!1","%!0WinEdt.lof\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.lof\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.lof\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.lof\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.lof","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.lof\DefaultIcon","%$('WinEdt-Icons');\lof.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.lof","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.lof"," ")','WinEdt.lof','=',>
+       'SetRegKey("%!1","%!0.lof","");>
+        RegDeleteKey("%!1","%!0",".lof");');>
+     RegDeleteKey("%!1","%!0WinEdt.lof\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.lof\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.lof","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.lof","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.lof");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.log","WinEdt.log");>
+     SetRegKey("%!1","%!0WinEdt.log","Log File");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.log\shell");>
+          SetRegKey("%!1","%!0WinEdt.log\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.log\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.log\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.log\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.log","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.log\DefaultIcon","%$('WinEdt-Icons');\log.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.log","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.log"," ")','WinEdt.log','=',>
+       'SetRegKey("%!1","%!0.log","");>
+        RegDeleteKey("%!1","%!0",".log");');>
+     RegDeleteKey("%!1","%!0WinEdt.log\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.log\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.log","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.log","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.log");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.lot","WinEdt.lot");>
+     SetRegKey("%!1","%!0WinEdt.lot","LaTeX List of Tables");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.lot\shell");>
+          SetRegKey("%!1","%!0WinEdt.lot\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.lot\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.lot\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.lot\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.lot","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.lot\DefaultIcon","%$('WinEdt-Icons');\lot.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.lot","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.lot"," ")','WinEdt.lot','=',>
+       'SetRegKey("%!1","%!0.lot","");>
+        RegDeleteKey("%!1","%!0",".lot");');>
+     RegDeleteKey("%!1","%!0WinEdt.lot\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.lot\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.lot","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.lot","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.lot");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.mf","WinEdt.mf");>
+     SetRegKey("%!1","%!0WinEdt.mf","Metafont File");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.mf\shell");>
+          SetRegKey("%!1","%!0WinEdt.mf\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.mf\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.mf\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.mf\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.mf","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.mf\DefaultIcon","%$('WinEdt-Icons');\mf.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.mf","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.mf"," ")','WinEdt.mf','=',>
+       'SetRegKey("%!1","%!0.mf","");>
+        RegDeleteKey("%!1","%!0",".mf");');>
+     RegDeleteKey("%!1","%!0WinEdt.mf\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.mf\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.mf","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.mf","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.mf");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.mp","WinEdt.mp");>
+     SetRegKey("%!1","%!0WinEdt.mp","Metapost File");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.mp\shell");>
+          SetRegKey("%!1","%!0WinEdt.mp\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.mp\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.mp\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.mp\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.mp","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.mp\DefaultIcon","%$('WinEdt-Icons');\mp.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.mp","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.mp"," ")','WinEdt.mp','=',>
+       'SetRegKey("%!1","%!0.mp","");>
+        RegDeleteKey("%!1","%!0",".mp");');>
+     RegDeleteKey("%!1","%!0WinEdt.mp\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.mp\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.mp","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.mp","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.mp");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.mpx","WinEdt.mpx");>
+     SetRegKey("%!1","%!0WinEdt.mpx","Metapost Auxiliaries");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.mpx\shell");>
+          SetRegKey("%!1","%!0WinEdt.mpx\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.mpx\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.mpx\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.mpx\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.mpx","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.mpx\DefaultIcon","%$('WinEdt-Icons');\mpx.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.mpx","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.mpx"," ")','WinEdt.mpx','=',>
+       'SetRegKey("%!1","%!0.mpx","");>
+        RegDeleteKey("%!1","%!0",".mpx");');>
+     RegDeleteKey("%!1","%!0WinEdt.mpx\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.mpx\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.mpx","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.mpx","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.mpx");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.sty","WinEdt.sty");>
+     SetRegKey("%!1","%!0WinEdt.sty","LaTeX Style/Package");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.sty\shell");>
+          SetRegKey("%!1","%!0WinEdt.sty\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.sty\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.sty\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.sty\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.sty","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.sty\DefaultIcon","%$('WinEdt-Icons');\sty.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.sty","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.sty"," ")','WinEdt.sty','=',>
+       'SetRegKey("%!1","%!0.sty","");>
+        RegDeleteKey("%!1","%!0",".sty");');>
+     RegDeleteKey("%!1","%!0WinEdt.sty\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.sty\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.sty","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.sty","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.sty");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.toc","WinEdt.toc");>
+     SetRegKey("%!1","%!0WinEdt.toc","LaTeX Table of Contents");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.toc\shell");>
+          SetRegKey("%!1","%!0WinEdt.toc\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.toc\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.toc\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.toc\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.toc","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.toc\DefaultIcon","%$('WinEdt-Icons');\toc.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.toc","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.toc"," ")','WinEdt.toc','=',>
+       'SetRegKey("%!1","%!0.toc","");>
+        RegDeleteKey("%!1","%!0",".toc");');>
+     RegDeleteKey("%!1","%!0WinEdt.toc\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.toc\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.toc","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.toc","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.toc");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.tfm","WinEdt.tfm");>
+     SetRegKey("%!1","%!0WinEdt.tfm","TeX Font Metric");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.tfm\shell");>
+          SetRegKey("%!1","%!0WinEdt.tfm\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.tfm\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.tfm\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.tfm\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.tfm","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.tfm\DefaultIcon","%$('WinEdt-Icons');\tfm.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.tfm","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.tfm"," ")','WinEdt.tfm','=',>
+       'SetRegKey("%!1","%!0.tfm","");>
+        RegDeleteKey("%!1","%!0",".tfm");');>
+     RegDeleteKey("%!1","%!0WinEdt.tfm\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.tfm\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.tfm","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.tfm","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.tfm");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.pk","WinEdt.pk");>
+     SetRegKey("%!1","%!0WinEdt.pk","TeX Packed Font");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.pk\shell");>
+          SetRegKey("%!1","%!0WinEdt.pk\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.pk\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.pk\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.pk\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.pk","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.pk\DefaultIcon","%$('WinEdt-Icons');\pk.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.pk","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.pk"," ")','WinEdt.pk','=',>
+       'SetRegKey("%!1","%!0.pk","");>
+        RegDeleteKey("%!1","%!0",".pk");');>
+     RegDeleteKey("%!1","%!0WinEdt.pk\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.pk\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.pk","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.pk","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.pk");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.vf","WinEdt.vf");>
+     SetRegKey("%!1","%!0WinEdt.vf","TeX Virtual Font");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.vf\shell");>
+          SetRegKey("%!1","%!0WinEdt.vf\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.vf\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.vf\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.vf\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.vf","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.vf\DefaultIcon","%$('WinEdt-Icons');\vf.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.vf","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.vf"," ")','WinEdt.vf','=',>
+       'SetRegKey("%!1","%!0.vf","");>
+        RegDeleteKey("%!1","%!0",".vf");');>
+     RegDeleteKey("%!1","%!0WinEdt.vf\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.vf\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.vf","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.vf","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.vf");>
+   `);
+
+LetRegNum(9,"%!9+1");
+IfIconChecked(%!9,0,>
+  !`>
+     SetRegKey("%!1","%!0.synctex","WinEdt.synctex");>
+     SetRegKey("%!1","%!0WinEdt.synctex","TeX-PDF Synchronization File");>
+     IfIconChecked(%!9,1,>
+       !``SetRegKey("%!1","%!0WinEdt.synctex\shell");>
+          SetRegKey("%!1","%!0WinEdt.synctex\shell\open");>
+          SetRegKey("%!1","%!0WinEdt.synctex\shell\open\command","%$('WinEdt-Exe'); %!7""%%1""");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.synctex\shell\open","command");>
+          RegDeleteKey("%!1","%!0WinEdt.synctex\shell","open");>
+          RegDeleteKey("%!1","%!0WinEdt.synctex","shell");``);>
+     IfIconChecked(%!9,2,>
+       !``SetRegKey("%!1","%!0WinEdt.synctex\DefaultIcon","%$('WinEdt-Icons');\synctex.ico,0");``,>
+       !``RegDeleteKey("%!1","%!0WinEdt.synctex","DefaultIcon");``);>
+   `,>
+  !`>
+     IfStr('%@("%!1","%!0.synctex"," ")','WinEdt.synctex','=',>
+       'SetRegKey("%!1","%!0.synctex","");>
+        RegDeleteKey("%!1","%!0",".synctex");');>
+     RegDeleteKey("%!1","%!0WinEdt.synctex\shell\open","command");>
+     RegDeleteKey("%!1","%!0WinEdt.synctex\shell","open");>
+     RegDeleteKey("%!1","%!0WinEdt.synctex","shell");>
+     RegDeleteKey("%!1","%!0WinEdt.synctex","DefaultIcon");>
+     RegDeleteKey("%!1","%!0","WinEdt.synctex");>
+   `);
+
+// Make sure about the default open command for manual associations:
+SetRegKey("%!1","%!0Applications\WinEdt.exe\shell\open\command",>
+  "%$('WinEdt-Exe'); %!7""%%1""");
+
+// Required for explorer's "Search In Files" for TeX files on XP
+Exe('%B\WinShell\XPSearch PersistentHandler.edt');
+
+// Force the Explorer to Refresh the associated Icons
+// Only for Power Users (Win2K/XP)!!!
+// IfStr("%$('isPowerUser');","1","=",>
+//  !`ShellExecute("Install",'%B\WinShell\Icons\_Icons.inf','','',0);`);
+
+Release('WinEdt-Exe');
+Release('WinEdt-Icons');
+
+StopWorking;
+
+End;

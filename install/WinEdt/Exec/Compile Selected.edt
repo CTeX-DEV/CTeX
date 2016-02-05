@@ -1,0 +1,13 @@
+// -*- ASCII:EDT -*-
+// Mode-Sensitive Compile Selected Text
+
+// @BEGIN: TeX
+IfisMode("TeX","%!M",!"Exe('%b\Exec\TeX\Compile Selected.edt');Exit;");
+// @END: TeX
+
+// Add any custom compilers here ...
+
+// @DEFAULT
+Relax; // No Default Compiler!
+
+End;

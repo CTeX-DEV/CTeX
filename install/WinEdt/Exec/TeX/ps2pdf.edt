@@ -1,0 +1,37 @@
+// -*- ASCII:EDT -*-
+// TeX: ps2pdf ...
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+  Assign('ExitCode-OK','0'); // OK Exit Code
+  LetReg(9,'ps2pdf');   // Execution Modes Compiler
+  LetReg(8,'');         // Log File (or empty)
+  LetReg(7,'pdf');      // Output Format
+  LetReg(6,'%P');       // Startup Folder
+
+  // Display a Dialog for Extra Switches:
+  IfStr("%$('%!9-GUI');","1","=",>
+    !|EnterSwitches('%!9',1,1,1);>
+      IfOK(!`Relax;`,!`PopTagsandRegisters;Exit;`);|,>
+    !|Release('%!9--Switches');Release('%!9--Pages');|);
+  LetReg(3, "%$('%!9-Executable'); %$('%!9-Switches');");
+  LetReg(4,'');
+  IfStr("%$('%!9-Paper_Size');","1","=",!|LetReg(4, "%!4 -sPAPERSIZE=letter");|);
+  IfStr("%$('%!9-Paper_Size');","2","=",!|LetReg(4, "%!4 -sPAPERSIZE=legal");|);
+  IfStr("%$('%!9-Paper_Size');","3","=",!|LetReg(4, "%!4 -sPAPERSIZE=a4");|);
+  IfStr("%$('%!9-Paper_Size');","4","=",!|LetReg(4, "%!4 -sPAPERSIZE=%$('%!9-Paper_Custom_Size');");|);
+  IfStr("%$('%!9-Landscape');", "1","=",!|LetReg(4, "%!4 -dORIENT1=false");|);
+  IfStr("%$('%!9-Executable');","ps2pdf.exe","=",!|SubstituteInString("%!4","=","#",0,4);|);
+  // Build the Command Line ...
+  LetReg(5, "%!3%!4 %$('%!9--Switches'); %$('%!9--Pages'); %$('%!9-Parameters');");
+
+  // Use Execution Modes to determine the flow of execution...
+  Exe('%b\Exec\ExeCompiler.edt');
+  IfFileExists("%P\%N.pdf",>
+    !|IfStr("%$('%!9-Clean_Build');",!"1",!"=",>
+       !||IfFileExists("%P\%N.ps",!"DeleteFile('%P\%N.ps')");||);|);
+  UpdateStatus;   // Update WinEdt's Menu etc...
+  PopTagsandRegisters;
+
+End;

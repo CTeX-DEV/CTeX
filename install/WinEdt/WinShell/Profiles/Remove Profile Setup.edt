@@ -1,0 +1,9 @@
+// Remove Multi User Setup (requires administrator privileges):
+// Startup Macro no longer automatically creates or updates the user profile
+
+IfFileExists("%B\WinShell\Create Startup User Profile.edt",>
+   !`DeleteFile("%B\WinShell\Create Startup User Profile.edt");`);
+
+Prompt("WinEdt is no longer configured for the automatic creation of user profiles...",0,1);
+
+End;

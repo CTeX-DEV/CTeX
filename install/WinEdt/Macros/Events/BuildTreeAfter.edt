@@ -1,0 +1,11 @@
+// Global Tree Build Event Handler (After)
+
+  Requires(20040806);
+  PushTagsandRegisters;
+
+  // Update Dynamic Dictionaries...
+  Exe('%b\Macros\Events\DynDict.edt');
+
+  PopTagsandRegisters;
+
+End;

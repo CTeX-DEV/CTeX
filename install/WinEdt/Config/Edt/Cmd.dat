@@ -1,0 +1,205 @@
+% Commands List
+% -*- DATA:EDT -*-
+% Created: Saturday, September 18, 2004 at 20:47
+
+New
+Open...
+Insert...
+Update
+Save
+Save As...
+Save Copy As...
+Save All
+Send...
+Print...
+Close
+Exit
+Undo
+Redo
+Undo All
+Redo All
+Reset Undo Buffer
+Select All
+Erase Clipboard
+Paste
+Cut
+Copy
+Append
+Delete
+Find...
+Replace...
+Next
+Previous
+Search Again
+Incremental Search
+Go To Line...
+Errors...
+Compare Documents...
+Next Difference
+Previous Difference
+Select Paragraph
+Format Paragraph
+Format Document
+Flush Left
+Flush Right
+Center
+Fill Extra Spaces
+Remove Extra Spaces
+Trim Spaces
+Add Spaces
+Indent
+Unindent
+Move Right
+Move Left
+Insert String...
+Remove String
+Insert Comment
+Remove Comment
+Append Line Break
+Remove Line Break
+Toggle Case
+Upper Case
+Lower Case
+Initial Capitals
+Spell Check
+Check Word
+Complete Word
+Next Error
+Enumerate Lines...
+Sort Lines...
+Insert Bullet
+Next Bullet
+Previous Bullet
+Character Map...
+Caret <-> Select
+Set Selection
+Reset Selection
+Set Mark
+Go To Mark
+Select From Mark
+Move Ring Backward
+Move Ring Forward
+Match Delimiter
+Normal Delimiter Check
+Quick Delimiter Check
+Slow Delimiter Check
+Auto Delimiter Check
+Slow and Auto Delimiter Check
+New Document...
+Word Count...
+Document Settings
+Project Setup
+Show Tree
+Gather
+Get Folder
+Set Folder
+Set Main File
+Remove Main File
+New Project
+Open Project...
+Save Project
+Save Project As...
+Close Project
+Quit Project
+Default Project
+Record Macro
+Play Macro Once
+Play Macro
+Repeat Macro
+Repeat Last Command
+Insert Macro
+Insert Command
+Insert Parameter
+Menu Setup...
+Preferences...
+Settings...
+Appearance...
+Dictionary...
+Highlighting...
+Variables...
+Save Settings As...
+Save Settings
+Cascade
+Tile Vertically
+Tile Horizontally
+Arrange Icons
+Minimize All
+Maximize All
+Restore All
+Close All
+Help Contents
+Help Index
+Configuration Wizard
+Licensing Agreement
+Register WinEdt...
+About WinEdt...
+Cancel
+Activate
+Tab
+Enter
+Backspace
+Track Caret
+Screen Refresh
+Screen Center Line
+Screen Line To Bottom
+Screen Line To Top
+Go To Screen Top
+Go To Screen Bottom
+Char Right
+Select Char Right
+Char Left
+Select Char Left
+Word Right
+Select Word Right
+Word Left
+Select Word Left
+Line Down
+Select Line Down
+Line Up
+Select Line Up
+Par Down
+Select Par Down
+Par Up
+Select Par Up
+Page Down
+Select Page Down
+Page Up
+Select Page Up
+Go To End Of Line
+Select To End Of Line
+Go To End Of File
+Select To End Of File
+Go To Beginning Of Line
+Select To Beginning Of Line
+Go To Beginning Of File
+Select To Beginning Of File
+Delete Line
+Kill Right
+Kill Left
+Clear Right
+Clear Left
+Clear Line
+Select Word
+Delete Word
+Delete Word Right
+Delete Word Left
+Double Space
+Single Space
+Double Empty Lines
+Single Empty Lines
+Remove Empty Lines
+Set Block Mode
+Set Line Mode
+Toggle Line/Block
+Set Wrap Mode
+Set No Wrap Mode
+Toggle Wrap/NoWrap
+Set Insert Mode
+Set Overwrite Mode
+Toggle Insert/Overwrite
+Set Indent Mode
+Set No Indent Mode
+Toggle Indent Mode
+Set Auto Spell
+Set No Auto Spell
+Toggle Auto Spell

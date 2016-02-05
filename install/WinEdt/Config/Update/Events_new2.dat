@@ -1,0 +1,9 @@
+// The following do nothing by default:
+ON_DOC_OPEN_AFTER="%b\Macros\Events\MDIOpen.edt"
+ON_DOC_ACTIVATE="%b\Macros\Events\MDIActivate.edt"
+ON_DOC_SAVE="%b\Macros\Events\MDISave.edt"
+
+// Mouse Click Event Handlers (executed after the default built-in response)
+ON_DOC_CLICK="%b\Macros\Events\DocClick.edt"
+ON_DOC_DOUBLE_CLICK="%b\Macros\Events\DocDoubleClick.edt"
+ON_DOC_TRIPLE_CLICK="%b\Macros\Events\DocTripleClick.edt"

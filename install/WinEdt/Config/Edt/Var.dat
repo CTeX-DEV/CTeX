@@ -1,0 +1,132 @@
+% %Variables List
+% -*- DATA:EDT -*-
+% Created: Wednesday, May 28, 2014 at 18:21
+
+%/     Unix  Filename Prefix (eg. %/F)
+%~     Short Filename Prefix (eg. %~F)
+
+%[/][~]("<filename>");
+       Prefix is applied after the String Parameter is expanded!
+
+%B     Base Directory (eg. C:\Program Files\WinEdt)
+%b     Ini Path (eg. C:\User\WinEdt: Application Data Folder)
+
+%H     Drive Letter for %B (eg. C)
+%h     Drive Letter for %b (eg. C)
+
+%F     Input File (%P\%N%T)
+%D     Input File's Drive
+%P     Input File's Path
+%N     Input File's Name
+%T     Input File's Type
+%U     Input File's Drive\Path
+
+%f     Current File (%p\%n%t)
+%d     Current File's Drive
+%p     Current File's Path
+%n     Current File's Name
+%t     Current File's Type
+%u     Current File's Drive\Path
+
+%O     Expanded TeX Output (AUX) Directory
+%E     Expanded Error Log File (%O\%N.log)
+%A     Expanded Auto-Save File
+%R     Expanded Backup File
+
+%o     TeX Output (AUX) Directory
+%e     Error Log File (%O\%N.log)
+%a     Auto-Save File
+%r     Backup File
+
+%X     Full name of the current Macro File
+%C     Path of the current Macro File
+
+%I     Enter Input Parameter
+%i     Enter and Reset Parameter
+
+%W     Current Word as a String
+%L     Current Line as a String
+%S     Selected Text as a String
+
+%c     Current Column Number
+%l     Current Line Number
+
+%x     Current Selected Column Number
+%y     Current Selected Line Number
+%s     Current Selection Mode: 0..15
+
+%Q     Relative Path with respect to the Main File
+%q     Relative Path from the Project Tree
+
+%!B    Parent Directory of %B
+%!b    Parent Directory of %b
+%!H    Root Directory of %B (eg. C:\Program Files)
+%!h    Root Directory of %b (eg. C:\Users\user\AppData\Roaming)
+
+%!C    Current Configuration
+%!P    Current Path
+%!D    Current Drive Letter
+%!M    Main Document's Mode
+%!m    Current Document's Mode
+%!E    Main Document's Encoding (eg. UTF-8)
+%!e    Current Document's Encoding (eg. UTF-8)
+
+%!x    Dimension: Columns
+%!y    Dimension: Rows
+%!z    Numeric Register
+%!c    Repeat Loop Counter
+
+%!f    Project File
+%!d    Project File's Drive
+%!p    Project File's Path
+%!n    Project File's Name
+%!t    Project File's Type (.prj)
+
+%!F    Main File (or empty string if the Main File is not set)
+%!N    Main File Name (or empty string)
+%!T    Main File Type (or empty string)
+
+%!l    Current Line Number or Paragraph (for Soft Wrapping Mode)
+%!L    Total number of Lines or Paragraphs (for Soft Wrapping Mode)
+
+%?     Context String Register
+%!?    String Register
+%0..9  Global String Registers
+%!0..9 Local String Registers
+%-0..9 Extended (negative) Local String Registers
+%#0..9 RegEx Tags
+
+%@('Environment Variable');
+
+%@('Registry Handle','Key\Subkey\..\subkey','Name');
+       Registry Handle must specify one of the
+       following reserved handles:
+         HKCR / HKEY_CLASSES_ROOT
+         HKCU / HKEY_CURRENT_USER
+         HKLM / HKEY_LOCAL_MACHINE
+         HKU  / HKEY_USERS
+       If you want to obtain the default value of the
+       registry key or subkey specify a space in the
+       place of the Name parameter.
+
+%$('local variable');
+       User-defined Local Variable
+       The following macro functions can be used
+       to manipulate local variables:
+         Declare("Name");
+         Release("Name");
+         Assign("Name","Value");
+       Release('') erases all local variables.
+       Assign can be used even if the variable
+       was not previously declared...
+
+%['Macro'];
+       Execute the specified Macro and continue...
+
+%\     EOLN (CR+LF)
+%%     % Character
+%&x;   chr(x) [x: 0..65535 or $0000..$FFFF ASCII]
+%>     Skip Parameters until %< (on no Input)
+%_     Ignored (can serve as a delimiter)
+%|     Ignored (can serve as a delimiter)
+%+     Skip next character

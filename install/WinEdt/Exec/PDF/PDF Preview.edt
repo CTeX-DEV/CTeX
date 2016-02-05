@@ -1,0 +1,147 @@
+// -*- ASCII:EDT -*-
+// Open PDF Document ...
+
+  Requires(20130513); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+
+  FindInString(`%$('PDF-View');`,!'Adobe',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+  FindInString(`%$('PDF-View');`,!'Acrobat.exe',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+  FindInString(`%$('PDF-View');`,!'AcroRd',1,2,1000,1);
+  IfOK(!"JMP(!'Adobe')");
+
+// PDF-XChange?
+
+  FindInString(`%$('PDF-View');`,!'PDFX',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP(!'not_PDFX');");
+  Run('%$("PDF-View"); "%P\%N.pdf"');
+  PopTagsandRegisters;
+  Exit;
+
+:not_PDFX:: =========================================================
+
+// GSView?
+
+  FindInString(`%$('PDF-View');`,!'GSView',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP(!'not_GS')");
+  Run('%$("PDF-View"); "%P\%N.pdf"','%P',0,0,'%N.pdf - GSview',1,1);
+  PopTagsandRegisters;
+  Exit;
+
+:not_GS:: ===========================================================
+
+// Sumatra?
+
+  FindInString(`%$('PDF-View');`,!'Sumatra',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP(!'not_Sumatra')");
+
+  SendMessage("%N.pdf - SumatraPDF");
+  IfOK(!"JMP(!'Sumatra_Running');");
+
+// Not Running ======================================================
+
+  Run('%$("PDF-View"); -reuse-instance "%P\%N.pdf"','%P');
+  PopTagsandRegisters;
+  Exit;
+
+:Sumatra_Running:: ==================================================
+
+  // DDE command that can force a refresh in SumatraPDF...
+  DDEOpen("%$('PDF-View');",!"SUMATRA",!"control",1);
+  // Open("Filename.pdf", NewWindow,SetFocus,ForceRefresh: 0..1)
+  DDEExe('[Open("%P\%N.pdf",0,1,1)]');
+  DDEClose;
+  PopTagsandRegisters;
+  Exit;
+
+:not_Sumatra:: ======================================================
+
+// Foxit?
+
+  FindInString(`%$('PDF-View');`,!'Foxit',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP(!'not_Foxit')");
+  Run('%$("PDF-View"); "%P\%N.pdf"');
+  PopTagsandRegisters;
+  Exit;
+
+:not_Foxit:: ========================================================
+
+// Some other viewer ...
+
+  Run('%$("PDF-View"); "%P\%N.pdf"',"%P");
+  PopTagsandRegisters;
+  Exit;
+
+// Any other viewer?
+
+:Adobe:: ============================================================
+
+  StartWorking(!'Adobe Open...');
+
+// Shift Key should not be down or else Adobe might fail!
+// Wait until Shift (VK_SHIFT=16) is released ...
+//  ProcessMessages;
+//  LetRegNum(0,0);
+//  Loop(!|>
+//    LetRegNum(0,%!0+1);>
+//    IfNum(%!0,111,'>',!"Stop;");>
+//    IfKeyDown(16,0,0,!"WaitForMessage(111,2);",!"Stop;");>
+//  |);
+//  ProcessMessages;
+
+  // The file is Locked (Probably already opened in Acrobat):
+  // just start the viewer and let it stay where it is...
+  IfFileLocked("%P\%N.pdf", 11111,"JMP(!'Exit');");
+
+  // If GoBack no longer works (Adobe >= 9) then position cannot be restored!
+  IfStr("%$('PDF-Menu');","","=","JMP(!'Exit');");
+
+  // If not running then just start it and don't DDE anything...
+  SendMessage("%$('PDF-Caption');", $0000, $0000); // Dummy Message
+  IfOK(!"Relax;",!"JMP(!'Exit');");
+
+  // No Restoring of Position ...
+  IfStr("%$('PDF-Menu');",!'0',!'=','JMP(!"Exit");');
+
+  // Reader or Full Acrobat
+  FindInString(`%$('PDF-View');`,!'Acrobat.exe',1,2,1000,1);
+  IfOK(!"JMP(!'Acrobat');"); // Full Acrobat
+
+// Adobe Reader =====================================================
+  Run('%$("PDF-View"); "%P\%N.pdf"');
+  SendMessage("%$('PDF-Caption'); - [%N.pdf]", $0000, $0000);
+  IfOK(!|SendMessage("%$('PDF-Caption'); - [%N.pdf]", $0111, "%$('PDF-Menu');");JMP(!"Exit");|);
+  SendMessage("%N.pdf - %$('PDF-Caption');", $0000, $0000);
+  IfOK(!|SendMessage("%N.pdf - %$('PDF-Caption');", $0111, "%$('PDF-Menu');");JMP(!"Exit");|);
+  SendMessage("%$('PDF-Caption');", $0000, $0000);
+  IfOK(!|SendMessage("%$('PDF-Caption');", $0111, "%$('PDF-Menu');");JMP(!"Exit");|);
+  Wait(33); // Sync
+  JMP(!"Exit");
+
+:Acrobat:: ==========================================================
+
+  // Full Acrobat ...
+  Run('%$("PDF-View"); "%P\%N.pdf"');
+  DDEOpen("%$(!'PDF-View');","%$(!'Acro-DDE_Service');","%$(!'Acro-DDE_Topic');");
+  DDEExe('[MenuitemExecute(!"GoBack")]');
+  DDEClose;
+  Wait(9); // Sync
+
+:Exit:: =============================================================
+
+  Run('%$("PDF-View"); "%P\%N.pdf"');
+  ProcessMessages;
+  // Fix Focus:
+  SendMessage("%$('PDF-Caption');", $0000, $0000);
+  IfOK(!|SetFocus("%$('PDF-Caption');");|);
+  SendMessage("%N.pdf - %$('PDF-Caption');", $0000, $0000);
+  IfOK(!|SetFocus("%N.pdf - %$('PDF-Caption');");|);
+  SendMessage("%$('PDF-Caption'); - [%N.pdf]", $0000, $0000);
+  IfOK(!|SetFocus("%$('PDF-Caption'); - [%N.pdf]");|);
+  ProcessMessages;
+  PopTagsandRegisters;
+  StopWorking;
+
+End;

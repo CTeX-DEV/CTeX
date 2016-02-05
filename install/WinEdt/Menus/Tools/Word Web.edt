@@ -1,0 +1,8 @@
+// WordWeb Lookup (Thesaurus): Modal Dialog
+// Free WordWeb can be downloaded from http://wordweb.info/free/
+
+  IfSel(1,"<>",!"SelWord(1);");
+  WordWebLookup(0,"%S",1,0,"wweb32.dll");
+  IfOK(!'Ins("%!0");');
+
+End;

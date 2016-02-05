@@ -1,0 +1,31 @@
+// Insert HTML Date
+
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  Mark(1);
+  GetDate(7, 'dddd, mmmm d, yyyy  hh:nn');
+  //GetDate(7, 'dd\.mm\.yyyy "at" t');
+  GoToBeginningOfFile;
+  SetSearchForward(1);
+  SetSearchCaseSensitive(0);
+  SetSearchEntire(0);
+  SetSearchCyclic(0);
+  SetSearchRelaxed(0);
+  SetSearchWholeWords(0);
+  SetSearchInline(0);
+  SetSearchCurrentDoc;
+  SetRegEx(1);
+  SetReplaceRespectCaps(0);
+  SetReplacePrompt(0);
+  SetReplaceNotify(0);
+  SearchReset;
+  SetFindStr("\<!--\(1bdate\)--\>+*\<!--\(2edate\)--\>");
+  SetReplaceStr("\<!--\1--\>%!7\<!--\2--\>");
+  ReplaceAll;
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+
+End;

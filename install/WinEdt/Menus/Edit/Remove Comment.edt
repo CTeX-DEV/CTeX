@@ -1,0 +1,17 @@
+// @BEGIN: HTML
+IfisMode('HTML;XML;PHP;HHC','%!m',!'SubLabel("<","!--","-->");Exit;');
+// @END: HTML
+
+// @BEGIN: DTX
+IfisMode('DTX','%!m',>
+  !'MarkSelection(1,2);GoToBeginningOfLine;SelCharRight;>
+    IfStr("%S","%","=",>
+      !"RestoreSelection(1,2,1);RemoveString(`^^A`);",>
+      !"RestoreSelection(1,2,1);RemoveComment;");>
+    Exit;');
+// @END: DTX
+
+// @DEFAULT
+RemoveComment;
+
+End;

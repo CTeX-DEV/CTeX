@@ -1,0 +1,3 @@
+//      %!b\_history\%u\%n%t.bak
+// Document Menu allows you to open the backup file!
+BACKUP_FILENAME="%!b\_history\%u\%n%t.bak"

@@ -1,0 +1,14 @@
+// Response to Insert Key
+
+  // Standard: Toggle Insert/Overwrite Mode
+  SetInsert(0);
+
+  // Popup Menu: Toggle Wrap..Spell
+  // Popup("Mode");
+
+  // Format Paragraph
+  // Exe("%b\Menus\Edit\Format Paragraph.edt");
+
+  // Anything else you might fancy...
+
+End;

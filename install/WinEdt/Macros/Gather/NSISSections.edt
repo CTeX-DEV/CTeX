@@ -1,0 +1,36 @@
+// NSISSections.edt
+// ======================
+// Parse %!? for the Caption
+// =================================
+
+    PushTagsandRegisters;
+
+    LetReg(0,"%!?");
+    SubstituteInString(|%!0|,|/o|,||,0,0);
+
+    LetReg(1,"%!0");
+    SubstituteInString("%!1","$[#9,#32]$","",1,1);
+    IfIStr('%!1','section','=',!'LetReg(-10,"(untitled)");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|Section+$[#9,#32]$[;#/]|,1,2,1);
+    IfOK(!'LetReg(-10,"(untitled)");PopTagsandRegisters;Exit;');
+
+    FindInString(|%!0|,|Section+$[#9,#32]$""|,1,2,1);
+    IfOK(!'LetReg(-10,"(untitled)");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|Section+$[#9,#32]$''|,1,2,1);
+    IfOK(!'LetReg(-10,"(untitled)");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|Section+$[#9,#32]$``|,1,2,1);
+    IfOK(!'LetReg(-10,"(untitled)");PopTagsandRegisters;Exit;');
+
+    FindInString(|%!0|,|Section+$[#9,#32]$"\(+$~[]-[#0..#8,#10..#31,#34]$\)"|,1,2,1);
+    IfOK(!'LetReg(-10,"%#0");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|Section+$[#9,#32]$'\(+$~[]-[#0..#8,#10..#31,#39]$\)'|,1,2,1);
+    IfOK(!'LetReg(-10,"%#0");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|Section+$[#9,#32]$`\(+$~[]-[#0..#8,#10..#31,#96]$\)`|,1,2,1);
+    IfOK(!'LetReg(-10,"%#0");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|Section+$[#9,#32]$\($~[]-[#0..#32,#34,#35,#39,#47,#59,#96]$@$~[]-[#0..#32]$\)|,1,2,1);
+    IfOK(!'LetReg(-10,"%#0");PopTagsandRegisters;Exit;');
+    LetReg(-10,"");
+
+    PopTagsandRegisters;
+
+End;

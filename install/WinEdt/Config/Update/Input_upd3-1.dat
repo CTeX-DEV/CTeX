@@ -1,0 +1,11 @@
+  // Custom Input Directive Comment (should everything else fail):
+  DIRECTIVE="%BIB{?}"
+    EXTENSION="*;.bib"
+    PATH="%P;%p;%@('BIBINPUTS');"
+  DIRECTIVE="%INC{?}"
+    EXTENSION="*;.tex"
+    PATH="%P;%p;%@('TEXINPUTS');"
+  DIRECTIVE="%INPUT ""?"""
+    EXTENSION="*;.tex"
+    PATH="%P;%p;%@('TEXINPUTS');"
+END="TeX"

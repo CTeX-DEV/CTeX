@@ -1,0 +1,28 @@
+WinEdt 9 has been Reinstalled or Upgraded on your System
+========================================================
+
+This is the default configuration (project file is not loaded
+during the installation - it will be loaded after you restart the
+program). To finish the installation upgrade proceed as follows:
+
+Start the Configuration Wizard (Options Menu):
+
+  - (Optionally) Create or update any filetype associations.
+    WinEdt has to be run with (elevated) Administrator Privileges
+    for this to work on Vista or Windows 7 or 8! This is a good
+    time to perform this task while WinEdt has elevated status...
+
+  - Restart WinEdt NOW in order to finish the installation!
+
+----------------------------------------------------------------------
+
+If you have upgraded over an older version of WinEdt 9 your local
+settings have been preserved. However, after restarting WinEdt you
+should execute the
+
+  Options -> Maintenance -> Upgrade Personal Configuration
+
+menu command in order to merge your custom settings with the new
+defaults.
+
+----------------------------------------------------------------------

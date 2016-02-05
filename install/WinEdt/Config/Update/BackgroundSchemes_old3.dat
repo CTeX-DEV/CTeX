@@ -1,0 +1,42 @@
+// ===============================================================================
+
+// You can try a few pre-defined schemes below and see what looks good to you!
+// Change to ENABLED=1 and reload to see how it looks...
+
+// ===============================================================================
+
+BACKGROUND_SCHEME="Plain"
+  ENABLED=0
+  MODE_FILTER=""
+  VIEW_FILTER="A;B"
+  BACKGROUND_MODE=0
+    // BACKGROUND_COLOR=15               // MODE=1
+    // BACKGROUND_RGB="$F6E7E7"          // MODE=2
+    // BACKGROUND_BITMAP="Dots-Blue.bmp" // MODE=3
+  BOOKMARK_MODE=2
+    BACKGROUND_RGB="$FEFEFE"
+  TEXT_MODE=0
+    // Use Defaults
+    // BACKGROUND_RGB="$FFFFFF" // MODE=2
+    // BACKGROUND_COLOR=15      // MODE=1
+    DEFAULT_FONT=1
+    // TEXT_COLOR=0
+    // ITALIC=0
+    // BOLD=0
+    // UNDERLINE=0
+    // STRIKEOUT=0
+  LINE_NUMBERS_MODE=2
+    BACKGROUND_RGB="$EEEEEE"
+    TEXT_COLOR=0
+  CURRENT_LINE_MODE=0
+    BACKGROUND_RGB="$DDDDDD"
+    DEFAULT_FONT=1
+  RIGHT_MARGIN_MODE=0
+    BACKGROUND_RGB="$FFEEEE"
+    DEFAULT_FONT=1
+  RIGHT_MARGIN_OFFSET=2
+  RIGHT_MARGIN_ENABLED=0
+
+// ===============================================================================
+// This is my favorite ...
+// ===============================================================================

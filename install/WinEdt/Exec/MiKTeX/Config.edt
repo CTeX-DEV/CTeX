@@ -1,0 +1,16 @@
+// MiKTeX Configuration for Execution Modes
+
+  Requires(20120413);
+
+  // Configuration
+  SetConfig('MiKTeX');
+  Assign('Config-Dir','MiKTeX');
+  Assign('Exec-Dir','MiKTeX');
+
+  // Execution Modes
+  Exe('%b\Exec\%$("Exec-Dir");\ExeMode.edt');
+
+  // Detect TeX System for MiKTeX Configuration
+  Exe('%b\Exec\%$("Exec-Dir");\TeX System.edt');
+
+End;

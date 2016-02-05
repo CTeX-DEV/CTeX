@@ -1,0 +1,17 @@
+// Par Class
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<p class="');
+  Mark(1);
+  Ins('">');
+  NewLine;
+  IfStr('%!1','','=',!"Ins('');");
+  Ins('%!1');
+  NewLine;
+  Ins('</p>');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+End;

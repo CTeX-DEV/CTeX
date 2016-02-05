@@ -1,0 +1,80 @@
+// -*- ASCII:EDT -*-
+// PDF Viewer
+// Last modified on:
+//  Sunday, December 30, 2012  15:57
+
+  Requires(20120413);
+
+  PushTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+  SetTracking(1);
+
+  // Auto-Detect PDF Viewer (new in 5.5)
+  Exe('%b\Config\PDFAutoDetect.edt');
+
+// PDF Viewer Executable ============================================
+
+IfStr("%$(!'PDF-SyncEx');",!"",!"=",>
+  !"Assign(!'PDF-SyncEx',!'.synctex');");
+
+IfStr("%$('PDFAuto-View');","0","=","JMP('no_Auto-View');");
+  // File Type associations with .pdf files...
+  LetReg(1,`%@('HKCR','.pdf',' ');`);
+  IfStr('%!1','','=','LetReg(1,"AcroExch.Document");');
+  LetReg(0,`%@('HKCR','%!1\shell\open\command',' ');`);
+  IfStr('%!0',' ','>','JMP("PDF_OK");');
+  // AcroRd32 or Acrobat Executable: File Type associations with .pdf files
+  // As of version 7 Adobe Reader may not maintain the above key! Try this:
+  LetReg(1,`%@('HKCR','%!1\CurVer',' ');`);
+  IfStr('%!1','','=','LetReg(1,"AcroExch.Document.7");');
+  LetReg(0,`%@('HKCR','%!1\shell\open\command',' ');`);
+  IfStr('%!0',' ','>','JMP("PDF_OK");');
+  IfStr('%!1','AcroExch.Document.7','<>','LetReg(1,"AcroExch.Document.7");');
+  LetReg(0,`%@('HKCR','%!1\shell\open\command',' ');`);
+  IfStr('%!0',' ','>','JMP("PDF_OK");');
+  // Try HKLM
+  LetReg(0,`%@('HKLM','SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\AcroRd32.exe',' ');`);>
+  FindInString('%!0','"',1,2,1010,0);>
+  IfOK(!'Relax;',!'LetReg(0,''"%!0"'');');>
+  LetReg(3,"%@('HKLM','SOFTWARE\Adobe\Acrobat Reader','   ');");
+  LetReg(3,"%@('HKLM','SOFTWARE\Adobe\Acrobat Reader\%!3\InstallPath',' ');");
+  IfStr('%!3','','<>','LetReg(0,`"%!3\AcroRd32.exe"`);');
+  IfStr('%!0',' ','>','JMP("PDF_OK");');
+  // Last resort (get Adobe Reader directly from HKLM)
+  LetReg(0,`%@('HKLM','SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\AcroRd32.exe',' ');`);
+  FindInString('%!0','"',1,2,1010,0);
+  IfOK(!'Relax;',!'LetReg(0,''"%!0"'');');
+:PDF_OK:: ===========================================================
+  FindInString('%!0','"',1,2,1010,0);
+  IfNum("%!1","0","=",>
+    !`FindInString('%!0','"',1,2,1010,1)`,>
+    !`FindInString('%!0','%%',1,2,1010,0);>
+      IfOK(!``FindInString('%!0',' ',1,2,1110,%!1-1);LetRegNum(1,"%!1-1")``,!``LetReg(1,"0");``)`);
+  IfNum("%!1","0",">",!"ExtractByIndex(0,`%!0`,0,%!1)");
+  GetLength(1,"%!0");
+  IfNum(%!1,9,"<","LetReg(0,'')");
+  Assign('PDF-View',`%!0`);
+  IfStr("%$('PDF-View');","","=",>
+    !"Assign('PDF-View','AcroRd32.exe')"); // Nothing is associated with pdf files?
+:no_Auto-View:: =====================================================
+
+  Release("PDF-Menu");
+  Release("PDF-Caption");
+
+  FindInString(`%$('PDF-View');`,'Adobe',1,2,1000,1);
+  IfOK(!"Exe('%b\Config\Adobe.edt');JMP('Done');");
+  FindInString(`%$('PDF-View');`,'Acrobat.exe',1,2,1000,1);
+  IfOK(!"Exe('%b\Config\Adobe.edt');JMP('Done');");
+  FindInString(`%$('PDF-View');`,'AcroRd',1,2,1000,1);
+  IfOK(!"Exe('%b\Config\Adobe.edt');JMP('Done');");
+
+:Done:: =============================================================
+
+  PopTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+End;

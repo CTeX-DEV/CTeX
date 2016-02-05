@@ -1,0 +1,20 @@
+// File Pegasus.edt
+// Open DDE: Server Application, Service, Topic
+      DDEOpen("c:\pmail\winpm-32.exe", "WinPMail", "Message");
+      DDEPoke("Message", "New: Window");
+      DDEPoke("Message", "Urgent: Y");
+      DDEPoke("Message", "Mime: Y");
+      DDEPoke("Message", "Attach: %f,-,-,0");
+      DDEPoke("Message", "Restore");
+      //DDEClose;
+End;
+
+// It adds the standard "send to" functionality to WinEdt by
+// means of DDE exchange with Pegasus (the only worth using
+// e-mail client having the ability to act as a DDE server I know).
+// The only thing to do here is to change the path to the
+// Pegasus executable. Works fine --- and no need for MAPI.
+// Btw, note the commented out "DDEClose" and don't enable
+// that line --- I don't know why, but when this line is
+// uncommented, this "send to Pegasus" works correctly only
+// *once* in every WinEdt's session.

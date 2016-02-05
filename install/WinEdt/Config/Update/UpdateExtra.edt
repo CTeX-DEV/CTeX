@@ -1,0 +1,69 @@
+// Extra Tasks
+
+  SubstituteInString('%!0',>
+    '<@{ }LEFT_COLOR_RGB@{ }=@{ }"*"@{ }>@{ }RIGHT_COLOR_RGB@{ }=@{ }"*"@{ }>',>
+    '  TRANSPARENT=128>  GRADIENT_COLOR="xclEnvBkLeftGradient">  BACKGROUND_COLOR="xclEnvBk">',>
+    11);
+  SubstituteInString('%!0',>
+    '<@{ }/'+'/@{ }LEFT_COLOR_RGB@{ }=@{ }"*"@{ }>@{ }/'+'/@{ }RIGHT_COLOR_RGB@{ }=@{ }"*"@{ }>',>
+    '/'+'/  TRANSPARENT=128>/'+'/  GRADIENT_COLOR="xclEnvBkLeftGradient">/'+'/  BACKGROUND_COLOR="xclEnvBk">',>
+    11);
+  SubstituteInString('%!0',>
+    'RGB@{ }=@{ }"\$\(0??\)\(1??\)\(2??\)"',>
+    'COLOR="#\2\1\0"',>
+    11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }-1','COLOR="SysNone"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }15','COLOR="clWindow"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }14','COLOR="RGB_7"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }13','COLOR="RGB_2"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }12','COLOR="RGB_1"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }11','COLOR="RGB_9"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }10','COLOR="RGB_6"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }9','COLOR="RGB_5"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }8','COLOR="xclComment"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }7','COLOR="RGB_9"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }6','COLOR="RGB_F"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }5','COLOR="RGB_3"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }4','COLOR="RGB_0"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }3','COLOR="RGB_E"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }2','COLOR="RGB_6"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }1','COLOR="RGB_4"',11);
+  SubstituteInString('%!0','COLOR@{ }=@{ }0','COLOR="clWindowText"',11);
+
+// GUI ==============================================================
+
+  IfStr('%!3','GUI','=',>
+    !'Relax;',!'JMP("No_GUI");');
+  FindInString('%!0','SCALED_IMAGES',-1,-1,10);
+  IfOK(!'Relax;',!'ReadFile("%B\ConfigEx\GUI.ini",0);');
+
+:No_GUI:: ===========================================================
+
+// StatusBar ========================================================
+
+  IfStr('%!3','StatusBar','=',>
+    !'Relax;',!'JMP("No_StatusBar");');
+  FindInString('%!0','DEFAULT_COLOR',-1,-1,10);
+  IfOK(!'Relax;',!'ReadFile("%B\ConfigEx\StatusBar.ini",0);');
+
+:No_StatusBar:: =====================================================
+
+// ColorGrid ========================================================
+
+  IfStr('%!3','ColorGrid','=',>
+    !'Relax;',!'JMP("No_ColorGrid");');
+  FindInString('%!0','RGB_COLOR',-1,-1,10);
+  IfOK(!'Relax;',!'ReadFile("%B\ConfigEx\ColorGrid.ini",0);');
+
+:No_ColorGrid:: =====================================================
+
+// Selections =======================================================
+
+  IfStr('%!3','Selections','=',>
+    !'Relax;',!'JMP("No_Selections");');
+  FindInString('%!0','SELECTION_MODE',-1,-1,10);
+  IfOK(!'Relax;',!'ReadFile("%B\ConfigEx\Selections.ini",0);');
+
+:No_Selections:: ====================================================
+
+End;

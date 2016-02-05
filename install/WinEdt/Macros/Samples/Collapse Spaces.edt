@@ -1,0 +1,25 @@
+ SetTracking(0);
+ SaveFind;
+ BeginGroup;
+ SetSel(0);
+// Collapse Spaces on the Right
+ Loop(!|FindInString("%L", " ", 0,1, 1010, %c-1);>
+   IfNum(%!0,%c-1,"=","Delete;","Stop")|);
+// Collapse Spaces on the Left
+ Loop(!|FindInString("%L", " ", 0,1, 1010, %c-2);>
+   IfNum(%!0,%c-2,"=","Backspace;","Stop")|);
+ SetFindCenterLine(0);
+ SetSearchCurrentDoc;
+ SetSearchCyclic(0);
+ SetSearchForward(1);
+ SetSearchEntire(0);
+ SetRegEx(1);
+ SetFindStr("{\$}|{\.}|{\\}");
+ // Deselect and place the caret in front of the found string...
+ IfFound("SwapCaretSelect;SetSel(0);");
+ EndGroup;
+ RestoreFind;
+ SetTracking(1);
+ Refresh;
+ TrackCaret;
+End;

@@ -1,0 +1,9 @@
+// GS Auto Detection Data
+
+  Assign(!"GSAuto-View", !"1");
+  Assign(!"GSView");
+
+  Assign(!"GSAuto-Bin", !"1");
+  Assign(!"GS-Bin");
+
+End;

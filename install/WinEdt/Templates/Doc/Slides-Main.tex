@@ -1,0 +1,38 @@
+% ----------------------------------------------------------------
+% AMS-LaTeX definitions for Slides *******************************
+% ----------------------------------------------------------------
+\documentclass[titlepage]{slides}
+\usepackage{amsmath}
+\usepackage{graphicx}
+% Fuzz --- -------------------------------------------------------
+\hfuzz5pt % Don't bother to report over-full boxes < 5pt
+\vfuzz5pt % Don't bother to report over-full boxes < 5pt
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem.}
+\newtheorem{cor}[thm]{Corollary.}
+\newtheorem{con}[thm]{Conjecture.}
+\newtheorem{lem}[thm]{Lemma.}
+\newtheorem{prop}[thm]{Proposition.}
+\newtheorem{defn}[thm]{Definition.}
+\renewcommand{\thethm}{}  % not numbered
+\pagestyle{plain}
+% MATH -----------------------------------------------------------
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\A}{\mathcal{A}}
+%%% --------------------------------------------------------------
+\begin{document}
+\title{}
+\author{}
+\date{}
+\maketitle
+% ----------------------------------------------------------------
+\input{.tex}
+% ----------------------------------------------------------------
+\end{document}
+% ----------------------------------------------------------------

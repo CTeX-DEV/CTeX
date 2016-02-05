@@ -1,0 +1,10 @@
+// NSIS Preview Macro
+
+  // Must use ShellExecute for UAC...
+  // Also needs SW_SHOWNORMAL Show flag or else it is invisible!
+  IfFileExists("%$('%F-NSIS-Installer');",>
+    !"ShellExecute('open',|%$('%F-NSIS-Installer');|,'','',1);Exit;");
+
+// Nothing to preview?
+
+End;

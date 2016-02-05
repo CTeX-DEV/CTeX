@@ -1,0 +1,4 @@
+  ITEM="NSIS:Run_NSIS_Installer"
+    CAPTION="&Run NSIS Installer"
+    CONFIG_FILTER="NSIS"
+    IMAGE="Run"

@@ -1,0 +1,34 @@
+// -*- ASCII:EDT -*-
+// Mode-Sensitive Compile
+
+// @BEGIN: TeX
+IfisMode("TeX","%!M",!"Exe('%b\Exec\TeX\Compile.edt');Exit;");
+// @END: TeX
+
+// @BEGIN: MetaFont
+IfisMode("MetaFont","%!M",!"Exe('%b\Exec\TeX\MetaFont.edt');Exit;");
+// @END: MetaFont
+
+// @BEGIN: MetaPost
+IfisMode("MetaPost","%!M",!"Exe('%b\Exec\TeX\MetaPost.edt');Exit;");
+// @END: MetaPost
+
+// @BEGIN: NSIS
+IfisMode("NSIS","%!M",!"Exe('%b\Exec\NSIS\Compile.edt');Exit;");
+// @END: NSIS
+
+// @BEGIN: XWE (HTML Help Compiler for Macro Manual
+IfisMode("XWE","%!M",!"Exe('%b\Exec\HTML\Compile.edt');Exit;");
+// @END: XWE
+
+// @BEGIN: HHC (HTML Help Compiler)
+IfisMode("HHC","%!M",!"Exe('%b\Exec\HTML\Compile.edt');Exit;");
+IfIStr("%F","%P\%N.hhp",'=',!"Exe('%b\Exec\HTML\Compile.edt');Exit;");
+// @END: HHC (HTML Help Compiler)
+
+// Add any custom compilers here ...
+
+// @DEFAULT
+Relax; // No Default Compiler!
+
+End;

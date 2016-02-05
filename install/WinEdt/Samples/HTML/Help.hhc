@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC>
+<!-- -*- HTML:HHC:EDT -*- -->
+<!-- Time Stamp: Friday, July 25, 2014 at 17:20 -->
+
+<HTML>
+  <HEAD>
+    <link rev="made" href="mailto:support@winedt.com"/>
+    <meta name="generator" content="WinEdt HTML:HHC Mode for Help Compiler"/>
+    <meta name="author" content="Aleksander Simonic"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  </HEAD>
+<BODY>
+
+<UL>
+
+  <!--INCLUDE="Help.hhp"-->
+  <!--INCLUDE="Help.css"-->
+  <!--INCLUDE="Help.hhk"-->
+
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="HTML Help Sample"/>
+      <param name="Local" value="Help.html"/>
+      </OBJECT></LI>
+  <UL>
+
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="About WinEdt..."/>
+        <param name="Local" value="WinEdt/About.html"/>
+        </OBJECT></LI>
+    <UL>
+      <LI><OBJECT type="text/sitemap">
+          <param name="Name" value="Support"/>
+          <param name="Local" value="WinEdt/About.html#Support"/>
+          </OBJECT></LI>
+      <LI><OBJECT type="text/sitemap">
+          <param name="Name" value="Registration"/>
+          <param name="Local" value="WinEdt/About.html#Registration"/>
+          </OBJECT></LI>
+    </UL>
+
+    <!--Put more html topic files here...-->
+
+  </UL>
+
+</UL>
+
+</BODY>
+</HTML>

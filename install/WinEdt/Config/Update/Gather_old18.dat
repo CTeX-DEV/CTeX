@@ -1,0 +1,2 @@
+    CAPTION="%[!|Assign('GatherType','!macro');"+
+                "Exe('%b\Macros\Gather\NSISFunctions.edt');|];%$('NSISGather');"

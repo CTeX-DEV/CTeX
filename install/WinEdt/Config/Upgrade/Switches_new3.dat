@@ -1,0 +1,4 @@
+  START1_TRIGGER="\book*"
+  START1_TRIGGER="\part*"
+  START1_TRIGGER="\addpart*"
+  START2_TRIGGER=""

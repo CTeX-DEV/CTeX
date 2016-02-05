@@ -1,0 +1,95 @@
+// HTML Frames
+
+IfStr('%!0',!'frameset_col',!'=',!"JMP(!'frameset_col');");
+IfStr('%!0',!'frameset_row',!'=',!"JMP(!'frameset_row');");
+IfStr('%!0',!'frame',!'=',!"JMP(!'frame');");
+IfStr('%!0',!'frames_n',!'=',!"JMP(!'frames_n');");
+IfStr('%!0',!'noframes',!'=',!"JMP(!'noframes');");
+
+Prompt('Unknown Frame: "%!0"');
+
+Exit;
+
+:frameset_col:: =====================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<frameset cols="');
+  Mark(1);
+  Ins('">');
+  NewLine;
+  Tab;
+  IfStr("%!1",!"",!"=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Backspace;
+  Ins("</frameset>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:frameset_row:: =====================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins('<frameset rows="');
+  Mark(1);
+  Ins('">');
+  NewLine;
+  Tab;
+  IfStr("%!1",!"",!"=",!"Ins('')",!"Ins('%!1')");
+  NewLine;
+  Backspace;
+  Ins("</frameset>");
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:frame:: ============================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Ins('<frame src="');
+  Mark(1);
+  Ins('">');
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:frames_n:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  SetSel(0);
+  Mark(1);
+  LetReg(1,"");
+  EnterReg(1,"Number of frames","Frames");
+  Repeat(%!1,'Ins(''<frame src="">'');NewLine;');
+  GoToBeginningOfLine;
+  Backspace;
+  Goto(1);
+  NextBullet;
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+:noframes:: =========================================================
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'>',!'SetSel(0);');
+  GetSel(0,1);
+  Ins("<noframes>");
+  NewLine;
+  Mark(1);
+  Ins("%!1");
+  NewLine;
+  Ins("</noframes>");
+  IfStr("%!1","","=","Goto(1);");
+  EndGroup;
+  SetTracking(1);
+  Exit;
+
+End;

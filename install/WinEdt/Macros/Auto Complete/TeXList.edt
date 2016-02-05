@@ -1,0 +1,41 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Auto Complete: Insert LaTeX list Environments
+// ===============================================================================
+
+Requires(20150217);
+
+// ===============================================================================
+// Input Parameters:
+// =================
+// %?  - environment name
+// %!? - indentation of the trigger
+// %-0..%-9 - can be manually set for macros that insert objects
+//
+// Temporary registers (manually set):
+// ===================================
+// %-1 (item with a bullet placeholder and optional extra indentation)
+// %-2 (extra info after \begin{...} such as \label{})
+// %-3 (Caption of "enter number of items" dialog or empty string
+//      if a fixed number of items is to be inserted)
+// %-4 (Default fixed number of items)
+//
+// AutoPopup event handler calls this macro and inserts the resulting string: %?
+// ===============================================================================
+
+LetReg(-9,'%?');
+LetTempReg;
+
+IfStr('%-3',!'',!'<>',!'GetCounter("%-3:","%-3");LetRegNum(-4,%!z);');
+IfNum(%-4,!'1',!'<',!"LetReg(-4,!'1');");
+IfNum(%-4,!'99',!'>',!"LetReg(-4,!'99');");
+
+LetReg(-10,'\begin{%-9}%-2%\');
+Repeat(%-4,!"LetReg(-10,'%-0%!?%-1%\');");
+LetReg(-10,'%-0%!?\end{%-9}');
+
+LetTempReg("%-0");
+
+End;
+
+// ===============================================================================

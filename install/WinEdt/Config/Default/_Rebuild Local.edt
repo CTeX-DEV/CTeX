@@ -1,0 +1,103 @@
+// Load Local Configuration Scripts
+
+    Requires(20150217);
+
+    Prompt("This macro rebuilds current configuration by loading local ini files...%\>
+It is recommended that you close all files (or project) to make it faster.%\%\>
+                            Continue?",1,0);
+
+    PushTagsandRegisters;
+
+    StartWorking('Rebuilding Local Configuration...');
+    ProcessMessages;
+    SaveSettings;
+
+    // Load Local Scripts
+    IfFileExists("%b\ConfigEx\Colors.ini",!'LoadConfig("%b\ConfigEx\Colors.ini");');
+    IfFileExists("%b\ConfigEx\Images.ini",!'LoadConfig("%b\ConfigEx\Images.ini");');
+    IfFileExists("%b\ConfigEx\MainMenu.ini",!'LoadConfig("%b\ConfigEx\MainMenu.ini");');
+    IfFileExists("%b\ConfigEx\PopupMenus.ini",!'LoadConfig("%b\ConfigEx\PopupMenus.ini");');
+    IfFileExists("%b\ConfigEx\Toolbar.ini",!'LoadConfig("%b\ConfigEx\Toolbar.ini");');
+    IfFileExists("%b\ConfigEx\GUI.ini",!'LoadConfig("%b\ConfigEx\GUI.ini");');
+    IfFileExists("%b\ConfigEx\DocTabs.ini",!'LoadConfig("%b\ConfigEx\DocTabs.ini");');
+    IfFileExists("%b\ConfigEx\DocList.ini",!'LoadConfig("%b\ConfigEx\DocList.ini");');
+    IfFileExists("%b\ConfigEx\StatusBar.ini",!'LoadConfig("%b\ConfigEx\StatusBar.ini");');
+    IfFileExists("%b\ConfigEx\Bookmarks.ini",!'LoadConfig("%b\ConfigEx\Bookmarks.ini");');
+    IfFileExists("%b\ConfigEx\Input.ini",!'LoadConfig("%b\ConfigEx\Input.ini");');
+    IfFileExists("%b\ConfigEx\Tree.ini",!'LoadConfig("%b\ConfigEx\Tree.ini");');
+    IfFileExists("%b\ConfigEx\Gather.ini",!'LoadConfig("%b\ConfigEx\Gather.ini");');
+    IfFileExists("%b\ConfigEx\Folding.ini",!'LoadConfig("%b\ConfigEx\Folding.ini");');
+    IfFileExists("%b\ConfigEx\Wrapping.ini",!'LoadConfig("%b\ConfigEx\Wrapping.ini");');
+    IfFileExists("%b\ConfigEx\Paragraphs.ini",!'LoadConfig("%b\ConfigEx\Paragraphs.ini");');
+    IfFileExists("%b\ConfigEx\Environments.ini",!'LoadConfig("%b\ConfigEx\Environments.ini");');
+    IfFileExists("%b\ConfigEx\WordCount.ini",!'LoadConfig("%b\ConfigEx\WordCount.ini");');
+    IfFileExists("%b\ConfigEx\Font.ini",!'LoadConfig("%b\ConfigEx\Font.ini");');
+    IfFileExists("%b\ConfigEx\Tabs.ini",!'LoadConfig("%b\ConfigEx\Tabs.ini");');
+    IfFileExists("%b\ConfigEx\Caret.ini",!'LoadConfig("%b\ConfigEx\Caret.ini");');
+    IfFileExists("%b\ConfigEx\Fonts.ini",!'LoadConfig("%b\ConfigEx\Fonts.ini");');
+    IfFileExists("%b\ConfigEx\Editor.ini",!'LoadConfig("%b\ConfigEx\Editor.ini");');
+    IfFileExists("%b\ConfigEx\MouseInterface.ini",!'LoadConfig("%b\ConfigEx\MouseInterface.ini");');
+    IfFileExists("%b\ConfigEx\Modes.ini",!'LoadConfig("%b\ConfigEx\Modes.ini");');
+    IfFileExists("%b\ConfigEx\Defaults.ini",!'LoadConfig("%b\ConfigEx\Defaults.ini");');
+    IfFileExists("%b\ConfigEx\Templates.ini",!'LoadConfig("%b\ConfigEx\Templates.ini");');
+    IfFileExists("%b\ConfigEx\Find.ini",!'LoadConfig("%b\ConfigEx\Find.ini");');
+    IfFileExists("%b\ConfigEx\Find in Files.ini",!'LoadConfig("%b\ConfigEx\Find in Files.ini");');
+    IfFileExists("%b\ConfigEx\Replace.ini",!'LoadConfig("%b\ConfigEx\Replace.ini");');
+    IfFileExists("%b\ConfigEx\Incremental Search.ini",!'LoadConfig("%b\ConfigEx\Incremental Search.ini");');
+    IfFileExists("%b\ConfigEx\Errors.ini",!'LoadConfig("%b\ConfigEx\Errors.ini");');
+    IfFileExists("%b\ConfigEx\Delimiters.ini",!'LoadConfig("%b\ConfigEx\Delimiters.ini");');
+    IfFileExists("%b\ConfigEx\AutoComplete.ini",!'LoadConfig("%b\ConfigEx\AutoComplete.ini");');
+    IfFileExists("%b\ConfigEx\ActiveStrings.ini",!'LoadConfig("%b\ConfigEx\ActiveStrings.ini");');
+    IfFileExists("%b\ConfigEx\Abbreviations.ini",!'LoadConfig("%b\ConfigEx\Abbreviations.ini");');
+    IfFileExists("%b\ConfigEx\Language.ini",!'LoadConfig("%b\ConfigEx\Language.ini");');
+    IfFileExists("%b\ConfigEx\Unicode.ini",!'LoadConfig("%b\ConfigEx\Unicode.ini");');
+    IfFileExists("%b\ConfigEx\Sorting.ini",!'LoadConfig("%b\ConfigEx\Sorting.ini");');
+    IfFileExists("%b\ConfigEx\TranslationTables.ini",!'LoadConfig("%b\ConfigEx\TranslationTables.ini");');
+    IfFileExists("%b\ConfigEx\Dictionaries.ini",!'LoadConfig("%b\ConfigEx\Dictionaries.ini");');
+    IfFileExists("%b\ConfigEx\Spelling.ini",!'LoadConfig("%b\ConfigEx\Spelling.ini");');
+    IfFileExists("%b\ConfigEx\Suggestions.ini",!'LoadConfig("%b\ConfigEx\Suggestions.ini");');
+    IfFileExists("%b\ConfigEx\IgnoredText.ini",!'LoadConfig("%b\ConfigEx\IgnoredText.ini");');
+    IfFileExists("%b\ConfigEx\SpellingErrors.ini",!'LoadConfig("%b\ConfigEx\SpellingErrors.ini");');
+    IfFileExists("%b\ConfigEx\CompoundedWords.ini",!'LoadConfig("%b\ConfigEx\CompoundedWords.ini");');
+    IfFileExists("%b\ConfigEx\ColorEffects.ini",!'LoadConfig("%b\ConfigEx\ColorEffects.ini");');
+    IfFileExists("%b\ConfigEx\BackgroundSchemes.ini",!'LoadConfig("%b\ConfigEx\BackgroundSchemes.ini");');
+    IfFileExists("%b\ConfigEx\ColorGrid.ini",!'LoadConfig("%b\ConfigEx\ColorGrid.ini");');
+    IfFileExists("%b\ConfigEx\Selections.ini",!'LoadConfig("%b\ConfigEx\Selections.ini");');
+    IfFileExists("%b\ConfigEx\FilterSets.ini",!'LoadConfig("%b\ConfigEx\FilterSets.ini");');
+    IfFileExists("%b\ConfigEx\Switches.ini",!'LoadConfig("%b\ConfigEx\Switches.ini");');
+    IfFileExists("%b\ConfigEx\Keywords.ini",!'LoadConfig("%b\ConfigEx\Keywords.ini");');
+    IfFileExists("%b\ConfigEx\Columns.ini",!'LoadConfig("%b\ConfigEx\Columns.ini");');
+    IfFileExists("%b\ConfigEx\PrintSchemes.ini",!'LoadConfig("%b\ConfigEx\PrintSchemes.ini");');
+    IfFileExists("%b\ConfigEx\PrintDefault.ini",!'LoadConfig("%b\ConfigEx\PrintDefault.ini");');
+    IfFileExists("%b\ConfigEx\PrintAlternative.ini",!'LoadConfig("%b\ConfigEx\PrintAlternative.ini");');
+    IfFileExists("%b\ConfigEx\PrintCustom.ini",!'LoadConfig("%b\ConfigEx\PrintCustom.ini");');
+    IfFileExists("%b\ConfigEx\PrintFancy.ini",!'LoadConfig("%b\ConfigEx\PrintFancy.ini");');
+    IfFileExists("%b\ConfigEx\PrintPlain.ini",!'LoadConfig("%b\ConfigEx\PrintPlain.ini");');
+    IfFileExists("%b\ConfigEx\PrintDefault.ini",!'LoadConfig("%b\ConfigEx\PrintDefault.ini");');
+    IfFileExists("%b\ConfigEx\Backup.ini",!'LoadConfig("%b\ConfigEx\Backup.ini");');
+    IfFileExists("%b\ConfigEx\AutoSave.ini",!'LoadConfig("%b\ConfigEx\AutoSave.ini");');
+    IfFileExists("%b\ConfigEx\Folders.ini",!'LoadConfig("%b\ConfigEx\Folders.ini");');
+    IfFileExists("%b\ConfigEx\FileStatus.ini",!'LoadConfig("%b\ConfigEx\FileStatus.ini");');
+    IfFileExists("%b\ConfigEx\Project.ini",!'LoadConfig("%b\ConfigEx\Project.ini");');
+    IfFileExists("%b\ConfigEx\Forms.ini",!'LoadConfig("%b\ConfigEx\Forms.ini");');
+    IfFileExists("%b\ConfigEx\Sounds.ini",!'LoadConfig("%b\ConfigEx\Sounds.ini");');
+    IfFileExists("%b\ConfigEx\Preferences.ini",!'LoadConfig("%b\ConfigEx\Preferences.ini");');
+    IfFileExists("%b\ConfigEx\Options.ini",!'LoadConfig("%b\ConfigEx\Options.ini");');
+    IfFileExists("%b\ConfigEx\Events.ini",!'LoadConfig("%b\ConfigEx\Events.ini");');
+    IfFileExists("%b\ConfigEx\Config.ini",!'LoadConfig("%b\ConfigEx\Config.ini");');
+    IfFileExists("%b\ConfigEx\UserPreferences.ini",!'LoadConfig("%b\ConfigEx\UserPreferences.ini");');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+    ProcessMessages;
+
+    Exe('%b\Exec\Config.edt');
+    Exe('%b\Exec\%$("Config-Dir");\Load Config.edt');
+    IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
+
+    PopTagsandRegisters;
+
+    SaveSettings;
+    StopWorking;
+
+    Prompt('Current Configuration has been Rebuilt or Repaired: %\ "%b\WinEdt.dnt"',0,1);
+
+End;

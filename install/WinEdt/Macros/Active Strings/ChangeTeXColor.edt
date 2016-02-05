@@ -1,0 +1,36 @@
+  // RGB: 0 = HEX FF0000 (Red)
+  //      1 = DEC 255 0 0 (Red)
+  //      2 = PERCENT 100 0 0 (Red)
+  //      3 = Fraction 1.00 0.00 0.00 (Red)
+  // \textcolor[rgb]{1.00,0.00,0.00}{}
+
+  // Active String: \textcolor[rgb]{R,G,B}"
+
+  LetReg(1,'%S');
+  GetColor(0,"%?",3,',');
+  IfOK("Relax;","Exit;");
+    SetTracking(0);
+    BeginGroup;
+    SaveFind;
+    SetFindTextSelect(1);
+    SetNotFoundNotify(1);
+    SetSearchCurrentDoc;
+    SetSearchCyclic(0);
+    SetSearchEntire(0);
+    SetSearchForward(1);
+    SetSearchCaseSensitive(1);
+    SetRegEx(0);
+    SetSearchCaseSensitive(1);
+    SetFindStr('{%?}');
+    IfFound('Relax;','TrackCaret;EndGroup;SetTracking(1);RestoreFind;Exit;');
+    Delete;
+    Ins('{%!0}');
+    SetSearchForward(0);
+    SetFindStr("%!1");
+    Find(0,-1);
+    RestoreFind;
+    EndGroup;
+    SetTracking(1);
+    TrackCaret;
+    Refresh(0);
+End;

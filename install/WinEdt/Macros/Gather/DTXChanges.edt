@@ -1,0 +1,14 @@
+// DTXChanges.edt
+// ======================
+// Parse %!? for the Caption
+// =================================
+
+    PushTagsandRegisters;
+
+    LetReg(0,"%!?");
+    FindInString("%!0","\{\(0*\)\}\{\(1*\)\}",1,2,1);
+    LetReg(-10,"%#0 [%#1]: %?");
+
+    PopTagsandRegisters;
+
+End;

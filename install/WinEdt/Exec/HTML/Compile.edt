@@ -1,0 +1,47 @@
+// -*- ASCII:EDT -*-
+// HTML Compiler
+
+// Macro Manual pre-compiler for XWE mode
+IfisMode("XWE","%!M","Relax;","JMP('HHC')");
+SetModified(1,1); // Is Modified?
+IfOK("SaveDoc;Wait(111);ProcessMessages;UpdateStatus;");
+
+IfFileExists("%P\%N.out","Relax;","JMP('PRE')");
+IfFileOlder("%P\%N.out","%F","JMP('PRE');");
+JMP('HHC');
+
+:PRE:: ==============================================================
+// Custom pre-compiler for the Macro Manual
+
+Run('"%P\Delphi\HTMLGen.exe" "%F"','%P',0,0,"HHC Macro Help Converter",1,1);
+Exit;
+
+:HHC:: ==============================================================
+// Call Microsoft HTML Help Compiler HHC.exe
+// Requires MS HTML Workshop (available free on MS downloads site) ...
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  // HTML Help is probably Locking it!
+  IfFileLocked("%P\%N.chm", 11111, !"HTMLHelp('',1,6);"); // Close HTML Help
+
+  PushTagsandRegisters;
+  Assign('ExitCode-OK','1'); // OK Exit Code
+  LetReg(9,'HHC');      // Execution Modes Compiler
+  LetReg(8,'log');      // Log File (or empty)
+  LetReg(7,'chm');      // Output Format
+  LetReg(6,'%P');       // Startup Folder
+
+  // Display a Dialog for Extra Switches:
+  IfStr("%$('%!9-GUI');","1","=",>
+    !|GetString("Switches: ","%!9 Switches","%$('%!9--Switches');");>
+      IfOK(!`Assign('%!9--Switches','%!?');`,!`PopTagsandRegisters;Exit;`);|,>
+    !|Release('%!9--Switches');|);
+  // Build the Command Line ...
+  LetReg(5, "%$('%!9-Executable'); %$('%!9-Switches'); %$('%!9--Switches'); %$('%!9-Parameters');");
+
+  // Use Execution Modes to determine the flow of execution...
+  Exe('%b\Exec\ExeCompiler.edt');
+  PopTagsandRegisters;
+
+End;

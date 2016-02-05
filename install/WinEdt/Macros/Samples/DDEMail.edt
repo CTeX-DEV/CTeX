@@ -1,0 +1,34 @@
+// Here's an example from Pegasus Mail documentation:
+// -- Example: -----------------------------------
+//    In WordBasic (MS-Word 7) the following Macro opens a connection to
+//    WinPMail, and sends a message with no window.
+//
+//       Sub MAIN
+//       channel = DDEInitiate("WinPMail", "Message")
+//       DDEPoke channel, "Message", "New: Message"
+//       DDEPoke channel, "Message", "Defaults: Y"
+//       DDEPoke channel, "Message", "To: David"
+//       DDEPoke channel, "Message", "Subject: Test from Word"
+//       DDEPoke channel, "Message", "Data: Hi there!"
+//       DDEPoke channel, "Message", "Send"
+//       DDETerminate channel
+//       End Sub
+//
+// WinEdt acts as a DDE Client.
+// Open DDE: Server Application, Service, Topic
+      DDEOpen("", "WinPMail", "Message");
+      DDEPoke("Message", "New: Message");
+      DDEPoke("Message", "Defaults: Y");
+      DDEPoke("Message", "To: David");
+      DDEPoke("Message", "Subject: Test from WinEdt");
+      DDEPoke("Message", "Data: Hi there!"); // Test Message
+
+//Alternative: Send Currently selected text or the whole document
+//      GetSel(1,9);  // Get Selected Text in %!9
+//      //0-1:^^^If there is no Selected text copy the whole Document
+//      DDEPoke("Message", "Data: %!9");
+//      LetReg(9,""); // Release Memory (%!9 Str Register)
+
+      DDEPoke("Message", "Send");
+      DDEClose;
+End;

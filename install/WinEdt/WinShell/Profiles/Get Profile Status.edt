@@ -1,0 +1,9 @@
+// %!1>'': if Personal Profile Exists or needs to be cleaned up...
+
+  // Get Application Data Folder in Register %!0
+  Exe('%B\WinShell\Profiles\Get Application Data Folder.edt');
+
+  LetReg(1);
+  IfFileExists("%!0\","LetReg(1,'Data');");
+
+End;

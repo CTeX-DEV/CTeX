@@ -1,0 +1,13 @@
+// On Doc Triple Click Event Handler
+
+  Requires(20140115);
+
+  PushTagsandRegisters;
+
+  Relax;
+
+:Done:: ===========================================================
+
+  PopTagsandRegisters;
+
+End;

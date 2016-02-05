@@ -1,0 +1,22 @@
+// -*- ASCII:EDT -*-
+// Auto Response to: \label?{}
+
+ CharLeft;
+ GlobalMark;
+ FindInString("%L","\", 0,1,1110,%c-1);
+ GotoCol(%!0+1);
+ Mark(0);
+ GlobalReturn;
+ SelectFromMark;
+ TrackCaret;
+ GlobalMark;
+ SaveSort;
+ SetSort(1,1,1,-1,1,1);
+ // GDIPopup("Page","Caption",Refresh,Sort,Track_onClick,Track_onDblClick,OK_onDblClick:0..1);
+ // F? Keys: Track;  Shift+F? Keys: Return  [F1..F24]
+ GDIPopup('Label','Labels',1,1,1,0,1);
+ IfOK(!"RestoreSort;GlobalReturn;SetSel(0);Ins('%?');>
+   IfStr('%?','','>','CharRight;');",>
+   "RestoreSort;GlobalReturn;SetSel(0);");
+ TrackCaret;
+End;

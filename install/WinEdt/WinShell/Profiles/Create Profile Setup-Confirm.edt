@@ -1,0 +1,9 @@
+// Enable Automatic Profile Creation
+
+Requires(20010724); // Requires this build of WinEdt to work properly
+
+Prompt("You are about to enable automatic creation of personal profiles for WinEdt...",1,0);
+
+Exe('%B\WinShell\Profiles\Create Profile Setup.edt');
+
+End;

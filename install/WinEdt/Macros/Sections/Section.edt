@@ -1,0 +1,19 @@
+// -*- ASCII:EDT -*-
+
+PushTagsandRegisters;
+BeginGroup;
+LetReg(9,"\section{");
+IfSel('0','=',>
+      !'SelectParagraph;>
+        IfSel(''0'',''='',>
+              !''Ins("\section{}");>
+                 CharLeft;'',>
+              !''SelCharLeft;>
+                 IfSel(''''0'''',''''='''',>
+                       !''''Ins("\section{}");>
+                            CharLeft;'''',>
+                       !''''Exe("%b\Macros\Sections\CommonSections.edt");'''')'')',>
+      !'Exe("%b\Macros\Sections\CommonSections.edt");');
+EndGroup;
+PopTagsandRegisters;
+End;

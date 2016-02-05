@@ -1,0 +1,32 @@
+// Replace {x \over y} with \frac{x}{y}
+// Works with nested {} inside arguments!
+
+ Requires(20000413);
+ SaveFind;
+ SearchReset;
+ SetSearchCurrentDoc;
+ SetSearchEntire(0);
+ SetSearchForward(1);
+ SetSearchCaseSensitive(1);
+ SetSearchInline(1);
+ SetNotFoundNotify(1);
+ SetReplacePrompt(0);
+ SetRegEx(1);
+ SetFindStr(' \\over ');>
+ SetReplaceStr('\}\{');
+ SetTracking(0);    // Turn off Screen Refreshing
+ BeginGroup;
+  SetOK(1); // Just in case
+  Loop(">
+    Replace;>
+    IfOK(*>
+      CharLeft;>
+      MatchDelimiter(0,0);>
+      InsText('\frac');>
+    *,*Stop*);>
+  ");
+  SetTracking(1); // Turn on Screen Refreshing
+  SetOK(1);       // It's OK
+ EndGroup;
+ RestoreFind;
+End;

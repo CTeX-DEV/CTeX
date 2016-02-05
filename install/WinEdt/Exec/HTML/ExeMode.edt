@@ -1,0 +1,28 @@
+// Execution Modes - HTML
+
+// HHC
+    Assign(!"HHC-Executable", !|%$("HHC");|);
+    Release(!"HHC-Switches");
+    Assign(!"HHC-Parameters", !|"%N"|);
+    Release(!"HHC-Paper_Size");
+    Release(!"HHC-Paper_Custom_Size");
+    Release(!"HHC-Landscape");
+    Release(!"HHC-GUI");
+    Release(!"HHC-High_Priority");
+    Assign(!"HHC-Wait", !|1|);
+    Assign(!"HHC-Report", !|1|);
+    Release(!"HHC-Errors");
+    Release(!"HHC-Warnings");
+    Assign(!"HHC-ExitCode", !|1|);
+    Assign(!"HHC-Viewer", !|1|);
+    Release(!"HHC-View_Search");
+    Release(!"HHC-STD_IO");
+    Release(!"HHC-No_Interaction");
+    Release(!"HHC-C-style-errors");
+    Release(!"HHC-Clean_Build");
+    Assign(!"HHC-WinEdt_Console", !|1|);
+    Release(!"HHC-Hidden_Window");
+    Release(!"HHC-Background_Window");
+    Assign(!"HHC-Pause", !|1|);
+
+End;

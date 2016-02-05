@@ -1,0 +1,5 @@
+  PAR="* "
+  PAR=""
+  PAR=">"
+
+SMART_WRAP_SET="TeX Alt"

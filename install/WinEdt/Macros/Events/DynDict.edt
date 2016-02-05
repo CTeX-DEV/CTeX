@@ -1,0 +1,123 @@
+// ===============================================================================
+// -*- ASCII:EDT -*-
+// Compile dynamic LaTeX dictionaries from the definitions in the preamble
+// ===============================================================================
+
+// This macro is called after the tree is built:
+//   See also: "Built Tree (after)" event handler...
+IfisMode("TeX","%!M",!"JMP(!'Start_TeX');");
+
+// Disable Dynamic LaTeX Dictionaries
+EnableDict(!"LaTeX User Environments",-1);
+EnableDict(!"LaTeX User Commands",-1);
+EnableDict(!"LaTeX User Commands Arg",-1);
+
+Exit;
+
+:Collect_Env_Tags:: =================================================
+  LetRegNum(2,0);
+  SetTag(1);
+  SetTag(2);
+:Search_Env:: =======================================================
+  FindInString("%!0","%!9",3,2,1011,%!2);
+  IfOK(!"Relax;",!"Return;");
+  LetReg(5);
+  IfStr("%#2","","<>",>
+    !"IfStr(`%#1`,`0`,`>`,>
+      !`LetReg(5,' (args: []');>
+        Repeat(%#1-1,!|LetReg(5,'%!5{}');|);LetReg(5,'%!5)');`);",>
+    !"IfStr(`%#1`,`0`,`>`,>
+      !`LetReg(5,' (args: ');>
+        Repeat(%#1,!|LetReg(5,'%!5{}');|);LetReg(5,'%!5)');`);");
+  LetReg(8,"%!8%#0%!5%&10;");
+  LetRegNum(7,"%!7+1");
+  JMP(!"Search_Env");
+
+:Collect_Com_Tags:: =================================================
+  LetRegNum(2,0);
+  SetTag(1);
+  SetTag(2);
+:Search_Com:: =======================================================
+  FindInString("%!0","%!9",3,2,1011,%!2);
+  IfOK(!"Relax;",!"Return;");
+  LetReg(5);
+  IfStr("%#2","","<>",>
+    !"IfStr(`%#1`,`0`,`>`,>
+      !`LetReg(5,'[]');Repeat(%#1-1,!|LetReg(5,'%!5{}');|);`);",>
+    !"IfStr(`%#1`,`0`,`>`,>
+      !`Repeat(%#1,!|LetReg(5,'%!5{}');|);`);");
+  LetReg(8,"%!8%#0%!5%&10;");
+  LetRegNum(7,"%!7+1");
+  JMP(!"Search_Com");
+
+:Start_TeX:: ========================================================
+
+PushTagsandRegisters;
+
+GetPreamble(!"\begin{document}",0,9999);
+
+// User Environments ...
+LetReg(8);        // Word List
+LetReg(7);        // Word Count
+LetReg(9,!'<\\newenvironment{@ }{\*|}{@ }\{\(0*\)\}{@ }{{\[{@ }\(1[1-9]\){@ }\]}|\(1\)}{@ }{{\(2\[*\]\)}|\(2\)}');
+Call(!"Collect_Env_Tags");
+LetReg(9,!'<\\newtheorem{@ }\{\(0*\)\}');
+Call(!"Collect_Env_Tags");
+GetDate(6,'dddd, mmmm d, yyyy "at" hh:nn');
+LetReg(6, '%% LaTeX Dynamic Environments for "%N%T"%&10;'+>
+          '%% Number of items: %!7%&10;'+>
+          '%% Created: %!6%&10;');
+// Sort and Save in WinEdt Dictionary Format (UNIX UTF-16 with BOM)
+SortLines("%!8",1,2,8);
+LetReg(8,'%!6%!8');
+IfFileExists("%b\Dict\Temp\",!"Relax;",!"CreateFolders('%b\Dict\Temp',1);");
+WriteFile("%b\Dict\Temp\LaTeX User Environments.dic","%!8",2,0,1);
+EnableDict(!"LaTeX User Environments",1,1);
+
+// \Commands (with or without arguments) ...
+LetReg(8);        // Word List
+LetReg(7);        // Word Count
+LetReg(9,!'<{@ }\\newcommand{@ }{\*|}{@ }{{\(0\\+$Alpha$\)}|{\{\(0*\)\}}}');
+Call(!"Collect_Com_Tags");
+LetReg(9,!'<{@ }\\newcounter{@ }\{\(0*\)\}');
+Call(!"Collect_Com_Tags");
+LetReg(9,!'<{@ }\\newlength{@ }{{\(0\\+$Alpha$\)}|{\{\(0*\)\}}}');
+Call(!"Collect_Com_Tags");
+LetReg(9,!'<{@ }\\newfont{@ }{{\(0\\+$Alpha$\)}|{\{\(0*\)\}}}');
+Call(!"Collect_Com_Tags");
+LetReg(9,!'<{@ }\\newsavebox{@ }{{\(0\\+$Alpha$\)}|{\{\(0*\)\}}}');
+Call(!"Collect_Com_Tags");
+LetReg(9,!'<{@ }\\DeclareMathOperator{@ }{\*|}{@ }{{\(0\\+$Alpha$\)}|{\{\(0*\)\}}}');
+Call(!"Collect_Com_Tags");
+GetDate(6,'dddd, mmmm d, yyyy "at" hh:nn');
+LetReg(6, '%% LaTeX Dynamic Commands for "%N%T"%&10;'+>
+          '%% Number of items: %!7%&10;'+>
+          '%% Created: %!6%&10;');
+// Sort and Save in WinEdt Dictionary Format (UNIX UTF-16 with BOM)
+SortLines("%!8",1,2,8);
+LetReg(8,'%!6%!8');
+IfFileExists("%b\Dict\Temp\",!"Relax;",!"CreateFolders('%b\Dict\Temp',1);");
+WriteFile("%b\Dict\Temp\LaTeX User Commands.dic","%!8",2,0,1);
+EnableDict(!"LaTeX User Commands",1,1);
+
+// \Commands (with arguments for auto-completion) ...
+LetReg(8);        // Word List
+LetReg(7);        // Word Count
+LetReg(9,!'<{@ }\\newcommand{@ }{\*|}{@ }{{\(0\\+$Alpha$\)}|{\{\(0*\)\}}}{@ }{\[{@ }\(1[1-9]\){@ }\]}{@ }{{\(2\[*\]\)}|\(2\)}');
+Call(!"Collect_Com_Tags");
+GetDate(6,'dddd, mmmm d, yyyy "at" hh:nn');
+LetReg(6, '%% LaTeX Dynamic Commands with arguments for "%N%T"%&10;'+>
+          '%% Number of items: %!7%&10;'+>
+          '%% Created: %!6%&10;');
+// Sort and Save in WinEdt Dictionary Format (UNIX UTF-16 with BOM)
+SortLines("%!8",1,2,8);
+LetReg(8,'%!6%!8');
+IfFileExists("%b\Dict\Temp\",!"Relax;",!"CreateFolders('%b\Dict\Temp',1);");
+WriteFile("%b\Dict\Temp\LaTeX User Commands Arg.dic","%!8",2,0,1);
+EnableDict(!"LaTeX User Commands Arg",1,1);
+
+PopTagsandRegisters;
+
+End;
+
+// ===============================================================================

@@ -23,7 +23,7 @@ CTeX 2.9.0
 本套装软件包中含有如下软件：
 
         MiKTeX 2.9 //TODO 升级到最新版
-        WinEdt 6.0 //TODO 升级到9.1
+        WinEdt 9.1
         GSview 5.0
         Ghostscript 9.18
 

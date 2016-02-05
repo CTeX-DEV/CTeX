@@ -1,0 +1,22 @@
+// Decomment
+  SaveFind;
+  SetTracking(0);
+  BeginGroup;
+  Mark(1);
+  GoToBeginningOfFile;
+  SetRegEx(1);
+  SetReplaceNotify(0);
+  SetNotFoundNotify(0);
+  SetSearchForward(1);
+  SetSearchEntire(0);
+  SetSearchCurrentDoc;
+  SetReplacePrompt(0);
+  SetSearchCyclic(0);
+  SetFindStr("\<!--*@{~{@ *--\>}{*}>}{*--\>}");
+  SetReplaceStr('');
+  ReplaceAll;
+  Goto(1);
+  EndGroup;
+  SetTracking(1);
+  RestoreFind;
+End;

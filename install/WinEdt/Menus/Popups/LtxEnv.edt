@@ -1,0 +1,11 @@
+// LaTeX Environment Templates
+  PushTagsandRegisters;
+  SetSel(0);
+  Mark(9);
+  ReadFile("%B\Templates\LaTeX\%!0.ltx",9);
+  InsLine;GoToBeginningOfLine;
+  InsText("%!9");
+  Goto(9);
+  NextBullet;
+  PopTagsandRegisters;
+End;

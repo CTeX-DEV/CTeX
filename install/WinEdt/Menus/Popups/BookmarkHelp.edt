@@ -1,0 +1,20 @@
+// Bookmarks Popup Menu Help
+
+Prompt(">
+ALT - S       Set Next Bookmark%\>
+ALT - C       Clear This Bookmarks%\>
+ALT - A       Clear All Bookmarks%\>
+ALT - +       Goto Next Bookmark%\>
+ALT - -        Goto Previous Bookmark%\>
+ALT - L       List All Bookmarks%\>
+%\>
+ALT - 0       Goto Bookmark #0%\>
+ . . .                      . . .  %\>
+ALT - 9       Goto Bookmark #9%\>
+%\>
+0                 (Un)Set Bookmark #0%\>
+. . .                       . . . %\>
+9                 (Un)Set Bookmark #9>
+",0,1);
+
+End;

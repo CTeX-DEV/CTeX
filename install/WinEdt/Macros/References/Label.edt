@@ -1,0 +1,15 @@
+// -*- ASCII:EDT -*-
+
+BeginGroup;
+LetReg(6,"\label{");
+LetReg(7,"}");
+LetReg(8,"Label");
+LetReg(9,"Label Items");
+IfSel('0','=',>
+      !'Exe("%b\Macros\References\CommonFindLabel.edt");>
+        IfSel(''0'',''='',>
+              !''Exe("%b\Macros\References\CommonMenuReferences.edt");'',>
+              !''Exe("%b\Macros\References\CommonShowReferences.edt");'');',>
+      !'Exe("%b\Macros\References\CommonShowReferences.edt");');
+EndGroup;
+End;

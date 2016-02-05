@@ -1,0 +1,14 @@
+// Create Execution Modes GUI Interface for non-TeX Configurations
+// This interface can be used to control the execution flow for console applications
+
+  Requires(20120413);
+
+  ClearApplications;
+
+  ShowExecutionModes('Execution Modes - ASCII',>
+    '%b\Exec\ASCII\ExeMode.edt',>
+    '%b\Exec\ASCII\ExeMode_Backup.edt',>
+    '%b\Exec\ASCII\ExeMode_Custom.edt',>
+    '%b\Exec\ASCII\ExeMode_Default.edt');
+
+End;

@@ -1,0 +1,54 @@
+// Denis Stancer (Monday, August 21, 2000 at 20:47)
+//
+// > I saw this in Emacs and I liked it...
+// > Beware it only counts \begins and \ends it knows nothing about
+// > syntax (but TeX engine does).
+//
+// This Macro Closes the current (nested) environment...
+//
+// Usage:
+//    Save it under %B\Macros\Samples\
+//    Make an active string: \end<<
+//    On type: TeX
+//    Action: [BeginGroup;Backspace;Backspace;Exe('%B\Macros\Samples\LatexComplete.edt');EndGroup;]
+//
+//    and/or
+//
+//    Add a macro menu item to your Menu:
+//
+//    Macro:
+//      Item:Complete Environment
+//      Definition:[BeginGroup;Ins('\end');Exe('%B\Macros\Samples\LatexComplete.edt');EndGroup;]
+//
+
+
+  BeginGroup;
+  LetRegNum(8,1);
+  LetRegNum(3,0);
+  LetRegNum(4,1);
+  Mark(1);
+  SetTracking(0);
+  SetBlock(-1);
+  CharLeft;
+  SelToBeginningOfFile;
+  GetSel(0,1);
+  Goto(1);
+  SetSel(0);
+  RestoreBlock;
+  SetTracking(1);
+  Loop('>
+      FindInString("%%!1", "\\\(1{{begin}|{end}}\)\{*\}", 8, 9, 111);>
+      IfStr("%%!8","%%!9",">=","Prompt(''Environment not found.'',3,1);Undo;Exit;","");>
+      ExtractByIndex(2, "%%!1", %%!8+1, %%!9);>
+      ExtractByIndex(1, "%%!1",0,%%!8);>
+      FindInString("%%!2", "begin", 5, 6, 10);>
+      IfStr("%%!5","%%!6",">=","LetRegNum(4,""%%%%!4+1"");",">
+        FindInString(''%%%%!2'', ''\{*\}'', 8, 9, 11);>
+        ExtractByIndex(5, ''%%%%!2'', %%%%!8, %%%%!9);>
+        LetRegNum(3,""%%%%!3+1"");");>
+      StartWorking("Begin: %%!3 End: %%!4");>
+      IfStr("%%!3","%%!4","=","Goto(1);Ins(''%%%%!5'');Stop;","");>
+  ');
+  StopWorking;
+  EndGroup;
+End;

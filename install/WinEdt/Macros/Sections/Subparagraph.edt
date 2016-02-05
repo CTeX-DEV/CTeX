@@ -1,0 +1,19 @@
+// -*- ASCII:EDT -*-
+
+PushTagsandRegisters;
+BeginGroup;
+LetReg(9,"\subparagraph{");
+IfSel('0','=',>
+      !'SelectParagraph;>
+        IfSel(''0'',''='',>
+              !''Ins("\subparagraph{}");>
+                 CharLeft;'',>
+              !''SelCharLeft;>
+                 IfSel(''''0'''',''''='''',>
+                       !''''Ins("\subparagraph{}");>
+                            CharLeft;'''',>
+                       !''''Exe("%b\Macros\Sections\CommonSections.edt");'''')'')',>
+      !'Exe("%b\Macros\Sections\CommonSections.edt");');
+EndGroup;
+PopTagsandRegisters;
+End;

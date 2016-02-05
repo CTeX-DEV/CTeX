@@ -1,0 +1,44 @@
+// -*- ASCII:EDT -*-
+// Start Graphic Previewer for TeX in response to Action in the Navigation Tree
+//
+// Since WinEdt does not know which application you want to use
+// to open a particular graphic file it simply calls ShellExecute
+// and leaves it to Windows Filetype Associations to determine how
+// to Open the file.
+
+// You can change this by using a more explicit command:
+// Run('"YourApplication.EXE" -any switches "%!1.ext"','%!2'); etc...
+
+  PushTagsandRegisters;
+  TreeGetFileName(0);
+  GetFilePath("%!0", 0);
+  GetFullPath(1, "%?", "%!0"); // Relative to the Current File
+  IfOK(!"Relax;",>
+    !'GetFullPath(1, "%?", "%P"); // Relative to the Main File<>
+      IfOK(!"Relax;",>
+      !"Prompt(''Cannot locate graphics file ""%?""'');PopTagsandRegisters;Exit;");');
+
+  GetFilePath("%!1", 2);
+  IfFileExists("%!1",>
+    !"ShellExecute('Open','%!1','','%!2',1);PopTagsandRegisters;Exit;");
+  // Set your preferred order or alternative applications...
+  IfFileExists("%!1.pdf",>
+    !"ShellExecute('Open','%!1.pdf','','%!2',1);PopTagsandRegisters;Exit;");
+  IfFileExists("%!1.png",>
+    !"ShellExecute('Open','%!1.png','','%!2',1);PopTagsandRegisters;Exit;");
+  IfFileExists("%!1.jpg",>
+    !"ShellExecute('Open','%!1.jpg','','%!2',1);PopTagsandRegisters;Exit;");
+  IfFileExists("%!1.jpeg",>
+    !"ShellExecute('Open','%!1.jpeg','','%!2',1);PopTagsandRegisters;Exit;");
+  IfFileExists("%!1.eps",>
+    !"ShellExecute('Open','%!1.eps','','%!2',1);PopTagsandRegisters;Exit;");
+  IfFileExists("%!1.ps",>
+    !"ShellExecute('Open','%!1.ps','','%!2',1);PopTagsandRegisters;Exit;");
+  IfFileExists("%!1.bmp",>
+    !"ShellExecute('Open','%!1.bmp','','%!2',1);PopTagsandRegisters;Exit;");
+
+  Prompt('Cannot locate graphics file "%!1"');
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,119 @@
+// Detection for Adobe (Reader or Acrobat)
+// =======================================
+//
+// Open the file in the last viewed page as if the GoBack
+// menu command has been executed
+//
+// Full Acrobat implements reliable DDE...
+//
+// Acrobat Reader simulates wm_Command message:
+//   the problem is that the message code changes between Acrobat Reader
+//   versions (if the menu has been changed)...
+
+//  Full description of all DDE Functions implemented by Acrobat (only
+//  some are also supported by Acrobat Reader as indicated for each one):
+//
+//   https://partners.adobe.com/asn/acrobat/sdk/reg/Documentation/Core_API/CoreAPIReference.pdf
+
+  // Get the Version
+  FindInString(`%$('PDF-View');`,'Acrobat.exe',1,2,1000,1);
+  IfNum("%!1","%!2",">",>
+   !`>
+       LetReg(3,"%@('HKLM','SOFTWARE\Adobe\Acrobat Reader','   ');");>
+       IfStr('%!3','','=',!|LetReg(3,"%@('HKLM','SOFTWARE\Wow6432Node\Adobe\Acrobat Reader','   ');");|);>
+       IfStr('%!3','','=',!|LetReg(3,"%@('HKCU','SOFTWARE\Adobe\Acrobat Reader','   ');");|);>
+       LetReg(4,"%@('HKCU','SOFTWARE\Adobe\Acrobat Reader\DC','   ');");>
+       IfStr('%!4','','<>',!|LetReg(3,"DC");|);>
+    `,>
+   !`>
+       LetReg(3,"%@('HKLM','SOFTWARE\Adobe\Adobe Acrobat','   ');");>
+       IfStr('%!3','','=',!|LetReg(3,"%@('HKLM','SOFTWARE\Wow6432Node\Adobe\Adobe Acrobat','   ');");|);>
+       IfStr('%!3','','=',!|LetReg(3,"%@('HKCU','SOFTWARE\Adobe\Adobe Acrobat','   ');");|);>
+       LetReg(4,"%@('HKCU','SOFTWARE\Adobe\Adobe Acrobat\2015','   ');");>
+       IfStr('%!4','','<>',!|LetReg(3,"DC");|);>
+    `);
+  IfStr('%!3','','=',!|LetReg(3,"%$('PDF-View');");|);
+  // Prompt('%!3'); // Debugging
+  FindInString('%!3','\(0+[0-9]\)\(1\.+[0-9]\)',1,2,1001,0);
+  IfOK(!'GetTag(0,3);GetTag(1,4);');
+  IfStr('%!3','DC','=',!|LetReg(3,"15");LetReg(4,".0");|);
+  // Prompt('%!3 + %!4'); // Debugging
+
+  // Acrobat (Reader) Caption ...
+  // Which Acrobat: Reader or Acrobat
+  FindInString(`%$('PDF-View');`,'Acrobat.exe',1,2,1000,1);
+  IfNum("%!1","%!2",">",>
+   !`>
+       IfNum('%!3','6','>=',>
+         !|Assign("PDF-Caption","Adobe Reader");|,>
+         !|Assign("PDF-Caption","Acrobat Reader");|);>
+    `,>
+   !`>
+       IfNum('%!3','9','>=',>
+         !|Assign("PDF-Caption","Adobe Acrobat Pro");|,>
+         !|Assign("PDF-Caption","Adobe Acrobat Professional");|);>
+    `);
+
+   // If this does not work assign it manually:
+   // Assign("PDF-Caption","Adobe Caption???");
+
+// Go Back Menu Item ID =============================================
+
+  // Menu Item Code for Acrobat/ Adobe Reader's "Go to Previous View" Command
+  // Hacking: used in SendMessage to restore the position after compilation
+  // The code changes with Adobe Reader's Menu: this should work with versions 4.0..8.0
+  // Go Back is no longer possible in Adobe 9 after a pdf has been rewritten!
+  // GoBack: Menu ID Acro Reader (version dependent):
+  // The command no longer works in Adobe 9 (or later) after the document has been modified.
+  // There is no known solution for this (SumatraPDF or PDF-XChange might be a better choice)!
+
+  Assign("PDF-Menu","");
+  IfNum('%!3','8','=',>
+    !|Assign("PDF-Menu","6063");|);
+  IfNum('%!3','7','=',>
+    !|Assign("PDF-Menu","6100");|);
+  IfNum('%!3','6','=',>
+    !|Assign("PDF-Menu","6085");|);
+  IfNum('%!3','5','=',>
+    !|>
+       IfStr('%!4','.1','>=',>
+         !||Assign("PDF-Menu","6052");||,>
+         !||Assign("PDF-Menu","6044");||);>
+     |);
+  IfNum('%!3','5','<',>
+    !|Assign("PDF-Menu","6044");|);
+
+ // If this does not work assign it manually:
+ // Assign("PDF-Menu","6xxx???");
+
+// ==================================================================
+// As of Adobe X DDE Service is version-dependent (eg. AcroViewR10 or AcroViewA10)
+
+  Assign(!'Acro-DDE_Service',!'Acroview');
+
+  // Adobe Blues: Registry does not contain proper value for Adobe X!
+  // http://forums.adobe.com/message/3323310
+  IfNum('%!3','10','<',!'JMP(!"DDE_OK");');
+  // Add R or A + Major Version...
+  LetReg(4,'R%!3');
+  FindInString("%$('PDF-View');",'Acrobat.exe',1,2,1000,1);
+  IfOK(!"LetReg(4,'A%!3');");
+  Assign(!'Acro-DDE_Service','%$("Acro-DDE_Service");%!4');
+  // Prompt('DDE Service: %$("Acro-DDE_Service");');
+
+:DDE_OK:: ===========================================================
+
+  Assign(!'Acro-DDE_Topic',"%@('HKCR','acrobat\shell\open\ddeexec\topic',' ');");
+  IfStr('%$("Acro-DDE_Topic");','','=',>
+    !"Assign(!'Acro-DDE_Topic',!'Control');");
+
+// ==================================================================
+// If you must manually modify any of these variables do it here:
+//
+// Assign(!"PDF-Caption",!"Adobe Reader");
+// Assign(!"Acro-DDE_Topic",!"Control");
+// Assign(!"Acro-DDE_Service",!"AcroviewR11");
+//
+// ==================================================================
+
+End;

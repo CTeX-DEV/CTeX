@@ -1,0 +1,16 @@
+// NSISInclude.edt
+// ======================
+// Parse %!? for the Caption
+// =================================
+
+    PushTagsandRegisters;
+
+    Assign('GatherType','!include');
+    Exe('%b\Macros\Gather\NSISFunctions.edt');
+    LetReg(0,"%-0");
+    SubstituteInString("%!0","${NSISDIR}","%$('NSIS-Root');",0,0);
+    LetReg(-10,"%!0");
+
+    PopTagsandRegisters;
+
+End;

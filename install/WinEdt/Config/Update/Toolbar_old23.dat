@@ -1,0 +1,5 @@
+  BUTTON="NSIS:Run_NSIS_Installer"
+    CONFIG_FILTER="NSIS"
+  BUTTON="|"
+  BUTTON="WinEdt_Console"
+  BUTTON="Erase_Output_Files"

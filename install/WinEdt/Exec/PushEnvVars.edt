@@ -1,0 +1,10 @@
+// -*- ASCII:EDT -*-
+// Save Environment Variables
+
+  Assign(!"OLDTEXINPUTS","%@('TEXINPUTS');");
+  Assign(!"OLDBIBINPUTS","%@('BIBINPUTS');");
+  Assign(!"OLDBSTINPUTS","%@('BSTINPUTS');");
+  Assign(!"OLDMPINPUTS","%@('MPINPUTS');");
+  Assign(!"OLDMFINPUTS","%@('MFINPUTS');");
+
+End;

@@ -1,0 +1,10 @@
+// MDI Before Open Event Handler
+
+  Requires(20070313);
+  PushTagsandRegisters;
+
+  Exe("%b\Macros\Events\GetMode.edt");
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,33 @@
+// -*- ASCII:EDT -*-
+// TeX: BibTeX ...
+
+  Requires(20110812); // Requires this build of WinEdt to work properly
+
+  PushTagsandRegisters;
+  Assign('ExitCode-OK','0'); // OK Exit Code
+  LetReg(9,'BibTeX');   // Execution Modes Compiler
+  LetReg(8,'blg');      // Log File (or empty)
+  LetReg(7,'bbl');      // Output Format
+  LetReg(6,'%O');       // Startup Folder
+
+  // Display a Dialog for Extra Switches:
+  IfStr("%$('%!9-GUI');","1","=",>
+    !|GetString("Switches: ","%!9 Switches","%$('%!9--Switches');");>
+      IfOK(!`Assign('%!9--Switches','%!?');`,!`PopTagsandRegisters;Exit;`);|,>
+    !|Release('%!9--Switches');|);
+  // Aux Directory?
+  LetReg(3);
+  IfStr("%$('TeX System');","MiKTeX","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(3,'--include-directory="%P"');`);|);
+  // Only for bibtex.exe (bibtex8 and biber do not support this switch)
+  IfIStr("%$('%!9-Executable');","bibtex.exe","<>",!"LetReg(3);");
+  IfIStr("%$('%!9-Executable');","biber.exe","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(3,'--input-directory "%P"');`);|);
+  // Build the Command Line ...
+  LetReg(5, "%$('%!9-Executable'); %$('%!9-Switches'); %!3 %$('%!9--Switches'); %$('%!9-Parameters');");
+
+  // Use Execution Modes to determine the flow of execution...
+  Exe('%b\Exec\ExeCompiler.edt');
+  PopTagsandRegisters;
+
+End;

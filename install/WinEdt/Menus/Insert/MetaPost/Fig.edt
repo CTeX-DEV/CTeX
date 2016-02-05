@@ -1,0 +1,25 @@
+// MetaPost figure
+
+  SetTracking(0);
+  BeginGroup;
+  IfSel(1,'=','GetSel(0,1);Delete;','SetSel(0);GetSel(0,1);');
+  IfNum(%c,'1','>','InsLine;');
+  Mark(1);
+  LetReg(0,"%c"); // *** Current Column
+  Ins('beginfig(%!9);');
+  NewLine;
+  GotoCol(%!0);                     // *** Original Column
+  TrimLine;
+  Ins("%!1");
+  IfStr("%!1","","=","Ins('  %\');",>
+    "IfNum(%c,'1','>','Ins(''%\'');');");
+  GotoCol(%!0);                     // *** Original Column
+  TrimLine;
+  Ins("endfig;");
+  MoveBy(1);IfNum(%c,'1','>','MoveBy(-1);InsLine;');
+  Goto(1,1);
+  IfStr("%!1","","=","NextBullet;");
+  EndGroup;
+  SetTracking(1);
+
+End;

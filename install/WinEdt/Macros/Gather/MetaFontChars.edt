@@ -1,0 +1,21 @@
+// MetaFontChars.edt
+// ======================
+// Parse %? for the Caption
+// =================================
+
+    PushTagsandRegisters;
+
+    LetReg(0,"%?");
+    FindInString(|%!0|,|<@$[#32]$\(+$[#48..#57]$\)|,1,2,11);
+    IfOK(!'LetReg(-10,"dec %#0");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|<@$[#32]$oct@$[#32]$"\(+$[#48..#57]$\)"|,1,2,11);
+    IfOK(!'LetReg(-10,"oct %#0");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|<@$[#32]$hex@$[#32]$"\(+$[#48..#57,#65..#70,#97..#102]$\)"|,1,2,11);
+    IfOK(!'LetReg(-10,"hex %#0");PopTagsandRegisters;Exit;');
+    FindInString(|%!0|,|<@$[#32]$"\(?\)"|,1,2,11);
+    IfOK(!'LetReg(-10,"""%#0""");PopTagsandRegisters;Exit;');
+    LetReg(-10,"");
+
+    PopTagsandRegisters;
+
+End;

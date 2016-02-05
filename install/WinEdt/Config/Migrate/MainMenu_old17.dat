@@ -1,0 +1,4 @@
+  ITEM="LaTeX_Doc"
+    CAPTION="LaTeX &Doc..."
+    CONFIG_FILTER="MiKTeX"
+    IMAGE="DocLaTeX"

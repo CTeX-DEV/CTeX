@@ -1,0 +1,13 @@
+[MAIN_MENU]
+
+// If image size is specified as zero then WinEdt determines the actual size
+// depending on your screen resolution...
+// Default dpi-dependent values are:
+//     16x16 139dpi or less
+//     20x20 140dpi -- 179dpi
+//     24x24 180dpi -- 239dpi
+//     32x32 240dpi or more
+IMAGE_WIDTH=0
+IMAGE_HEIGHT=0
+
+// Disable this option (set the value to 0)

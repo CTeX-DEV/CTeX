@@ -1,0 +1,28 @@
+// ===============================================================================
+//
+// Bitmaps can be used if you want to "carve" your text into wood or marble:-)
+//
+// Defaults are bitmap-free:
+// background like this is not considered "cool" these days!
+//
+// The following Bitmaps are by default in Bitmaps\Background Folder:
+//
+//     BACKGROUND_BITMAP="Dots-Blue.bmp"    // BACKGROUND_COLOR="#E7E7F6"
+//     BACKGROUND_BITMAP="Dots-Gray.bmp"    // BACKGROUND_COLOR="#E9E9E9"
+//     BACKGROUND_BITMAP="Bk-Gray.bmp"      // BACKGROUND_COLOR="#E8E8E8"
+//     BACKGROUND_BITMAP="Bk-Brown.bmp"     // BACKGROUND_COLOR="#F3E7D1"
+//     BACKGROUND_BITMAP="Wood-Brown.bmp"   // BACKGROUND_COLOR="#D8CDA2"
+//     BACKGROUND_BITMAP="Wood-Gray.bmp"    // BACKGROUND_COLOR="#D8D8D8"
+//     BACKGROUND_BITMAP="Sky-Blue.bmp"     // BACKGROUND_COLOR="#E3EAFE"
+//     BACKGROUND_BITMAP="Sky-Gray.bmp"     // BACKGROUND_COLOR="#EDEFEC"
+//     BACKGROUND_BITMAP="Marble-Brown.bmp" // BACKGROUND_COLOR="#DAD3A1"
+//     BACKGROUND_BITMAP="Marble-Gray.bmp"  // BACKGROUND_COLOR="#CFCFCF"
+//     BACKGROUND_BITMAP="Paper-Brown.bmp"  // BACKGROUND_COLOR="#DFDCC6"
+//     BACKGROUND_BITMAP="Paper-Gray.bmp"   // BACKGROUND_COLOR="#DADADA"
+//
+// Background Color is a bitmap average color (it can be used for panels)...
+//
+// This example requires 'Allow Environment Background' to be disabled in the
+// Preferences dialog.
+//
+// ===============================================================================

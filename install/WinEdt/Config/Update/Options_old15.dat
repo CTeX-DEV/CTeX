@@ -1,0 +1,6 @@
+  ITEM="Common Macros..."
+    ICON="Macro"
+    ACTION="$Help"
+      MACRO="HTMLHelp('%B\Doc\Help\WinEdt.chm',1,0,"+
+            "'Config/Advanced.html#Common_Macros');"
+    ITEM="Erase Working Files"

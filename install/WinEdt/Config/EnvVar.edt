@@ -1,0 +1,27 @@
+// Environment Variables
+
+  Release(!"UseEnvVar-1");
+  Assign(!"EnvVar-1",!"TEXINPUTS");
+  Release(!"EnvVal-1");
+
+  Release(!"UseEnvVar-2");
+  Assign(!"EnvVar-2",!"BIBINPUTS");
+  Release(!"EnvVal-2");
+
+  Release(!"UseEnvVar-3");
+  Assign(!"EnvVar-3",!"MIKTEX_EDITOR");
+  Assign(!"EnvVal-3",!"WinEdt.exe ""[Open(|%%f|);SelPar(%%l,7);]""");
+
+  Release(!"UseEnvVar-4");
+  Assign(!"EnvVar-4",!"TEXEDIT");
+  Assign(!"EnvVal-4",!"WinEdt.exe ""[Open(|%%s|);SelPar(%%d,7);]""");
+
+  Release(!"UseEnvVar-5");
+  Release(!"EnvVar-5");
+  Release(!"EnvVal-5");
+
+  Release(!"UseEnvVar-6");
+  Release(!"EnvVar-6");
+  Release(!"EnvVal-6");
+
+End;

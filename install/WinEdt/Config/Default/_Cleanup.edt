@@ -1,0 +1,71 @@
+// Remove Local ini and edt files if they are empty or the same as global
+
+    Requires(20120413);
+    IfStr('%b','%B','=',>
+      !"Prompt('You are using Global Configuration!');Exit;");
+
+    Prompt("This macro will remove unnecessary Local Files... %\ %\>
+                       Continue?",1,0);
+
+    PushTagsandRegisters;
+    StartWorking('Maintenance...');
+    SaveSettings;
+    ListFolderFiles(1,'%b','.ini',1,1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    LetRegNum(2,0);
+    LetRegNum(6,0);
+    LetRegNum(7,0);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\%!3",>
+          !"LetRegNum(6,%!6+1);>
+            ReadFile('%b\%!3',4);>
+            ReadFile('%B\%!3',5);>
+            IfStr('%!4','%!5',!'=',>
+              !'DeleteFile(`%b\%!3`);LetRegNum(2,%!2+1);');>
+            IfStr('%!4',!'',!'=',>
+              !'DeleteFile(`%b\%!3`);LetRegNum(2,%!2+1);');");>
+        LetReg(8,'%b\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"LetRegNum(7,%!7+1);",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+    LetReg(9, '%!2 out of %!6 duplicated (%!1 total) .ini files have been removed from local settings.');
+    ListFolderFiles(1,'%b','.edt',1,1,1);
+    LstEnum('%!1','%\');
+    LstGetCount(1);
+    LetRegNum(2,0);
+    LetRegNum(6,0);
+    Repeat(%!1,>
+      !|LstGetItem(3,%!c-1);>
+        IfFileExists("%B\%!3",>
+          !"LetRegNum(6,%!6+1);>
+            ReadFile('%b\%!3',4);>
+            ReadFile('%B\%!3',5);>
+            IfStr('%!4','%!5',!'=',>
+              !'DeleteFile(`%b\%!3`);LetRegNum(2,%!2+1);');>
+            IfStr('%!4',!'',!'=',>
+              !'DeleteFile(`%b\%!3`);LetRegNum(2,%!2+1);');");>
+        LetReg(8,'%b\%!3');>
+        Loop(!`>
+          GetFilePath("%!8",8);>
+          IfStr('%b','%!8',!'>=',!'Stop;',>
+            !'RemoveDirectory("%!8");>
+              IfOK(!"LetRegNum(7,%!7+1);",!"Stop;");');`);>
+        ProcessMessages;>
+       |);
+    LstRelease;
+    LetReg(9, '%!9%\%!2 out of %!6 duplicated (%!1 total) .edt files have been removed from local settings.');
+    IfNum(%!7,1,!'=',!|LetReg(9, '%!9%\One empty local folder has been removed...');|);
+    IfNum(%!7,1,!'>',!|LetReg(9, '%!9%\%!7 empty local folders have been removed...');|);
+
+    // Cleanup ...
+    StopWorking;
+    Prompt("%!9",0,1);
+    PopTagsandRegisters;
+End;
