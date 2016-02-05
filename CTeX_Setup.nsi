@@ -1,3 +1,4 @@
+Unicode true
 
 ; Use compression
 !ifdef BUILD_FULL
@@ -292,31 +293,31 @@ FunctionEnd
 LicenseLangString license ${LANG_SIMPCHINESE} License-zh.txt
 LicenseLangString license ${LANG_ENGLISH} License-en.txt
 
-LangString Desc_MiKTeX ${LANG_SIMPCHINESE} "WindowsÏÂ×îºÃÓÃµÄTeXÏµÍ³Ö®Ò»£¬Ëü´øÓĞÒ»¸öºÜÓÅĞãµÄDVIÔ¤ÀÀÆ÷Yap¡£"
+LangString Desc_MiKTeX ${LANG_SIMPCHINESE} "Windowsä¸‹æœ€å¥½ç”¨çš„TeXç³»ç»Ÿä¹‹ä¸€ï¼Œå®ƒå¸¦æœ‰ä¸€ä¸ªå¾ˆä¼˜ç§€çš„DVIé¢„è§ˆå™¨Yapã€‚"
 LangString Desc_MiKTeX ${LANG_ENGLISH} "One of the best TeX system on Windows platform, with an excellent DVI previewer Yap."
-LangString Desc_Addons ${LANG_SIMPCHINESE} "ÖĞÎÄTeX×é¼ş£¬°üÀ¨CJK/CCT/TYºÍÏàÓ¦µÄ×ÖÌåÉèÖÃ£¬ÒÔ¼°Ò»Ğ©ÖĞÎÄLaTeXºê°ü¡£"
+LangString Desc_Addons ${LANG_SIMPCHINESE} "ä¸­æ–‡TeXç»„ä»¶ï¼ŒåŒ…æ‹¬CJK/CCT/TYå’Œç›¸åº”çš„å­—ä½“è®¾ç½®ï¼Œä»¥åŠä¸€äº›ä¸­æ–‡LaTeXå®åŒ…ã€‚"
 LangString Desc_Addons ${LANG_ENGLISH} "Chinese TeX addons, including CJK/CCT/TY and their Chinese font settings, and several Chinese LaTeX packages."
-LangString Desc_Ghostscript ${LANG_SIMPCHINESE} "PS (PostScript)ÓïÑÔºÍPDFÎÄ¼şµÄ½âÊÍÆ÷£¬¿ÉÔÚ·ÇPS´òÓ¡»úÉÏ´òÓ¡ËüÃÇ¡£¿ÉÒÔ½«PSÎÄ¼şºÍPDFÎÄ¼şÏà»¥×ª»»¡£"
+LangString Desc_Ghostscript ${LANG_SIMPCHINESE} "PS (PostScript)è¯­è¨€å’ŒPDFæ–‡ä»¶çš„è§£é‡Šå™¨ï¼Œå¯åœ¨éPSæ‰“å°æœºä¸Šæ‰“å°å®ƒä»¬ã€‚å¯ä»¥å°†PSæ–‡ä»¶å’ŒPDFæ–‡ä»¶ç›¸äº’è½¬æ¢ã€‚"
 LangString Desc_Ghostscript ${LANG_ENGLISH} "PS (PostScript) and PDF interpreter."
-LangString Desc_GSview ${LANG_SIMPCHINESE} "GSviewÊÇGhostscriptµÄÍ¼ĞÎ½çÃæ³ÌĞò£¬Í¨¹ıGhostscriptµÄÖ§³Ö£¬¿ÉÒÔºÜ·½±ãµØä¯ÀÀºÍĞŞ¸ÄPSÎÄ¼ş¡£"
+LangString Desc_GSview ${LANG_SIMPCHINESE} "GSviewæ˜¯Ghostscriptçš„å›¾å½¢ç•Œé¢ç¨‹åºï¼Œé€šè¿‡Ghostscriptçš„æ”¯æŒï¼Œå¯ä»¥å¾ˆæ–¹ä¾¿åœ°æµè§ˆå’Œä¿®æ”¹PSæ–‡ä»¶ã€‚"
 LangString Desc_GSview ${LANG_ENGLISH} "GSview is the frontend GUI of Ghostscript, used with Ghostscript to view and edit PS (PostScript) file."
-LangString Desc_WinEdt ${LANG_SIMPCHINESE} "WinEdtÊÇÒ»¸ö±à¼­Æ÷£¬ËüÄÚÖÃÁË¶ÔTeXµÄÁ¼ºÃÖ§³Ö¡£ÔÚËüµÄ²Ëµ¥ÉÏºÍ°´Å¥ÉÏ¿ÉÒÔÖ±½Óµ÷ÓÃTeX³ÌĞò£¬°üÀ¨±àÒë¡¢Ô¤ÀÀµÈ¡£WinEdt»¹ÄÜ°ïÖúÄãÑ¸ËÙÊäÈë¸÷ÖÖTeXÃüÁîºÍ·ûºÅ£¬Ê¡È¥Äã¼ÇÒä´óÁ¿ÃüÁîµÄ·³ÄÕ¡£"
+LangString Desc_WinEdt ${LANG_SIMPCHINESE} "WinEdtæ˜¯ä¸€ä¸ªç¼–è¾‘å™¨ï¼Œå®ƒå†…ç½®äº†å¯¹TeXçš„è‰¯å¥½æ”¯æŒã€‚åœ¨å®ƒçš„èœå•ä¸Šå’ŒæŒ‰é’®ä¸Šå¯ä»¥ç›´æ¥è°ƒç”¨TeXç¨‹åºï¼ŒåŒ…æ‹¬ç¼–è¯‘ã€é¢„è§ˆç­‰ã€‚WinEdtè¿˜èƒ½å¸®åŠ©ä½ è¿…é€Ÿè¾“å…¥å„ç§TeXå‘½ä»¤å’Œç¬¦å·ï¼Œçœå»ä½ è®°å¿†å¤§é‡å‘½ä»¤çš„çƒ¦æ¼ã€‚"
 LangString Desc_WinEdt ${LANG_ENGLISH} "WinEdt a well designed text editor with full support to edit and compile TeX file."
 
-LangString Desc_File ${LANG_SIMPCHINESE} "ÎÄµµ"
+LangString Desc_File ${LANG_SIMPCHINESE} "æ–‡æ¡£"
 LangString Desc_File ${LANG_ENGLISH} "File"
 
-LangString Msg_AdminRequired ${LANG_SIMPCHINESE} "°²×°±¾³ÌĞòĞèÒª¹ÜÀíÔ±È¨ÏŞ£¡"
+LangString Msg_AdminRequired ${LANG_SIMPCHINESE} "å®‰è£…æœ¬ç¨‹åºéœ€è¦ç®¡ç†å‘˜æƒé™ï¼"
 LangString Msg_AdminRequired ${LANG_ENGLISH} "Adminstrator rights are required to install the program!"
-LangString Msg_ObsoleteVersion ${LANG_SIMPCHINESE} "ÔÚÏµÍ³ÖĞ·¢ÏÖ¾É°æµÄCTeX£¬ÇëÏÈĞ¶ÔØ£¡"
+LangString Msg_ObsoleteVersion ${LANG_SIMPCHINESE} "åœ¨ç³»ç»Ÿä¸­å‘ç°æ—§ç‰ˆçš„CTeXï¼Œè¯·å…ˆå¸è½½ï¼"
 LangString Msg_ObsoleteVersion ${LANG_ENGLISH} "Found obsolete version of CTeX installed in the system, please uninstall first!"
-LangString Msg_WrongVersion ${LANG_SIMPCHINESE} "ÏµÍ³ÖĞ°²×°ÁËÆäËû°æ±¾µÄCTeX£¬ÊÇ·ñ¼ÌĞø£¿"
+LangString Msg_WrongVersion ${LANG_SIMPCHINESE} "ç³»ç»Ÿä¸­å®‰è£…äº†å…¶ä»–ç‰ˆæœ¬çš„CTeXï¼Œæ˜¯å¦ç»§ç»­ï¼Ÿ"
 LangString Msg_WrongVersion ${LANG_ENGLISH} "Another version of CTeX is installed in the system, continue?"
-LangString Msg_Downgrade ${LANG_SIMPCHINESE} "ÏµÍ³ÖĞ°²×°ÁË¸ü¸ß°æ±¾µÄCTeX£¬ÊÇ·ñ¼ÌĞø½øĞĞ½µ¼¶°²×°£¿"
+LangString Msg_Downgrade ${LANG_SIMPCHINESE} "ç³»ç»Ÿä¸­å®‰è£…äº†æ›´é«˜ç‰ˆæœ¬çš„CTeXï¼Œæ˜¯å¦ç»§ç»­è¿›è¡Œé™çº§å®‰è£…ï¼Ÿ"
 LangString Msg_Downgrade ${LANG_ENGLISH} "Newer version of CTeX is installed in the system, continue to downgrade setup?"
-LangString Msg_RemoveInstDir ${LANG_SIMPCHINESE} "ÊÇ·ñÍêÈ«É¾³ı°²×°Ä¿Â¼£¿"
+LangString Msg_RemoveInstDir ${LANG_SIMPCHINESE} "æ˜¯å¦å®Œå…¨åˆ é™¤å®‰è£…ç›®å½•ï¼Ÿ"
 LangString Msg_RemoveInstDir ${LANG_ENGLISH} "Remove all files in the installed diretory?"
-LangString Msg_FontSetup ${LANG_SIMPCHINESE} "ÊÇ·ñÔËĞĞÖĞÎÄ×ÖÌå°²×°³ÌĞò£¿"
+LangString Msg_FontSetup ${LANG_SIMPCHINESE} "æ˜¯å¦è¿è¡Œä¸­æ–‡å­—ä½“å®‰è£…ç¨‹åºï¼Ÿ"
 LangString Msg_FontSetup ${LANG_ENGLISH} "Run the Chinese font setup program?"
 
 ; eof

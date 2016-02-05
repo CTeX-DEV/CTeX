@@ -1,3 +1,4 @@
+Unicode true
 
 ; Use compression
 SetCompressor /FINAL /SOLID LZMA
@@ -153,17 +154,17 @@ FunctionEnd
 
 ; Language strings
 
-LangString Msg_NewVer ${LANG_SIMPCHINESE} "ÏµÍ³ÖĞ°²×°ÁË¸ü¸ß°æ±¾µÄCTeX£¡"
+LangString Msg_NewVer ${LANG_SIMPCHINESE} "ç³»ç»Ÿä¸­å®‰è£…äº†æ›´é«˜ç‰ˆæœ¬çš„CTeXï¼"
 LangString Msg_NewVer ${LANG_ENGLISH} "Newer version of CTeX is found in the system!"
-LangString Msg_SameVer ${LANG_SIMPCHINESE} "ÏµÍ³ÖĞÒÑ¾­°²×°ÁË×îĞÂ°æ±¾µÄCTeX£¡"
+LangString Msg_SameVer ${LANG_SIMPCHINESE} "ç³»ç»Ÿä¸­å·²ç»å®‰è£…äº†æœ€æ–°ç‰ˆæœ¬çš„CTeXï¼"
 LangString Msg_SameVer ${LANG_ENGLISH} "Latest version of CTeX is found in the system!"
-LangString Msg_OldVer ${LANG_SIMPCHINESE} "ÏµÍ³ÖĞ°²×°µÄCTeX°æ±¾Ì«¾É£¬ÇëÏÈ¸üĞÂµ½°æ±¾£º"
+LangString Msg_OldVer ${LANG_SIMPCHINESE} "ç³»ç»Ÿä¸­å®‰è£…çš„CTeXç‰ˆæœ¬å¤ªæ—§ï¼Œè¯·å…ˆæ›´æ–°åˆ°ç‰ˆæœ¬ï¼š"
 LangString Msg_OldVer ${LANG_ENGLISH} "The installed CTeX is too old, please update to version: "
-LangString Msg_NotInst ${LANG_SIMPCHINESE} "ÏµÍ³ÖĞÃ»ÓĞ°²×°CTeX£¡"
+LangString Msg_NotInst ${LANG_SIMPCHINESE} "ç³»ç»Ÿä¸­æ²¡æœ‰å®‰è£…CTeXï¼"
 LangString Msg_NotInst ${LANG_ENGLISH} "Not found CTeX in the system!"
-LangString Msg_FontSetup ${LANG_SIMPCHINESE} "±ØĞëÖØĞÂÉú³ÉÖĞÎÄType1×Ö¿â£¡ÔËĞĞFontSetup£¿"
+LangString Msg_FontSetup ${LANG_SIMPCHINESE} "å¿…é¡»é‡æ–°ç”Ÿæˆä¸­æ–‡Type1å­—åº“ï¼è¿è¡ŒFontSetupï¼Ÿ"
 LangString Msg_FontSetup ${LANG_ENGLISH} "Must re-generate Chinese Type1 fonts! Run FontSetup?"
-LangString Msg_UpdateMiKTeX ${LANG_SIMPCHINESE} "ÊÇ·ñÔÚÏß¸üĞÂMiKTeX£¿"
+LangString Msg_UpdateMiKTeX ${LANG_SIMPCHINESE} "æ˜¯å¦åœ¨çº¿æ›´æ–°MiKTeXï¼Ÿ"
 LangString Msg_UpdateMiKTeX ${LANG_ENGLISH} "Update MiKTeX through Internet?"
 
 ; eof

@@ -25,7 +25,7 @@
 !macro Set_Version_Information
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "ProductName" "${APP_NAME}"
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "CompanyName" "${APP_COMPANY}"
-	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileDescription" "ÖÐÎÄTeXÌ××°"
+	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileDescription" "ä¸­æ–‡TeXå¥—è£…"
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileVersion" "${APP_BUILD}"
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "LegalCopyright" "${APP_COPYRIGHT}"
 	VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "${APP_NAME}"
