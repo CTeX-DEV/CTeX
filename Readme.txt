@@ -1,26 +1,26 @@
 CTeX 2.9.0
 ==========
 
-Ŀ¼
+目录
 
-1. ����
-2. ��װ
-3. ����
-   3.1. CJK ����ģʽ���ֿ�
-   3.2. �����͸���
-   3.3. ˢ���ļ������ݿ�
-4. ��л
-5. ��������
-   5.1. ��վ
-   5.2. CTeX ������װ
-   5.3. ��ϵ��ʽ
+1. 内容
+2. 安装
+3. 其它
+   3.1. CJK 中文模式和字库
+   3.2. 升级和更新
+   3.3. 刷新文件名数据库
+4. 致谢
+5. 关于我们
+   5.1. 网站
+   5.2. CTeX 中文套装
+   5.3. 联系方式
 
 
 ====================================================
 
-1. ����
+1. 内容
 
-����װ�������к�������������
+本套装软件包中含有如下软件：
 
         MiKTeX 2.9
         WinEdt 6.0
@@ -30,117 +30,117 @@ CTeX 2.9.0
 
 ====================================================
 
-2. ��װ
+2. 安装
 
-�Ѿ���װ�˵Ͱ汾������2.7.0 beta2���� CTeX ������װ���û��뽫ԭ�ȵ� 
-CTeX ������װж�غ�ɾ����װĿ¼���ٰ�װ�°汾����Ҫֱ��������
+已经安装了低版本（早于2.7.0 beta2）的 CTeX 中文套装的用户请将原先的 
+CTeX 中文套装卸载后删除安装目录，再安装新版本，不要直接升级。
 
-�°汾�е� FontSetup �����Զ���ϵͳ�ֿ����������� Type1 �ֿ⣬����
-���龡����ʹ�ã�����ʹ�� TrueType �ֿ⡣
+新版本中的 FontSetup 可以自动从系统字库中生成中文 Type1 字库，但是
+建议尽量不使用，而是使用 TrueType 字库。
 
 
 ====================================================
 
-3. ����
+3. 其它
 
 
-3.1. CJK ����ģʽ
+3.1. CJK 中文模式
 
-CTeX ������װ����ֱ��ʹ�õ� CJK ģʽ�� GBK �� UTF8������������
+CTeX 中文套装可以直接使用的 CJK 模式有 GBK 和 UTF8，字体有六种
 
-song    % ����
-hei     % ����
-kai     % ����
-fs      % ����
-li      % ����
-you     % ��Բ
+song    % 宋体
+hei     % 黑体
+kai     % 楷体
+fs      % 仿宋
+li      % 隶书
+you     % 幼圆
 
-�����Ҫʹ�� pmC ģʽ���� GB ���룬�����������������ֿ⣬���Լ��������
-�ֿ�������ļ������Բο� CTeX Ŀ¼�µ��ļ���
+如果需要使用 pmC 模式或者 GB 编码，或者增加其他中文字库，请自己生成相关
+字库和配置文件。可以参考 CTeX 目录下的文件。
 
 
-3.2. Type1 �ֿ�
+3.2. Type1 字库
 
-���û���������� Type1 �ֿ⣬���Զ�ʹ�� Windows �Դ��� TrueType �ֿ⡣
-����������£�ֻ�� dvips ʹ�� ttf2pk ���� TrueType �ֿ�תΪ pk �ֿ⣬
-������������ dvipdfmx �� pdfTeX ����ֱ��ʹ�� TrueType �ֿ⡣
+如果没有生成中文 Type1 字库，则自动使用 Windows 自带的 TrueType 字库。
+在这种情况下，只有 dvips 使用 ttf2pk 来将 TrueType 字库转为 pk 字库，
+而其他程序如 dvipdfmx 和 pdfTeX 都将直接使用 TrueType 字库。
 
-������ Type1 �ֿ��pdfTeX �� pdfLaTeX ����Ϊʹ�� Type1 �ֿ⣬��ʱҪʹ
-pdfTeX �� pdfLaTeX ֱ��ʹ�� TrueType �ֿ⣬���� tex �ļ���ʹ����������
+在生成 Type1 字库后，pdfTeX 和 pdfLaTeX 将改为使用 Type1 字库，此时要使
+pdfTeX 和 pdfLaTeX 直接使用 TrueType 字库，请在 tex 文件中使用如下命令
 
 \input{cjk-ttf}
 
-��ʹ������ TrueType �ֿ⡣
+来使用中文 TrueType 字库。
 
-ע�⣺Windows XP �еĿ���ͷ����� TrueType �ֿ�ֻ�� GB2312 �ַ�������������
-�������� GBK ���ַ�����
-
-
-3.3. ����
-
-��� CTeX ������װû�м�ʱ������������Լ����� CTeX ������װ�еĲ�����
-CTeX ������װ�еĴ󲿷��������Ե���������
-
-MiKTeX ��������ʹ�ò˵��е� MiKTeX -> Update
-MiKTeX ���� package ����ʹ�ò˵��е� MiKTeX -> Browser Packages
-
-Ghostscript �� GSview ֻ��ֱ�Ӱ�װ�µİ汾���ɡ���װ����Ժ�ԭ����Ŀ¼
-����ɾ�������� Ghostscript �Ժ�Ҫ�� GSview �Ĳ˵�
-Options -> Easy Configuration ��������ȷ�İ汾�ţ����� GSview ����������
-������ʱ��Ҫˢ�� MiKTeX ���ļ������ݿ���ʹ�� Ghostscript �������ֿ⡣
-
-WinEdt �������Ƚ��鷳���������Լ�������
+注意：Windows XP 中的楷体和仿宋体 TrueType 字库只是 GB2312 字符集，而其他几
+种字体是 GBK 大字符集。
 
 
-3.4. ˢ���ļ������ݿ�
+3.3. 升级
 
-�ڶ� CTeX �� MiKTeX Ŀ¼�µ��ļ������޸ĺ��벻Ҫ����ˢ�� MiKTeX ��
-�ļ������ݿ⡣����ʹ�ò˵��е� MiKTeX -> Settings ��������ɡ�
+如果 CTeX 中文套装没有及时升级，你可以自己更新 CTeX 中文套装中的部件。
+CTeX 中文套装中的大部分软件可以单独升级。
+
+MiKTeX 升级可以使用菜单中的 MiKTeX -> Update
+MiKTeX 增加 package 可以使用菜单中的 MiKTeX -> Browser Packages
+
+Ghostscript 和 GSview 只需直接安装新的版本即可。安装完成以后，原来的目录
+可以删除。升级 Ghostscript 以后要在 GSview 的菜单
+Options -> Easy Configuration 中设置正确的版本号，这样 GSview 才能正常工
+作。有时还要刷新 MiKTeX 的文件名数据库以使用 Ghostscript 所带的字库。
+
+WinEdt 的升级比较麻烦，不建议自己升级。
 
 
-====================================================
+3.4. 刷新文件名数据库
 
-4. ��л
-
-������ CTeX ������װ�������޸ģ����������˲�������ӭ���޸���Ϣ������ CTEX��
-�⽫������������һ�����а汾�кܴ�İ��������κεĽ���������Ҳ��ӭ��
-���Ƿ�ӳ����л CTEX ��̳�ϵ��û��� CTeX ��װ��������ĸ��ֽ���������
+在对 CTeX 和 MiKTeX 目录下的文件作出修改后，请不要忘了刷新 MiKTeX 的
+文件名数据库。可以使用菜单中的 MiKTeX -> Settings 工具来完成。
 
 
 ====================================================
 
-5. ��������
+4. 致谢
 
-CTEX ��һ���й� TeX �û�������Ŀǰ���� CTEX ��վ�� CTEX ��̳�Ĺ���ά��
-������
-
-CTEX ����ּ��Ϊ�й����� TeX �û��ṩ�����ܼ��İ�����CTEX Ŀǰ����
-ά�� CTEX ��վ�⣬�������ṩ�� CTeX ������װ������ TeX ��װ��������
+如果你对 CTeX 中文套装进行了修改，或者制作了补丁，欢迎将修改信息反馈到 CTEX。
+这将对我们制作下一个发行版本有很大的帮助。有任何的建议和意见，也欢迎向
+我们反映。感谢 CTEX 论坛上的用户对 CTeX 套装软件提出的各种建议和意见。
 
 
-5.1. CTEX ��վ
+====================================================
 
-CTEX �ķ��������������õ����й���ѧԺ��ѧ��ϵͳ��ѧ�о�Ժ��֧�֡�
+5. 关于我们
 
-CTEX ��վ�ṩ������ TeX ����������ĵ����أ��Լ���������ͨѶ��
+CTEX 是一个中国 TeX 用户社区，目前负责 CTEX 网站和 CTEX 论坛的管理维护
+工作。
 
-CTEX ��վ����ַΪ http://www.ctex.org
-CTEX ��̳����ַΪ http://bbs.ctex.org
-
-
-5.2. CTeX ������װ
-
-CTeX ������װ�ǻ��� Windows �µ� MiKTeX ϵͳ�������˱༭�� WinEdt �� PostScript 
-�������� Ghostscript �� GSview ����Ҫ���ߡ�
-
-CTeX ������װ�� MiKTeX �Ļ����������˶����ĵ�����֧�֡�CTeX ������װ֧��
-CJK/CCT/TY �������� TeX ������ʽ��
-
-CTeX ������װֻ���ڿ�����ѧ��Ŀ�ģ��������κ�����������ҵĿ�ġ�CTeX ������װ��
-������������ѡ����������İ�Ȩ��������ԭ���ߡ���װ����İ�Ȩ���� CTEX��
+CTEX 的宗旨是为中国广大的 TeX 用户提供力所能及的帮助。CTEX 目前除了
+维护 CTEX 网站外，还开发提供了 CTeX 中文套装（中文 TeX 套装）软件。
 
 
-5.3. ��ϵ��ʽ
+5.1. CTEX 网站
 
-��ҳ��http://www.ctex.org
-��̳��http://bbs.ctex.org
+CTEX 的服务器和网络接入得到了中国科学院数学与系统科学研究院的支持。
+
+CTEX 网站提供大量的 TeX 相关软件和文档下载，以及各类新闻通讯。
+
+CTEX 网站的网址为 http://www.ctex.org
+CTEX 论坛的网址为 http://bbs.ctex.org
+
+
+5.2. CTeX 中文套装
+
+CTeX 中文套装是基于 Windows 下的 MiKTeX 系统，集成了编辑器 WinEdt 和 PostScript 
+处理软件 Ghostscript 和 GSview 等主要工具。
+
+CTeX 中文套装在 MiKTeX 的基础上增加了对中文的完整支持。CTeX 中文套装支持
+CJK/CCT/TY 三种中文 TeX 处理方式。
+
+CTeX 中文套装只用于科研与学术目的，不得以任何理由用于商业目的。CTeX 中文套装中
+包含的所有免费、共享软件的版权均属于其原作者。安装程序的版权属于 CTEX。
+
+
+5.3. 联系方式
+
+主页：http://www.ctex.org
+论坛：http://bbs.ctex.org
