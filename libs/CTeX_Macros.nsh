@@ -1,17 +1,18 @@
 ;Internal Headers
 !include "WordFunc.nsh"
 !include "Sections.nsh"
-!include "TextReplace.nsh" ;Need to be installed
+!include "TextReplace.nsh"
+;TextReplace may need to be installed, see the zip in "libs\external\"
 !include "TextFunc.nsh"
 !include "StrFunc.nsh"
 !include "LogicLib.nsh"
-!include "LogicLib_Ext.nsh"
-!include "WinMessages.NSH"
+!include "WinMessages.nsh"
 
 ;External Headers
-!include "EnvVarUpdate.nsh"
-!include "FileAssoc.nsh"
-!include "UninstByLog.nsh"
+!include "libs\external\LogicLib_Ext.nsh"
+!include "libs\external\EnvVarUpdate.nsh"
+!include "libs\external\FileAssoc.nsh"
+!include "libs\external\UninstByLog.nsh"
 
 ; Variables
 Var Version

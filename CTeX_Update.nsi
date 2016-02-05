@@ -4,10 +4,10 @@ Unicode true
 SetCompressor /FINAL /SOLID LZMA
 SetCompressorDictSize 32
 
-!include "CTeX_Version.nsh"
+!include "libs\CTeX_Version.nsh"
 
 ; Functions and Macros
-!include "CTeX_Macros.nsh"
+!include "libs\CTeX_Macros.nsh"
 
 !define Base_Version "2.9.1.0"
 
@@ -26,7 +26,7 @@ RequestExecutionLevel admin
 !include "MUI2.nsh"
 
 !define MUI_ABORTWARNING
-!define MUI_ICON "CTeX.ico"
+!define MUI_ICON "icons\CTeX.ico"
 !define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
 
 !insertmacro MUI_PAGE_WELCOME

@@ -9,10 +9,10 @@ Unicode true
 	SetCompressorDictSize 64
 !endif
 
-!include "CTeX_Version.nsh"
+!include "libs\CTeX_Version.nsh"
 
 ; Functions and Macros
-!include "CTeX_Macros.nsh"
+!include "libs\CTeX_Macros.nsh"
 
 ; Variables
 Var UN_CONFIG_ONLY
@@ -43,11 +43,11 @@ RequestExecutionLevel admin
 
 !define MUI_ABORTWARNING
 !ifndef BUILD_REPAIR
-!define MUI_ICON "CTeX.ico"
+!define MUI_ICON "icons\CTeX.ico"
 !else
-!define MUI_ICON "CTeX_Repair.ico"
+!define MUI_ICON "icons\CTeX_Repair.ico"
 !endif
-!define MUI_UNICON "CTeX_Uninst.ico"
+!define MUI_UNICON "icons\CTeX_Uninst.ico"
 !define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
 
 !insertmacro MUI_PAGE_WELCOME
@@ -290,8 +290,8 @@ FunctionEnd
 !insertmacro Set_Version_Information
 
 ; Language strings
-LicenseLangString license ${LANG_SIMPCHINESE} License-zh.txt
-LicenseLangString license ${LANG_ENGLISH} License-en.txt
+LicenseLangString license ${LANG_SIMPCHINESE} "license\zh.txt"
+LicenseLangString license ${LANG_ENGLISH} "license\en.txt"
 
 LangString Desc_MiKTeX ${LANG_SIMPCHINESE} "Windows下最好用的TeX系统之一，它带有一个很优秀的DVI预览器Yap。"
 LangString Desc_MiKTeX ${LANG_ENGLISH} "One of the best TeX system on Windows platform, with an excellent DVI previewer Yap."
