@@ -1,13 +1,8 @@
 Unicode true
 
 ; Use compression
-!ifdef BUILD_FULL
-	SetCompressor /FINAL LZMA
-	SetCompressorDictSize 128
-!else
-	SetCompressor /FINAL /SOLID LZMA
-	SetCompressorDictSize 64
-!endif
+SetCompressor /FINAL /SOLID LZMA
+SetCompressorDictSize 64
 
 !include "libs\CTeX_Version.nsh"
 
@@ -23,11 +18,7 @@ BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 
 !ifndef BUILD_REPAIR
 	InstallDir "C:\CTEX"
-!ifndef BUILD_FULL
 	OutFile "CTeX_${APP_BUILD}.exe"
-!else
-	OutFile "CTeX_${APP_BUILD}_Full.exe"
-!endif
 !endif
 
 !ifdef BUILD_REPAIR
@@ -54,7 +45,7 @@ RequestExecutionLevel admin
 !insertmacro MUI_PAGE_LICENSE $(license)
 !insertmacro MUI_PAGE_COMPONENTS
 !ifndef BUILD_REPAIR
-!define MUI_PAGE_CUSTOMFUNCTION_SHOW PageDirectoryShow
+	!define MUI_PAGE_CUSTOMFUNCTION_SHOW PageDirectoryShow
 !endif
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
@@ -82,11 +73,7 @@ Section "MiKTeX" Section_MiKTeX
 	SetOutPath "$INSTDIR\${MiKTeX_Dir}"
 
 !ifndef BUILD_REPAIR
-!ifndef BUILD_FULL
-	${Install_Files} "install\MiKTeX.basic\*.*" "install_miktex.log"
-!else
-	${Install_Files} "install\MiKTeX.full\*.*" "install_miktex.log"
-!endif
+${Install_Files} "install\MiKTeX\*.*" "install_miktex.log"
 !endif
 
 	!insertmacro Install_Config_MiKTeX

@@ -62,7 +62,7 @@ Section
 ;		!insertmacro Uninstall_Config_GSview ""
 ;		SetOutPath "$INSTDIR\${GSview_Dir}"
 ;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_gsview.log"
-;		${Install_Files} "GSview\*.*" "install_gsview.log"
+;		${Install_Files} "install\GSview\*.*" "install_gsview.log"
 ;	${EndIf}
 	
 	${If} $Ghostscript != ""
@@ -76,12 +76,13 @@ Section
 		!insertmacro Uninstall_Config_WinEdt ""
 		SetOutPath "$INSTDIR\${WinEdt_Dir}"
 		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_winedt.log"
-		${Install_Files} "install\WinEdt\*.*" "install_winedt.log"	${EndIf}
+		${Install_Files} "install\WinEdt\*.*" "install_winedt.log"
+	${EndIf}
 
 ; Always do update
 	SetOutPath $INSTDIR
-	File Readme.txt
-	File Changes.txt
+	File "texts\Readme.txt"
+	File "texts\Changes.txt"
 	File Repair.exe
 
 ; Update configs
@@ -110,9 +111,15 @@ Section
 ; Update MiKTeX
 	DetailPrint "Update MiKTeX"
 	${If} $MiKTeX != ""
-		MessageBox MB_YESNO|MB_ICONQUESTION "$(Msg_UpdateMiKTeX)" /SD IDNO IDNO +2
-		nsExec::Exec '"$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\copystart_admin.exe" "$INSTDIR\${MiKTeX_Dir}\miktex\bin\internal\miktex-update_admin.exe"'
+		!insertmacro Uninstall_Config_MiKTeX ""
+		${Uninstall_Files} "$INSTDIR\${Logs_Dir}\install_miktex.log"
+		RMDir "$UN_INSTDIR\${MiKTeX_Dir}"
+		SetOutPath "$INSTDIR\${MiKTeX_Dir}"
+		${Install_Files} "install\MiKTeX\*.*" "install_miktex.log"
+		!insertmacro Install_Config_MiKTeX
 	${EndIf}
+		
+
 SectionEnd
 
 ; On initialization

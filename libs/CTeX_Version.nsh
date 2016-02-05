@@ -5,7 +5,7 @@
 !define APP_NAME "CTeX"
 !define APP_COMPANY "CTEX.ORG"
 !define APP_COPYRIGHT "Copyright (C) 2016 ${APP_COMPANY}"
-!define APP_VERSION "2.9.1"
+!define APP_VERSION "3.0.0"
 !define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
 
 ; Components information
@@ -15,9 +15,9 @@
 !define Ghostscript_Dir     "Ghostscript"
 !define Ghostscript_Version "9.04"
 !define GSview_Dir          "GSview"
-!define GSview_Version      "4.9"
+!define GSview_Version      "5.0"
 !define WinEdt_Dir          "WinEdt"
-!define WinEdt_Version      "6.0"
+!define WinEdt_Version      "9.1"
 !define Logs_Dir            "Logs"
 !define UserData_Dir        "UserData"
 

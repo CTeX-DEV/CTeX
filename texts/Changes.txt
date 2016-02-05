@@ -1,3 +1,11 @@
+2016
+  - v3.0.0
+  - 取消 full/basic 的版本区别，一概只安装核心组件与中文处理相关宏包
+  - 更新 SumatraPDF 3.11
+  - 更新 Ghostscript 9.18
+  - 更新 WinEdt 9.1
+  - TODO ADD MORE
+  
 2011.12.22
   - v2.9.1
   - 删除宏包 ctex/xeCJK/zhmetrics，使用 MiKTeX 内含的版本
