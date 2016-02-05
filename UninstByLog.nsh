@@ -1,7 +1,3 @@
-!include "StrFunc.nsh"
-!include "TextFunc.nsh"
-!include "LogicLib.nsh"
-
 
 !ifndef StrLoc_INCLUDED
 	${StrLoc}
