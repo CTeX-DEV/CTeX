@@ -1,9 +1,10 @@
 CTeX Maintenance Plan  
 ====
 目前已完成：  
-- [x] 所有脚本UTF-8化
-- [x] 整理目录结构
-- [x] 包含最新版的 Ghostview 和 GSView
+- [x] 所有脚本UTF-8化  
+- [x] 整理目录结构  
+- [x] 包含最新版的 Ghostview 和 GSView  
+
 待完成或问题：  
 - [ ] 加入MiKTeX 的两个版本
 - [ ] 加入 WinEdt （是否要破解？或者换成其他编辑器比如 TeX Studio？）
