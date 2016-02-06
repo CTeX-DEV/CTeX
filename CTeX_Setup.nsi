@@ -34,11 +34,11 @@ RequestExecutionLevel admin
 
 !define MUI_ABORTWARNING
 !ifndef BUILD_REPAIR
-!define MUI_ICON "icons\CTeX.ico"
+!define MUI_ICON "icons\Install.ico"
 !else
-!define MUI_ICON "icons\CTeX_Repair.ico"
+!define MUI_ICON "icons\Repair.ico"
 !endif
-!define MUI_UNICON "icons\CTeX_Uninst.ico"
+!define MUI_UNICON "icons\Uninstall.ico"
 !define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
 
 !insertmacro MUI_PAGE_WELCOME
