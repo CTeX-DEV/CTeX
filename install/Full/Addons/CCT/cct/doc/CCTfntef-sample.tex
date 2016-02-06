@@ -1,0 +1,175 @@
+% $Id: CCTfntef-sample.tex,v 1.5 2004/11/26 11:23:24 zlb Exp $
+%\documentclass[11pt,twoside]{cctart}
+\documentclass[11pt,CJK,twoside]{cctart}
+\textheight 220mm
+\textwidth 150mm
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\usepackage{xcolor}
+\usepackage{CCTfntef}
+\begin{document}
+
+\baselineskip 16pt
+\pagestyle{myheadings}
+\markboth{样本文件}{使用说明}
+ \section{宏命令列表}
+CCTfntef.sty提供两端分散对齐环境
+
+\verb|CCTfilltwosides|
+
+\noindent
+和以下宏命令：
+\begin{verbatim}
+   \CCTunderdot{...}
+   \CCTunderline[*]{...}
+   \CCTunderdblline[*]{...}
+   \CCTunderwave[*]{...}
+   \CCTsout[*]{...}
+   \CCTxout[*]{...}
+并允许以下形式的嵌套：
+     \CCTunderdot[..]{...\CCTunderline[*]{...}...}
+     \CCTunderdot[..]{...\CCTunderdblline[*]{...}...}
+     \CCTunderdot[..]{...\CCTunderwave[*]{...}...}
+     \CCTunderdot[..]{...\CCTsout[*]{...}...}
+     \CCTunderdot[..]{...\CCTxout[*]{...}...}
+
+     \CCTunderline[*]{...\CCTunderdot[..]{...}...}
+     \CCTunderdblline[*]{...\CCTunderdot[..]{...}...}
+     \CCTunderwave[*]{...\CCTunderdot[..]{...}...}
+     \CCTsout[*]{...\CCTunderdot[..]{...}...}
+     \CCTxout[*]{...\CCTunderdot[..]{...}...}
+\end{verbatim}
+其中不带*的宏对全角标点不起作用。
+
+\verb+\CCTunderdot+有一个可选参数，用以改变修饰符，缺省为加点，可以根据需要改为其他字符，如三角，小圆圈等。
+
+
+可以改变下划线和加点的颜色， 以下是缺省配置（需要先调入xcolor宏包）
+
+\begin{verbatim}
+  \newcommand{\CCTunderdotcolor}{\color{red}}
+  \newcommand{\CCTunderwavecolor}{\color{blue}}
+  \newcommand{\CCTunderlinecolor}{\color{blue}}
+  \newcommand{\CCTunderdbllinecolor}{\color{blue}}
+  \newcommand{\CCTsoutcolor}{\color{red}}
+  \newcommand{\CCTxoutcolor}{\color{blue}}
+\end{verbatim}
+
+
+\newpage
+风清扬道：“{五岳剑派中各有无数蠢才，以为将师父传下来的剑招学得精熟，自然
+而然便成高手，哼哼，熟读唐诗三百首，不会作诗也会吟！熟读了人家诗句，做几首打油
+诗是可以的，但若不能自出机抒，能成大诗人么}？”他这番话，自然是连岳不群也骂在其
+中了，但令狐冲一来觉得这话十分有理，二来他并未直提岳不群的名字，也就没有抗辩。
+风清扬道：“活学活使，只是第一步。要做到出手无招，那才真是踏入了高手的境界。你
+说‘各招浑成，敌人便无法可破’，这句话还只说对了一小半。不是‘浑成’，而是根本
+无招。你的剑招使得再浑成，只要有迹可寻，敌人便有隙可乘。但如你根本并无招式，敌
+人如何来破你的招式？”令狐冲一颗心怦怦乱跳，手心发热，喃喃的道：“根本无招，如
+何可破？根本无招，如何可破？”斗然之间，眼前出现了一个生平从所未见、连做梦也想
+不到的新天地。风清扬道：“要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+你剑招，你须得有剑招给人家来破才成。一个从未学过武功的常人，拿了剑乱挥乱舞，你
+见闻再博，也猜不到他下一剑要刺向哪里，砍向何处。就算是剑术至精之人，也破不了他
+的招式，只因并无招式，‘破招’二字，便谈不上了。只是不曾学过武功之人，虽无招式
+，却会给人轻而易举的打倒。真正上乘的剑术，则是能制人而决不能为人所制。”
+
+\CCTunderline{风清扬道：“\CCTunderdot{五岳剑派中各有无数蠢才，以为将师父传下来的剑招学得精熟，自然
+而然便成高手，哼哼，熟读唐诗三百首，不会作诗也会吟！熟读了人家诗句，做几首打油
+诗是可以的，但若不能自出机抒，能成大诗人么}？”他这番话，自然是连岳不群也骂在其
+中了，但令狐冲一来觉得这话十分有理，二来他并未直提岳不群的名字，也就没有抗辩。
+风清扬道：“活学活使，只是第一步。要做到出手无招，那才真是踏入了高手的境界。你
+说‘各招浑成，敌人便无法可破’，这句话还只说对了一小半。不是‘浑成’，而是根本
+无招。你的剑招使得再浑成，只要有迹可寻，敌人便有隙可乘。但如你根本并无招式，敌
+人如何来破你的招式？”令狐冲一颗心怦怦乱跳，手心发热，喃喃的道：“根本无招，如
+何可破？根本无招，如何可破？”斗然之间，眼前出现了一个生平从所未见、连做梦也想
+不到的新天地。风清扬道：“要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+你剑招，你须得有剑招给人家来破才成。一个从未学过武功的常人，拿了剑乱挥乱舞，你
+见闻再博，也猜不到他下一剑要刺向哪里，砍向何处。就算是剑术至精之人，也破不了他
+的招式，只因并无招式，‘破招’二字，便谈不上了。只是不曾学过武功之人，虽无招式
+，却会给人轻而易举的打倒。真正上乘的剑术，则是能制人而决不能为人所制。”
+}
+
+
+
+\CCTunderline{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdblline{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderwave{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTsout{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTxout{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderline{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdblline{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderwave{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTsout{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTxout{你剑招，你须得有剑招}给人家来破才成。}
+
+
+
+\CCTunderline*{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdblline*{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderwave*{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTsout*{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTxout*{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdot{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderline*{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderdblline*{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTunderwave*{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTsout*{你剑招，你须得有剑招}给人家来破才成。}
+
+\CCTunderdot{要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+\CCTxout*{你剑招，你须得有剑招}给人家来破才成。}
+
+
+
+\section{两端分散对齐}
+
+\begin{CCTfilltwosides}{80mm}
+要切肉\\总得有肉可切\\ \CCTunderdot{要斩柴总得有柴可斩}
+\end{CCTfilltwosides}
+
+
+
+
+\CCTunderdot[{\tiny$\triangle$}]
+{五岳剑派中各有无数蠢才，五岳剑派中各有无数蠢才，以为将师父传下来的剑招学得精熟，自然
+\CCTunderline{而然便成高手，哼哼，熟读唐诗三百首，不会作诗也会吟！熟读了人家诗句，做几首打油}%
+诗是可以的，但若不能自出机抒}
+
+\CCTunderline{而然便成高手，哼哼，\CCTunderdot[{\tiny$\triangle$}]{熟读唐诗三百首，不会作诗也}%
+会吟！熟读\CCTunderdot[{\tiny$\circ$}]{了人家诗句，做几}首打油诗是可以的}
+
+ \end{document}

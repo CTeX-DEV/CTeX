@@ -1,0 +1,1523 @@
+%& -makeindex_opts='-s cct.ist -C mixed'
+%& -glossary_opts='-s cctglo.ist'
+\documentclass[CJK]{cctart}
+\renewcommand{\sectionformat}{\flushleft}
+\def\AmSTeX{\leavevmode\hbox{$\mathcal A\kern-.2em\lower.376ex%
+        \hbox{$\mathcal M$}\kern-.2em\mathcal S$-\TeX}}
+\usepackage{graphicx}
+\usepackage{everb}
+%\usepackage{srcltx}
+\usepackage{ifpdf}
+%\newif\ifpdf \pdftrue
+%\ifx\pdfoutput\undefined \pdffalse \fi
+%\ifx\pdfoutput\relax \pdffalse \fi
+%
+\ifx\texonly\undefined\let\texonly\relax\fi
+\ifx\endtexonly\undefined\let\endtexonly\relax\fi
+\texonly
+  \let\htmlonly\iffalse
+  \let\endhtmlonly\fi
+  \textwidth=16cm
+  \textheight=24cm
+  \headheight=0pt
+  \headsep=0pt
+  \topmargin=0pt
+  \oddsidemargin=0pt
+  \parskip=3pt
+\endtexonly
+%
+\htmlonly
+  \newcommand{\URL}[1]{\urlhd{#1}{#1}{\texttt{#1}}}
+\endhtmlonly
+\texonly
+  % 使用 CJK 字库时定义 CJKbookmarks 可选项以便产生正确的中文书签
+  \ifpdf
+    \usepackage[CJKbookmarks,hyperindex]{hyperref}
+    \usepackage{ccmap}
+  \else
+    \if \CCTCJKfonts 1
+      \expandafter\ifx\csname dvipdfm\endcsname\relax
+	\usepackage[CJKbookmarks,hyperindex,hypertex]{hyperref}
+      \else
+	\usepackage[CJKbookmarks,dvipdfm,hyperindex]{hyperref}
+      \fi
+    \else
+      \usepackage[hyperindex,hypertex]{hyperref}
+    \fi
+  \fi
+  % Redefine theindex environment to use multicols
+  \usepackage{makeidx}
+  \newcommand{\URL}[1]{\href{#1}{\texttt{\itshape #1\/}}}
+  \usepackage{multicol}
+  \makeatletter
+  \renewenvironment{theindex} 
+               {\let\sectionnamesave\sectionname
+		\renewcommand{\sectionname}{\hskip-1em}%
+		\begin{multicols}{2}[\section{\indexname}\vspace*{1cm}]%
+		\leftskip=2cm
+                \markboth{\indexname}{\indexname}%
+                \thispagestyle{plain}\parindent 0pt
+                \parskip0pt plus .3pt\relax
+                \let\item\@idxitem}
+               {\end{multicols}\let\sectionname\sectionnamesave}
+  \makeatother
+  % 重新定义 verbatim 环境，使用 everb.sty
+  \newverbatim[oval=false,number=false,box=false,bg=false]{verbatim}
+
+  \renewcommand\labelenumi{(\theenumi)} 
+  \renewcommand\labelenumii{(\theenumii)}
+  \renewcommand\labelenumiii{(\theenumiii)}
+\endtexonly
+\makeindex
+\begin{document}
+
+\title{关于新版~CCT 的说明}
+\author{张林波\\
+\texonly
+	(\href{mailto:zlb@lsec.cc.ac.cn}{zlb@lsec.cc.ac.cn})\\
+\endtexonly
+\htmlonly
+	(\urlhd{mailto:zlb@lsec.cc.ac.cn}{zlb@lsec.cc.ac.cn}{})\\
+\endhtmlonly
+	中国科学院数学与系统科学研究院}
+\date{\chntoday}
+%\date{\small 2004年~12 月~20 日}
+\maketitle
+
+\begin{abstract}
+   本文档对新版~CCT 系统的功能、用法进行说明。我们假设阅读本文档的读者已
+经对老版~CCT 系统有一个基本的了解，否则请先阅读老版~CCT 手册：
+\URL{ftp://ftp.cc.ac.cn/pub/cct/old-cct/cctman.ps.gz}。
+本文档的编译需要~CJK 字库。如果没安装~CJK 字库的话请将~``\verb|\documentclass|''
+中的~``\verb|[CJK]|''\index{CJK@\verb+CJK+ 可选项} 可选项去掉后再编译。
+
+\medskip
+\noindent
+致谢：\verb|cxterm@CTeX|\index{cxterm@\verb+cxterm+}
+提供了书签处理程序~\verb|gbk2uni|，\allowbreak
+\verb|hooklee@CTeX|\index{hooklee@\verb+hooklee+}
+对其进行了重写与完善，\allowbreak\verb|hooklee@CTeX| 和
+\verb|nsii@CTeX|\index{nsii@\verb+nsii+} 帮助完成了~Windows
+环境下的移植与调试，\verb|mytex@CTeX|\index{nsii@\verb+mytex+}
+提供了 NSIS 安装脚本
+及 \verb|CCTfntef| 和 \verb|ccmap| 宏包，特在此表示感谢。
+对其他所有对~CCT 提出过建议、
+参与过讨论的各方~\TeX\ 高手们在此一并致谢。特别要感谢
+\verb|aloft@CTeX|\index{aloft@\verb+aloft+}
+建立的~C\TeX\ 论坛，使得大家有了一个共同讨论、开发的平台。
+\end{abstract}
+
+\tableofcontents
+
+\section{构成与功能}
+
+\index{新版 CCT!构成与功能}
+新版~CCT 中主要增加了一个宏文件~\verb|CCT.sty|\index{CCT.sty@\verb+CCT.sty+}，
+同时对老版本中的一些程序和宏文件做了少量修改，并增加了一些辅助程序和
+宏文件。新版~CCT 使用新的版本号系列，目前的版本是~\texttt{0.61803}
+(老版~CCT 的最终版本号为~\texttt{5.14})。
+
+根据 \verb|ifuleyou|\index{ifuleyou@\verb+ifuleyou+}
+的建议从 \texttt{0.6.0} 版开始 CCT 对汉字标点符
+号\index{标点符号}进行了特殊处理，以便当它们出现在行首或行尾时能够
+与其它行对齐，同时，还对某些连续标点符号~(如“。）”) 间的空进行了调整。
+由于这项改动可能导致排版结果与以前的版本不一样，新版本中将前一个版本
+的~\verb|CCT.sty| 更
+名为~\verb|CCT047.sty|\index{CCT047.sty@\verb+CCT047.sty+}
+(相应的配置文件更名为~\verb|CCT047.cfg|\index{CCT047.cfg@\verb+CCT047.cfg+})，
+并在~\verb|cctbase.sty|\index{cctbase.sty@\verb+cctbase.sty+}
+中增加了一个可选项
+``\/\verb|CCT047|''\index{CCT047.sty@\verb+CCT047.sty+}%
+\index{CCT047@\verb+CCT047+ 可选项}，可用在~\verb|\documentclass| 命令中，
+例如~``\verb|\documentclass[CJK,CCT047]{cctart}|''，
+\index{cctart.cls@\verb+cctart.cls+}来调用前一个版本的~\verb|CCT.sty|。
+
+\texttt{0.6.0} 版的另一个改动是禁止在汉字和~\TeX\ 字符间断行，
+除非它们之间原来就有弹性空间~(如空格等)。这是为了解决
+以前版本中存在的可能破坏行禁则的一个~bug
+(例如，在以前版本中可能会在全角右括号和半角逗号之间换行)。
+必要时可以在它们中间插入\verb|\allowbreak|命令来解决由于无法断行而导致的
+overfull 问题，例如，可将“\verb|标点，word|”写成
+“\verb|标点，\allowbreak word|”来允许在逗号和``word''之间换行。
+\verb|CCT.sty| ($\ge$0.618-1) 中修改了 \verb|\allowbreak|
+命令，使得当它用在汉字标点后面时，不但允许换行，还会
+消除行尾可能多出来的空。
+
+\index{标点符号处理}
+此外，\texttt{0.6.0} 版中还增加了两个条件变量~\verb|\ifCCTpunct|
+和~\verb|\ifCCTbreak|。
+\verb|\ifCCTpunct| 用于控制是否对标点符号进行处理，用户可用
+命令~\verb|\CCTpunctfalse|\index{CCTpunctfalse@\verb+\CCTpunctfalse+}
+关闭对标点符号的特殊处理，使所有全角标点与普通汉字占有一样的宽度，并且
+可以任意断行，该命令可以满足要求汉字严格对齐的排版~(例如将汉字排在
+格子中)，命令~\verb|\CCTpuncttrue|\index{CCTpuncttrue@\verb+\CCTpuncttrue+}
+恢复对标点符号的处理。\verb|\ifCCTbreak| 用于控制是否允许在汉字间断行，
+\verb|\CCTbreaktrue| (默认) 允许在汉字间断行，而~\verb|\CCTbreakfalse| 
+则禁止在汉字间断行~(用在如~\verb|verbatim| 等环境中)。
+这些命令的作用域符合~\TeX\ 的分组~(grouping) 规则。
+
+老版~CCT 的~DOS 版是捆绑~em\TeX\ 系统\index{em\TeX}发行的。
+由于~em\TeX\  不支持
+高位为~1 的字符，因此新版~CCT 中所提供的宏文件不能直接在~em\TeX\ 中
+使用，而需要先进行转换，参看~\ref{cctconv}\index{cctconv@\verb+cctconv+} 
+最后一段中的说明。
+
+新版~CCT 主要增加了下面一些功能:\index{新版 CCT!新增功能}
+
+\begin{enumerate}
+  \item 排版源文件可以不经过预处理程序而直接用~\TeX/\LaTeX\ 排版，
+	解决了老版本在~\verb|verbatim| 等环境中不能使用汉字的问题，也可以方
+	便包含多个源文件的文档的处理。
+  \item 新版本提供了使用~CJK 字库的可选项，用这种方式可以充分利用许多软件对
+	~CJK 系统的支持，如使用~Type~1 字库生成矢量字库的中文~PS 文件，
+	利用~\verb|dvipdfmx|，\verb|pdflatex| 等程序生成高质量的~PDF 文件，
+	等等。几乎所有支持~CJK 系统的工具或宏包都可以以某种方式在~CCT 中用。
+\end{enumerate}
+
+\index{新版 CCT!与老版本兼容性}
+新版~CCT 支持两种排版流程。第一种排版流程是先用~CCT 的预处理
+程序~\verb|cct| 对排版源文件进行预处理，然后再调用~\TeX\ 进行排版，
+这种排版处理过程与老版~CCT 中完全一样，得到的排版结果也应该一样。
+第二种排版流程是不对排版源文件做预处理而直接用~\TeX\ 进行排版，
+此时可以使用~CCT 的所有新功能，但排版结果与使用老版~CCT 系统相比会
+略有差别。
+
+使用上述第二种排版流程时，CCT 支持生成两种~dvi 文件格式。第一种格式与老
+版~CCT 中使用的~dvi 文件格式一样，简称~CCT 格式，它需要用~\verb|patchdvi|
+程序进行转换后才能用其它处理~dvi 文件的程序~(如~\verb|dvips|，\verb|xdvi|，
+\verb|yap| 等等) 处理。第二种格式与~CJK 系统的~dvi 文件兼容，简称~CJK 格式，
+它直接调用~CJK 系统的中文字库，这种格式的~dvi 文件不需要用~\verb|patchdvi|
+进行转换便可以直接用其它处理~dvi 文件的程序做进一步处理。至于如何选择~CCT 
+输出的~dvi 文件格式请参看~\ref{CCT.sty} 节中的说明。当使用~CJK 格式时，
+还可以直接用~PDF\TeX\ 或~PDF\LaTeX\ 生成~PDF 文件。
+
+\index{新版 CCT!扩展名约定}
+建议新的~CCT 排版源文件的命名遵循下述规则：如果希望用~CCT 的预处理程
+序~\verb|cct| 处理，则将源文件的扩展名取为~``\verb|.ctx|''，否则将源文件的
+扩展名取为~``\verb|.tex|''。我们鼓励CCT的用户使用 ``\verb|.tex|'' 做为
+排版文件的扩展名，逐渐淘汰老版CCT。关于如何将老版CCT文件转换为新版CCT文件
+请参看
+\index{NewCCT-HOWTO.txt@\verb+NewCCT-HOWTO.txt+}
+\URL{ftp://ftp.cc.ac.cn/pub/cct/NewCCT-HOWTO.txt}。
+
+\medskip
+
+\index{新版 CCT!DOS/Windows 版下载}
+我们为~C\TeX~中文套装用户提供补丁用于更新~C\TeX~中文套装中的 CCT 系统。
+补丁的文件名为~\texttt{cct-x.xx-x-CTeX-update.exe} 的形式，
+下载地址为~\URL{ftp://ftp.cc.ac.cn/pub/cct/}，
+其中~``\verb|x.xx-x|'' 对应于 CCT 发布版的版本号。
+补丁中包含最新 CCT 的宏文件、WIN32 可执行文件、文档和源程序。
+
+C\TeX~中文套装的下载地址是 \URL{ftp://ftp.ctex.org/pub/tex/systems/ctex}。 
+
+\section{CCT源码的编译}
+
+通常情况下不推荐直接从 CCT 的源码编译、安装。Linux用户可以使用CCT提供的
+RPM或Debian包进行安装、升级，而Windows用户可以先安装中文\TeX\ 套装，然后
+再下载运行CCT的CTeX升级程序进行升级。
+
+\index{新版 CCT!源程序下载}
+新版~CCT 的源码可从~\URL{ftp://ftp.cc.ac.cn/pub/cct/src} 中下载。
+展开源码包后，所有文件位于目录 \verb|cct-dist|中。
+
+CCT 最新开发版本可以通过匿名 CVS 从\index{CVS 版本}
+\verb|:pserver:anonymous@lsec.cc.ac.cn:/cvsroot/cct|
+获取。例如：
+\begin{verbatim}
+    cvs -d :pserver:anonymous@lsec.cc.ac.cn:/cvsroot/cct login
+    (要求输入密码时直接敲回车即可)
+    cvs -d :pserver:anonymous@lsec.cc.ac.cn:/cvsroot/cct co .
+\end{verbatim}
+或是用 Web 浏览器访问 \URL{http://lsec.cc.ac.cn/cgi-bin/viewcvs.cgi/cct}
+由于源码包中的部分内容没有在CVS中，因此建议首先下载 CCT 的源码包，然后从用
+CVS 下载的目录替换源码包中的相应目录。
+
+\subsection{Linux下的编译、安装}
+
+Linux 下编译 CCT 源码除需要 gcc 编译器外，还需要 KPATHSEA 的头文件与库
+(RedHat/FC 系统中它们包含在 tetex-fonts 包，而 Debian 系统中它们包含在
+libkpathsea-dev 包)。
+
+\begin{enumerate}
+\item 编译：
+\begin{verbatim}
+    cd cct-dist
+    make all
+\end{verbatim}
+如果使用 gcc4 则应该用下面的命令编译：
+\begin{verbatim}
+    cd cct-dist
+    make EXTRA_CFLAGS=-Wno-pointer-sign all
+\end{verbatim}
+
+\item 安装：
+\begin{verbatim}
+    make prefix=/usr install
+\end{verbatim}
+或：
+\begin{verbatim}
+    make prefix=/usr/local install
+\end{verbatim}
+\end{enumerate}
+
+安装完毕后，如果你的系统上安装了 Fontforge 程序，则建议运行一遍
+``\verb|cctgentbl|''命令，它会自动为所有已安装的CJK GBK/GB 字体
+生成相应的 \verb|.tbl| 文件。每次添加新的 CJK 字体后 (GBK 或 GB)
+都应该运行一遍这个脚本 (重复运行不会有负作用)。
+
+\subsection{Windows版本的编译}
+
+Windows版本的CTeX升级程序是在 Linux 下用下述命令产生的：
+\begin{verbatim}
+    cd cct-dist
+    make install_win32
+\end{verbatim}
+上述编译命令需要安装 crossmingw32、wine 以及在 wine 下安装的
+Windows程序NSIS。如果只想编译生成部分可执行程序，则可以
+分别进入到相关的子目录中(如 \verb|cct|、\verb|ctex|等)，
+然后键入命令“\verb|make win32|”即可。
+
+CCT的大部分程序在Windows下用VC应该也能编译，但没有试过。
+
+\subsection{制作RPM包}
+
+只需运行命令(以\verb|root|身份) 
+\begin{verbatim}
+    sh cct-dist/Linux/makerpm.sh 
+\end{verbatim}
+便可生成 RPM 源码和 \verb|i386| 包。生成的源码包在目录
+\verb|/usr/src/redhat/SRPMS/| 中，
+\verb|i386|包在目录\verb|/usr/src/redhat/RPMS/i386/|中。
+在制作RPM包之前必须安装其它一些软件包，否则会报错，
+此时可按照错误提示安装所需的包，然后重新运行上述命令来制作RPM包。
+
+\subsection{制作Debian包}
+
+只需运行命令
+\begin{verbatim}
+    sh cct-dist/Linux/Debian/makedeb.sh cct
+\end{verbatim}
+便可在目录
+\verb|cct-dist/Linux/Debian/cct|中生成 Debian 包。
+
+注意，开始制作 CCT Debian 包之前需要先安装 \verb|libkpathsea-dev| 包。
+安装 CCT 包之前必须先安装 \verb|fontforge|, \verb|tetex-base| 和
+\verb|tetex-bin| 包，
+另外，建议安装 \verb|cjk-latex| 和 \verb|dvipdfm-cjk| 包
+(制作Debian包的相关文件由 \verb|weigela@CTeX|\index{weigela@\verb+weigela+}
+提供)。
+
+安装完 \verb|cct| 包后，建议安装 \verb|CJK-GBKfonts| 包
+(用 \verb|alien| 命令将 RPM 包转换成 Debian 包)，
+然后用命令 ``\verb|gbkfont-inst|'' 来添加 GBK 字体。
+
+Debian 下安装 CCT 的具体步骤参阅文件 \URL{ftp://ftp.cc.ac.cn/pub/cct/README.Debian}。
+
+\section{对老版~CCT 的改动部分}
+
+\begin{enumerate}
+  \item 预处理程序~\verb|cct.c|\index{cct.c@\verb+cct.c+}\par
+	主要改动是当中英文间已经有空格或~``\verb|~|'' 时
+	不再加入空格。因为~CJK 系统的用户习惯在中英文间加
+	~``\verb|~|''，如~``\verb|中文~\TeX~|...''，新的预处理程序可以
+	避免在这种情况下插入多余的空格。其它一些小改动包括增加
+	~`\verb|-q|' 命令行可选项~(用于关闭多余的输出信息)，允许对
+	输入/输出文件用~`\verb|-|' 来表示标准输入或标准输出以便
+	可以用在管道中，等。
+
+  \item 初始化程序~\verb|cctinit.c|\index{cctinit.c@\verb+cctinit.c+}\par
+  	由于~\verb|CCT.sty| 中重新定义了~`\verb|~|' (相当于使用了
+	~CJK 中的~\verb|\CJKtilde| 命令)，\verb|cctinit| 中相应修改
+	了~\verb|cchead.sty| 中的一些定义以避免破坏中文行禁则。升级
+	或安装新版~CCT 系统时必须运行一次~\verb|cctinit| 程序生成新
+	的~\verb|cchead.sty| 文件。
+
+  \item 宏文件~\verb|cctbase.sty|\index{cctbase.sty@\verb+cctbase.sty+}\par
+	自动包含~\verb|CCT.sty|，并做了一些相关的修改。
+	增加了环境~\verb|CCTdot|，用于在汉字下面加点~(将来拟根据需要逐步引
+	进其它类似环境，如用于
+	在汉字下面加波浪线的~\verb|CCTwave| 环境等)。另外，增加了一个
+	~`\verb|zihaoAny|' 可选项\index{zihaoAny@\verb+zihaoAny+ 可选项}，它使用
+	~\verb|\zihaoAny| 命令匹配中英文大小，使得中英文的大小更为一致，
+	缺点是中文的大小不符合中文字号标准。
+
+  \item 文档类~\verb|cctart.cls|\index{cctart.cls@\verb+cctart.cls+} 
+	和~\verb|cctbook.cls|\index{cctbook.cls@\verb+cctbook.cls+}\par
+	增加了~\verb|CJK| 可选项\index{CJK@\verb+CJK+ 可选项}，用于选择生成~CJK
+	格式的~dvi 文件。如果用了~\verb|CJK| 可选项，则不能再用~CCT 的预处
+	理程序进行处理~(这种情况下排版时会产生警告信息)。
+\end{enumerate}
+
+其它改动请参看
+\URL{ftp://ftp.cc.ac.cn/pub/cct/Changelog}\index{Changelog}。
+CCT 宏包 (\verb|cctbase.sty|) 和文档类的说明可参看
+\index{cctbase.sty@\verb+cctbase.sty+}\index{cctart.cls@\verb+cctart.cls+}%
+\index{cctbook.cls@\verb+cctbook.cls+}
+\URL{ftp://ftp.cc.ac.cn/pub/cct/CCTLaTeX.pdf}。
+
+\section{新增功能}
+
+\subsection{宏文件~\texttt{CCT.sty}}\label{CCT.sty}
+
+\index{CCT.sty@\verb+CCT.sty+}
+这是一个~\TeX\ 宏包，用于替代老版~CCT 中的预处理程序，适用于~Plain
+\TeX，\LaTeX，PDF\TeX，\allowbreak PDF\LaTeX\ 等。它的主要作用是用~\TeX\ 语言
+实现了~CCT 预处理程序的主要功能，从而使得~CCT 排版文件可以不经预处理而直接
+用~\TeX\ 排版。就排版结果而言，\verb|CCT.sty| 与~CCT 预处理程序间的主要区别在
+于：CCT 的预处理程序会自动在中英文间加入空格，而~\verb|CCT.sty| 则不会自动插
+入空格，并且~(默认情况下) 会吃掉汉字后面的空格，因此需要手工在中英文间加空格，
+并且在汉字后面需要使用“控制空格” (即~``\verb*|\ |'' 或 ~``\verb*|~|'')
+以免空格被汉字吃掉。建议用户借鉴~CJK 排版文件的写法，即在
+中文－英文间加一个~`\verb|~|'\index{~@\verb+~+}，而在英文－中文间加一个空格
+或~`\verb|~|' (可参看本文档中的写法)。 另一个方法是利用~\ref{cctspace} 
+中介绍的辅助程序~\verb|cctspace|\index{cctspace@\verb+cctspace+} 自动在中英文间加空格。
+
+老版~CCT 的预处理程序自动在中英文间插入空格。由于一些处理不尽合理，
+有时会在标点符号的前后插入多余的空格，导致较难看的排版结果。为了保持排版
+结果的一致性，我们不可能在这方面对老版~CCT 再做任何改进。新版~CCT 在空格
+及标点符号的处理上有所改善，排版质量应该优于老版~CCT。
+
+\verb|CCT.sty| 使用一个配置文件~\verb|CCT.cfg| 来定义
+一些参数，包括各个字号的大小和CCT 字体到~CJK 字体的映射。
+\verb|CCT.cfg| 中定义的字号与字体只有在用户选择了输出
+CJK\index{CJK@\verb+CJK+ 可选项} 格式的~dvi 文件时~(即在~\verb|\documentclass|
+中使用了~\verb|[CJK]| 可选项) 才起作用。当输出~CCT 格式的~dvi 文件时，
+字号与字体依然由文件~\verb|cct.dat| 和~\verb|ccfonts.def| 定义。
+
+\verb|CCT.sty| 中定义了一些用户命令，这些命令的作用与~CJK 中的对应命令类似，
+包括~\verb|\CCTspace|\index{CCTspace@\verb+\CCTspace+}，\allowbreak
+\verb|\CCTnospace|\index{CCTnospace@\verb+\CCTnospace+}，
+\verb|\CCTtilde|\index{CCTtilde@\verb+\CCTtilde+}，
+\verb|\standardtilde|\index{standardtilde@\verb+\standardtilde+}，
+\verb|\nbs|\index{nbs@\verb+\nbs+} 和~\verb+\CCTchar+\index{CCTchar@\verb+\CCTchar+}。
+其中命令~\verb|\CCTchar| 允许用户直接输入汉字编码，如可用
+~`\verb|\CCTchar{176}{161}|' (或是~16 进制形式~`\verb|\CCTchar{"B0}{"A1}|')
+来输入汉字“\CCTchar{"B0}{"A1}”，该命令通常用于输入一些不易输入的字符。
+
+\verb|CCT.sty| 中还提供了一条命令~\verb|\zihaoAny|\index{zihaoAny@\verb+\zihaoAny+}
+用来将当前汉字的大小设成任意用户指定的尺寸，
+如~\verb|\zihaoAny{15pt}| 将当前汉字的大小设成~15pt。
+\verb|\zihaoAny| 命令参数中的长度单位可以省略，当省略长度单位时以~\verb|pt|
+为单位。
+
+其余命令普通用户一般不用，因而不在此介绍。
+
+\verb|CCT.sty| 的使用方法如下：
+\begin{enumerate}
+  \item \LaTeXe\ 系统\par \nobreak \noindent
+	如果使用新的中文文档类~\verb|cctart.cls|，
+	\verb|cctbook.cls| (或宏包~\verb|cctbase.sty|)，则~\verb|CCT.sty|
+	已经被自动包含，因此可以直接使用相关的功能，并且可以用可选项
+	~``\verb|[CJK]|''\index{CJK@\verb+CJK+ 可选项}来选择生成~CJK 格式的
+	~dvi 文件~(没有该可选项时生成~CCT 格式的~dvi 文件)。
+	如果使用其它文档类，则需在源文件中加入：
+	\begin{verbatim}
+	      \usepackage{cctbase}
+	\end{verbatim}
+	或：
+	\begin{verbatim}
+	      \usepackage{CCT}
+	\end{verbatim}
+	(``\verb|\usepackage{cctbase}|'' 或~``\verb|\usepackage{CCT}|'' 中可以
+	使用可选项~\verb|[CJK]| 来选择生成~CJK 格式的~dvi 文件)。
+
+	在~\verb|\documentclass{cctxxxx}| 和~\verb|\usepackage{cctbase}|
+	命令中还可使用可选项~\verb|zihaoAny|\index{zihaoAny@\verb+zihaoAny+ 
+	可选项}，它允许~\LaTeX\ 使用中文非标准字号与英文进行大小匹配。
+  \item 其它系统\par \nobreak \noindent
+	需在文档开头加入：
+	\begin{verbatim}
+	      \input CCT.sty
+	\end{verbatim}
+	或：
+	\begin{verbatim}
+	      \let\CCTCJKfonts=1
+	      \input CCT.sty
+	\end{verbatim}
+	(``\verb|\let\CCTCJKfonts=1|'' 选择生成~CJK\index{CJK@\verb+CJK+ 可选项}
+	格式的~dvi 文件)。
+\end{enumerate}
+
+\verb|CCT.sty| 默认使用 GBK 编码。
+可以通过可选项 \verb|[enc=GB]| 或命令 \verb|\let\CCTGBKencoding=0|
+来选择使用 GB 编码 (如果用 CJK 字库的话还必须配置好 GB 编码的字库)。
+
+需要注意的是，如果用 PDF\TeX\ 或 PDF\LaTeX\ 编译，则必须使用 CJK 字库
+(即加上 \verb|[CJK]| 可选项或 \verb|\let\CCTCJKfonts=1| 命令)。
+
+\subsection{辅助程序~\texttt{cctspace}}\label{cctspace}
+
+\index{cctspace@\verb+cctspace+}
+这是一个辅助程序，用于自动调整中英文间的空。其用法如下：
+\begin{verbatim}
+        cctspace [可选项] [输入文件名] [输出文件名]
+\end{verbatim}
+\noindent
+或：
+\begin{verbatim}
+        cctspace <输入文件名 >输出文件名
+\end{verbatim}
+
+\verb|cctspace| 可以作为一个辅助工具，用于对老的~\verb|.ctx| 文件进行转换以便
+不用预处理程序处理。也可以看作一个新的“预处理程序”，但它只在输出文件
+中加入一些空格和~``\verb|~|''。
+
+\verb|cctspace| 默认在中文－英文间加~`\verb|~|'，在英文－中文间加空格。
+如果使用了~``\verb|-t|'' 可选项，则在英文－中文间也加~``\verb|~|''
+并且删除源文件中原有的空格~(以免引进多余的空)。\verb|cctspace| 运行时会读
+入一个名为~\verb|cctspace.cfg|\index{cctspace.cfg@\verb+cctspace.cfg+} 的配
+置文件，其中列出不应该加空格或~``\verb|~|'' 的地方。Unix 版本的~CCT 中，
+\verb|cctspace| 按照~\TeX\ 搜索其它输入文件的规则搜索~\verb|cctspace.cfg| 文件，
+因此后者可以放在当前目录或~\TeX\ 的某个~\verb|input| 路径中，而在~Windows 版
+本的~CCT 中，可以将~\verb|cctspace.cfg| 放在当前目录或是~\verb|cctspace.exe|
+所在的子目录。
+
+\verb|cctspace.cfg| 文件中分五个表列出不应该加空格或~`\verb|~|' 的字符串
+或~\TeX\ 命令：
+\begin{description}
+  \item[\texttt{LEFT}]\ \\
+	当其中列出的字符串位于汉字左边时不要插入空格或~`\verb|~|'。
+  \item[\texttt{RIGHT}]\ \\
+	当其中列出的字符串位于汉字右边时不要插入空格或~`\verb|~|'。
+  \item[\texttt{COMMON}]\ \\
+	当其中列出的字符串位于汉字左边或右边时都不要插入空格或~`\verb|~|'
+	(相当于同时属于~\verb|LEFT| 和~\verb|RIGHT| 表)。
+  \item[\texttt{VERBATIM}]\ \\
+	不要在所列出的命令的参数中插入空格或~`\verb|~|'。
+  \item[\texttt{TRANSPARENT}]\ \\
+	根据命令参数的内容来判断是否应该插空格~(即将这些命令看成是
+	“透明的”)。
+  \item[\texttt{VERBATIM\_ENV}]\ \\
+	不要在所列出的环境中插入空格 (verbatim 类环境)
+  \item[\texttt{VERB}]\ \\
+	所列出的命令将与 \verb|\verb| 命令一样处理，即不要在由跟在它们后面的单个
+	字符所界定的参数中插入空格。
+\end{description}
+
+除了~\verb|cctspace.cfg| 文件中列出的不应该加空格或~``\verb|~|'' 的地方外，
+\verb|cctspace| 在下列情况下也不插入空格或~``\verb|~|''：
+\begin{enumerate}
+  \item 中英文或英中文间有两个以上换行的。
+  \item 该插入~``\verb|~|'' 的地方已经有~``\verb|~|''，或是该插入空格的地方
+	已经有空格或~``\verb|~|'' (包括控制空格~``\verb*|\ |'')。
+  \item \LaTeX\ 的~\verb|verbatim| 和~\verb|verbatim*| 环境，\verb|\verb|
+	和~\verb|\verb*| 命令，\verb|comment| 环境中等。
+  \item 括在一对花括号间、花括号前不是命令的内容 (当花括号前是命令时，花括号间
+	的内容会被当做命令参数对待)。
+\end{enumerate}
+
+\verb|cctspace| 偶而会引入不应该有的空格。用户可以通过加入一些列
+在~\verb|cctspace.cfg| 中的特殊命令来防止~\verb|cctspace| 在某些地方加入空格。
+如~``\verb|啊ABC|'' 经处理后会变成~``\verb|啊~ABC|''，如果不希望
+在~``\verb|ABC|'' 前面加入空格，则可写成~``\verb|啊\relax ABC|'' 的形式，
+因为~\verb|cctspace| 不会在~``\verb|\relax|'' 的前后加空格或~``\verb|~|''，
+而~``\verb|\relax|'' 命令本身不起任何作用，也可以使用一对花括号，
+如写成~``\verb|啊{ABC}|''形式。
+
+\verb|cctspace| 程序另外一个有趣的用法是当用户在中英文间手工插入空格时，
+用来检查是否有漏加空格的地方。方法是用~\verb|cctspace| 程序处理排版文件，
+然后比较处理前后文件间的差异~(Unix 下可用~``\verb|diff|'' 命令比较，
+DOS/Windows 下可用~``\verb|fc|'' 或~``\verb|comp|'' 命令比较)。
+
+注：\verb|cctspace| \texttt{0.6.0.2} 版 (随 CCT \texttt{0.6.0-4} 版发布)
+中增加了
+对老版本CCT造字功能的支持。它将输入文件中 `\texttt{\#{}[\ldots]}' 形式的内容
+做为对用户自造字的引用进行适当转换。
+
+\subsection{辅助程序~\texttt{cctconv}}\label{cctconv}
+
+\index{cctconv@\verb+cctconv+}
+GB2312 编码中汉字的两个字节都在~161--254 之间，用~\TeX\ 处理这些汉字不会
+出问题。GBK 编码是~GB2312 的超集，在~GBK 编码中，第一个字节的取值范围为
+~129--254，第二个字节的取值范围为~64--254 (不能取~127)。GBK 汉字的第
+二个字节的取值范围中包含了 ~\TeX\ 特殊字符~`\verb|\|'，`\verb|{|'，
+`\verb|}|'，`\verb|^|'，`\verb|_|'，`\verb|~|' 和~`\verb|^^80|'，前四个
+字符用~\TeX\ 处理时会出问题，而后三个字符用在~PDF 书签文件中~(\verb|.out|
+文件) 时可能出问题，因此用~\TeX\ 排版包含这样的汉字的文件时需要做一些特殊
+处理。辅助程序~\verb|cctconv| 对汉字中的特殊字符进行转换，以便~\TeX\ 系统
+能正确地处理它们。\verb|cctconv| 程序或者将汉字中的字符~`\verb|\|'，
+`\verb|{|'，`\verb|}|'，`\verb|^|'，`\verb|_|'，`\verb|~|'，
+和~`\verb|^^80|' 分别转换成~`0'，`1'，`2'，`3'，`4'，`5' 和~`6'，
+\verb|CCT.sty| 排版时再将它们转换回来~(这种形式只对~CCT 有效)，
+或者将这些汉字转换成~`\verb|^^7f...^^7f...^^7f|' 的形式~(该形式同时适用
+于~CCT 和~CJK)。具体转换成何种形式取决于~\verb|cctconv| 编译时用的选项，
+目前发布版中的~\verb|cctconv| 程序采用后一种形式，即~`\verb|^^7f ...|'
+的形式，因此同时适用于~CCT 和~CJK 文件的处理。
+
+\verb|cctconv| 程序的用法如下：
+\begin{verbatim}
+        cctconv [输入文件名] [输出文件名]
+\end{verbatim}
+\noindent
+或：
+\begin{verbatim}
+        cctconv <输入文件名 >输出文件名
+\end{verbatim}
+
+注意，如果用户使用~CCT 的预处理程序，则不能用~\verb|cctconv| 程序对排版文件
+做转换，否则包含这些字符的汉字会不对。
+
+\verb|cctconv| 程序有一个命令行可选项~``\verb|-f|''，它强制将所有第~8 位为~1
+的字符~(即~128--255 范围内的字符) 转换成~``\verb|^^xx|'' 的形式，
+其中~``\verb|xx|'' 为字符的~16 进制编码。如，组成汉字“啊”的两个字节的~1，
+进制编码为~\verb|b0| 和~\verb|a1|，因此~``\verb|cctconv -f|'' 会将“啊”转换，
+~``\verb|^^b0^^a1|''。有些老的~\TeX\ 系统~(如~em\TeX) 不允许输入文件中
+直接使用大于~127 的字符，此时需用~``\verb|cctconv -f|'' 对所有含汉字的
+文件进行转换~(包括用户排版文件、\verb|CCT.cfg|、\verb|cctbase.sty|、
+\verb|cctart.cls| 等)，然后才能进行处理。
+
+由于简体中文中很少用到~GB2312 编码之外的汉字，而且所有汉字中只有数百个
+含有~\TeX\ 的特殊字符，因此~\verb|cctconv| 程序只在极少数特殊情况下有必要。
+
+\subsection{书签文件转换程序~\texttt{gbk2uni}}
+
+\index{gbk2uni@\verb+gbk2uni+}
+这个程序由~\verb|hooklee|\index{hooklee@\verb+hooklee+}
+在~\verb|cxterm|\index{cxterm@\verb+cxterm+} 编制的程序基础上完善而成。
+由于~Acrobat Reader 程序只能正确处理~PDF 文件中使用~Unicode 编码的书签，
+而~CCT 或~(使用~GB/GBK 编码的) CJK 排版文件中通常使用~GBK 编码，因而生成
+的~PDF 文件可能会在书签中出现乱码\footnote{注：为正确处理含汉字的书签
+文件，应该在~\texttt{hyperref} 包中使用
+~\texttt{CJKbookmarks} 可选项}\index{hyperref@\verb+hyperref+ 包}%
+\index{CJKbookmarks@\verb+CJKbookmarks+ 可选项}。
+
+如果用~\verb|dvipdfmx| 程序生成~PDF 文件，可以在排版文件中加入命令
+\begin{verbatim}
+        \AtBeginDvi{\special{pdf:tounicode GBK-EUC-UCS2}}
+\end{verbatim}
+来告诉~\verb|dvipdfmx| 将书签中的汉字转换成~Unicode 编码从而在~AcroBat
+Reader 中得到正确的书签。而~\verb|pdflatex| 程序则没有提供类似机制，此时可用
+~\verb|gbk2uni| 程序对书签文件进行处理。使用~\verb|dvipdfmx| 时也可以
+用~\verb|gbk2uni| 程序处理书签文件~(这样就不用在排版文件中使用上面的命令)。
+
+\verb|gbk2uni| 程序的使用方法如下：
+\begin{enumerate}
+  \item \verb|hyperref|${}+{}$\verb|pdflatex|：
+	\begin{verbatim}
+	       pdflatex myfile.tex
+	       pdflatex myfile.tex
+	       gbk2uni myfile.out
+	       pdflatex myfile.tex
+	\end{verbatim}
+  \item \verb|hyperref|${}+{}$\verb|dvipdfmx|：
+	\begin{verbatim}
+	       latex myfile.tex
+	       latex myfile.tex
+	       gbk2uni myfile.out
+	       latex myfile.tex
+	       dvipdfmx myfile
+	\end{verbatim}
+\end{enumerate}
+
+汉字中含有~\TeX\ 特殊字符时经~\verb|cctconv| 程序处理后也会在书签文件中
+产生不正确的汉字~(参看~\ref{cctconv})，\verb|gbk2uni| 程序也负责对这些字符
+进行转换。
+
+目前~\verb|CCT.sty| 在处理用~\verb|\CCTchar| 命令或~`\verb|^^7f|'
+定义的汉字时似乎与~\verb|hyperref| 之间不兼容，如果使用了~\verb|dvipdfm|
+可选项或用~\verb|pdflatex| 处理，在生成书签文件时可能会出错，另外包含有特殊
+字符的汉字经~\verb|cctconv| 处理后也不能生成正确的~PDF 书签。由于这些情况在
+排版简体中文时极其少见，因此我们不打算立即着手去解决这些问题。用~CCT
+排版时请尽量避免在~\verb|\chapter|，\verb|\section| 等的参数中使
+用~\verb|\CCTchar| 命令。
+
+\subsection{索引处理程序~\texttt{cctmkind}}\label{cctmkind}
+
+CCT 提供了一个处理索引、术语文件的程序 `\verb|cctmkind|'。它的功能与用法
+与标准 \verb|makeindex| 程序类似，但增加了汉字排序\index{排序!汉字排序}的支持。
+用户可以用可选项 `\verb|-C|' 来选择汉字排序的方式，目前可用
+`\verb|-C pinyin|' 选择按拼音首字母排序\index{排序!拼音}、用
+`\verb|-C stroke|' 选择按笔画排\index{排序!笔画}序、用`\verb|-C mixed|'
+选择按拼音排序并且中西文混排。
+
+与 \verb|makeindex| 程序类似，\verb|cctmkind| 程序允许通过可选项
+`\verb|-s|' 指定一个 index style\index{index style 文件} 文件
+(\verb|.ist| 文件)，用于定义索引的处理方式与排版格式。
+\verb|cctmkind| 按查找 TEXMF 文件的标准方式搜索 \verb|.ist| 文件，
+默认搜索顺序是当前目录、LOCALTEXMF 下的 \verb|makeindex| 目录(及子目录)、
+TEXMF 下的 \verb|makeindex| 目录(及子目录)。
+
+我们随 \verb|cctmkind| 提供了分别用于中文索引和术语排版的两个简单样例
+`\verb|cct.ist|' 和 `\verb|cctglo.ist|' 供用户参考。
+
+关于\verb|cctmkind|的使用细节可参考\verb|makeindex|的手册，因为
+这两个程序除了排序结果不同外，用法和功能基本上一样。
+
+\subsection{通用前端程序~\texttt{ctex}}\label{ctex}
+
+\index{ctex@\verb+ctex+}
+\verb|ctex| 是适用于排版~CCT 和~CJK 文件的前端程序，它可一次完成排版文件的
+预处理、排版和后处理。\verb|ctex| 程序能够递归地对所有~\verb|\input| 
+或~\verb|\include| 文件进行预处理。对于~CJK 排版文件而言，\verb|ctex|
+程序的主要作用是调用~\verb|cctspace| (可选) 调整中英文间的，
+调用~\verb|cctconv| 对汉字进行转换以确保用到~\TeX\ 特殊字符的汉字~(参
+看~\ref{cctconv}) 能在~CCT/CJK 系统中被正确处理，调用~\verb|gbk2uni|
+程序处理~PDF 书签文件以便能够通过~\verb|pdflatex| 或~\verb|dvipdfmx| 生成
+正确的中文书签，以及调用\verb|cctmkind|或\verb|makeindex|程序处理
+书签(\verb|.idx|)和术语(\verb|.glo|)文件。
+
+\verb|ctex| 的命令行参数形式为：
+\begin{verbatim}
+        ctex [可选项] 排版文件名
+\end{verbatim}
+
+\verb|ctex| 将顺序搜索~``\verb|排版文件名.ctx|''，
+``\verb|排版文件名.tex|'' 和~``\verb|排版文件名|''。(注：在~Mik\TeX\ 中，
+如果~``\verb|排版文件名|'' 本身不含扩展，则~\verb|ctex| 将只
+搜索~``\verb|排版文件名.ctx|'' 和~``\verb|排版文件名.tex|'')。
+
+除非使用了~``\verb|-quiet|'' 可选项，\verb|ctex| 运行时会将它所执行的命
+令~(或等价形式) 显示在~\verb|stderr|。因此~Windows 下可
+用~``\verb|ctex 排版文件名 >nul|''，Unix/Linux 下可
+用~``\verb|ctex 排版文件名 >/dev/null|'' 来屏蔽掉其它
+程序的输出信息以便观察~\verb|ctex| 的处理过程.
+
+\verb|ctex| 会将所有它不认识的命令行可选项，以及~``\verb|&fmt|'' 形式的参数
+传递给~\TeX\ 程序。因此，用户可以在~\verb|ctex| 的命令行上使用~\verb|tex|
+或~\verb|latex| 程序的可选项。需要注意的是，如果这些可选项中含有空格，
+则必须将它们括在~(单或双) 引号中，否则~\verb|ctex| 会错把空格后面的部分
+当成排版文件名。例如，可以采用下面的形式传递带有空格的参数：
+\begin{verbatim}
+        ctex "--translate-file cp8bit.tcx" mypaper.tex
+\end{verbatim}
+\noindent
+(上例中如果将空格换成~`\verb|=|' 就不必用引号了)。
+
+用户还可以用~`\verb|%&|' 的形式在排版源文件中给出~\verb|ctex| 的可选项。如：
+\begin{verbatim}
+        %& -no-cctspace
+        %& -latex-runs=1
+        \documentclass{cctart}
+        ... ...
+\end{verbatim}
+\noindent
+上述形式的可选项必须位于排版文件的最前面，每个可选项必须占一行，
+以~`\verb|%&|' 开始，`\verb|%&|' 前面不能有空格或其它字符，并且
+(除\verb|-no-cctspace|外)只有主排版文
+件~(即在命令行上给出的文件) 中的可选项起作用。可选项行的前面可以有其它
+说明行，但这些行的第一个字母必须是 `\verb|%|'。可选项的参数可以用单引号或
+双引号括起来。命令行上给出的可选项的优先级要高于排版源文件中给出的可选项。
+
+当不希望~\verb|ctex| 用~\verb|cctspace| 程序处理某个文件时，可
+在该文件第一行写上~``\verb|%& -no-cctspace|''。主排版文件中给出的
+~``\verb|%& -no-cctspace|'' 作用域是全局的，即它表示所有输入文件都不用
+~\verb|cctspace| 处理，而其它输入文件开头的~``\verb|%& -no-cctspace|''
+则只对该文件起作用(注：\verb|ctex| 扫描源文件中的可选项时，对主排版
+文件会一直读到第一个非说明行，而对其它文件则只读第一行)。
+
+\verb|ctex| 根据命令行中给出的输入文件~(即主输入文件) 的扩展名决定是否调
+用~\verb|cct| 对输入文件进行预处理。如果主输入文件的扩展名为~\verb|.ctx|，则调
+用~\verb|cct| 进行预处理，否则则调用~\verb|cctspace| 和~\verb|cctconv|
+进行转换。因此，对于~CCT 排版文件，如果希望使用老版~CCT 的处理方式，则应该将
+源文件的扩展名取为~\verb|.ctx|，而如果希望使用新版~CCT 的处理方式，则应该
+将源文件的扩展名取为~\verb|.tex|。我们希望~CCT 用户在新文档中尽量使用新
+版~CCT 的处理方式，逐渐淘汰老版~CCT。
+
+\iffalse
+  \verb|ctex| 将所有经过预处理或转换后的文件放在子目录~\verb|ctextemp.dir| 中。
+\else
+  \verb|ctex| 在原文件名前加上前缀~`\verb|ctextemp_|' 做为预处理或转换后的
+  文件名。
+\fi
+如果输入文件的扩展名为~\verb|.ctx|，则将输出文件的扩展名改为~\verb|.tex|。
+
+当用~\verb|cct| 进行预处理时，如果一个~\verb|\input| 或~\verb|\include|
+文件的扩展名为~\verb|.tex|，\begin{CCTdot}或者\end{CCTdot}该文件不存在，
+则~\verb|ctex| 自动寻找扩展名为~\verb|.ctx| 的文件作为输入文件。而当
+用~\verb|cctspace| 和~\verb|cctconv| 进行转换时，只有当~\verb|\input|
+或~\verb|\include| 文件的扩展名为~\verb|.tex| \begin{CCTdot}并
+且\end{CCTdot}该文件不存在时，\verb|ctex| 才会去找对应的~\verb|.ctx| 文件。
+
+递归搜索~\verb|\input| 或~\verb|\include| 文件时，\verb|ctex| 扫描排版文件
+中的下述命令：
+\begin{verbatim}
+        \include{文件名}，\input{文件名}，\input 文件名
+        \documentclass[可选项]{文件名}，
+        \usepackage[可选项]{文件名}，\RequirePackage[可选项]{文件名}
+        \LoadClass[可选项]{文件名}
+\end{verbatim}
+\noindent 并递归地对所涉及的文件进行处理。
+
+\iffalse
+  因为~\verb|ctex| 是在临时目录~\verb|ctextemp.dir| 中调用~\TeX\ 排版，因此，
+  \verb|ctex| 程序还对一些插入图形的常用命令中文件名的路径进行转换，
+  以便~\TeX\ 排版时能够找到这些图形文件。\verb|ctex| 处理的图形命
+  令包括：
+  \begin{verbatim}
+        \includegraphgics*[可选项]{文件名}，\includegraphgics[可选项]{文件名}
+        \epsfbox{文件名}，\epsffile{文件名}
+\end{verbatim}
+  \noindent
+  (\verb|ctex| 将上述命令中的文件名换成绝对路径，或是将所对应的图形文件
+  拷贝到临时目录中)。
+
+  \begin{CCTdot}
+  由于~\verb|ctex| 将所有预处理或转换后的结果文件放在同一子目录，
+  因此~\verb|\input|，\verb|\include| 以及图形文件不能同名，即使它们的源文件
+  位于不同的子目录中。
+  \end{CCTdot}
+\else
+  \begin{CCTdot}
+  由于~\verb|ctex| 将所有预处理或转换后的结果文件放在当前目录，
+  因此~\verb|\input| 或~\verb|\include| 文件不能同名，即使它们的源文件位于
+  不同的子目录中。
+  \end{CCTdot}
+
+  此外，\verb|ctex| 还对下述命令中的文件名进行转换~(在文件名前面加
+  上~\verb|ctextemp_| 前缀)：
+  \begin{verbatim}
+        \includeonly，\ProvidesClass，\ProvidesPackage，\ProvidesFile
+\end{verbatim}
+\fi
+
+为提高处理效率，\verb|ctex| 在处理每个输入文件前先比较该文件与对应的加
+了~`\verb|ctextemp_|' 前缀的文件的修改时间，如果后者比前者新则跳过该文
+件的处理。必要时可以用~`\verb|-force-pre|' 可选项强制~\verb|ctex| 重新
+处理所有输入文件，或用~`\verb|ctex -clean|' 命令删除
+\iffalse
+临时目录~\verb|ctextemp.dir| 中的
+\else
+以~`\verb|ctextemp_|' 为前缀的
+\fi
+所有文件。
+
+\iffalse
+  \verb|ctex| 调用~\TeX\ 排版完毕后，会将产生的~\verb|.dvi| 文件、
+  \verb|.pdf| 文件和~\verb|.log| 文件从临时目录中拷贝出来。
+\fi
+
+排版~\LaTeX\ 文档时~(用~\verb|latex|，\verb|pdflatex|
+或~\verb|amslatex| 等命令排版时)，
+\iffalse
+  \verb|ctex| 会检查所产生的~\verb|.log| 文件中有关交叉引用的警告信息，
+\else
+  \verb|ctex| 会检查~\verb|.aux|，\verb|.out|，\allowbreak\verb|.idx|
+  等文件的变化，
+\fi
+以决定是否需要再运行一次~\verb|latex| 以保证交叉引用的正确性。
+为避免死循环，命令行可选项~`\verb|-latex-runs|' 用来控制最大重复运行
+的次数~(默认值可参看~\verb|ctex| 程序的帮助信息)。排版结束后，如果生成
+了新的~\verb|.aux| 并且使用了~``\verb|-bibtex|'' 命令行可选项，
+则~\verb|ctex| 会~(在第一次排版结束时) 运行~\verb|bibtex| 程序以刷
+新~\verb|.bbl| 文件。如果生成了新的~\verb|.out| 文件~(PDF 书签文件)，
+则~\verb|ctex| 会运行~\verb|gbk2uni| 程序对其进行转换以保证在~PDF 文件
+中生成正确的书签。如果生成了新的~\verb|.idx| 文件~(索引文件)，
+则~\verb|ctex| 会运行~\verb|makeindex| 程序生成~\verb|.ind| 文件。
+如果生成了新的~\verb|.glo| (glossary，术语) 文件，则~\verb|ctex| 会运
+行~\verb|makeindex| 程序生成~\verb|.gls| 文件。
+
+Windows 版本的~\verb|ctex| 程序在排版完毕后如果~dvi 文件是~CCT 格式，则运
+行~\verb|patchdvi| 程序，因此最终产生的~dvi 文件可以直接用其它程
+序~(如~\verb|yap| 或~\verb|dvips|) 处理。而~UNIX 版本的~\verb|ctex|
+程序则不运行~\verb|patchdvi| 程序，所产生的~dvi 文件如果是~CCT 格式的话不
+能直接用其它程序处理，而必须用~CCT 提供的~\verb|xdvic| 和~\verb|dvipsc|
+脚本处理~(参看~\ref{Linux})。
+
+默认情况下，\verb|ctex| 只进行排版。如果用户指定了~\verb|-dvips| 可选项，
+则~\verb|ctex| 会在排版完毕后运行~\verb|dvips| 生成~PS 文件。如果用户指
+定了~\verb|-dvipdfmx| 可选项，则~\verb|ctex| 会在排版完毕后运
+行~\verb|dvipdfmx| 生成~PDF 文件。
+
+\verb|ctex| 中可以用~`\verb|-tex|'、`\verb|-amstex|'、`\verb|-pdftex|'、
+`\verb|-latex|'、`\verb|-amslatex|' 和~`\verb|-pdflatex|' 可选项来选
+择~\TeX\ 的排版命令，默认时用~\verb|latex| 命令排版。也可以通过改
+变~\verb|ctex| 的可执行文件名来选择排版命令。例如，在~Windows 下如果
+将~\verb|ctex.exe| 改名为~\verb|ccttex.exe|，则默认调用~\verb|tex| 排版，
+而如果将~\verb|ctex.exe| 改名为~\verb|cctpdflatex.exe|，则默认 
+用~\verb|pdflatex| 排版。UNIX 下可以通过给~\verb|ctex| 程序创建不同的
+符号链接，如~\verb|ccttex|、\verb|cctlatex|、\verb|cctpdflatex|
+等等，来分别完成不同的工作。
+
+为了便于控制索引文件的处理，\verb|ctex| 提供了以下三个可选项：
+\begin{verbatim}
+        -makeindex_prog，-makeindex_opts，-glossary_opts
+\end{verbatim}
+第一个可选项指定处理索引和术语文件的程序名，默认值
+为 `\verb|cctmkind|' (参看\ref{cctmkind})。后两个可选项给出传递给
+Makeindex 程序的参数，其中\verb|-makeindex_opts| 用于处理
+\verb|.idx| 文件，默认值为空，而 \verb|-glossary_opts| 则用于
+处理 \verb|.glo| 文件，默认值为 `\verb|-s gglo.ist|'。由于这些参数比较
+长，建议将它们用 `\verb|%&|' 的形式放在主排版文件的开头，如：
+\begin{verbatim}
+%& -makeindex_prog=cctmkind
+%& -makeindex_opts="-s cct.ist"
+%& -glossary_opts="-s cctglo.ist"
+\end{verbatim}
+
+\verb|ctex| 还提供了一其它~\verb|xxxxx_opts| 形式的命令行可选项，用来传递参
+数给~\verb|ctex| 调用的程序，其中~`\verb|xxxxx|' 代表程序名。这些可选项有：
+\begin{verbatim}
+        -gbk2uni_opts，-bibtex_opts，-dvips_opts，-dvipdfmx_opts
+\end{verbatim}
+\noindent
+如：
+\begin{verbatim}
+        ctex -dvipdfmx -dvipdfmx_opts="-p b5" -gbk2uni_opts="-npe" myfile.tex
+\end{verbatim}
+\noindent
+将在运行~\verb|dvipdfmx| 时使用参数~`\verb|-p b5|' (设置~B5 幅面)，在运行
+~\verb|gbk2uni| 时使用参数~`\verb|-npe|'。建议用户将这些参数
+以~`\verb|%& -xxxxx_opts="...."|' 的形式放在主排版文档的开头。
+
+其它命令行可选项请参看~\verb|ctex| 自带的帮助信息。
+
+\subsection{辅助工具的局限与使用时的注意事项}
+
+辅助程序~\verb|ctex| 和~\verb|cctspace| 对用户的排版源文件进行转换。
+经~\verb|ctex| 转换后排版源文件中一些文件名会发生变化，
+如~`\verb|\include{chap1}|' 可能会被变成~`\verb|\include{ctextemp_chap1}|'。
+而经~\verb|cctspace| 转换后的排版源文件会在汉字与英文间插入一些空格
+和~`\verb|~|'，如~`\verb|中文\TeX|' 会被转换成~`\verb|中文~\TeX|'。
+由于~\verb|ctex| 和~\verb|cctspace| 不可能对复杂的~\TeX\ 命令
+进行完全处理，不可避免地会偶尔改变一些不应该改变的排版内容。\verb|ctex| 
+和~\verb|cctspace| 在设计时考虑了一些常见情况，例如，\verb|ctex|
+和~\verb|cctspace| 会避免修改抄录环境~(\verb|verbatim| 环境，\verb|\verb|
+命令等) 中的内容，但它们只能识别标准的抄录环境或命令，对于其它形式，
+如通过~\verb|shortvrb| 包引入的“短”形式或用户自定义的宏则可能对其中的
+内容进行转换，导致错误的排版结果。
+
+因此，使用~\verb|cctspace| 和~\verb|ctex| 时，排版源文件中尽量不要用非
+标准的抄录环境或命令以及通过~\verb|shortvrb| 包定义的“短”抄录形式，
+特别是当这些环境中包含中文时。 也不要用自定义宏代替~\verb|\include|，
+\verb|\includeonly| 和~\verb|\input| 等命令来插入文件。此外，还应尽量
+避免在文件名中使用汉字。只要做到这几条，基本上就可以避免经~\verb|ctex|
+或~\verb|cctspace| 转换后产生不正确的排版结果。
+
+\section{\texttt{CCT.sty} 的处理流程及配置文件~\texttt{CCT.cfg}}
+
+图~\ref{fig:cctdiag} 给出了~\verb|CCT.sty| 的处理流程。\index{CCT.sty@\verb+CCT.sty+}
+
+\begin{figure}[htpb]
+  \centering
+  \ifpdf
+    \includegraphics{cctdiag.pdf}
+  \else
+    \includegraphics{cctdiag.eps}
+  \fi
+  \caption{\texttt{CCT.sty} 排版流程图}
+  \label{fig:cctdiag}
+\end{figure}
+
+新版~CCT 提供了四条命令用来定义~CCT 的字体、字号及标点符号处理。这些
+命令的参数之间用空格隔开，并且最后一个参数后面也必须至少有一个空格~(或换行)。
+
+\begin{enumerate}
+  \item \verb|\CCTdefzihao CCT字号 磅数|\index{CCTdefzihao@\verb+\CCTdefzihao+}\par
+    该命令将给定~CCT 字号的大小设成指定的磅数~(pt)，它只对~CJK 字库有效，
+    如果使用~CCT 字库的话字号大小由文件~\verb|cct.dat| 定义。
+    新设定的参数在下一次执行~\verb|\zihao| 命令后才起作用。
+  \item \verb|\CCTdefziti 字母 字库名 替代字库名|\index{CCTdefziti@\verb+\CCTdefziti+}\par
+    该命令定义~CCT 字体到~CJK 字库名的映射，它只有当使用~CJK 字库时才有效，
+    如果使用~CCT 字库的话字体映射由文件~\verb|hzfonts.def| 定义。
+    第一个参数为~\verb|\ziti| 命令中使用的字母。第二个参数为~CJK 字体名，
+    如~``\verb|song|''，``\verb|hei|'' 等。第三个参数为替换字库名，当
+    由第二个参数指定的字库不存在时将用该参数指定的字库代替。
+    新设定的参数在下一次执行~\verb|\ziti| 命令后才起作用。
+  \item \verb|\GBKpunct 全角字符 前断行 前rule 前glue 后断行 后rule 后glue|%
+    \index{GBKpunct@\verb+\GBKpunct+}\par
+    该命令用于调整一些特殊的全角字符~(标点符号) 前后的空及设定与之相关的行
+    禁则。命令中各参数的含义如下：
+    \begin{description}
+      \item[\texttt{前断行}，\texttt{后断行}]\ \\
+	这两个参数分别用于说明是否禁止在指定字符的前面~(pre-break) 或
+	后面~(post-break) 断行，参数值取数字~0 或~1，0 表示允许断行，
+	1 表示禁止断行。
+      \item[\texttt{前\relax rule}，\texttt{后\relax rule}]\ \\
+	CCT 可以在一个字符的前面~(pre-rule) 或后面~(post-rule) 附加一个高度
+	为~0 的~\verb|\vrule|，用于调整该字符前后的空，这两个参数分别给
+	出附加在指定字符前面和后面的~\verb|\vrule| 的宽度，以~em 为单
+	位~(通常取负值来减少字符前后的空)。
+      \item[\texttt{前\relax glue}，\texttt{后\relax glue}]\ \\
+	这两个参数分别给出附加在指定字符的前面~(pre-glue) 和后面~(post-glue)
+	的弹性空间~(glue) 的大小。按照~\TeX\ 的排版规则，这些弹性空间只在一行
+	中间起作用，在换行时会自动消失。这两个参数均以
+	~``\verb|flag,space,stretch,shrink|'' 的形式给出，其中
+	~\verb|flag| 取~0 或~1，当~\verb|flag| 为~0 时表示忽略该~glue，
+	~\verb|space|，\verb|stretch| 和~\verb|shrink| 给出~glue 的值，以
+	~em 为单位。例如~``\verb|1,0.3,0.2,0.2|'' 中~\verb|flag| 为~1，
+	相应的~glue 值为~\verb|0.3em plus 0.2em minus 0.2em|。
+    \end{description}
+    用~\verb|\GBKpunct| 定义的全角字符经~\verb|CCT.sty| 处理后变成以下形式:\\
+    \verb|    [penalty] [glue] [vrule] 字符 [vrule] [penalty] [glue]|\\
+    其中~penalty (罚分) 用于禁止断行。连续两个全角字符间的~penalty 和~glue
+    会被自动合并起来。
+    
+    例如，假如对“。”的参数设定如下:\\
+    \verb|    \GBKpunct 。  1  .0  0,0,0,0  0  -.510  1,.510,.0,.4 |\\
+    则~\TeX\ 排版~``\verb|...啊。啊...|'' 时会产生下述结果:\par
+    {\renewcommand{\baselinestretch}{1}
+\begin{verbatim}
+      ...
+      啊
+      \penalty 10000
+      \hskip 0pt plus 0.29999pt minus 0.20004pt
+      。
+      \vrule width -5.35493pt height 0pt depth 0pt
+      \hskip 5.35493pt plus 0.29999pt minus 4.39998pt
+      啊
+      ...
+\end{verbatim}
+    }
+    \noindent
+    其中第一个~glue (\verb|\hskip|) 是汉字的字间空，第二个~glue (\verb|\hskip|)
+    是字间空与~``\verb|后glue|'' 值之和 ~(这里~``\verb|后glue|'' 值为
+    ~\verb|0.510em plus 0em minus 0.4em|)，\verb|\penalty 10000| 阻止~\TeX\
+    在句号前面断行。有兴趣的读者可以使用下面的排版命令:\\
+\verb|    \showboxbreadth=20 \showboxdepth=2 \setbox0\hbox{啊。啊} \showbox0|\\
+    然后在~log 文件中观察~\verb|CCT.sty| 的排版结果和~\verb|CCT.cfg| 中的参数
+    的作用。
+    
+    参数~``\verb|前rule|'' 和~``\verb|后rule|'' 的设定应该依据字体的度量信息
+    计算，使它们正好去掉标点符号前后多余的空白，而标点符号与前后字符间应该留
+    出的空则由参数~``\verb|前glue|'' 和~``\verb|后glue|'' 设定，这些~glue 在
+    换行时会消失，从而使得位于行首或行尾的标点符号正好顶格。
+  \item \verb|\GBKkern 全角字符1 全角字符2 长度|\index{GBKkern@\verb+\GBKkern+}\par
+    (参数“\verb|全角字符1|”和“\verb|全角字符2|”间的空格可以省略。) 该命令
+    用于调整两个连续全角字符间的空~(\TeX\ 术语中称为~kerning)。参数
+    “\verb|长度|”给出附加在两个给定字符间的空白的宽度~(\verb|\kern|)，
+    以~em 为单位，可以取负值。该命令同时取消通过~\verb|\GBKpunct| 命令附加
+    在“\verb|全角字符1|”后面和“\verb|全角字符2|”前面的~glue，因此
+    “\verb|长度|”参数通常可取值为~0。
+\end{enumerate}
+
+由于命令~\verb|\CCTdefzihao|、\verb|\CCTdefziti| 和~\verb|\GBKkern| 定义的参数
+与具体使用的字库无关，因此~CCT 将它们分别放在与字库无关的配置文件
+~\verb|CCT.cfg|\index{CCT.cfg@\verb+CCT.cfg+} 和
+~\verb|GBKkern.cfg|\index{GBKkern.cfg@\verb+GBKkern.cfg+}
+中。而命令~\verb|\GBKpunct| 中的参数与标点符号的度量信息有关，它们是根据
+具体字库计算出来的，不同字库的参数可能会不一样。例如，在~Windows 的四种
+基本中文~TrueType 字体中，\verb|simsun| 和~\verb|simhei| 的参数是一样的，
+\verb|simkai| 和~\verb|simfang| 的参数是一样的，但这两组字体的参数却
+不同。为了便于对不同字体的标点符号进行不同的调整，CCT 将~\verb|\GBKpunct| 命令
+单独放在一个与字体名挂钩的参数文件中，这些文件的文件名与字体文件名相同，扩展名
+为~\verb|.tbl|，如~\verb|gbksong.tbl|，\verb|gbkhei.tbl| 等等。CCT 处理标点符
+号时会对不同字体自动使用相应参数文件中定义的参数以达到最佳效果。当一个~CJK
+字体的参数文件~(\verb|.tbl| 文件) 不存在时，CCT 使用文件~\verb|gbkdef.tbl|
+中的默认参数。由于所有~CCT 字库共用一个标点符号库~(\verb|clib256e.pps|)，
+因此当使用~CCT 字库时标点符号参数从文件~\verb|clib256e.tbl| 中获得
+~(该文件将随~CCT 系统发布)。
+
+\verb|.tbl| 文件中只能包含~\verb|\GBKpunct| 命令及参数、说明~(\verb|%|) 及空格、
+制表符~(\verb|<tab>|) 和空行，除此之外不能有其它任何命令~(包括~\verb|\endinput|
+命令)，否则可能出现意想不到的结果。由于~\verb|.tbl| 文件中的参数是根据
+字库的度量信息确定的，很难直接手工制作。为此，CCT 提供了一个~bash 脚本，
+它会自动从~Type 1 字库中读取度量信息来生成相应的~\verb|.tbl| 文件。该脚本
+的文件名为~\verb|GBKpunct|\index{GBKpunct@\verb+GBKpunct+}，
+包含在~Linux 版的~CCT
+中，可以在~Linux 或~Cygwin 下运行。\verb|GBKpunct| 运行时需要 ~FontForge
+程序~(\URL{http://fontforge.sourceforge.net})，或它的前身~PfaEdit。
+Windows 下的~C\TeX\ %
+用户只要将~Linux 中生成的~\verb|.tbl| 文件拷贝到目录
+~\verb|\ctex\localtexmf\tex\latex\cct| 下，再刷新一次~Mik\TeX\ 的文件名数据
+库即可~(注意~Windows 下使用的中文字库可能与~Linux 不同，CTeX 用户请使用随~CTeX
+发布的 \verb|.tbl| 文件，如果~\verb|.tbl| 文件与所使用的字库不配套则会影响
+排版的效果)。\verb|GBKpunct| 中有一组参数，放在文件结尾处，必要时可以修改。
+随~CCT 发布的~\verb|.tbl| 文件是在~Linux 下用下述命令产生的：
+\begin{verbatim}
+    % GBKpunct clib256e > clib256e.tbl
+    % cp clib256e.tbl gbkdef.tbl
+    % GBKpunct gbksong  > gbksong.tbl
+    % GBKpunct gbkhei   > gbkhei.tbl
+    % GBKpunct gbkkai   > gbkkai.tbl
+    % GBKpunct gbkfs    > gbkfs.tbl
+    % GBKpunct gbkbs    > gbkbs.tbl
+\end{verbatim}
+
+用户如果需要改变字体映射或字号大小，可以直接修改配置
+文~\verb|CCT.cfg|。如果希望改变标点符号的处理则需修改~\verb|GBKkern.cfg|
+文件。此外，也可以使用本节介绍的命令将要修改的参数放在自己的
+排版文件中。但我们不推荐直接手工修改~\verb|.tbl| 文件，如确有必要，应该修
+改~\verb|GBKpunct| 中的参数，然后重新生成~\verb|.tbl| 文件。
+
+\section{Linux 版本}\label{Linux}
+
+\index{Linux}
+我们为~Linux 用户提供一组新版~CCT 的~RPM 包，包括~\verb|src| 和 ~\verb|i386|
+包\index{RPM 包}，它们可以从网址:\index{新版 CCT!Linux 版下载}
+\begin{flushleft}
+\qquad\qquad\URL{ftp://ftp.cc.ac.cn/pub/cct/Linux}
+\end{flushleft}
+处下载。
+
+CCT 的~RPM 包中包含一组命令~\verb|ccttex|\index{ccttex@\verb+ccttex+}，
+\verb|cctlatex|\index{cctlatex@\verb+cctlatex+}，
+\verb|cctamstex|\index{cctamslatex@\verb+cctamslatex+}，
+\verb|cctpdftex|\index{cctpdftex@\verb+cctpdftex+}
+和~\verb|cctpdflatex|\index{cctpdflatex@\verb+cctpdflatex+}，
+它们是~CCT 的前端程序~\verb|ctex|\index{ctex@\verb+ctex+} 的符
+号链接，可分别代替~\verb|tex|，\verb|latex|，\verb|amstex|，\verb|pdftex| 和
+~\verb|pdflatex| 命令用于~CCT 或~CJK 文档的排版，参看~\ref{ctex}。
+CCT 的~Linux 版本中还提供了三个脚本文件~\verb|xdvic|\index{xdvic@\verb+xdvic+}，
+\verb|dvipsc|\index{dvipsc@\verb+dvipsc+}，和~\verb+eps2pdf+\index{eps2pdf@\verb+eps2pdf+}。
+脚本~\verb|xdvic| 和~\verb|dvipsc| 分别用于显示和打印~CCT 格式的~dvi 文件，
+它们在调用~\verb|xdvi| 或~\verb|dvips| 前先运
+行~\verb|patchdvi|\index{patchdvi@\verb+patchdvi+} 程序
+对~dvi 文件进行转换，在退出时删除所生成的临时~dvi 文件和~PK 字库；
+脚本~\verb|eps2pdf| 将~EPS 文件转换为~PDF 文件~(与~Ghostscript
+的~\verb|ps2pdf| 脚本的区别在于它保持图像原有的~BoundingBox 不变)。
+
+我们建议在安装~CCT 系统的同时安装~CJK 系统，以便能够使用新~CCT 系统的
+所有功能。网址：
+\begin{flushleft}
+\qquad\qquad\URL{ftp://ftp.cc.ac.cn/pub/cct/CJK}
+\end{flushleft}
+处提供了一组~CJK 的~RPM 包\index{CJK RPM 包}，自行安装~CJK 系统有困难时可以试
+试它们~(如果已经安装了~CJK 系统及字库，则在安装这些包前应先备份好重
+要的配置文件)。这些包都是~\verb|src| 包，可用命令：
+\begin{verbatim}
+        rpmbuild --rebuild {src 包名}
+\end{verbatim}
+\noindent
+编译生成相应的~\verb|i386| 包。
+
+\verb|CJK-GBKfonts| 包提供了 \verb|gbkfonts| 程序和一个 bash 脚本
+\verb|gbkfont-inst|，后者可用来方便地安装、卸载供 CCT 和 CJK 用的
+GBK 字体，例如：
+\begin{verbatim}
+        gbkfont-inst /usr/share/fonts/zh_CN/TrueType/gbsn00lp.ttf song
+\end{verbatim}
+(最好以 \verb|root| 身份运行) 将安装字体 \verb|gbksong|，而：
+\begin{verbatim}
+        gbkfont-inst remove song
+\end{verbatim}
+则将卸载 \verb|gbksong|。重复安装同一个字体不会有副作用。
+不带任何参数运行 \verb|gbkfont-inst| 会显示一个简要使用说明。
+
+另外，随~RedHat--9 发布的~\verb|tetex-xdvi| 包不支持~Type 1 字库及彩色，
+建议下载安装~xdvik\index{xdvik} 的最新~\texttt{beta} 版，网址为：
+\begin{flushleft}
+\qquad\qquad\URL{http://xdvi.sourceforge.net/cvs-upgrade.html}
+\end{flushleft}
+或：
+\begin{flushleft}
+\catcode`\_=11
+\qquad\qquad\URL{http://sourceforge.net/project/showfiles.php?group_id=23164}\\
+\end{flushleft}
+或是用：
+\begin{flushleft}
+\qquad\qquad\URL{ftp://ftp.cc.ac.cn/pub/cct/xdvik}
+\end{flushleft}
+中的~\verb|xdvik| 包替换~\verb|tetex-xdvi| 包，以便在预览时直接
+使用~Type 1 字库~(如果使用下面介绍的~Kile 与~Gvim 的集成环境的
+话则必须用该处提供的~RPM 包才能实现~CCT 文档的双向搜索功能)。使
+用~te\TeX\nbs 1.0 的用户安装~\verb|xdvik| 包后可能需要修
+改~\verb|/usr/share/texmf/xdvi/xdvi.cfg| 文件，将倒数第二行上的说明符
+去掉，详见该文件中的说明。
+
+\bigskip
+
+网址:\index{Kile}
+\begin{flushleft}
+\qquad\qquad\URL{ftp://ftp.cc.ac.cn/pub/cct/kile}
+\end{flushleft}
+处有经过修改的~Kile 版本，其中加入了对~CCT 及前端程序~\verb|ctex| 的支持。
+有关细节可参看该目录中的~\verb|README-kile.txt| 文件。
+
+\bigskip
+
+网址:\index{ITE}
+\begin{flushleft}
+\qquad\qquad\URL{ftp://ftp.cc.ac.cn/pub/cct/ite}
+\end{flushleft}
+处提供了一个名为~\verb|ite| 的~RPM 包~(意为~Integrated TeX Environment)，
+其中包含一些脚本及支持文件，它们与~GVIM 或~Kile 结合构成编排~LaTeX 文档
+的集成环境。命令~``\verb|rpm -qip ite-*-*.i386.rpm|'' 可显示一些相关说明。
+该目录下还有一套点阵~X11 字库~(\verb|gb20st.pcf.gz| 和
+~\verb|gb20st-iso10646.pcf.gz|)，可用于改善汉字显示效果~(安装时只需将
+两个文件拷贝到目录~\verb|/usr/X11R6/lib/X11/fonts/misc| 下然后运行：
+\begin{verbatim}
+        mkfontdir /usr/X11R6/lib/X11/fonts/misc
+        /etc/init.d/xfs reload
+\end{verbatim}
+即可)。安装完~\verb|ite| 包后，用命令~``\verb|vtex 主排版文件名|'' 即可进入
+基于~GVIM 的~\TeX\ 集成环境。
+
+\verb|ite| 中有一个拼写错误检查按钮，用于提供简单的英文拼写检查功能，用户可以
+创建一个文件~\verb|$HOME/.ite/spell.words|，在其中加入自定义的单词~(单词间用
+空格或换行隔开)。由于~\verb|ite| 包依赖于~\verb|aspell| 包，如果升级了
+~\verb|aspell| 包的话最好重新安装一次~\verb|ite| 包并删除文件
+~\verb|$HOME/.ite/spell.dic|。
+
+\verb|ite| 包要求~Vim \texttt{6.0} 以上的版本，因此~RedHat \texttt{7.2}
+及更早的~Linux 版本需要
+升级~Vim (RedHat updates 中有相应的升级包)。对于~RedHat\nbs\texttt{9} 的用户，推荐从下述
+网址下载安装~Vim \texttt{6.2}:\index{Vim}\\
+\verb|        |\URL{ftp://ftp.cc.ac.cn/pub/cct/vim-6.2},\\
+该版本基于~GTK2，使用了~anti-aliase 技术，字符显示效果好得多，并且不需要前面
+所提到的中文~X11 字库~(\verb|gbst20*.pcf.gz|)。它与官方发布的~Vim \texttt{6.2}
+的区别在于改正了几个对汉字支持的问题~(参
+看~\URL{ftp://ftp.cc.ac.cn/pub/cct/vim-6.2/README.txt})。
+
+另外，如果希望使用双向搜索功能的话，则最好安装或升级到~te\TeX~\texttt{2}
+(如果使用~te\TeX~\texttt{1.x} 的话需要在排版源文件中加
+入~``\verb|\usepackage{srcltx}|'' 才能使用搜索功能)。建议安装~\verb|ite| 包
+之前安装或升级下述包：
+\begin{verbatim}
+        vim-{common,enhanced,X11} >= 6.1
+        tetex >= 2.0.2 (不要装 tetex-xdvi 包)
+        cct >= 0.5.0-3
+        xdvik >= 22.74.2
+        aspell >= 0.33.7
+\end{verbatim}
+
+该目录中还有一个~\verb|ite-latexSuite|\index{LaTeX Suite@\LaTeX\ Suite} 包
+~(\URL{http://vim-latex.sourceforge.net})，其中
+提供了许多非常有用的用于编排~\LaTeXe\ 文档的功能。
+安装该包后，可在~\verb|vtex| 环境下用命令~\verb|:help latex-suite|
+(或在命令行上键入~\verb|vim /usr/share/ite/doc/latex-suite.txt|) 来
+阅读它的用户手册。
+
+\appendix
+\section{}
+
+\subsection{如何在同一文档中同时使用~CCT 和~CJK 进行排版}
+
+\index{同时使用 CCT 和 CJK}
+
+这里介绍的方法仅供参考。它们不一定总有效，也许有些地方不对，欢迎大家指正。
+
+在一个~CCT 文档~(\verb|\documentclass{cctxxx}|) 的导言区加入下述
+命令：
+\begin{verbatim}
+        \standardtilde \let\standardtilde=\relax
+        \usepackage{CJK}
+\end{verbatim}
+便可在文档中使用~\verb|CJK| 或~\verb|CJK*| 环境。需要注意的是应该在命令
+~\verb|\end{CJK}| 或~\verb|\end{CJK*}| 之后加上~``\verb|\input CCT.sty|''
+才能再用~CCT 的汉字。该方法可用于在一个~CCT 文档中利用~CJK 排出一些~GBK
+编码之外的文字。
+
+如果需要在一个~CJK 文档中插入~CCT 的排版内容，可以在导言区加入
+~``\verb|\usepackage{cchead}|''，然后用下面的命令进入~CCT 环境：
+\begin{verbatim}
+        {
+        \input CCT.sty
+        CCT 排版内容 ...
+        }
+\end{verbatim}
+注意将~CCT 排版内容局限在一个~group 中，以免影响~CJK 排版。CCT 排版内容
+可以插在~\verb|CJK| 环境之内，也可以插在~\verb|CJK| 环境之外。(将
+~``\verb|\usepackage{cchead}|'' 加在导言区是为了避免重复调入 ~\verb|cchead.sty|
+而无谓地占用~\TeX\ 寄存器。\verb|CCT.sty| 设计时已经做了考虑，可以重复载
+入而不会多占资源。)
+
+\subsection{其它一些宏包}
+
+本节介绍的宏包还都是实验性的，它们尚有待进一步测试、完善。欢迎大家共同对
+它们进行改进。
+
+\subsubsection{\texttt{CCTty}}
+
+    \index{CCTty.sty@\verb+CCTty.sty+}\index{天元 \TeX\ 系统}
+    这是一个支持天元中文~\TeX\ 系统的宏包。使用时只需将天元~\TeX\ 排版
+    源文件中的\\
+    \verb|        \input tyinput|\\
+    改成\\
+    \verb|        \input CCTty.sty|\\
+    (\LaTeXe\ 中可以用~``\verb|\usepackage{CCTty}|'')，即可用~CCT 来排版。
+    与~CCT 排版文件类似，可以在~``\verb|\input CCTty.sty|'' 前面加
+    上~``\verb|\let\CCTCJKfonts=1|'' 或在~``\verb|\usepackage{CCTty}|'' 中
+    使用~``\verb|[CJK]|'' 可选项来选择使用~CJK 字库。用~\verb|CCTty| 宏包排
+    版天元~\TeX\ 文件时与天元系统的排版结果会略有不同，在排版命令的处理上也
+    有一些差异，主要体现在以下几方面：
+    \begin{itemize}
+      \item 用~\verb|CCTty| 处理天元排版命令~(如~``\verb|\宋|''，
+	``\verb|\大|'' 等) 时，命令的作用域严格遵循~\TeX\ 的分组规则。而用天
+	元系统排版时它们仅受限于用~``\verb|{|'' 和~``\verb|}|'' 界定的组。
+      \item 目前在~\verb|CCTty| 宏包中~``\verb|\瘦|''，``\verb|\扁|'' 
+	和~``\verb|\阔|'' 命令是利用~PS 和~PDF 的缩放功能实现的，只有在
+	将排版结果转成~PS 或~PDF 文件后才能看到最终排版效果。
+    \end{itemize}
+
+    此外，\verb|CCTty| 宏包中只定义了~\verb|\宋|、~\verb|\楷|、~\verb|\仿|、
+    ~\verb|\黑| 四条字体命令，以及~\verb|\半|、~\verb|\五|、~\verb|\六|、
+    ~\verb|\七|、~\verb|\八|、~\verb|\小|、~\verb|\九|、~\verb|\标|、
+    ~\verb|\中|、~\verb|\大|、~\verb|\特|、~\verb|\双|、~\verb|\巨|、
+    ~\verb|\叁|、~\verb|\肆| 十五条字号命令。如果用到其它字体、字号命令的话
+    可参照~\verb|CCTty.sty| 中的格式自行定义。例如命令：\\
+    \verb|        \CCTtycmd 题 {\biaosong}|\\
+    将天元字体“\verb|\题|”定义为~CCT 的~``\verb|\biaosong|'' (标宋)。
+    可将新的字体、字号定义放在排版源文件的开头，但必须位于命令
+    ~``\verb|\input CCTty.sty|'' (或~``\verb|\usepackage{CCTty}|'') 之后。
+
+\subsubsection{\texttt{hzcmd}}
+    
+    \index{hzcmd.sty@\verb+hzcmd.sty+}\index{汉字命令}
+    宏包~\verb|hzcmd| 引入了对以汉字命名的~\TeX\ 命令的支持。包含汉字的命令名
+    中可以有英文字母，但命令名的第一个字符必须是汉字。该宏包修改
+    了~\LaTeXe\ 的下述命令:\\
+    \verb|    \newcommand|，\verb|\renewcommand|，
+    \verb|\DeclareRobustCommand|，\verb|\ProvidesCommand|\\
+    可以用它们定义以汉字命名的~\TeX\ 命令。此外，还提供命令~\verb|\cdef|，
+    \verb|\cgdef|，\verb|\cedef|，\verb|\cxdef| 和~\verb|\clet|，用于
+    在~PLAIN \TeX\ 或~\AmSTeX\ 中定义汉字命令。宏包~\verb|hzcmd| 除了
+    可以在~CCT 中使用外，也可在~CJK 排版文件中使用。
+
+    以汉字命名的命令目前有以下局限：
+    \begin{itemize}
+      \item 包含汉字的命令名第一个字符必须是汉字，不能以英文字母开头。
+      \item 与普通由英文字母构成的命令不同，包含汉字的命令后面的空格不会
+	被“吃掉”。必要时可以在定义汉字命令时在最后加上~\verb|\ignorespaces|
+	命令来自动去掉跟随在命令后面的空格。
+      \item 汉字命令不能用在其它命令的参数中~(有一个方法可以去掉该限制，但由于
+	会显著降低处理速度而没有采用，参看宏文件中用~``\verb|%???|'' 注释掉
+	的部分)。
+      \item 汉字命令不能用在浮动内容中，如~\verb|\section| 命令的参数中。
+      \item 出现在命令名中的汉字的两个字节必须都在~129--254 范围，或者是英文
+	字母，因此少数不常用的汉字不能用在命令名中。
+      \item 由于宏包~\verb|hzcmd| 修改了~\verb|\newcommand| 等一些~\LaTeXe\
+	命令，可能会影响到其它一些宏包~(如~\verb|hyperref|) 的使用。一个解决
+	办法是在调入这些宏包之后再调入~\verb|hzcmd|。
+    \end{itemize}
+
+    除汉字命令外，宏包~\verb|hzcmd| 还允许用户在环境名中使用汉字，如：
+\begin{verbatim}
+        \usepackage{hzcmd}
+        ... ...
+        \newenvironment{居中}{\begin{center}}{\end{center}}
+        \begin{居中}
+          ... ...
+        \end{居中}
+\end{verbatim}
+
+    目前定义汉字命名的环境时有一个限制：只有~\verb|\newenvironment| 
+    或~\verb|\renewenvironment| 命令的第一个参数~(即新环境名) 中允许含有
+    汉字，其余参数~(即定义体) 中不允许含有以汉字命名的命令或环境~(但可以
+    含有汉字)。
+
+注意宏包~\verb|CCTty| 和~\verb|hzcmd| 不相容，它们不能在一起使用。
+
+\subsubsection{\texttt{everb}}\index{everb@\verb+everb+ 宏包}
+    
+宏包 \texttt{everb}扩展了\LaTeXe{}的\texttt{verbatim}环境。它具有如下特点：
+\begin{itemize}
+  \item 可以有选择地排印(直角或圆角)边框、背景色、行号等。
+  \item 允许在源文件的一行中间开始或结束环境。
+  \item 自动将 tab 展开成正确数目的空格。
+  \item 通过逃逸字符 (escape char) 可以在环境中插入 \LaTeXe{} 命令。
+  \item 保证 CCT 和 CJK 中英文字符间的对齐 (一个汉字与两个英文字符同宽)。
+  \item 结合逃逸字符可以在环境中用 \verb|\label| 命令产生对行号的引用。
+    该功能支持\texttt{hyperref} 宏包。
+\end{itemize}
+
+宏包\verb|everb|提供下述命令和环境：
+
+\begin{description}
+  \item[\texttt{\char`\\everbinput[可选参数]\char`\{文件名\relax\char`\}}]
+    \index{everb@\verb+everb+ 宏包!\verb+\everbinput+ 命令}\ \\
+    类似于 \verb|\verbatiminput| 命令，区别在于可以通过可选参数控制排版样式，
+    并且\texttt{文件名}中可以使用除``\verb|{|''和``\verb|}|'' 之外的任何
+    ASCII字符``\verb|\|''。\verb|\everbinput*| 命令将空格排成可见的。
+    该命令会自动分页。
+
+  \item[\texttt{\char`\\begin\char`\{everbatim\char`\}[可选参数] ... 
+    \char`\\end\char`\{everbatim\char`\}}]
+    \index{everb@\verb+everb+ 宏包!\verb+everbatim+ 环境}\ \\
+    类似于 \verb|verbatim| 环境，区别在于可以通过可选参数控制排版样式。
+    \verb|everbatim*| 环境将空格排成可见的。注意 \verb|everbatim| 和
+    \verb|everbatim*| 环境不能用在浮动体，如 \verb|figure| 环境中，
+    必要时可以在这些地方用 \verb|\everbinput| 命令。该环境会自动分页。
+
+  \item[\texttt{\char`\\everb}]
+    \index{everb@\verb+everb+ 宏包!\verb+\everb+ 命令}\ \\
+    用法类似于 \verb|\verb| 命令 (\verb|\everb*| 命令将空格排成可见的)。
+
+  \item[\texttt{\char`\\begin\char`\{colorboxed\char`\}[可选参数] ... 
+    \char`\\end\char`\{colorboxed\char`\}}]
+    \index{everb@\verb+everb+ 宏包!\verb+colorboxed+ 环境}\ \\
+    可用于给一段排版内容加上边框和背景色，并且允许中间换页。例如：
+    \begin{verbatim}
+    \fboxrule=1pt \fboxsep=3pt \fboxradius=20pt
+    \begin{colorboxed}[oval=true,fgcolor=black,bgcolor={[gray]{0.9}},width=6cm]
+	$$\int_0^14/(1+x^2)\,dx = \pi$$
+    \end{colorboxed}
+    \end{verbatim}
+    的排版结果为：
+    {\fboxrule=1pt \fboxsep=3pt \fboxradius=20pt
+    \begin{colorboxed}[oval=true, bgcolor={[gray]{0.9}}, width=6cm]
+       $$\int_0^14/(1+x^2)\,dx = \pi$$
+    \end{colorboxed}}%
+    \verb|colorboxed| 环境必须在纵向模式下使用，其排版内容总高度
+    不能超过 16383.99998pt (约576cm，这是\TeX\ 允许的最大长度)。
+    需要注意的是，\verb|colorboxed| 环境与其它一些涉及分页的环境，
+    如 \verb|multicols|，\verb|longtable|，\verb|supertabular| 等可能冲突，
+    应该避免它们之间相互嵌套使用。
+
+  \item[\texttt{\char`\\colorovalbox{[模式]}\char`\{边框色\relax\char`\}%
+		\char`\{背景色\relax\char`\}\char`\{...\char`\}}]
+    \index{everb@\verb+everb+ 宏包!\verb+\colorovalbox+ 命令}\ \\
+    用法与标准宏包 \verb|color| 中的 \verb|\fcolorbox| 命令类似，但可以排出
+    任意半径和宽度的圆角框。当指定的圆角半径太大时，该命令自动将半径设
+    成盒子的宽度或高度的一半 (该命令的\verb|*|形式禁止对半径做调整)。
+    该命令中不允许断页。
+
+  \item[\texttt{\char`\\newverbatim[可选参数]\char`\{环境名\relax\char`\}}]
+    \index{everb@\verb+everb+ 宏包!\verb+\newverbatim+ 命令}\ \\
+    定义新抄录环境。\texttt{可选参数}给出该环境使用的参数。例如，命令:\\
+    \verb|    \newverbatim[oval=true,number=true]{verbatim}|\\
+    重新定义 \LaTeXe\ 的 \verb|verbatim| 环境。
+
+  \item[\texttt{\char`\\everbsetup\char`\{参数列表\relax\char`\}}]
+    \index{everb@\verb+everb+ 宏包!\verb+\everbsetup+ 命令}\ \\
+    设定默认参数。
+\end{description}
+
+除\verb|\colorovalbox| 外，上述命令和环境通过一组参数来控制排版式样。
+这些参数的公共默认值可以用命令 \verb|\everbsetup| 设定，
+除 \verb|\everb| 命令外，其它命令还可以在每次调用时以可选参数的方式指定不
+同的值。参数采用 ``\verb|关键字=值|'' 的形式，不同参数用逗号隔开，详细格式可
+参看 \verb|keyval| 宏包的说明。特别要注意的是当参数值中含有``\verb|[|''
+或``\verb|]|''时一定要用``\verb|{...}|''将它们括起来，否则排版会出错，
+例如，必须将``\verb|bgcolor=[gray]{0.8}|''写成``\verb|bgcolor={[gray]{0.8}}|''
+的形式。\verb|everb|提供的参数及默认值如下 (一些命令会忽略某些参数)。
+\index{everb@\verb+everb+ 宏包!参数}
+\begin{description}
+  \itemindent=1\ccwd
+  \itemsep=0pt
+  \parsep=0pt
+  \parskip=0pt
+  \let\oitem\item
+  \def\item[#1]{\oitem[{\makebox[5.5cm][l]{#1}}---]}
+  \item[\texttt{width=<长度>}] 设定排版宽度 (默认或0表示排版宽度取当前行宽)
+  \item[\texttt{bg=true|false}] 是否填充背景色 (默认值 \texttt{true})
+  \item[\texttt{bgcolor=<颜色>}] 背景颜色 (默认值 \texttt{white})
+  \item[\texttt{fgcolor=<颜色>}] 前景颜色 (默认值 \texttt{black})
+  \item[\texttt{box=true|false|[lrtb]*}] 是否画框 (默认值 \texttt{true})
+  \item[\texttt{boxcolor=<颜色>}] 框颜色 (默认值 \texttt{black})
+  \item[\texttt{oval=true|false|[abcd]*}] 是否用圆角 (默认值 \texttt{false})
+  \item[\texttt{number=true|false}] 是否要行号 (默认值 \texttt{true})
+  \item[\texttt{firstnumber=auto|last|<整数>}] 首行行号 (\verb|last|
+	表示继续上一次的行号，默认值 \texttt{auto})
+  \item[\texttt{nbrsep=<长度>}] 行号到盒子的距离 (默认值 \texttt{.5em})
+  \item[\texttt{nbrcolor=<颜色>}] 行号颜色 (默认值 \texttt{black})
+  \item[\texttt{tab=<整数>}] 制表符宽度 (默认值 \texttt{8})
+  \item[\texttt{escape=<整数>}] 逃逸字符(ASCII码，默认值 \texttt{256}，
+	表示无逃逸字符)
+  \item[\texttt{first=<整数>}] 起始行 (默认值 \texttt{1})
+  \item[\texttt{last=<整数>}] 终止行 (默认值 $2^{31}-1$)
+  \item[\texttt{prologue=<token list>}] 前导命令 (默认值 ``\verb|{}|'')
+  \item[\texttt{epilogue=<token list>}] 后继命令 (默认值 ``\verb|{}|'')
+  \item[\texttt{pagebreak=true|false}] 是否允许换页 (默认值 \verb|true|)
+  \item[\texttt{quoteshack=true|false}] 是否将 ``\verb|'|'' 和
+	{\renewcommand\everbprehook
+	  {\everbsetup{box=false,bg=false,oval=false,quoteshack=true}%
+	  \fboxsep=0pt }
+	``\verb|`|'' 换成 ``\everb|'|'' 和 ``\everb|`|'' (默认值 \verb|false|)}
+  \item[\texttt{toptitle=<token list>}] 指定盒子顶部标题
+  \item[\texttt{bottomtitle=<token list>}] 指定盒子底部标题
+  \item[\texttt{title=<token list>}] 同时指定盒子顶部和底部标题
+  \item[\texttt{titlesep=<长度>}] 设定标题两侧的空白大小(默认值\verb|.5em|)
+  \item[\texttt{titleskip=<长度>}]	标题左右两侧保留的最小横线长度
+	(默认值\verb|.5em|)
+  \item[\texttt{vscale=<浮点数>}] 字符纵向缩放比例 (\verb|\scalebox{}{vscale}{...}|，默认值为空)
+\end{description}
+
+这些命令和环境与 \LaTeXe\ 的 \verb|\fbox| 命令一样，通过 \verb|\fboxrule| 和
+\verb|\fboxsep| 来指定框的线宽以及排版内容到边框的距离。\verb|everb| 宏包
+定义了一个新的长度变量 \verb|\fboxradius| 用来指定圆角半径 (当它的值小于或
+等于 \verb|100sp| 时，\verb|everb| 将其当做百分比处理，例如，
+\verb|\fboxradius=25sp| 表示圆角半径取为盒子宽度和高度中较小者的 25\%)。
+\verb|everb| 宏包利用一个特殊字库 ``\verb|corners|'' 来排出任意大小和宽度
+的圆角框，该字库随 CCT (${}\ge \texttt{0.618}$ 版) 发行。
+
+逃逸字符用来在抄录环境中插入\TeX\ 命令。界定在两个逃逸字符之间的内容会被
+当成普通 \TeX\ 命令处理。一个比较常用的作法是利用逃逸字符在抄录环境中
+插入数学公式，或是插入 \verb|\label| 命令用于引用抄录环境中的行号。
+
+注意\verb|prologue|和\verb|epilogue|参数对\verb|\everb|命令不起作用。
+用户可以通过宏\verb|\everbprehook|和\verb|\everbposthook| 来将特定的内容插入
+\verb|\everb|命令，其中
+\verb|\everbprehook|被插在\verb|\everb|的排版内容之前，
+\verb|\everbposthook|被插在\verb|\everb|的排版内容之后。
+由于插入的内容被包含在一个组内，因此其作用域局仅限于 \verb|\everb| 命令内部。
+做为应用的例子，这里给出用 \verb|\everb| 取代 \LaTeX\ 标准命令 \verb|\verb|
+的两个方法：第一个方法利用\verb|\everbprehook|
+\begin{verbatim}
+    \renewcommand\everbprehook{\everbsetup{box=false,bg=false,oval=false}%
+      \fboxsep=0pt \fboxrule=0pt }
+    \let\verb\everb
+\end{verbatim}
+第二个方法利用\verb|\everbposthook|
+\begin{verbatim}
+    \renewcommand\verb{\bgroup
+      \everbsetup{box=false,bg=false,oval=false}\fboxsep=0pt \fboxrule=0pt %
+      \renewcommand\everbposthook{\egroup}\everb}
+\end{verbatim}
+上述第二个方法的好处是允许\verb|\verb|和\verb|\everb|采用不同的格式排版。
+
+参数\verb|title|、\verb|toptitle|和\verb|bottomtitle|用于定义盒子的标题，
+参数值是标题的内容。参数值前面可以用两个括在方括号中的字母来控制
+标题的位置，第一个字母给出水平方向的位置，可以是``\verb|r|'' (靠右)、
+``\verb|c|'' (居中)和``\verb|l|'' (靠左)，第二个字母给出垂直方向的位置
+(与框线对齐的部位)，可以是``\verb|t|'' (顶部)、``\verb|c|'' (中部)
+和``\verb|b|'' (底部)，当省略位置参数时默认取``\verb|[cc]|''。
+
+此外，参数\verb|box|的取值除了可以是``\verb|true|''和``\verb|false|''外，还可以
+是一个由字符``\verb|l|'' (left，左)，``\verb|r|'' (right，右)，
+``\verb|t|'' (top，上) 和 ``\verb|b|'' (bottom，下) 构成的字符串，用于
+控制具体画出盒子的哪条边。类似地，参数\verb|oval|的值可以是一个由字符
+``\verb|a|'' (左上角)，``\verb|b|'' (右上角)，``\verb|c|'' (左下角)
+和 ``\verb|d|'' (右下角) 构成的字符串，用于控制盒子的哪个角画成圆角。
+注意，``\verb|box=false,|''和``\verb|box=,|'' (空字符串) 的含义是
+不同的，前者取消盒子四周、包括角上圆角部分的线条，相当于将 \verb|fboxrule|
+设为\verb|0pt|，而后者仅取消盒子四周的直线。
+
+例如命令
+{
+\par\nobreak \everbsetup{pagebreak=false}
+\begin{verbatim}
+    \fboxrule=1pt \fboxsep=5pt \fboxradius=5pt
+    \everbsetup{ oval=true, bg=true, box=tb, toptitle={[cc]{\textit{标题}}},
+	titlesep=0.25em, titleskip=1em }
+    \colorovalbox{black}{white}{一个带标题的盒子}
+\end{verbatim}
+}
+产生的输出是：
+{
+    \fboxrule=1pt \fboxsep=7pt \fboxradius=5pt
+    \everbsetup{ oval=true, bg=true, box=tb, toptitle={[cc]{\textit{标题}}},
+	titlesep=0.25em, titleskip=1em }
+    \colorovalbox{black}{white}{一个带标题的盒子}
+}
+
+\verb|everb| 宏包中调入了 \verb|graphicx|、\verb|color| 和 \verb|keyval| 宏包，
+它将所有的选项传递给 \verb|graphicx| 宏包，同时会将 \verb|graphicx| 宏包使用
+的driver 传递给 \verb|color| 宏包。
+
+\subsubsection{\texttt{CCTfntef}}\index{\verb+CCTfntef+ 宏包}
+
+这是由南开大学孙文昌老师设计的一个宏包，用来给汉字加上各种特效
+(分散对齐、加点、加下划线、加波浪线等)，其使用可参看它的示例文件
+\verb|CCTfntef-sample.tex|。
+
+\subsubsection{\texttt{ccmap}}\index{\verb+ccmap+ 宏包}
+
+这是由南开大学孙文昌老师在\texttt{cmap}基础上修改的一个宏包，
+调用它后通过 PDF\LaTeX\ 编译可以生成支持查找/复制/粘贴的PDF文件。
+
+
+\clearpage
+\renewcommand{\sectionformat}{\centering}
+\printindex
+
+\end{document}
+
+
+\subsubsection{\texttt{CCTfntef}}\index{\verb+CCTfntef+ 宏包}
+
+这是由南开大学孙文昌老师设计的一个宏包，用来给汉字加上各种特效
+(分散对齐、加点、加下划线、加波浪线等)，其使用可参看它的示例文件
+\verb|CCTfntef-sample.tex|。
+
+\subsubsection{\texttt{ccmap}}\index{\verb+ccmap+ 宏包}
+
+这是由南开大学孙文昌老师在\texttt{cmap}基础上修改的一个宏包，
+调用它后通过 PDF\LaTeX\ 编译可以生成支持查找/复制/粘贴的PDF文件。
+
+
+\clearpage
+\renewcommand{\sectionformat}{\centering}
+\printindex
+
+\end{document}

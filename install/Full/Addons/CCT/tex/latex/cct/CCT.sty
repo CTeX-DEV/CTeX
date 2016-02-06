@@ -1,0 +1,1246 @@
+%& -no-cctspace
+%
+% $Id: CCT.sty,v 1.44 2009/11/20 07:34:04 zlb Exp $
+
+\def\fileversion{0.61803}
+\def\filedate{2009/11/20}
+\message{\fileversion \space [\filedate]}
+%
+% Changelog since 2004/03/21 v0.6.0-5
+%
+%    20091120
+%     . improve the test on PDF or DVI output
+%
+%    20080831
+%     .	the special hack for cctconv.c has been broken since changing
+%	\endlinechar to -1, fix it by adding ' %' before EOL
+%
+%     . similar fixes at a few other places
+%
+%    20060818
+%     .	add missing \space in a warning message
+%
+%    20060203
+%     . add \frenchspacing
+%
+%    20050923
+%     . change vesion number to 0.6180
+%
+%    20050901 (0.618-1):
+%     . new macro \CCT@get@fontname for getting CJK fontnames from .fd files.
+%
+%    20050828 (0.618-1):
+%     . show input line number in warnings and errmessages
+%     . redefine \allowbreak
+%
+%    20050716 (0.618-0):
+%     . improve PDFTeX detection.
+%
+%    20050705 (0.618-0):
+%     . fix inconsistency between \CCTCJKfonts and \if@CCT@CJK for PDFTeX
+%
+%    20041209 (0.618-0):
+%     . change scope of \@CCT@CJKfont back to local since it sometimes
+%	produces incorrect characters (it seems the problem causing this
+%	change (20041022) has gone) - suggested by SUN Wenchang
+%
+%    20041205 (0.618-0):
+%     . introduce \CCTGBKencoding: 0=>GB (untested), 1=>GBK (default)
+%     . new Package/Class options [enc=GB] and [enc=GBK] (default)
+%     . experimental on the fly creation of GBK fonts (UNIX only, requires
+%	the 'gbkfont-inst' script from CJK-GBKfonts-0.3-7)
+%		FIXME: have to restart the program after creation of a font
+%			- don't know how to refresh the filenames database
+%			  of the running program :(
+%     . move \let\CCT@hooka etc. after the \catcode`\@ line
+%     . check the existence of a GBK font in \!ziti, instead of in \CCTdefziti
+%     . make the scope of \CCTdefziti global (necessary to avoid
+%	repeatedly testing the existence of a same font)
+%     . set \endlinechar to -1
+%
+%    20041203 (0.61-2):
+%      modifications for ccmap (searable PDF), by SUN Wenchang,
+%       - add a macro \CCT@cmap@hook for ccmap.sty
+%       - \@CCT@CJKselfont: define \CCT@fontno
+%       - \@CCTSetChar: add \CCT@cmap@hook
+%
+%    20041103 (0.61-1):
+%     . further modifications for CCTfntef (ulem).
+%       - add a macro \CCT@hooka(=\relax) in \CCT@selfont (used by CCTfntef.sty)
+%
+%    20041022 (0.61-1):
+%     . modifications for CCTfntef (ulem).
+%	- \@CCT@CJKselfont: define \@CCT@CJKfont globally
+%	- \@CCTpostpunct: change \hskip to \@CCThskip
+%	- \@CCTpre:  replace \hskip \@CCTskip with \@CCTdoskip and
+%	  	     \@CCTdonobreakskip
+%
+%    20040922 (0.61-0):
+%     .	\CCTMapChar: if \protect != \@typeset@protect then output
+%	the two bytes verbatim. 
+%	pros: no \CCTSetChar in .aux, .toc, .idx, etc., files.
+%	cons: about 0.5%-1.5% slower.
+%
+%     .	conversion '|' --> '7' (workaround for a hyperref bug with
+%	makeindex, see explaination and example in cctmkind.tex)
+%
+
+\ifx\zihao\undefined
+  \input cchead.sty
+\fi
+
+%---------------------------------------------------------------------------
+% Package: CCT.sty
+%
+% This package is intended to replace CCT's preprocessor `cct.exe'.
+% By including this package, a .ctx file can be directly TeXed.
+% It allows LaTeX commands like \verb, \begin{verbatim} ... \end{verbatim},
+% etc., to work with Chinese characters.
+%
+% The package also provides an option to generate dvi files (or pdf files
+% with pdftex/pdflatex) using CJK's GBK fonts (the mapping of CCT's \ziti
+% and \zihao to GBK fonts are controlled through the configuration file
+% `CCT.cfg').
+%
+% As of version 2003/01/10,  `cctbase.sty' automatically loads `CCT.sty'.
+% Thus .ctx files using `cctart' or `cctbook' documentclasses can be
+% directly processed by LaTeX. In order to use CJK fonts, define
+% \CCTCJKfonts to 1 before the \documentclass command (see notes below),
+% for example:
+%
+%	\let\CCTCJKfonts=1
+%	\documentclass{cctart}
+%	... ...
+%
+% or use the option 'CJK':
+%
+%	\documentclass[CJK]{cctart}
+%	... ...
+%
+%---------------------------------------------------------------------------
+% Author: Zhang Linbo.
+%
+% Please send bug reports, patches, suggestions, etc., to zlb@lsec.cc.ac.cn
+%---------------------------------------------------------------------------
+%
+% Usage:
+%
+%    1) Plain TeX, LaTeX 2.09:
+%		\input CCT.sty
+%	or
+%		\let\CCTCJKfonts=1	% to use CJK's GBK fonts
+%		\input CCT.sty
+%
+%    2) LaTeX2e:
+%		\usepackage[options]{CCT}
+%
+%	Options: CJK
+%
+% Warning: CCT's preprocessor should not be run on .ctx files when using
+% CJK fonts (an error message will be generated in this case).
+%
+% Notes on the differences between `cct.exe' and `CCT.sty':
+%
+%    1) The output results are not identical because it is difficult,
+%	if not impossible, to implement what cct.exe exactly does with
+%	the TeX language.
+%
+%    2)	cct.exe adds rigid glues to punctuation chars (\CCAS and \CCBS),
+%	while CCT.sty adds glues like \hskip -0.2em minus 0.3em,
+%	leading to different output results.
+%
+%    3)	cct.exe transforms some ASCII punctuation chars following a
+%	Chinese char to corresponding Chinese punctuation chars (全角).
+%	This transformation is not implemented in CCT.sty.
+%
+%    4) cct.exe always inserts a space between a Chinese char and an ASCII
+%	char, and removes (unprotected) spaces between two Chinese
+%	chars. CCT.sty provides the following commands to control swallowing
+%	of spaces:
+%
+%	\CCTspace	- preserves spaces in the source file (same as
+%			  CJK's \CJKspace command)
+%
+%	\CCTnospace	- removes unprotected spaces following a Chinese
+%			  char (same as CJK's \CJKnospace command, default)
+%
+%	\CCTforcespace	- first removes spaces before or after Chinese chars
+%			  in the source file, then inserts one space
+%			  between a Chinese char and an ASCII char
+%
+%			  FIXME: This feature is currently unusable because
+%			  unprotected glues before a Chinese character are
+%			  removed (e.g., it breaks \centering). Moreover,
+%			  undesirable spaces get prepended/appended to
+%			  ASCII punctuation chars.
+%
+%    5) Processing speed: using cct.exe is about 6 times faster than using
+%	CCT.sty when TeXing the document.
+%
+\edef\CCTCatcodeOfAt{\the\catcode`\@}% save catcode of @
+\edef\CCTCatcodeOfEx{\the\catcode`\!}% save catcode of !
+\edef\CCTEndlinechar{\the\endlinechar}% save endlinechar
+\catcode`\@=11
+\catcode`\!=11
+\endlinechar=-1
+
+\iffalse
+  \def\CCT@debug#1{\PackageInfo{CCT}{#1}}
+\else
+  \def\CCT@debug#1{}
+\fi
+
+\let\CCT@hooka\relax
+\let\CCT@cmap@hook\relax
+
+\ifx\RequirePackage\undefined
+  % Plain TeX or LaTeX 2.09
+\else \ifx\@nodocument\relax \else
+  % LaTeX2e
+  \NeedsTeXFormat{LaTeX2e}[1994/12/01]
+  \ProvidesPackage{CCT}[\filedate\space\fileversion]
+\fi\fi
+
+\newif\if@CCT@CJK
+\newif\if@CCT@GBK
+\newif\if@CCTispunct \@CCTispunctfalse		% if current char is punct.
+\newif\if@CCTlastispunct \@CCTlastispunctfalse	% if lastchar is punct.
+
+%
+% User accessible flags
+\newif\ifCCTpunct \CCTpuncttrue
+\newif\ifCCTbreak \CCTbreaktrue
+
+% Redefine \allowbreak to remove extra space after a punct char at right margin
+\def\allowbreak{%
+  \ifnum\lastkern=\@ne
+    % previous character is a Chinese character
+    \unkern \unkern
+    \edef\@tempa{\the\lastskip}%
+    \unskip \unpenalty \hskip\@tempa \kern \m@ne sp \kern \@ne sp %
+  \else
+    % previous character is not a Chinese character
+    \penalty \z@
+  \fi}
+
+%
+% Put `\let\CCTCJKfonts=1' or `\define\CCTCJKfonts{1}' before
+% `\input CCT.sty', or add the 'CJK' option to \documentclass or
+% the cctbase package to use CJK fonts.
+%
+\if1\csname CCTCJKfonts\endcsname
+  \@CCT@CJKtrue
+\else
+  \@CCT@CJKfalse
+  \let\CCTCJKfonts=0
+\fi
+
+%
+% Put `\let\CCTGBKencoding=0' or `\define\CCTGBKencoding{0}' before
+% `\input CCT.sty', or add the 'CJK' option to \documentclass or
+% the cctbase package to use CJK fonts.
+%
+\if0\csname CCTGBKencoding\endcsname
+  \@CCT@GBKfalse
+\else
+  \@CCT@GBKtrue
+  \let\CCTGBKencoding=1
+\fi
+
+
+\ifx\RequirePackage\undefined \else \ifx\@nodocument\relax \else
+  \DeclareOption{CJK}{\@CCT@CJKtrue\let\CCTCJKfonts=1}
+  \DeclareOption{enc=GB}{\@CCT@GBKfalse\let\CCTGBKencoding=0}
+  \DeclareOption{enc=GBK}{\@CCT@GBKtrue\let\CCTGBKencoding=1}
+  \ProcessOptions
+\fi\fi
+
+% Force CJK fonts when output is PDF
+\ifx\pdfoutput\undefined
+  % not running PDFTeX
+\else
+  \ifx\pdfoutput\relax
+    % not running PDFTeX
+  \else
+    % running PDFTeX with:
+    \ifnum\pdfoutput>0 %
+      % PDF output
+      \@CCT@CJKtrue
+      \let\CCTCJKfonts=1
+    \else
+      % DVI output
+    \fi
+  \fi
+\fi
+
+%
+% define ^^Z to be \endinput, some old MSDOS editors use it as EOF mark
+\catcode`\^^Z=\active \let^^Z=\endinput
+
+%
+% Note: we should use \@CCTnewxxxx in place of \newxxxx to allocates registers
+% globally in order to avoid using up too many registers if CCT.sty is called
+% multiple times.
+
+\ifx\@typeset@protect\undefined \let\@typeset@protect=\relax \fi
+\ifx\protect\undefined \let\protect=\relax \fi
+\ifx\@ne\undefined \chardef\@ne=1 \fi
+\ifx\@M\undefined \mathchardef\@M=10000 \fi
+\ifx\zero@glue\undefined {\skip0=0pt \xdef\zero@glue{\the\skip0}}\fi
+\ifx\@empty\undefined \def\@empty{}\fi
+
+%
+% FIXME: PLAIN TeX doesn't allow \newxxx in macro definitions.
+% The definitions below were taken from latex.ltx (drawbacks?)
+%
+\def\newcount{\alloc@0\count\countdef\insc@unt}
+%\def\newdimen{\alloc@1\dimen\dimendef\insc@unt}
+\def\newskip{\alloc@2\skip\skipdef\insc@unt}
+\def\newtoks{\alloc@5\toks\toksdef\@cclvi}
+
+\def\@CCTnewcount#1{\ifx\undefined#1\global\newcount#1\fi}
+%\def\@CCTnewdimen#1{\ifx\undefined#1\global\newdimen#1\fi}
+\def\@CCTnewskip#1{\ifx\undefined#1\global\newskip#1\fi}
+\def\@CCTnewtoks#1{\ifx\undefined#1\global\newtoks#1\fi}
+
+\@CCTnewcount\@CCTcnta 
+\@CCTnewcount\@CCTcntb
+\@CCTnewcount\@CCTlastkern
+\@CCTnewskip\@CCTglue
+
+% flag used by \@CCTpre and \@CCTpostpunct##
+\newif\if@CCTpostglue
+\@CCTpostgluefalse
+
+%
+% Load font config file #1 into the control sequence \@CCT#1.
+% If it does not exist then load file #2 instead and issue a warning message.
+\let\@CCTcurrtable=\relax
+\@CCTnewtoks\@CCTtoks
+
+\def\@CCTLoadFontTable#1#2{% \@CCTcnta and \@CCTcntb should be preserved
+  \openin0 #1 %
+  \ifeof0 %
+    \message{Warning: can't load `#1', will use `#2' instead}%
+    \closein0 %
+    \openin0 #2 %
+    \edef\@CCTtempa{#2}%
+  \else
+    \edef\@CCTtempa{#1}%
+  \fi
+  \expandafter\ifx\csname @CCTcache\@CCTtempa\endcsname\relax
+   % Load the table (filename in \@CCTtempa) into \@CCTcache<filename>
+   \bgroup
+    %
+    % The characters may have incorrect catcode if this macro is called
+    % within, say, verbatim mode.
+    \catcode`\\=0 \catcode`\%= 14 \catcode`\^^Z=10 %
+    \catcode`\^^I=10 \catcode`\ =10 \catcode`\^^M=5 \catcode`\@=11 %
+    \catcode`.=12 \catcode`,=12 \catcode`-=12 \catcode`+=12 %
+    \catcode`0=12 \catcode`1=12 \catcode`2=12 \catcode`3=12 %
+    \catcode`4=12 \catcode`5=12 \catcode`6=12 \catcode`7=12 %
+    \catcode`8=12 \catcode`9=12 %
+    \catcode`G=11 \catcode`B=11 \catcode`K=11 \catcode`p=11 %
+    \catcode`u=11 \catcode`n=11 \catcode`c=11 \catcode`t=11 %
+    \endlinechar=`\ %
+    \@CCTtoks={}%
+    \message{Loading punctuation table \@CCTtempa}%
+    \@CCTcnta=1
+    \loop
+      \ifeof0 %
+        \@CCTcnta=0 %
+      \else
+        \read0 to\@CCTtempb
+        \@CCTtoks=\expandafter\expandafter\expandafter{\expandafter
+          \the\expandafter\@CCTtoks\@CCTtempb}%
+      \fi
+    \ifnum\@CCTcnta=1\repeat
+    \expandafter\def\expandafter\@CCTtempb\expandafter{\the\@CCTtoks}%
+    % Only one copy of the table globally
+    \global\expandafter\let\csname @CCTcache\@CCTtempa\endcsname\@CCTtempb
+   \egroup
+  \fi
+  \closein0 %
+  % \@CCTfontprefix.tbl := \@CCTcache<filename>
+  \global\expandafter\expandafter\expandafter\let\expandafter\expandafter
+    \csname @CCT#1\endcsname\csname @CCTcache\@CCTtempa\endcsname
+}
+
+%
+% The '{', '}', '\\', '^', '_', '~' hack (see cctconv.c)
+\def\@CCTspecialhack#1{%
+  \ifnum \@CCTcntb<"40 %
+    \advance \@CCTcntb by -"30 %
+    \ifcase \@CCTcntb
+      \@CCTcntb="5C \or		% case 0: '\'
+      \@CCTcntb="7B \or		% case 1: '{'
+      \@CCTcntb="7D \or		% case 2: '}'
+      \@CCTcntb="5E \or		% case 3: '^'
+      \@CCTcntb="5F \or		% case 4: '_' (for hyperref PDF bookmarks)
+      \@CCTcntb="7E \or		% case 5: '~' (for hyperref PDF bookmarks)
+      \@CCTcntb="80 \or		% case 6: '^^80' (for hyperref PDF bookmarks)
+      \@CCTcntb="7C \else	% case 7: '|' (for hyperref/makeindex)
+      \errmessage{CCT Error: line \the\inputlineno, invalid char \string #1}%
+    \fi
+  \else \ifnum \@CCTcntb="7F %
+    \errmessage{CCT Error: line \the\inputlineno, invalid char \string #1}%
+  \fi \fi}
+
+% \remove@to@nnil removes any thing following it until \@nnil
+\ifx\remove@to@nnil\undefined
+  \def\remove@to@nnil#1\@nnil{}
+\fi
+
+\if@CCT@CJK
+  % Prevent user from running the preprocessor in CJK mode
+  \def\CC{\errmessage{CCT Warning: you shouldn't run CCT's preprocessor\space
+    when using CJK fonts}}
+  \let\pushziti\relax
+  \let\popziti\relax
+
+  \def\!SetZiJu{%
+    \ccwd=\@CCTfontsize\p@
+    \ccwd=\!CurrentZiJu\ccwd
+    \ifdim\ccwd=\z@
+      \@CCTglue=\ccwd plus 0.03em  minus 0.02em\relax
+    \else
+      \@CCTglue=\ccwd plus 0.5 \ccwd minus 0.33333333 \ccwd
+    \fi
+    \advance \ccwd by \@CCTfontsize\p@
+  }
+
+  \def\!CurrentZiJu{0}
+
+  \def\CCTdefzihao #1 #2 {\expandafter \def\csname @CCTzihao#1\endcsname{#2}}
+
+  \def\!zihao#1{%
+    \expandafter \ifx \csname @CCTzihao#1\endcsname \relax
+      \errmessage{CCT Error: line \the\inputlineno, unknown zihao `#1',\space
+	current zihao unchanged.}
+    \else
+      \expandafter \let \expandafter
+        \@CCTfontsize \csname @CCTzihao#1\endcsname
+      \!SetZiJu
+    \fi}
+
+  \if@CCT@GBK
+    \def\@CCTCJKid{c19}
+    \def\@CCTCJKprefix{gbk}
+  \else
+    \def\@CCTCJKid{c10}
+    \def\@CCTCJKprefix{gb}
+  \fi
+
+  %
+  % TODO: Macros for on-the-fly generation of CJK fonts.
+  %
+  % Two implementations of the macro \@CCT@make@GBKfont:
+  %
+  % 1. The macro \@CCT@make@GBKfont loads the font gbk{name}00.tfm which
+  %    will trigger execution of 'mktextfm' (TODO: find out a mechanism
+  %    to execute CCT's mktextfm script instead of the one from TEXMF,
+  %    e.g., through the program ctex). The mktextfm program should write
+  %    the full pathname of an existent tfm file (e..g. `kpsewhich cmr10.tfm`)
+  %    when it's called with an argument of the form 'gbkxxxx00' to avoid
+  %    "can't load TFM file" error.
+%%%  \def\@CCT@make@GBKfont#1{
+%%%    \if@CCT@GBK\if1\csname CCTOnTheFly\endcsname
+%%%        {\font\ccdummy=\@CCTCJKprefix #100 }
+%%%    \fi\fi
+%%%  }
+  % 
+  % 2. An alternative is to use the \write18{shell cmd} mechanism
+%??  \def\@CCT@make@GBKfont#1{\if@CCT@GBK
+%??    \if1\csname CCTOnTheFly\endcsname
+%??      \def\@CCTtempb{\par}
+%??      \@CCT@ask@fn{#1}
+%??      \ifx \@CCTttfname \@empty \else
+%??       \immediate\write16{Running `gbkfont-inst \@CCTttfname \space #1'}
+%??       \immediate\write18{gbkfont-inst \@CCTttfname \space #1;
+%??				: rm -f $HOME/texmf/ls-R}
+%??       %\immediate\write16{*}%
+%??       %\immediate\write16{* New GBK font created, please rerun the program}%
+%??       %\immediate\write16{*}%
+%??       %\ifx\@@end\undefined \end \else \@@end \fi
+%??      \fi
+%??    \fi
+%??  \fi}
+%??  \def\@CCT@ask@fn#1{
+%??    \immediate\write16{Enter full pathname of the TTF font for `gbk#1'\space
+%??	(empty string to skip)}
+%??    \message{TTF font = }
+%??    \bgroup
+%??      \endlinechar=-1 \catcode`\\=12 \catcode`\~=12 %
+%??      \catcode`\$=12 \catcode`\%=12 \catcode`\#=12 %
+%??      \read-1 to \@CCTtempa
+%??      \xdef\@CCTttfname{\@CCTtempa}
+%??    \egroup
+%??    \def\CCT@next##1{}
+%??    \ifx \@CCTttfname \@empty \else
+%??      \openin0 \@CCTttfname \space %
+%??      \ifeof0 %
+%??        \immediate\write16{Cannot open font `\@CCTttfname'.}
+%??        \let\CCT@next\@CCT@ask@fn
+%??      \fi
+%??      \closein0 %
+%??    \fi
+%??    \CCT@next{#1}}
+
+  %
+  %
+
+  % Note: we use the ASCII value instead of the letter itself for ziti to
+  % facilitate case converting, and to avoid possible troubles with special
+  % characters.
+  \def\CCTdefziti #1 #2 #3 {
+    % Record the definition in the macro \CCT@set@ziti@{letter},
+    % the actual setup will be done in \!ziti by calling this macro
+    % (to avoid to check unused ziti's)
+    \@CCTcnta=\number `#1\relax
+    \ifnum\@CCTcnta>96 \ifnum\@CCTcnta<123 %
+      \advance\@CCTcnta by -32 %
+    \fi\fi
+    \expandafter \global \expandafter
+      \def\csname CCT@set@ziti@\the\@CCTcnta\endcsname{\CCT@set@ziti #1 #2 #3 }}
+
+  %
+  % Retrieve real fontname from .fd file using a hacky method.
+  % The first 'CJK' fontname defined is returned (or \relax if none found)
+  \def\CCT@get@fontname#1{%
+    \expandafter \let \expandafter \CCT@fontname \csname @CCT@#1\endcsname
+    \ifx\CCT@fontname\relax
+      \CCT@get@fontname@{#1}%
+      % Save (cache) fontname for next use
+      \global \expandafter \let \csname @CCT@#1\endcsname \CCT@fontname
+    \fi
+    \CCT@debug{fontname=`\CCT@fontname'}}
+
+  \def\CCT@get@fontname@#1{\let\CCT@next\relax \let\CCT@fontname\@empty
+    \bgroup
+    % Reset catcodes
+    \@CCTcnta33 %
+    \loop \catcode\@CCTcnta12 \advance\@CCTcnta\@ne \ifnum\@CCTcnta<65 \repeat
+    \loop \catcode\@CCTcnta11 \advance\@CCTcnta\@ne \ifnum\@CCTcnta<91 \repeat
+    \loop \catcode\@CCTcnta12 \advance\@CCTcnta\@ne \ifnum\@CCTcnta<97 \repeat
+    \loop \catcode\@CCTcnta11 \advance\@CCTcnta\@ne \ifnum\@CCTcnta<123 \repeat
+    \catcode`\\\z@ \catcode`\{\@ne \catcode`\|12 \catcode`\}\tw@ \catcode`\~12 %
+    \catcode`\#6 \catcode`\%14 \catcode`\ 9 \catcode`\^^I9 \catcode`\^^M9 %
+    %
+    \def\ProvidesFile##1{\futurelet\CCT@next\ProvidesFile@}%
+    \def\ProvidesFile@{\ifx\CCT@next[\let\CCT@next\ProvidesFile@@
+      \else \let\CCT@next\relax \fi \CCT@next}%
+    \def\ProvidesFile@@[##1]{}%
+    % FIXME: save `#3' in \CCT@fontinit? (normally `\hyphenchar \font\m@ne')
+    \def\DeclareFontFamily##1##2##3{}%
+    %
+    \def\DeclareFontShape{\bgroup
+      \catcode`\ 10 \catcode`\^^I10 \catcode`\^^M10 %
+      \expandafter\egroup\DeclareFontShape@}%
+    \def\DeclareFontShape@##1##2##3##4##5##6{\CCT@parse@fd ##5 \@nnil}%
+    \openin0 #1 %
+    \ifeof0
+      %%%% Can't open FD file, assume fontname is '(gb|gbk)xxxx'
+      %%%\expandafter
+      %%%\def\expandafter\@tempa\@CCTCJKid ##1.fd{\@CCTCJKprefix ##1}%
+      %%%\xdef\CCT@next{\def\noexpand\CCT@fontname{\@tempa #1}}%
+    \else
+      \input #1 %
+    \fi
+    \closein0
+    \egroup
+    \CCT@next}
+
+  \def\CCT@parse@fd#1{%
+    \ifx#1\@nnil
+      \def\CCT@next##1{}%
+    \else \ifx#1<%
+      \def\CCT@next<##1>{\CCT@parse@fd}%
+    \else\ifx\CCT@next\space
+      \def\CCT@next##1{\CCT@parse@fd}%
+    \else
+      \let\CCT@next\CCT@parse@fd@
+    \fi\fi\fi
+    \CCT@next #1}
+
+  \def\CCT@parse@fd@ #1 * #2 {%
+    \expandafter \ifx \csname CCT@fd@#1\endcsname \relax
+      \CCT@debug{ignored: `#1 * #2'}%
+    \else
+      \csname CCT@fd@#1\endcsname #2 %
+    \fi
+    \remove@to@nnil}
+
+  %------ Note: "XXX * YYY" in \DeclareFontShape invokes \CCT@fd@XXX{YYY}
+  \def\CCT@fd@CJK #1 {\CCT@debug{got fontname `#1'}%
+    \def\DeclareFontShape##1##2##3##4##5##6{}%
+    \gdef\CCT@next{\def\CCT@fontname{#1}}}
+  \def\CCT@fd@CJKsub #1/#2/#3 {\CCT@debug{substitute with `#1'}%
+    \def\DeclareFontShape##1##2##3##4##5##6{}%
+    \gdef\CCT@next{\CCT@get@fontname{\@CCTCJKid #1.fd}}}
+  %------ Note: more macros of the form \CCT@fd@XXX may be added above
+
+  %
+  \def\CCT@set@ziti #1 #2 #3 {%
+    \@CCTcnta=\number `#1\relax
+    % Convert lowercase letter to uppercase
+    \ifnum\@CCTcnta>96 \ifnum\@CCTcnta<123 %
+      \advance\@CCTcnta by -32 %
+    \fi\fi
+    % Get real fontname from the .fd file
+    \CCT@get@fontname{\@CCTCJKid #2.fd}%
+    \ifx\CCT@fontname\@empty
+      \def\@CCTtempa{#2}%
+      \def\@CCTtempb{#3}%
+      \ifx\@CCTtempa\@CCTtempb
+	% #2 and #3 are identical
+        \immediate\write16{Warning: font `#3' not found,\space
+		trying default font `song'}%
+        \CCT@get@fontname{\@CCTCJKid song.fd}%
+      \else
+	% #2 and #3 are different
+        \immediate\write16{Warning: font `#2' not found,\space
+		trying alternative font `#3'}%
+        \CCT@get@fontname{\@CCTCJKid #3.fd}%
+        \ifx\CCT@fontname\@empty
+          \def\@CCTtempa{#2}%
+          \def\@CCTtempb{song}%
+	  \ifx\@CCTtempa\@CCTtempb\else
+            \def\@CCTtempa{#3}%
+	    \ifx\@CCTtempa\@CCTtempb\else
+              \immediate\write16{Warning: font `#3' not found,\space
+		trying default font `song'}%
+	      \CCT@get@fontname{\@CCTCJKid song.fd}%
+	    \fi
+	  \fi
+        \fi
+      \fi
+    \fi
+    \ifx\CCT@fontname\@empty
+      %%%\immediate\write16{Emergency stop: cannot find a suitable CJK font!}%
+      %%%\ifx\@@end\undefined \end \else \@@end \fi
+      %------
+      \edef\CCT@fontname{\@CCTCJKprefix #2}%
+      % Note: setting \@CCT@\@CCTc19xxxx.fd will cause all ziti to use `song'
+      %%%\global \expandafter
+      %%%\let \csname @CCT@\@CCTCJKid #2.fd\endcsname \CCT@fontname
+      \immediate\write16{Warning: reading FD files failed,\space
+			  assume fontname is `\CCT@fontname'}%
+    \fi
+    \expandafter \global \expandafter \edef \csname @CCTziti\the\@CCTcnta 
+      \endcsname{\CCT@fontname}%
+    \message{(\string\ziti{#1}->\csname @CCTziti\the\@CCTcnta \endcsname)}}
+
+  \def\!ziti#1{%
+    \@CCTcnta=\number `#1\relax
+    \ifnum\@CCTcnta>96 \ifnum\@CCTcnta<123 %
+      \advance\@CCTcnta by -32 %
+    \fi\fi
+    \expandafter \ifx \csname CCT@set@ziti@\the\@CCTcnta\endcsname \relax \else
+      \csname CCT@set@ziti@\the\@CCTcnta\endcsname
+      \expandafter \global \expandafter 
+	\let\csname CCT@set@ziti@\the\@CCTcnta\endcsname \relax
+    \fi
+    \expandafter \ifx \csname @CCTziti\the\@CCTcnta\endcsname \relax
+      \errmessage{CCT Error: line \the\inputlineno, unknown ziti `#1',\space
+	current ziti unchanged.}
+    \else
+      \expandafter \let \expandafter \@CCTfontprefix
+        \csname @CCTziti\the\@CCTcnta \endcsname
+    \fi}
+
+  \def\@CCT@CJKselfont#1#2{%
+    % Compute fontno and glyph no
+    %
+    % GB2312 (standard): 94 chars per plane and 94 planes (0xA1-0xFE)
+    %       n = (c1 - 0xa1) * 94 + c2 - 0xa1
+    %
+    % GBK (extended): 126 planes (0x81-0xFE), 190 chars/plane
+    % (0x40-0x7E,0x80-0xFE)
+    %       n = (c1 - 0x81) * 190 + ((c2 >= 0x7F) ? (c2 - 1) : c2) - 64
+    %
+    %       Fontno  = n / 256 + 1;
+    %       Glyphno = n % 256
+    \@CCTcnta=\number `#1\@CCTcntb=\number `#2\relax
+    % Only need to check punct chars
+    \if@CCTispunct
+      \ifCCTpunct
+        % --------------------------------------------- Load punctuation table
+        \expandafter\ifx\csname @CCT\@CCTfontprefix.tbl\endcsname\relax
+	  %\ifnum\catcode`\\=0 % minimum check
+	    \@CCTLoadFontTable{\@CCTfontprefix.tbl}{gbkdef.tbl}%
+	  %\else
+	  %  \errmessage{CCT Warning: line \the\inputlineno, catcode of\space
+	  %	backslash is not 0, skipping loading the punct table}%
+	  %\fi
+        \fi
+        \expandafter\ifx\csname
+          @CCT\@CCTfontprefix.tbl\endcsname\@CCTcurrtable\else
+          % Delete current table
+          \let\GBKpunct=\@CCTunpunct
+          %%%\let\GBKkern=\@CCTunkern
+          \@CCTcurrtable	% reset previously defined macros
+          \let\GBKpunct=\@CCTpunct
+          %%%\let\GBKkern=\@CCTkern
+          \expandafter
+            \let\expandafter\@CCTcurrtable\csname
+	      @CCT\@CCTfontprefix.tbl\endcsname
+          % Load new table
+          \@CCTcurrtable	% define new macros
+        \fi
+      % ---------------------------------------------
+      \else
+	% No need to remove the punct table, because all punct macros have
+	% '\ifCCTpunct' test which is necessary for the case \@CCT@CJKfalse
+	%%\ifx\@CCTcurrtable\relax\else
+	%%  \let\GBKpunct=\@CCTunpunct
+	%%  %%%\let\GBKkern=\@CCTunkern
+	%%  \@CCTcurrtable
+        %%  \let\GBKpunct=\@CCTpunct
+        %%  %%%\let\GBKkern=\@CCTkern
+	%%  \let\@CCTcurrtable\relax
+	%%\fi
+      \fi
+    \fi
+    %
+    \@CCTspecialhack #2\relax
+    \if@CCT@GBK
+      % GBK: charno = (c1 - 129) * 190 + (c2 - 64) + (c2>=127 ? -1 : 0)
+      \advance \@CCTcnta by -129 \multiply \@CCTcnta by 190 %
+      \advance\@CCTcnta by -64 %
+      \advance\@CCTcnta by \@CCTcntb
+      \ifnum\@CCTcntb>126 \advance\@CCTcnta by \m@ne \fi
+      \@CCTcntb=\@CCTcnta
+    \else
+      % GB: charno = (c1 - 161) * 94 + (c2 - 161)
+      \advance \@CCTcnta by -161 \multiply \@CCTcnta by 94 %
+      \advance\@CCTcnta by -161 %
+      \advance\@CCTcnta by \@CCTcntb
+      \@CCTcntb=\@CCTcnta
+    \fi
+    \divide\@CCTcntb by \@cclvi
+    \advance\@CCTcntb by \@ne
+    \ifnum\@CCTcntb>9 %
+      \edef\@CCT@CJKfontname{\@CCTfontprefix \the\@CCTcntb}%
+      \edef\CCT@fontno{\the\@CCTcntb}%
+    \else
+      \edef\@CCT@CJKfontname{\@CCTfontprefix 0\the\@CCTcntb}%
+      \edef\CCT@fontno{0\the\@CCTcntb}%
+    \fi
+    \expandafter \let \expandafter \@CCT@CJKfont
+	\csname \@CCT@CJKfontname-\@CCTfontsize \endcsname
+    \ifx\@CCT@CJKfont\relax
+    \CCT@debug{*** loading \@CCT@CJKfontname \space at \@CCTfontsize \p@}%
+      \expandafter \global \expandafter \font
+	\csname \@CCT@CJKfontname-\@CCTfontsize \endcsname =
+	  \@CCT@CJKfontname \space at \@CCTfontsize \p@
+      \expandafter \let \expandafter \@CCT@CJKfont
+		\csname \@CCT@CJKfontname-\@CCTfontsize \endcsname
+      %\hyphenchar \@CCT@CJKfont \m@ne
+      \hyphenchar \@CCT@CJKfont -1 %
+    \fi
+    \multiply\@CCTcntb by \@cclvi
+    \advance\@CCTcntb by -\@cclvi
+    \advance\@CCTcnta by -\@CCTcntb
+    \chardef\@CCT@CJKchar=\@CCTcnta
+    \CCT@hooka	%%%% used by CCTfntef package
+  }
+
+  \def\!zihaoAny#1{%---- Note: #1 may or may not have an unit part
+    {\afterassignment \remove@to@nnil \dimen0=#1 pt \@nnil
+     \@CCTcnta=\dimen0 %
+     \global \divide \@CCTcnta \p@
+     \@CCTcntb=\@CCTcnta \multiply \@CCTcntb \p@ \multiply \@CCTcntb -1
+     \advance \@CCTcntb \dimen0 \multiply \@CCTcntb 100 %
+     \dimen0=0.5pt \advance \@CCTcntb \dimen0	% rounding
+     \global \divide \@CCTcntb \p@
+    }%
+    \edef\@CCTfontsize{\the\@CCTcnta.\ifnum\@CCTcntb<10 0\fi\the\@CCTcntb}%
+    \!SetZiJu
+  }
+\else % \@CCT@CJKfalse
+  \def\CCTdefzihao #1 #2 {}
+
+  \def\CCTdefziti #1 #2 #3 {}
+
+  \def\!SetZiJu{\setbox\!ccbox\hbox{\DaXiao M}\relax	% setup temp box
+    \ccwd=2\wd\!ccbox \ccht=\ht\!ccbox \ccdp=\dp\!ccbox	% get size
+    \fontdimen2\DaXiao=\!CurrentZiJu\ccwd 		% space
+    \fontdimen3\DaXiao=0.5\fontdimen2\DaXiao		% stretch
+    \fontdimen4\DaXiao=0.3333333333\fontdimen2\DaXiao	% shrink
+    \fontdimen6\DaXiao=\ccwd				% quad
+    \advance\ccwd by\fontdimen2\DaXiao			% adjust \ccwd
+    \!ccbdskip=0pt plus 0pt minus 0.5\ccwd		%
+    \@CCTglue=\fontdimen2\DaXiao plus\fontdimen3\DaXiao minus\fontdimen4\DaXiao
+  }
+  % This fixes an old bug in cchead.sty: \!ccbdskips only needs to be defined
+  % once, so it should be moved out of the macro \!SetZiJu (to be verified)
+  \def\!ccbdskips{\vrule width -0.45\ccwd height\z@ depth\z@}
+
+  \def\!zihaoAny#1{%---- Note: #1 may or may not have an unit
+    {\afterassignment \remove@to@nnil \dimen0=#1 pt \@nnil
+     \xdef\@CCTtempa{\the\dimen0}}%
+    \expandafter\let\expandafter\DaXiao\csname ccfnt\@CCTtempa\endcsname
+    \ifx \DaXiao \relax
+      \expandafter\font\csname ccfnt\@CCTtempa\endcsname=ccfnta at \@CCTtempa
+      \expandafter\let\expandafter\DaXiao\csname ccfnt\@CCTtempa\endcsname
+      \hyphenchar\DaXiao -1 %
+    \fi
+    \!SetZiJu
+  }
+
+  \!SetZiJu
+\fi
+
+\!def\zihaoAny{\!zihaoAny}
+
+\def\@CCTunkern#1#2#3#4 #5 {%
+  \expandafter\let\csname
+    @CCTkern\string #1\string #2\string #3\string #4\endcsname\relax
+}
+\def\@CCTkern#1#2#3#4 #5 {%
+  \expandafter\def\csname
+  @CCTkern\string #1\string #2\string #3\string #4\endcsname{%
+    \ifCCTpunct
+      % Note: don't need \leavevmode here becuase we are between 2 GBK chars
+      %
+      % The glue between the two chars is removed to make spacing adjustment
+      % easier (avoid interaction with glues set by \CCTpunct).
+      \ifdim #5em=\z@ \else \kern #5em \fi
+      \chardef\@CCTnobreak=\@ne \global\@CCTskip=\z@ \relax
+    \fi
+  }%
+}
+
+\def\@CCTunpunct#1#2 #3 #4 #5 #6 #7 #8 {%
+  \expandafter\let\csname @CCTpreglue\string #1\string #2\endcsname=\relax
+  \expandafter\let\csname @CCTpostglue\string #1\string #2\endcsname=\relax
+  \expandafter\let\csname @CCTprerule\string #1\string #2\endcsname=\relax
+  \expandafter\let\csname @CCTpostrule\string #1\string #2\endcsname=\relax
+}
+\def\@CCTpunct#1#2 #3 #4 #5 #6 #7 #8 {%
+  % glue and nobreak flag before a punct char
+  \@CCTprepunct#1#2#3 #5 %
+  % glue and nobreak flag after a punct char
+  \@CCTpostpunct#1#2#6 #8 %
+  % zero-height rule added before a punct char
+  \ifdim #4\p@ = \z@
+    \expandafter\let\csname @CCTprerule\string #1\string #2\endcsname=\relax
+  \else
+    \expandafter\def\csname @CCTprerule\string #1\string #2\endcsname{%
+      \ifCCTpunct
+        \vrule width #4em depth \z@ height \z@
+      \fi
+    }%
+  \fi
+  % zero-height rule added after a punct char
+  \ifdim #7\p@ = \z@
+    \expandafter\let\csname @CCTpostrule\string #1\string #2\endcsname=\relax
+  \else
+    \expandafter\def\csname @CCTpostrule\string #1\string #2\endcsname{%
+      \ifCCTpunct
+        \vrule width #7em depth \z@ height \z@
+      \fi
+    }%
+  \fi
+}
+
+\def\@CCTprepunct#1#2#3 #4,#5,#6,#7 {%
+  \ifnum #3#4=\z@
+    \expandafter\let\csname @CCTpreglue\string #1\string #2\endcsname=\relax
+  \else
+    \expandafter\def\csname @CCTpreglue\string #1\string #2\endcsname{%
+      \ifCCTpunct
+        \if #31\global\chardef\@CCTnobreak=\@ne \fi
+        \if #41%
+	  \global\advance\@CCTskip by #5em plus #6em minus #7em\relax
+	\fi
+      \fi
+    }%
+  \fi
+}
+
+\let\CCT@hskip\hskip
+\def\@CCTpostpunct#1#2#3 #4,#5,#6,#7 {%
+  \ifnum #3#4=\z@
+    \expandafter\let\csname @CCTpostglue\string #1\string #2\endcsname=\relax
+  \else
+    \expandafter\def\csname @CCTpostglue\string #1\string #2\endcsname{%
+      \ifCCTpunct
+        \if #31\global\chardef\@CCTnobreak=\@ne \fi
+        % Note: we insert the glue here otherwise it might be lost
+        % if the next char is not a Chinese char.
+        %
+        % We also insert a penalty to prevent line break, a negative penalty
+        % might be added by the next Chinese char to allow line break between
+        % them.
+        \if #41%
+	  \penalty \@M % prevent line break between Chinese-ASCII (e.g., '。,')
+	  \CCT@hskip #5em plus #6em minus #7em\global\@CCTpostgluetrue
+	\fi
+      \fi
+      }%
+  \fi
+}
+
+\let\GBKpunct=\@CCTpunct
+\let\GBKkern=\@CCTkern
+
+%=================
+\endlinechar=13 %
+\input CCT.cfg
+\input GBKkern.cfg
+\if@CCT@CJK\else
+  %\@CCTLoadFontTable{clib256e.tbl}{gbkdef.tbl}
+  %\csname @CCTclib256e.tbl\endcsname
+  \input clib256e.tbl
+\fi
+\endlinechar=-1 %
+%=================
+
+\ziti{A}
+\zihao{5}
+\parindent=2\ccwd
+
+\def\CS{\hskip \@CCTglue \relax}
+
+%
+% CJK-like commands
+%
+
+% \CCTnospace makes unprotected spaces following a Chinese char to be killed
+\def\CCTnospace{%
+  \let\@CCTprespace=\relax
+  \let\@CCTpostspace=\ignorespaces}
+
+% \CCTspace makes spaces to be preserved as they are in the source file
+\def\CCTspace{%
+  \let\@CCTprespace=\relax
+  \let\@CCTpostspace=\relax}
+
+% \CCTforcespace simulates cct.exe's behaviour (Broken, don't use!)
+\def\CCTforcespace{%
+  \def\@CCTprespace{\ifhmode \unskip \fi \ifnum\lastkern=\@ne \else \space \fi}
+  \def\@CCTpostspace{ \ignorespaces}}
+
+\let\nbs~
+\def\CCTtilde{\def~{\ }\ignorespaces}
+\def\standardtilde{\let~\nbs}
+
+% Initial settings
+\CCTnospace
+\ifx\CCTpreproc\undefined
+  \CCTtilde
+\fi
+
+%
+% Define the first byte of a Chinese character as a macro with
+% the second byte as its argument.
+% (the \protect's are needed for LaTeX's cross reference to work properly)
+%
+\def\@CCTMapChar#1{%
+  \def#1##1{\ifx \protect \@typeset@protect
+	      \protect \CCTSetChar \protect #1 \protect ##1%
+	    \else \noexpand #1\noexpand ##1\fi}%
+  %
+  % define \#1 as "\ #1" such that, e,g., the sequence "\TeX\系统" is expanded
+  % into "\TeX\ 系统" ;-)
+  \expandafter\def\csname \string #1\endcsname{\ #1}%
+}
+
+%
+% \@CCTSetChar <byte1> <byte2>				(\contentsline, etc.)
+% \@CCTSetChar \protect <byte1> \protect <byte2>	(normal text)
+%
+% Note: the second `\expandafter' is used to skip `\else ... \fi' part.
+%	(otherwise they become arguments of `\@CCTSetCharp').
+%
+%	Don't insert <newline> before `\else'!!!
+%
+\def\CCTSetChar#1#2{%
+  \ifx #1\protect
+    \expandafter\@CCTSetChar\expandafter#2\else\@CCTSetChar #1 a #2\fi}
+
+%
+% test if the given char is in the planes of punctuation chars ([A1-A5][A1-FE])
+% and set \if@CCTispunct flag
+\def\@CCTtestpunct#1#2{{%
+  \@CCTcnta=`#1\relax
+  \ifnum\@CCTcnta>"A5 %
+    \global\@CCTispunctfalse
+  \else
+    \ifnum\@CCTcnta<"A1 %
+      \global\@CCTispunctfalse
+    \else
+      \@CCTcnta=`#2\relax
+      \ifnum\@CCTcnta<"A1 %
+        \global\@CCTispunctfalse
+      \else
+        \global\@CCTispuncttrue
+      \fi
+    \fi
+  \fi
+}}
+
+%
+% Macro which actually typesets a Chinese character:
+%   #1=<byte1>, #2=\protect or a dummy 'a', #3=<byte2>
+%
+\chardef\@CCTote=128
+\def\@CCTaccent#1#2{}
+\def\@CCTSetChar#1#2#3{%
+  \ifmmode
+    \@CCTispunctfalse
+    \@CCTcnta`#1\@CCTcntb`#3\relax
+    \ifnum\@CCTcnta="A3 %
+      \ifnum\@CCTcntb>"A0 \ifnum\@CCTcntb<"FF %
+        \@CCTispuncttrue
+      \fi\fi
+    \fi
+    \if@CCTispunct
+      \advance\@CCTcntb by -128 \char\@CCTcntb
+      \edef\@CCTtemp{\the\@CCTcntb}%
+      \immediate\write16{^^JCCT Warning: line \the\inputlineno,\space
+	GBK punct \string #1\string #3 in math mode converted to\space
+	\string\char\@CCTtemp^^J}%
+    \else
+      \errmessage{CCT Warning: line \the\inputlineno,\space
+	GBK char \string #1\string #3 in math mode ignored}%
+    \fi
+  \else		% \ifmmode
+    \@CCTprespace
+    \@CCTlastkern=\lastkern
+    \@CCTtestpunct #1 #3%
+    \if@CCT@CJK \@CCT@CJKselfont #1 #3\fi
+    {\@CCTpre #1 #3%
+    % reset \sfcodes, examples showing the problem:
+    %	\hbox to 10\ccwd{研{ }究{ }内{ }容}	(for CJK fonts)
+    %	\hbox to 10\ccwd{研{ }处{ }内{ }容}	(for CCT fonts)
+    \frenchspacing
+    \@CCTaccent #1 #3{%
+    \CCT@cmap@hook
+    \if@CCTispunct
+      \csname @CCTprerule\string #1\string #3\endcsname
+    \fi
+    \if@CCT@CJK
+      % Replace char 0xa1a1 which is often used for a full-size space in CCT
+      % by a \vrule, it seems CJK fonts do not like it.
+      % TODO: create a conversion table if there're more chars to convert.
+      %
+      % Warning: '\ifx#1^^a1' does not work because the \catcode of ^^a1
+      % is `other' here (it's changed to \active later).
+      \ifnum \number`#1="A1 %
+        \ifnum \number`#3="A1 %
+          \vrule width 1em height \z@ depth \z@
+        \else
+          \@CCT@CJKchar
+        \fi
+      \else
+        \@CCT@CJKchar
+      \fi
+    \else
+      \ccdummy\!ZiTi\DaXiao
+      \@CCTcnta=\number`#1\relax
+      \advance\@CCTcnta by -\@CCTote
+      \char\@CCTcnta
+      \@CCTcntb=\number`#3\relax
+      \@CCTspecialhack #3\relax
+      \ifnum \@CCTcntb < \@CCTote
+        \advance\@CCTcntb by \@CCTote
+      \else
+        \advance\@CCTcntb by -\@CCTote
+      \fi
+      \char\@CCTcntb
+    \fi
+    \if@CCTispunct
+      \csname @CCTpostrule\string #1\string #3\endcsname
+    \fi
+    }%
+    \@CCTpost #1 #3}\@CCTpostspace
+  \fi % \ifmmode
+}
+
+%
+% We append \kern 1sp at end of a Chinese char to such that the next
+% Chinese char can detect it.
+%
+% This is a hack and it's based on the assumption that ordinary TeX macro
+% packages/fonts should not generate \kern 1sp.
+%
+% \@CCTskip and \@CCTnobreak are passed from \CCTpost of the previours
+% char.
+%
+
+\@CCTnewskip\@CCTskip \@CCTskip=\z@
+\chardef\@CCTnobreak=\z@
+
+\def\@CCTdoskip{\hskip \@CCTskip}
+\def\@CCTdonobreakskip{\hskip \@CCTskip}
+
+\def\@CCTpre#1#2{%
+  \ifnum\@CCTlastkern=\@ne
+    % previous character is a Chinese character
+    \unkern \unkern
+    \ifCCTbreak\else \global\chardef\@CCTnobreak=\@ne \fi
+  \else
+    % previous character is not a Chinese character
+    \global\chardef\@CCTnobreak=\@ne \global\@CCTskip=\z@
+    \leavevmode
+  \fi
+  % Switch to Chinese font to validate 'em' for \@CCT{pre,post}##
+  \if@CCT@CJK
+    \@CCT@CJKfont
+  \else
+    \DaXiao
+  \fi
+  \if@CCTispunct
+    \csname @CCTpreglue\string #1\string #2\endcsname	% pre punct glue
+  \fi
+  \ifnum\@CCTlastkern=\@ne	% last char is Chinese
+    \if@CCTpostglue
+      % Remove the glue  introduced by the last punct char and add it later
+      % (otherwise it won't disappear at EOL because it follows
+      % \penalty 10000).
+      % The penalty is also removed to allow line break.
+      \global \advance \@CCTskip by \lastskip
+      \unskip \unpenalty
+    \fi
+    % Kerning
+    \if@CCTispunct\if@CCTlastispunct
+      \csname @CCTkern\@CCTlastchar\string #1\string #2\endcsname
+    \fi\fi
+    % Insert Chinese interword glue if previous char is Chinese
+    \global\advance\@CCTskip by \@CCTglue
+  \fi
+  %
+  % Testing \@CCTskip==0pt plus 0pt minus 0pt is slower than
+  % adding a penalty and zero-glue!!!
+  %%\edef\@CCTtempa{\the\@CCTskip}%
+  %%\ifx\@CCTtempa\zero@glue
+  %%  \ifnum\@CCTnobreak=\@ne\global\chardef\@CCTnobreak=\z@\else\penalty\z@\fi
+  %%\else
+    \ifnum\@CCTnobreak=\@ne
+       \penalty \@M
+       \global\chardef\@CCTnobreak=\z@
+       \@CCTdonobreakskip
+    \else
+       \@CCTdoskip
+    \fi
+    \global\@CCTskip=\z@
+  %%\fi
+  \gdef\@CCTlastchar{\string #1\string #2}%
+  \if@CCTispunct
+    \global\@CCTlastispuncttrue
+  \else
+    \global\@CCTlastispunctfalse
+  \fi}
+
+\def\@CCTpost#1#2{%
+  \global\@CCTpostgluefalse
+  \if@CCTispunct
+    \csname @CCTpostglue\string #1\string #2\endcsname	% post punct glue
+  \fi
+  \kern \m@ne sp\kern \@ne sp}
+
+%
+% Make chars 127-255 active
+%
+\@CCTcnta "7F\relax
+\loop
+  \catcode\@CCTcnta \active
+  \lccode\@CCTcnta \z@
+  \uccode\@CCTcnta \z@
+  \ifnum\@CCTcnta < "0FF \advance\@CCTcnta \@ne
+\repeat
+
+%
+% Macro for transforming a byte to its character token
+% (and '\', '{', '}', '^', '_', and '~' are converted to
+% '0', '1', '2', '3', '4', and '5', respectively).
+%
+% The second argument (#2) should be "\expandafter" for the first byte
+% (command-byte), and empty for the second byte (the argument-byte).
+% (Note: the `\expandafter' is necessary to skip `\or' or `\else' part
+% before executing the command byte, otherwise `\or' or `\else' is
+% taken as the argument of the command byte.)
+%
+\def\@CCTbyte#1#2{\ifcase #1 %
+  % ----- "00-"0F
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+  % ----- "10-"1F
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+  % ----- "20-"2F
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+  % ----- "30-"3F
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+    #2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or#2^^7f\or
+  % ----- "40-"4F
+    #2^^40\or#2^^41\or#2^^42\or#2^^43\or#2^^44\or#2^^45\or#2^^46\or#2^^47\or
+    #2^^48\or#2^^49\or#2^^4a\or#2^^4b\or#2^^4c\or#2^^4d\or#2^^4e\or#2^^4f\or
+  % ----- "50-"5F
+    #2^^50\or#2^^51\or#2^^52\or#2^^53\or#2^^54\or#2^^55\or#2^^56\or#2^^57\or
+    #2^^58\or#2^^59\or#2^^5a\or#2^^5b\or#2^^30\or#2^^5d\or#2^^33\or#2^^34\or
+  % ----- "60-"6F
+    #2^^60\or#2^^61\or#2^^62\or#2^^63\or#2^^64\or#2^^65\or#2^^66\or#2^^67\or
+    #2^^68\or#2^^69\or#2^^6a\or#2^^6b\or#2^^6c\or#2^^6d\or#2^^6e\or#2^^6f\or
+  % ----- "70-"7F
+    #2^^70\or#2^^71\or#2^^72\or#2^^73\or#2^^74\or#2^^75\or#2^^76\or#2^^77\or
+    #2^^78\or#2^^79\or#2^^7a\or#2^^31\or#2^^37\or#2^^32\or#2^^35\or#2^^7f\or
+  % ----- "80-"8F
+    #2^^36\or#2^^81\or#2^^82\or#2^^83\or#2^^84\or#2^^85\or#2^^86\or#2^^87\or
+    #2^^88\or#2^^89\or#2^^8a\or#2^^8b\or#2^^8c\or#2^^8d\or#2^^8e\or#2^^8f\or
+  % ----- "90-"9F
+    #2^^90\or#2^^91\or#2^^92\or#2^^93\or#2^^94\or#2^^95\or#2^^96\or#2^^97\or
+    #2^^98\or#2^^99\or#2^^9a\or#2^^9b\or#2^^9c\or#2^^9d\or#2^^9e\or#2^^9f\or
+  % ----- "A0-"AF
+    #2^^a0\or#2^^a1\or#2^^a2\or#2^^a3\or#2^^a4\or#2^^a5\or#2^^a6\or#2^^a7\or
+    #2^^a8\or#2^^a9\or#2^^aa\or#2^^ab\or#2^^ac\or#2^^ad\or#2^^ae\or#2^^af\or
+  % ----- "B0-"BF
+    #2^^b0\or#2^^b1\or#2^^b2\or#2^^b3\or#2^^b4\or#2^^b5\or#2^^b6\or#2^^b7\or
+    #2^^b8\or#2^^b9\or#2^^ba\or#2^^bb\or#2^^bc\or#2^^bd\or#2^^be\or#2^^bf\or
+  % ----- "C0-"CF
+    #2^^c0\or#2^^c1\or#2^^c2\or#2^^c3\or#2^^c4\or#2^^c5\or#2^^c6\or#2^^c7\or
+    #2^^c8\or#2^^c9\or#2^^ca\or#2^^cb\or#2^^cc\or#2^^cd\or#2^^ce\or#2^^cf\or
+  % ----- "D0-"DF
+    #2^^d0\or#2^^d1\or#2^^d2\or#2^^d3\or#2^^d4\or#2^^d5\or#2^^d6\or#2^^d7\or
+    #2^^d8\or#2^^d9\or#2^^da\or#2^^db\or#2^^dc\or#2^^dd\or#2^^de\or#2^^df\or
+  % ----- "E0-"EF
+    #2^^e0\or#2^^e1\or#2^^e2\or#2^^e3\or#2^^e4\or#2^^e5\or#2^^e6\or#2^^e7\or
+    #2^^e8\or#2^^e9\or#2^^ea\or#2^^eb\or#2^^ec\or#2^^ed\or#2^^ee\or#2^^ef\or
+  % ----- "F0-"FF
+    #2^^f0\or#2^^f1\or#2^^f2\or#2^^f3\or#2^^f4\or#2^^f5\or#2^^f6\or#2^^f7\or
+    #2^^f8\or#2^^f9\or#2^^fa\or#2^^fb\or#2^^fc\or#2^^fd\or#2^^fe\or#2^^ff\fi}
+
+%
+% Define ^^7f (for compatibility with CJK's 'extconv' program)
+% (define useCJKform in cctconv.c to use this feature: slow!).
+\def^^7f#1^^7f#2^^7f{\expandafter\expandafter\expandafter#1\@CCTbyte{#2}{}}
+
+%
+% \CCTchar{number1}{number2}
+\ifx\DeclareRobustCommand\undefined
+ \def\CCTchar#1#2{\def\@CCTtempa{\@CCTbyte{#1}{\expandafter}}%
+   \expandafter\expandafter\expandafter\@CCTtempa\@CCTbyte{#2}{}}
+\else
+ \DeclareRobustCommand{\CCTchar}[2]{\def\@CCTtempa{\@CCTbyte{#1}{\expandafter}}%
+   \expandafter\expandafter\expandafter\@CCTtempa\@CCTbyte{#2}{}}
+\fi
+
+%
+% Macros for \char"81 - \char"FE
+\@CCTcnta "81\relax
+\loop
+  \expandafter\expandafter\expandafter\@CCTMapChar\@CCTbyte{\@CCTcnta}{}\relax
+  \ifnum\@CCTcnta < "0FE \advance\@CCTcnta \@ne
+\repeat
+
+%
+% restore catcodes of @ and !
+%
+\catcode`\@=\CCTCatcodeOfAt
+\catcode`\!=\CCTCatcodeOfEx
+\endlinechar=\CCTEndlinechar
+
+\endinput

@@ -1,0 +1,59 @@
+\def\ChineseScale{1095}
+\input tyinput
+\documentclass[11pt]{article}
+\begin{document}
+{\肆这是初号字}
+
+\bigskip
+{\巨\Huge 这是一号字 (\tt$\backslash$巨$\backslash$Huge)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\双\huge 这是二号字 (\tt$\backslash$双$\backslash$huge)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\特\LARGE 这是三号字 (\tt$\backslash$特$\backslash$LARGE)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\大\Large 这是四号字 (\tt$\backslash$大$\backslash$Large)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\中\large 这是小四号字 (\tt$\backslash$中$\backslash$large)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+\newpage
+{\标\normalsize 这是五号字 (\tt$\backslash$标$\backslash$normalsize )
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\九\small 这是小五号字 (\tt$\backslash$九$\backslash$small)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\小\footnotesize 这是六号字 (\tt$\backslash$小$\backslash$footnotesize)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\七\scriptsize 这是\,{\tt$\backslash$scriptsize} (\tt$\backslash$七$\backslash$scriptsize)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+{\五\tiny 这是七号字 (\tt$\backslash$五$\backslash$tiny)
+
+{\bf\黑 Fermat\,定理:} 对\,$n\ge3$,
+$$\left\{(x,y,z)\in\hbox{\bf Q}^3\mid x^n+y^n=z^n,xyz\ne0\right\}=\emptyset.$$}
+
+\end{document}

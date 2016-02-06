@@ -50,12 +50,12 @@ Section
 		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
 		File install\Addons\CTeX\ctex\bin\SumatraPDF.exe
 
-		SetOutPath $INSTDIR\${Addons_Dir}
-		File /r install\Addons\CCT\*.*
+;		SetOutPath $INSTDIR\${Addons_Dir}
+;		File /r install\Addons\CCT\*.*
 
-		SetOutPath "$INSTDIR\${Addons_Dir}"
-		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
-		${Install_Files} "install\Addons\Packages\*.*" "install_packages.log"
+;		SetOutPath "$INSTDIR\${Addons_Dir}"
+;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
+;		${Install_Files} "install\Addons\Packages\*.*" "install_packages.log"
 	${EndIf}
 	
 ;	${If} $GSview != ""

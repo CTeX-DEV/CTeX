@@ -1,0 +1,195 @@
+% $Id: addr2tex.sty,v 1.6 2006/10/03 15:24:48 zlb Exp $
+
+\RequirePackage{ifpdf}
+
+%%%\typeout{Type '1' to create the dvi file for dvipdfmx.}
+%%%\typeout{Type return to create the dvi file for xdvi or yap.}
+%%%\read16 to \dvipdfmx
+%%%%
+%%%\long\def\check@dvipdfmx#1{
+%%%  \ifx #11\let\dvipdfmx1\else \let\dvipdfmx0\fi \remove@to@nnil}
+%%%\expandafter\check@dvipdfmx\dvipdfmx\relax\@nnil
+
+\ifx \dvipdfmx \undefined \let \dvipdfmx 0\fi
+\ifx \nocolor \undefined \let \nocolor 0\fi
+%%\DeclareOption{monochrome}{\let\nocolor 1}
+%%\ProcessOptions
+
+%
+\ifpdf
+ \usepackage{ccmap}
+ \if\nocolor0\RequirePackage[pdftex]{color}\fi
+ \RequirePackage[pdftex]{hyperref}
+\else
+ \if\dvipdfmx1
+  %--- For dvipdfmx
+  \RequirePackage[dvipdfm]{hyperref}
+  \if\nocolor0\RequirePackage[dvips]{color}\fi
+ \else
+  %--- For yap/xdvi
+  \RequirePackage[hypertex]{hyperref}
+  \if\nocolor0\RequirePackage[dvips]{color}\fi
+ \fi
+\fi
+
+\if\nocolor0%
+ \hypersetup{CJKbookmarks,colorlinks=true,linkcolor=blue}
+\else
+ \hypersetup{CJKbookmarks,colorlinks=false}
+ \RequirePackage[monochrome]{color}
+\fi
+
+\RequirePackage{multicol}
+\columnsep=3\ccwd
+\columnseprule=0.8pt
+\topmargin=0.0cm
+\oddsidemargin=-0.75cm
+\textwidth=17cm
+\textheight=24cm
+\parindent=0pt
+
+\endlinechar=-1
+
+% set the catcode of all ASCII characters >=32 (except bgroup/egroup) to other
+\def\make@ascii@other{%
+  \@CCTcnta=32 %
+  \loop 
+    \ifnum\catcode\@CCTcnta=1		%\@CCTcnta=123
+      %\catcode\@CCTcnta=1 
+    \else\ifnum\catcode\@CCTcnta=2	%\@CCTcnta=125
+      %\catcode\@CCTcnta=2
+    \else
+      \catcode\@CCTcnta=12
+    \fi\fi
+  \ifnum\@CCTcnta<127 \advance \@CCTcnta \@ne \repeat}
+
+% set the catcode of all chars above 128 to other
+\def\make@hz@other{\@tempcnta=129 %
+  \loop
+    \catcode\@tempcnta=12 \ifnum\@tempcnta<255 \advance\@tempcnta \@ne
+  \repeat}
+
+\def\email{\bgroup\make@ascii@other \make@hz@other \email@}
+\def\email@#1{\egroup\href{mailto:#1}{{\ttfamily\itshape\atmost{32}{#1}}}}
+
+\def\url{\bgroup\make@ascii@other \make@hz@other \url@}
+\def\url@#1{\egroup\href{#1}{{\ttfamily\itshape\atmost{32}{#1}}}}
+
+% typeset at most #1 characters of string #2
+\def\atmost#1#2{\@tempcnta=#1 \atmost@ #2\@nnil}
+\def\atmost@#1{%
+  \ifx #1\@nnil
+    \let \@next \relax
+  \else
+    \ifnum\@tempcnta>\z@
+      #1\advance\@tempcnta by\m@ne
+      \let \@next \atmost@
+    \else
+      ...\let \@next \remove@to@nnil
+    \fi
+  \fi
+  \@next}
+
+\renewcommand{\baselinestretch}{1.0}
+
+\AtBeginDocument{
+  \begin{multicols}{2}
+  \raggedright
+  \leftskip=3\ccwd
+  \catcode`\%=12 \catcode`\_=12 \catcode`\#=12 \catcode`\$=12
+  \catcode`\&=12 \catcode`\^=12
+}
+\AtEndDocument{\end{multicols}}
+
+\def\lettercolor{\color{black}}
+\def\namecolor#1{\if #11\color{red}\else\color{magenta}\fi}
+\def\textcolor{\color{blue}}
+
+\let\colorno 0
+\def\colorswap{\if\colorno1\let \colorno=0\else \let \colorno=1\fi}
+
+%------ original
+%%%\newcommand\entry[2]{{\unskip\hskip-\ccwd\bf\namecolor{\colorno} #1\ %
+%%%    \it\textcolor #2\par}}
+%%%\newcommand\startletter[1]{\bigskip\smallskip\leavevmode\vbox to0pt{\lettercolor
+%%%    \fboxrule=0.6pt
+%%%    \vskip10pt\vbox to0pt{\vss\hbox to 0pt{\hss
+%%%    \framebox[1.5\ccwd]{\hss\Huge\bf\tt #1\hss}\hskip2\ccwd}}%
+%%%    \vss}\relax\global\let\colorno=1}
+
+%------ new 
+\let\thesection\relax
+\newcommand\startletter[1]{\bigskip\leavevmode
+    \vbox to0pt{\vskip -0.75em
+      \hbox to 0pt{\hss 
+        {\lettercolor \fboxrule=0.6pt\fbox{\Huge\bf\tt #1}}
+      \hskip1.5\ccwd}
+    \vss}
+    \global\let\colorno=1\ignorespaces}
+\newcommand\startsection[1]{\bigskip
+    \hbox{\hspace*{-0\ccwd}{\lettercolor\large\bf #1}}
+    \global\let\colorno=1\smallskip}
+
+
+\newcommand\entry[2]{\hspace*{-\ccwd}{\bf\namecolor{\colorno} #1}
+  {\kaishu \textcolor \parseentry #2;;\@nnil}\par \smallskip}
+
+\def\parseentry#1;{\def\@tempa{#1}\relax
+  \ifx\@tempa\@empty
+    \let\@next\remove@to@nnil
+  \else
+    \doentry #1::\@nnil \par
+    \let\@next\parseentry
+  \fi
+  \@next}
+
+\def\doentry#1:#2:{\def\@tempa{#2}
+  \ifx\@tempa\@empty
+    % 没有 ':' 的情况 (注意前面留一个空格)
+    { \ignorespaces #1}
+  \else
+    % 有 ':' 的情况
+    \hangindent=\ccwd \hangafter=1 %
+    {\par\nopagebreak\bfseries\ignorespaces #1: }\ignorespaces #2
+  \fi
+  \remove@to@nnil}
+
+%---------------- For PDF bookmarks
+\let\ostartletter\startletter
+\let\ostartsection\startsection
+\renewcommand\sectionformat{}
+\renewcommand\sectionname{\hskip -1em}
+\renewcommand\startletter[1]{
+  % Note: using \vspace* before the first section generates extra spacing
+  \ifnum \c@section > 0 \vspace*{-\medskipamount}\fi \section[#1]
+  {\ostartletter{#1}}\vspace*{-3.5em}}
+\renewcommand\startsection[1]{
+  \ifnum \c@section > 0 \vspace*{-\medskipamount}\fi \section[#1]
+  {\hspace*{-3\ccwd}\ostartsection{#1}}\vspace*{-2em}}
+
+% Load .toc file into a toks register
+\newtoks\toc@save \toc@save{}
+\openin0 \jobname.toc
+\loop \ifeof0 \else
+  \read0 to\@tempa
+  \toc@save=\expandafter\expandafter\expandafter{\expandafter
+            \the\expandafter\toc@save\@tempa}
+\repeat
+\closein0
+% Prepare .toc file for write
+\newwrite\tf@toc
+\immediate\openout \tf@toc \jobname.toc\relax
+
+\headheight=14pt
+\headsep=15pt
+\footskip=15pt
+\renewcommand\l@section[2]{{\rm #1\,#2 \hskip \z@ plus 1fil}}
+\def\@oddhead{{\color{green}
+  \rlap{\vrule width\textwidth height 0.4\p@ depth\z@}
+  \raise 0.5em\hbox to \textwidth{\the \toc@save \unskip \unskip}}}
+\def\@oddfoot{{\color{green}
+  \rlap{\vrule width\textwidth height 0.4\p@ depth\z@}
+  \raise-1.5em\hbox to \textwidth{\hfill\thepage\hfill}}}
+
+\endlinechar=`\^^M
+\endinput

@@ -1,0 +1,4 @@
+font_identifier:="POINTSC for TYDRAW"; font_size 10pt#;
+
+ em#:=0.2/1.095mm#;
+input point

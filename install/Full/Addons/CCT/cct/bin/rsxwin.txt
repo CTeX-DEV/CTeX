@@ -1,0 +1,7 @@
+-X - close on program termination
+-t - truncate file names for DOS 8.3
+Also: disables support of long file names under WIndows95 by:
+  set LFN=N
+It is resonable, because all our ZIP's are stored under DOS
+with truncated names but all references are original.
+

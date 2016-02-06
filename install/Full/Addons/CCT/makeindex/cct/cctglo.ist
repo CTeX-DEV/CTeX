@@ -1,0 +1,27 @@
+% $Id: cctglo.ist,v 1.2 2004/11/26 11:41:32 zlb Exp $
+%
+preamble "
+\\providecommand*{\\glossaryname}{术语}
+\\begin{theglossary}
+  \\def\\seename{见}
+  \\def\\alsoname{又见}
+  \\ifx\\CCTspace\\undefined\\else\\CCTspace\\fi
+  \\ifx\\CJKspace\\undefined\\else\\CJKspace\\fi
+  \\providecommand*\\indexgroup[1]{\\indexspace
+    \\item \\textbf{#1}\\nopagebreak}
+"
+
+postamble "\\end{theglossary}\n"
+
+group_skip "  %\n  \\indexspace\n  %\n"
+
+headings_flag 1
+heading_prefix "  %\n  \\indexgroup{"
+heading_suffix "}\n  %\n"
+
+numhead_positive "数字";
+numhead_negative "数字";
+symhead_positive "符号";
+symhead_negative "符号";
+
+keyword "\\glossaryentry"

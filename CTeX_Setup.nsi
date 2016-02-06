@@ -73,7 +73,7 @@ Section "MiKTeX" Section_MiKTeX
 	SetOutPath "$INSTDIR\${MiKTeX_Dir}"
 
 !ifndef BUILD_REPAIR
-${Install_Files} "install\MiKTeX\*.*" "install_miktex.log"
+	${Install_Files} "install\MiKTeX\*.*" "install_miktex.log"
 !endif
 
 	!insertmacro Install_Config_MiKTeX
@@ -86,11 +86,7 @@ Section "CTeX Addons" Section_Addons
 	SetOutPath "$INSTDIR\${Addons_Dir}"
 
 !ifndef BUILD_REPAIR
-	${Install_Files} "install\Addons\CTeX\*.*" "install_ctex.log"
-	${Install_Files} "install\Addons\CJK\*.*" "install_cjk.log"
-	${Install_Files} "install\Addons\CCT\*.*" "install_cct.log"
-	${Install_Files} "install\Addons\TY\*.*" "install_ty.log"
-	${Install_Files} "install\Addons\Packages\*.*" "install_packages.log"
+	${Install_Files} "install\Addons\*.*" "install_addons.log"
 !endif
 
 	!insertmacro Install_Config_Addons

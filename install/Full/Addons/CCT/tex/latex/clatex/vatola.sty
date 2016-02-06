@@ -1,0 +1,146 @@
+% VATOLA.STY
+% Copyright (C) 1992 by GE XIANG YANG
+% Version date 6/11/92
+\catcode`@=11
+\def\flushpar{\par\noindent}
+\newskip\plaincentering \plaincentering=0pt plus 1000pt minus 1000pt
+\def\@plainlign{\tabskip=0pt\everycr={}}
+\def\eqalignno#1{\displ@y \tabskip\plaincentering
+  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip\z@skip
+    &$\@lign\displaystyle{{}##}$\hfil\tabskip\plaincentering
+    &\llap{$\@lign##$}\tabskip\z@skip\crcr
+    #1\crcr}}
+\def\leqalignno#1{\displ@y \tabskip\plaincentering
+  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip\z@skip
+    &$\@lign\displaystyle{{}##}$\hfil\tabskip\plaincentering
+    &\kern-\displaywidth\rlap{$\@lign##$}\tabskip\displaywidth\crcr
+    #1\crcr}}
+\def\plainLet@{\relax\iffalse{\fi\let\\=\cr\iffalse}\fi}
+\def\plainvspace@{\def\vspace##1{\noalign{\vskip##1}}}
+\def\dfrac#1#2{{\displaystyle{#1\over#2}}}
+\def\tfrac#1#2{{\textstyle{#1\over#2}}}
+\def\binom#1#2{{#1\choose #2}}
+\def\dbinom#1#2{{\displaystyle{#1\choose #2}}}
+\def\tbinom#1#2{{\textstyle{#1\choose #2}}}
+\def\pmb#1{\mbox{\boldmath $#1$}} % latex
+\def\intic@{\mathchoice{\hskip5\p@}{\hskip4\p@}{\hskip4\p@}{\hskip4\p@}}
+\def\negintic@
+ {\mathchoice{\hskip-5\p@}{\hskip-4\p@}{\hskip-4\p@}{\hskip-4\p@}}
+\def\intkern@{\mathchoice{\!\!\!}{\!\!}{\!\!}{\!\!}}
+\def\intdots@{\mathchoice{\cdots}{{\cdotp}\mkern1.5mu
+    {\cdotp}\mkern1.5mu{\cdotp}}{{\cdotp}\mkern1mu{\cdotp}\mkern1mu
+      {\cdotp}}{{\cdotp}\mkern1mu{\cdotp}\mkern1mu{\cdotp}}}
+\newcount\intno@
+\def\iint{\intno@=\tw@\futurelet\next\ints@}
+\def\iiint{\intno@=\thr@@\futurelet\next\ints@}
+\def\iiiint{\intno@=4 \futurelet\next\ints@}
+\def\idotsint{\intno@=\z@\futurelet\next\ints@}
+\def\ints@{\findlimits@\ints@@}
+\newif\iflimtoken@
+\newif\iflimits@
+\def\findlimits@{\limtoken@false\limits@false\ifx\next\limits
+ \limtoken@true\limits@true\else\ifx\next\nolimits\limtoken@true\limits@false
+    \fi\fi}
+\def\multintlimits@{\intop\ifnum\intno@=\z@\intdots@
+  \else\intkern@\fi
+    \ifnum\intno@>\tw@\intop\intkern@\fi
+     \ifnum\intno@>\thr@@\intop\intkern@\fi\intop}
+\def\multint@{\int\ifnum\intno@=\z@\intdots@\else\intkern@\fi
+   \ifnum\intno@>\tw@\int\intkern@\fi
+    \ifnum\intno@>\thr@@\int\intkern@\fi\int}
+\def\ints@@{\iflimtoken@\def\ints@@@{\iflimits@
+   \negintic@\mathop{\intic@\multintlimits@}\limits\else
+    \multint@\nolimits\fi\eat@}\else
+     \def\ints@@@{\multint@\nolimits}\fi\ints@@@}
+\def\Sb{_\bgroup\vspace@
+        \baselineskip=\fontdimen10 \scriptfont\tw@
+        \advance\baselineskip by \fontdimen12 \scriptfont\tw@
+        \lineskip=\thr@@\fontdimen8 \scriptfont\thr@@
+        \lineskiplimit=\thr@@\fontdimen8 \scriptfont\thr@@
+        \Let@\vbox\bgroup\halign\bgroup \hfil$\scriptstyle
+            {##}$\hfil\cr}
+\def\endSb{\crcr\egroup\egroup\egroup}
+\def\Sp{^\bgroup\vspace@
+        \baselineskip=\fontdimen10 \scriptfont\tw@
+        \advance\baselineskip by \fontdimen12 \scriptfont\tw@
+        \lineskip=\thr@@\fontdimen8 \scriptfont\thr@@
+        \lineskiplimit=\thr@@\fontdimen8 \scriptfont\thr@@
+        \Let@\vbox\bgroup\halign\bgroup \hfil$\scriptstyle
+            {##}$\hfil\cr}
+\def\endSp{\crcr\egroup\egroup\egroup}
+\def\Let@{\relax\iffalse{\fi\let\\=\cr\iffalse}\fi}
+\def\vspace@{\def\vspace##1{\noalign{\vskip##1 }}}
+\def\aligned{\,\vcenter\bgroup\plainvspace@\plainLet@\openup\jot\m@th\ialign
+  \bgroup \strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil\crcr}
+\def\endaligned{\crcr\egroup\egroup}
+\def\matrix{\,\vcenter\bgroup\plainLet@\plainvspace@
+    \normalbaselines
+  \m@th\ialign\bgroup\hfil$##$\hfil&&\quad\hfil$##$\hfil\crcr
+    \mathstrut\crcr\noalign{\kern-\baselineskip}}
+\def\endmatrix{\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}\egroup
+                \egroup\,}
+\newtoks\hashtoks@
+\hashtoks@={#}
+\def\format{\crcr\egroup\iffalse{\fi\ifnum`}=0 \fi\format@}
+\def\format@#1\\{\def\preamble@{#1}%
+  \def\c{\hfil$\the\hashtoks@$\hfil}%
+  \def\r{\hfil$\the\hashtoks@$}%
+  \def\l{$\the\hashtoks@$\hfil}%
+  \setbox\z@=\hbox{\xdef\Preamble@{\preamble@}}\ifnum`{=0 \fi\iffalse}\fi
+   \ialign\bgroup\span\Preamble@\crcr}
+\def\pmatrix{\left(\matrix}
+\def\endpmatrix{\endmatrix\right)}
+\def\bmatrix{\left[\matrix}
+\def\endbmatrix{\endmatrix\right]}
+\def\vmatrix{\left|\matrix}
+\def\endvmatrix{\endmatrix\right|}
+\def\Vmatrix{\left\|\matrix}
+\def\endVmatrix{\endmatrix\right\|}
+\def\cases{\left\{\,\vcenter\bgroup\plainvspace@
+     \normalbaselines\openup\jot\m@th
+      \plainLet@\ialign\bgroup$\displaystyle{##}$\hfil&\quad$\displaystyle{{}##}$\hfil\crcr
+      \mathstrut\crcr\noalign{\kern-\baselineskip}}
+\def\endcases{\endmatrix\right.}
+\newif\iftagsleft@
+\tagsleft@true
+\def\TagsOnRight{\global\tagsleft@false}
+\def\tag#1$${\iftagsleft@\leqno\else\eqno\fi
+ \hbox{\def\pagebreak{\global\postdisplaypenalty-\@M}%
+ \def\nopagebreak{\global\postdisplaypenalty\@M}\rm(#1\unskip)}%
+  $$\postdisplaypenalty\z@\ignorespaces}
+\interdisplaylinepenalty=\@M
+\def\plainallowdisplaybreak@{\def\allowdisplaybreak{\noalign{\allowbreak}}}
+\def\plaindisplaybreak@{\def\displaybreak{\noalign{\break}}}
+\def\align#1\endalign{\def\tag{&}\plainvspace@\plainallowdisplaybreak@\plaindisplaybreak@
+  \iftagsleft@\plainlalign@#1\endalign\else
+   \plainralign@#1\endalign\fi}
+\def\plainralign@#1\endalign{\displ@y\plainLet@\tabskip\plaincentering\halign to\displaywidth
+     {\hfil$\displaystyle{##}$\tabskip=\z@&$\displaystyle{{}##}$\hfil
+       \tabskip=\plaincentering&\llap{\hbox{\rm(##\unskip)}}\tabskip\z@\crcr
+             #1\crcr}}
+\def\plainlalign@
+ #1\endalign{\displ@y\plainLet@\tabskip\plaincentering\halign to \displaywidth
+   {\hfil$\displaystyle{##}$\tabskip=\z@&$\displaystyle{{}##}$\hfil
+   \tabskip=\plaincentering&\kern-\displaywidth
+        \rlap{\hbox{\rm(##\unskip)}}\tabskip=\displaywidth\crcr
+               #1\crcr}}
+\def\proclaim#1{\par\bf #1. \unskip \it }
+\def\endproclaim{\par\rm }
+\def\demo#1{\par\it #1. \unskip \rm }
+\def\enddemo{\par\rm }
+\def\REF#1{\par\hangindent\parindent\indent\llap{#1\enspace}\ignorespaces}
+\def\re@#1{\par\hangindent\parindent\indent\llap{#1\enspace}\ignorespaces}
+%\newinsert\footins
+%\let\endgraf=\par\let\endline=\cr
+\def\qfootnote#1{\edef\@sf{\spacefactor\the\spacefactor}{}#1\@sf
+      \insert\footins{\let\egroup=}\footnotesize % latex
+      \interlinepenalty100 \let\par=\endgraf
+        \leftskip=0pt \rightskip=0pt
+        \splittopskip=10pt plus 1pt minus 1pt \floatingpenalty=20000
+   \smallskip\re@{#1}\bgroup\strut\aftergroup{\strut\egroup}\let\next}
+%\long\def\@makefntext#1{\parindent 1em\noindent % latex
+%         \hbox to 1.8em{\hss$^{}$}#1} % latex
+\topmargin=0pt \oddsidemargin=0pt \evensidemargin=0pt % latex
+\catcode`\@=\active
+%\catcode`@=12
+

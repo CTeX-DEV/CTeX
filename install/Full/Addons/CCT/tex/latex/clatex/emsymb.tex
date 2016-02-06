@@ -1,0 +1,31 @@
+% This is EMSYMB.TEX
+%
+% This file must be \input before german.sty.
+%
+\catcode`@=11
+
+\def\hexnumber@#1{\ifnum#1<10 \number#1\else
+ \ifnum#1=10 A\else\ifnum#1=11 B\else\ifnum#1=12 C\else
+ \ifnum#1=13 D\else\ifnum#1=14 E\else\ifnum#1=15 F\fi\fi\fi\fi\fi\fi\fi}
+
+\newfam\emsy
+
+\edef\emsy@{\hexnumber@\emsy}
+
+\font\tenemsy=emsy10
+\font\sevenemsy=emsy7
+\font\fiveemsy=emsy5
+
+\skewchar\tenemsy="00
+
+\textfont\emsy=\tenemsy
+\scriptfont\emsy=\sevenemsy
+\scriptscriptfont\emsy=\fiveemsy
+
+\def\cev{\mathaccent"0\emsy@00 }       % vector accent (leftward arrow)
+\def\fatuparrow{\mathhexbox\emsy@10}   % fat upward arrow (shift key)
+\def\fatdownarrow{\mathhexbox\emsy@11} % fat downward arrow (lock key)
+\def\lefttriangle{\mathhexbox\emsy@12} % leftward black triangle
+\def\padlock{\mathhexbox\emsy@13}      % padlock (lock key)
+
+\catcode`@=12 % at signs are no longer letters

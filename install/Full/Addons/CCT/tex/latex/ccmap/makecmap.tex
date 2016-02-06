@@ -1,0 +1,266 @@
+% $Id: makecmap.tex,v 1.3 2005/11/21 14:57:05 zlb Exp $
+%
+%  Filename:  makecmap.tex (provided by SUN Wenchang)
+%
+%  Function:  make cmap files for using cmap.sty with CJK fonts.
+%
+%  Usage:
+%  for GB encoding
+%
+%           Latex  \def\cmapEnc{GB} \input{makecmap.tex}
+%
+%       Then you will get 35 or 36 cmap files like c1001.cmap, c1002.cmap, ...
+%
+%
+\documentclass{article}
+\usepackage{CJK}
+\begin{document}
+\makeatletter
+
+\newwrite\cmapout
+\newif\if@firstplane
+\@firstplanetrue
+
+\newif\if@CJKplane@hexmode
+\@CJKplane@hexmodefalse
+
+\newcount\unicode@a
+\newcount\unicode@b
+
+\def\unicodecmap{
+\@CJKplane@hexmodetrue
+\unicode@a 0
+\loop
+  \CJK@numbToHex{\tempba}{\unicode@a}
+  \ifnum\the\unicode@a < 256
+     {\output@unicodeplane}
+  \advance\unicode@a 1
+\repeat
+}
+
+\def\output@unicodeplane
+{{
+\unicode@b 0
+\loop
+  \ifnum\the\unicode@b < 256
+     \CJK@numbToHex{\tempbb}{\unicode@b}
+     \edef\tempbb{\tempba\tempbb}
+     \expandafter\@@cidmap\tempbb
+  \advance\unicode@b 1
+\repeat
+}
+}
+
+
+
+
+\newcount\cmaplines
+\newcount\cmapCJKplane
+\newcount\cmaptemp
+\newcount\cmap@num@a
+\newcount\cmap@num@b
+
+\cmapCJKplane 0
+\cmaplines 0
+
+\catcode`\%=11
+\catcode`\#=14
+\catcode`\$=6
+
+\catcode`\x=13
+\def x{\@@cidmap}
+
+\def\make@eks@active{
+    \catcode`\x=13
+    \def x{\@@cidmap}}
+
+\catcode`\x=11
+
+\def\write@cmapheader{
+   \begingroup
+      \if@filesw
+        \immediate\openout \cmapout  \lower@@@enc\cmap@CJKplane.cmap\relax
+      \fi
+      \@nobreakfalse
+      \typeout{...generating \lower@@@enc\cmap@CJKplane.cmap...}
+   \endgroup
+
+   \immediate\write\cmapout{%!PS-Adobe-3.0 Resource-CMap}
+   \immediate\write\cmapout{%%DocumentNeededResources: ProcSet (CIDInit)}
+   \immediate\write\cmapout{%%IncludeResource: ProcSet (CIDInit)}
+   \immediate\write\cmapout{%%BeginResource: CMap (TeX-\lower@@@enc-\cmap@CJKplane-0)}
+   \immediate\write\cmapout{%%Title: (TeX-\lower@@@enc-\cmap@CJKplane-0\space
+       TeX \lower@@@enc-\cmap@CJKplane 0)}
+   \immediate\write\cmapout{%%Version: 1.000}
+   \immediate\write\cmapout{%%EndComments}
+   \immediate\write\cmapout{/CIDInit /ProcSet findresource begin}
+   \immediate\write\cmapout{begincmap}
+   \immediate\write\cmapout{12 dict begin}
+   \immediate\write\cmapout{/CIDSystemInfo}
+   \immediate\write\cmapout{<< /Registry (TeX)}
+   \immediate\write\cmapout{/Ordering (\lower@@@enc-\cmap@CJKplane)}
+   \immediate\write\cmapout{/Supplement 0}
+   \immediate\write\cmapout{>> def}
+   \immediate\write\cmapout{/CMapName /TeX-\lower@@@enc-\cmap@CJKplane-0 def}
+   \immediate\write\cmapout{/CMapType 2 def}
+}
+
+\def\write@cmaptotal{
+   \cmaptemp\cmaplines
+   \advance\cmaptemp -1
+   \CJK@numbToHex{\tempba}{\cmaptemp}
+   \immediate\write\cmapout{1 begincodespacerange}
+   \immediate\write\cmapout{<00> <\tempba>}
+   \immediate\write\cmapout{endcodespacerange}
+}
+
+\def\write@cmapcontents{
+
+   \cmaptemp\cmap@num@b
+   \advance\cmaptemp -\cmap@num@a
+   \immediate\write\cmapout{\the\cmaptemp\space beginbfchar}
+
+   {\cmaptemp \cmap@num@a
+   \loop
+      \ifnum\the\cmaptemp<\cmap@num@b
+      \immediate\write\cmapout{\csname cmapline@\the\cmaptemp\endcsname}
+      \advance\cmaptemp 1
+   \repeat
+   \immediate\write\cmapout{endbfchar}
+   }
+}
+
+\def\write@cmapend{
+   \immediate\write\cmapout{endcmap}
+   \immediate\write\cmapout{CMapName currentdict /CMap defineresource pop}
+   \immediate\write\cmapout{end}
+   \immediate\write\cmapout{end}
+   \immediate\write\cmapout{%%EndResource}
+   \immediate\write\cmapout{%%EOF}
+   \immediate\closeout\cmapout
+}
+
+\def\@@cidmap$1$2$3$4{
+
+\catcode`\x=11
+
+\ifnum\the\cmaplines=0
+   \if@firstplane
+      \global\@firstplanefalse
+      \ifnum $1=0
+      \else
+          \global\advance \cmapCJKplane 1
+      \fi
+   \else
+          \global\advance \cmapCJKplane 1
+   \fi
+   \if@CJKplane@hexmode
+      \CJK@numbToHex{\cmap@CJKplane}{\cmapCJKplane}
+      \edef\tempa{\lowercase{\def\noexpand\cmap@CJKplane{\cmap@CJKplane}}}
+      \tempa
+   \else
+      \ifnum\the\cmapCJKplane<10
+            \edef\cmap@CJKplane{0\the\cmapCJKplane}
+      \else
+            \edef\cmap@CJKplane{\the\cmapCJKplane}
+      \fi
+   \fi
+\fi
+\CJK@numbToHex{\cmap@hexind}{\cmaplines}
+\expandafter\edef\csname cmapline@\the\cmaplines\endcsname{<\cmap@hexind> <$1$2$3$4>}
+\advance\cmaplines 1
+
+\ifnum\the\cmaplines=256
+
+   \write@cmapheader
+   \write@cmaptotal
+
+   \cmap@num@a 0
+   \cmap@num@b 100
+   \write@cmapcontents
+
+   \cmap@num@a 100
+   \cmap@num@b 200
+   \write@cmapcontents
+
+   \cmap@num@a 200
+   \cmap@num@b 256
+   \write@cmapcontents
+
+   \write@cmapend
+   \global\cmaplines 0
+\fi
+
+\make@eks@active
+}
+
+
+\def\get@sfd$1{
+\edef\temp{$1}
+\edef\tempa{\lowercase{\def\noexpand\tempa{\temp}}}
+\tempa
+\edef\sfdname{\csname sfd@\tempa\endcsname}
+}
+
+\@namedef{sfd@bg5}{UBig5}
+\@namedef{sfd@bg5+}{UBg5plus}
+\@namedef{sfd@gb}{UGB}
+\@namedef{sfd@gbk}{UGBK}
+\@namedef{sfd@jis}{UJIS}
+\@namedef{sfd@ks}{UKS}
+\@namedef{sfd@utf8}{Unicode}
+
+
+\def\makecmapfiles$1{
+\CJKenc{$1}
+\edef\lower@@@enc{\lowercase{\def\noexpand\lower@@@enc{\csname CJK@$1@nfssenc\endcsname}}}
+\lower@@@enc
+\get@sfd{$1}
+\expandafter\ifx\csname \sfdname cmap\endcsname\relax
+   \make@eks@active
+   \input{\sfdname.sfd}
+\else
+   \csname \sfdname cmap\endcsname
+\fi
+}
+
+\makecmapfiles{\cmapEnc}
+
+
+
+\catcode`\x=11
+
+\ifnum\the\cmaplines<256
+   \ifnum\the\cmap@num@b > 0
+      \write@cmapheader
+      \write@cmaptotal
+   \fi
+
+   \cmap@num@a 0
+   \cmap@num@b \cmaplines
+
+   \ifnum\the\cmap@num@b > 100
+      \cmap@num@b 100
+      \write@cmapcontents
+      \cmap@num@a 100
+      \cmap@num@b \cmaplines
+   \fi
+
+   \ifnum\the\cmap@num@b > 200
+      \cmap@num@b 200
+      \write@cmapcontents
+      \cmap@num@a 200
+      \cmap@num@b \cmaplines
+   \fi
+
+   \ifnum\the\cmap@num@b > 0
+      \write@cmapcontents
+      \write@cmapend
+   \fi
+\fi
+
+
+
+
+
+\end{document}

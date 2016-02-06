@@ -1,0 +1,25 @@
+% emlines.sty  Mai 1990, Georg Horn / Eberhard Mattes.
+%
+% Makros zum Zeichnen von Linien mit beliebiger Steigung.
+%
+% ****************************************************************
+% * Nur funktionsfÑhig mit den dvi-Treibern von Eberhard Mattes  *
+% * ab Version 1.3j.                                             *
+% ****************************************************************
+%
+% Der Makro \emline#1#2#3#4#5#6 verbindet den Punkt mit den
+% Koordinaten (#1,#2) und den Punkt mit den Koordinaten (#4,#5).
+% Die Parameter #3 und #6 werden ignoriert.
+%
+% TeXcad erzeugt Aufrufe dieses Makros fÅr mit eingeschalteter
+% EMLines-Option gezeichnete Linien.
+% (z.B. \emline{0.0}{0.0}{1}{17.0}{4.0}{2}).
+%
+\def\emline#1#2#3#4#5#6{%
+       \put(#1,#2){\special{em:moveto}}%
+       \put(#4,#5){\special{em:lineto}}}
+%
+% Der Makro \newpic#1 wird ignoriert, da nicht mehr erforderlich.
+%
+\def\newpic#1{}
+

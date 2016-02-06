@@ -1,0 +1,4 @@
+font_identifier:="LSEG02 for TYDRAW"; font_size 10pt#;
+
+ em#:=0.125pt#; cap#:=2mm#;
+input lseg

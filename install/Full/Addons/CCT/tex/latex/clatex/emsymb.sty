@@ -1,0 +1,92 @@
+% This is EMSYMB.STY
+% Version 1.0 [18-Aug-88]
+%
+% This document style option must be used before german.sty.
+%
+\newfam\emsyfam
+
+{\def\hexnumber@#1{\ifnum#1<10 \number#1\else
+   \ifnum#1=10 A\else\ifnum#1=11 B\else\ifnum#1=12 C\else
+   \ifnum#1=13 D\else\ifnum#1=14 E\else\ifnum#1=15 F\fi\fi\fi\fi\fi\fi\fi}
+ \xdef\emsy@fam{\hexnumber@\emsyfam}}
+
+\font\fivemsy=emsy5
+\font\sixemsy=emsy6
+\font\sevemsy=emsy7
+\font\egtemsy=emsy8
+\font\ninemsy=emsy9
+\font\tenemsy=emsy10
+\font\elvemsy=emsy10 \@halfmag
+\font\twlemsy=emsy10 \@magscale1
+\font\frtnemsy=emsy10 \@magscale2
+\font\svtnemsy=emsy10 \@magscale3
+\font\twtyemsy=emsy10 \@magscale4
+%\font\twfvemsy=emsy10 \@magscale5
+
+\@addfontinfo\@vpt{%
+   \def\emsy{\fam\emsyfam\fivemsy}\textfont\emsyfam\fivemsy
+     \scriptfont\emsyfam\fivemsy \scriptscriptfont\emsyfam\fivemsy}
+
+\@addfontinfo\@vipt{%
+   \def\emsy{\fam\emsyfam\sixemsy}\textfont\emsyfam\sixemsy
+     \scriptfont\emsyfam\sixemsy \scriptscriptfont\emsyfam\sixemsy}
+
+\@addfontinfo\@viipt{%
+   \def\emsy{\fam\emsyfam\sevemsy}\textfont\emsyfam\sevemsy
+     \scriptfont\emsyfam\fivemsy \scriptscriptfont\emsyfam\fivemsy}
+
+\@addfontinfo\@viiipt{%
+   \def\emsy{\fam\emsyfam\egtemsy}\textfont\emsyfam\egtemsy
+     \scriptfont\emsyfam\sixemsy \scriptscriptfont\emsyfam\fivemsy}
+
+\@addfontinfo\@ixpt{%
+   \def\emsy{\fam\emsyfam\ninemsy}\textfont\emsyfam\ninemsy
+     \scriptfont\emsyfam\sixemsy \scriptscriptfont\emsyfam\fivemsy}
+
+\@addfontinfo\@xpt{%
+   \def\emsy{\fam\emsyfam\tenemsy}\textfont\emsyfam\tenemsy
+     \scriptfont\emsyfam\sevemsy \scriptscriptfont\emsyfam\fivemsy}
+
+\@addfontinfo\@xipt{%
+   \def\emsy{\fam\emsyfam\elvemsy}\textfont\emsyfam\elvemsy
+     \scriptfont\emsyfam\egtemsy \scriptscriptfont\emsyfam\sixemsy}
+
+\@addfontinfo\@xiipt{%
+   \def\emsy{\fam\emsyfam\twlemsy}\textfont\emsyfam\twlemsy
+     \scriptfont\emsyfam\egtemsy \scriptscriptfont\emsyfam\sixemsy}
+
+\@addfontinfo\@xivpt{%
+   \def\emsy{\fam\emsyfam\frtnemsy}\textfont\emsyfam\frtnemsy
+     \scriptfont\emsyfam\tenemsy \scriptscriptfont\emsyfam\sevemsy}
+
+\@addfontinfo\@xviipt{%
+   \def\emsy{\fam\emsyfam\svtnemsy}\textfont\emsyfam\svtnemsy
+     \scriptfont\emsyfam\twlemsy   \scriptscriptfont\emsyfam\tenemsy}
+
+\@addfontinfo\@xxpt{%
+  \def\emsy{\fam\emsyfam\twtyemsy}\textfont\emsyfam\twtyemsy
+     \scriptfont\emsyfam\frtnemsy \scriptscriptfont\emsyfam\twlemsy}
+
+%\@addfontinfo\@xxvpt{%
+%  \def\emsy{\fam\emsyfam\twtyemsy}\textfont\emsyfam\twtyemsy
+%     \scriptfont\emsyfam\twtyemsy \scriptscriptfont\emsyfam\svtnemsy}
+
+
+\skewchar\fivemsy="00
+\skewchar\sixemsy="00
+\skewchar\sevemsy="00
+\skewchar\egtemsy="00
+\skewchar\ninemsy="00
+\skewchar\tenemsy="00
+\skewchar\elvemsy="00
+\skewchar\twlemsy="00
+\skewchar\frtnemsy="00
+\skewchar\svtnemsy="00
+\skewchar\twtyemsy="00
+% \skewchar\twfvemsy="00
+
+\def\cev{\mathaccent"0\emsy@fam00 }       % vector accent (leftward arrow)
+\def\fatuparrow{\mathhexbox\emsy@fam10}   % fat upward arrow (shift key)
+\def\fatdownarrow{\mathhexbox\emsy@fam11} % fat downward arrow (lock key)
+\def\lefttriangle{\mathhexbox\emsy@fam12} % leftward black triangle
+\def\padlock{\mathhexbox\emsy@fam13}      % padlock (lock key)

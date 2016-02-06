@@ -1,0 +1,514 @@
+\catcode`@=11
+%
+\chardef\tw@=2
+\chardef\sixt@@n=16
+\mathchardef\@m=1000
+%%\chardef\@ne=1
+%%\chardef\thr@@=3
+%%\chardef\@cclv=255
+%%\mathchardef\@cclvi=256
+%%\mathchardef\@M=10000
+%%\mathchardef\@MM=20000
+%
+\def\begin#1{\begingroup\let\end\@end\csname #1\endcsname}%
+% \end is defined here
+\def\@end#1{\csname end#1\endcsname\endgroup}%
+%
+\def\@nnil{\@nil}
+\def\@empty{}
+\def\@fornoop#1\@@#2#3{}
+%
+\def\@height{height}
+\def\@width{width}
+\def\@depth{depth}
+%
+\def\@tfor#1:=#2\do#3{\xdef\@fortmp{#2}\ifx\@fortmp\@empty \else
+    \@tforloop#2\@nil\@nil\@@#1{#3}\fi}
+\def\@tforloop#1#2\@@#3#4{\def#3{#1}\ifx #3\@nnil
+       \let\@nextwhile=\@fornoop \else
+      #4\relax\let\@nextwhile=\@tforloop\fi\@nextwhile#2\@@#3{#4}}
+%
+\def\@ifnextchar#1#2#3{\let\@tempe #1\def\@tempa{#2}\def\@tempb{#3}\futurelet
+    \@tempc\@ifnch}
+\def\@ifnch{\ifx \@tempc \@sptoken \let\@tempd\@xifnch
+      \else \ifx \@tempc \@tempe\let\@tempd\@tempa\else\let\@tempd\@tempb\fi
+      \fi \@tempd}
+%
+% NOTE:	the following hacking must precede the definition of \:
+%  as math medium space.
+%
+\def\:{\let\@sptoken= }	\:  % this makes \@sptoken a space token
+%
+\def\:{\@xifnch} \expandafter\def\: {\futurelet\@tempc\@ifnch}
+%
+\def\@ifstar#1#2{\@ifnextchar *{\def\@tempa*{#1}\@tempa}{#2}}
+%
+\def\@whilenum#1\do #2{\ifnum #1\relax #2\relax\@iwhilenum{#1\relax
+     #2\relax}\fi}
+\def\@iwhilenum#1{\ifnum #1\let\@nextwhile=\@iwhilenum
+	 \else\let\@nextwhile=\@whilenoop\fi\@nextwhile{#1}}
+%
+\def\@iwhiledim#1{\ifdim#1\@iwhiledim{#1}\fi}%
+%
+\def\@whiledim#1\do #2{\ifdim#1\relax#2\@iwhiledim{#1\relax#2}\fi}%
+%
+\def\@whilenoop#1{}
+%
+\def\@warning#1{\message{#1}}%
+\def\@badlinearg{\message{**Error in the arguments of "line" or "vector" command}}%
+%
+% **********************
+% * PICTURE ENVIROMENT *
+% **********************
+%
+% line & circle fonts
+\font\tenln    = line10 at 10 true pt
+\font\tenlnw   = linew10 at 10 true pt
+\font\tencirc  = lcircle1 at 10 true pt
+\font\tencircw = lcirclew at 10 true pt
+
+\ifnum\fontdimen8\tenln=\fontdimen8\tencirc \else
+  \@warning{Incompatible thin line and circle fonts}\fi
+\ifnum\fontdimen8\tenlnw=\fontdimen8\tencircw \else
+  \@warning{Incompatible thick line and circle fonts}\fi
+
+\newdimen\@picht
+\def\picture(#1,#2){\@ifnextchar({\@picture(#1,#2)}{\@picture(#1,#2)(0,0)}}
+
+\def\@picture(#1,#2)(#3,#4){
+% define commands under picture environment
+    \let\thinlines\@@thinlines
+    \let\thicklines\@@thicklines
+    \let\put\@@put
+    \let\line\@@line
+    \let\vector\@@vector
+    \let\circle\@@circle
+    \let\oval\@@oval
+% redefines PLAIN TeX's \line command.
+    \def\@line{\hbox to\hsize
+    }\def\leftline#1{\@line{#1\hss
+    }}\def\rightline#1{\@line{\hss #1
+    }}\def\centerline#1{\@line{\hss #1\hss
+    }}\@picht #2\unitlength
+\setbox\@picbox\hbox to	#1\unitlength\bgroup
+\hskip -#3\unitlength \lower #4\unitlength \hbox\bgroup}
+
+\def\endpicture{\egroup\hss\egroup\ht\@picbox\@picht
+\dp\@picbox\z@\leavevmode\box\@picbox}
+%
+%\tracingstats=2
+%
+\newcount\@tempcnta
+\newcount\@tempcntb
+%
+\newdimen\@tempdima
+\newdimen\@tempdimb
+%
+\newbox\@tempboxa
+%
+\newdimen\@wholewidth
+\newdimen\@halfwidth
+\newdimen\unitlength \unitlength=1true mm
+\newbox\@picbox
+\newdimen\@picht
+%
+\newcount\@xarg
+\newcount\@yarg
+\newcount\@yyarg
+\newbox\@linechar
+\newdimen\@linelen
+\newdimen\@clnwd
+\newdimen\@clnht
+%
+%\put
+%
+\long\def\@@put(#1,#2)#3{\@killglue\raise#2\unitlength\hbox to \z@{\hskip
+#1\unitlength #3\hss}\ignorespaces}
+%
+\def\@killglue{\unskip\@whiledim \lastskip >\z@\do{\unskip}}
+%
+%\thinlines & \thicklines
+%
+\def\@@thinlines{\let\@linefnt\tenln \let\@circlefnt\tencirc
+  \@wholewidth\fontdimen8\tenln	\@halfwidth .5\@wholewidth}
+\def\@@thicklines{\let\@linefnt\tenlnw \let\@circlefnt\tencircw
+  \@wholewidth\fontdimen8\tenlnw \@halfwidth .5\@wholewidth}
+%
+% LINES & VECTORS
+%
+\newif\if@negarg
+%
+\def\@@line(#1,#2)#3{\@xarg #1\relax \@yarg #2\relax
+\@linelen=#3\unitlength
+\ifnum\@xarg =0	\@vline	
+  \else	\ifnum\@yarg =0	\@hline	\else \@sline\fi
+\fi}
+%
+\def\@sline{\ifnum\@xarg< 0 \@negargtrue \@xarg	-\@xarg	\@yyarg	-\@yarg
+  \else	\@negargfalse \@yyarg \@yarg \fi
+\ifnum \@yyarg >0 \@tempcnta\@yyarg \else \@tempcnta -\@yyarg \fi
+\ifnum\@tempcnta>6 \@badlinearg\@tempcnta0 \fi
+\setbox\@linechar\hbox{\@linefnt\@getlinechar(\@xarg,\@yyarg)}%
+\ifnum \@yarg >0 \let\@upordown\raise \@clnht\z@
+   \else\let\@upordown\lower \@clnht \ht\@linechar\fi
+\@clnwd=\wd\@linechar
+\if@negarg \hskip -\wd\@linechar \def\@tempa{\hskip -2\wd\@linechar}\else
+     \let\@tempa\relax \fi
+\@whiledim \@clnwd <\@linelen \do
+  {\@upordown\@clnht\copy\@linechar
+   \@tempa
+   \advance\@clnht \ht\@linechar
+   \advance\@clnwd \wd\@linechar}%
+\advance\@clnht	-\ht\@linechar
+\advance\@clnwd	-\wd\@linechar
+\@tempdima\@linelen\advance\@tempdima -\@clnwd
+\@tempdimb\@tempdima\advance\@tempdimb -\wd\@linechar
+\if@negarg \hskip -\@tempdimb \else \hskip \@tempdimb \fi
+\multiply\@tempdima \@m
+\@tempcnta \@tempdima \@tempdima \wd\@linechar \divide\@tempcnta \@tempdima
+\@tempdima \ht\@linechar \multiply\@tempdima \@tempcnta
+\divide\@tempdima \@m
+\advance\@clnht	\@tempdima
+\ifdim \@linelen <\wd\@linechar
+   \hskip \wd\@linechar
+  \else\@upordown\@clnht\copy\@linechar\fi}
+%
+\def\@hline{\ifnum \@xarg <0 \hskip -\@linelen \fi
+\vrule \@height	\@halfwidth \@depth \@halfwidth	\@width	\@linelen
+\ifnum \@xarg <0 \hskip	-\@linelen \fi}
+%
+\def\@getlinechar(#1,#2){\@tempcnta#1\relax\multiply\@tempcnta 8
+\advance\@tempcnta -9 \ifnum #2>0 \advance\@tempcnta #2\relax\else
+\advance\@tempcnta -#2\relax\advance\@tempcnta 64 \fi
+\char\@tempcnta}
+%
+\def\@@vector(#1,#2)#3{\@xarg #1\relax \@yarg #2\relax
+\@linelen=#3\unitlength
+\ifnum\@xarg =0	\@vvector
+  \else	\ifnum\@yarg =0	\@hvector \else	\@svector\fi
+\fi}
+%
+\def\@hvector{\@hline\hbox to 0pt{\@linefnt
+\ifnum \@xarg <0 \@getlarrow(1,0)\hss\else
+    \hss\@getrarrow(1,0)\fi}}
+%
+\def\@vvector{\ifnum \@yarg <0 \@downvector \else \@upvector \fi}
+%
+\def\@svector{\@sline
+\@tempcnta\@yarg \ifnum\@tempcnta <0 \@tempcnta=-\@tempcnta\fi
+\ifnum\@tempcnta <5
+  \hskip -\wd\@linechar
+  \@upordown\@clnht \hbox{\@linefnt  \if@negarg	
+  \@getlarrow(\@xarg,\@yyarg) \else \@getrarrow(\@xarg,\@yyarg)	\fi}%
+\else\@badlinearg\fi}
+%
+\def\@getlarrow(#1,#2){\ifnum #2 =\z@ \@tempcnta='33\else
+\@tempcnta=#1\relax\multiply\@tempcnta \sixt@@n	\advance\@tempcnta
+-9 \@tempcntb=#2\relax\multiply\@tempcntb \tw@
+\ifnum \@tempcntb >0 \advance\@tempcnta	\@tempcntb\relax
+\else\advance\@tempcnta	-\@tempcntb\advance\@tempcnta 64
+\fi\fi\char\@tempcnta}
+%
+\def\@getrarrow(#1,#2){\@tempcntb=#2\relax
+\ifnum\@tempcntb < 0 \@tempcntb=-\@tempcntb\relax\fi
+\ifcase	\@tempcntb\relax \@tempcnta='55	\or
+\ifnum #1<3 \@tempcnta=#1\relax\multiply\@tempcnta
+24 \advance\@tempcnta -6 \else \ifnum #1=3 \@tempcnta=49
+\else\@tempcnta=58 \fi\fi\or
+\ifnum #1<3 \@tempcnta=#1\relax\multiply\@tempcnta
+24 \advance\@tempcnta -3 \else \@tempcnta=51\fi\or
+\@tempcnta=#1\relax\multiply\@tempcnta
+\sixt@@n \advance\@tempcnta -\tw@ \else
+\@tempcnta=#1\relax\multiply\@tempcnta
+\sixt@@n \advance\@tempcnta 7 \fi\ifnum	#2<0 \advance\@tempcnta	64 \fi
+\char\@tempcnta}
+%
+\def\@vline{\ifnum \@yarg <0 \@downline	\else \@upline\fi}
+%
+\def\@upline{\hbox to \z@{\hskip -\@halfwidth \vrule \@width \@wholewidth
+   \@height \@linelen \@depth \z@\hss}}
+%
+\def\@downline{\hbox to	\z@{\hskip -\@halfwidth	\vrule \@width \@wholewidth
+   \@height \z@	\@depth	\@linelen \hss}}
+%
+\def\@upvector{\@upline\setbox\@tempboxa\hbox{\@linefnt\char'66}\raise
+     \@linelen \hbox to\z@{\lower \ht\@tempboxa\box\@tempboxa\hss}}
+%
+\def\@downvector{\@downline\lower \@linelen
+      \hbox to \z@{\@linefnt\char'77\hss}}
+%
+% CIRCLES AND OVALS
+%
+\newif\if@ovt
+\newif\if@ovb
+\newif\if@ovl
+\newif\if@ovr
+\newdimen\@ovxx
+\newdimen\@ovyy
+\newdimen\@ovdx
+\newdimen\@ovdy
+\newdimen\@ovro
+\newdimen\@ovri
+%
+\def\@getcirc#1{\@tempdima #1\relax \@tempcnta\@tempdima
+  \@tempdima 4pt\relax \divide\@tempcnta\@tempdima
+  \ifnum \@tempcnta > 10\relax \@tempcnta 10\relax\fi
+  \ifnum \@tempcnta >\z@ \advance\@tempcnta\m@ne
+    \else \@warning{Oval too small}\fi
+  \multiply\@tempcnta 4\relax
+  \setbox \@tempboxa \hbox{\@circlefnt
+  \char	\@tempcnta}\@tempdima \wd \@tempboxa}
+%
+\def\@put#1#2#3{\raise #2\hbox to \z@{\hskip #1#3\hss}}
+%
+\def\@@oval(#1,#2){\@ifnextchar[{\@oval(#1,#2)}{\@oval(#1,#2)[]}}
+%
+\def\@oval(#1,#2)[#3]{\begingroup\boxmaxdepth \maxdimen
+  \@ovttrue \@ovbtrue \@ovltrue	\@ovrtrue
+  \@tfor\@tempa	:=#3\do{\csname	@ov\@tempa false\endcsname}\@ovxx
+  #1\unitlength	\@ovyy #2\unitlength
+  \@tempdimb \ifdim \@ovyy >\@ovxx \@ovxx\else \@ovyy \fi
+  \@getcirc \@tempdimb
+  \@ovro \ht\@tempboxa \@ovri \dp\@tempboxa
+  \@ovdx\@ovxx \advance\@ovdx -\@tempdima \divide\@ovdx	\tw@
+  \@ovdy\@ovyy \advance\@ovdy -\@tempdima \divide\@ovdy	\tw@
+  \@circlefnt \setbox\@tempboxa
+  \hbox{\if@ovr	\@ovvert32\kern	-\@tempdima \fi
+  \if@ovl \kern	\@ovxx \@ovvert01\kern -\@tempdima \kern -\@ovxx \fi
+  \if@ovt \@ovhorz \kern -\@ovxx \fi
+  \if@ovb \raise \@ovyy	\@ovhorz \fi}\advance\@ovdx\@ovro
+  \advance\@ovdy\@ovro \ht\@tempboxa\z@	\dp\@tempboxa\z@
+  \@put{-\@ovdx}{-\@ovdy}{\box\@tempboxa}%
+  \endgroup}
+%
+\def\@ovvert#1#2{\vbox to \@ovyy{%
+    \if@ovb \@tempcntb \@tempcnta \advance \@tempcntb by #1\relax
+	\kern -\@ovro \hbox{\char \@tempcntb}\nointerlineskip
+    \else \kern	\@ovri \kern \@ovdy \fi
+    \leaders\vrule \@width \@wholewidth\vfil \nointerlineskip
+    \if@ovt \@tempcntb \@tempcnta \advance \@tempcntb by #2\relax
+	\hbox{\char \@tempcntb}%
+    \else \kern	\@ovdy \kern \@ovro \fi}}
+%
+\def\@ovhorz{\hbox to \@ovxx{\kern \@ovro
+    \if@ovr \else \kern	\@ovdx \fi
+    \leaders \hrule \@height \@wholewidth	\hfil
+    \if@ovl \else \kern	\@ovdx \fi
+    \kern \@ovri}}
+%
+\def\@@circle{\@ifstar{\@dot}{\@circle}}
+\def\@circle#1{\begingroup \boxmaxdepth	\maxdimen \@tempdimb #1\unitlength
+   \ifdim \@tempdimb >15.5pt\relax \@getcirc\@tempdimb
+      \@ovro\ht\@tempboxa
+     \setbox\@tempboxa\hbox{\@circlefnt
+      \advance\@tempcnta\tw@ \char \@tempcnta
+      \advance\@tempcnta\m@ne \char \@tempcnta \kern -2\@tempdima
+      \advance\@tempcnta\tw@
+      \raise \@tempdima	\hbox{\char\@tempcnta}\raise \@tempdima
+	\box\@tempboxa}\ht\@tempboxa\z@	\dp\@tempboxa\z@
+      \@put{-\@ovro}{-\@ovro}{\box\@tempboxa}%
+   \else  \@circ\@tempdimb{96}\fi\endgroup}
+%
+\def\@dot#1{\@tempdimb #1\unitlength \@circ\@tempdimb{112}}
+%
+\def\@circ#1#2{\@tempdima #1\relax \advance\@tempdima .5pt\relax
+   \@tempcnta\@tempdima	\@tempdima 1pt\relax
+   \divide\@tempcnta\@tempdima
+   \ifnum\@tempcnta > 15\relax \@tempcnta 15\relax \fi	
+   \ifnum \@tempcnta >\z@ \advance\@tempcnta\m@ne\fi
+   \advance\@tempcnta #2\relax
+   \@circlefnt \char\@tempcnta}
+%% Initialization
+\@@thinlines
+%
+%
+% *******************************
+% * ARRAY & TABULAR ENVIROMENTS *
+% *******************************
+%
+%
+\def\extracolsep#1{\tabskip #1\relax}
+%
+\def\array{\let\@acol\@arrayacol \let\@classz\@arrayclassz
+ \let\@classiv\@arrayclassiv \let\\\@arraycr\def\@halignto{}\@tabarray}
+%
+\def\endarray{\crcr\egroup\egroup\catcode`@=\active}
+\def\endtabular{\crcr\egroup\egroup $\egroup\catcode`@=\active}
+\expandafter \let \csname endtabular*\endcsname	= \endtabular
+%
+\def\tabular{\def\@halignto{}\@tabular}
+%
+\expandafter \def\csname tabular*\endcsname #1{\def\@halignto{to #1}\@tabular}
+%
+\def\@tabular{\catcode`@=12\leavevmode \hbox	\bgroup	$\let\@acol\@tabacol
+   \let\@classz\@tabclassz
+   \let\@classiv\@tabclassiv \let\\\@tabularcr\@tabarray}
+%
+\def\@tabarray{\catcode`@=12\@ifnextchar[{\@array}{\@array[c]}}
+%
+\def\@array[#1]#2{\setbox\@arstrutbox=\hbox{\vrule
+     \@height\arraystretch \ht\strutbox
+     \@depth\arraystretch	\dp\strutbox
+     \@width\z@}\@mkpream{#2}\edef\@preamble{\halign \noexpand\@halignto
+\bgroup	\tabskip\z@ \@arstrut \@preamble \tabskip\z@ \cr}%
+\let\@startpbox\@@startpbox \let\@endpbox\@@endpbox
+  \if #1t\vtop \else \if#1b\vbox \else \vcenter	\fi\fi
+  \bgroup \let\par\relax
+  \let\@sharp##\let\protect\relax \lineskip\z@\baselineskip\z@\@preamble}
+%
+\def\@arraycr{${\ifnum0=`}\fi\@ifstar{\@xarraycr}{\@xarraycr}}
+\def\@xarraycr{\@ifnextchar[{\@argarraycr}{\ifnum0=`{\fi}${}\cr}}
+%
+\def\@argarraycr[#1]{\ifnum0=`{\fi}${}\ifdim #1>\z@ \@xargarraycr{#1}\else
+   \@yargarraycr{#1}\fi}
+%
+\def\@tabularcr{{\ifnum0=`}\fi\@ifstar{\@xtabularcr}{\@xtabularcr}}
+\def\@xtabularcr{\@ifnextchar[{\@argtabularcr}{\ifnum0=`{\fi}\cr}}
+%
+\def\@argtabularcr[#1]{\ifnum0=`{\fi}\ifdim #1>\z@
+   \unskip\@xargarraycr{#1}\else \@yargarraycr{#1}\fi}
+%
+\def\@xargarraycr#1{\@tempdima #1\advance\@tempdima \dp	\@arstrutbox
+   \vrule \@height\z@ \@depth\@tempdima	\@width\z@ \cr}
+%
+\def\@yargarraycr#1{\cr\noalign{\vskip #1}}
+%
+\def\multicolumn#1#2#3{\multispan{#1}\begingroup
+  \def\@addamp{}\@mkpream{#2}%
+\def\@sharp{#3}\let\protect\relax
+  \let\@startpbox\@@startpbox\let\@endpbox\@@endpbox
+  \@arstrut \@preamble\endgroup\ignorespaces}
+%
+\def\@xexnoop #1\@@{}
+%
+\def\@expast#1{\@xexpast #1*0x\@@}
+%
+\def\@xexpast#1*#2#3#4\@@{\edef\@tempa{#1}\@tempcnta#2\relax
+    \ifnum\@tempcnta >0	\@whilenum\@tempcnta >0\do
+       {\edef\@tempa{\@tempa#3}\advance\@tempcnta by \m@ne}\let\@tempb\@xexpast
+      \else \let\@tempb\@xexnoop\fi
+    \expandafter\@tempb	\@tempa	#4\@@}
+%
+
+\newif\if@firstamp
+\def\@addamp{\if@firstamp \@firstampfalse \else	
+    \edef\@preamble{\@preamble &}\fi}
+\def\@arrayacol{\edef\@preamble{\@preamble \hskip \arraycolsep}}
+\def\@tabacol{\edef\@preamble{\@preamble \hskip	\tabcolsep}}
+\def\@ampacol{\@addamp \@acol}
+\def\@acolampacol{\@acol\@addamp\@acol}
+%
+\def\@mkpream#1{\@firstamptrue\@lastchclass6
+\def\@preamble{}\def\protect{\noexpand\protect\noexpand}\let\@sharp\relax
+\let\@startpbox\relax\let\@endpbox\relax
+\@expast{#1}\expandafter\@tfor \expandafter
+  \@nextchar \expandafter:\expandafter=\@tempa\do{\@testpach\@nextchar
+  \ifcase \@chclass \@classz \or \@classi \or \@classii	\or \@classiii
+    \or	\@classiv \or\@classv \fi\@lastchclass\@chclass}%
+\ifcase	\@lastchclass \@acol
+    \or	\or \@preamerr \@ne\or \@preamerr \tw@\or \or \@acol \fi}
+%
+\def\@arrayclassz{\ifcase \@lastchclass	\@acolampacol \or \@ampacol \or
+   \or \or \@addamp \or
+   \@acolampacol \or \@firstampfalse \@acol \fi
+\edef\@preamble{\@preamble
+  \ifcase \@chnum
+     \hfil$\relax\@sharp$\hfil \or $\relax\@sharp$\hfil	
+    \or	\hfil$\relax\@sharp$\fi}}
+%
+\def\@tabclassz{\ifcase	\@lastchclass \@acolampacol \or	\@ampacol \or
+   \or \or \@addamp \or
+   \@acolampacol \or \@firstampfalse \@acol \fi
+\edef\@preamble{\@preamble
+  \ifcase \@chnum
+     \hfil\ignorespaces\@sharp\unskip\hfil
+     \or \ignorespaces\@sharp\unskip\hfil
+     \or \hfil\hskip\z@	\ignorespaces\@sharp\unskip\fi}}
+%
+\def\@classi{\ifcase \@lastchclass \@acol \@arrayrule \or
+   \@addtopreamble{\hskip \doublerulesep}\@arrayrule\or
+   \or \or \@arrayrule \or
+   \@acol \@arrayrule \or \@arrayrule \fi}
+%
+
+\def\@classii{\ifcase \@lastchclass \or	
+   \@addtopreamble{\hskip .5\arrayrulewidth}\fi}
+%
+\def\@classiii{\ifcase \@lastchclass \@acolampacol \or
+   \@addamp\@acol \or
+   \or \or \@addamp \or
+   \@acolampacol \or \@ampacol \fi}
+%
+\def\@tabclassiv{\@addtopreamble\@nextchar}
+%
+\def\@arrayclassiv{\@addtopreamble{$ \@nextchar$}}
+%
+\def\@classv{\@addtopreamble{\@startpbox{\@nextchar}\ignorespaces
+\@sharp\@endpbox}}
+%
+\def\@addtopreamble#1{\edef\@preamble{\@preamble #1}}
+%
+\newcount\@chclass
+\newcount\@lastchclass
+\newcount\@chnum
+%
+\newdimen\arraycolsep
+\newdimen\tabcolsep
+\newdimen\arrayrulewidth
+\newdimen\doublerulesep
+%
+\arraycolsep=5pt
+\tabcolsep=6pt
+\arrayrulewidth=0.4pt
+\doublerulesep=2pt
+%
+\def\arraystretch{1}	% Default value.
+%
+\newbox\@arstrutbox
+\def\@arstrut{\relax\ifmmode\copy\@arstrutbox\else\unhcopy\@arstrutbox\fi}
+%
+
+\def\@arrayrule{\@addtopreamble{\hskip -.5\arrayrulewidth
+   \vrule \@width \arrayrulewidth\hskip	-.5\arrayrulewidth}}
+%
+\def\@testpach#1{\@chclass \ifnum \@lastchclass=\tw@ 4 \else
+    \ifnum \@lastchclass=3 5 \else
+     \z@ \if #1c\@chnum	\z@ \else
+			      \if #1l\@chnum \@ne \else
+			      \if #1r\@chnum \tw@ \else
+	  \@chclass \if	#1|\@ne	\else
+		    \if	#1@\tw@	\else
+		    \if	#1p3 \else \z@ \@preamerr 0\fi
+  \fi  \fi  \fi	 \fi  \fi  \fi	
+\fi}
+%
+\def\hline{\noalign{\ifnum0=`}\fi\hrule	\@height \arrayrulewidth \futurelet
+   \@tempa\@xhline}
+%
+\def\@xhline{\ifx\@tempa\hline\vskip \doublerulesep\fi
+      \ifnum0=`{\fi}}
+%
+\def\vline{\vrule \@width \arrayrulewidth}
+%
+\newcount\@cla
+\newcount\@clb
+%
+\def\cline#1{\@cline[#1]}
+\def\@cline[#1-#2]{\noalign{\global\@cla#1\relax
+\global\advance\@cla\m@ne
+\ifnum\@cla>0\global\let\@gtempa\@clinea\else
+  \global\let\@gtempa\@clineb\fi
+\global\@clb#2\relax
+\global\advance\@clb-\@cla}\@gtempa
+\noalign{\vskip-\arrayrulewidth}}
+%
+\def\@clinea{\multispan\@cla&\multispan\@clb
+\unskip\leaders\hrule \@height \arrayrulewidth \hfill
+\cr}
+%
+\def\@clineb{\multispan\@clb
+\unskip\leaders\hrule \@height \arrayrulewidth \hfill
+\cr}
+%
+\catcode`@=\active
+%%\catcode`@=12

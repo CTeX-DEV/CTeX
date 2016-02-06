@@ -1,0 +1,27 @@
+% This is the file c19com.fd of the CJK package
+%   for using Asian logographs (Chinese/Japanese/Korean) with LaTeX2e
+%
+% created by Leo Aloft (aloft@ctex.org)
+
+\def\fileversion{4.8.2}
+\def\filedate{2009/09/23}
+\ProvidesFile{c19com.fd}[\filedate\space\fileversion]
+
+% Chinese characters (extension of GB 2312)
+%
+% character set: GBK
+% font encoding: CJK (extended)
+
+\DeclareFontFamily{C19}{com}{\hyphenchar \font\m@ne}
+
+\DeclareFontShape{C19}{com}{m}{n}{<-> CJK * gbksong}{\CJKnormal}
+\DeclareFontShape{C19}{com}{b}{n}{<-> CJK * gbkhei}{\CJKnormal}
+\DeclareFontShape{C19}{com}{bx}{n}{<-> CJK * gbkhei}{\CJKnormal}
+\DeclareFontShape{C19}{com}{m}{sl}{<-> CJK * gbkkaisl}{\CJKnormal}
+\DeclareFontShape{C19}{com}{b}{sl}{<-> CJKb * gbkkaisl}{\CJKbold}
+\DeclareFontShape{C19}{com}{bx}{sl}{<-> CJKb * gbkkaisl}{\CJKbold}
+\DeclareFontShape{C19}{com}{m}{it}{<-> CJK * gbkkai}{\CJKnormal}
+\DeclareFontShape{C19}{com}{b}{it}{<-> CJKb * gbkkai}{\CJKbold}
+\DeclareFontShape{C19}{com}{bx}{it}{<-> CJKb * gbkkai}{\CJKbold}
+
+\endinput

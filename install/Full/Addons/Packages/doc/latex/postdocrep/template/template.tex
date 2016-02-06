@@ -1,0 +1,118 @@
+%% Template of Postdoctoral Research Report
+%%   for using PostDocRep package with LaTeX2e
+%%
+%% Created by Ling-Yun Wu <aloft@ctex.org>
+%%
+%% $Id: template.tex 430 2009-05-13 06:20:12Z aloft $
+
+
+\documentclass[dvipdfm]{PostDocRep}
+% 可选参数：
+% notypeinfo 取消扉页的LaTeX版本信息
+%
+% 下面三个选一个：
+% dvipdfm 使用 dvipdfm(x) 生成最终的 PDF 文档 (缺省设置）
+% dvips 使用 dvips 生成最终的 PS 文档
+% pdftex 使用 pdfLaTeX 生成最终的 PDF 文档
+
+
+% 设置图形文件的搜索路径
+\graphicspath{{chapter/}{figures/}}
+
+% 取消链接的颜色
+%\hypersetup{colorlinks=false}
+
+% 修改章的标题为英文格式
+%\CTEXsetup[name={Chapter~,}, number={\arabic{chapter}}]{chapter}
+
+% 小节标题靠左对齐
+%\CTEXsetup[format+={\flushleft}]{section}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  % 中文封面内容
+  \classification{}
+  \confidential{}
+  \UDC{}
+  \serialnumber{}
+  \school{中国科学院}
+  \title{博士后研究报告~\LaTeX{}~模板}
+  \author{吴凌云}
+  \workdate{2003年9月}{2005年6月}
+  \submitdate{2005年6月}
+  \address{中国科学院（北京）}
+  \englishtitle{\LaTeX{} Template of Postdoctoral Research Report}
+  \major{数学}
+  \submajor{运筹学}
+  \institute{中国科学院数学与系统科学研究院}
+
+  %可选内容：撰写规则中不作要求的内容，一般不需要。
+
+  %如果要在封面显示合作导师，去掉下行的注释符即可。
+  %\advisor{XXX~研究员}
+
+  % 封面、题名页
+  \maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 前言部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+  % 摘要
+  \include{chapter/abstract}
+
+  % 目录
+  \tableofcontents
+  % 表格目录
+  \listoftables
+  % 插图目录
+  \listoffigures
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+  \include{chapter/chap-intro}
+  \include{chapter/chap-math}
+  \include{chapter/chap-tabfig}
+
+
+  % 致谢
+  \include{chapter/thanks}
+
+  % 参考文献
+  % 使用 BibTeX
+  \bibliography{bib/tex}
+  \nocite{*}
+  % 不使用 BibTeX
+  % \include{chapter/bib}
+
+  % 附录
+  \appendix
+
+  \include{chapter/chap-req}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 附件部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+  % 个人简历
+  \include{chapter/resume}
+
+  % 发表文章目录
+  \include{chapter/pub}
+
+
+\end{document}

@@ -1,0 +1,43 @@
+
+怎样将老版 CCT 文档改成使用 CJK 字库的新版 CCT 文档:
+====================================================
+
+1. 安装新版 CCT:
+
+  . Windows:
+
+     1. 从 ftp://ftp.ctex.org/pub/tex/systems/ctex 下载安装
+	中文TeX套装 >= 2.3.2 和 CTeX-fonts >= 2.4.1
+
+     2. 下载安装 ftp://ftp.cc.ac.cn/pub/cct/cct-x.xx-x-CTeX-update.exe 升级包。
+
+  . Linux: 需要安装下述包
+
+    - tetex
+
+    - cct, cct-fonts: ftp://ftp.cc.ac.cn/pub/cct/Linux
+
+    - CJK, CJK-GBKfonts, dvipdfmx: ftp://ftp.cc.ac.cn/pub/cct/CJK
+
+    安装说明见: ftp://ftp.cc.ac.cn/pub/cct/README.pdf 最后一节。
+
+2. 将 .ctx 扩展改成 .tex
+
+3. 将文件头 \documentstyle{carticle}, \documentstyle{article},
+   \documentclass{cctart}, 等等, 改成 \documentclass[CJK]{cctart}
+   (或 \documentclass[CJK]{cctbook}), 删除 \input cchead.sty (如果有的话。)
+   如果有 \footheight 命令也应该去掉，它与 LaTeX2e 不兼容。
+
+4. WinEdt 中用 CCT&LaTeX 按钮编译即可。
+
+   命令行上可用 'ctex' 命令编译, 如:
+
+        ctex mypaper.tex                - 生成 .dvi 文件
+        dvips mypaper                   - 生成 .ps 文件
+        dvipdfmx mypaper                - 生成 .pdf 文件 (也可用 .ps 转换)
+
+   或
+
+        ctex -pdflatex mypaper.tex      - 直接调用 PDFLaTeX 生成 pdf 文件
+
+5. 新版 CCT 的说明参看 ftp://ftp.cc.ac.cn/pub/cct/README.pdf

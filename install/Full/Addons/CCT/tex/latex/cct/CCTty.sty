@@ -1,0 +1,107 @@
+%& -no-cctspace
+%
+% $Id: CCTty.sty,v 1.3 2006/03/25 03:22:48 zlb Exp $
+
+\edef\CCTCatcodeOfAt{\the\catcode`\@}%
+\catcode`\@=11 %
+
+\ifx\@CCTbyte\undefined
+  \ifx\RequirePackage\undefined
+    \input CCT.sty
+  \else
+    \DeclareOption{CJK}{\let\CCTCJKfonts=1}\ProcessOptions
+    \RequirePackage{CCT}
+  \fi
+\fi
+
+\def\CCTtycmd#1#2#3{%
+  \expandafter\def\csname \string #1\string #2\endcsname{#3}}
+
+%
+% ×ÖÌåÃüÁî
+\CCTtycmd ËÎ {\songti}
+\CCTtycmd ¿¬ {\kaishu}
+\CCTtycmd ·Â {\fangsong}
+\CCTtycmd ºÚ {\heiti}
+
+%
+% ×ÖºÅÃüÁî
+\CCTtycmd °ë {\zihaoAny{5pt}}
+\CCTtycmd Îå {\zihaoAny{5pt}}
+\CCTtycmd Áù {\zihaoAny{6pt}}
+\CCTtycmd Æß {\zihaoAny{7pt}}
+\CCTtycmd °Ë {\zihaoAny{8pt}}
+\CCTtycmd Ð¡ {\zihaoAny{8pt}}
+\CCTtycmd ¾Å {\zihaoAny{9pt}}
+\CCTtycmd ±ê {\zihaoAny{10pt}}
+\CCTtycmd ÖÐ {\zihaoAny{12pt}}
+\CCTtycmd ´ó {\zihaoAny{14.4pt}}
+\CCTtycmd ÌØ {\zihaoAny{17.2pt}}
+\CCTtycmd Ë« {\zihaoAny{20pt}}
+\CCTtycmd ¾Þ {\zihaoAny{25pt}}
+\CCTtycmd Èþ {\zihaoAny{30pt}}
+\CCTtycmd ËÁ {\zihaoAny{40pt}}
+
+%
+% ×ÖÐÍÃüÁî
+\CCTtycmd ÊÝ {\CCTtyaspect{0.8}{1}}
+\CCTtycmd À« {\CCTtyaspect{1.2}{1}}
+\CCTtycmd ±â {\CCTtyaspect{1.0}{0.8}}
+
+%
+% Change character's aspect ratio to #1em \times #2em
+% CCT/CJK do not allow setting arbitrary width and height. 
+% Solutions:
+%   1. use a set of fonts with aspect ratio 0.8:1, 1.2:1, and 1:0.8
+%   2. use the graphicx package to scale the characters.
+%      drawback: characters only correctly displayed after converting to PS.
+\def\CCTtyaspect#1#2{%
+  %--- fontwidth=width, scaling height
+  %???\ifx\@tempdima\undefined \newdimen\@tempdima \fi
+  %???\if@CCT@CJK
+  %???  \@tempdima=\@CCTfontsize\p@
+  %???\else
+  %???  \@tempdima=\fontdimen6\DaXiao
+  %???\fi
+  %???\@tempdima=#1\@tempdima
+  %???\expandafter\zihaoAny\expandafter{\the\@tempdima}%
+  %???% Scaling: height := height * #2/#1
+  %???\@tempdima=#2\p@
+  %???\divide\@tempdima by #1
+  %--- use current font, scaling both width and height
+  \def\@CCTaccent##1##2{\@CCTscale{#1}{#2}}%
+}
+
+\def\@CCTscale#1#2#3{{%
+  \setbox0\hbox{#3}%
+  \setbox2\hbox{%
+    \ifx\pdfliteral\undefined
+      \special{ps: currentpoint currentpoint translate #1 #2
+		scale neg exch neg exch translate}%
+    \else
+      \pdfliteral{ q #1\space0 0 #2\space 0 0 cm}%
+    \fi
+    \rlap{\copy0}%
+    \ifx\pdfliteral\undefined
+      \special{ps: currentpoint currentpoint translate 1 #1 div 1 #2 div scale
+		neg exch neg exch translate}%
+    \else
+      \pdfliteral{ Q}%
+    \fi
+  }%
+  \ht2=#2\ht0 \dp2=#2\dp0 \wd2=#1\wd0 \box2
+}}
+
+%
+% Single character control sequence
+\def\@CCTtemp#1{\expandafter\def\csname \string #1\endcsname##1{%
+  \csname \string #1\string ##1\endcsname}}
+\@CCTcnta 161\relax
+\loop
+  \expandafter\expandafter\expandafter\@CCTtemp\@CCTbyte{\@CCTcnta}{}\relax
+  \ifnum\@CCTcnta<254 \advance\@CCTcnta \@ne
+\repeat
+
+\catcode`\@=\CCTCatcodeOfAt
+
+\endinput

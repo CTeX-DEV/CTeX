@@ -1,0 +1,20 @@
+\input vanilla.sty
+%\def\xiang#1#2{\line{\hss\vbox{\parindent=0pt
+%\hsize=13.8true cm\hskip-0.7true cm#1 #2}}}
+%%\input intface.sty
+%
+\nopagenumbers
+%
+\pageno=\firstpageno
+%
+\headline={\ifnum\pageno=\firstpageno
+              \firsthead
+           \else
+              \ifodd\pageno
+                \rightheadline
+              \else
+                \leftheadline
+              \fi
+            \fi}
+\voffset=2\baselineskip
+

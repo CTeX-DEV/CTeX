@@ -1,0 +1,162 @@
+%!PS-Adobe-3.0 Resource-CMap
+%%DocumentNeededResources: ProcSet (CIDInit)
+%%IncludeResource: ProcSet (CIDInit)
+%%BeginResource: CMap (TeX-c19-94-0)
+%%Title: (TeX-c19-94-0 TeX c19-940)
+%%Version: 1.000
+%%EndComments
+/CIDInit /ProcSet findresource begin
+begincmap
+12 dict begin
+/CIDSystemInfo
+<< /Registry (TeX)
+/Ordering (c19-94)
+/Supplement 0
+>> def
+/CMapName /TeX-c19-94-0 def
+/CMapType 2 def
+1 begincodespacerange
+<00> <83>
+endcodespacerange
+100 beginbfchar
+<00> <E83F>
+<01> <E840>
+<02> <E841>
+<03> <E842>
+<04> <E843>
+<05> <E844>
+<06> <E845>
+<07> <E846>
+<08> <E847>
+<09> <E848>
+<0A> <E849>
+<0B> <E84A>
+<0C> <E84B>
+<0D> <E84C>
+<0E> <E84D>
+<0F> <E84E>
+<10> <E84F>
+<11> <E850>
+<12> <E851>
+<13> <E852>
+<14> <E853>
+<15> <E854>
+<16> <E855>
+<17> <E856>
+<18> <E857>
+<19> <E858>
+<1A> <E859>
+<1B> <E85A>
+<1C> <E85B>
+<1D> <E85C>
+<1E> <E85D>
+<1F> <E85E>
+<20> <E85F>
+<21> <E860>
+<22> <E861>
+<23> <E862>
+<24> <E863>
+<25> <E864>
+<26> <FFFE>
+<27> <FFFE>
+<28> <FFFE>
+<29> <FFFE>
+<2A> <FFFE>
+<2B> <FFFE>
+<2C> <FFFE>
+<2D> <FFFE>
+<2E> <FFFE>
+<2F> <FFFE>
+<30> <FFFE>
+<31> <FFFE>
+<32> <FFFE>
+<33> <FFFE>
+<34> <FFFE>
+<35> <FFFE>
+<36> <FFFE>
+<37> <FFFE>
+<38> <FFFE>
+<39> <FFFE>
+<3A> <FFFE>
+<3B> <FFFE>
+<3C> <FFFE>
+<3D> <FFFE>
+<3E> <FFFE>
+<3F> <FFFE>
+<40> <FFFE>
+<41> <FFFE>
+<42> <FFFE>
+<43> <FFFE>
+<44> <FFFE>
+<45> <FFFE>
+<46> <FFFE>
+<47> <FFFE>
+<48> <FFFE>
+<49> <FFFE>
+<4A> <FFFE>
+<4B> <FFFE>
+<4C> <FFFE>
+<4D> <FFFE>
+<4E> <FFFE>
+<4F> <FFFE>
+<50> <FFFE>
+<51> <FFFE>
+<52> <FFFE>
+<53> <FFFE>
+<54> <FFFE>
+<55> <FFFE>
+<56> <FFFE>
+<57> <FFFE>
+<58> <FFFE>
+<59> <FFFE>
+<5A> <FFFE>
+<5B> <FFFE>
+<5C> <FFFE>
+<5D> <FFFE>
+<5E> <FFFE>
+<5F> <FFFE>
+<60> <FFFE>
+<61> <FFFE>
+<62> <FFFE>
+<63> <FFFE>
+endbfchar
+32 beginbfchar
+<64> <FFFE>
+<65> <FFFE>
+<66> <FFFE>
+<67> <FFFE>
+<68> <FFFE>
+<69> <FFFE>
+<6A> <FFFE>
+<6B> <FFFE>
+<6C> <FFFE>
+<6D> <FFFE>
+<6E> <FFFE>
+<6F> <FFFE>
+<70> <FFFE>
+<71> <FFFE>
+<72> <FFFE>
+<73> <FFFE>
+<74> <FFFE>
+<75> <FFFE>
+<76> <FFFE>
+<77> <FFFE>
+<78> <FFFE>
+<79> <FFFE>
+<7A> <FFFE>
+<7B> <FFFE>
+<7C> <FFFE>
+<7D> <FFFE>
+<7E> <FFFE>
+<7F> <FFFE>
+<80> <FFFE>
+<81> <FFFE>
+<82> <FFFE>
+<83> <FFFE>
+endbfchar
+endcmap
+CMapName currentdict /CMap defineresource pop
+end
+end
+%%EndResource
+%%EOF

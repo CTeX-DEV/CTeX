@@ -1,0 +1,371 @@
+%& -no-cctspace
+%
+% $Id: cctbase.sty,v 1.10 2006/05/17 15:39:48 zlb Exp $
+%
+% Definitions for typesetting Chinese documents with LaTeX2e
+%
+% This package should work with 'book' and 'article' classes.
+%
+
+%
+% This file contains Chinese characters and should be CCTed to generate
+% a file with the extension .STY for use as a LaTeX2e package:
+%
+%	cct cctbase.ctx cctbase.sty
+%
+% Author:	张林波 (zlb@lsec.cc.ac.cn)
+%		汪道柳 (wdl@lsec.cc.ac.cn}
+%
+%
+% Changelog:
+%
+%  20060517  -  redefine \@seccntformat etc. only when \sectionname is defined
+%		(fixing bug with '\documentclass{book}\usepackage{cctbase} ...')
+%
+%  20050830  -	change `\ormfamily', `\oset@fontsize', etc., to
+%		`\CCT@rmfamily', `\CCT@set@fontsize', etc.
+%
+%  20050709  -	keep original values of \topsep, \partopsep, etc.
+%
+%  20050427  -	when redefine \title, allow it to have an optional argument
+%		(for supporting beamer)
+%
+
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesPackage{cctbase}[2006/05/17]
+
+\newif\ifCJKCCT \CJKCCTfalse
+\newif\ifstandard@zihao \standard@zihaotrue
+\newif\ifCCT@punct \CCT@puncttrue
+
+\DeclareOption{CJKCCT}{\CJKCCTtrue}
+\DeclareOption{CCT047}{\CCT@punctfalse}
+\DeclareOption{zihaoAny}{\standard@zihaofalse}
+\DeclareOption{CJK}{\let\CCTCJKfonts=1}
+\DeclareOption{enc=GBK}{\let\CCTGBKencoding=1}
+\DeclareOption{enc=GB}{\let\CCTGBKencoding=0}
+\DeclareOption{CCTdebug}{\PassOptionsToPackage{\CurrentOption}{CCT}}
+\ProcessOptions
+
+%\ifCJKCCT
+%  \RequirePackage{CJKCCT}
+%\else
+  \ifCCT@punct
+    \RequirePackage{CCT}
+  \else
+    \RequirePackage{cchead}
+    \RequirePackage{CCT047}
+  \fi
+%\fi
+
+%
+% Make chars 128-255 active
+%
+%%%\@tempcnta "80\relax
+%%%\loop
+%%%  \catcode\@tempcnta \active
+%%%  \ifnum\@tempcnta < "0FF \advance\@tempcnta \@ne
+%%%\repeat
+
+%
+% Define \chntoday, and reset default \date
+\def\chntoday{\the\year~年~\the\month~月~\the\day~日}
+\date{\chntoday}
+
+% \CS is equal to Chinese inter-word glue
+\ifx\CS\undefined
+  \ifx\CJKglue\undefined
+    \def\CS{{\CC\ }}
+  \else
+    \def\CS{\CJKglue}
+  \fi
+\fi
+
+% \ccnospace suppresses spaces before and after the argument
+\def\ccnospace#1{\leavevmode\unskip #1\ignorespaces}
+
+\newcommand\chnno@one[1]{%
+  \ifcase#1 零\or 一\or 二\or 三\or 四\or 五\or 六\or 七\or 八\or 九\or 十%
+  \else\@ctrerr\fi}
+
+\def\chnno@two#1#2{%
+  \ifnum #1=1\else\chnno@one{#1}\unskip\CS\fi 十\unskip
+  \ifnum #2=0\else\CS\chnno@one{#2}\fi\unskip
+}
+
+\newcommand\chnno[1]{%
+  \ifnum\arabic{#1}>99\@ctrerr\else
+    \ifnum\arabic{#1}>10
+      \expandafter\chnno@two\the\value{#1}\unskip
+    \else
+      \chnno@one{\arabic{#1}}\unskip
+    \fi
+  \fi}
+
+%
+% Change \@seccntformat to use \sectionname, \subsectionname, etc.
+%org \def\@seccntformat#1{\csname the#1\endcsname\quad}
+\def\@seccntformat#1{\csname #1name\endcsname\quad}%   !!!
+
+\ifx \sectionname \undefined \else %------------------------------------------
+%
+% Change \@sect to use \sectionname, \subsectionname, etc., in the table of
+% contents
+\def\@sect#1#2#3#4#5#6[#7]#8{%
+  \ifnum #2>\c@secnumdepth
+    \let\@svsec\@empty
+  \else
+    \refstepcounter{#1}%
+    \protected@edef\@svsec{\@seccntformat{#1}\relax}%
+  \fi
+  \@tempskipa #5\relax
+  \ifdim \@tempskipa>\z@
+    \begingroup
+      #6{%
+        \@hangfrom{\hskip #3\relax\@svsec}%
+          \interlinepenalty \@M #8\@@par}%
+    \endgroup
+    \csname #1mark\endcsname{#7}%
+    \addcontentsline{toc}{#1}{%
+      \ifnum #2>\c@secnumdepth \else
+%org    \protect\numberline{\csname the#1\endcsname}%
+        \protect\numberline{\csname #1name\endcsname}%        !!!
+      \fi
+      #7}%
+  \else
+    \def\@svsechd{%
+      #6{\hskip #3\relax
+      \@svsec #8}%
+      \csname #1mark\endcsname{#7}%
+      \addcontentsline{toc}{#1}{%
+        \ifnum #2>\c@secnumdepth \else
+%org      \protect\numberline{\csname the#1\endcsname}%
+          \protect\numberline{\csname #1name\endcsname}%      !!!
+        \fi
+        #7}}%
+  \fi
+  \@xsect{#5}}
+\fi                                %------------------------------------------
+
+%
+% Change \afterheading to leave \parindent after heading
+\def\@afterheading{%
+  \@nobreaktrue
+  \everypar{%
+    \if@nobreak
+      \@nobreakfalse
+      \clubpenalty \@M
+%org  \if@afterindent \else
+%org    {\setbox\z@\lastbox}%
+%org  \fi
+    \else
+      \clubpenalty \@clubpenalty
+      \everypar{}%
+    \fi}}
+
+% Change default font size and style in \caption.
+% Insert \pushziti and \popziti to avoid changing style of Chinese chars.
+% (based on article/book classes).
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+%org \sbox\@tempboxa{#1: #2}%
+  \sbox\@tempboxa{\pushziti\small #1: #2\popziti}%          !!!
+  \ifdim \wd\@tempboxa >\hsize
+%org   #1: #2\par
+    {\pushziti\small #1: #2\popziti\par}%                   !!!
+  \else
+    \global \@minipagefalse
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+%
+% Match Chinese typefaces to LaTeX typefaces
+\newcommand\@matchccfont[3]{%
+  \ifx#2\undefined\else\let#1#2\fi
+  \let#2#1\def#1{#2#3}
+}
+
+% Use \heiti for \bfseries
+\@matchccfont{\bfseries}{\CCT@bfseries}{\heiti}
+
+% Use \songti for \rmfamily, \mdseries, \upshape
+\@matchccfont{\rmfamily}{\CCT@rmfamily}{\songti}
+\@matchccfont{\mdseries}{\CCT@mdseries}{\songti}
+\@matchccfont{\upshape}{\CCT@upshape}{\songti}
+
+% Use \kaishu for \itshape
+\@matchccfont{\itshape}{\CCT@itshape}{\kaishu}
+
+% Use \fangsong for \slshape, \sffamily
+\@matchccfont{\slshape}{\CCT@slshape}{\fangsong}
+\@matchccfont{\sffamily}{\CCT@sffamily}{\fangsong}
+
+% Use \kaishu for \ttfamily
+\ifCCT@punct
+  \@matchccfont{\ttfamily}{\CCT@ttfamily}{\zihaoAny{1em}\kaishu
+    \protect\CCTpunctfalse}
+\else
+  \@matchccfont{\ttfamily}{\CCT@ttfamily}{\kaishu}
+\fi
+
+%
+% Map Chinese and LaTeX2e font sizes by redefining
+% \set@fontsize{baselinestretch}{point size}{baselineskip}
+%
+% We also set \parindent=2\ccwd if current parindent is not zero.
+\let\CCT@set@fontsize=\set@fontsize
+\def\set@fontsize#1#2#3{%
+  \CCT@set@fontsize{#1}{#2}{#3}%
+  % Note: #2 may or may not contain an unit
+  \ifstandard@zihao
+    {\afterassignment \remove@to@nnil \@tempdima=#2 pt \@nnil
+      \xdef\@CCTtempa{\the\@tempdima}}%
+    \ifdim \@CCTtempa < 6.25pt \zihao{7}\else
+       \ifdim \@CCTtempa < 8pt \zihao{6}\else
+          \ifdim \@CCTtempa < 9.2pt \zihao{-5}\else
+             \ifdim \@CCTtempa < 10.61pt \zihao{5}\else
+                \ifdim \@CCTtempa < 12.16pt \zihao{-4}\else
+                   \ifdim \@CCTtempa < 14pt \zihao{4}\else
+                      \ifdim \@CCTtempa < 17.5pt \zihao{3}\else
+                         \ifdim \@CCTtempa < 23pt \zihao{2}\else
+                            \ifdim \@CCTtempa < 30pt \zihao{1}\else
+                               \zihao{0}\relax
+    \fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \else
+    \zihaoAny{#2}%
+  \fi
+  \ifdim\parindent=0pt\else\parindent 2\ccwd\fi
+}
+
+% Change definition of \numberline to allow wider section/chapter labels in
+% \tableofcontents
+%org \def\numberline#1{\hb@xt@\@tempdima{#1\hfil}}
+\def\numberline#1{\ifx\relax#1\relax\else#1\quad\fi}% !!!
+
+%=========== suppress extra inter-line spacing in \list environments
+%%%\setlength\partopsep{0pt}
+%%%\def\@listI{\leftmargin\leftmargini
+%%%            \parsep 0pt
+%%%            \topsep \parsep
+%%%            \itemsep \parsep}
+%%%\@listI
+%%%\def\@listii {\leftmargin\leftmarginii
+%%%              \labelwidth\leftmarginii
+%%%              \advance\labelwidth-\labelsep
+%%%              \parsep    \z@ \@plus\z@  \@minus\z@
+%%%              \topsep    \parsep
+%%%              \itemsep   \parsep}
+%%%\def\@listiii{\leftmargin\leftmarginiii
+%%%              \labelwidth\leftmarginiii
+%%%              \advance\labelwidth-\labelsep
+%%%              \parsep    \z@ \@plus\z@  \@minus\z@
+%%%              \topsep    \parsep
+%%%              \itemsep   \parsep}
+%%%\def\@listiv{\leftmargin\leftmarginiv
+%%%              \labelwidth\leftmarginiv
+%%%              \advance\labelwidth-\labelsep
+%%%              \parsep    \z@ \@plus\z@  \@minus\z@
+%%%              \topsep    \parsep
+%%%              \itemsep   \parsep}
+%%%\def\@listv{\leftmargin\leftmarginv
+%%%              \labelwidth\leftmarginv
+%%%              \advance\labelwidth-\labelsep
+%%%              \parsep    \z@ \@plus\z@  \@minus\z@
+%%%              \topsep    \parsep
+%%%              \itemsep   \parsep}
+%%%\def\@listvi{\leftmargin\leftmarginvi
+%%%              \labelwidth\leftmarginvi
+%%%              \advance\labelwidth-\labelsep
+%%%              \parsep    \z@ \@plus\z@  \@minus\z@
+%%%              \topsep    \parsep
+%%%              \itemsep   \parsep}
+%
+% Change default margins for \list environments
+\setlength\leftmargini   {2\ccwd}
+\setlength\leftmarginii  {\leftmargini}
+\setlength\leftmarginiii {\leftmargini}
+\setlength\leftmarginiv  {\leftmargini}
+\setlength\leftmarginv   {\ccwd}
+\setlength\leftmarginvi  {\ccwd}
+\setlength\leftmargin    {\leftmargini}
+\setlength\labelsep      {.5\ccwd}
+\setlength\labelwidth    {\leftmargini}
+
+%
+\setlength\listparindent{2\ccwd}
+% Change \listparindent to 2\ccwd in \list
+\def\list#1#2{\ifnum \@listdepth >5\relax \@toodeep
+     \else \global\advance\@listdepth\@ne \fi
+  \rightmargin \z@ \listparindent2\ccwd \itemindent \z@
+  \csname @list\romannumeral\the\@listdepth\endcsname
+  \def\@itemlabel{#1}\let\makelabel\@mklab \@nmbrlistfalse #2\relax
+  \@trivlist
+  \parskip\parsep \parindent\listparindent
+  \advance\linewidth -\rightmargin \advance\linewidth -\leftmargin
+  \advance\@totalleftmargin \leftmargin
+  \parshape \@ne \@totalleftmargin \linewidth
+  \ignorespaces}
+
+%
+% Use \bfseries in the title
+\let\title@bak=\title
+\def\title{\@ifnextchar[{\CCT@title@}{\CCT@title@@}}
+\def\CCT@title@[#1]#2{\title@bak[#1]{#2}}
+\def\CCT@title@@#1{\title@bak{\bfseries\biaosong #1}}
+
+\def\baselinestretch{1.3}\normalsize
+
+%
+% This fixes a small bug in the theorem environments of LaTeX which 
+% infects the old CCT ('Unexpected error.' when patching dvi).
+\def\@opargbegintheorem#1#2#3{\trivlist
+      \item[\hskip \labelsep{\bfseries #1\ #2\ ({#3})}]\itshape}
+
+%
+% CCT accents
+\newenvironment{CCTdot}
+   {\bgroup
+    \ifCCT@punct
+      \def\@CCTaccent##1##2{\if@CCTispunct\else
+        \leavevmode\rlap{\hskip 0.5em\vbox
+          to 0pt{\if@CCT@CJK \vskip0.25em\else \vskip0.35em\fi
+            \hbox to 0pt{\hss
+            {\fontfamily{cmr}\fontseries{bx}\fontshape{n}\selectfont .}\hss
+          }\vss}}%
+        \fi
+      }%
+    \else
+      \def\@CCTaccent##1##2{%
+        % Don't put dots under punctuation chars
+        \expandafter\ifx\csname @CCTpre\string ##1\string ##2\endcsname\relax
+	  \expandafter\ifx\csname @CCTpost\string ##1\string ##2\endcsname\relax
+	    \leavevmode\rlap{\hskip 0.5em\vbox
+	      to 0pt{\vskip 0.225em\hbox to 0pt{\hss
+	        %\tiny$\bullet$\hss
+	        %\rule{0.1em}{0.1em}\hss
+	        {\fontfamily{cmr}\fontseries{bx}\fontshape{n}\selectfont .}\hss
+	      }\vss}}%
+	  \fi\fi
+      }%
+    \fi
+   }
+   {\egroup}
+
+\newenvironment{CCTrotate}[1][90]
+   {\expandafter\ifx\csname rotatebox\endcsname\relax
+      \errmessage{Warning: CCTrotate requires the `graphicx' package}%
+    \fi
+    \bgroup\def\@CCTaccent##1##2{\rotatebox[origin=c]{#1}}}%
+   {\egroup}
+
+%
+% Adjust ziti and size for verbatim mode (done with \ttfamily)
+\ifCCT@punct
+  % \CCTpunctfalse and \zihaoAny added in \ttfamily
+  \renewcommand{\verbatim@font}{\normalfont\ttfamily\CCTbreakfalse}
+\else
+  \renewcommand{\verbatim@font}{\normalfont\ttfamily\zihaoAny{1em}}
+\fi
+
+\endinput

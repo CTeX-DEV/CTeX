@@ -1,0 +1,544 @@
+% $Id: CCTfntef.sty,v 1.8 2005/11/18 13:26:17 zlb Exp $
+%
+% This is the file CCTfntef.sty, CCT version of CJKfntef
+% One parts of this package are copied from the package {CJKfntef},
+% and the rest are modified version of some CCT macros.
+%
+% By Wenchang Sun
+%
+% Version 4.5.3-4e (11-18-2005)
+%
+%
+%  Changelog
+%
+%      2005/11/18    Add \PassoptionsToPackage ...
+%
+%      2005/02/27   Redefine \CCT@hooka and \UL@CCT@hooka to be compatible with ccmap.sty
+%
+%      2004/11/05   \newif\ifCCT@underwave@
+%                   \newif\ifCCT@sout@
+%                   \newif\ifCCT@xout@
+%                   \newcommand{\CCTxoutheight}{-0.90em}
+%                   \newcommand{\CCTunderwavesepa}{0.20em}
+%                   redefine under wave  sep/basesep, \markoverwith, ...
+%
+% Macros:
+%   \CCTunderdot{...}
+%   \CCTunderline[*]{...}
+%   \CCTunderdblline[*]{...}
+%   \CCTunderwave[*]{...}
+%   \CCTsout[*]{...}
+%   \CCTxout[*]{...}
+%
+%   The following nesting combinations are allowed:
+%
+%     \CCTunderdot{...\CCTunderline[*]{...}...}
+%     \CCTunderdot{...\CCTunderdblline[*]{...}...}
+%     \CCTunderdot{...\CCTunderwave[*]{...}...}
+%     \CCTunderdot{...\CCTsout[*]{...}...}
+%     \CCTunderdot{...\CCTxout[*]{...}...}
+%
+%     \CCTunderline[*]{...\CCTunderdot{...}...}
+%     \CCTunderdblline[*]{...\CCTunderdot{...}...}
+%     \CCTunderwave[*]{...\CCTunderdot{...}...}
+%     \CCTsout[*]{...\CCTunderdot{...}...}
+%     \CCTxout[*]{...\CCTunderdot{...}...}
+%
+% Environment:
+%   CCTfilltwosides
+%
+
+\NeedsTeXFormat{LaTeX2e}[1998/06/01]
+\def\fileversion{4.5.3-4d}
+\def\filedate{2005/11/18}
+\ProvidesPackage{CCTfntef}[\filedate\space\fileversion]
+
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{CCT}}
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{ulem}}
+\ProcessOptions\relax
+
+
+\RequirePackage{CCT}[2004/11/03]
+\RequirePackage{ulem}[2000/05/26]
+
+\newdimen\UL@lastkern
+\newskip\CCT@skip
+\endlinechar \m@ne
+
+\ifx\CCT@hooka@@\undefined
+   \newtoks\CCT@hooka@@
+   \CCT@hooka@@{}
+   \def\CCT@hooka{\the\CCT@hooka@@}
+\fi
+
+
+\let\LA@CCTdoskip\@CCTdoskip
+\let\LA@CCTdonobreakskip\@CCTdonobreakskip
+
+\def\UL@CCTdoskip{
+  \ifx\ \LA@space
+    \LA@hskip \@CCTskip
+  \else
+    \egroup
+    \UL@stop
+    \ifnum\lastkern = \thr@@
+      \LA@hskip \@CCTskip
+    \else
+      \global\UL@skip \@CCTskip
+      \UL@leaders
+    \fi
+    \UL@start
+    \bgroup
+  \fi}
+
+\def\UL@CCTdonobreakskip{
+  \ifx\ \LA@space
+    \LA@hskip \@CCTskip
+  \else
+    \egroup
+    \UL@stop
+    \LA@penalty \@M
+    \ifnum\lastkern = \thr@@
+      \LA@hskip \@CCTskip
+    \else
+      \global\UL@skip \@CCTskip
+      \UL@leaders
+    \fi
+    \LA@penalty \@M
+    \UL@start
+    \bgroup
+  \fi}
+
+
+\ifx\CCTsymbol\undefined
+  \let\CCTsymbol\symbol
+\fi
+
+\newskip\CCT@fntefSkip
+\newcount\CCT@nest
+\newbox\CCT@underdotBox
+\newbox\CCT@ULbox
+
+\newcommand{\CCT@fntefDimen}{1.1em}
+
+\newif\ifCCT@UL@
+\CCT@UL@false
+
+\newif\ifCCT@sout@
+\CCT@sout@false
+
+\newif\ifCCT@xout@
+\CCT@xout@false
+
+\newif\ifCCT@underdot@
+\CCT@underdot@false
+
+\if\CCTCJKfonts1
+  \newcommand{\CCTunderdotbasesep}{0.20em}
+  \newcommand{\CCTunderdotsep}{0.08em}
+  \newcommand{\CCTunderlinebasesep}{0.20em}
+  \newcommand{\CCTunderlinesep}{0.10em}
+  \newcommand{\CCTunderdbllinebasesep}{0.20em}
+  \newcommand{\CCTunderdbllinesep}{0.17em}
+  \newcommand{\CCTunderwavebasesep}{0.20em}
+  \newcommand{\CCTunderwavesepa}{0.20em}
+  \newcommand{\CCTunderwavesep}{0.20em}
+  \newcommand{\CCTsoutheight}{0.35em}
+  \newcommand{\CCTxoutheight}{-0.90em}
+\else
+  \newcommand{\CCTunderdotbasesep}{0.30em}
+  \newcommand{\CCTunderdotsep}{0.18em}
+  \newcommand{\CCTunderlinebasesep}{0.30em}
+  \newcommand{\CCTunderlinesep}{0.17em}
+  \newcommand{\CCTunderdbllinebasesep}{0.30em}
+  \newcommand{\CCTunderdbllinesep}{0.27em}
+  \newcommand{\CCTunderwavebasesep}{0.40em}
+  \newcommand{\CCTunderwavesepa}{0.30em}
+  \newcommand{\CCTunderwavesep}{0.20em}
+  \newcommand{\CCTsoutheight}{0.35em}
+  \newcommand{\CCTxoutheight}{-0.80em}
+\fi
+
+\ifx\color\undefined
+  \newcommand{\CCTunderdotcolor}{}
+  \newcommand{\CCTunderwavecolor}{}
+  \newcommand{\CCTunderlinecolor}{}
+  \newcommand{\CCTunderdbllinecolor}{}
+  \newcommand{\CCTsoutcolor}{}
+  \newcommand{\CCTxoutcolor}{}
+\else
+  \newcommand{\CCTunderdotcolor}{\color{red}}
+  \newcommand{\CCTunderwavecolor}{\color{blue}}
+  \newcommand{\CCTunderlinecolor}{\color{blue}}
+  \newcommand{\CCTunderdbllinecolor}{\color{blue}}
+  \newcommand{\CCTsoutcolor}{\color{red}}
+  \newcommand{\CCTxoutcolor}{\color{blue}}
+\fi
+
+
+%
+% \CCTunderdot:
+%   Add a dot under every CCT non-punctuation character.  The dot position
+%   can be controlled by redefining \CCTunderdotsep (for nesting) and
+%   \CCTunderdotbasesep.
+%
+%   The dot color can be changed by redefining \CCTunderdotcolor.
+%
+\def\CCT@underdotSkip{\z@}
+
+\def\CCT@setunderdotbox#1{\global\setbox\CCT@underdotBox\hbox{{
+    \CCTunderdotcolor
+    \textnormal{#1}}}}
+
+\def\CCT@preUnderdot{
+  \ifnum\CCT@nest = \z@
+    \global\advance\CCT@fntefSkip \CCTunderdotbasesep
+  \fi
+  \global\advance\CCT@nest \@ne
+
+  \xdef\CCT@underdotSkip{\the\CCT@fntefSkip}
+  \global\advance\CCT@fntefSkip \CCTunderdotsep
+
+  \global\advance\CCT@fntefSkip \ht\CCT@underdotBox
+  \global\advance\CCT@fntefSkip \dp\CCT@underdotBox}
+
+\def\CCT@postUnderdot{
+  \global\advance\CCT@fntefSkip -\CCTunderdotsep
+  \global\advance\CCT@fntefSkip -\ht\CCT@underdotBox
+  \global\advance\CCT@fntefSkip -\dp\CCT@underdotBox
+  \gdef\CCT@underdotSkip{\z@}
+
+  \global\advance\CCT@nest \m@ne
+  \ifnum\CCT@nest = \z@
+    \global\advance\CCT@fntefSkip -\CCTunderdotbasesep
+  \fi}
+
+\def\CCT@dotaccent{\if@CCTispunct\else
+        \leavevmode
+        \rlap{
+        \vbox to \z@ {
+        \vskip\CCT@underdotSkip
+        \hbox to \z@ {
+          \hskip \CCT@fntefDimen
+          \hss
+          {\copy\CCT@underdotBox}
+          \hss}
+        \hskip \CCT@fntefDimen
+        \vss}}
+        \fi}%
+
+
+
+
+\newcommand{\CCTunderdot}[2][\textbf{.}]{
+  \rule{0pt}{0pt}
+  \global\CCT@underdot@true
+  \CCT@setunderdotbox{#1}
+  \CCT@preUnderdot
+  \global\let\CCTunderdotsaved@CCTaccent\@CCTaccent
+
+
+  \global\def\@CCTaccent##1##2{\CCTunderdotsaved@CCTaccent{##1}{##2}\CCT@dotaccent}
+
+  #2
+  \global\let\@CCTaccent\CCTunderdotsaved@CCTaccent
+  \global\CCT@underdot@false
+  \CCT@postUnderdot
+  \ignorespaces}
+
+
+%
+% Auxiliary macros needed by \CCTunderline and friends.
+%
+
+\def\CCT@fntefSave{
+  \global\let\LA@CCTaccent\@CCTaccent
+  \global\let\LA@CCT@hooka\CCT@hooka
+  \global\let\CCT@hooka\UL@CCT@hooka
+  \global\let\@CCTdonobreakskip\UL@CCTdonobreakskip
+  \global\let\@CCTdoskip\UL@CCTdoskip
+ }
+
+\def\CCT@fntefRestore{
+  \global\let\@CCTaccent\LA@CCTaccent
+  \global\let\CCT@hooka\LA@CCT@hooka
+  \global\let\@CCTdonobreakskip\LA@CCTdonobreakskip
+  \global\let\@CCTdoskip\LA@CCTdoskip
+  }
+
+\def\CCT@preUL{
+   \rule{0pt}{0pt}
+   \ifCCT@UL@
+    \PackageError{CCTfntef}
+      {Nesting error}
+      {Nesting \string\CCTunderwave[*], \string\CCTunderline[*],
+       \string\CCTsout[*], \string\CCTxout[*],\MessageBreak
+       or \string\CCTunderdblline[*] is not supported.}
+  \else
+    \global\CCT@UL@true
+  \fi
+  \ifCCT@sout@
+    \gdef\CCT@ULskip{\z@}
+  \else
+    \ifCCT@xout@
+      %\setbox\@tempboxa\hbox{{/}}
+      \global\edef\CCT@ULskip{\CCTxoutheight}
+    \else
+      \ifnum\CCT@nest = \z@
+        \global\advance\CCT@fntefSkip \CCT@ULbasesep
+      \fi
+      \global\advance\CCT@nest \@ne
+
+      \global\advance\CCT@fntefSkip \ht\CCT@ULbox
+      \global\advance\CCT@fntefSkip \dp\CCT@ULbox
+
+      \ifCCT@underwave@ \global\advance\CCT@fntefSkip -\CCTunderwavesepa\fi
+      \xdef\CCT@ULskip{\the\CCT@fntefSkip}
+      \global\advance\CCT@fntefSkip \CCT@ULsep
+    \fi
+  \fi}
+
+\def\CCT@postUL{
+  \global\CCT@UL@false
+
+  \ifCCT@sout@
+    \global\CCT@sout@false
+  \else
+    \ifCCT@xout@
+      \global\CCT@xout@false
+    \else
+      \global\advance\CCT@fntefSkip -\CCT@ULsep
+      \global\advance\CCT@fntefSkip -\ht\CCT@ULbox
+      \global\advance\CCT@fntefSkip -\dp\CCT@ULbox
+
+      \global\advance\CCT@nest \m@ne
+      \ifnum\CCT@nest = \z@
+        \global\advance\CCT@fntefSkip -\CCT@ULbasesep
+      \fi
+      \ifCCT@underwave@
+             \global\advance\CCT@fntefSkip\CCTunderwavesepa
+             \global\CCT@underwave@false
+      \fi
+    \fi
+  \fi}
+
+
+\newcount\UL@CCT@tempa
+\def\UL@CCT@hooka{
+\the\CCT@hooka@@
+\global\UL@CCT@tempa\@CCTcnta
+\edef\temptemp{\CCT@fontno}
+\global\edef\CCT@fontno{\temptemp}
+\global\let\saved@CCT@CJKfont\@CCT@CJKfont%%%%%%%%%%%%%
+%\global\def\@CCT@CJKchar{{\@CCT@CJKfont\if@CCTispunct\CCTpunctsymbol{\UL@CCT@tempa}\else\CCTsymbol{\UL@CCT@tempa}\fi}}
+\global\def\@CCT@CJKchar{{\saved@CCT@CJKfont\CCTsymbol{\UL@CCT@tempa}}}
+}
+
+
+
+
+
+\def\CCT@UL{
+  \CCT@preUL
+  \CCT@fntefSave
+
+  \def\@CCTaccent{
+    \if@CCTispunct
+       \gdef\UL@leadtype{}
+    \else
+       \gdef\UL@leadtype{\leaders\copy\ULC@box}
+    \fi
+    \LA@CCTaccent}
+
+  \bgroup
+    \markoverwith{
+%      \lower\CCT@ULskip\copy\CCT@ULbox
+          \vbox to \z@{\vskip \CCT@ULskip   \copy\CCT@ULbox\vss}
+      }
+    \aftergroup\CCT@fntefRestore
+    \aftergroup\CCT@postUL
+    \ULon}
+
+\def\CCT@@UL{
+  \CCT@preUL
+  \CCT@fntefSave
+
+  \bgroup
+    \markoverwith{
+%      \lower\CCT@ULskip\copy\CCT@ULbox
+          \vbox to \z@{\vskip \CCT@ULskip   \copy\CCT@ULbox\vss}
+      }
+    \aftergroup\CCT@fntefRestore
+    \aftergroup\CCT@postUL
+    \ULon}
+
+
+%
+% \CCTunderwave*:
+%   The same as \uwave except that the wavy line is colored (you can change
+%   the color by redefining \CCTunderwavecolor), and the position can be
+%   controlled by redefining \CCTunderwavesep (for nesting) and
+%   \CCTunderwavebasesep.
+%
+% \CCTunderwave:
+%   The same as \CCTunderwave* but ignoring CCT punctuation characters.
+%
+\newif\ifCCT@underwave@  \CCT@underwave@false
+\newcommand{\CCTunderwave}{
+  \global\let\CCT@ULsep \CCTunderwavesep
+  \global\let\CCT@ULbasesep \CCTunderwavebasesep
+  \global\CCT@underwave@true
+  \global\setbox\CCT@ULbox\hbox{{
+    \CCTunderwavecolor
+    \sixly
+    \char 58}}
+
+  \@ifstar\CCT@@UL\CCT@UL}
+
+
+%
+% \CCTunderline*:
+%   The same as \uline except that the line is colored (you can change the
+%   color by redefining \CCTunderlinecolor), and the position can be
+%   controlled by redefining \CCTunderlinesep (for nesting) and
+%   \CCTunderlinebasesep.
+%
+% \CCTunderline:
+%   The same as \CCTunderline* but ignoring CCT punctuation characters.
+%
+\newcommand{\CCTunderline}{
+  \global\let\CCT@ULsep \CCTunderlinesep
+  \global\let\CCT@ULbasesep \CCTunderlinebasesep
+  \global\setbox\CCT@ULbox\hbox{{
+    \CCTunderlinecolor
+    \vtop{\hrule \@height \ULthickness \@width .2em}}}
+
+  \@ifstar\CCT@@UL\CCT@UL}
+
+
+%
+% \CCTunderdblline[*]:
+%   The same as \CCTunderline[*] except that two lines are used for
+%   underlining.
+%
+\newcommand{\CCTunderdblline}{
+  \global\let\CCT@ULsep \CCTunderdbllinesep
+  \global\let\CCT@ULbasesep \CCTunderdbllinebasesep
+
+  \global\setbox\CCT@ULbox\hbox{{
+    \CCTunderdbllinecolor
+    \vtop{
+      \kern -.07em
+      \hrule \@height\ULthickness \@width .2em
+      \kern 1.1\p@
+      \hrule}}}
+
+  \@ifstar\CCT@@UL\CCT@UL}
+
+
+%
+% \CCTsout*:
+%   The same as \sout except that the line is colored (you can change the
+%   color by redefining \CCTsoutcolor), and the position can be controlled
+%   by redefining \CCTsoutheight.
+%
+% \CCTsout:
+%   The same as \CCTsout* but ignoring CCT punctuation characters.
+%
+\def\CCTsout{
+  \global\CCT@sout@true
+  \global\setbox\CCT@ULbox\hbox{{
+    \CCTsoutcolor
+    \vtop{
+      \kern -\CCTsoutheight
+      \hrule \@height\ULthickness \@width .2em}}}
+
+  \@ifstar\CCT@@UL\CCT@UL}
+
+
+%
+% \CCTxout*:
+%   The same as \xout except using colored `/' (you can change the color
+%   by redefining \CCTxoutcolor).
+%
+% \CCTxout:
+%   The same as \CCTxout* but ignoring CCT punctuation characters.
+%
+\def\CCTxout{
+  \global\CCT@xout@true
+  \global\setbox\CCT@ULbox \hbox{{
+     \kern -0.1em
+    {\CCTxoutcolor /}
+    \kern -0.1em}}
+
+  \@ifstar\CCT@@UL\CCT@UL}
+
+
+%
+%  CCTfilltwosides environment:
+%    Align CCT characters to fill two sides.
+%
+%  Usage:
+%    \begin{CCTfilltwosides}{width}
+%      first line \\
+%      second line \\
+%      ... \\
+%      last line
+%    \end{CCTfilltwosides}
+%
+\newif\ifCCT@fillbegin@
+\global\CCT@fillbegin@false
+\newif\ifCCT@filltwosides@
+\global\CCT@filltwosides@false
+
+\newenvironment{CCTfilltwosides}[1]{
+  \leavevmode
+  \vbox\bgroup
+    \global\CCT@filltwosides@true
+    \global\let\CCTfilltwosidessaved@CCTaccent\@CCTaccent
+
+    \def\CCT@ftscr{
+      \egroup
+      \global\CCT@fillbegin@false
+
+      \hbox to #1\bgroup
+        \ignorespaces}
+
+    \let\\ \CCT@ftscr
+
+    \global\def\@CCTaccent##1##2{
+      \ifCCT@fillbegin@
+        \hfill
+      \else
+        \global\CCT@fillbegin@true
+      \fi
+      \CCTfilltwosidessaved@CCTaccent{##1}{##2}}
+
+    \hbox to #1\bgroup
+      \ignorespaces
+ }{
+  \egroup
+  \egroup
+  \global\let\@CCTaccent\CCTfilltwosidessaved@CCTaccent
+  \global\CCT@fillbegin@false
+  \global\CCT@filltwosides@false}
+
+\let\CCTfntef@tempa\relax
+\let\CCTfntef@tempb\relax
+
+\let\@CCT@CJKfont\relax
+\def\CCTfntefpush{
+     \global\let\CCTfntef@tempa\CCT@hooka
+     \global\let\CCTfntef@tempb\@CCT@CJKfont
+     \global\let\CCT@hooka\relax}
+
+\def\CCTfntefpop{
+   \global\let\CCT@hooka\CCTfntef@tempa
+   \global\let\CCTfntef@tempa\relax
+   \global\let\@CCT@CJKfont\CCTfntef@tempb}
+
+
+\endlinechar `\^^M
+
+\endinput

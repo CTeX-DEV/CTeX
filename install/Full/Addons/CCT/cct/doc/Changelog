@@ -1,0 +1,819 @@
+0.0.1
+	. First version. Does not work with LaTeX's cross references
+
+0.0.2
+	. Add \protect's to for working with LaTeX's cross references.
+
+... ...
+
+0.0.8
+	. Handle punctuation chars
+
+0.1.0
+
+0.2.0
+	. Support for CJK fonts
+
+0.2.4
+	. Change interword space to 0pt plus 0.03\ccwd minus 0.02\ccwd if
+	  CJK mode.
+
+0.3.0	
+	. Use skip for interword glue instead of space, renable \ziju command,
+
+	. Set \lccode and \uccode of chars 0x80-0xFF to 0 to prevent
+	  \MakeUppercase from modifying Chinese characters (this only works
+	  for GB2312 encoding, since with GBK encoding the second byte may
+	  be in the range 0x40-0x7E).
+
+0.3.1
+	. Change some formats of the CCT.cfg file.
+
+	. Use \CCTnospace by default.
+
+0.3.3
+	. Add a hack for dealing with the special characters '{', '}', '\', '^'
+	  by mapping them to '0', '1', '2', '3', respectively.
+
+	. Create cctconv.c, only needed with GBK chars whose second byte is
+          one of '\\', '{', '}', '^'.
+
+0.3.4
+	. cctconv.c: '_' -> '4', '~' -> '5' (for hyperref PDF bookmarks)
+
+	. Force CJK mode if PDFTeX/PDFLaTeX
+
+	. Add support for CJK's ^^7f hook.
+
+	. Create cctbm.c for postprocessing of hyperref PDF bookmarks
+	  file (.out), only needed with GBK chars whose second byte is
+	  '\\', '{', '}', '^', '_', or '~'.
+	  Note ZLB: it is now obsoleted by gbk2uni.c
+
+	. Create shell script 'ccttex'
+
+0.4.0
+	. Add \CCTtilde, \nbs, \standardtilde
+
+	. Rewriting of ^^7f, \@CCTMapChar macros,
+	  add \CCTchar macro.
+
+	  CCT's preprocessor inserts '~' for a non break space,
+	  thus calling \CCTtilde in a document processed by the preprocessor
+	  might generate linebreaks at undesirable places (E.g., the comma
+	  on line 496 in cctch2.ctx). cctinit.c is modified for this purpose,
+	  and the new 'cchead.sty' redefines '~' in the \CC macro.
+
+0.4.1   
+	. some minor modifications in CCT.sty, cct.c, cctinit.c, cctspace.c
+
+0.4.2
+	. Create Makefile for compiling DOS executables using crossdjgpp.
+
+0.4.2a
+	. cctconv.c: convert special chars to ^^7f form
+
+0.4.3
+	. cctspace.c: (annoying) startup message suppressed.
+
+	. cct.c: accepts '-' for stdin (input) or stdout (output),
+	  add '-q' option to suppress messages.
+
+	. CCT.sty: now compatible with 2.09 compatibility mode of LaTeX2e.
+
+	. Fix a bug (segfault) in patchdvi
+
+0.4.3a
+	. cct.c: appending of 0x1a at EOF removed.
+
+	. cctinit.c: save/restore catcodes of '@' and '!', add \endinput
+          at end of file.
+
+	. CCT.sty: save/restore catcodes of '@' and '!'
+
+0.4.4
+	. cct.c: 0x0d bug fixed.
+
+0.4.5
+	. gbk2uni.c: processing of \ooo removed.
+
+0.4.6
+	. cctspace.cfg: add '‘', '’', '［', '］' to the COMMON list such
+	  that cctspace won't add '~''s to CCT.cfg
+
+	. cctspace.cfg: add '　' (0xa1a1) to the COMMON list.
+
+0.4.7
+	. cctspace.c, cctconv.c: change cmdline format to the form:
+		[options] [inputfile|-] [outputfile|-]
+
+0.4.8
+	. VC compiler support (by hooklee).
+
+	. release of source code of patchdvi.
+
+	. avoid bad line breaks at, e.g., {\CC xx xx}~{\CC xx xx}
+
+	  cct.c:	append '\def\CCTpreproc{cct v5.17}' to output file.
+	  CCT.sty:	don't call \CCTtilde if \CCTpreproc defined.
+
+	. cctbase.sty, CCT.sty: \begin{CCTdot} ... \end{CCTdot} supoort.
+
+	. CCT.sty: 用户可用 `\if \CCTCJKfonts 1' 来判断是否使用 CJK 字库.
+
+0.4.9
+	. fullpath.c: DOS/Windows port
+
+	. cctspace.c, cct.c, cctinit.c: process argv[0] with fullpath.c
+	  under DOS/Windows
+
+	. cctspace.c:
+
+	  - check for \begin{verbatim}-\end{verbatim}, \begin{comment}-
+	    \end{comment}, and \verb commands, and don't insert spaces
+	    or '~' in verbatim modes.
+
+	  - add '-h' option to display a help message, '-t' option to force
+	    inserting '~' instead of space, and '-v' (verbose) option.
+
+	  - drop possible arguments ('{...}', '[...]') following a TeX
+	    command before testing the command.
+
+	  - add list of TRANSPARENT tokens.
+
+	  - Windows version: first look at current directory, then the
+	    executable directory for cctspace.cfg
+
+	  - 将 \verb 和 \verb* 从 COMMON 表中去掉 (允许 cctspace 在它们
+	    前面加空格.
+
+	  - 将 \CCTchar 加入 COMMON, 改正了两处理将 space 写成 sapce 的
+	    错误.
+
+	  - 从 COMMON 中去掉了 '-', '_', '<', '>', '"', 尚需测试.
+
+	. CCT.sty: LaTeX 下用 \DeclareRobustCommand 定义 \CCTchar,
+	  以便它们能用在如 \section 等命令中; 增加将 0x80 转换成 '6'
+	  的处理。
+
+	. cct.c: 改正 '\r' 处理的 bug.
+
+	. cctbase.sty:
+
+	  - 改变 \@opargbegintheorem 的定义以绕过影响 CCT 的一个
+	    LaTeX 小 bug
+
+	  - 修改了 \set@fontsize 命令的处理, 以正确处理命令参数中
+	    含长度单位的情况
+
+	  - 增加 `zihaoAny' 可选项
+
+	  - 将 \ttfamily 对应的汉字字体调整为楷体
+
+	  - 调整 verbatim 环境中汉字的宽度为两个西文宽
+
+	  - 调整了 CCTdot 中点的大小
+
+	. Integrate hooklee's gbk2uni.c, v0.22
+
+	. patchdvi.c: scale chinese character height (cksum) by ssize/dsize
+	  to allow loading ccfnt? fonts not at its design size (used by
+	  the (new) \zihaoAny command defined in CCT.sty)
+
+	. CCT.sty 0.4.5: add definition for \zihaoAny (can be called either
+	  as, say, \zihaoAny{12.5} or as \zihaoAny{12.5pt}).
+
+	. cctspace.cfg: add \zihaoAny to the COMMON list, add `"' to the
+	  RIGHT list.
+
+0.5.0
+	. ctex-0.1.9
+
+	. add patchchk
+
+	. patchdvi 1.15
+
+	  - add '-p' option for UNIX.
+
+	. patchdvi 1.16
+
+	  - remove the 'ctextemp_' prefix in src specials
+	    (obsolete for ctex >= 0.2.1).
+
+	. patchdvi 1.17
+
+	  - write usage message to stdout instead of stderr.
+
+	  - change 'src:###file' or 'src:###file.tex' to 'src:###file.ctx' if
+	    'file.ctx' exists.
+
+	. add support for MingW32 compiler (gcc 2.8.1).
+
+	  Notes on crossmingw32-990111:
+
+	  - predefined macros: __GNUC__, __MINGW32__, WIN32
+		
+	  - `#error' and `#warning' pragmas can't be used (segfault in cpp)
+
+	  - redefining a defined macro sometimes also leads to segfault.
+
+	  - setenv() not available, substitute with putenv()/getenv()
+
+	. xdvic
+
+	  - add '--cleanpk' option
+
+	  - add '-nofork' option and disable '+nofork' option.
+
+	  - warn about '-sourceposition' option.
+
+	. WinEdt and YAP forward/inverse search support (wedt-yap.c)
+
+	. CCT.sty: add CCTrotate environment (TODO: handle punctuation chars)
+
+	. dvipsc
+
+	  - fixed return code
+
+0.5.0-2
+
+	. ctex-0.2.2
+
+0.5.0-3
+
+	. CCT.sty-0.4.7: fixed a small bug (\ifnum #3#4=\z@ ==> \ifnum #5#6=\z@)
+	  in the macro \CCTpunct
+
+0.6.0-beta 
+	(WARNING: spacing of punct chars is changed and may alter output).
+
+	. cchead.sty (cctinit.c): suppress extra space (\@CCTglue) added to
+	  \fontdimen6 (quad) in \!SetZiJu
+
+	. CCT.sty-0.6.0:
+
+	  - \!SetZiJu modified as in cchead.sty
+
+	  - adjust size of Chinese punctuation characters by prepending or
+	    appending negative width vrules.
+
+	  - kerning (\CCTkern, line break is also disabled).
+
+	   -----------------------------------------------------------------
+	    KNOWN BUG: THE GLUE FOLLOWING A CHINESE CHAR IS NOT REMOVED AT
+	    EOL IF IT'S NOT IMMEDIATELY FOLLOWED BY A CHINESE CHAR, BECAUSE
+	    THE GLUE IS PROTECTED BY KERNS AND PENALTY.
+
+	    Warning: the format of CCT.cfg is changed and the processing
+	    speed is about 20% slower.
+	   -----------------------------------------------------------------
+
+	  - disable line breaks between ASCII-Chinese and Chinese-ASCII
+	    to correctly handle cases like '(“' or '”,'.
+
+	  - newif \ifCCTpunct (default to \CCTpuncttrue), used to control
+	    whether to add punctuation glues, use \CCTpunctfalse to get
+	    uniform width for the punctuation characters and allow
+	    linebreak on them.
+
+	  - put '\ccdummy\!ZiTi' right before setting the Chinese char,
+	    otherwise it might interfere with glues/penalties
+
+	. cctbase.sty:
+
+	  - change option 'debug' to 'CCTdebug', add option
+	    'CCTnopunctadj' to disable adjusting spacing of punctuation
+	    chars (this option should ensure the output to be identical
+	    to previous versions of CCT.sty).
+
+	  - use \CCTpunctfalse and \zihaoAny{1em} in for \ttfamily.
+	    Bug: linebreak between Chinese characters in verbatim environments
+
+	  - vertical placement of CCTdot adjusted using different values
+	    for CCT and CJK modes.
+
+0.6.0-beta1
+
+	. CCT.sty:
+
+	  - add \ifCCTbreak flag
+
+	  - introducing .tbl files
+
+	. cctbase.sty: add \CCTbreakfalse for verbatim modes
+
+0.6.0-beta2
+
+	. add argument #3 to \CCTdefziti as the substitution font
+	  if the font requested is not available.
+
+	. remove the 'gbk' prefix in \@CCTdefziti's arguments (replaced
+	  with a configurable macro \@CCTCJKencoding whose default value
+	  is 'gbk'). CCT.cfg changed accordingly.
+
+	. only call LaTeX2e macros in the preamble to allow \input
+	  CCT.sty after \begin{document}
+
+	. README.tex: add tips for using CCT and CJK at the same time.
+
+	. use \@CCTnewxxx to allocate registers to make CCT.sty reentrant
+	  without using up register numbers.
+
+	. Only call macros \@CCTxxxx<c1><c2>[<c3><c4>] for punctuation chars
+	  to reduce TeX's macros/strings usage.
+
+	. Define ^^Z to \endinput
+
+	. cctbase.sty: CCTdot: don't add dot to punctuation chars: 
+	  [A1-A5][A1-FE]
+
+0.6.0-beta3
+
+	. cctspace.cfg: add '\' to the COMMON list (to support control
+	  sequences using Chinese characters).
+
+	. add '%& -no-cctspace' to CCT*.{sty,cfg}, *.tbl, cctbase.sty
+
+0.6.0-beta4
+
+	. issue an error message when a Chinese character is encountered
+	  in math mode, and convert chars in the range [0xa3, 0xa1..0xfe]
+	  to corresponding ASCII chars
+
+0.6.0-beta5
+
+	. include 'cchead.sty' in CCT.sty if it's not yet included. update
+	  cctbase.sty accordingly (no need to manually include cchead.sty now).
+
+	. broken CCTdot environment in CCT047.sty fixed,
+	  CCT047.sty and cctbase.sty updated.
+
+	. new package `hzcmd'
+
+	. new package `CCTty'
+
+	. cctspace.c: Chinese control sequences are skipped (no '~' gets
+	  inserted before or after them).
+
+	. cctspace.cfg: `\color' added to the COMMON list, '{' and '}'
+	  moved to the COMMON list (no space will be inserted at both
+	  sides of them).
+
+0.6.0	release on Oct 2 2003
+
+0.6.0-2	(Oct 30 2003)
+
+	. CCT.sty: add '\hyphenchar\@CCT@CJKfont=-1'
+
+	. cchead.sty (cctinit.c): add '\hyphenchar\DaXiao=-1'
+
+0.6.0-3	(Jan 12 2004)
+
+	. hzcmd.sty: add support for defining environments with Chinese
+	  names (\newenvironment, \renewenvironment, \begin, \end redefined).
+
+	. cctinit.c: bug fix: "...%\n" ==> "...%%\n"
+
+	. cctspace.c:
+
+	  Added 'VERBATIM_ENV' and 'VERB' sections in cctspace.cfg
+	  for verbatim environments/commands.
+
+	  Fixed a bug in buffer overrun in testing for VERBATIM commands in
+	  main().
+
+	  Possible optional argument following commands in the 'Verbatim'
+	  list is skipped.
+
+	(Feb 29 2004)
+
+	. patchdvi.c v1.18: '-b2' cmd-line option for .png image format.
+
+	(Mar 05 2004: src/ctex-0.2.4c.zip, win32/cct-0.6.0-3.zip,
+	 cct-0.6.0-3-CTeX-update.zip updated)
+
+	. ctex.exe: added '-no-patchdvi' option
+
+	. ctex.exe: fixed a severe bug (memory corruption, only affects WIN32
+	  executables) in do_cmd().
+
+0.6.0-4	(Mar 08 2004)
+
+	. cctspace.c v0.6.0.2: convert CCT's user defined char '#[ddd]'.
+
+	. CCT.cfg: added ' \GBKkern  ！） .0'
+
+	. everb.sty included in the distribution files
+
+0.6.0-5	(Apr 11 2004)
+
+	. Move \GBKkern's from CCT.cfg to GBKkern.cfg
+
+	. Add the following entries to GBKkern.cfg:
+
+		\GBKkern  ！》  .0
+		\GBKkern  ）》  .0
+		\GBKkern  ’》  .0
+		\GBKkern  ”》  .0
+		\GBKkern  ］》  .0
+		\GBKkern  ？》  .0
+		\GBKkern  《（  .0
+		\GBKkern  《［  .0
+
+		\GBKkern  “（  .0
+		\GBKkern  ‘（  .0
+		\GBKkern  ）”  .0
+		\GBKkern  ）’  .0
+		\GBKkern  》）  .0
+		\GBKkern  （《  .0
+
+
+	. everb.sty:
+
+	  - use '\linewidth' instead of '\hsize' in a list environment (for
+	    both 'everbatim' and 'colorboxed' environments).
+
+	  - add an extra group for '\setbox' in '\everb@@@' to protect the
+	    color change.
+
+	  - \everb command now works with CJK
+
+	  - set \{line,column,text}width to \hsize
+
+	  - support 'bg=true|false' and 'box=true|false' parameters
+
+	. text2dvi.c v1.1: added '-CJK' option to use CJK's T1 fonts (a small
+	  bug (off by 1) in v1.0 was also discovered, see the patch below)
+
+	--- text2dvi.c.orig	2003-03-06 13:43:52.000000000 +0800
+	+++ text2dvi.c	2004-04-26 08:55:21.000000000 +0800
+	@@ -101,7 +101,7 @@
+	   fwrite(p,1,i,f_out);				/* font name */
+	   if (!is_postamble) {
+	     /* special command selecting Chinese character's style */
+	-    char p[6]="ZiTi=A"; p[5]+=ziti; i=strlen(p);
+	+    char p[]="ZiTi=A"; p[5]+=ziti; i=strlen(p);
+	     fputc(239,f_out);				/* xxx1 command */
+	     fputc(i,f_out);
+	     fwrite(p,1,i,f_out);
+
+	. GBKpunct: first try 'fontforge', then 'pfaedit'.
+
+	. everb.sty 0.1.3: made more robust with resp. to page breaks
+
+	. everb.sty 0.1.4
+
+	. everb.sty 0.1.5
+
+	. ctex 0.2.5
+
+	. 增加 addr2tex
+
+0.6.0-6 (Apr 14 2004)
+
+	. everb.sty: 0.1.6
+
+0.6.0-7 (Sep 20 2004)
+
+	. cctspace.c v0.6.0.3:
+	  - fixed incorrect help message.
+	  - simply output '\\' if it's followed by a Chinese char
+	    (this fixes the bug: '~' not inserted for the case "\汉字A")
+
+	. cctbook.cls 2004/09/20:
+	  - use \chapterformat macros (default: "\Large\bfseries\centering")
+	    in the macros \@makechapterhead and \@makeschapterhead to
+	    allow user customizations (TODO: \partformat?)
+
+0.61-0 (Sep 22 2004)
+
+	. CCT.sty 0.61-0 [2004/09/22]
+	  (see Changelog in CCT.sty)
+
+	. remove all entries in gbkdef.tbl (thus no default kerning table now).
+
+	. ctex 0.2.6 (see Changelog in its src dir)
+
+	. uncct.c:
+	  - add support for CJK mode (used to convert .idx, .toc, etc., files).
+	  - allow specifying an output filename on the cmdline.
+
+	. add gb2wncyr.c (from old CCT).
+
+	. add cctmkind.c (based on ccsort.c from old CCT, ccutils.zip)
+
+	. cctspace.cfg:
+	    add \index to VERBATIM
+	    move \referto from COMMON to VERBATIM
+	    add \URL, \href, \hyper{baseurl,link,target} to VERBATIM
+
+	. cctconv.c, gbk2uni*.c: conversion '|' <--> '7'
+
+	. everb.sty-0.1.7: fix a computation error in colorboxed which caused
+	  boxes of small hight (<=0.5\pagestretch) to be dropped.
+
+0.61-0a (Oct 13 2004)
+
+	. CCT.cfg: uncomment '\CCTdefziti F ...' and '\CCTdefziti G ...'
+
+	. ctex.c v0.2.7 (see Changelog in the source dir)
+
+	. everb.sty 0.1.8: call \CCTspace (\CJKspace) in
+	  \everb@CCT@setup (\everb@CJK@setup)
+
+0.61-0c (Oct 16 2004)
+
+	. cctart.cls, cctbook.cls:
+	  - add '%& -no-cctspace'
+	  - remove \ccnospace、\CS in \chaptername, \sectionname, etc.
+	  - change definition of \sectionname to:
+		\S\thesection (\S\thechapter.\arabic{section} for cctbook)
+	    of \subsectionname to:
+		\sectionname.\arabic{subsection}
+	    of \subsubsectionname to:
+		\subsectionname.\arabic{subsubsection} 
+
+	. cctart.cls: implement \appendix feature.
+
+	. cctmkind 0.0.3:
+	  - Change macro names CHAR, STRING, NUMBER to CHAR_T, STRING_T and
+	    NUMBER_T respectively ('CHAR' is used by windows.h)
+	  - Call miktex_find_file in MiKTeX-core-*.dll to find .ist files,
+	    and #define MIKTEX #if defined(WIN32)
+	    --- thank Happy for pointing to the relevant WIN32 functions.
+	  - Put cct.ist and cctglo.ist to LOCALTEXMF/makeindex/cct for win32
+	    installation (previously in TEXMF/makeindex/cct)
+
+	. WIN32 installer using Inno Setup 4 (http://www.jrsoftware.org/)
+
+	. cct.ist, cctglo.ist: add \nopagebreak after \indexgroup
+
+0.61-1 (Nov 10 2004)
+
+	. cct.c, cctconv.c, cctmkind.c, cctspace.c, uncct.c:
+	  fflush(f_out) when writing to stdout
+	  (work around for a small bug with 'wine prog.exe >output')
+
+	. CCT.sty: 加入对 CCTfntef.sty 的支持 (稍稍降低了处理速度)
+
+	. 增加 CCTfntef.sty 及 CCTfntef-sample.tex
+
+	. add cctmkind-sample.tex to doc/. in the distributions.
+
+	. ctex.c v0.2.8
+
+0.61-2 (Dec 03 2004)
+
+	. text2dvi.c: improved line breaks (break at spaces or GBK char
+	  whenever possible).
+
+	. everb.sty 0.1.9: keep \textwidth unchanged
+
+	. CCT.sty: SUN Wenchang's ccmap hook
+
+	. added ccmap.sty and c19*.cmap files to distribution
+
+	. cctbase.sty: use '\let\CCTCJKfonts=1' instean of using 
+	  \PassOptionsToPackage (why the latter does not work?),
+	  added options enc=GB and enc=GBK
+
+	. CCT.sty: support GB encoding, added 'enc=GB' and 'enc=GBK' options
+	  and \CCTGBKencoding (0 or 1) macro.
+
+0.618-1 (Jan 18 2005)
+
+	. experimental on the fly generation of GBK fonts (requires
+	  the gbkfont-inst script which is currently only available on
+	  UNIX/Linux). This feature must be enabled by \let\CCTOnTheFly=1,
+	  and '-shell-escape' (tetex) or '--enable-write18' (MikTeX) cmdline
+	  option, e.g.,
+
+	  latex -shell-escape '\let\CCTOnTheFly=1 \input file.tex' (teTeX)
+	  latex --enable-write18 '\let\CCTOnTheFly=1 \input file.tex' (MikTeX)
+
+	. support GB encoding (enabled with package option 'enc=GB' or
+	  \let\CCTGBKencoding=0).
+
+	. delay check for the existence of a GBK font to its first
+	  invocation
+
+	. CCT.cfg: set \ziti{G}-\ziti{Z} to 'unknown song'
+
+	. The scope of \CCTdefziti is made global (necessary to avoid
+	  repeatedly testing the existence of a same font)
+
+	. everb.sty 0.2.0: bug fixes and enhancements.
+
+	. workaround to make \usepackage[CJK]{cctbase} and \usepackage[CJK]{CCT}
+	  work.
+
+	. README.tex updated.
+
+0.618-2 (Jan 24 2005)
+
+	. everb.sty 0.2.2: bugfixes, enhancements.
+
+0.618-3 (Feb 02 2005)
+
+	. "GBKpunct default" will generate a default table.
+
+	. Use clib256e.tbl as gbkdef.tbl.
+
+0.618-4 (Apr 12 2005)
+
+	. everb.sty: fix incorrect \filedate
+
+	. ccmap.sty, CCTfntef.sty: changes from SUN Wenchang (20050227)
+
+	. CCT src RPM: remove dependency on Fontforge and CJK-GBKfonts
+
+	. cctmkind v0.0.4: also apply cmd to end-pagenumbers
+
+	. cctbook.cls: set \@currentlabel to \partname and \chaptername
+	  respectively in \part and \chapter.
+
+0.618-5 (May 23 2005)
+
+	. cctbook.cls: correct \filedate
+
+	. cctbase.sty: allow \title to have an optional argument (for beamer)
+
+	. everb.sty 0.2.3: remove \@noligs in \everb@pre which breaks mathmode,
+	  e.g., $t'$
+
+	. cctmkind v0.0.5: new option '-C mixed'
+
+0.618-6 (Aug 07 2005)
+
+	. everb.sty 0.2.4:
+	  - comment out '\renewcommand\baselinestretch{\@ne}' in \everb@pre
+	    WARNING: vertical spacing different from previous versions
+	  - fix a PDFLaTeX color problem with everb@boxcolor
+	  - prevent pagebreak before the bottom rule in everbatim environments
+	  - ensure glues are discardable at pagebreaks
+	  - fix issues related to \leftskip, \rightskip, etc.
+	  - adjust width of boxes after \vsplit
+	  - use \everb@@@ to typeset lines in everbatim environment
+
+	. addr2tex:
+	  - new input format 'name@group<TAB>address'
+	  - use ccmap if pdflatex
+
+	. cct, ctex, addr2tex: gcc4 compilation fix
+
+	. ccmap:
+	  - add UGB.sfd and UGBK.sfd
+	  - use ifpdf.sty if it exists to detect PDFLaTeX
+	  - fix memory leaks
+
+	. CCT.sty:
+	  - fix inconsistency between \CCTCJKfonts and \if@CCT@CJK
+	  - improve detection of PDFTeX
+
+	. cctbase.sty: keep original values of \topsep, \partopsep, etc.
+	  WARNING: vertical spacing different from previous versions
+
+	. RPM packages: changes for teTeX-3
+
+0.618-7 (Aug 21 2005)
+
+	. ctex 0.2.10: avoid rerun LaTeX when .idx or .glo file has size 0
+
+	. cctart.cls, cctbook.cls: define \@currentlabel to \xxxxname in \xxxx,
+	  where xxxx=part, chapter, section, subsection, subsubsection
+
+	. everb.sty 0.2.5:
+	  - use \verbatim@font instead of \ttfamily
+	  - new keyvalue 'quoteshack'
+	  - introduce \everbprehook
+	  - make \everb work with mathmode
+	  - new keyvalue pagebreak={true|false}
+
+0.6180 (Sep 23 2005)
+
+	. Files for building cct Debian package, prepared by weigela@CTeX,
+	  see README.pdf & Linux/Debian/README.txt in the source distribution.
+
+	. README.tex: add a section about compiling the source
+
+	. GBKpunct: add support for GB enc (e.g., GBKpunct GB gbsn >gbsn.tbl)
+
+	. remove Linux/*.tbl files from the distribution, they will be
+	  recreated when installing the RPM or Debian package (by running
+	  the `cctgebtbl' script in the %post section).
+
+	. everb.sty 0.2.6:
+	  - new macro \everbposthook
+	  - new keys: title, toptitle, bottomtitle, titlesep, titleskip
+	  - fix underfull in `center' environment when \fboxradius>0
+	  - make `box' and `oval' keys act independently, and affect
+	    \colorovalbox
+	  - allow `box=true|false|[lrtb]*', `oval=true|false|[abcd]*'
+	  - move epilogue before \smallskip to allow 'epilogue={\nobreak}'
+
+	. cctspace.c:
+	  - insert a space for the case `\ref{abc}啊' (not `\label{abc}啊').
+	  - cctspace.cfg: add \bibitem, \cite, \label, \newlabel, \pageref, \ref
+	    to VERBATIM list, add commands from CJKfntef.sty to TRANSPARENT
+
+	. CCT.sty 0.6180:
+	  - show line number in warnings/errmessages
+	  - change definition of \allowbreak, which, when used after a Chinese
+	    punct char, removes the extra space after it if it appears
+	    at the right margin and is followed by a non Chinese,
+	    see README.pdf.
+	  - retrieve fontname from .fd files for better compatibility with CJK
+
+	. cctbase.sty: change `\ormfamily', `\oset@fontsize', etc., to
+	  `\CCT@rmfamily', `\CCT@set@fontsize', etc.
+
+	. cctbook.cls, cctart.cls: remove colon in \caption
+
+	. ctex 0.2.11: fix some memory bugs in translating filenames.
+
+0.6180-1 (Sep 24 2005)
+
+	. cctgentbl: allow specifying texmf trees on the cmdline, e.g.,
+
+		cctgentbl /usr/local/share/texmf /usr/TeX/texmf
+
+	. cct.spec, Debian/postinst: run cctgentbl using arguments
+		/usr/local/share/texmf /usr/TeX/texmf /usr/share/texmf
+
+	. Windows/cct-updt.bat: fix pathname problem with UGBK.sfd and UGB.sfd
+	  (noticed by aloft)
+
+0.6180-2 (Nov 08 2005)
+
+	. cctspace.cfg: add \URL* and \referto*
+
+	. cctmkind v0.0.6:
+	  - store linenos in entry_t and show them in warning/error messages
+	  - bugfix in compare_strings()
+	  - merge entries like "220, \textbf{220}" into "\textbf{220}"
+
+0.6180-3a (Feb 03 2006)
+
+	. CCTfntef 4.5.3-4d
+
+	. ccmap/makecmap.tex: new version from mytex
+
+	. ctex 0.2.12: add quotes to the output filename of makeindex
+
+	. Windows/cct-updt.bat: comment out '@echo off', use full pathname
+	  when compiling README.tex/CCTLaTeX.tex
+
+	. everb.sty 0.2.7: move `\par' before prologue to make line spacing
+	  changes local, and add new keys `vscale' and 'hscale'
+
+	. cctbase.sty: allow multiple calls to \@matchccfont for a same font
+
+	. cctinit.c v5.18: add \frenchspacing to the macro \CC which was
+	  missing if dummyflag == TRUE
+
+	. CCT.sty: add \frenchspacing
+
+0.61803-0 (Jun 30 2007)
+
+	. everb.sty 0.2.8: add \filedate and \fileversion to \ProvidesPackage
+		    0.2.9: add group for escape mode
+
+	. cctinit.exe (WIN32): handle quoted pathnames (to allow spaces in them)
+
+	. Windows/cct-updt.bat: quote arguments of cctinit.exe
+
+	. CTeX installer: use cctenv.c to pass paths as envvars to cct-updt.bat
+
+	. fullpath.c (win32): remove quotes in %PATH%
+
+	. cctbase.sty 2006/05/17: fix problems with \sectionname when used
+	  with the `book' class
+
+	. addr2tex.c: compare s->name when needed if s->key contains '@'
+	  addr2tex.sty: add '\let\thesection\relax'
+	  new option '-monochrome'
+
+	. ctex-0.2.13: new option '-force-patchdvi' (win32)
+
+	. cctmkind 0.0.8: new code for the mixed ordering
+
+	. Windows: switch to .zip distribution (provided by Sun Wenchang)
+
+	. cctinit.c: fix compilation under cygwin (unchecked)
+
+	. CCT.sty: add missing \space in a warning
+
+	. cctspace.c 0.6.2: avoid inserting '~' with, e.g., '啊%\n啊'
+
+	. everb.sty: options consistency between 'graphicx' and 'color'
+
+	. ccmap.sty bugfix by Sun Wenchang
+
+0.61803-1 (Sep 01 2008)
+
+	. CCT.sty: append " %" to numbers before EOL (this fixes the
+	  \@CCTspecialhack problem which existed since changing \endlinechar
+	  to -1)
+
+	. cctmkind 0.0.9: fix the bug reported at:
+	      http://bbs.ctex.org/redirect.php?fid=6&tid=42877&goto=nextnewset

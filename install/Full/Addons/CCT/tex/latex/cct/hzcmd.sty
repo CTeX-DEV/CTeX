@@ -1,0 +1,294 @@
+% $Id: hzcmd.sty,v 1.2 2004/11/26 11:41:33 zlb Exp $
+%
+% 宏包 hzcmd
+%
+% 加入该宏包后便可定义、使用以汉字命名的命令。
+%
+% 例: \newcommand{\黑体}{\bf\ignorespaces}
+%
+% PLAIN TeX 和 AmSTeX (也包括 LaTeX) 下可用:
+%
+%   \cdef (\def), \cgdef (\gdef), \cedef (\edef), \cxdef (\xdef), \clet (\let)
+%
+% 定义汉字命令
+%
+% 已知局限:
+%
+%   1. 包含汉字的命令名第一个字符必须是汉字
+%
+%   2. 命令后面的空不会被吃掉 (必要时可在定义最后加 \ignorespaces)
+%
+%   3. 汉字命令不能用在宏参数中。该限制在 CCT 中可以去掉 (CJK 中需要定义
+%      \CCT@byte 命令)，但会降低处理速度，因此没有启用, 参看说明掉的
+%      '\ifcat\noexpand\hz@nexttoken\relax' 部分
+%
+%   4. 汉字命令不能用在浮动环境中 (如 \section)
+%
+%   5. 命令名中只能使用两个字节都在 129-254 的汉字
+%
+%   6. 定义中不能使用汉字命令，如 `\newcommand{\命令二}{\命令一}' 会出错
+%
+%   7. 与一些包 (如 hyperref) 不兼容, 因此应该将 hzcmd 包放在最后
+%
+% 文件末尾 \endinput 后是一个测试文件
+%
+% 作者: 张林波 (zlb@lsec.cc.ac.cn)
+
+\def\fileversion{0.0.2}
+\def\filedate{2003/09/20}
+\message{\fileversion \space [\filedate]}
+
+\ifx\ProvidesPackage\undefined
+  \edef\CCTCatcodeOfAt{\the\catcode`\@}% save catcode of @
+  \catcode`\@=11
+\else
+  \ProvidesPackage{hzcmd}
+\fi
+
+\ifx\@tempcnta\undefined \newcount\@tempcnta\fi
+{\catcode`\|=0 \catcode`\\=12 |global|def|hz@backslash{\}}
+
+%
+\def\hz@docmd{}
+
+\def\make@hz@other{%
+ \@tempcnta=129 %
+ \loop
+   \catcode\@tempcnta=12 \ifnum\@tempcnta<255 \advance\@tempcnta \@ne 
+ \repeat}
+ 
+{
+\catcode"80=11
+\catcode"FF=12
+\gdef\hz@nextchar{%
+  \let\hz@next\hz@docmd
+  \ifcat\noexpand\hz@nexttoken ^^80%
+    \let\hz@next\hz@nextchar@
+  \else\ifcat\noexpand\hz@nexttoken ^^ff%
+    \let\hz@next\hz@nextchar@
+  %???\else\ifcat\noexpand\hz@nexttoken\relax	% active char
+  \else\iffalse
+    % Slow method: compare with each of ^^80..^^ff (slow, but allows
+    % hz commands to be used in arguments of macros).
+    \ifx\@CCTbyte\undefined\else
+      \@tempcnta 129\relax
+      \loop
+        \expandafter\expandafter\expandafter\hz@check\@CCTbyte{\@tempcnta}{}%
+      \ifnum\@tempcnta<255 \advance\@tempcnta \@ne \repeat
+      \ifnum\@tempcnta<257 \else
+        \let\hz@next\hz@nextchar@
+      \fi
+    \fi
+  \fi\fi\fi
+  \hz@next}
+}
+
+\def\hz@check#1{\ifx\hz@nexttoken#1\@tempcnta=257 \fi}
+
+\def\hz@nextchar@#1{%
+  \@tempcnta=`#1\relax
+  \def\hz@next{\hz@docmd#1}%
+  \ifnum\@tempcnta>127 %
+    \def\hz@next{\xdef\hz@cmdstr{\hz@cmdstr \string #1}%
+      \futurelet\hz@nexttoken\hz@nextchar}%
+  \else\ifnum\catcode\@tempcnta=11 %
+    \def\hz@next{\xdef\hz@cmdstr{\hz@cmdstr \string #1}%
+      \futurelet\hz@nexttoken\hz@nextchar}%
+  \fi\fi
+  \hz@next}
+%
+% Define control characters \c, c="A0, ..., "FF
+\def\hz@temp#1{\expandafter\def\csname \string #1\endcsname{%
+ \bgroup \make@hz@other
+ \def\hz@docmd{\egroup\expandafter\hz@docmd@ \csname\hz@cmdstr\endcsname}%
+ \xdef\hz@cmdstr{\string #1}\futurelet\hz@nexttoken\hz@nextchar}}
+
+\def\hz@docmd@#1{%
+  \ifx#1\relax
+    \errmessage{Undefined command: \hz@backslash \hz@cmdstr}%
+    \let\hz@temp\relax
+  \else
+    \let\hz@temp#1%
+  \fi
+  \hz@temp}
+
+%--- This requires the CCT package
+%???\@tempcnta 129\relax
+%???\loop
+%???  \expandafter\expandafter\expandafter\hz@temp\@CCTbyte{\@tempcnta}{}\relax
+%???  \ifnum\@tempcnta<255 \advance\@tempcnta \@ne
+%???\repeat
+%--- works with both CCT and CJK
+\hz@temp{^^80} \hz@temp{^^81} \hz@temp{^^82} \hz@temp{^^83}
+\hz@temp{^^84} \hz@temp{^^85} \hz@temp{^^86} \hz@temp{^^87}
+\hz@temp{^^88} \hz@temp{^^89} \hz@temp{^^8a} \hz@temp{^^8b}
+\hz@temp{^^8c} \hz@temp{^^8d} \hz@temp{^^8e} \hz@temp{^^8f}
+\hz@temp{^^90} \hz@temp{^^91} \hz@temp{^^92} \hz@temp{^^93}
+\hz@temp{^^94} \hz@temp{^^95} \hz@temp{^^96} \hz@temp{^^97}
+\hz@temp{^^98} \hz@temp{^^99} \hz@temp{^^9a} \hz@temp{^^9b}
+\hz@temp{^^9c} \hz@temp{^^9d} \hz@temp{^^9e} \hz@temp{^^9f}
+\hz@temp{^^a0} \hz@temp{^^a1} \hz@temp{^^a2} \hz@temp{^^a3}
+\hz@temp{^^a4} \hz@temp{^^a5} \hz@temp{^^a6} \hz@temp{^^a7}
+\hz@temp{^^a8} \hz@temp{^^a9} \hz@temp{^^aa} \hz@temp{^^ab}
+\hz@temp{^^ac} \hz@temp{^^ad} \hz@temp{^^ae} \hz@temp{^^af}
+\hz@temp{^^b0} \hz@temp{^^b1} \hz@temp{^^b2} \hz@temp{^^b3}
+\hz@temp{^^b4} \hz@temp{^^b5} \hz@temp{^^b6} \hz@temp{^^b7}
+\hz@temp{^^b8} \hz@temp{^^b9} \hz@temp{^^ba} \hz@temp{^^bb}
+\hz@temp{^^bc} \hz@temp{^^bd} \hz@temp{^^be} \hz@temp{^^bf}
+\hz@temp{^^c0} \hz@temp{^^c1} \hz@temp{^^c2} \hz@temp{^^c3}
+\hz@temp{^^c4} \hz@temp{^^c5} \hz@temp{^^c6} \hz@temp{^^c7}
+\hz@temp{^^c8} \hz@temp{^^c9} \hz@temp{^^ca} \hz@temp{^^cb}
+\hz@temp{^^cc} \hz@temp{^^cd} \hz@temp{^^ce} \hz@temp{^^cf}
+\hz@temp{^^d0} \hz@temp{^^d1} \hz@temp{^^d2} \hz@temp{^^d3}
+\hz@temp{^^d4} \hz@temp{^^d5} \hz@temp{^^d6} \hz@temp{^^d7}
+\hz@temp{^^d8} \hz@temp{^^d9} \hz@temp{^^da} \hz@temp{^^db}
+\hz@temp{^^dc} \hz@temp{^^dd} \hz@temp{^^de} \hz@temp{^^df}
+\hz@temp{^^e0} \hz@temp{^^e1} \hz@temp{^^e2} \hz@temp{^^e3}
+\hz@temp{^^e4} \hz@temp{^^e5} \hz@temp{^^e6} \hz@temp{^^e7}
+\hz@temp{^^e8} \hz@temp{^^e9} \hz@temp{^^ea} \hz@temp{^^eb}
+\hz@temp{^^ec} \hz@temp{^^ed} \hz@temp{^^ee} \hz@temp{^^ef}
+\hz@temp{^^f0} \hz@temp{^^f1} \hz@temp{^^f2} \hz@temp{^^f3}
+\hz@temp{^^f4} \hz@temp{^^f5} \hz@temp{^^f6} \hz@temp{^^f7}
+\hz@temp{^^f8} \hz@temp{^^f9} \hz@temp{^^fa} \hz@temp{^^fb}
+\hz@temp{^^fc} \hz@temp{^^fd} \hz@temp{^^fe} \hz@temp{^^ff}
+
+%-----------------------------------------------------------------------------
+
+%
+% \hz@makegroupedcs is used for the case `\newcommand{\命令}...'
+\def\hz@makegroupedcs#1{\bgroup
+  \def\hz@cmdstr{}\expandafter \hz@makegroupedcs@ \string #1\relax}
+\def\hz@makegroupedcs@#1{%
+  \ifx#1\relax
+    \let\hz@next\hz@docmd
+  \else
+    \let\hz@next=\hz@makegroupedcs@
+    \if\noexpand#1\hz@backslash
+      % ignored
+    \else
+      \xdef\hz@cmdstr{\hz@cmdstr\string #1}%
+    \fi
+  \fi\hz@next}
+%
+% \hz@makecs is used for the case, e.g., `\newcommand\命令...'
+\def\hz@makecs#1{\bgroup\make@hz@other\expandafter\hz@makecs@\string #1}
+\def\hz@makecs@#1#2{%
+  \xdef\hz@cmdstr{\string #2}\futurelet\hz@nexttoken\hz@nextchar}
+
+\def\hz@cmd@{%
+  % Check if the next char is '{' (e.g., \newcommand{\命令})
+  % This only works if the control words \^^xx (xx in ^^a1..^^ff) do not
+  % start with '\bgroup'
+  \ifx\bgroup\hz@nexttoken
+    \let\hz@next\hz@makegroupedcs
+  \else
+    \let\hz@next\hz@makecs
+  \fi
+  \hz@next}
+% e.g.: \hz@cmd{\cnewcommand}{\newcommand}
+\def\hz@cmd#1#2{%
+  \def#1{%
+    \def\hz@docmd{\egroup\expandafter#2\csname \hz@cmdstr \endcsname}%
+    \futurelet\hz@nexttoken\hz@cmd@}}
+
+
+\def\hz@defcmd#1{%
+  \def\hz@docmd{\egroup}%
+  \hz@makecs{#1}%
+  \expandafter \let \expandafter \hz@temp \csname \hz@cmdstr \endcsname
+  \expandafter \let \csname hz@\hz@cmdstr \endcsname \hz@temp
+  \expandafter\expandafter\expandafter \hz@cmd 
+    \expandafter\expandafter \csname \hz@cmdstr \endcsname
+      \csname hz@\hz@cmdstr \endcsname}
+
+%
+\hz@defcmd{\newcommand}
+\hz@defcmd{\renewcommand}
+\hz@defcmd{\DeclareRobustCommand}
+\hz@defcmd{\ProvidesCommand}
+%
+%\hz@cmd{\cnewcommand}{\newcommand}
+%\hz@cmd{\crenewcommand}{\renewcommand}
+%\hz@cmd{\cDeclareRobustCommand}{\DeclareRobustCommand}
+%\hz@cmd{\cProvidesCommand}{\ProvidesCommand}
+%
+\hz@cmd{\cdef}{\def}
+\hz@cmd{\cgdef}{\gdef}
+\hz@cmd{\cedef}{\edef}
+\hz@cmd{\cxdef}{\xdef}
+\hz@cmd{\clet}{\let}
+
+%
+% Chinese environments
+%
+% Note: \hz@arg@other{cmd} will change catcode of Chinese chars in the
+% first argument following '\cmd' to 12, then execute '\cmd'.
+% 
+\def\hz@arg@other#1{%
+  \expandafter \expandafter \expandafter \let \expandafter \expandafter
+    \csname hz@#1@bak\endcsname \csname #1\endcsname
+  \expandafter \def \csname #1\endcsname{\bgroup\make@hz@other
+    \hz@arg@arg{\csname hz@#1@bak\endcsname}}%
+}
+\def\hz@arg@arg#1#2{\egroup #1{#2}}
+
+\hz@arg@other{newenvironment}
+\hz@arg@other{renewenvironment}
+\hz@arg@other{begin}
+\hz@arg@other{end}
+
+\ifx\ProvidesPackage\undefined
+  \catcode`\@=\CCTCatcodeOfAt
+\fi
+
+\endinput
+
+%-------------------------------- 测试文件 ---------------------------------
+\iftrue		% CCT
+  \documentclass[CJK]{cctart}
+\else		% CJK
+  \documentclass{article}
+  \usepackage{CJK}
+  \AtBeginDocument{\begin{CJK*}{GBK}{song}} \AtEndDocument{\end{CJK*}}
+\fi
+\usepackage[CJKbookmarks,dvipdfm]{hyperref}
+\usepackage{hzcmd}
+\begin{document}
+
+%\tracingmacros=2 \tracingcommands=2
+
+%-------- commands
+\newcommand{\节}[1]{\section{#1}}
+\newcommand\黑体{\bfseries\ignorespaces}
+\newcommand{\目录}{\tableofcontents}
+\newcommand{\xxx}{XYZ}
+\renewcommand{\xxx}{ABC}
+\newcommand{\小节}{\subsection}
+\cdef\数组(#1,#2){(x_{#1}, \ldots, x_{#2})}
+\clet\小\small
+
+\目录 \节{第一节} \小节{第一小节} {\xxx\黑体\xxx 这是{\小\relax 小字}}
+$\数组(1,n)$
+
+
+%-------- environments
+\newenvironment{楷体}{}{}
+\renewenvironment{楷体}{\itshape}{}
+\begin{楷体}
+  这是一行楷体字
+\end{楷体}
+
+\clet \开始=\begin
+\clet \结束=\end
+\clet \新环境=\newenvironment
+\新环境{居中}{\par\centering}{\par}
+
+\开始{居中}
+这是几行居中的内容\\
+这是几行居中的内容\\
+这是几行居中的内容
+\结束{居中}
+
+这是后续段落。
+
+\end{document}

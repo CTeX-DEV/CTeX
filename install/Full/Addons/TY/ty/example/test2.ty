@@ -1,0 +1,33 @@
+\def\ChineseScale{1000}
+\input tyinput
+\input tdw
+\documentclass{article}
+\begin{document}
+\setlength{\unitlength}{1mm}
+\begin{center}
+\中球面的正二等测投影图
+\bigskip
+
+\begin{picture}(54,54)(-25,-25)
+\put(0,0){\draw0,0,{width(.4),
+circle(0,0,25),
+threed(20.7,70.3),
+trace(-69.3*pi/180,110.7*pi/180,25cos(t),25sin(t),0),
+trace(-0.366,pi-0.366,25sin(t),0,25cos(t)),
+trace(-0.792,pi-0.792,0,25sin(t),25cos(t)),
+line(25,0,0,35,0,0),
+line(0,25,0,0,30,0),
+line(0,0,25,0,0,30),
+arrowhead(35,0,0,2,220,10),
+arrowhead(0,30,0,2,-7,10),
+arrowhead(0,0,30,2,90,10),
+dotted(6,7),width(.2),
+trace(110.7*pi/180,290.7*pi/180,25cos(t),25sin(t),0),
+trace(2pi-0.366,pi-0.366,25sin(t),0,25cos(t)),
+trace(2pi-0.792,pi-0.792,0,25sin(t),25cos(t)),
+line(-25,0,0,25,0,0),
+line(0,-25,0,0,25,0),
+line(0,0,-25,0,0,25)}}
+\end{picture}
+\end{center}
+\end{document}

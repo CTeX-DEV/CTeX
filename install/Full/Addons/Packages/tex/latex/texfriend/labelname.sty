@@ -1,0 +1,129 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{labelname}[2003/12/08]
+%
+%
+%  version 1.0.1
+%  Sun Wenchang, 2003/12/08
+%
+%
+\def\label#1{\@bsphack
+\ifmmode \gdef\math@@label{#1}\gdef\labeledequation{1}
+\else
+\if@twoside
+   \ifodd\c@page  \reversemarginpar \else \normalmarginpar \fi
+\else   \reversemarginpar
+\fi
+  \mbox{}\marginpar{\raggedleft\hspace{0pt}\hfil \framebox{\footnotesize #1}}\fi
+  \protected@write\@auxout{}%
+         {\string\newlabel{#1}{{\@currentlabel}{\thepage}}}%
+  \@esphack}
+
+
+
+\marginparwidth 40mm
+\marginparsep 3mm
+\oddsidemargin 10mm
+\def\@bibitem#1{
+\item\if@filesw \immediate\write\@auxout
+       {\string\bibcite{#1}{\the\value{\@listctr}}}\fi
+\if@twoside
+   \ifodd\c@page  \reversemarginpar \else \normalmarginpar \fi
+\else   \reversemarginpar
+\fi
+\mbox{}\marginpar{\raggedleft\hspace{0pt}\hfil \framebox{\footnotesize #1}}
+\ignorespaces}
+
+%
+% For standard latex
+%
+%
+\def\@eqnnum{{\normalfont \normalcolor (\theequation)%
+\ifnum\labeledequation=1 \,\,\hbox to 40mm{\framebox{\footnotesize \math@@label}\hfil}\hskip -40mm
+\gdef\labeledequation{0}\fi}}
+%
+%
+
+
+\ifx\letterlabel\undifined
+\newcounter{eqnum}\setcounter{eqnum}{-1}\fi
+\def\letterlabel#1{
+\addtocounter{eqnum}{1} \ifnum\the\value{equation} =\the\value{eqnum}
+   \addtocounter{eqnum}{-1}\setcounter{equation}{\the\value{eqnum}}
+     \else\setcounter{eqnum}{\the\value{equation}}\fi
+\global\def\@currentlabel{\p@equation\theequation {#1}}%
+\global\def\@eqnnum{{\normalfont \normalcolor ({\theequation}{#1})%
+\ifnum\labeledequation=1 \,\,
+\hbox to 40mm{\framebox{\footnotesize \math@@label}\hfil}
+\hskip -40mm\gdef\labeledequation{0}\fi}%
+\global\def\@eqnnum{%
+{\normalfont \normalcolor ({\theequation})%
+\ifnum\labeledequation=1 \,\,\hbox to 40mm{\framebox{\footnotesize \math@@label}\hfil}
+\hskip -40mm \gdef\labeledequation{0}\fi}}}
+}
+
+\def\labeledequation{0}
+%end of letter label
+
+
+
+
+
+
+\DeclareOption{refcite}{
+\def\ref#1{\mbox{$ {\expandafter\@setref\csname r@#1\endcsname\@firstoftwo{#1}}\atop{[\scriptstyle \rm #1]} $}}
+\def\pageref#1{\mbox{$ {\expandafter\@setref\csname r@#1\endcsname\@secondoftwo{#1}}\atop{[\scriptstyle \rm #1]} $}}
+
+\def\eqref#1{\mbox{$( {\expandafter\@setref\csname r@#1\endcsname\@firstoftwo{#1})}\atop{[\scriptstyle \rm #1]} $}}
+
+\def\cite{%
+  \@ifnextchar [{\@tempswatrue\@_citex}{\@tempswafalse\@_citex[]}}
+
+\def\@_citex[#1]#2{{\footnotesize\shortstack{  \@citex[#1]{#2} \\ #2}}}
+
+}
+
+\DeclareOption{amsmath}{
+
+
+\def\label@in@display{%
+    \ifx\df@label\@empty\else
+        \@amsmath@err{Multiple \string\label's:
+            label '\df@label' will be lost}\@eha
+    \fi
+\gdef\labeledequation{1}
+ \gdef\df@label
+}
+
+
+\iftagsleft@ %[leqno]
+  \def\@eqnnum{\hbox to1sp{}\rlap{\normalfont\normalcolor
+    \hskip -\displaywidth% \tagform@\theequation
+\ifnum\labeledequation=1 \hskip -40mm \hbox to 40mm{\hfil\framebox{\footnotesize \math@@label}}  \fi
+\maketag@@@{(\ignorespaces \theequation\unskip\@@italiccorr)}
+}}
+\def\tagform@#1{
+\maketag@@@{\ifx\df@label\@empty
+  \else \hskip -40mm \hbox to 40mm{\hfil\framebox{\footnotesize \df@label}}  \fi
+(\ignorespaces#1\unskip\@@italiccorr)}}
+%
+\else  %[reqno]
+%
+  \def\@eqnnum{{\normalfont\normalcolor%
+\maketag@@@{(\ignorespaces \theequation\unskip\@@italiccorr)}%
+\ifnum\labeledequation=1 \,\,\hbox to 40mm{\framebox{\footnotesize \math@@label}\hfil}\hskip -40mm
+\gdef\labeledequation{0}\fi
+}}
+
+\def\tagform@#1{
+  \maketag@@@{(\ignorespaces#1\unskip\@@italiccorr)
+  \ifx\df@label\@empty \else\,\hbox to 40mm{\framebox{\footnotesize \df@label}\hfil}\hskip -40mm
+  \fi}
+}
+
+\fi
+}
+\ProcessOptions\relax
+
+\endinput
+
+\def\print@eqnum{\tagform@\theequation}

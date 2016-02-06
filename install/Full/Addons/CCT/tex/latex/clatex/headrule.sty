@@ -1,0 +1,22 @@
+% headrule.sty
+% Copyright (C) 1992 by GE XIANG YANG
+% Version date 6/11/92
+\catcode`@=11
+\def\evenhead{}
+\def\oddhead{}
+\headheight=8truemm
+% \footheight=0pt
+\def\@evenhead{\pushziti
+  \vbox{\hbox to\textwidth{\rlap{\tenrm\thepage}\hfil{\evenhead}\llap{}}
+    \protect\vspace{2truemm}\relax
+    \hrule depth0pt height0.15truemm width\textwidth
+  }\popziti}
+\def\@oddhead{\pushziti
+  \vbox{\hbox to\textwidth{\rlap{}{\oddhead}\hfil\llap{\tenrm\thepage}}
+    \protect\vspace{2truemm}\relax
+    \hrule depth0pt height0.15truemm width\textwidth
+  }\popziti}
+\def\@evenfoot{}
+\def\@oddfoot{}
+\catcode`@=12
+

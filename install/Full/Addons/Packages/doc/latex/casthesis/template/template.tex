@@ -1,0 +1,125 @@
+%% Thesis Template of Chinese Academy of Sciences
+%%   for using CASthesis package with LaTeX2e
+%%
+%% Created by Ling-Yun Wu <aloft@ctex.org>
+%%
+%% $Id: template.tex 429 2009-05-13 06:19:07Z aloft $
+
+
+\documentclass[dvipdfm]{CASthesis}
+% 可选参数：
+% notypeinfo 取消扉页的LaTeX版本信息
+%
+% 下面三个选一个：
+% dvipdfm 使用 dvipdfm(x) 生成最终的 PDF 文档 (缺省设置）
+% dvips 使用 dvips 生成最终的 PS 文档
+% pdftex 使用 pdfLaTeX 生成最终的 PDF 文档
+
+
+% 设置图形文件的搜索路径
+\graphicspath{{chapter/}{figures/}}
+
+% 取消链接的颜色（黑白打印时）
+%\hypersetup{colorlinks=false}
+
+% 小节标题靠左对齐
+%\CTEXsetup[format+={\flushleft}]{section}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  % 中文封面内容
+  \classification{}
+  \confidential{}
+  \UDC{}
+  \serialnumber{}
+  \title{中国科学院学位论文~\LaTeX{}~模板}
+  \author{吴凌云}
+  \advisor{章祥荪~研究员}
+  \advisorinstitute{中国科学院数学与系统科学研究院}
+  \degree{博士}
+  \major{运筹学与控制论}
+  \submitdate{2004年8月}
+  \defenddate{2004年8月}
+  \institute{中国科学院数学与系统科学研究院}
+  \school{中国科学院研究生院}
+  \chairman{}
+
+  % 英文封面内容
+  \englishtitle{\LaTeX{} Thesis Template \\ of \\ Chinese Academy of Sciences}
+  \englishauthor{Ling-Yun Wu}
+  \englishadvisor{Prof. Xiang-Sun Zhang}
+  \englishinstitute{Institute of Applied Mathematics \\
+    Academy of Mathematics and Systems Science \\
+    Chinese Academy of Sciences}
+  \englishdegree{Ph.D.}
+  \englishmajor{Operations Research}
+
+
+  % 封面
+  \maketitle
+
+  % 英文封面
+  \makeenglishtitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 前言部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+  % 摘要
+  \include{chapter/abstract}
+
+  % 目录
+  \tableofcontents
+  % 表格目录
+  \listoftables
+  % 插图目录
+  \listoffigures
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+  \include{chapter/chap-intro}
+  \include{chapter/chap-math}
+  \include{chapter/chap-tabfig}
+  \include{chapter/chap-faq}
+
+  % 附录
+  \appendix
+
+  \include{chapter/chap-req}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 附件部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+  % 参考文献
+  % 使用 BibTeX
+  \bibliography{bib/tex}
+  \nocite{*}
+  % 不使用 BibTeX
+  % \include{chapter/bib}
+
+  % 发表文章目录
+  \include{chapter/pub}
+
+  % 个人简历
+  \include{chapter/resume}
+
+  % 致谢
+  \include{chapter/thanks}
+
+
+\end{document}

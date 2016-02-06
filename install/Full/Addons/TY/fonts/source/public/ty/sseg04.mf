@@ -1,0 +1,4 @@
+font_identifier:="SSEG04 for TYDRAW"; font_size 10pt#;
+
+ em#:=0.125pt#; cap#:=4mm#;
+input sseg

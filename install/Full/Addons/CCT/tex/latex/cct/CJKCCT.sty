@@ -1,0 +1,48 @@
+% $Id: CJKCCT.sty,v 1.2 2004/11/26 11:41:32 zlb Exp $
+
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesPackage{CJKCCT}[2003/01/20]
+
+% ------------------------------ for test only
+\def\@endif{\fi}
+\iffalse
+  \RequirePackage{cchead}
+  \RequirePackage{CCT}
+  \@endif
+  \endinput
+\fi
+% --------------------------------------------
+
+\RequirePackage{CJK}
+\AtBeginDocument{\begin{CJK*}{GBK}{song}\CJKtilde}
+\AtEndDocument{\end{CJK*}}
+
+\newcommand\ziti[1]{\@tempcnta \number `#1\advance\@tempcnta by -65
+  \ifcase \@tempcnta
+    \CJKfamily{song}\or
+    \CJKfamily{hei}\or
+    \CJKfamily{kai}\or
+    \CJKfamily{fs}\or
+    \CJKfamily{bs}\else
+    \errmessage{Undefined ziti: \string \ziti \{#1\}}\relax
+  \fi}
+
+\newcommand{\songti}{\ziti{A}}
+\newcommand{\heiti}{\ziti{B}}
+\newcommand{\kaishu}{\ziti{C}}
+\newcommand{\fangsong}{\ziti{D}}
+\newcommand{\biaosong}{\ziti{E}}
+
+\newlength{\ccwd} \setlength{\ccwd}{2em}
+\newlength{\ccht} \setlength{\ccht}{2em}
+\newlength{\ccdp} \setlength{\ccdp}{0em}
+
+\newcommand\zihao[1]{\write16{Warning: command \string \zihao \space
+	not yet implemented!}}
+\newcommand\ziju[1]{\write16{Warning: command \string \ziju \space
+	not yet implemented!!}}
+
+\let \pushziti \relax
+\let \popziti \relax
+
+\endinput

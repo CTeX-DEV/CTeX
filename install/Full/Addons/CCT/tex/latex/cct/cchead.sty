@@ -1,0 +1,85 @@
+\edef\ccheadCatAt{\the\catcode`\@}
+\edef\ccheadCatEx{\the\catcode`\!}
+\catcode`\@=11
+\catcode`\!=11
+%
+\ifx\DeclareRobustCommand\undefined
+  \let\!def\def
+\else
+  \let\!def\DeclareRobustCommand
+\fi
+%
+\let\ccfnta=\relax
+\let\ccfntb=\relax
+\let\ccfntc=\relax
+\let\ccfntd=\relax
+\let\ccfnte=\relax
+\let\ccfntf=\relax
+\let\ccfntg=\relax
+\let\ccfnth=\relax
+\let\ccfnti=\relax
+\let\ccfntj=\relax
+%
+\newcount\!ZihaoNo	% contains current zihao no.
+\newdimen\ccwd		% contains width+space of a CC
+\newdimen\ccht		% contains height of a CC
+\newdimen\ccdp		% contains depth of a CC
+\newbox\!ccbox		% used to get width,depth & height
+\newskip\!ccbdskip	% used to adjust spacing of some BiaoDians
+%
+\!def\CCA{\hskip\!ccbdskip }	% Add glue after some biadians
+\!def\CCAS{\!ccbdskips }	% Add glue after some biadians
+\!def\CCB{\hskip\!ccbdskip }	% Add glue before some biadians
+\!def\CCBS{\!ccbdskips }	% Add glue before some biadians
+\def\!CurrentZiJu{0.0600}
+\def\!SetCCFont#1#2{\ifx#1\relax\font#1=#2 \hyphenchar#1 -1 \fi\let\DaXiao#1}
+\def\!SetupDaXiao#1{\!ZihaoNo=#1
+  \ifnum\!ZihaoNo=0\!SetCCFont{\ccfnta}{ccfnta}\else
+  \ifnum\!ZihaoNo=1\!SetCCFont{\ccfntb}{ccfntb}\else
+  \ifnum\!ZihaoNo=2\!SetCCFont{\ccfntc}{ccfntc}\else
+  \ifnum\!ZihaoNo=3\!SetCCFont{\ccfntd}{ccfntd}\else
+  \ifnum\!ZihaoNo=4\!SetCCFont{\ccfnte}{ccfnte}\else
+  \ifnum\!ZihaoNo=-4\!SetCCFont{\ccfntf}{ccfntf}\else
+  \ifnum\!ZihaoNo=5\!SetCCFont{\ccfntg}{ccfntg}\else
+  \ifnum\!ZihaoNo=-5\!SetCCFont{\ccfnth}{ccfnth}\else
+  \ifnum\!ZihaoNo=6\!SetCCFont{\ccfnti}{ccfnti}\else
+  \ifnum\!ZihaoNo=7\!SetCCFont{\ccfntj}{ccfntj}\else
+  \errmessage{Invalid \string\zihao\space command ignored}\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+\def\!SetZiJu{\setbox\!ccbox\hbox{\DaXiao M}\relax	% setup temp box
+  \ccwd=2\wd\!ccbox \ccht=\ht\!ccbox \ccdp=\dp\!ccbox	% get width,height,depth
+  \fontdimen2\DaXiao=\!CurrentZiJu\ccwd	% space
+  \fontdimen3\DaXiao=0.5\fontdimen2\DaXiao	% stretch
+  \fontdimen4\DaXiao=0.3333333333\fontdimen2\DaXiao	% shrink
+  \fontdimen6\DaXiao=\ccwd	% quad
+  \advance\ccwd by\fontdimen2\DaXiao	% adjust \ccwd
+  \!ccbdskip=0pt plus 0pt minus 0.5\ccwd	%
+  \def\!ccbdskips{\leavevmode\vrule width -0.45\ccwd height0pt depth0pt}\relax
+}
+%
+\def\!ziti#1{\def\!ZiTi{#1}\relax}
+\!def\ziti{\!ziti}
+%
+\def\!zihao#1{\!SetupDaXiao{#1}\!SetZiJu\relax}
+\!def\zihao{\!zihao}
+%
+\def\!ziju#1{\def\!CurrentZiJu{#1}\!SetZiJu\relax}
+\!def\ziju{\!ziju}
+%
+\!def\songti{\ziti{A}\relax}
+\!def\heiti{\ziti{B}\relax}
+\!def\kaishu{\ziti{C}\relax}
+\!def\fangsong{\ziti{D}\relax}
+\!def\biaosong{\ziti{E}\relax}
+\!def\YH{\ziti{\char64}\CC }
+\!def\pushziti{{\ccdummy\char63}\relax}
+\!def\popziti{{\ccdummy\char62}\relax}
+%
+\font\ccdummy=ccdummy at 10 true pt
+\hyphenchar\ccdummy -1 %
+\!def\CC{\!SetZiJu\catcode`\~=\active\def~{\penalty\@M \ }\ccdummy\!ZiTi\DaXiao\frenchspacing}
+%
+\songti\zihao{5}
+\catcode`\@=\ccheadCatAt
+\catcode`\!=\ccheadCatEx
+\endinput
