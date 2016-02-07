@@ -34,7 +34,7 @@ RequestExecutionLevel admin
 
 !define MUI_ABORTWARNING
 
-;Images
+;Images and readme
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
 !ifndef BUILD_REPAIR
@@ -50,6 +50,7 @@ RequestExecutionLevel admin
 !define MUI_WELCOMEFINISHPAGE_BITMAP_STRETCH NoStretchNoCropNoAlign
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "images\uninstall_welcome.bmp"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP_STRETCH NoStretchNoCropNoAlign
+!define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\readme.txt"
 
 
 !define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
@@ -81,6 +82,7 @@ SectionEnd
 
 Section "MiKTeX" Section_MiKTeX
 
+	SectionIn RO
 	SetOverwrite on
 	SetOutPath "$INSTDIR\${MiKTeX_Dir}"
 
