@@ -27,6 +27,7 @@ RequestExecutionLevel admin
 
 !define MUI_ABORTWARNING
 !define MUI_ICON "images\Install.ico"
+!define MUI_UNICON "images\Uninstall.ico"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
 !define MUI_HEADERIMAGE_BITMAP "images\install_header.bmp"
