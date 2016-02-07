@@ -18,12 +18,12 @@ BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 
 !ifndef BUILD_REPAIR
 	InstallDir "C:\CTEX"
-	OutFile "CTeX_${APP_BUILD}.exe"
+	OutFile "output\CTeX_${APP_BUILD}.exe"
 !endif
 
 !ifdef BUILD_REPAIR
 	InstallDir "$EXEDIR"
-	OutFile "Repair.exe"
+	OutFile "output\Repair.exe"
 !endif
 
 ; Other settings
@@ -162,7 +162,7 @@ Section -FinishSection
 	${Begin_Install_Files}
 	File "texts\Readme.txt"
 	File "texts\Changes.txt"
-	File Repair.exe
+	File "output\Repair.exe"
 	${End_Install_Files} "install.log"
 !endif
 

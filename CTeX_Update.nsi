@@ -17,7 +17,7 @@ SetCompressorDictSize 32
 Name "${APP_NAME} ${APP_VERSION} Update"
 BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
 InstallDir "C:\CTEX"
-OutFile "CTeX_${APP_BUILD}_Update.exe"
+OutFile "output\CTeX_${APP_BUILD}_Update.exe"
 
 ; Other settings
 RequestExecutionLevel admin
@@ -26,8 +26,13 @@ RequestExecutionLevel admin
 !include "MUI2.nsh"
 
 !define MUI_ABORTWARNING
-!define MUI_ICON "icons\CTeX.ico"
+!define MUI_ICON "images\Install.ico"
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_RIGHT
+!define MUI_HEADERIMAGE_BITMAP "images\install_header.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "images\install_welcome.bmp"
 !define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
+!define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\Changes.txt"
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_INSTFILES
@@ -47,15 +52,9 @@ Section
 	SetOverwrite on
 
 	${If} $Addons != ""
-		SetOutPath $INSTDIR\${Addons_Dir}\ctex\bin
-		File install\Addons\CTeX\ctex\bin\SumatraPDF.exe
-
-;		SetOutPath $INSTDIR\${Addons_Dir}
-;		File /r install\Addons\CCT\*.*
-
-;		SetOutPath "$INSTDIR\${Addons_Dir}"
-;		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_packages.log"
-;		${Install_Files} "install\Addons\Packages\*.*" "install_packages.log"
+		SetOutPath "$INSTDIR\${Addons_Dir}"
+		${Uninstall_Files} "$UN_INSTDIR\${Logs_Dir}\install_addons.log"
+		${Install_Files} "install\Addons\*.*" "install_addons.log"
 	${EndIf}
 	
 ;	${If} $GSview != ""
@@ -83,7 +82,7 @@ Section
 	SetOutPath $INSTDIR
 	File "texts\Readme.txt"
 	File "texts\Changes.txt"
-	File Repair.exe
+	File "output\Repair.exe"
 
 ; Update configs
 	DetailPrint "Update configs"
