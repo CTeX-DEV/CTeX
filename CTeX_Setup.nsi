@@ -51,7 +51,9 @@ RequestExecutionLevel admin
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "images\uninstall_welcome.bmp"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP_STRETCH NoStretchNoCropNoAlign
 !define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\readme.txt"
-
+!ifdef DEBUG
+	!define MUI_FINISHPAGE_NOAUTOCLOSE
+!endif
 
 !define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
 !insertmacro MUI_PAGE_WELCOME
