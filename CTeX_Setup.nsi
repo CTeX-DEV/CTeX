@@ -33,14 +33,26 @@ RequestExecutionLevel admin
 !include "MUI2.nsh"
 
 !define MUI_ABORTWARNING
-!ifndef BUILD_REPAIR
-!define MUI_ICON "icons\Install.ico"
-!else
-!define MUI_ICON "icons\Repair.ico"
-!endif
-!define MUI_UNICON "icons\Uninstall.ico"
-!define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
 
+;Images
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_RIGHT
+!ifndef BUILD_REPAIR
+!define MUI_ICON "images\Install.ico"
+!define MUI_HEADERIMAGE_BITMAP "images\install_header.bmp"
+!else
+!define MUI_ICON "images\Repair.ico"
+!define MUI_HEADERIMAGE_BITMAP "images\repair_header.bmp"
+!endif
+!define MUI_UNICON "images\Uninstall.ico"
+!define MUI_HEADERIMAGE_UNBITMAP "images\uninstall_header.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "images\install_welcome.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP_STRETCH NoStretchNoCropNoAlign
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "images\uninstall_welcome.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP_STRETCH NoStretchNoCropNoAlign
+
+
+!define MUI_CUSTOMFUNCTION_GUIINIT onMUIInit
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE $(license)
 !insertmacro MUI_PAGE_COMPONENTS
