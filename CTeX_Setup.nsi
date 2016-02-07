@@ -14,7 +14,7 @@ Var UN_CONFIG_ONLY
 
 ; Main Install settings
 Name "${APP_NAME} ${APP_VERSION}"
-BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_COMPANY}"
+BrandingText "${APP_NAME} ${APP_BUILD} (C) ${APP_YEAR} ${APP_COMPANY}"
 
 !ifndef BUILD_REPAIR
 	InstallDir "C:\CTEX"

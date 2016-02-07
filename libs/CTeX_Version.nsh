@@ -4,7 +4,8 @@
 ; Application information
 !define APP_NAME "CTeX"
 !define APP_COMPANY "CTEX.ORG"
-!define APP_COPYRIGHT "Copyright (C) 2016 ${APP_COMPANY}"
+!define APP_YEAR "2016"
+!define APP_COPYRIGHT "Copyright (C) ${APP_YEAR} ${APP_COMPANY}"
 !define APP_VERSION "3.0.0"
 !define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
 
