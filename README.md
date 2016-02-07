@@ -1,10 +1,11 @@
 CTeX Maintenance Plan  
 ====
 如何编译:  
-1. 下载启用 Advance Log 的 NSIS 3.0b3 http://prdownloads.sourceforge.net/nsis/nsis-3.0b3-log.zip?download  
-2. 执行以下命令： `makensis.exe /INPUTCHARSET UTF8 /OUTPUTCHARSET UTF8 /DDEBUG filename.nsi`  
-3. 若需详细编译过程可使用 /V4 开关，但是会严重影响编译速度  
-4. 若需发布则去掉 /DDEBUG 开关，并 install\Full 下面的文件夹移动到 install 下，删除所有的dummy.txt
+1. 下载启用 Advance Log 的 NSIS 3.0b3 http://prdownloads.sourceforge.net/nsis/nsis-3.0b3-log.zip?download   
+2. 把本 repo 中 libs\external\Textreplace.zip 中的内容解压到 NSIS 程序目录下  
+3. 执行以下命令： `makensis.exe /INPUTCHARSET UTF8 /OUTPUTCHARSET UTF8 /DDEBUG filename.nsi`  
+4. 若需详细编译过程可使用 /V4 开关，但是会严重影响编译速度  
+5. 若需发布则去掉 /DDEBUG 开关，并 install\Full 下面的文件夹移动到 install 下，删除所有的dummy.txt
 
 目前已完成：  
 - [x] 所有脚本UTF-8化  
