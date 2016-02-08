@@ -1,0 +1,361 @@
+
+\def\thepage{\arabic{page}}
+\setcounter{page}{1}
+
+\fontsize{11}{22}\selectfont             % 定义字大小(11pt)与行间距(22pt),可根据需要修改
+\parindent 22pt                          % 每段开始空 22pt
+
+\chapter*{ 摘\quad 要}
+\addcontentsline{toc}{chapter}{\protect\numberline{摘要}{(中文)}}
+\markboth{摘要}{摘要}
+
+这里输入中文摘要。
+
+
+风清扬道：“五岳剑派中各有无数蠢才，以为将师父传下来的剑招学得精熟，自然
+而然便成高手，哼哼，熟读唐诗三百首，不会作诗也会吟！熟读了人家诗句，做几首打油
+诗是可以的，但若不能自出机抒，能成大诗人么？”他这番话，自然是连岳不群也骂在其
+中了，但令狐冲一来觉得这话十分有理，二来他并未直提岳不群的名字，也就没有抗辩。
+风清扬道：“活学活使，只是第一步。要做到出手无招，那才真是踏入了高手的境界。你
+说‘各招浑成，敌人便无法可破’，这句话还只说对了一小半。不是‘浑成’，而是根本
+无招。你的剑招使得再浑成，只要有迹可寻，敌人便有隙可乘。但如你根本并无招式，敌
+人如何来破你的招式？”令狐冲一颗心怦怦乱跳，手心发热，喃喃的道：“根本无招，如
+何可破？根本无招，如何可破？”斗然之间，眼前出现了一个生平从所未见、连做梦也想
+不到的新天地。风清扬道：“要切肉，总得有肉可切；要斩柴，总得有柴可斩；敌人要破
+你剑招，你须得有剑招给人家来破才成。一个从未学过武功的常人，拿了剑乱挥乱舞，你
+见闻再博，也猜不到他下一剑要刺向哪里，砍向何处。就算是剑术至精之人，也破不了他
+的招式，只因并无招式，‘破招’二字，便谈不上了。只是不曾学过武功之人，虽无招式
+，却会给人轻而易举的打倒。真正上乘的剑术，则是能制人而决不能为人所制。”
+
+
+只听风清扬续道：“岳不群那小子，当真是
+狗屁不通。你本是块大好的材料，却给他教得变成了蠢牛木马。”
+
+
+
+    她连刺两次失误，对杨过憎恨之心更加强了，咬牙低声道：「臭傻蛋，瞧我这次要
+不要了你的小命。」闪身扑上，举刀向他背心猛砍。杨过於鼾声呼呼中翻了个身，这一
+刀拍的一声，砍在桌上，深入木□。
+
+    陆无双手上运劲，待要拔刀，杨过正做甚麽恶梦，大叫：「妈婀，妈啊，小老鼠来
+咬我啊。」两条泥腿□地伸出，左腿搁在陆无双臂弯□的「曲池穴」，右腿却搁在她肩
+头的「肩井穴」。这两处都是人身大穴，他两条泥腿摔将下来，无巧不巧，恰好撞正这
+两处穴道。陆无双登时动弹不得，呆呆的站著，让身子作了他搁腿的架子。
+
+    她心中怒极，身子虽不能动，口中却能说话，喝道：「喂，傻蛋，快把臭脚拿开。
+」只听他打呼声愈加响了。她不知如何是好，恼恨之下，张口将唾沫向他吐去。杨过翻
+了个身，右脚尖漫不经意的掠了过来，正好在她「巨骨穴」上轻轻一碰。陆无双立时全
+身酸麻，连嘴也张不开了，鼻中只闻到他脚上臭气阵阵冲来。
+
+    就这麽搁了一盏茶时分，陆无双气得几欲晕去，心中赌咒发誓：「明日待我穴道松
+了，定要在这傻蛋身上斩他十七八刀。」再过一阵，杨过心想也作弄她得够了，放开双
+
+\chapter*{ Abstract}
+\addcontentsline{toc}{chapter}{\protect\numberline{摘要}{(英文)}}
+\markboth{Abstract}{摘要}
+
+
+
+\chapter{图表}
+
+\section{表格}
+\begin{table}[!htb]
+
+\caption{这是一个表格 }
+
+\begin{center}
+\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}ccr}
+\hline dimension &$\delta_0\omega_0$&$\delta_0\omega_0$
+                    \\ \hline
+1    &.6931471806  & 1.570796327    \\
+2    &.3465735903  &  .726708429    \\
+\hline
+\end{tabular*}
+\end{center}
+\end{table}
+
+
+\begin{table}[!htb]
+
+\caption{这是一个表格 }
+
+\begin{center}
+\begin{tabular*}{0.5\textwidth}{@{\extracolsep{\fill}}ccr}
+\hline dimension &$\delta_0\omega_0$&$\delta_0\omega_0$
+                    \\ \hline
+3    &.2310490602  &  .475124782    \\
+4    &.1732867952  &  .353351966    \\
+5    &.1386294361  &  .281381006 \\
+\hline
+\end{tabular*}
+\end{center}
+\end{table}
+
+
+\newpage
+\section{插图}
+
+\subsection{\LaTeX作图}
+
+请参考 C:/texmf/doc/graphics/texdraw/texdraw.pdf
+
+\vskip 10mm
+
+\begin{figure}[!h]
+
+
+\centertexdraw{ \drawdim in \linewd 0.03 \setgray 0.3
+\arrowheadtype t:F \avec(0 0.5) \linewd 0.01 \setgray 0
+\arrowheadtype t:V \avec(0.5  0.5) \linewd 0.015 \lpatt(0.067 0.1)
+\lvec (1 0) \linewd 0.02 \lpatt()  \arrowheadtype t:T \avec(1.5
+0.5) \arrowheadtype t:H \avec(2 0.5) \arrowheadtype t:W \avec(2 0)
+}
+
+\caption{Texdraw作图}
+\end{figure}
+
+\begin{figure}[!h]
+\centertexdraw{ \linewd 0.02 \fcir f:0.7 r:1 \larc r:1 sd:45
+ed:135 \lvec (+0.707 +0.707) \move(0 0) \lvec (-0.707 +0.707) }
+
+\caption{Texdraw作图}
+
+\end{figure}
+
+\subsection{插图}
+
+支持以下图象格式
+
+\vskip 5mm
+\def\arraystretch{1.3}
+
+
+\begin{tabular}{llllllllll}
+\hline
+acr, &aif, &ani, &au,  &avi, &b3d,& bmp,& cam, &clp, &cpt, \\
+crw, &cur, &dat, &dcm, &dcr, &dcx,& dds,& dib, &djvu,&dxf, \\
+ecw, &emf, &eps, &flc, &fli, &fpx,& fsh,& g3b, &gif, &gsm, \\
+icl, &ico, &iff, &img, &jng, &jp2,& jpeg,&jpg, &jpm, &kdc, \\
+lbm, &ldf, &lwf, &med, &mid, &mng,& mrw,& nef, &ngg, &nlm, \\
+nol, &nsl, &ogg, &orf, &otb, &pbm,& pcx,& pdf  &pgm, &png,  \\
+ppm, &psd, &psp, &qtif,&raf, &ras, &raw,& rgb,& rle, &rmi, \\
+sff, &sfw, &sgi, &snd, &sun, &swf, &tga,& tif,& tiff,&ttf, \\
+wad, &wav, &wbmp,&wma, &wmf, &wmv, &xbm,& xpm &      &\\
+\hline
+\end{tabular}
+
+使用说明见\verb+[texmf]\doc\latex\graphics\picture.pdf+
+
+
+\chapter{草稿专用宏包：labelname.sty}
+
+为了使用\LaTeX
+的交叉引用，你需要给每一个自动编号的项目加一个标签($\backslash$label\{ ... \}).
+当标签比较多的时候，要记住这些标签可能比较难。
+
+为解决这一问题，我们编写了一个新的宏包labelname.sty\,\,
+只要在文件开始处加入命令
+
+\begin{verbatim}
+   \usepackage{labelname}
+\end{verbatim}
+
+每一个标签的名字就会打印在页面的边缘。当论文完成以后，只需要删除这一命令，即可回到普通模式。
+
+
+
+\chapter{方程式编号}
+这里提供各种编号的打印方法。
+
+\addtocounter{equation}{1}
+\begin{align}
+c^2&=a^2+b^2 \tag{\theequation a}\\
+a^2&=c^2-b^2 \tag{\theequation b} \\
+b^2&=c^2-a^2 \tag{\theequation b$'$} \label{eq:b1}
+\end{align}
+
+\ref{eq:b1}
+\begin{align}
+dy&=f'(x) dx \label{eq:1} \\
+f'(x)&=dy/dx  \tag{\ref{eq:1}$'$}
+\end{align}
+
+\begin{equation} \label{eq:2}
+\begin{split}
+y'&= dy / dx \\
+ &= f'(x)
+ \end{split}
+ \end{equation}
+
+\begin{equation} \label{eq:3}
+\left\{ \begin{aligned}
+         \pi &= 3.141\cdots \\
+                  \sqrt{2}&=1.414\cdots
+                          \end{aligned} \right.
+                          \end{equation}
+
+\parbox[c]{0.35\linewidth}
+{\hfill $\left\{ \vbox to 8mm{}\right.$}
+\hfill
+\parbox[c]{0.60\linewidth}
+{\begin{flalign}
+x&=\frac{a_K^M}{B_L^Q}y &\label{eq:4}\\
+a&=b+c &\tag{\ref{eq:4} $'$}
+\end{flalign}}
+
+Ref: \eqref{eq:4}
+
+\chapter{页面格式}
+
+SimpChinese.sty提供以下页面格式：
+
+\begin{center}
+\begin{tabular}{l}
+plain\\
+headings\\
+myheadings\\
+newheadings\\
+centerheadings\\
+centerheadingsUP\\
+thesis\\
+newfoot
+\end{tabular}
+
+\end{center}
+
+
+
+\chapter{字体与章节号}
+
+\section{正文字体}
+请参考源文件中的注释或文件texmf/samples/中文字体/CJKFonts.tex
+
+\section{标题格式}
+
+以下为缺省标题格式， 可根据需要修改：
+
+\begin{verbatim}
+
+\def\chapterformat{\centering\huge\bfseries\heiti}
+   %    章标题格式
+\def\partformat{\centering\huge\bfseries\heiti}
+\def\sectionformat{\centering\normalfont\Large\bfseries\heiti}
+   %    节标题格式
+\def\subsectionformat{\normalfont\large\bfseries\heiti}
+\def\subsubsectionformat{\normalfont\normalsize\bfseries\heiti}
+\def\overchapterspace{40pt}  %章标题上面的空行
+\def\belowchapterspace{30pt} %章标题下面的空行
+\end{verbatim}
+
+\newpage
+\section{目录字体}
+
+以下为缺省目录字体：
+
+\begin{verbatim}
+\def\tocchapterfonts{\bfseries}     %  定义目录中章标题字体
+\def\tocsectionfonts{\small}        %  定义目录中节标题字体
+\def\tocsubsectionfonts{\small}%    %  定义目录中子节标题字体
+\end{verbatim}
+
+\section{节号\S}
+
+如果你想加上节号\S, 请用命令
+\begin{verbatim}
+\def\sectionformat{\centering\normalfont\Large\bfseries\heiti\S}
+                                      %  正文节标题格式
+\def\tocsectionfonts{\small\S}        %  定义目录中节标题字体
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+
+
+%
+%======  字体  ===============
+%
+%\songti    宋体
+%\kaiti     楷体
+%\heiti     黑体
+%\fangsong  仿宋
+%\lishu     隶书
+%\youyuan   幼圆
+%\xinwei    华文新魏
+%\xihei     华文细黑
+%\caiyun    华文彩云
+%\hupo      华文琥珀
+%\hlishu    华文隶书
+%\hfangsong 华文仿宋
+%\xingkai   华文行楷
+%\zhongsong 华文中宋
+%\hsongti   华文宋体
+%\hkaiti    华文楷体
+%\shuti     方正舒体
+%\yaoti     方正姚体
+%
+%  以下命令对中英文都有效
+%
+%=========字系列 =============
+%
+%  \fontseries{m}\selectfont         标准
+%  \fontseries{bx}\selectfont        粗体
+%  \fontseries{c}\selectfont         窄体
+%  \fontseries{bc}\selectfont        粗窄体
+%
+%====== 字型 ====================
+% \fontshape{n}\selectfont    直立
+% \fontshape{it}\selectfont   斜体
+% \fontshape{sl}\selectfont   斜体
+%
+%======字大小与行间距 =================
+%\fontsize{11}{22}   第一个参数为字大小， 第二个参数为行间距。
+%                    对于True Type字体，可以定义任意大小。
+%
+
+
+
+\chapter{归纳法}
+\section{逻辑学家}
+逻辑学家说：``你看这个数学家, 他观察开头的99个数比100小,
+从而他就用他的所谓的`归纳'推断所有的数都比100小.''
+
+\newpage
+\section{数学家}
+ 数学家说: ``一个物理学家相信60能被一切数除尽.
+他发现60能被1, 2, 3, 4, 5和6除尽, 他还试验了更多的情况, 如象10,
+20, 30也能除尽60, 并且据他说这些例子是随意举出的.
+由于60还能被这些数除尽, 他就认为这些实验证据已经足够了. ''
+
+\newpage
+\section{物理学家}
+物理学家说: ``是的, 你去看工程师吧,
+一个工程师觉得所有奇数都是素数. 他辩解说, 1无论如何是素数,
+无疑地3, 5, 7也是素数, 9好象不灵了,先不管它, 接下来11和13又是素数.
+`回过头来再看9', 他说, `我断定, 9必定是一个实验性的错误'.''
+
+------ (美)G.波利亚著,李心灿等译校《数学与猜想》第一,
+二卷,科技出版社1984年. 
+
+\chapter*{ 致谢}
+\addcontentsline{toc}{chapter}{\protect\numberline{}{致谢}}
+\markboth{致谢}{致谢}
+
+感谢您使用本模板。
+
+
+
+\begin{thebibliography}{EE}
+\addcontentsline{toc}{chapter}{\protect\numberline{}{参考文献}}
+\markboth{参考文献}{参考文献}
+
+\bibitem{sun1} 孙文昌，\textit{没有题目}，尚未发表。
+\end{thebibliography}
+\newpage
+\end{CJK*}
+\end{document}

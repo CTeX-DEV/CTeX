@@ -1,0 +1,87 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+   <meta http-equiv="Content-Language" content="en-us">
+   <meta name="GENERATOR" content="Mozilla/4.7 [en] (WinNT; I) [Netscape]">
+   <meta name="ProgId" content="FrontPage.Editor.Document">
+</head>
+
+<body>
+<font color="#FF00FF">使用</font>
+
+<p><FONT COLOR="#0080FF">一般操作</FONT></p>
+<p>只需点击鼠标,选中符号所对应用的LaTeX命令就会插入到WinEdt编辑的当前文本的光标所在处.此外,系统还会检查该LaTeX文件是否调用了相应的宏包.若没有,则会在
+\documentclass...下面加入一行,如
+\usepackage{...}.
+<p>为使该系统正确工作,LaTeX文件必须以\documentclass开始.对于CCT中文TeX,建议使用
+
+<TABLE cellSpacing=4 width="100%" border=0>
+  <TBODY>
+ <TR>
+    <TD vAlign=top width="15%"></TD>
+    <TD width="85%">\documentclass[11pt,CJK]{cctart}</TD>
+ <TR>
+
+ <TR>
+    <TD vAlign=top width="15%"></TD>
+    <TD width="85%">\documentclass[11pt,CJK]{cctbook}</TD>
+ <TR>
+
+ <TR>
+    <TD vAlign=top width="15%"></TD>
+    <TD width="85%">\documentclass[11pt,CJK]{cctpage}</TD>
+ <TR>
+
+ <TR>
+    <TD vAlign=top width="15%"></TD>
+    <TD width="85%">... ...</TD>
+ <TR>
+
+
+  </TBODY>
+</TABLE>
+
+<p><FONT COLOR="#0080FF">选则字体</FONT></p>
+
+<TABLE cellSpacing=4 width="100%" border=0>
+  <TBODY>
+ <TR>
+    <TD vAlign=top width="10%"><FONT COLOR="#0000FF">有两种方式</FONT></TD>
+    <TD width="85%"></TD>
+ <TR>
+
+ <TR>
+    <TD vAlign=top width="10%"></TD>
+    <TD width="85%">1. 直接点击相应字体命令,WinEdt会在当前位置插入\textrm{}或\songti之类的命令</TD>
+ <TR>
+
+ <TR>
+    <TD vAlign=top width="10%"></TD>
+    <TD width="85%">2. 先选中一段文字,再点字体命令, 这时该字体命令仅对选中的文字有效,即选中的部分变成了\textrm{selected words}或 {\songti 选中的文字}</TD>
+ <TR>
+
+
+  </TBODY>
+</TABLE>
+<p><font color="#FF00FF">文件格式说明</font>
+
+<p>您可以按以下方法扩充字符集,从而加强TeXFriend的功能.
+
+<p>[fonts.txt]</p> 
+<p>每行定义了一个字符集。其中caption为字符集的名称，bitmap为存放这些字符的位图文件（可以为其他格式），该图被分成r
+x c个小图，每个小图代表一个字符，h,w分别为小图的高和宽。command为一个文本文件，它的每一行定义了一个字符串，与bitmap中的小图相对应，它的格式为
+分类号：命令 其中分类号必须为1位字符，冒号之后为任意字符串 </p>
+
+<p>[TexFriend.ini]</p>
+<p>class与command定义了对上述字符串的解释。例如， class="1" command="Ins"
+表示对"1"类命令， 使用WinEdt宏Ins. 例如， 当点击鼠标时，若相应位置的字符串为"1:\bbalpha",
+则系统会调用WinEdt执行命令 Ins('\alpha') 即把\alpha插入当前位置。
+</p>
+
+<p> [fonts.txt]</p>
+<p>
+edt为可选参数，若存在，应该对应于一个WinEdt宏命令文件，该文件应存放在%WinEdtPath%\bin\MikTex文件夹。
+例如，对于AMS符号， edt="amssymb.edt", 点击鼠标时，除插入相应字符串以外，还执行文件amssymb.edt.
+该文件用于检查LaTeX文件中是否调用了宏包"amssymb.sty", 若没有,则会在\documentclass...下面加入一行\usepackage{amssymb}.</p>
+</body>
+</html>

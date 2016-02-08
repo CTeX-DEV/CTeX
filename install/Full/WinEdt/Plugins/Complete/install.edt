@@ -1,0 +1,9 @@
+// Append 'Command completion' in the Shortcuts Menu
+
+    Requires(20001213); //Build number (About Dialog)
+
+    Prompt("Enable plug-in Command Completion Shortcuts (Ctrl[+Shift]+Y)?",1,3,>
+      "AddMenus('Complete Menu.dat',1)",>
+      "AddMenus('Complete Menu-Off.dat',1)");
+
+End;

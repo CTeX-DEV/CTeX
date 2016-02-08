@@ -1,0 +1,3 @@
+Assign("PackageLine","\usepackage{bbm}");
+Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
+End;

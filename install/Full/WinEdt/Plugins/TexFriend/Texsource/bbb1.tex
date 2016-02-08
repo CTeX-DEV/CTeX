@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage[sans]{dsfont}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\ifx\mathbbold\undefined
+\DeclareFontFamily{U}{bbold}{}%
+\DeclareFontShape{U}{bbold}{m}{n}{<-5>bbold5<6>bbold6<7>bbold7
+  <8>bbold8<9>bbold9<9-11>bbold10<11-14>bbold12<14->bbold}{}%
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold} \fi
+\ifx\bbalpha\undefined
+\DeclareMathSymbol{\Lbrack}{\mathopen}{bbold}{`[}
+\DeclareMathSymbol{\Rbrack}{\mathclose}{bbold}{`]}
+\DeclareMathSymbol{\Langle}{\mathopen}{bbold}{`<}
+\DeclareMathSymbol{\Rangle}{\mathclose}{bbold}{`>}
+\DeclareMathSymbol{\Lparen}{\mathopen}{bbold}{`(}
+\DeclareMathSymbol{\Rparen}{\mathclose}{bbold}{`)}
+\DeclareMathSymbol{\Eins}{\mathord}{bbold}{`1}
+\DeclareMathSymbol{\bbalpha}{\mathord}{bbold}{"0B}
+\DeclareMathSymbol{\bbbeta}{\mathord}{bbold}{"0C}
+\DeclareMathSymbol{\bbgamma}{\mathord}{bbold}{"0D}
+\DeclareMathSymbol{\bbdelta}{\mathord}{bbold}{"0E}
+\DeclareMathSymbol{\bbespilon}{\mathord}{bbold}{"0F}
+\DeclareMathSymbol{\bbzeta}{\mathord}{bbold}{"10}
+\DeclareMathSymbol{\bbeta}{\mathord}{bbold}{"11}
+\DeclareMathSymbol{\bbtheta}{\mathord}{bbold}{"12}
+\DeclareMathSymbol{\bbiota}{\mathord}{bbold}{"13}
+\DeclareMathSymbol{\bbkappa}{\mathord}{bbold}{"14}
+\DeclareMathSymbol{\bblambda}{\mathord}{bbold}{"15}
+\DeclareMathSymbol{\bbmu}{\mathord}{bbold}{"16}
+\DeclareMathSymbol{\bbnu}{\mathord}{bbold}{"17}
+\DeclareMathSymbol{\bbxi}{\mathord}{bbold}{"18}
+\DeclareMathSymbol{\bbpi}{\mathord}{bbold}{"19}
+\DeclareMathSymbol{\bbrho}{\mathord}{bbold}{"1A}
+\DeclareMathSymbol{\bbsigma}{\mathord}{bbold}{"1B}
+\DeclareMathSymbol{\bbtau}{\mathord}{bbold}{"1C}
+\DeclareMathSymbol{\bbupsilon}{\mathord}{bbold}{"1D}
+\DeclareMathSymbol{\bbphi}{\mathord}{bbold}{"1E}
+\DeclareMathSymbol{\bbchi}{\mathord}{bbold}{"1F}
+\DeclareMathSymbol{\bbpsi}{\mathord}{bbold}{"20}
+\DeclareMathSymbol{\bbomega}{\mathord}{bbold}{"7F} \fi
+
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+ \makeatother
+\begin{document}
+\outputm
+\def\arraystretch{1}
+\arraycolsep 0pt
+\def\tabsep{\makebox{\hskip 14pt}}
+
+
+\def\vvspace{\mbox{\hskip 10mm \fontsize{18}{24}\selectfont H}}
+
+
+\makeatletter
+\def\vspaces{\vbox{\vskip 4mm}}
+
+\definecolor{colora}{rgb}{0,0,1}
+\definecolor{colorb}{rgb}{1,.5,0}
+\definecolor{colorc}{rgb}{1,0,1}
+\definecolor{colord}{rgb}{0,0,0}
+
+
+\def\K#1{\vspaces #1\totxt{#1}}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+1:\noexpand#1}}
+
+
+\def\Ka#1{{\color{colora}\vspaces #1\totxta{#1}}}
+\def\totxta#1{
+\immediate\write\tf@txt{%
+1:\string#1');Exe('\string\%B\string\Bin\string\MikTex\string\amsfonts.edt}}
+
+\def\Kb#1{{\color{colorb}\vspaces #1\totxtb{#1}}}
+\def\totxtb#1{
+\immediate\write\tf@txt{%
+1:\string#1');Exe('\string\%B\string\Bin\string\MikTex\string\dsfont-sans.edt}}
+
+
+\def\Kc#1{{\color{colorc}\vspaces #1\totxtc{#1}}}
+\def\totxtc#1{
+\immediate\write\tf@txt{%
+1:\string#1');Exe('\string\%B\string\Bin\string\MikTex\string\bbm.edt}}
+
+
+\def\Kd#1{\vspaces #1\totxtd{#1}}
+\def\totxtd#1{
+\immediate\write\tf@txt{%
+1:\string#1');Exe('\string\%B\string\Bin\string\MikTex\string\mathbbold.edt}}
+
+
+
+
+\makeatother
+
+
+\[
+\begin{array}{ccccccccccccccc}
+\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep
+&\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep & \vvspace\\
+ \Ka{\mathbb{A}}
+&\Ka{\mathbb{B}} &\Ka{\mathbb{C}} &\Ka{\mathbb{D}} &\Ka{\mathbb
+{E}} &\Ka{\mathbb{F}} &\Ka{\mathbb{G}} &\Ka{\mathbb{H}}
+&\Ka{\mathbb{I}} &\Ka{\mathbb{J}} &\Ka{\mathbb{K}} &\Ka{\mathbb
+{L}}
+&\Ka{\mathbb{M}} &\vvspace \\
+ \Ka{\mathbb{N}}
+&\Ka{\mathbb{O}} &\Ka{\mathbb{P}} &\Ka{\mathbb{Q}} &\Ka{\mathbb
+{R}} &\Ka{\mathbb{S}} &\Ka{\mathbb{T}} &\Ka{\mathbb{U}}
+&\Ka{\mathbb{V}} &\Ka{\mathbb{W}} &\Ka{\mathbb{X}} &\Ka{\mathbb
+{Y}}
+&\Ka{\mathbb{Z}} &\vvspace\\
+ \Kb{\mathds {A}}
+&\Kb{\mathds {B}} &\Kb{\mathds {C}} &\Kb{\mathds {D}}
+&\Kb{\mathds {E}} &\Kb{\mathds {F}} &\Kb{\mathds {G}}
+&\Kb{\mathds {H}} &\Kb{\mathds {I}} &\Kb{\mathds {J}}
+&\Kb{\mathds {K}} &\Kb{\mathds {L}}
+&\Kb{\mathds {M}} &\vvspace \\
+ \Kb{\mathds {N}}
+&\Kb{\mathds {O}} &\Kb{\mathds {P}} &\Kb{\mathds {Q}}
+&\Kb{\mathds {R}} &\Kb{\mathds {S}} &\Kb{\mathds {T}}
+&\Kb{\mathds {U}} &\Kb{\mathds {V}} &\Kb{\mathds {W}}
+&\Kb{\mathds {X}} &\Kb{\mathds {Y}}
+&\Kb{\mathds {Z}} &\vvspace\\
+  \Kc{\mathbbm {A}}
+&\Kc{\mathbbm {B}} &\Kc{\mathbbm {C}} &\Kc{\mathbbm {D}}
+&\Kc{\mathbbm {E}} &\Kc{\mathbbm {F}} &\Kc{\mathbbm {G}}
+&\Kc{\mathbbm {H}} &\Kc{\mathbbm {I}} &\Kc{\mathbbm {J}}
+&\Kc{\mathbbm {K}} &\Kc{\mathbbm {L}}
+&\Kc{\mathbbm {M}} &\vvspace \\
+ \Kc{\mathbbm {N}}
+&\Kc{\mathbbm {O}} &\Kc{\mathbbm {P}} &\Kc{\mathbbm {Q}}
+&\Kc{\mathbbm {R}} &\Kc{\mathbbm {S}} &\Kc{\mathbbm {T}}
+&\Kc{\mathbbm {U}} &\Kc{\mathbbm {V}} &\Kc{\mathbbm {W}}
+&\Kc{\mathbbm {X}} &\Kc{\mathbbm {Y}}
+&\Kc{\mathbbm {Z}} &\vvspace\\
+  \Kc{\mathbbm {a}}
+&\Kc{\mathbbm {b}} &\Kc{\mathbbm {c}} &\Kc{\mathbbm {d}}
+&\Kc{\mathbbm {e}} &\Kc{\mathbbm {f}} &\Kc{\mathbbm {g}}
+&\Kc{\mathbbm {h}} &\Kc{\mathbbm {i}} &\Kc{\mathbbm {j}}
+&\Kc{\mathbbm {k}} &\Kc{\mathbbm {l}}
+&\Kc{\mathbbm {m}} &\vvspace \\
+ \Kc{\mathbbm {n}}
+&\Kc{\mathbbm {o}} &\Kc{\mathbbm {p}} &\Kc{\mathbbm {q}}
+&\Kc{\mathbbm {r}} &\Kc{\mathbbm {s}} &\Kc{\mathbbm {t}}
+&\Kc{\mathbbm {u}} &\Kc{\mathbbm {v}} &\Kc{\mathbbm {w}}
+&\Kc{\mathbbm {x}} &\Kc{\mathbbm {y}}
+&\Kc{\mathbbm {z}} &\vvspace\\
+ \mathbbold {0}
+&\Kd{\mathbbold {1}} &\Kd{\mathbbold {2}} &\Kd{\mathbbold {3}}
+&\Kd{\mathbbold {4}} &\Kd{\mathbbold {5}} &\Kd{\mathbbold {6}}
+&\Kd{\mathbbold {7}} &\Kd{\mathbbold {8}} &\Kd{\mathbbold {9}}
+&\Kd\Lbrack &\Kd\Rbrack &\Kd\Langle &\vvspace \\
+\Kd\Rangle &\Kd\Lparen &\Kd\Rparen  &\Kd\bbalpha &\Kd\bbbeta
+&\Kd\bbgamma &\Kd\bbdelta &\Kd\bbespilon &\Kd\bbzeta &\Kd\bbeta
+&\Kd\bbtheta &\Kd\bbiota &\Kd\bbkappa&\vvspace \\
+\Kd\bblambda &\Kd\bbmu &\Kd\bbnu &\Kd\bbxi &\Kd\bbpi &\Kd\bbrho
+&\Kd\bbsigma &\Kd\bbtau &\Kd\bbupsilon  &
+ \Kd\bbphi &\Kd\bbchi &\Kd\bbpsi &\Kd\bbomega&\vvspace
+\end{array}
+\]
+
+
+
+
+
+
+\end{document}

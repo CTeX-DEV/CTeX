@@ -1,0 +1,5 @@
+Assign("NewDocGuide","%@('HKEY_CURRENT_USER','Software\VB and VBA Program Settings\TexFriend\Options','NewDocumentGuide')");
+IfStr("%$('NewDocGuide')","Off","=","Assign('NewDocGuide','On')","Assign('NewDocGuide','Off')");
+SetRegStr('HKEY_CURRENT_USER','Software\VB and VBA Program Settings\TexFriend\Options','NewDocumentGuide', '%$("NewDocGuide")');
+IfStr("%$('NewDocGuide')","Off","=","Prompt('新文件向导已经关闭',0,1,'','')","Prompt('新文件向导已经打开',0,1,'','')");
+End;

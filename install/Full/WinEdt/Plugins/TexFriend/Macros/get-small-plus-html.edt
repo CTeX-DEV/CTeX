@@ -1,0 +1,35 @@
+Assign("packages","[ar][ascii][bbding][bbm][bbold][beamer][bezos][carlisle][comprehensive][dingbat][dstroke][fc][geometry][gothic][ifsym][ipa][jknappen][manfnt][marvosym][monotype][pgf][rsfs][stmaryrd][texdraw][tipa][txfonts][ulsy][wasy][wasysym][wsuipa][xcolor][yfonts]xxxxxx");
+
+
+
+SearchReset;
+GotoCL(1,1);
+OpenOutput("d:\index.html");
+
+WrL(*<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">*);
+
+WrL(*<!-- saved from url=(0047)http://miktex.nankai.edu.cn/packages/index.html -->*);
+WrL(*<HTML><HEAD><TITLE>Untitled Document</TITLE>*);
+WrL(*<META http-equiv=Content-Type content="text/html; charset=gb2312">*);
+WrL(*<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>*);
+WrL(*<BODY text=#000000 bgColor=#ffffff>*);
+WrL(*<P>本文件夹存放<FONT*);
+WrL(*color=#ff0000>miktex-small-plus</FONT>的安装软件包。请用下载工具下载以下文件,然后运行setup.exe,按提示安装miktex.：</P>*);
+
+
+
+Repeat(125,!*WrL('<P><A href="http://miktex.nankai.edu.cn/packages/miktex-small-plus/%L"> %L </A></P>');CMD('Line Down');*);
+
+
+WrL('<P></p>');
+WrL('<HR>');
+WrL('<P><A href="http://miktex.nankai.edu.cn/packages/chinese/cct060.exe"> cct060.exe </A></P>');
+WrL('<P><A href="http://miktex.nankai.edu.cn/packages/chinese/patches4miktex.exe"> patches4miktex.exe </A></P>');
+WrL('<P><A href="http://miktex.nankai.edu.cn/packages/chinese/gbsn00lp.ttf"> gbsn00lp.ttf </A></P>');
+WrL('<P><A href="http://miktex.nankai.edu.cn/packages/chinese/gkai00mp.ttf"> gkai00mp.ttf </A></P>');
+WrL('<P><A href="http://miktex.nankai.edu.cn/packages/chinese/license.txt"> license.txt </A></P>');
+
+
+
+CloseOutput;
+End;

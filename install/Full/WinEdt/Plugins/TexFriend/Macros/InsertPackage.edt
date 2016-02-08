@@ -1,0 +1,31 @@
+Mark(1);
+SetSearchCyclic(1);
+SetSearchCaseSensitive(0);
+SetSearchEntire(1);
+GotoCL(1,1);
+SetFindStr("%$('PackageLine');");
+IfFound("CMD('Char Left');Goto(1);Ins('');End","");
+
+GotoCL(1,1);
+SetFindStr("\documentclass");
+IfFound("","Goto(1);End");
+
+//Loop(!'FindInString("%L","\documentclass",1,2);>
+//       FindInString("%L","%",3,4);>
+//       LetRegNum(5,1);>
+//       IfNum(%!1,%!2,|>|,|LetRegNum(5,0)|,||);>
+//       IfNum(%!3,%!1,|<|,|LetRegNum(5,0)|,||);>
+//       IfNum(%!5,0,|=|,"CMD(|Line Down|)","Stop")');
+
+Loop(!'FindInString("%L","}",1,2);>
+       FindInString("%L","%",3,4);>
+       LetRegNum(5,1);>
+       IfNum(%!1,%!2,|>|,|LetRegNum(5,0)|,||);>
+       IfNum(%!3,%!1,|<|,|LetRegNum(5,0)|,||);>
+       IfNum(%!5,0,|=|,"CMD(|Line Down|)","Stop")');
+
+GotoCL(%!1+2,%l);
+NewLine;
+Ins("%$('PackageLine');");
+Goto(1);
+End;

@@ -1,0 +1,228 @@
+%
+%
+%          请注意， 本文件的扩展名应为 .tex
+%
+%
+\documentclass[11pt]{article}        % 论文,单面格式
+\usepackage{labelname}               %
+%
+%
+%  为了使用\LaTeX
+%  的交叉引用，你需要给每一个自动编号的项目加一个标签($\backslash$label\{ ... \}).
+%  当标签比较多的时候，要记住这些标签可能比较难。
+%
+%  为解决这一问题，我们编写了一个新的宏包labelname.sty\,\,
+%  只要在文件开始处加入命令
+%
+%
+%   \usepackage{labelname}
+%
+%
+%   每一个标签的名字就会打印在页面的边缘。当论文完成以后，只需要删除这一命令，即可回到普通模式。
+%
+\usepackage{texdraw}                 % 绘图宏包
+\usepackage{graphics}                % LaTeX 图形宏包
+\usepackage{epsf}                    % eps 插图宏包
+%\usepackage{TimesNewRoman}          % 定义Times New Roman为缺省英文字体
+\usepackage{math}                    % 数学宏包，包含特殊方程式编号，改变\sum等的缺省样式，使上下标打印在最上端和最下端等
+\begin{document}
+
+\newtheorem{Theorem}{Theorem}[section]      %  定理类环境
+\newtheorem{Proposition}[Theorem]{Proposition}  %
+\newtheorem{Lemma}[Theorem]{Lemma}        %
+\newtheorem{Corollary}[Theorem]{Corollary}    %
+\newtheorem{Definition}{Definition}[section]   %
+\newtheorem{Example}{Example}[section]        %
+%
+%
+%  ================== 定理类环境缺省值 =============================================
+%\theoremindent 0pt                      % 左边界, 缺省为0
+%\def\theoremvskip{0pt}                  % 顶部空行, 缺省为0pt
+%\def\TheoremTitleFonts{\bfseries}        % 定理类环境标题字体, 缺省为黑体
+%\def\TheoremTextFonts{\itshape}          % 定理类环境正文字体, 缺省为斜体
+%
+%
+
+
+\fontsize{11}{22}\selectfont             % 定义字大小(11pt)与行间距(22pt),可根据需要修改
+\parindent 22pt                          % 每段开始空 22pt
+
+\title{Here input the title
+      \thanks{This work was not supported by any fund.}}
+\author{Wenchang Sun}
+\date{2002/10/10}
+\maketitle
+
+
+\section{Tables and Figures}
+
+\subsection{Tables}
+\begin{table}[!htb]
+
+\caption{This is an example }
+
+\begin{center}
+\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}ccr}
+\hline dimension &$\delta_0\omega_0$&$\delta_0\omega_0$
+                    \\ \hline
+1    &.6931471806  & 1.570796327    \\
+2    &.3465735903  &  .726708429    \\
+\hline
+\end{tabular*}
+\end{center}
+\end{table}
+
+
+\begin{table}[!htb]
+
+\caption{This is another example }
+
+\begin{center}
+\begin{tabular*}{0.5\textwidth}{@{\extracolsep{\fill}}ccr}
+\hline dimension &$\delta_0\omega_0$&$\delta_0\omega_0$
+                    \\ \hline
+3    &.2310490602  &  .475124782    \\
+4    &.1732867952  &  .353351966    \\
+5    &.1386294361  &  .281381006 \\
+\hline
+\end{tabular*}
+\end{center}
+\end{table}
+
+
+\newpage
+\subsection{Figures}
+
+\subsubsection{TexDraw }
+
+Please refer to  C:/texmf/doc/graphics/texdraw/texdraw.pdf
+
+\vskip 10mm
+
+\begin{figure}[!h]
+
+
+\centertexdraw{ \drawdim in \linewd 0.03 \setgray 0.3
+\arrowheadtype t:F \avec(0 0.5) \linewd 0.01 \setgray 0
+\arrowheadtype t:V \avec(0.5  0.5) \linewd 0.015 \lpatt(0.067
+0.1) \lvec (1 0) \linewd 0.02 \lpatt()  \arrowheadtype t:T
+\avec(1.5 0.5) \arrowheadtype t:H \avec(2 0.5) \arrowheadtype t:W
+\avec(2 0) }
+
+\caption{Drawing with Texdraw }
+\end{figure}
+
+\begin{figure}[!h]
+\centertexdraw{ \linewd 0.02 \fcir f:0.7 r:1 \larc r:1 sd:45
+ed:135 \lvec (+0.707 +0.707) \move(0 0) \lvec (-0.707 +0.707) }
+
+\caption{Texdraw 2}
+
+\end{figure}
+
+\subsubsection{eps or ps figures}
+%在\begin{document}之前 加入命令
+%
+%   \usepackage{epsfig}
+%
+% 插图命令为
+%
+%=======================================================
+%\begin{figure}[!htp]            % 把插图放在figure环境内, 可以自动编号 并支持交叉引用
+%                                %
+%\hfil                           % 两个 \hfil命令使得插图居中排版
+%\epsfxsize 80mm                 % 定义图象宽度, 高度会按比例调整
+%\epsfbox{filename}              % 插入图象, 扩展名为ps 或 eps
+%\hfil                           %
+%                                %
+%\caption{ 标题}  \label{ex1}    % 插图标题和标号, 可以用\ref{ex1}引用它的编号
+%                                %
+%%\end{figure}                   %
+%=============================================
+
+
+\subsubsection{others}
+
+
+%请参考以下格式插图,
+%\includegraphics[x1,y1][x2,y2]{picture-filename}
+%其中$(x1, y1)$是图象框的左上角坐标, $(x2,y2)$为右下角坐标,
+%单位为pt. 图象文件格式可以为任何格式, 扩展名应该小写!
+
+
+%Windows 98/Me 用户请注意:  若使用了bmp以外格式的插图, 必须用 Yap
+%0.98n 浏览, 否则, win98下会报错, WinMe下会进入等待状态.%
+%
+%
+%例如,以下语句在正文中插入图象cct.jpg
+%      \includegraphics[0,0][100,100]{cct.jpg}
+
+
+
+\section{equation numbers}
+
+
+\begin{eqnarray}
+a^2 &=& b^2 + c^2 \\
+a^2 &=& b^2 + c^2 \letterlabel{a} \label{eq:ex:a}\\               % \letterlabel{..} 可以出现在方程式的任何位置，
+\letterlabel{b} \label{eq:ex:b}a^2 &=& b^2 + c^2 \\               % \label{...} 命令必须在\letterlabel{}的后面，
+a^2 &=& b^2 + c^2 \setcounter{eqnum}{-1}\letterlabel{a}\\         %  否则， \ref{..} 命令将不能得到正确的编号.
+a^2 &=& b^2 + c^2 \letterlabel{b}\\                               %
+a^2 &=& b^2 + c^2 \\                                              %
+a^2 &=& b^2 + c^2 \letterlabel{}\\
+a^2 &=& b^2 + c^2 \letterlabel{$'$}\\
+a^2 &=& b^2 + c^2 \letterlabel{$''$}\\
+a^2 &=& b^2 + c^2
+\end{eqnarray}
+
+%
+%  缺省状态下，相邻的\letterlabel 命令使用相同的基本编号，
+%    （相邻的定义：如果两个方程式之间没有其他自动编号的方程式，即使属于不同的eqnarray 或equation或equations ，
+%     也认为是相邻的方程式）
+%  如果要强制分组，可使用命令 \setcounter{eqnum}{-1}
+%
+%
+
+references: (\ref{eq:ex:a}), (\ref{eq:ex:b})
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% equations 环境缺省值
+%
+%
+%\eqnsleftlength 40pt       % 方程组左半部分（包含左括号）宽度
+%\eqnsskip 5pt              % equations环境上下空行高度
+%\eqnsheight 6mm            % 方程组（左括号）高度
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\eqnsleftlength 40mm \eqnsheight 9mm
+\begin{equations}
+a^2=b^2+c^2 \letterlabel{a}\label{eq:a}\\      % \letterlabel{..} 可以出现在方程式的任何位置，
+\letterlabel{b}\label{eq:b} a^2=b^2+c^2 \\     % \label{...} 命令必须在\letterlabel{}的后面，
+a^2=b^2+c^2                                    %  否则， \ref{..} 命令将不能得到正确的编号.
+\end{equations}
+
+references: (\ref{eq:a}), (\ref{eq:b})
+
+
+\section{Fonts}
+
+%  以下命令对中英文都有效
+%
+%=========字系列 =============
+%
+%  \fontseries{m}\selectfont         标准
+%  \fontseries{bx}\selectfont        粗体
+%  \fontseries{c}\selectfont         窄体
+%  \fontseries{bc}\selectfont        粗窄体
+%
+%====== 字型 ====================
+% \fontshape{n}\selectfont    直立
+% \fontshape{it}\selectfont   斜体
+% \fontshape{sl}\selectfont   斜体
+%
+%======字大小与行间距 =================
+%\fontsize{11}{22}   第一个参数为字大小， 第二个参数为行间距。对于True Type字体，可以定义任意大小。
+%
+
+\end{document}

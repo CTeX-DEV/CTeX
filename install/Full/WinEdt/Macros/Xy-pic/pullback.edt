@@ -1,0 +1,6 @@
+ // Pullback Xy-Pic diagram
+ BeginGroup;
+ SetSel(0);Mark(9);
+ ReadFile('%b\Templates\xy-pic\pullback.ltx',9);
+ Ins('%!9');Goto(9);CMD('Next Bullet');
+End;
