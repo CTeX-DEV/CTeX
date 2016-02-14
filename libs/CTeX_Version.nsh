@@ -7,7 +7,7 @@
 !define APP_YEAR "2016"
 !define APP_COPYRIGHT "Copyright (C) ${APP_YEAR} ${APP_COMPANY}"
 !define APP_VERSION "3.0.0"
-!ifndef DEBUG
+!ifdef DEBUG
 	!define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}-DEBUG"
 !endif
 !define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"

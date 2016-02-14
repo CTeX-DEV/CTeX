@@ -21,8 +21,11 @@ CTeX Maintenance Plan
 - [x] 支持从最新一个版本的升级（对于 MikTeX 其实是删除重装）
 - [x] 再次重建目录结构（现在的 install 目录即要被打包的文件，但为了加快打包测试速度所有目录都是空的，真正的文件都在 Full 目录下，正式打包时移动即可）  
 - [x] 在工作目录中包含一个最小化的 NSIS ，只保证可以正确编译本项目。
-- [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具）
+- [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具） 
+- [x] 加入MiKTeX 的必要部分（https://gist.github.com/Liam0205/0da87bd77f13c9f4549f） 
 
 待完成或问题：  
-- [ ] 加入MiKTeX 的必要部分（等待 Liam 的宏包列表） 
-- [ ] 处理原本有的 Addons 目录（是否继续包含？如果要，是否有可以升级的部分？）
+
+- [ ] 测试 CJK 是否可以使用 
+- [ ] 解决 zhmCJK 无法使用的问题
+- [ ] 测试！测试！测试！
