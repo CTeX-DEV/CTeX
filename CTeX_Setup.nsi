@@ -84,7 +84,9 @@ SectionEnd
 
 Section "MiKTeX" Section_MiKTeX
 
-	SectionIn RO
+	!ifndef DEBUG
+		SectionIn RO
+	!endif
 	SetOverwrite on
 	SetOutPath "$INSTDIR\${MiKTeX_Dir}"
 
@@ -110,7 +112,7 @@ Section "CTeX Addons" Section_Addons
 ; Install Chinese fonts
 !ifndef BUILD_REPAIR
 	DetailPrint "Run FontSetup"
-	nsExec::Exec '$INSTDIR\${Addons_Dir}\ctex\bin\FontSetup.exe /S /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
+	nsExec::Exec '$INSTDIR\${Addons_Dir}\CTeX\bin\FontSetup.exe /S /LANG=$LANGUAGE /CTEXSETUP="$INSTDIR\${Addons_Dir}"'
 !endif
 SectionEnd
 

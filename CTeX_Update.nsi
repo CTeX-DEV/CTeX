@@ -1,3 +1,6 @@
+;Not now
+disbled
+
 Unicode true
 
 ; Use compression

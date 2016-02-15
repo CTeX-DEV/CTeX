@@ -9,15 +9,16 @@
 !define APP_VERSION "3.0.0"
 !ifdef DEBUG
 	!define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}-DEBUG"
+!else
+	!define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
 !endif
-!define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}"
 
 ; Components information
 !define MiKTeX_Dir          "MiKTeX"
 !define MiKTeX_Version      "2.9"
 !define Addons_Dir          "CTeX"
 !define Ghostscript_Dir     "Ghostscript"
-!define Ghostscript_Version "9.04"
+!define Ghostscript_Version "9.18"
 !define GSview_Dir          "GSview"
 !define GSview_Version      "5.0"
 !define WinEdt_Dir          "WinEdt"

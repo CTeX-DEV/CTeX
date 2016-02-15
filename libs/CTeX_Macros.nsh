@@ -247,10 +247,10 @@ FunctionEnd
 		FileClose $R0
 
 ; ShortCuts
-		CreateShortCut "$SMCTEX\FontSetup.lnk" "$0\ctex\bin\FontSetup.exe"
+		CreateShortCut "$SMCTEX\FontSetup.lnk" "$0\CTeX\bin\FontSetup.exe"
 
 		StrCpy $9 "$SMCTEX\Help"
-		StrCpy $8 "$0\ctex\doc"
+		StrCpy $8 "$0\CTeX\doc"
 		CreateDirectory "$9"
 		CreateShortCut "$9\CTeX FAQ.lnk" "$8\ctex-faq.pdf"
 		CreateShortCut "$9\Graphics.lnk" "$8\graphics.pdf"
