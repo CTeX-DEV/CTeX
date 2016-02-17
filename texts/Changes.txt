@@ -4,6 +4,7 @@
   - 更新 SumatraPDF 3.11
   - 更新 Ghostscript 9.18
   - 更新 WinEdt 9.1
+  - 在 WinEdt 中加入 LaTeXify 插件
   - TODO ADD MORE
   
 2011.12.22

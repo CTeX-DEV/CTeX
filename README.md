@@ -21,7 +21,7 @@ CTeX Maintenance Plan
 - [x] 支持从最新一个版本的升级（对于 MikTeX 其实是删除重装）
 - [x] 再次重建目录结构（现在的 install 目录即要被打包的文件，但为了加快打包测试速度所有目录都是空的，真正的文件都在 Full 目录下，正式打包时移动即可）  
 - [x] 在工作目录中包含一个最小化的 NSIS ，只保证可以正确编译本项目。
-- [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具）
+- [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具，加入了 LaTeXify ）
 - [x] 加入MiKTeX 的必要部分（<https://gist.github.com/Liam0205/0da87bd77f13c9f4549f>） 
 
 待完成或问题：  
