@@ -917,7 +917,7 @@ Font
 0
 1
 
-Exe('%b\Menus\Popups\Font.edt');
+Exe('%B\Menus\Popups\Font.edt');
 0
 
 0
@@ -928,7 +928,7 @@ Insert Font
 0
 1
 
-Exe('%b\Menus\Popups\Insert Font.edt');
+Exe('%B\Menus\Popups\Insert Font.edt');
 0
 
 0
@@ -939,7 +939,7 @@ Change Font
 0
 1
 
-Exe('%b\Menus\Popups\Change Font.edt');
+Exe('%B\Menus\Popups\Change Font.edt');
 0
 
 0
@@ -950,7 +950,7 @@ Environments
 0
 1
 
-Exe('%b\Menus\Popups\Environments.edt');
+Exe('%B\Menus\Popups\Environments.edt');
 0
 
 
@@ -1056,7 +1056,7 @@ Format Paragraph
 0
 1
 
-Exe('%b\Menus\Edit\Format Paragraph.edt');
+Exe('%B\Menus\Edit\Format Paragraph.edt');
 24663
 
 3
@@ -1068,7 +1068,7 @@ Escape
 0
 0
 
-Exe('%b\Menus\Shortcuts\Escape.edt');
+Exe('%B\Menus\Shortcuts\Escape.edt');
 27
 
 0
@@ -1090,7 +1090,7 @@ Enter
 0
 1
 
-Exe('%b\Menus\Shortcuts\Enter.edt');
+Exe('%B\Menus\Shortcuts\Enter.edt');
 13
 
 0
@@ -1112,7 +1112,7 @@ Backspace
 0
 1
 
-Exe('%b\Menus\Shortcuts\Backspace.edt');
+Exe('%B\Menus\Shortcuts\Backspace.edt');
 8
 
 0
@@ -1123,7 +1123,7 @@ Backspace + Shift
 0
 1
 
-Exe('%b\Menus\Shortcuts\Backspace.edt');
+Exe('%B\Menus\Shortcuts\Backspace.edt');
 8200
 
 0
@@ -1134,7 +1134,7 @@ Indent
 0
 1
 
-Exe('%b\Menus\Shortcuts\Indent.edt');
+Exe('%B\Menus\Shortcuts\Indent.edt');
 9
 
 0
@@ -1145,7 +1145,7 @@ Unindent
 0
 1
 
-Exe('%b\Menus\Shortcuts\Unindent.edt');
+Exe('%B\Menus\Shortcuts\Unindent.edt');
 8201
 
 0
@@ -1156,7 +1156,7 @@ Insert
 0
 1
 
-Exe('%b\Menus\Shortcuts\Insert.edt');
+Exe('%B\Menus\Shortcuts\Insert.edt');
 45
 
 3
@@ -1168,7 +1168,7 @@ Transpose Chars
 0
 1
 
-Exe('%b\Menus\Shortcuts\TransposeChars.edt');
+Exe('%B\Menus\Shortcuts\TransposeChars.edt');
 16468
 
 0
@@ -1223,7 +1223,7 @@ Select Word
 0
 1
 
-Exe('%b\Menus\Shortcuts\Select Word.edt');
+Exe('%B\Menus\Shortcuts\Select Word.edt');
 0
 
 0
@@ -1234,7 +1234,7 @@ Delete Word
 0
 1
 
-Exe('%b\Menus\Shortcuts\Delete Word.edt');
+Exe('%B\Menus\Shortcuts\Delete Word.edt');
 0
 
 0
@@ -1245,7 +1245,7 @@ Delete Word Right
 0
 1
 
-Exe('%b\Menus\Shortcuts\Delete Word Right.edt');
+Exe('%B\Menus\Shortcuts\Delete Word Right.edt');
 16430
 
 0
@@ -1256,7 +1256,7 @@ Delete Word Left
 0
 1
 
-Exe('%b\Menus\Shortcuts\Delete Word Left.edt');
+Exe('%B\Menus\Shortcuts\Delete Word Left.edt');
 16392
 
 3
@@ -1312,7 +1312,7 @@ Word Right
 0
 1
 
-Exe('%b\Menus\Shortcuts\Word Right.edt');
+Exe('%B\Menus\Shortcuts\Word Right.edt');
 16423
 
 0
@@ -1323,7 +1323,7 @@ Select Word Right
 0
 1
 
-Exe('%b\Menus\Shortcuts\Select Word Right.edt');
+Exe('%B\Menus\Shortcuts\Select Word Right.edt');
 24615
 
 0
@@ -1334,7 +1334,7 @@ Word Left
 0
 1
 
-Exe('%b\Menus\Shortcuts\Word Left.edt');
+Exe('%B\Menus\Shortcuts\Word Left.edt');
 16421
 
 0
@@ -1345,7 +1345,7 @@ Select Word Left
 0
 1
 
-Exe('%b\Menus\Shortcuts\Select Word Left.edt');
+Exe('%B\Menus\Shortcuts\Select Word Left.edt');
 24613
 
 0
@@ -1400,7 +1400,7 @@ Par Down
 0
 1
 
-Exe('%b\Menus\Shortcuts\Par Down.edt');
+Exe('%B\Menus\Shortcuts\Par Down.edt');
 16424
 
 0
@@ -1411,7 +1411,7 @@ Select Par Down
 0
 1
 
-Exe('%b\Menus\Shortcuts\Select Par Down.edt');
+Exe('%B\Menus\Shortcuts\Select Par Down.edt');
 24616
 
 0
@@ -1422,7 +1422,7 @@ Par Up
 0
 1
 
-Exe('%b\Menus\Shortcuts\Par Up.edt');
+Exe('%B\Menus\Shortcuts\Par Up.edt');
 16422
 
 0
@@ -1433,7 +1433,7 @@ Select Par Up
 0
 1
 
-Exe('%b\Menus\Shortcuts\Select Par Up.edt');
+Exe('%B\Menus\Shortcuts\Select Par Up.edt');
 24614
 
 0
@@ -1656,6 +1656,51 @@ Screen Refresh
 
 Refresh(1);
 32803
+
+0
+Command completion
+Command completion
+
+
+0
+0
+
+Exe('%B\Plugins\complete\complete.edt');
+16473
+
+3
+0
+Environment completion
+Environment completion
+
+
+0
+0
+
+Exe('%B\Plugins\complete\env.edt');
+24665
+
+0
+WinEdt macro completion
+WinEdt macro completion
+
+
+0
+0
+
+Exe('%B\Plugins\complete\macro.edt');
+32857
+
+0
+WinEdt command completion
+WinEdt command completion
+
+
+0
+0
+
+Exe('%B\Plugins\complete\cmd.edt');
+41049
 
 
 Alternatives
@@ -2273,7 +2318,7 @@ Reload
 0
 3
 
-Exe('%b\Macros\Restore from File.edt');
+Exe('%B\Macros\Restore from File.edt');
 0
 
 0
@@ -2550,7 +2595,7 @@ Delete
 0
 1
 
-Exe('%b\Menus\Edit\Delete.edt');
+Exe('%B\Menus\Edit\Delete.edt');
 46
 
 3
@@ -2615,7 +2660,7 @@ Tolower
 0
 1
 
-Exe('%b\Menus\Edit\Toggle Char.edt');
+Exe('%B\Menus\Edit\Toggle Char.edt');
 57384
 
 2
@@ -2636,7 +2681,7 @@ SelectPar
 0
 1
 
-Exe('%b\Menus\Edit\Select Paragraph.edt');
+Exe('%B\Menus\Edit\Select Paragraph.edt');
 24621
 
 0
@@ -2658,7 +2703,7 @@ FormatPar
 0
 1
 
-Exe('%b\Menus\Edit\Format Paragraph.edt');
+Exe('%B\Menus\Edit\Format Paragraph.edt');
 49197
 
 0
@@ -2669,7 +2714,7 @@ FormatDoc
 0
 1
 
-Exe('%b\Menus\Edit\Format Document.edt');
+Exe('%B\Menus\Edit\Format Document.edt');
 57389
 
 3
@@ -2839,7 +2884,7 @@ CommentInsert
 0
 1
 
-Exe('%b\Menus\Edit\Insert Comment.edt');
+Exe('%B\Menus\Edit\Insert Comment.edt');
 57383
 
 0
@@ -2850,7 +2895,7 @@ CommentRemove
 0
 1
 
-Exe('%b\Menus\Edit\Remove Comment.edt');
+Exe('%B\Menus\Edit\Remove Comment.edt');
 57381
 
 3
@@ -3050,7 +3095,7 @@ ErrorsHide
 0
 
 ShowErrorLog(-1);
-24645
+0
 
 3
 0
@@ -3321,7 +3366,7 @@ Bold
 0
 1
 
-Exe('%b\Menus\Insert\Bold.edt');
+Exe('%B\Menus\Insert\Bold.edt');
 0
 
 0
@@ -3332,7 +3377,7 @@ Italic
 0
 1
 
-Exe('%b\Menus\Insert\Emph.edt');
+Exe('%B\Menus\Insert\Emph.edt');
 0
 
 0
@@ -3343,7 +3388,7 @@ Teletype
 0
 1
 
-Exe('%b\Menus\Insert\Teletype.edt');
+Exe('%B\Menus\Insert\Teletype.edt');
 0
 
 3
@@ -3355,7 +3400,7 @@ Colors
 0
 1
 
-Exe('%b\Menus\Insert\Colors.edt');
+Exe('%B\Menus\Insert\Colors.edt');
 0
 
 2
@@ -3375,7 +3420,7 @@ Figure
 0
 1
 
-Exe('%b\Menus\Insert\Image.edt');
+Exe('%B\Menus\Insert\Image.edt');
 0
 
 0
@@ -3386,7 +3431,7 @@ Table
 0
 1
 
-Exe('%b\Menus\Insert\Table.edt');
+Exe('%B\Menus\Insert\Table.edt');
 0
 
 3
@@ -3398,7 +3443,7 @@ Hyperlink
 0
 1
 
-Exe('%b\Menus\Insert\Link.edt');
+Exe('%B\Menus\Insert\Link.edt');
 0
 
 2
@@ -3419,7 +3464,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Macros\Sections\Part.edt');
+Exe('%B\Macros\Sections\Part.edt');
 0
 
 0
@@ -3430,7 +3475,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Macros\Sections\Chapter.edt');
+Exe('%B\Macros\Sections\Chapter.edt');
 0
 
 3
@@ -3442,7 +3487,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Macros\Sections\Section.edt');
+Exe('%B\Macros\Sections\Section.edt');
 0
 
 0
@@ -3453,7 +3498,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Macros\Sections\Subsection.edt');
+Exe('%B\Macros\Sections\Subsection.edt');
 0
 
 0
@@ -3464,7 +3509,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Macros\Sections\Subsubsection.edt');
+Exe('%B\Macros\Sections\Subsubsection.edt');
 0
 
 3
@@ -3476,7 +3521,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Macros\Sections\Paragraph.edt');
+Exe('%B\Macros\Sections\Paragraph.edt');
 0
 
 0
@@ -3487,7 +3532,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Macros\Sections\Subparagraph.edt');
+Exe('%B\Macros\Sections\Subparagraph.edt');
 0
 
 3
@@ -3587,7 +3632,7 @@ ListItem
 0
 1
 
-LetReg(9,'List Items');LetReg(8,'itemize');Exe('%b\Menus\Insert\List.edt');
+LetReg(9,'List Items');LetReg(8,'itemize');Exe('%B\Menus\Insert\List.edt');
 0
 
 0
@@ -3598,7 +3643,7 @@ ListEnum
 0
 1
 
-LetReg(9,'Enumerate Items');LetReg(8,'enumerate');Exe('%b\Menus\Insert\List.edt');
+LetReg(9,'Enumerate Items');LetReg(8,'enumerate');Exe('%B\Menus\Insert\List.edt');
 0
 
 0
@@ -3609,7 +3654,7 @@ ListDesc
 0
 1
 
-LetReg(9,'Description Items');LetReg(8,'description');Exe('%b\Menus\Insert\List.edt');
+LetReg(9,'Description Items');LetReg(8,'description');Exe('%B\Menus\Insert\List.edt');
 0
 
 3
@@ -3621,7 +3666,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%b\Menus\Insert\Cases.edt');
+Exe('%B\Menus\Insert\Cases.edt');
 0
 
 2
@@ -3641,7 +3686,7 @@ Array
 0
 1
 
-Exe('%b\Menus\Insert\Array.edt');
+Exe('%B\Menus\Insert\Array.edt');
 0
 
 0
@@ -3652,7 +3697,7 @@ Matrix
 0
 1
 
-Exe('%b\Menus\Insert\Matrix.edt');
+Exe('%B\Menus\Insert\Matrix.edt');
 0
 
 3
@@ -3664,7 +3709,7 @@ Tabular
 0
 1
 
-Exe('%b\Menus\Insert\Tabular.edt');
+Exe('%B\Menus\Insert\Tabular.edt');
 0
 
 0
@@ -3675,7 +3720,7 @@ Tabbing
 0
 1
 
-Exe('%b\Menus\Insert\Tabbing.edt');
+Exe('%B\Menus\Insert\Tabbing.edt');
 0
 
 3
@@ -3697,7 +3742,7 @@ Env
 0
 1
 
-EnterReg(9,'Environment name:','Insert Environment');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
+EnterReg(9,'Environment name:','Insert Environment');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
 0
 
 3
@@ -3709,7 +3754,7 @@ Equation
 0
 1
 
-LetReg(9,'equation');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'equation');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Env.edt');
 0
 
 0
@@ -3720,7 +3765,7 @@ EquationStar
 0
 1
 
-LetReg(9,'equation*');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'equation*');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
 0
 
 3
@@ -3732,7 +3777,7 @@ EqnArray
 0
 1
 
-LetReg(9);Exe('%b\Menus\Insert\EqnArray.edt');
+LetReg(9);Exe('%B\Menus\Insert\EqnArray.edt');
 0
 
 0
@@ -3743,7 +3788,7 @@ EqnArrayStar
 0
 1
 
-LetReg(9,'*');Exe('%b\Menus\Insert\EqnArray.edt');
+LetReg(9,'*');Exe('%B\Menus\Insert\EqnArray.edt');
 0
 
 3
@@ -3755,7 +3800,7 @@ EnvCenter
 0
 1
 
-LetReg(9,'center');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'center');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
 0
 
 0
@@ -3766,7 +3811,7 @@ EnvLeft
 0
 1
 
-LetReg(9,'flushleft');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'flushleft');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
 0
 
 0
@@ -3777,7 +3822,7 @@ EnvRight
 0
 1
 
-LetReg(9,'flushright');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'flushright');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
 0
 
 3
@@ -3789,7 +3834,7 @@ Teletype
 0
 1
 
-LetReg(9,'verbatim');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'verbatim');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
 0
 
 0
@@ -3800,7 +3845,7 @@ EnvQuote
 0
 1
 
-LetReg(9,'quote');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'quote');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
 0
 
 0
@@ -3811,7 +3856,7 @@ Minipage
 0
 1
 
-LetReg(9,'minipage');LetReg(8,'[]{}');Exe('%b\Menus\Insert\Env.edt');
+LetReg(9,'minipage');LetReg(8,'[]{}');Exe('%B\Menus\Insert\Env.edt');
 0
 
 2
@@ -3831,7 +3876,7 @@ EqnMulti
 0
 1
 
-LetReg(9,'multline');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'multline');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3842,7 +3887,7 @@ EqnMultiStar
 0
 1
 
-LetReg(9,'multline*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'multline*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
 0
 
 3
@@ -3854,7 +3899,7 @@ EqnSplit
 0
 1
 
-LetReg(9,'split');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'split');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
 0
 
 3
@@ -3866,7 +3911,7 @@ EqnGather
 0
 1
 
-LetReg(9,'gather');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'gather');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3877,7 +3922,7 @@ EqnGatherStar
 0
 1
 
-LetReg(9,'gather*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'gather*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3888,7 +3933,7 @@ EqnAlign
 0
 1
 
-LetReg(9,'align');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'align');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3899,7 +3944,7 @@ EqnAlignStar
 0
 1
 
-LetReg(9,'align*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'align*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3910,7 +3955,7 @@ EqnAlign
 0
 1
 
-LetReg(9,'alignat');LetReg(8,'{}\label{}');Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'alignat');LetReg(8,'{}\label{}');Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3921,7 +3966,7 @@ EqnAlignStar
 0
 1
 
-LetReg(9,'alignat*');LetReg(8,'{}');Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'alignat*');LetReg(8,'{}');Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3932,7 +3977,7 @@ EqnAlign
 0
 1
 
-LetReg(9,'flalign');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'flalign');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
 0
 
 0
@@ -3943,7 +3988,7 @@ EqnAlignStar
 0
 1
 
-LetReg(9,'flalign*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
+LetReg(9,'flalign*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
 0
 
 3
@@ -3955,7 +4000,7 @@ Matrix
 0
 1
 
-LetReg(9,'p');Exe('%b\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'p');Exe('%B\Menus\Insert\AMSMatrix.edt');
 0
 
 0
@@ -3966,7 +4011,7 @@ Matrix
 0
 1
 
-LetReg(9,'b');Exe('%b\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'b');Exe('%B\Menus\Insert\AMSMatrix.edt');
 0
 
 0
@@ -3977,7 +4022,7 @@ Matrix
 0
 1
 
-LetReg(9,'v');Exe('%b\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'v');Exe('%B\Menus\Insert\AMSMatrix.edt');
 0
 
 0
@@ -3988,7 +4033,7 @@ Matrix
 0
 1
 
-LetReg(9,'V');Exe('%b\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'V');Exe('%B\Menus\Insert\AMSMatrix.edt');
 0
 
 2
@@ -4142,7 +4187,7 @@ Article
 0
 1
 
-LetReg(9,'Article');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Article');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4153,7 +4198,7 @@ Book
 0
 1
 
-LetReg(9,'Book');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Book');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4164,7 +4209,7 @@ InBook
 0
 1
 
-LetReg(9,'Inbook');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Inbook');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4175,7 +4220,7 @@ Proceedings
 0
 1
 
-LetReg(9,'Proc');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Proc');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4186,7 +4231,7 @@ InProceedings
 0
 1
 
-LetReg(9,'Inproc');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Inproc');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4197,7 +4242,7 @@ Collection
 0
 1
 
-LetReg(9,'Collect');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Collect');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4208,7 +4253,7 @@ InCollection
 0
 1
 
-LetReg(9,'Incollec');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Incollec');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4219,7 +4264,7 @@ Booklet
 0
 1
 
-LetReg(9,'Booklet');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Booklet');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4230,7 +4275,7 @@ Manual
 0
 1
 
-LetReg(9,'Manual');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Manual');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4241,7 +4286,7 @@ Report
 0
 1
 
-LetReg(9,'Report');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Report');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4252,7 +4297,7 @@ Conference
 0
 1
 
-LetReg(9,'Conf');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Conf');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4263,7 +4308,7 @@ ThesisPhD
 0
 1
 
-LetReg(9,'Phd');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Phd');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4274,7 +4319,7 @@ ThesisMaster
 0
 1
 
-LetReg(9,'Master');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Master');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4285,7 +4330,7 @@ Sample
 0
 1
 
-LetReg(9,'Misc');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Misc');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4296,7 +4341,7 @@ Unpublished
 0
 1
 
-LetReg(9,'Unpub');Exe('%b\Menus\Insert\Bib.edt');
+LetReg(9,'Unpub');Exe('%B\Menus\Insert\Bib.edt');
 0
 
 2
@@ -4317,7 +4362,7 @@ Meta
 0
 1
 
-EnterReg(9,'Guard name:','Insert Guard');Exe('%b\Menus\Insert\DTX\Guard.edt');
+EnterReg(9,'Guard name:','Insert Guard');Exe('%B\Menus\Insert\DTX\Guard.edt');
 0
 
 0
@@ -4328,7 +4373,7 @@ Meta
 0
 1
 
-EnterReg(9,'Guard name:','Insert Guard');Exe('%b\Menus\Insert\DTX\SingleGuard.edt');
+EnterReg(9,'Guard name:','Insert Guard');Exe('%B\Menus\Insert\DTX\SingleGuard.edt');
 0
 
 3
@@ -4340,7 +4385,7 @@ Macro
 0
 1
 
-EnterReg(9,'Macro name:','Insert Macro');Exe('%b\Menus\Insert\DTX\Macro.edt');
+EnterReg(9,'Macro name:','Insert Macro');Exe('%B\Menus\Insert\DTX\Macro.edt');
 0
 
 0
@@ -4351,7 +4396,7 @@ Env
 0
 1
 
-EnterReg(9,'Environment name:','Insert Environment');Exe('%b\Menus\Insert\DTX\Env.edt');
+EnterReg(9,'Environment name:','Insert Environment');Exe('%B\Menus\Insert\DTX\Env.edt');
 0
 
 0
@@ -4362,7 +4407,7 @@ Code
 0
 1
 
-Exe('%b\Menus\Insert\DTX\Macrocode.edt');
+Exe('%B\Menus\Insert\DTX\Macrocode.edt');
 0
 
 3
@@ -4374,7 +4419,7 @@ Invert
 0
 1
 
-Exe('%b\Menus\Insert\DTX\Changes.edt');
+Exe('%B\Menus\Insert\DTX\Changes.edt');
 0
 
 3
@@ -4386,7 +4431,7 @@ DocSettings
 0
 1
 
-Exe('%b\Menus\Insert\DTX\Checksum.edt');
+Exe('%B\Menus\Insert\DTX\Checksum.edt');
 0
 
 0
@@ -4397,7 +4442,7 @@ CharMap
 0
 1
 
-Exe('%b\Menus\Insert\DTX\Table.edt');
+Exe('%B\Menus\Insert\DTX\Table.edt');
 0
 
 2
@@ -4418,7 +4463,7 @@ Figure
 0
 1
 
-EnterReg(9,'Figure number:','Insert Figure');Exe('%b\Menus\Insert\MetaPost\Fig.edt');
+EnterReg(9,'Figure number:','Insert Figure');Exe('%B\Menus\Insert\MetaPost\Fig.edt');
 0
 
 0
@@ -4429,7 +4474,7 @@ Graph
 0
 1
 
-Exe('%b\Menus\Insert\MetaPost\Graph.edt');
+Exe('%B\Menus\Insert\MetaPost\Graph.edt');
 0
 
 2
@@ -4458,7 +4503,7 @@ ImportSelect
 0
 5
 
-Exe('%b\Menus\Insert\HTML\Import.edt');
+Exe('%B\Menus\Insert\HTML\Import.edt');
 0
 
 0
@@ -4469,7 +4514,7 @@ ImportHighlight
 0
 5
 
-Exe('%b\Menus\Insert\HTML\Import Highlighted.edt');
+Exe('%B\Menus\Insert\HTML\Import Highlighted.edt');
 0
 
 3
@@ -4481,7 +4526,7 @@ ImportSelect
 0
 5
 
-Exe('%b\Menus\Insert\HTML\Import Pre.edt');
+Exe('%B\Menus\Insert\HTML\Import Pre.edt');
 0
 
 0
@@ -4492,7 +4537,7 @@ ImportHighlight
 0
 5
 
-Exe('%b\Menus\Insert\HTML\Import Pre Highlighted.edt');
+Exe('%B\Menus\Insert\HTML\Import Pre Highlighted.edt');
 0
 
 3
@@ -4504,7 +4549,7 @@ ExportSelect
 0
 5
 
-Exe('%b\Menus\Insert\HTML\Export.edt');
+Exe('%B\Menus\Insert\HTML\Export.edt');
 0
 
 2
@@ -4525,7 +4570,7 @@ Wizard
 0
 0
 
-LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Doc.edt');
 0
 
 3
@@ -4537,7 +4582,7 @@ TagHtml
 0
 1
 
-LetReg(0,!'html');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'html');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4548,7 +4593,7 @@ TagHead
 0
 1
 
-LetReg(0,!'head');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'head');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4559,7 +4604,7 @@ TagTitle
 0
 1
 
-LetReg(0,!'title');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'title');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4570,7 +4615,7 @@ TagBody
 0
 1
 
-LetReg(0,!'body');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'body');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -4582,7 +4627,7 @@ Meta
 0
 1
 
-LetReg(0,!'meta');Exe('%b\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'meta');Exe('%B\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4593,7 +4638,7 @@ MetaHttp
 0
 1
 
-LetReg(0,!'meta_http');Exe('%b\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'meta_http');Exe('%B\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4604,7 +4649,7 @@ MetaCharset
 0
 1
 
-LetReg(0,!'meta_charset');Exe('%b\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'meta_charset');Exe('%B\Menus\Insert\HTML\Doc.edt');
 0
 
 3
@@ -4616,7 +4661,7 @@ LinkDocs
 0
 1
 
-LetReg(0,!'link_rel');Exe('%b\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'link_rel');Exe('%B\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4627,7 +4672,7 @@ LinkStyle
 0
 1
 
-LetReg(0,!'link_style');Exe('%b\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'link_style');Exe('%B\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4638,7 +4683,7 @@ Style
 0
 1
 
-LetReg(0,!'style');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'style');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4649,7 +4694,7 @@ Macro
 0
 1
 
-LetReg(0,!'script');Exe('%b\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'script');Exe('%B\Menus\Insert\HTML\Doc.edt');
 0
 
 2
@@ -4670,7 +4715,7 @@ Teletype
 0
 1
 
-LetReg(0,!'pre');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'pre');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4681,7 +4726,7 @@ Quote
 0
 1
 
-LetReg(0,!'blockquote');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'blockquote');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4692,7 +4737,7 @@ Span
 0
 1
 
-Exe('%b\Menus\Insert\HTML\Span.edt');
+Exe('%B\Menus\Insert\HTML\Span.edt');
 0
 
 3
@@ -4880,7 +4925,7 @@ DocEmpty
 0
 1
 
-LetReg(0,!'p');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'p');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -4892,7 +4937,7 @@ Style
 0
 1
 
-Exe('%b\Menus\Insert\HTML\ParClass.edt');
+Exe('%B\Menus\Insert\HTML\ParClass.edt');
 0
 
 0
@@ -4903,7 +4948,7 @@ AlignJust
 0
 1
 
-LetReg(0,!'justify');Exe('%b\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'justify');Exe('%B\Menus\Insert\HTML\Par.edt');
 0
 
 0
@@ -4914,7 +4959,7 @@ AlignCenter
 0
 1
 
-LetReg(0,!'center');Exe('%b\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'center');Exe('%B\Menus\Insert\HTML\Par.edt');
 0
 
 0
@@ -4925,7 +4970,7 @@ AlignRight
 0
 1
 
-LetReg(0,!'right');Exe('%b\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'right');Exe('%B\Menus\Insert\HTML\Par.edt');
 0
 
 0
@@ -4936,7 +4981,7 @@ AlignLeft
 0
 1
 
-LetReg(0,!'left');Exe('%b\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'left');Exe('%B\Menus\Insert\HTML\Par.edt');
 0
 
 2
@@ -4956,7 +5001,7 @@ DocEmpty
 0
 1
 
-LetReg(0,!'div');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'div');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -4968,7 +5013,7 @@ Style
 0
 1
 
-Exe('%b\Menus\Insert\HTML\DivClass.edt');
+Exe('%B\Menus\Insert\HTML\DivClass.edt');
 0
 
 0
@@ -4979,7 +5024,7 @@ AlignJust
 0
 1
 
-LetReg(0,!'justify');Exe('%b\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'justify');Exe('%B\Menus\Insert\HTML\Div.edt');
 0
 
 0
@@ -4990,7 +5035,7 @@ AlignCenter
 0
 1
 
-LetReg(0,!'center');Exe('%b\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'center');Exe('%B\Menus\Insert\HTML\Div.edt');
 0
 
 0
@@ -5001,7 +5046,7 @@ AlignRight
 0
 1
 
-LetReg(0,!'right');Exe('%b\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'right');Exe('%B\Menus\Insert\HTML\Div.edt');
 0
 
 0
@@ -5012,7 +5057,7 @@ AlignLeft
 0
 1
 
-LetReg(0,!'left');Exe('%b\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'left');Exe('%B\Menus\Insert\HTML\Div.edt');
 0
 
 2
@@ -5219,7 +5264,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\List.edt');
+LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\List.edt');
 0
 
 3
@@ -5231,7 +5276,7 @@ ListItem
 0
 1
 
-LetReg(0,!'ul');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'ul');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5242,7 +5287,7 @@ ListEnum
 0
 1
 
-LetReg(0,!'ol');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'ol');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5253,7 +5298,7 @@ ListDesc
 0
 1
 
-LetReg(0,!'dl');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'dl');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -5265,7 +5310,7 @@ ListItemItem
 0
 1
 
-LetReg(0,!'li');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'li');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5276,7 +5321,7 @@ List Items (&n)
 0
 1
 
-LetReg(0,!'items');Exe('%b\Menus\Insert\HTML\List.edt');
+LetReg(0,!'items');Exe('%B\Menus\Insert\HTML\List.edt');
 0
 
 0
@@ -5287,7 +5332,7 @@ M&ake Items
 0
 1
 
-LetReg(0,!'make_items');Exe('%b\Menus\Insert\HTML\List.edt');
+LetReg(0,!'make_items');Exe('%B\Menus\Insert\HTML\List.edt');
 0
 
 0
@@ -5320,7 +5365,7 @@ Definition Ter&m/Desc (n)
 0
 1
 
-LetReg(0,!'term');Exe('%b\Menus\Insert\HTML\List.edt');
+LetReg(0,!'term');Exe('%B\Menus\Insert\HTML\List.edt');
 0
 
 2
@@ -5340,7 +5385,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 3
@@ -5352,7 +5397,7 @@ Table
 0
 1
 
-LetReg(0,!'table');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'table');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5363,7 +5408,7 @@ TableCaption
 0
 1
 
-LetReg(0,!'caption');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'caption');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -5375,7 +5420,7 @@ Columns
 0
 1
 
-LetReg(0,!'col_group');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'col_group');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5386,7 +5431,7 @@ ColumnsSingle
 0
 1
 
-LetReg(0,!'col_span');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'col_span');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5397,7 +5442,7 @@ ColumnsAttribute
 0
 1
 
-LetReg(0,!'col_spec');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'col_spec');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 3
@@ -5409,7 +5454,7 @@ TableHead
 0
 1
 
-LetReg(0,!'thead');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'thead');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5420,7 +5465,7 @@ TableFoot
 0
 1
 
-LetReg(0,!'tfoot');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'tfoot');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5431,7 +5476,7 @@ TableBody
 0
 1
 
-LetReg(0,!'tbody');Exe('%b\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'tbody');Exe('%B\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -5454,7 +5499,7 @@ M&ake Row
 0
 1
 
-LetReg(0,!'rows');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'rows');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5476,7 +5521,7 @@ Tab&le Data (n)
 0
 1
 
-LetReg(0,!'data');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'data');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5498,7 +5543,7 @@ Table Header (&n)
 0
 1
 
-LetReg(0,!'headers');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'headers');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5509,7 +5554,7 @@ Matrix
 0
 1
 
-LetReg(0,!'nxm');Exe('%b\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'nxm');Exe('%B\Menus\Insert\HTML\Table.edt');
 0
 
 2
@@ -5529,7 +5574,7 @@ Image
 0
 1
 
-LetReg(0,!'img');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'img');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 3
@@ -5541,7 +5586,7 @@ Objects
 0
 1
 
-LetReg(0,!'data');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'data');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5552,7 +5597,7 @@ MacroInsert
 0
 1
 
-LetReg(0,!'app');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'app');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5563,7 +5608,7 @@ MacroCommand
 0
 1
 
-LetReg(0,!'apppar');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'apppar');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5574,7 +5619,7 @@ MacroParameter
 0
 1
 
-LetReg(0,!'par');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'par');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 3
@@ -5586,7 +5631,7 @@ ImageMap
 0
 1
 
-LetReg(0,!'map');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'map');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5597,7 +5642,7 @@ ImageMapArea
 0
 1
 
-LetReg(0,!'maparea');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'maparea');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5608,7 +5653,7 @@ Image Map Area (&n)
 0
 1
 
-LetReg(0,!'imagemaparea');Exe('%b\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'imagemaparea');Exe('%B\Menus\Insert\HTML\Objects.edt');
 0
 
 2
@@ -5628,7 +5673,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 3
@@ -5640,7 +5685,7 @@ Hyperlink
 0
 1
 
-LetReg(0,!'link');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5651,7 +5696,7 @@ LinkName
 0
 1
 
-LetReg(0,!'link_name');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_name');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5662,7 +5707,7 @@ Hyperlink
 0
 1
 
-LetReg(0,!'link_href');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_href');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5673,7 +5718,7 @@ LinkAnchor
 0
 1
 
-LetReg(0,!'link_anchor');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_anchor');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5684,7 +5729,7 @@ HyperlinkName
 0
 1
 
-LetReg(0,!'link_name_href');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_name_href');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5695,7 +5740,7 @@ MailAddress
 0
 1
 
-LetReg(0,!'mail');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'mail');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5706,7 +5751,7 @@ MailNameAddress
 0
 1
 
-LetReg(0,!'mail_address');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'mail_address');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5717,7 +5762,7 @@ Link
 0
 1
 
-LetReg(0,!'base');Exe('%b\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'base');Exe('%B\Menus\Insert\HTML\Links.edt');
 0
 
 2
@@ -5738,7 +5783,7 @@ FrameColumns
 0
 1
 
-LetReg(0,!'frameset_col');Exe('%b\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frameset_col');Exe('%B\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5749,7 +5794,7 @@ FrameRows
 0
 1
 
-LetReg(0,!'frameset_row');Exe('%b\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frameset_row');Exe('%B\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5760,7 +5805,7 @@ Frame
 0
 1
 
-LetReg(0,!'frame');Exe('%b\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frame');Exe('%B\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5771,7 +5816,7 @@ $Frames_(n)
 0
 1
 
-LetReg(0,!'frames_n');Exe('%b\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frames_n');Exe('%B\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5782,7 +5827,7 @@ FrameDelete
 0
 1
 
-LetReg(0,!'noframes');Exe('%b\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'noframes');Exe('%B\Menus\Insert\HTML\Frames.edt');
 0
 
 2
@@ -5802,7 +5847,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 3
@@ -5814,7 +5859,7 @@ Form
 0
 1
 
-LetReg(0,!'form');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'form');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5825,7 +5870,7 @@ Fieldset
 0
 1
 
-LetReg(0,!'fieldset');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'fieldset');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5836,7 +5881,7 @@ FormCaption
 0
 1
 
-LetReg(0,!'legend');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'legend');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 3
@@ -5848,7 +5893,7 @@ CmdButton
 0
 1
 
-LetReg(0,!'button');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'button');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5859,7 +5904,7 @@ CmdSelect
 0
 1
 
-LetReg(0,!'select');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'select');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5870,7 +5915,7 @@ CmdSelectM
 0
 1
 
-LetReg(0,!'multi_select');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'multi_select');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5881,7 +5926,7 @@ CmdOption
 0
 1
 
-LetReg(0,!'options');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'options');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5892,7 +5937,7 @@ M&ake Options
 0
 1
 
-LetReg(0,!'make_options');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'make_options');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5903,7 +5948,7 @@ Option (&n)
 0
 1
 
-LetReg(0,!'option_n');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'option_n');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5914,7 +5959,7 @@ CmdOptionGroup
 0
 1
 
-LetReg(0,!'option_group');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'option_group');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5925,7 +5970,7 @@ CmdTextArea
 0
 1
 
-LetReg(0,!'text_area');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'text_area');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5936,7 +5981,7 @@ Label
 0
 1
 
-LetReg(0,!'label');Exe('%b\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'label');Exe('%B\Menus\Insert\HTML\Forms.edt');
 0
 
 2
@@ -5956,7 +6001,7 @@ CmdInput
 0
 1
 
-LetReg(0,!'input');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'input');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 3
@@ -5968,7 +6013,7 @@ CmdText
 0
 1
 
-LetReg(0,!'text');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'text');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -5979,7 +6024,7 @@ CmdPassword
 0
 1
 
-LetReg(0,!'password');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'password');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -5990,7 +6035,7 @@ CmdCheck
 0
 1
 
-LetReg(0,!'checkbox');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'checkbox');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6001,7 +6046,7 @@ CmdRadio
 0
 1
 
-LetReg(0,!'radio');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'radio');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6012,7 +6057,7 @@ Check
 0
 1
 
-LetReg(0,!'submit');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'submit');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6023,7 +6068,7 @@ Delete
 0
 1
 
-LetReg(0,!'reset');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'reset');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6034,7 +6079,7 @@ CmdButton
 0
 1
 
-LetReg(0,!'push');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'push');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6045,7 +6090,7 @@ CmdHidden
 0
 1
 
-LetReg(0,!'hidden');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'hidden');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6056,7 +6101,7 @@ Image
 0
 1
 
-LetReg(0,!'image');Exe('%b\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'image');Exe('%B\Menus\Insert\HTML\Input.edt');
 0
 
 2
@@ -6076,7 +6121,7 @@ Code
 0
 1
 
-LetReg(0,!'code');Exe('%b\Menus\Insert\HTML\ASP.edt');
+LetReg(0,!'code');Exe('%B\Menus\Insert\HTML\ASP.edt');
 0
 
 0
@@ -6087,7 +6132,7 @@ Variables
 0
 1
 
-LetReg(0,!'value');Exe('%b\Menus\Insert\HTML\ASP.edt');
+LetReg(0,!'value');Exe('%B\Menus\Insert\HTML\ASP.edt');
 0
 
 2
@@ -6108,7 +6153,7 @@ AlignCenter
 0
 1
 
-LetReg(0,!'center');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'center');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 3
@@ -6120,7 +6165,7 @@ Font
 0
 1
 
-LetReg(0,!'basefont');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'basefont');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6131,7 +6176,7 @@ Font
 0
 1
 
-LetReg(0,!'font_empty');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_empty');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6142,7 +6187,7 @@ Font
 0
 1
 
-LetReg(0,!'font_face');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_face');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6153,7 +6198,7 @@ Font
 0
 1
 
-LetReg(0,!'font_size');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_size');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6164,7 +6209,7 @@ Font
 0
 1
 
-LetReg(0,!'font_face_size');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_face_size');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6175,7 +6220,7 @@ Strikethrough
 0
 1
 
-LetReg(0,!'s');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'s');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6186,7 +6231,7 @@ Strikethrough
 0
 1
 
-LetReg(0,!'strike');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'strike');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6197,7 +6242,7 @@ Underline
 0
 1
 
-LetReg(0,!'u');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'u');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 3
@@ -6209,7 +6254,7 @@ Macro
 0
 1
 
-LetReg(0,!'app');Exe('%b\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'app');Exe('%B\Menus\Insert\HTML\HTML32.edt');
 0
 
 2
@@ -6230,7 +6275,7 @@ Time
 0
 1
 
-Exe('%b\Menus\Insert\HTML\Date.edt');
+Exe('%B\Menus\Insert\HTML\Date.edt');
 0
 
 3
@@ -6242,7 +6287,7 @@ Zip
 0
 1
 
-Exe('%b\Menus\Insert\HTML\Compress.edt');
+Exe('%B\Menus\Insert\HTML\Compress.edt');
 0
 
 0
@@ -6253,7 +6298,7 @@ CommentRemove
 0
 1
 
-Exe('%b\Menus\Insert\HTML\Decomment.edt');
+Exe('%B\Menus\Insert\HTML\Decomment.edt');
 0
 
 0
@@ -6264,7 +6309,7 @@ Quotation
 0
 1
 
-LetReg(0,!'quote');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'quote');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 3
@@ -6276,7 +6321,7 @@ CapLarge
 0
 1
 
-LetReg(0,!'upper_tags');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'upper_tags');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6287,7 +6332,7 @@ CapSmall
 0
 1
 
-LetReg(0,!'lower_tags');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lower_tags');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6298,7 +6343,7 @@ CapLarge
 0
 1
 
-LetReg(0,!'upper_att');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'upper_att');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6309,7 +6354,7 @@ CapSmall
 0
 1
 
-LetReg(0,!'lower_att');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lower_att');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6320,7 +6365,7 @@ CapLarge
 0
 1
 
-LetReg(0,!'upper_val');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'upper_val');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6331,7 +6376,7 @@ CapSmall
 0
 1
 
-LetReg(0,!'lower_val');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lower_val');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 3
@@ -6343,7 +6388,7 @@ $->_amp;
 0
 1
 
-LetReg(0,!'amp');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'amp');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6354,7 +6399,7 @@ $<_->_lt;
 0
 1
 
-LetReg(0,!'lt');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lt');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6365,7 +6410,7 @@ $>_->_gt;
 0
 1
 
-LetReg(0,!'gt');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'gt');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6376,7 +6421,7 @@ $"_->_quot;
 0
 1
 
-LetReg(0,!'quot');Exe('%b\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'quot');Exe('%B\Menus\Insert\HTML\Fix.edt');
 0
 
 2
@@ -6398,7 +6443,7 @@ Section
 0
 1
 
-EnterReg(9,'Section name:','Insert Section');Exe('%b\Menus\Insert\NSIS\Section.edt');
+EnterReg(9,'Section name:','Insert Section');Exe('%B\Menus\Insert\NSIS\Section.edt');
 0
 
 0
@@ -6409,7 +6454,7 @@ Function
 0
 1
 
-EnterReg(9,'Function name:','Insert Function');Exe('%b\Menus\Insert\NSIS\Function.edt');
+EnterReg(9,'Function name:','Insert Function');Exe('%B\Menus\Insert\NSIS\Function.edt');
 0
 
 0
@@ -6420,7 +6465,7 @@ Macro
 0
 1
 
-EnterReg(9,'Macro name:','Insert Macro');Exe('%b\Menus\Insert\NSIS\Macro.edt');
+EnterReg(9,'Macro name:','Insert Macro');Exe('%B\Menus\Insert\NSIS\Macro.edt');
 0
 
 2
@@ -6473,7 +6518,7 @@ GetMode
 0
 1
 
-Exe('%b\Macros\GetMode.edt');
+Exe('%B\Macros\GetMode.edt');
 0
 
 3
@@ -6529,8 +6574,8 @@ STD
 
 0
 0
-%b\_Run.log
-CloseFile('%b\_Run.log',1);Open('%b\_Run.log',1,1,-1);GotoCL(1,1);TrackCaret;
+%B\_Run.log
+CloseFile('%B\_Run.log',1);Open('%B\_Run.log',1,1,-1);GotoCL(1,1);TrackCaret;
 24655
 
 3
@@ -6573,7 +6618,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Examples\Demo.tex');Exe('%b\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Examples\Demo.tex');Exe('%B\Macros\OpenSample.edt');]
 0
 
 0
@@ -6584,7 +6629,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Examples\UTF-8.tex');Exe('%b\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Examples\UTF-8.tex');Exe('%B\Macros\OpenSample.edt');]
 0
 
 0
@@ -6595,7 +6640,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\GUI\GuiSource.tex');Exe('%b\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\GUI\GuiSource.tex');Exe('%B\Macros\OpenSample.edt');]
 0
 
 3
@@ -6607,7 +6652,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Thesis\Thesis.tex');Exe('%b\Macros\OpenSample.edt');CreateFolders('%b\Samples\Thesis\TeXAux');]
+[LetReg(9,!'Samples\Thesis\Thesis.tex');Exe('%B\Macros\OpenSample.edt');CreateFolders('%B\Samples\Thesis\TeXAux');]
 0
 
 0
@@ -6618,7 +6663,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Paper\Paper.tex');Exe('%b\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Paper\Paper.tex');Exe('%B\Macros\OpenSample.edt');]
 0
 
 3
@@ -6630,7 +6675,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Bib\xbib.tex');Exe('%b\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Bib\xbib.tex');Exe('%B\Macros\OpenSample.edt');]
 0
 
 0
@@ -6641,7 +6686,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(1,!'Samples\Bib\xbib.bib');Exe('%b\Config\OpenLocalCopy.edt');]
+[LetReg(1,!'Samples\Bib\xbib.bib');Exe('%B\Config\OpenLocalCopy.edt');]
 0
 
 3
@@ -6653,7 +6698,7 @@ Default;HTML
 0
 0
 
-[LetReg(9,!'Samples\www\index.html');Exe('%b\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\www\index.html');Exe('%B\Macros\OpenSample.edt');]
 0
 
 0
@@ -6664,7 +6709,7 @@ Default;HTML
 0
 0
 
-[LetReg(9,!'Samples\HTML\Help.hhc');Exe('%b\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\HTML\Help.hhc');Exe('%B\Macros\OpenSample.edt');]
 0
 
 2
@@ -7003,7 +7048,7 @@ Recycle
 0
 1
 
-Exe('%b\Exec\Erase Working Files.edt');
+Exe('%B\Exec\Erase Working Files.edt');
 0
 
 3
@@ -7015,7 +7060,7 @@ Thesaurus
 0
 1
 
-Exe('%b\Menus\Tools\Word Web.edt');
+Exe('%B\Menus\Tools\Word Web.edt');
 49165
 
 3
@@ -7049,7 +7094,7 @@ Complete
 0
 1
 
-Exe('%b\Menus\Tools\Complete Word.edt');
+Exe('%B\Menus\Tools\Complete Word.edt');
 16397
 
 0
@@ -7106,7 +7151,7 @@ Right
 0
 1
 
-Exe('%b\Menus\Tools\Next Bullet.edt');
+Exe('%B\Menus\Tools\Next Bullet.edt');
 16416
 
 0
@@ -7320,7 +7365,7 @@ MacroStartupRun
 0
 0
 
-Exe('%b\Config\Startup.edt');
+Exe('%B\Config\Startup.edt');
 0
 
 3
@@ -7344,7 +7389,7 @@ MacroRun
 0
 1
 "%!m=ASCII:EDT"?"%!m=DATA:INI:EDT"
-Exe('%b\Config\ExeScript.edt');
+Exe('%B\Config\ExeScript.edt');
 24696
 %p
 3
@@ -7356,7 +7401,7 @@ MacroView
 0
 0
 
-Exe('%b\Macros\ExeMcr.edt');
+Exe('%B\Macros\ExeMcr.edt');
 16504
 
 
@@ -7373,7 +7418,7 @@ Default
 4
 0
 "%!M=HTML:HHC"*%P\%N.hhp?"%F=%P\%N.hhp"?"%!M=XWE"?"%!M=TeX"?"%!M=MetaPost"?"%!M=MetaFont"?"%!M=NSIS"|"%!M=TeX:STY"|"%!M=TeX:AUX"|"%!M=MetaPost:AUX"|"%!M=NSIS:NSH"
-Exe('%b\Exec\Compile.edt');
+Exe('%B\Exec\Compile.edt');
 120
 
 0
@@ -7384,7 +7429,7 @@ Default
 0
 5
 "%!M=TeX"*"%!m=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"|"%!m=TeX:STY"|"%!m=TeX:AUX"
-Exe('%b\Exec\Compile Selected.edt');
+Exe('%B\Exec\Compile Selected.edt');
 8312
 
 0
@@ -7395,7 +7440,7 @@ Default
 0
 0
 %$('%F-NSIS-Installer');*"%$('%F-NSIS-Source');=%F"?%P\%N.pdf?%P\%N.dvi?%P\%N.ps?%P\%N.eps?%p\%n.eps?%P\%N.chm?%P\%N.php?%P\%N.htm?%P\%N.html?%p\%n.php?%p\%n.htm?%p\%n.html
-Exe('%b\Exec\Preview.edt');
+Exe('%B\Exec\Preview.edt');
 119
 
 3
@@ -7407,7 +7452,7 @@ MiKTeX;TeX Live|Default
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\Compile.edt');
+Exe('%B\Exec\TeX\Compile.edt');
 120
 
 0
@@ -7418,7 +7463,7 @@ MiKTeX;TeX Live|Default
 0
 5
 "%!M=TeX"*"%!m=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"|"%!m=TeX:STY"|"%!m=TeX:AUX"
-Exe('%b\Exec\TeX\Compile Selected.edt');
+Exe('%B\Exec\TeX\Compile Selected.edt');
 8312
 
 0
@@ -7429,7 +7474,7 @@ MiKTeX;TeX Live|Default
 0
 0
 %P\%N.pdf?%P\%N.dvi?%P\%N.ps?%P\%N.eps?%p\%n.eps
-Exe('%b\Exec\TeX\Preview.edt');
+Exe('%B\Exec\TeX\Preview.edt');
 119
 
 3
@@ -7441,7 +7486,7 @@ Default
 4
 0
 "%!M=HTML:HHC"*%P\%N.hhp?"%F=%P\%N.hhp"?"%!M=XWE"
-Exe('%b\Exec\HTML\Compile.edt');
+Exe('%B\Exec\HTML\Compile.edt');
 0
 
 0
@@ -7452,7 +7497,7 @@ Default
 4
 0
 %P\%N.chm?%P\%N.php?%P\%N.htm?%P\%N.html?%p\%n.php?%p\%n.htm?%p\%n.html
-Exe('%b\Exec\HTML\Preview.edt');
+Exe('%B\Exec\HTML\Preview.edt');
 0
 
 3
@@ -7464,7 +7509,7 @@ HTML
 4
 0
 "%!M=HTML:HHC"*%P\%N.hhp?"%F=%P\%N.hhp"?"%!M=XWE"
-Exe('%b\Exec\HTML\Compile.edt');
+Exe('%B\Exec\HTML\Compile.edt');
 120
 
 0
@@ -7475,7 +7520,7 @@ HTML
 4
 0
 %P\%N.chm?%P\%N.php?%P\%N.htm?%P\%N.html?%p\%n.php?%p\%n.htm?%p\%n.html
-Exe('%b\Exec\HTML\Preview.edt');
+Exe('%B\Exec\HTML\Preview.edt');
 119
 
 3
@@ -7487,7 +7532,7 @@ Default
 4
 0
 "%!M=NSIS"|"%!M=NSIS:NSH"
-Exe('%b\Exec\NSIS\Compile.edt');
+Exe('%B\Exec\NSIS\Compile.edt');
 0
 
 0
@@ -7498,7 +7543,7 @@ Default
 0
 0
 %$('%F-NSIS-Installer');*"%$('%F-NSIS-Source');=%F"
-Exe('%b\Exec\NSIS\Preview.edt');
+Exe('%B\Exec\NSIS\Preview.edt');
 0
 
 3
@@ -7510,7 +7555,7 @@ NSIS
 4
 0
 "%!M=NSIS"|"%!M=NSIS:NSH"
-Exe('%b\Exec\NSIS\Compile.edt');
+Exe('%B\Exec\NSIS\Compile.edt');
 120
 
 0
@@ -7521,7 +7566,7 @@ NSIS
 0
 0
 %$('%F-NSIS-Installer');*"%$('%F-NSIS-Source');=%F"
-Exe('%b\Exec\NSIS\Preview.edt');
+Exe('%B\Exec\NSIS\Preview.edt');
 119
 
 3
@@ -7600,6 +7645,17 @@ Default;MiKTeX;TeX Live
 0
 0
 0
+LaTeXify
+LaTeXify
+TeXLaTeXify
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Exe('%b\Exec\TeX\TeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");
+49240
+
+0
 TeXify
 Te&Xify
 TeXTeXify
@@ -7619,7 +7675,7 @@ TeXLaTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\LaTeX.edt');
+Exe('%B\Exec\TeX\LaTeX.edt');
 24652
 
 0
@@ -7630,7 +7686,7 @@ TeXTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\TeX.edt');
+Exe('%B\Exec\TeX\TeX.edt');
 24660
 
 0
@@ -7641,7 +7697,7 @@ TeXAMSTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\AMSTeX.edt');
+Exe('%B\Exec\TeX\AMSTeX.edt');
 24641
 
 3
@@ -7653,10 +7709,21 @@ TeXConTeXt
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\ConTeXt.edt');
+Exe('%B\Exec\TeX\ConTeXt.edt');
 0
 
 3
+0
+Biber
+Biber
+Biber
+
+0
+0
+%O\%N.bcf*"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Exe('%b\Exec\TeX\BibTeX.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");
+49218
+
 0
 BibTeX
 &BibTeX
@@ -7676,7 +7743,7 @@ Index
 0
 0
 %O\%N.idx*"%!M=TeX"|"%!M=TeX:INS"|"%!M=TeX:DTX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\MakeIndex.edt');
+Exe('%B\Exec\TeX\MakeIndex.edt');
 24649
 
 0
@@ -7687,7 +7754,7 @@ Glossary
 0
 0
 %O\%N.glo?%O\%N.acn?%O\%N.acr*"%!M=TeX"|"%!M=TeX:INS"|"%!M=TeX:DTX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\MakeGlossary.edt');
+Exe('%B\Exec\TeX\MakeGlossary.edt');
 0
 
 3
@@ -7699,7 +7766,7 @@ DviView
 0
 0
 %P\%N.dvi
-Exe('%b\Exec\TeX\DVI Preview.edt');
+Exe('%B\Exec\TeX\DVI Preview.edt');
 24662
 
 0
@@ -7710,7 +7777,7 @@ DviFind
 0
 3
 %P\%N.dvi
-Exe('%b\Exec\TeX\DVI Search.edt');
+Exe('%B\Exec\TeX\DVI Search.edt');
 24659
 
 3
@@ -7722,7 +7789,7 @@ GSView
 0
 0
 %P\%N.ps?%P\%N.pdf?%p\%n.ps?%p\%n.eps
-Exe('%b\Exec\TeX\GSView.edt');
+Exe('%B\Exec\TeX\GSView.edt');
 24647
 
 0
@@ -7733,7 +7800,7 @@ DviPs
 0
 0
 %P\%N.dvi
-Exe('%b\Exec\TeX\dvi2ps.edt');
+Exe('%B\Exec\TeX\dvi2ps.edt');
 24644
 
 3
@@ -7745,7 +7812,7 @@ MetaFont
 4
 0
 "%!M=MetaFont"
-Exe('%b\Exec\TeX\MetaFont.edt');
+Exe('%B\Exec\TeX\MetaFont.edt');
 0
 
 0
@@ -7756,7 +7823,7 @@ MetaPost
 4
 0
 "%!M=MetaPost"|"%!M=MetaPost:AUX"
-Exe('%b\Exec\TeX\MetaPost.edt');
+Exe('%B\Exec\TeX\MetaPost.edt');
 24653
 
 3
@@ -7776,7 +7843,7 @@ Index
 0
 0
 "%!M=TeX:INS"?"%!M=TeX:DTX"*%O\%N.idx
-Exe('%b\Exec\TeX\DTXIndex.edt');
+Exe('%B\Exec\TeX\DTXIndex.edt');
 0
 
 0
@@ -7787,7 +7854,7 @@ Glossary
 0
 0
 "%!M=TeX:INS"?"%!M=TeX:DTX"*%O\%N.glo
-Exe('%b\Exec\TeX\DTXGlossary.edt');
+Exe('%B\Exec\TeX\DTXGlossary.edt');
 0
 
 2
@@ -7808,7 +7875,7 @@ AcroRead
 0
 0
 %P\%N.pdf
-Exe('%b\Exec\PDF\PDF Preview.edt');
+Exe('%B\Exec\PDF\PDF Preview.edt');
 24658
 
 0
@@ -7819,10 +7886,21 @@ AcroFind
 0
 3
 %P\%N.pdf*%P\%N%$(!'PDF-SyncEx');
-Exe('%b\Exec\PDF\PDF Search.edt');
+Exe('%B\Exec\PDF\PDF Search.edt');
 8311
 
 3
+0
+PDFLaTeXify
+PDFLaTeXify
+TeXPDFLaTeXify
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");
+49232
+
 0
 PDFTeXify
 PDFTe&Xify
@@ -7834,6 +7912,50 @@ TeXPDFTeXify
 Exe('%b\Exec\TeX\PDFTeXify.edt');
 24656
 
+0
+LuaLaTeXify
+LuaLaTeXify
+TeXLuaLaTeXify
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","lualatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
+49237
+
+0
+LuaTeXify
+LuaTeXify
+TeXLuaTeXify
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","lualatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
+24661
+
+0
+XeLaTeXify
+XeLaTeXify
+TeXXeLaTeXify
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","xelatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
+49221
+
+0
+XeTeXify
+XeTeXify
+TeXXeTeXify
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","xelatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
+24645
+
 3
 0
 PDFLaTeX
@@ -7843,7 +7965,7 @@ TeXPDFLaTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\PDFLaTeX.edt');
+Exe('%B\Exec\TeX\PDFLaTeX.edt');
 0
 
 0
@@ -7854,7 +7976,7 @@ TeXPDFTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\PDFTeX.edt');
+Exe('%B\Exec\TeX\PDFTeX.edt');
 0
 
 3
@@ -7866,7 +7988,7 @@ TeXLuaLaTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\LuaLaTeX.edt');
+Exe('%B\Exec\TeX\LuaLaTeX.edt');
 0
 
 0
@@ -7877,7 +7999,7 @@ TeXLuaTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\LuaTeX.edt');
+Exe('%B\Exec\TeX\LuaTeX.edt');
 0
 
 3
@@ -7889,7 +8011,7 @@ TeXXeLaTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\XeLaTeX.edt');
+Exe('%B\Exec\TeX\XeLaTeX.edt');
 0
 
 0
@@ -7900,7 +8022,7 @@ TeXXeTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\XeTeX.edt');
+Exe('%B\Exec\TeX\XeTeX.edt');
 0
 
 3
@@ -7912,7 +8034,7 @@ DviPdf
 0
 0
 %P\%N.dvi
-Exe('%b\Exec\TeX\dvi2pdf.edt');
+Exe('%B\Exec\TeX\dvi2pdf.edt');
 0
 
 0
@@ -7923,7 +8045,7 @@ PsPdf
 0
 0
 %P\%N.ps
-Exe('%b\Exec\TeX\ps2pdf.edt');
+Exe('%B\Exec\TeX\ps2pdf.edt');
 0
 
 2
@@ -7944,7 +8066,7 @@ IExplorer
 0
 0
 %P\%N.html
-Exe('%b\Exec\HTML\Preview.edt');
+Exe('%B\Exec\HTML\Preview.edt');
 0
 
 3
@@ -7956,7 +8078,7 @@ LaTeX2HTML
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\LaTeX2HTML.edt');
+Exe('%B\Exec\TeX\LaTeX2HTML.edt');
 0
 
 0
@@ -7967,7 +8089,7 @@ TeX2HTML
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\TeX2HTML.edt');
+Exe('%B\Exec\TeX\TeX2HTML.edt');
 0
 
 3
@@ -7979,7 +8101,7 @@ TtH
 4
 0
 "%!M=TeX"|"%!M=TeX:INS"|"%!M=TeX:DTX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\TtH.edt');
+Exe('%B\Exec\TeX\TtH.edt');
 0
 
 2
@@ -8040,6 +8162,74 @@ WinExe('','tlmgr.bat -gui','','',1000);
 
 3
 1
+CTeX_Tools>
+CTeX Tools
+Window
+Default;MiKTeX
+0
+0
+
+0
+TexFriend
+TexFriend...
+
+
+0
+0
+
+Run('%B\Plugins\TexFriend\TexFriend.exe');
+0
+
+3
+0
+CCT_LaTeX
+&CCT && LaTeX
+
+
+0
+0
+"%!M=TeX"?"%!T=.ctx"
+Run(|ctex.exe --src-specials -latex-runs=1 -dvips '%N%T'|, |%P|);
+0
+
+0
+CTeXify
+CTe&Xify
+
+
+0
+0
+"%!M=TeX"?"%!T=.ctx"
+Exe('%B\MUI\CTeXify\CTeXify.edt','%P');
+0
+
+3
+0
+TY_LaTeX
+TY
+
+
+0
+0
+"%!M=TeX"?"%!T=.ty"
+Run(|tywin.exe '%N%T'|, |%P|);
+0
+
+0
+TYCFG
+TY Config
+
+
+0
+0
+
+Run('tywin.exe');
+0
+
+3
+2
+3
+1
 MUI>
 M&UI
 Window
@@ -8055,7 +8245,7 @@ PsNup
 0
 0
 
-Exe('%b\MUI\psutils\psn.edt','%P');
+Exe('%B\MUI\psutils\psn.edt','%P');
 0
 %P
 0
@@ -8066,7 +8256,7 @@ PsSelect
 0
 0
 
-Exe('%b\MUI\psutils\pss.edt','%P');
+Exe('%B\MUI\psutils\pss.edt','%P');
 0
 %P
 0
@@ -8077,7 +8267,7 @@ PsBooklet
 0
 0
 
-Exe('%b\MUI\psutils\psb.edt','%P');
+Exe('%B\MUI\psutils\psb.edt','%P');
 0
 %P
 0
@@ -8088,7 +8278,7 @@ PsResize
 0
 0
 
-Exe('%b\MUI\psutils\psr.edt','%P');
+Exe('%B\MUI\psutils\psr.edt','%P');
 0
 %P
 3
@@ -8100,7 +8290,7 @@ IncludeGraphics
 0
 0
 
-Exe('%b\MUI\Graphics\Graphics.edt','%P');
+Exe('%B\MUI\Graphics\Graphics.edt','%P');
 0
 %P
 3
@@ -8112,7 +8302,7 @@ PsNup
 0
 0
 
-Exe('%b\MUI\psnup\psnup.edt');
+Exe('%B\MUI\psnup\psnup.edt');
 0
 
 2
@@ -8146,8 +8336,8 @@ Console
 
 0
 0
-%b\Exec\%$('Exec-Dir');\ExecModes.edt?%B\Exec\%$('Exec-Dir');\ExecModes.edt
-Exe(|%b\Exec\%$('Exec-Dir');\ExecModes.edt|);
+%B\Exec\%$('Exec-Dir');\ExecModes.edt?%B\Exec\%$('Exec-Dir');\ExecModes.edt
+Exe(|%B\Exec\%$('Exec-Dir');\ExecModes.edt|);
 0
 
 0
@@ -8201,7 +8391,7 @@ WinEdt
 0
 0
 
-Exe('%b\Exec\Default\Load Config.edt');
+Exe('%B\Exec\Default\Load Config.edt');
 0
 
 3
@@ -8213,7 +8403,7 @@ TeXMiKTeXPlus
 0
 0
 
-Exe('%b\Exec\Default-MiKTeX\Load Config.edt');
+Exe('%B\Exec\Default-MiKTeX\Load Config.edt');
 0
 
 0
@@ -8224,7 +8414,7 @@ TeXLivePlus
 0
 0
 
-Exe('%b\Exec\Default-TeX Live\Load Config.edt');
+Exe('%B\Exec\Default-TeX Live\Load Config.edt');
 0
 
 3
@@ -8236,7 +8426,7 @@ TeXMiKTeX
 0
 0
 
-Exe('%b\Exec\MiKTeX\Load Config.edt');
+Exe('%B\Exec\MiKTeX\Load Config.edt');
 0
 
 0
@@ -8247,7 +8437,7 @@ TeXLive
 0
 0
 
-Exe('%b\Exec\TeX Live\Load Config.edt');
+Exe('%B\Exec\TeX Live\Load Config.edt');
 0
 
 3
@@ -8259,7 +8449,7 @@ Hyperlink
 0
 0
 
-Exe('%b\Exec\HTML\Load Config.edt');
+Exe('%B\Exec\HTML\Load Config.edt');
 0
 
 0
@@ -8270,7 +8460,7 @@ NSIS
 0
 0
 
-Exe('%b\Exec\NSIS\Load Config.edt');
+Exe('%B\Exec\NSIS\Load Config.edt');
 0
 
 0
@@ -8281,7 +8471,7 @@ Omega
 0
 0
 
-Exe('%b\Exec\ASCII\Load Config.edt');
+Exe('%B\Exec\ASCII\Load Config.edt');
 0
 
 2
@@ -8300,8 +8490,8 @@ Erase
 
 0
 0
-|"%B=%b"
-Exe('%b\Config\Default\_Cleanup.edt');
+|"%B=%B"
+Exe('%B\Config\Default\_Cleanup.edt');
 0
 
 3
@@ -8313,7 +8503,7 @@ Compile
 0
 0
 
-Exe('%b\Config\Default\_Rebuild All.edt');
+Exe('%B\Config\Default\_Rebuild All.edt');
 0
 
 0
@@ -8323,8 +8513,8 @@ Compile
 
 0
 0
-|"%B=%b"
-Exe('%b\Config\Default\_Rebuild Local.edt');
+|"%B=%B"
+Exe('%B\Config\Default\_Rebuild Local.edt');
 0
 
 0
@@ -8334,8 +8524,8 @@ Compile
 
 0
 0
-|"%B=%b"
-Exe('%b\Config\Default\_Rebuild Default.edt');
+|"%B=%B"
+Exe('%B\Config\Default\_Rebuild Default.edt');
 0
 
 3
@@ -8346,8 +8536,8 @@ ConfigUpgrade
 
 0
 0
-|%b\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%b"
-Exe('%b\Config\Default\_Upgrade.edt');
+|%B\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%B"
+Exe('%B\Config\Default\_Upgrade.edt');
 0
 
 0
@@ -8357,8 +8547,8 @@ ConfigRollback
 
 0
 0
-%b\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%b"
-Exe('%b\Config\Default\_Rollback.edt');
+%B\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%B"
+Exe('%B\Config\Default\_Rollback.edt');
 0
 
 3
@@ -8369,8 +8559,8 @@ ConfigMigrate
 
 0
 0
-%$('Old-AppData');\|%b\ConfigEx\|"%B=%b"
-Exe('%b\Config\Default\_Migrate.edt');
+%$('Old-AppData');\|%B\ConfigEx\|"%B=%B"
+Exe('%B\Config\Default\_Migrate.edt');
 0
 
 2
@@ -8391,7 +8581,7 @@ WinEdt
 0
 0
 
-Assign('TOOLBAR','');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 3
@@ -8403,7 +8593,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','1l');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','1l');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8414,7 +8604,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','1s');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','1s');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8425,7 +8615,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','1c');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','1c');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 3
@@ -8437,7 +8627,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','2d');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','2d');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8448,7 +8638,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','2s');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','2s');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8459,7 +8649,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','2c');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','2c');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 3
@@ -8471,7 +8661,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','5x');Exe('%b\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','5x');Exe('%B\Config\ChangeToolbar.edt');
 0
 
 2
@@ -8776,7 +8966,7 @@ KeywordSearch
 0
 0
 
-Exe('%b\Menus\Help\Keyword Help.edt');
+Exe('%B\Menus\Help\Keyword Help.edt');
 16496
 
 3
@@ -8788,7 +8978,7 @@ MiKTeX
 0
 0
 
-Exe('%b\Macros\Doc\TeXDoc.edt');
+Exe('%B\Macros\Doc\TeXDoc.edt');
 24688
 
 0
@@ -12919,7 +13109,7 @@ Notepad
 MS_Paint
 
 Toolbar_TeX2
-41
+42
 0
 0
 0
@@ -13117,7 +13307,7 @@ $Erase_MPX_File
 
 
 0
-PDFTeXify
+PDFLaTeXify
 TeX Compile
 8
 0
@@ -13125,11 +13315,13 @@ TeX Compile
 
 
 
-16
+22
+PDFLaTeXify
 PDFTeXify
 PDFLaTeX
 PDFTeX
 -
+LaTeXify
 TeXify
 LaTeX
 TeX
@@ -13137,14 +13329,27 @@ AMSTeX
 -
 ConTeXt
 -
+LuaLaTeXify
+LuaTeXify
 LuaLaTeX
 LuaTeX
 -
+XeLaTeXify
+XeTeXify
 XeLaTeX
 XeTeX
 |
 
 1
+0
+0
+
+
+
+0
+Biber
+
+0
 0
 0
 
@@ -32144,7 +32349,7 @@ INI
 0
 0
 1
-9
+1
 999
 9
 1
@@ -32437,8 +32642,8 @@ TeX
 10
 12
 1
-10
-20
+8
+16
 0
 0
 0
@@ -35410,8 +35615,8 @@ END="
 Binary Files
 Binary
 1
-10
-20
+8
+16
 0
 0
 64
@@ -35439,8 +35644,8 @@ Courier New
 Macros and Configurations
 INI;EDT|XWE
 1
-10
-20
+8
+16
 0
 1
 80
@@ -35468,8 +35673,8 @@ Courier New
 HTML Documents
 HTML|HHC;XWE
 1
-6
-20
+5
+16
 0
 0
 98
@@ -35497,8 +35702,8 @@ Verdana
 XWE Documents
 XWE
 1
-10
-20
+8
+16
 0
 0
 98
@@ -35526,8 +35731,8 @@ Courier New
 ASCII Documents
 ASCII
 1
-10
-20
+8
+16
 0
 0
 68
@@ -35555,8 +35760,8 @@ Courier New
 TeX Source
 DTX;INS;STY
 1
-10
-20
+8
+16
 0
 0
 80
@@ -50158,10 +50363,10 @@ Edt
 80
 Default:MiKTeX
 1
-0
-0
-1349
-899
+505
+93
+1584
+812
 0
 0
 0
@@ -50174,16 +50379,16 @@ Default:MiKTeX
 1
 77
 1
+282
+207
+282
+207
 0
 0
-0
-0
-0
-0
-0
-0
-0
-0
+235
+171
+335
+243
 0
 0
 0
@@ -50194,8 +50399,8 @@ Default:MiKTeX
 0
 0
 0
-120
-120
+96
+96
 3
 3
 3
@@ -50204,10 +50409,10 @@ Default:MiKTeX
 
 *
 81
-400
-400
-205
-125
+320
+320
+164
+100
 
 Tree
 1
@@ -50218,8 +50423,8 @@ Tree
 1
 0
 0
-450
-650
+360
+520
 
 fclFormBk
 -16777211
@@ -50240,8 +50445,8 @@ Gather
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -50262,8 +50467,8 @@ Macro Recorder
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -50284,8 +50489,8 @@ Errors
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -50306,8 +50511,8 @@ Character Map
 1
 0
 0
-1000
-225
+800
+180
 
 fclFormBk
 -16777211
@@ -50328,8 +50533,8 @@ Find in Files
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -50342,7 +50547,7 @@ Courier New
 0
 
 Console
-0
+1
 2
 0
 1
@@ -50350,8 +50555,8 @@ Console
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -50372,8 +50577,8 @@ Options Interface
 1
 0
 0
-450
-650
+360
+520
 
 fclFormBk
 -16777211

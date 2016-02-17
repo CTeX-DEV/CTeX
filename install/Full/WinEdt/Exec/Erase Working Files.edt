@@ -20,6 +20,8 @@
     AddFileItem(1,"LOG Files","*.log","");
     AddFileItem(1,"AUX Files","*.aux","TeX");
     AddFileItem(1,"BBL Files","*.bbl","TeX");
+    AddFileItem(1,"BCF Files","*.bcf","TeX");
+    AddFileItem(1,"RUN Files","*.run.xml","TeX");
     AddFileItem(1,"BLG Files","*.blg","TeX");
     AddFileItem(1,"IDX Files","*.idx","TeX");
     AddFileItem(1,"IND Files","*.ind","TeX");

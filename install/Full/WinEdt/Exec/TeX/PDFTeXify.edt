@@ -19,6 +19,8 @@
   IfFileExists("%O\%N.glg",!"DeleteFile('%O\%N.glg');");
   IfStr("%$('PDFTeXify-Clean_Build');","1","=",>
     !|IfFileExists("%O\%N.bbl",!"DeleteFile('%O\%N.bbl');");>
+      IfFileExists("%O\%N.bcf",!"DeleteFile('%O\%N.bcf');");>
+      IfFileExists("%O\%N.run.xml",!"DeleteFile('%O\%N.run.xml');");>
       IfFileExists("%O\%N.ind",!"DeleteFile('%O\%N.ind');");>
       IfFileExists("%O\%N.idx",!"DeleteFile('%O\%N.idx');");>
       IfFileExists("%O\%N.gls",!"DeleteFile('%O\%N.gls');");>
