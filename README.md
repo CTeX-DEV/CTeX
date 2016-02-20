@@ -1,6 +1,7 @@
 CTeX Maintenance Plan  
 ====
 如何自动编译：  
+
 1. 下载 MiKTeX: [32-bits](http://mirrors.ctan.org/systems/win32/miktex/setup/basic-miktex-2.9.5872.exe):[64-bits](http://mirrors.ctan.org/systems/win32/miktex/setup/basic-miktex-2.9.5872-x64.exe)
 2. 安装 MiKTeX: 安装时选择「Only for: %USER%」
 3. 将整个安装目录下的文件，复制到 `./install/Full/MiKTeX`
