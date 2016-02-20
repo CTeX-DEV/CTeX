@@ -1,8 +1,15 @@
 CTeX Maintenance Plan  
 ====
 如何自动编译：  
-1. 运行 CTeX-Build.exe  
-2. 到 output 目录下找到输出文件  
+1. 下载 MiKTeX: [32-bits](http://mirrors.ctan.org/systems/win32/miktex/setup/basic-miktex-2.9.5872.exe):[64-bits](http://mirrors.ctan.org/systems/win32/miktex/setup/basic-miktex-2.9.5872-x64.exe)
+2. 安装 MiKTeX: 安装时选择「Only for: %USER%」
+3. 将整个安装目录下的文件，复制到 `./install/Full/MiKTeX`
+4. 将整个 `./install/Full/` 目录下的文件，移动到 `./install` 下；注意 `./install/Full` 目录本身不可删除（但可以为空）
+5. 双击 `./CTeX_Build.exe` 准备编译，勾选 `1`/`3` 复选框，`4`/`5` 按需选择
+6. 点击 `install` 开始编译。
+7. 到 output 目录下找到输出文件  
+
+![qq20160220-0 2x](https://cloud.githubusercontent.com/assets/3348485/13194540/0ed7ca38-d7d0-11e5-8c3e-827134e34c3f.png) 
 
 如何手工编译:  
 0. 下载并安装 NSIS 3.0b3  
