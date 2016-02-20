@@ -6,7 +6,7 @@
 !define APP_COMPANY "CTEX.ORG"
 !define APP_YEAR "2016"
 !define APP_COPYRIGHT "Copyright (C) ${APP_YEAR} ${APP_COMPANY}"
-!define APP_VERSION "3.0.0"
+!define APP_VERSION "2.9.3"
 !ifdef DEBUG
 	!define APP_BUILD "${APP_VERSION}.${BUILD_NUMBER}-DEBUG"
 !else
@@ -30,7 +30,7 @@
 !macro Set_Version_Information
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "ProductName" "${APP_NAME}"
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "CompanyName" "${APP_COMPANY}"
-	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileDescription" "中文TeX套装"
+	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileDescription" "中文 TeX 套装"
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "FileVersion" "${APP_BUILD}"
 	VIAddVersionKey /LANG=${LANG_SIMPCHINESE} "LegalCopyright" "${APP_COPYRIGHT}"
 	VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "${APP_NAME}"
