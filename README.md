@@ -30,7 +30,7 @@ CTeX Maintenance Plan
 - [x] 再次重建目录结构（现在的 install 目录即要被打包的文件，但为了加快打包测试速度所有目录都是空的，真正的文件都在 Full 目录下，正式打包时移动即可）  
 - [x] 在工作目录中包含一个最小化的 NSIS ，只保证可以正确编译本项目。
 - [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具，加入了 LaTeXify ）
-- [x] 加入MiKTeX 的必要部分（<https://github.com/Harry-Chen/CTeX/wiki/%E7%9B%B8%E5%AF%B9%E4%BA%8EMiKTeX%EF%BC%8CCTeX-2.9.3.x-%E9%9C%80%E8%A6%81%E6%96%B0%E5%A2%9E%E7%9A%84%E5%AE%8F%E5%8C%85>） 
+- [x] 加入MiKTeX 的必要部分（<https://github.com/Harry-Chen/CTeX/blob/master/required_packages.txt>） 
 - [x] 测试 CJK 是否可以使用 
 
 待完成或问题：  
