@@ -1,0 +1,346 @@
+%%
+%% This is file `zhmCJK.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% zhmCJK.dtx  (with options: `package')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2012--2013 by Leo Liu <leoliu.pku@gmail.com>
+%% --------------------------------------------------------------------------
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{zhmCJK}
+    [2013/08/10 v0.9 setup CJK fonts dynamically]
+\def\ifzhm@primitive#1{\begingroup
+  \edef\tempa{\meaning#1}%
+  \edef\tempb{\string#1}%
+  \expandafter\endgroup
+    \ifx\tempa\tempb}
+\ifzhm@primitive\eTeXversion\else
+  \PackageError{zhmCJK}%
+    {You are not running an eTeX-compatible engine.
+     zhmCJK needs an eTeX-compatible TeX engine}%
+    {If `latex' and `pdflatex' commands fails,
+     try `elatex' or `pdfelatex' command.
+     If all fails, you may need to upgrade your TeX system.}
+  \expandafter\endinput
+\fi
+\ifzhm@primitive\luatexversion
+  \PackageError{zhmCJK}%
+    {You are wrongly use lualatex or dvilualatex to compile
+     the file. zhmCJK do not support LuaTeX engine.}%
+    {Use pdflatex or latex+dvipdfmx to compile the file.}
+  \expandafter\endinput
+\fi
+\ifzhm@primitive\XeTeXrevision
+  \PackageError{zhmCJK}%
+    {You are wrongly use xelatex to compile the file.
+     zhmCJK do not support XeTeX engine.}%
+    {You can use xeCJK instead.}
+  \RequirePackage{xeCJK}
+  \expandafter\endinput
+\fi
+\RequirePackage{ifpdf}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=zhm@opt,
+  prefix=zhm@}
+\DeclareStringOption[unicode]{cmap}
+\DeclareBoolOption[true]{embed}
+\AddToKeyvalOption*{embed}{%
+  \ifpdf
+    \PackageWarning{zhmCJK}
+      {The `embed' option is not supported by pdfTeX driver.\MessageBreak
+       Ignoring option `embed'}
+  \fi}
+\DeclareStringOption[UTF8]{encoding}
+\DeclareBoolOption[true]{pdffakebold}
+\DeclareStringOption[0.4]{AutoFakeBold}[0.4]
+\DeclareStringOption[0]{AutoFakeSlant}[0.167]
+\ProcessKeyvalOptions*
+\RequirePackage{CJK}
+\def\zhm@check@encoding{%
+  \unless\ifcsname CJK@\zhm@encoding @nfssenc\endcsname
+    \PackageError{zhmCJK}%
+      {There is no CJK encoding `\zhm@encoding', please
+      check it over. `UTF8' is used as default encoding.}%
+      {You can use `UTF8', `GBK', `Bg5', `JIS', `KS', etc.
+       Read CJK.txt from CJK package for all valid encodings.}
+    \def\zhm@encoding{UTF8}
+  \fi}
+\zhm@check@encoding
+\begingroup
+\def\zhm@UTF{UTF8}
+\ifx\zhm@encoding\zhm@UTF\endgroup
+  \@namedef{opt@CJK.sty}{encapsulated}
+  \let\CJK@global\relax
+  \let\CJK@active\relax
+  \let\CJK@local\relax
+  \RequirePackage{CJKutf8}
+\else\endgroup\fi
+\RequirePackage{CJKspace}
+\RequirePackage{CJKpunct}
+\edef\zhm@nfssenc{\@nameuse{CJK@\zhm@encoding @nfssenc}}
+\edef\zhm@sfd{\@nameuse{zhm@\zhm@encoding @sfd}}
+\def\zhm@def@sfd#1#2{\@namedef{zhm@#1@sfd}{#2}}
+\zhm@def@sfd{UTF8}{Unicode}
+\zhm@def@sfd{Bg5}{UBig5}
+\zhm@def@sfd{Bg5+}{UBg5plus}
+\zhm@def@sfd{JIS}{UJIS}
+\zhm@def@sfd{KS}{UKS}
+\zhm@def@sfd{GB}{UGB}
+\zhm@def@sfd{GBK}{UGBK}
+\def\zhm@check@sfd{%
+  \unless\ifcsname zhm@\zhm@encoding @sfd\endcsname
+    \PackageError{zhmCJK}%
+      {No SFD file specified for `\zhm@encoding' encoding.
+       Only `UTF8', `Bg5', `Bg5+', `GB', `GBK', `JIS' and
+       `KS' are supported by now.}%
+      {}
+    \def\zhm@sfd{Unicode}
+  \fi}
+\zhm@check@sfd
+\AtEndOfPackage{\CJK@makeActive}
+\edef\document{%
+  \unexpanded\expandafter{\document}%
+  \unexpanded{\begin{CJK*}{\zhm@encoding}{\CJKfamilydefault}}}
+\edef\enddocument{%
+  \unexpanded{\clearpage\end{CJK*}}%
+  \unexpanded\expandafter{\enddocument}}
+\newcount\zhm@fontnum
+\ifpdf
+  \def\zhm@pdfliteral#1{\pdfliteral{#1}}
+\else
+  \def\zhm@pdfliteral#1{\special{pdf:literal #1}}
+\fi
+\ifpdf
+  \def\zhm@pdfliteraldirect#1{\pdfliteral direct {#1}}
+\else
+  \def\zhm@pdfliteraldirect#1{\special{pdf:literal direct #1}}
+\fi
+\def\zhm@pdf@beginbold{%
+  \zhm@pdfliteraldirect{2 Tr \@nameuse{zhm@\CJK@family @embolden} w}}
+\def\zhm@pdf@endbold{\zhm@pdfliteraldirect{0 Tr}}
+\def\zhm@zero{0}
+\def\ifzhm@fakebold{\expandafter\unless\expandafter\ifx
+  \csname zhm@\zhm@fam @embolden\endcsname
+  \zhm@zero}
+\def\zhm@fakeboldfalse{\@namedef{zhm@\zhm@fam @embolden}{0}}
+\def\zhm@pdf@beginslant{%
+  \zhm@pdfliteral{1 0 \@nameuse{zhm@\CJK@family @slant} 1 0 0 cm}}
+\def\zhm@pdf@endslant{%
+  \zhm@pdfliteral{1 0 \@nameuse{zhm@\CJK@family @negslant} 1 0 0 cm}}
+\newif\ifzhm@CJK@bold@
+\newif\ifzhm@CJK@slant@
+\ifzhm@pdffakebold
+  \def\CJKbold{\global\zhm@CJK@bold@true\global\zhm@CJK@slant@false}
+\else
+  \def\CJKbold{\global\CJK@bold@true\global\zhm@CJK@slant@false}
+\fi
+\ifzhm@pdffakebold
+  \def\CJKslant{\global\zhm@CJK@bold@false\global\zhm@CJK@slant@true}
+\else
+  \def\CJKnormal{\global\CJK@bold@false\global\zhm@CJK@slant@false}
+\fi
+\ifzhm@pdffakebold
+  \def\CJKboldslant{\global\zhm@CJK@bold@true\global\zhm@CJK@slant@true}
+\else
+  \def\CJKnormal{\global\CJK@bold@false\global\zhm@CJK@slant@false}
+\fi
+\ifzhm@pdffakebold
+  \def\CJKnormal{\global\zhm@CJK@bold@false\global\zhm@CJK@slant@false}
+\else
+  \def\CJKnormal{\global\CJK@bold@false\global\zhm@CJK@slant@false}
+\fi
+\def\ifzhm@fakeslant{\expandafter\unless\expandafter\ifx
+  \csname zhm@\zhm@fam @slant\endcsname
+  \zhm@zero}
+\def\zhm@fakeslantfalse{%
+  \@namedef{zhm@\zhm@fam @slant}{0}%
+  \@namedef{zhm@\zhm@fam @negslant}{0}}
+\@namedef{CJKsymbol }#1{%
+  \ifzhm@CJK@slant@ \zhm@pdf@beginslant \fi
+  \ifzhm@CJK@bold@  \zhm@pdf@beginbold  \fi
+  \symbol{#1}%
+  \ifCJK@bold@
+    \hbox to \CJKboldshift{\hss\symbol{#1}}%
+    \hbox to \CJKboldshift{\hss\symbol{#1}}%
+  \fi
+  \ifzhm@CJK@bold@  \zhm@pdf@endbold  \fi
+  \ifzhm@CJK@slant@ \zhm@pdf@endslant \fi}
+\def\zhm@DeclareFontShape#1#2#3#4#5#6{%
+  \scantokens{\DeclareFontShape{#1}{#2}{#3}{#4}{#5}{#6}}}
+\DeclareSizeFunction{CJKsl}{\CJK@empty\@font@warning}
+\DeclareSizeFunction{CJKbsl}{\CJK@empty\@font@warning}
+\ifpdf
+  \def\zhm@mapline#1#2{%
+    \pdfmapline{=zhm#1@\zhm@sfd @ <#2}}
+\else
+  \def\zhm@mapline#1#2{%
+    \special{pdf:mapline zhm#1@\zhm@sfd @ \zhm@cmap\space \ifzhm@embed\else!\fi#2}}
+\fi
+\def\zhm@setfontmap#1#2{%
+  \AtBeginDvi{\zhm@mapline{#1}{#2}}
+  \AtBeginDocument{%
+    \@ifpackageloaded{atbegshi}{\AtBeginShipoutFirst{%
+      \zhm@mapline{#1}{#2}}}{}}}
+\def\zhm@DeclareRealFont#1{
+  \unless\ifcsname zhm@#1@fontnum\endcsname
+    \global\advance\zhm@fontnum\@ne
+    \ifnum\zhm@fontnum>\@xxxii
+      \PackageError{zhmCJK}%
+        {No more CJK font families can be setup.}%
+        {There are at most 32 families setup by zhmCJK.}
+    \else
+      \expandafter\xdef\csname zhm@#1@fontnum\endcsname{\the\zhm@fontnum}
+      \zhm@setfontmap{\the\zhm@fontnum}{#1}
+    \fi
+  \fi
+  \edef\zhm@tfm{zhm\@nameuse{zhm@#1@fontnum}}}
+\define@key{zhm}{cmap}{%
+  \edef\zhm@cmap{#1}}
+\define@key{zhm}{embed}[true]{%
+  \ifpdf
+    \PackageWarning{zhmCJK}
+      {The `embed' option is not supported by pdfTeX driver.\MessageBreak
+       Ignoring option `embed'}
+  \fi
+  \edef\zhm@embed{#1}%
+  \ifx\zhm@embed\zhm@true
+    \zhm@embedtrue
+  \else\ifx\zhm@embed\zhm@false
+    \zhm@embedfalse
+  \else
+    \PackageError{zhmCJK}%
+      {The `embed' option must be true or false.}%
+      {See the package manual for more information.}%
+  \fi\fi}
+\def\zhm@true{true}
+\def\zhm@false{false}
+\define@key{zhm}{encoding}{%
+  \edef\zhm@encoding{#1}%
+  \zhm@check@encoding
+  \edef\zhm@nfssenc{\@nameuse{CJK@\zhm@encoding @nfssenc}}%
+  \edef\zhm@sfd{\@nameuse{zhm@\zhm@encoding @sfd}}%
+  \zhm@check@sfd}
+\define@key{zhm}{AutoFakeBold}%
+  [\ifx\zhm@AutoFakeBold\zhm@zero 0.4\else\zhm@AutoFakeBold \fi]%
+  {\expandafter\xdef\csname zhm@\zhm@fam @embolden\endcsname{#1}}
+\def\zhm@neg#1{\strip@pt\dimexpr-#1pt\relax}
+\define@key{zhm}{AutoFakeSlant}%
+  [\ifx\zhm@AutoFakeSlant\zhm@zero 0.167\else\zhm@AutoFakeSlant \fi]%
+  {\expandafter\xdef\csname zhm@\zhm@fam @slant\endcsname{#1}%
+   \expandafter\xdef\csname zhm@\zhm@fam @negslant\endcsname{\zhm@neg{#1}}}
+\define@key{zhm}{BoldFont}{
+  \zhm@DeclareRealFont{#1}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{b}{n}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{bx}{n}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}
+  \zhm@fakeboldfalse}
+\define@key{zhm}{ItalicFont}{
+  \zhm@DeclareRealFont{#1}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{m}{it}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}}
+\define@key{zhm}{BoldItalicFont}{
+  \zhm@DeclareRealFont{#1}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{b}{it}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{bx}{it}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}}
+\define@key{zhm}{SlantedFont}{
+  \zhm@DeclareRealFont{#1}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{m}{sl}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}
+  \zhm@fakeslantfalse}
+\define@key{zhm}{BoldSlantedFont}{
+  \zhm@DeclareRealFont{#1}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{b}{sl}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{bx}{sl}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}}
+\def\zhm@newfontfamily#1[#2]#3{
+  \begingroup
+  \ifcsname zhm@#1@font\endcsname
+    \PackageWarning{zhmCJK}{Redefnition of CJK family `#1'}
+  \fi
+  \edef\zhm@fam{#1}
+  \expandafter\xdef\csname zhm@#1@font\endcsname{#3}
+  \setkeys{zhm}{%
+    AutoFakeBold=\zhm@AutoFakeBold,
+    AutoFakeSlant=\zhm@AutoFakeSlant}
+  \DeclareFontFamily{\zhm@nfssenc}{\zhm@fam}{\hyphenchar\font\m@ne}
+  \setkeys{zhm}{#2}
+  \zhm@DeclareRealFont{#3}
+  \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{m}{n}{<-> CJK * \zhm@tfm}%
+    {\CJKnormal}
+  \ifzhm@fakebold
+    \zhm@DeclareRealFont{#3}
+    \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{bx}{n}%
+      {<-> CJKb * \zhm@tfm}{\CJKbold}
+    \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{b}{n}%
+      {<-> CJKb * \zhm@tfm}{\CJKbold}
+  \fi
+  \ifzhm@fakeslant
+    \zhm@DeclareRealFont{#3}
+    \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{m}{sl}%
+      {<-> CJKsl * \zhm@tfm}{\CJKslant}
+  \fi
+  \expandafter\ifzhm@fakeslant\ifzhm@fakebold
+      \zhm@DeclareRealFont{#3}
+      \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{bx}{sl}%
+        {<-> CJKbsl * \zhm@tfm}{\CJKboldslant}
+      \zhm@DeclareFontShape{\zhm@nfssenc}{\zhm@fam}{b}{sl}%
+        {<-> CJKbsl * \zhm@tfm}{\CJKboldslant}
+  \fi\fi
+  \endgroup}
+\newcommand*\setCJKfamilyfont[1]{%
+  \@ifnextchar[%]
+    {\zhm@newfontfamily{#1}}%
+    {\zhm@newfontfamily{#1}[]}}
+\@onlypreamble\setCJKfamilyfont
+\newcommand*\setCJKmainfont[2][]{%
+  \zhm@newfontfamily{\CJKrmdefault}[#1]{#2}}
+\@onlypreamble\setCJKmainfont
+\let\setCJKromanfont\setCJKmainfont
+\@onlypreamble\setCJKromanfont
+\newcommand*\setCJKsansfont[2][]{%
+  \zhm@newfontfamily{\CJKsfdefault}[#1]{#2}}
+\@onlypreamble\setCJKsansfont
+\newcommand*\setCJKmonofont[2][]{%
+  \zhm@newfontfamily{\CJKttdefault}[#1]{#2}}
+\@onlypreamble\setCJKmonofont
+\providecommand*\CJKrmdefault{rm}
+\providecommand*\CJKsfdefault{sf}
+\providecommand*\CJKttdefault{tt}
+\providecommand*\CJKfamilydefault{\CJKrmdefault}
+\DeclareRobustCommand\normalfont
+        {\CJKfamily{\CJKfamilydefault}%
+         \usefont\encodingdefault
+                 \familydefault
+                 \seriesdefault
+                 \shapedefault
+         \relax}
+\let\reset@font\normalfont
+\DeclareRobustCommand\rmfamily
+        {\not@math@alphabet\rmfamily\mathrm
+         \fontfamily\rmdefault\CJKfamily{\CJKrmdefault}\selectfont}
+\DeclareRobustCommand\sffamily
+        {\not@math@alphabet\sffamily\mathsf
+         \fontfamily\sfdefault\CJKfamily{\CJKsfdefault}\selectfont}
+\DeclareRobustCommand\ttfamily
+        {\not@math@alphabet\ttfamily\mathtt
+         \fontfamily\ttdefault\CJKfamily{\CJKttdefault}\selectfont}
+\endinput
+%%
+%% End of file `zhmCJK.sty'.
