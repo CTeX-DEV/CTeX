@@ -32,8 +32,4 @@ CTeX Maintenance Plan
 - [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具，加入了 LaTeXify ）
 - [x] 加入MiKTeX 的必要部分（<https://github.com/Harry-Chen/CTeX/blob/master/required_packages.txt>） 
 - [x] 测试 CJK 是否可以使用 
-
-待完成或问题：  
-
-- [ ] 解决 zhmCJK 无法使用的问题
-- [ ] 测试！测试！测试！
+- [x] 解决 zhmCJK 无法使用的问题
