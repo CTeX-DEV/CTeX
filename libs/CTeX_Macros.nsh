@@ -204,7 +204,7 @@ FunctionEnd
 	${If} $Addons != ""
 		DetailPrint "Install CTeX Addons configs"
 
-		StrCpy $0 "$INSTDIR\${Addons_Dir}"
+		StrCpy $0 "$INSTDIR\${Addons_Dir};$INSTDIR\${Addons_Dir}\Packages"
 
 		StrCpy $9 "Software\MiKTeX.org\MiKTeX\$MiKTeX\Core"
 		ReadRegStr $R0 HKLM "$9" "CommonRoots"
