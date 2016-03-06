@@ -1,17 +1,53 @@
 2016
-  - v3.0.0
+  - v2.9.2
   - 取消 full/basic 的版本区别，一概只安装核心组件与中文处理相关宏包
   - 更新 SumatraPDF 3.11
   - 更新 Ghostscript 9.18
-  - 更新 WinEdt 9.1
+  - 更新 WinEdt 9.1 20150731
   - 在 WinEdt 中加入 LaTeXify 插件
-  - TODO ADD MORE
-  
+  - 加入 Leo Liu 的 zhmCJK 宏包
+  - 删除自带的 CJK 宏包，使用 CTAN 上的版本
+
+2012.03.22
+  - v2.9.2.164
+  - 修正 WinEdt 中 CCT 菜单设置错误
+  - 修改 WinEdt 不使用 UTF-8 作为缺省编码
+  - 升级 WinEdt 7.0 20120321
+  - 升级 GSview 5.0
+  - 升级 Ghostscript 9.05
+  - 更新 SumatraPDF 2.0 r5987
+  - 更新 MiKTeX 2.9
+
+2012.02.12
+  - v2.9.2.163
+  - 修正 WinEdt 设置错误
+  - 升级 WinEdt 7.0 20120125
+  - 更新 SumatraPDF 2.0 r5491
+
+2012.01.18
+  - v2.9.2.162
+  - 升级 WinEdt 7.0 20120117
+  - 更新 SumatraPDF 2.0 r5193
+
+2012.01.15
+  - v2.9.2.161
+  - 升级 WinEdt 7.0 20120112
+  - 更新 SumatraPDF 2.0 r5160
+
+2011.12.26
+  - v2.9.1.160
+  - 增加 WinEdt 插件 Xy-pic/Complete
+  - 增加宏包 hypernat
+  - 更新帮助文档
+  - 更新 SumatraPDF 2.0 r4994
+  - 更新 MiKTeX 2.9
+
 2011.12.22
-  - v2.9.1
+  - v2.9.1.156
   - 删除宏包 ctex/xeCJK/zhmetrics，使用 MiKTeX 内含的版本
   - 更新 SumatraPDF 2.0 r4973
   - 更新 Ghostscript 9.04
+  - 更新 WinEdt 6.0 20110315
   - 更新 MiKTeX 2.9
 
 2010.12.13
