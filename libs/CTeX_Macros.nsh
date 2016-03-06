@@ -380,7 +380,6 @@ FunctionEnd
 
 		StrCpy $0 "$INSTDIR\${WinEdt_Dir}"
 		WriteRegStr HKLM "Software\WinEdt" "Install Root" "$0"
-		WriteRegStr HKLM "Software\WinEdt" "AppData" "$0\Local"
 		WriteRegStr HKCU "Software\VB and VBA Program Settings\TexFriend\Options" "StartupByWinEdt" "False"
 
 		${AppendPath} "$0"
