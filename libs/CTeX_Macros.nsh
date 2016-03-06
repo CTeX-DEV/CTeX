@@ -391,6 +391,7 @@ FunctionEnd
 		StrCpy $9 "$SMCTEX"
 		CreateDirectory "$9"
 		CreateShortCut "$9\WinEdt.lnk" "$INSTDIR\${WinEdt_Dir}\WinEdt.exe"
+		CreateShortCut "$9\切换WinEdt默认编码.lnk" "$INSTDIR\${WinEdt_Dir}\切换编码.exe"
 
 		${If} $MiKTeX != ""
 			WriteRegStr HKCU "Software\MiKTeX.org\MiKTeX\$MiKTeX\Yap\Settings" "Editor" '$INSTDIR\${WinEdt_Dir}\winedt.exe "[Open(|%f|);SelPar(%l,8)]"'

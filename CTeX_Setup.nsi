@@ -155,6 +155,13 @@ Section "WinEdt" Section_WinEdt
 
 SectionEnd
 
+Section /o "WinEdt in ANSI mode" Section_WinEdt_ANSI
+
+	SetOverwrite on
+	CopyFiles "$INSTDIR\${WinEdt_Dir}\ANSI.dnt" "$INSTDIR\${WinEdt_Dir}\WinEdt.dnt"
+
+SectionEnd
+
 Section -FinishSection
 
 	SetOverwrite on
@@ -183,6 +190,7 @@ SectionEnd
 	!insertmacro MUI_DESCRIPTION_TEXT ${Section_Ghostscript} $(Desc_Ghostscript)
 	!insertmacro MUI_DESCRIPTION_TEXT ${Section_GSview} $(Desc_GSview)
 	!insertmacro MUI_DESCRIPTION_TEXT ${Section_WinEdt} $(Desc_WinEdt)
+	!insertmacro MUI_DESCRIPTION_TEXT ${Section_WinEdt_ANSI} $(Desc_WinEdt_ANSI)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;Uninstall section
@@ -226,6 +234,19 @@ Function .onInit
 
 	${If} ${Silent}
 		Call onMUIInit
+	${EndIf}
+
+FunctionEnd
+
+Function .onSelChange
+
+	${If} ${SectionIsSelected} ${Section_WinEdt}
+	${Else}
+		!insertmacro UnSelectSection ${Section_WinEdt_ANSI}
+	${EndIf}
+	
+	${If} ${SectionIsSelected} ${Section_WinEdt_ANSI}
+		!insertmacro SelectSection ${Section_WinEdt}
 	${EndIf}
 
 FunctionEnd
@@ -304,6 +325,8 @@ LangString Desc_GSview ${LANG_SIMPCHINESE} "GSview是Ghostscript的图形界面�
 LangString Desc_GSview ${LANG_ENGLISH} "GSview is the frontend GUI of Ghostscript, used with Ghostscript to view and edit PS (PostScript) file."
 LangString Desc_WinEdt ${LANG_SIMPCHINESE} "WinEdt是一个编辑器，它内置了对TeX的良好支持。在它的菜单上和按钮上可以直接调用TeX程序，包括编译、预览等。WinEdt还能帮助你迅速输入各种TeX命令和符号，省去你记忆大量命令的烦恼。"
 LangString Desc_WinEdt ${LANG_ENGLISH} "WinEdt a well designed text editor with full support to edit and compile TeX file."
+LangString Desc_WinEdt_ANSI ${LANG_SIMPCHINESE} "将WinEdt的默认编码从UTF-8切换为ANSI，仅供特殊需求使用。"
+LangString Desc_WinEdt_ANSI ${LANG_ENGLISH} "Make WinEdt use ANSI as the default encoding instead of UTF-8, DO NOT select unless necessary."
 
 LangString Desc_File ${LANG_SIMPCHINESE} "文档"
 LangString Desc_File ${LANG_ENGLISH} "File"
