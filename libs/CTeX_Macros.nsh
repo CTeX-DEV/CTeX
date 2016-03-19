@@ -252,11 +252,19 @@ FunctionEnd
 		StrCpy $9 "$SMCTEX\Help"
 		StrCpy $8 "$0\CTeX\doc"
 		CreateDirectory "$9"
-		CreateShortCut "$9\CTeX FAQ.lnk" "$8\ctex-faq.pdf"
-		CreateShortCut "$9\Graphics.lnk" "$8\graphics.pdf"
-		CreateShortCut "$9\Symbols.lnk" "$8\symbols.pdf"
-		CreateShortCut "$9\Mathematics.lnk" "$8\ch8.pdf"
-		CreateShortCut "$9\LaTeX Short.lnk" "$8\lshort-cn.pdf"
+		CreateShortCut "$9\插图指南.lnk" "$8\graphics.pdf"
+		CreateShortCut "$9\LaTeX 笔记第二版.lnk" "$8\lnotes2.pdf"
+		CreateShortCut "$9\(English)Mathematics.lnk" "$8\ch8.pdf"
+		
+		;CreateShortCut "$9\CTeX 常见问题.lnk" "$8\ctex-faq.pdf"
+		;ctex-faq is deprecated
+		
+		;CreateShortCut "$9\Symbols.lnk" "$8\symbols.pdf"
+		;But where is this symbol.pdf?
+		
+		;CreateShortCut "$9\LaTeX Short.lnk" "$8\lshort-cn.pdf"
+		;lshort is deprecated
+		
 	${EndIf}
 !macroend
 
