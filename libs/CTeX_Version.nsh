@@ -22,7 +22,7 @@
 !define GSview_Dir          "GSview"
 !define GSview_Version      "5.0"
 !define WinEdt_Dir          "WinEdt"
-!define WinEdt_Version      "9.1"
+!define WinEdt_Version      "10.0"
 !define Logs_Dir            "Logs"
 !define UserData_Dir        "UserData"
 

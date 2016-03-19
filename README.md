@@ -23,12 +23,12 @@ CTeX Maintenance Plan
 目前已完成：  
 - [x] 所有脚本UTF-8化  
 - [x] 包含最新版的 Ghostview 和 GSView  
-- [x] 加入 WinEdt 9.1 科学版（你懂的，可直接使用无需定期reset）
+- [x] 加入 WinEdt 10.0，并问作者要到了授权
 - [x] 重绘图标（偷懒不加上 CTeX 字样了）
 - [x] 重绘安装包的 Banner    
 - [x] 重建目录结构（现在的 install 目录即要被打包的文件，但为了加快打包测试速度所有目录都是空的，真正的文件都在 Full 目录下，正式打包时移动即可）  
 - [x] 在工作目录中包含一个最小化的 _自编译版_ NSIS ，打开了长字符串和日志支持，只保证可以正确编译本项目。
-- [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具，加入了 LaTeXify ）
+- [x] Patch WinEdt（加入 CTeX_Tools 菜单以及一些工具）
 - [x] 加入MiKTeX 的必要部分（<https://github.com/Harry-Chen/CTeX/blob/master/required_packages.txt>） 
 - [x] 测试 CJK 是否可以使用 
 - [x] 解决 zhmCJK 无法使用的问题

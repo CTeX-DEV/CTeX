@@ -1,11 +1,11 @@
 2016
-  - v2.9.2
+  - v2.9.3
   - 取消 full/basic 的版本区别，一概只安装核心组件与中文处理相关宏包
   - 更新 SumatraPDF 3.11
   - 更新 Ghostscript 9.18
-  - 更新 WinEdt 9.1 20150731
-  - 在 WinEdt 中加入 LaTeXify 插件
+  - 更新 WinEdt 10.0 20160317
   - 加入 Leo Liu 的 zhmCJK 宏包
+  - 加入 lnotes 2.0，移除过时的 lshort-cn 和 ctex-faq 文档
   - 删除自带的 CJK 宏包，使用 CTAN 上的版本
 
 2012.03.22

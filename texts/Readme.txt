@@ -23,7 +23,7 @@ CTeX 3.0.0
 本套装软件包中含有如下软件：
 
         MiKTeX 2.9 以及必要的宏包
-        WinEdt 9.1
+        WinEdt 10.0
         GSview 5.0
         Ghostscript 9.18
         SumatraPDF 3.11
