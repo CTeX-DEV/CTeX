@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\usepackage{pifont}
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+macro="\noexpand#1" \space package="pifont"}} \makeatother
+\begin{document}
+\outputm
+\def\arraystretch{1.2}
+\tabcolsep 0pt
+\def\tabsep{\makebox{\hskip 20pt}}
+\def\K#1{#1\totxt{#1}}
+\def\Ks#1{{\fontencoding{T1}\selectfont#1}\totxt{{\noexpand\fontencoding{T1}\noexpand\selectfont\noexpand#1}}}
+\def\vvspace{\mbox{\hskip 10mm \fontsize{18}{20}\selectfont H}}
+
+
+\newcounter{symNo}
+\newcounter{LineNew}
+
+\setcounter{symNo}{0}
+\setcounter{LineNew}{0}
+
+\def\showsymbol#1#2#3{%
+\totxt{#1{\expandafter\thesymNo}}%
+#1{\value{symNo}}\stepcounter{symNo}%
+\stepcounter{LineNew}%
+\ifnum\theLineNew=12 \setcounter{LineNew}{0}  {\mbox{\hskip 10mm}\fontsize{18}{20}\selectfont H}\\ \else & \fi%
+\ifnum\thesymNo<#3 \showsymbol{#1}{#2}{#3} \fi%
+}
+
+
+\def\showfont#1#2#3{
+\setcounter{symNo}{#2}
+\begin{tabular}{lllllllllllll}
+\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep & \\
+\showsymbol{#1}{#2}{#3}
+\end{tabular}
+}
+
+\newpage\showfont{\ding}{33}{129}
+
+\showfont{\ding}{161}{256}
+
+\end{document}

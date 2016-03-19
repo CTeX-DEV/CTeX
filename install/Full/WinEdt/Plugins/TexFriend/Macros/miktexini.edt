@@ -1,0 +1,142 @@
+Assign("localtexmf","%@('HKEY_LOCAL_MACHINE','SOFTWARE','MiK','MiKTeX','CurrentVersion','MiKTeX','Texmf Root Directories');");
+GetLength(0,"%$('localtexmf')");
+FindInString("%$('localtexmf')", ";",1,2);
+ExtractByIndex(3,"%$('localtexmf')",0,%!1-1);
+ExtractByIndex(4,"%$('localtexmf')",%!1+1,%!0-1);
+Assign("localtexmf","%!3");
+
+OpenOutput("%$('localtexmf');\miktex\config\temp.bat");
+WrL(!"Set _temp_=%systemroot%ENDOFROOT");
+WrL("Set _temp_ > %$('localtexmf');\miktex\config\temp.txt");
+CloseOutput;
+
+//ChDir("%$('localtexmf');\miktex\config");
+
+Run("%$('localtexmf');\miktex\config\temp.bat");
+Prompt("Press OK...");
+
+ReadFile("%$('localtexmf');\miktex\config\temp.txt",9);
+GetLength(0,"%!9");
+FindInString("%!9", "=",1,2);
+ExtractByIndex(4,"%!9",%!1+1,%!0-1);
+Assign("systemroot","%!4");
+
+
+FindInString("%$('systemroot');", "ENDOFROOT",1,2);
+ExtractByIndex(4,"%$('systemroot');",0,%!1-1);
+
+Assign("systemroot","%!4");
+
+
+
+OpenOutput("%$('localtexmf');\miktex\config\miktex.ini");
+WrL(!*;;*);
+WrL(!*;;*);
+WrL(!*;;  This is the local miktex.ini, modified by Wenchang Sun [2003/11/20]*);
+WrL(!*;;*);
+WrL(!*;;*);
+WrL(!**);
+WrL(!*[LaTeX]*);
+WrL(!**);
+
+WrL(!*Input Dirs=.;%R\tex\latex//;%R\tex\generic//;%R\tex//;%R\ttf2tfm//;*);
+
+WrL(!**);
+WrL(!*;; --------------------------------------------------------------------------*);
+WrL(!*;; MakePK*);
+WrL(!*;; --------------------------------------------------------------------------*);
+WrL(!**);
+WrL(!*[MakePK]*);
+WrL(!**);
+WrL(!*;; Where MakePK installs new .pk files.*);
+WrL(!*;;*);
+WrL(!*;; %m is a place holder for the current METAFONT mode (e.g. 'ljfour').*);
+WrL(!*;; %s is a place holder for the font supplier (e.g. 'public').*);
+WrL(!*;; %t is a place holder for the typeface name (e.g. 'cm').*);
+WrL(!*;; %d is a place holder for the horizontal resolution (dots per inch).*);
+WrL(!*;;*);
+WrL(!*;; This directory must be writable.*);
+WrL(!*;; DestDir=%R\fonts\pk\%m\%s\%t\dpi%d*);
+WrL(!*DestDir=%R\fonts\pk\pixel\dpi%d*);
+WrL(!**);
+WrL(!*[MiKTeX]*);
+WrL(*TTFPath=.;%%R\fonts\truetype//;%$('systemroot');\fonts//*);
+
+WrL(!*PKPath=.;%R\fonts\pk//dpi%d*);
+WrL(!**);
+WrL(!*[pdfLaTeX]*);
+WrL(!*Input Dirs=.;%R\pdftex\latex//;%R\pdftex\generic//;%R\pdftex//;%R\tex\latex//;%R\tex\generic//;%R\tex//;%R\TTF2TFM//*);
+WrL(!**);
+WrL(!*[TeX]*);
+WrL(!*Editor=winedt "[Open('%f');SelPar(%l,7)]"*);
+WrL(!**);
+WrL(!*[eTeX]*);
+WrL(!**);
+WrL(!*;; input file name extensions recognized by e-TeX*);
+WrL(!*Extensions=.tex;.src*);
+WrL(!**);
+WrL(!*;; where eTeX searches for input files*);
+WrL(*Input Dirs=.;%%R\etex\plain//;%%R\etex\generic//;%%R\etex//;%%R\tex\plain//;%%R\tex\generic//;%%R\tex//;%$('systemroot');\fonts//*);
+WrL(!**);
+WrL(!**);
+WrL(!*[Graphics]*);
+WrL(!**);
+WrL(!*;; Various graphics conversion rules.*);
+WrL(!*;; %i is a placeholder for the input file.*);
+WrL(!*;; %o is a placeholder for the output file.*);
+WrL(!*.pcx.bmp=pcxtoppm "%i"  ppmtobmp -windows > "%o"*);
+WrL(!*.png.bmp=pngtopnm "%i" | ppmtobmp -windows > "%o"*);
+WrL(!*.tga.bmp=tgatoppm "%i" | ppmtobmp -windows > "%o"*);
+WrL(!*.tif.bmp=tifftopnm "%i" | ppmtobmp -windows > "%o"*);
+WrL(!*.tiff.bmp=tifftopnm "%i" | ppmtobmp -windows > "%o"*);
+WrL(!*.bmf.bmp=bmftobmp.bat "%i"  "%o"*);
+WrL(!*.411.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.afi.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.ani.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.bw.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.cel.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.cur.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.cut.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.dib.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.emf.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.fax.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.gif.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.icb.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.ico.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.int.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.inta.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.jfi.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.jfif.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.jif.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.jng.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.jpe.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.jpeg.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.jpg.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.mng.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pbm.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pcc.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pcd.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pdd.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pgm.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pic.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pix.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.ppm.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.psd.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.psp.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.pxm.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.rgb.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.rgba.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.rla.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.rle.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.rpf.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.scr.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.sgi.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.tar.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.targa.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.vda.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.vst.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.wbmp.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.win.bmp=tobmp.bat "%i"  "%o"*);
+WrL(!*.wmf.bmp=tobmp.bat "%i"  "%o"*);
+
+CloseOutput;

@@ -1,0 +1,3 @@
+Assign("PackageLine","\usepackage[bbgreekl]{mathbbol}");
+Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
+End;

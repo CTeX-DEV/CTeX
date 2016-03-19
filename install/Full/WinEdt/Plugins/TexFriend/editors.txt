@@ -1,0 +1,10 @@
+Editor="WinShell",   CaptionWord="WinShell"                    ; 每行定义一个编辑器
+Editor="WinEdt", CaptionWord="WinEdt"                          ; CaptionWord为程序运行时
+Editor="TeXnicCenter", CaptionWord="TeXnicCenter"              ; 标题栏出现的关键词
+Editor="TeXMaker", CaptionWord="Document"
+Editor="SciTE", CaptionWord=" SciTE"
+Editor="PSPad", CaptionWord="PSPad"
+Editor="LEd", CaptionWord="LaTeXEditor"
+Editor="GVIM", CaptionWord="GVIM"
+Editor="emacs",CaptionWord="emacs"
+Editor="Crimson Editor", CaptionWord="Crimson Editor"

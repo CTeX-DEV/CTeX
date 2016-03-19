@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+\usepackage{txfonts}
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+1:\noexpand#1}} \makeatother
+\begin{document}
+\outputm
+\def\arraystretch{1}
+\arraycolsep 0pt
+\def\tabsep{\makebox{\hskip 25pt}}
+\def\K#1{\vbox{\vskip 5mm}#1\totxt{#1}}
+\def\Ks#1{\vbox{\vskip 5mm}{\fontencoding{T1}\selectfont#1}\totxt{{\noexpand\fontencoding{T1}\noexpand\selectfont\noexpand#1}}}
+\def\vvspace{\mbox{\hskip 10mm \fontsize{28}{30}\selectfont H}}
+
+\(
+\begin{array}{*6{c}}
+\tabsep &\tabsep &\tabsep&\tabsep &\tabsep &\\
+\K\bigsqcapplus
+&\K\ointclockwise
+&\K\bigsqcupplus
+&\K\ointctrclockwise
+&\K\fint
+&\vvspace \\
+\K\sqiiint
+&\K\idotsint
+&\K\sqiint
+&\K\iiiint
+&\K\sqint
+&\vvspace \\
+\K\iiint
+&\K\varoiiintclockwise
+&\K\iint
+&\K\varoiiintctrclockwise
+&\K\oiiintclockwise
+&\vvspace \\
+\K\varoiintclockwise
+&\K\oiiintctrclockwise
+&\K\varoiintctrclockwise
+&\K\oiiint
+&\K\varointclockwise
+&\vvspace \\
+\K\oiintclockwise
+&\K\varointctrclockwise
+&\K\oiintctrclockwise
+&\K\varprod
+&\K\oiint
+&\vvspace
+\end{array}
+\)
+
+\end{document}

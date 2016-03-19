@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{mathbbold}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+ \makeatother
+\begin{document}
+\outputm
+\def\arraystretch{1}
+\arraycolsep 0pt
+\def\tabsep{\makebox{\hskip 14pt}}
+
+
+\def\vvspace{\mbox{\hskip 10mm \fontsize{12}{14}\selectfont H}}
+
+\def\vspaces{\vbox{\vskip 3mm}}
+
+\makeatletter
+\def\K#1{{\color{colorc}\vspaces #1\totxt{#1}}}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+macro="\noexpand#1"}}
+
+\definecolor{Light}{gray}{.80}
+\definecolor{colora}{rgb}{1,0,0}
+\definecolor{colorb}{rgb}{1,.5,0}
+
+\definecolor{colorc}{rgb}{1,0,1}
+\definecolor{colore}{rgb}{1,0.5,0}
+\definecolor{colorf}{rgb}{0.5,0.5,0}
+
+
+
+
+\def\Ka#1{{\color{colora}\vspaces #1\totxta{#1}}}
+\def\totxta#1{
+\immediate\write\tf@txt{%
+macro="\string#1"\space package="mathrsfs"}}
+
+\def\Kb#1{{\color{blue}\vspaces #1\totxtb{#1}}}
+\def\totxtb#1{
+\immediate\write\tf@txt{%
+macro="\string#1"\space  package="amsfonts"}}
+
+
+\def\Kc#1{{\color{blue}\vspaces #1\totxtc{#1}}}
+\def\totxtc#1{
+\immediate\write\tf@txt{%
+macro="\string#1" \space package="amsfonts"}}
+
+
+
+
+\def\Ke#1{{\color{colore}\vspaces #1\totxte{#1}}}
+\def\totxte#1{
+\immediate\write\tf@txt{%
+macro="\string#1"\space package="bbm"}}
+
+
+\def\Kf#1{\color{colorf}\vspaces #1\totxtf{#1}}
+\def\totxtf#1{
+\immediate\write\tf@txt{%
+macro="\string#1" \space package="mathbbold"}}
+
+\makeatother
+\[
+\begin{array}{ccccccccccccccc}
+\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep
+&\tabsep &\tabsep &\tabsep &\tabsep &\tabsep &\tabsep & \vvspace\\
+  \Ka{\mathscr {A}}
+&\Ka{\mathscr {B}} &\Ka{\mathscr {C}} &\Ka{\mathscr {D}}
+&\Ka{\mathscr {E}} &\Ka{\mathscr {F}} &\Ka{\mathscr {G}}
+&\Ka{\mathscr {H}} &\Ka{\mathscr {I}} &\Ka{\mathscr {J}}
+&\Ka{\mathscr {K}} &\Ka{\mathscr {L}}
+&\Ka{\mathscr {M}} &\vvspace \\
+ \Ka{\mathscr {N}}
+&\Ka{\mathscr {O}} &\Ka{\mathscr {P}} &\Ka{\mathscr {Q}}
+&\Ka{\mathscr {R}} &\Ka{\mathscr {S}} &\Ka{\mathscr {T}}
+&\Ka{\mathscr {U}} &\Ka{\mathscr {V}} &\Ka{\mathscr {W}}
+&\Ka{\mathscr {X}} &\Ka{\mathscr {Y}}
+&\Ka{\mathscr {Z}} &\vvspace\\
+  \K{\mathcal {A}}
+&\K{\mathcal {B}}
+&\K{\mathcal {C}}
+&\K{\mathcal {D}}
+&\K{\mathcal {E}}
+&\K{\mathcal {F}}
+&\K{\mathcal {G}}
+&\K{\mathcal {H}}
+&\K{\mathcal {I}}
+&\K{\mathcal {J}}
+&\K{\mathcal {K}}
+&\K{\mathcal {L}}
+&\K{\mathcal {M}} &\vvspace \\
+ \K{\mathcal {N}}
+&\K{\mathcal {O}}
+&\K{\mathcal {P}}
+&\K{\mathcal {Q}}
+&\K{\mathcal {R}}
+&\K{\mathcal {S}}
+&\K{\mathcal {T}}
+&\K{\mathcal {U}}
+&\K{\mathcal {V}}
+&\K{\mathcal {W}}
+&\K{\mathcal {X}}
+&\K{\mathcal {Y}}
+&\K{\mathcal {Z}} &\vvspace\\
+\Kb{\mathfrak {A}} &\Kb{\mathfrak {B}} &\Kb{\mathfrak {C}}
+&\Kb{\mathfrak {D}} &\Kb{\mathfrak {E}} &\Kb{\mathfrak {F}}
+&\Kb{\mathfrak {G}} &\Kb{\mathfrak {H}} &\Kb{\mathfrak {I}}
+&\Kb{\mathfrak {J}} &\Kb{\mathfrak {K}} &\Kb{\mathfrak {L}}
+&\Kb{\mathfrak {M}} &\vvspace \\
+ \Kb{\mathfrak {N}}
+&\Kb{\mathfrak {O}} &\Kb{\mathfrak {P}} &\Kb{\mathfrak {Q}}
+&\Kb{\mathfrak {R}} &\Kb{\mathfrak {S}} &\Kb{\mathfrak {T}}
+&\Kb{\mathfrak {U}} &\Kb{\mathfrak {V}} &\Kb{\mathfrak {W}}
+&\Kb{\mathfrak {X}} &\Kb{\mathfrak {Y}}
+&\Kb{\mathfrak {Z}} &\vvspace\\
+\Kc{\mathbb{A}}
+&\Kc{\mathbb{B}}
+&\Kc{\mathbb{C}}
+&\Kc{\mathbb{D}}
+&\Kc{\mathbb{E}}
+&\Kc{\mathbb{F}}
+&\Kc{\mathbb{G}}
+&\Kc{\mathbb{H}}
+&\Kc{\mathbb{I}}
+&\Kc{\mathbb{J}}
+&\Kc{\mathbb{K}}
+&\Kc{\mathbb{L}}
+&\Kc{\mathbb{M}} &\vvspace \\
+ \Kc{\mathbb{N}}
+&\Kc{\mathbb{O}}
+&\Kc{\mathbb{P}}
+&\Kc{\mathbb{Q}}
+&\Kc{\mathbb{R}}
+&\Kc{\mathbb{S}}
+&\Kc{\mathbb{T}}
+&\Kc{\mathbb{U}}
+&\Kc{\mathbb{V}}
+&\Kc{\mathbb{W}}
+&\Kc{\mathbb{X}}
+&\Kc{\mathbb{Y}}
+&\Kc{\mathbb{Z}} &\vvspace\\
+\Ke{\mathbbm {a}}
+&\Ke{\mathbbm {b}} &\Ke{\mathbbm {c}} &\Ke{\mathbbm {d}}
+&\Ke{\mathbbm {e}} &\Ke{\mathbbm {f}} &\Ke{\mathbbm {g}}
+&\Ke{\mathbbm {h}} &\Ke{\mathbbm {i}} &\Ke{\mathbbm {j}}
+&\Ke{\mathbbm {k}} &\Ke{\mathbbm {l}}
+&\Ke{\mathbbm {m}} &\vvspace \\
+ \Ke{\mathbbm {n}}
+&\Ke{\mathbbm {o}} &\Ke{\mathbbm {p}} &\Ke{\mathbbm {q}}
+&\Ke{\mathbbm {r}} &\Ke{\mathbbm {s}} &\Ke{\mathbbm {t}}
+&\Ke{\mathbbm {u}} &\Ke{\mathbbm {v}} &\Ke{\mathbbm {w}}
+&\Ke{\mathbbm {x}} &\Ke{\mathbbm {y}}
+&\Ke{\mathbbm {z}} &\vvspace\\
+\Kf{\mathbbold {0}}
+&\Kf{\mathbbold {1}} &\Kf{\mathbbold {2}} &\Kf{\mathbbold {3}}
+&\Kf{\mathbbold {4}} &\Kf{\mathbbold {5}} &\Kf{\mathbbold {6}}
+&\Kf{\mathbbold {7}} &\Kf{\mathbbold {8}} &\Kf{\mathbbold {9}}
+&\Kf\Lbrack &\Kf\Rbrack &\Kf\Langle &\vvspace \\
+\Kf\Rangle &\Kf\Lparen &\Kf\Rparen  &\Kf\bbalpha &\Kf\bbbeta
+&\Kf\bbgamma &\Kf\bbdelta &\Kf\bbespilon &\Kf\bbzeta &\Kf\bbeta
+&\Kf\bbtheta &\Kf\bbiota &\Kf\bbkappa&\vvspace \\
+\Kf\bblambda &\Kf\bbmu &\Kf\bbnu &\Kf\bbxi &\Kf\bbpi &\Kf\bbrho
+&\Kf\bbsigma &\Kf\bbtau &\Kf\bbupsilon  &
+ \Kf\bbphi &\Kf\bbchi &\Kf\bbpsi &\Kf\bbomega&\vvspace
+\end{array}
+\]
+\end{document}

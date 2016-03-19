@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\usepackage{txfonts}
+\usepackage{amssymb}
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+macro="\noexpand#1"}}
+\def\ttotxt#1{
+\immediate\write\tf@txt{%
+macro="\string#1" \space package="txfonts"}}
+\def\attotxt#1{
+\immediate\write\tf@txt{%
+macro="\string#1" \space package="amssymb"}}
+ \makeatother
+
+\begin{document}
+\outputm
+\def\arraystretch{1}
+\arraycolsep 0pt
+\def\tabsep{\makebox{\hskip 20pt}}
+\def\X#1{#1\totxt{#1}}
+\def\aX#1{#1\attotxt{#1}}
+
+\def\K#1{#1\ttotxt{#1}}
+\def\ttK#1{\vbox{\vskip 5mm}#1\tttotxt{#1}}
+\def\vvspace{\mbox{\hskip 10mm \fontsize{16}{20}\selectfont H}}
+
+\(
+\begin{array}{*9{c}}
+\tabsep &\tabsep &\tabsep&\tabsep &\tabsep &\tabsep &\tabsep&\tabsep &\\
+\X\alpha        &\X\theta       &\X o           &\X\tau    &\vvspace\\
+\X\beta         &\X\vartheta    &\X\pi          &\X\upsilon &\vvspace\\
+\X\gamma        &\X\iota        &\X\varpi       &\X\phi &\vvspace\\
+\X\delta        &\X\kappa       &\X\rho         &\X\varphi      &\vvspace \\
+\X\epsilon      &\X\lambda      &\X\varrho      &\X\chi &\vvspace\\
+\X\varepsilon   &\X\mu          &\X\sigma       &\X\psi          &\vvspace\\
+\X\zeta         &\X\nu          &\X\varsigma    &\X\omega &\vvspace\\
+\X\eta          &\X\xi                  &\aX\digamma      &\aX\varkappa                  &\vvspace \\
+\K\alphaup      & \K\thetaup      & \K\piup         & \K\phiup &\vvspace\\
+\K\betaup       & \K\varthetaup   & \K\varpiup      & \K\varphiup        &\vvspace\\
+\K\gammaup      & \K\iotaup       & \K\rhoup        & \K\chiup &\vvspace\\
+\K\deltaup      & \K\kappaup      & \K\varrhoup     & \K\psiup       &\vvspace    \\
+\K\epsilonup    & \K\lambdaup     & \K\sigmaup      & \K\omegaup &\vvspace\\
+\K\varepsilonup & \K\muup         & \K\varsigmaup   &\K\zetaup       &\vvspace\\
+ \K\nuup         & \K\tauup        &\K\etaup        & \K\xiup &\vvspace\\
+ \K\upsilonup & \X\Theta        &\X\Pi          &\X\Phi&\vvspace\\
+\X\Gamma        &\X\Lambda      &\X\Sigma       &\X\Psi &\vvspace\\
+\X\Delta        &\X\Xi          &\X\Upsilon     &\X\Omega        &\vvspace\\
+\end{array}
+\)
+\end{document}
+ams
+
+
+ &
+
+stmaryrd
+
+
+
+\end{document}

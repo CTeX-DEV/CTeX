@@ -1,0 +1,216 @@
+
+\def\thepage{\arabic{page}}
+\setcounter{page}{1}
+%\fontsize{11}{22}\selectfont             % 定义字大小(11pt)与行间距(22pt),可根据需要修改
+\baselineskip 22pt
+\parindent 22pt                          % 每段开始空 22pt
+
+\chapter{图表}
+
+\section{表格}
+\begin{table}[!htb]
+
+\caption{这是一个表格 }
+
+\begin{center}
+\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}ccr}
+\hline dimension &$\delta_0\omega_0$&$\delta_0\omega_0$
+                    \\ \hline
+1    &.6931471806  & 1.570796327    \\
+2    &.3465735903  &  .726708429    \\
+\hline
+\end{tabular*}
+\end{center}
+\end{table}
+
+
+\begin{table}[!htb]
+
+\caption{这是一个表格 }
+
+\begin{center}
+\begin{tabular*}{0.5\textwidth}{@{\extracolsep{\fill}}ccr}
+\hline dimension &$\delta_0\omega_0$&$\delta_0\omega_0$
+                    \\ \hline
+3    &.2310490602  &  .475124782    \\
+4    &.1732867952  &  .353351966    \\
+5    &.1386294361  &  .281381006 \\
+\hline
+\end{tabular*}
+\end{center}
+\end{table}
+
+
+\newpage
+\section{插图}
+
+\subsection{\LaTeX作图}
+
+请参考 C:/texmf/doc/graphics/texdraw/texdraw.pdf
+
+\vskip 10mm
+
+\begin{figure}[!h]
+
+
+\centertexdraw{ \drawdim in \linewd 0.03 \setgray 0.3
+\arrowheadtype t:F \avec(0 0.5) \linewd 0.01 \setgray 0
+\arrowheadtype t:V \avec(0.5  0.5) \linewd 0.015 \lpatt(0.067 0.1)
+\lvec (1 0) \linewd 0.02 \lpatt()  \arrowheadtype t:T \avec(1.5
+0.5) \arrowheadtype t:H \avec(2 0.5) \arrowheadtype t:W \avec(2 0)
+}
+
+\caption{Texdraw作图}
+\end{figure}
+
+\begin{figure}[!h]
+\centertexdraw{ \linewd 0.02 \fcir f:0.7 r:1 \larc r:1 sd:45
+ed:135 \lvec (+0.707 +0.707) \move(0 0) \lvec (-0.707 +0.707) }
+
+\caption{Texdraw作图}
+
+\end{figure}
+
+
+
+支持以下图象格式
+
+\vskip 5mm
+\def\arraystretch{1.3}
+
+
+\begin{tabular}{llllllllll}
+\hline
+acr, &aif, &ani, &au,  &avi, &b3d,& bmp,& cam, &clp, &cpt, \\
+crw, &cur, &dat, &dcm, &dcr, &dcx,& dds,& dib, &djvu,&dxf, \\
+ecw, &emf, &eps, &flc, &fli, &fpx,& fsh,& g3b, &gif, &gsm, \\
+icl, &ico, &iff, &img, &jng, &jp2,& jpeg,&jpg, &jpm, &kdc, \\
+lbm, &ldf, &lwf, &med, &mid, &mng,& mrw,& nef, &ngg, &nlm, \\
+nol, &nsl, &ogg, &orf, &otb, &pbm,& pcx,& pdf  &pgm, &png,  \\
+ppm, &psd, &psp, &qtif,&raf, &ras, &raw,& rgb,& rle, &rmi, \\
+sff, &sfw, &sgi, &snd, &sun, &swf, &tga,& tif,& tiff,&ttf, \\
+wad, &wav, &wbmp,&wma, &wmf, &wmv, &xbm,& xpm &      &\\
+\hline
+\end{tabular}
+
+使用说明见\verb+[texmf]\doc\tex\latex\graphics\picture.pdf+
+
+
+\chapter{草稿专用宏包：labelname.sty}
+
+为了使用\LaTeX
+的交叉引用，你需要给每一个自动编号的项目加一个标签($\backslash$label\{ ... \}).
+当标签比较多的时候，要记住这些标签可能比较难。
+
+为解决这一问题，我们编写了一个新的宏包labelname.sty\,\,
+只要在文件开始处加入命令
+
+\begin{verbatim}
+   \usepackage{labelname}
+\end{verbatim}
+
+每一个标签的名字就会打印在页面的边缘。当论文完成以后，只需要删除这一命令，即可回到普通模式。
+
+
+
+
+\chapter{方程式编号}
+这里提供各种编号的打印方法。
+
+
+\addtocounter{equation}{1}
+\begin{align}
+c^2&=a^2+b^2 \tag{\theequation a}\\
+a^2&=c^2-b^2 \tag{\theequation b} \\
+b^2&=c^2-a^2 \tag{\theequation b$'$} \label{eq:b1}
+\end{align}
+
+\ref{eq:b1}
+\begin{align}
+dy&=f'(x) dx \label{eq:1} \\
+f'(x)&=dy/dx  \tag{\ref{eq:1}$'$}
+\end{align}
+
+\begin{equation} \label{eq:2}
+\begin{split}
+y'&= dy / dx \\
+ &= f'(x)
+ \end{split}
+ \end{equation}
+
+\begin{equation} \label{eq:3}
+\left\{ \begin{aligned}
+         \pi &= 3.141\cdots \\
+                  \sqrt{2}&=1.414\cdots
+                          \end{aligned} \right.
+                          \end{equation}
+
+\parbox[c]{0.35\linewidth}
+{\hfill $\left\{ \vbox to 8mm{}\right.$}
+\hfill
+\parbox[c]{0.60\linewidth}
+{\begin{flalign}
+x&=\frac{a_K^M}{B_L^Q}y &\label{eq:4}\\
+a&=b+c &\tag{\ref{eq:4} $'$}
+\end{flalign}}
+
+Ref: \eqref{eq:4}
+
+
+\chapter{字体}
+
+
+
+%
+%======  字体  ===============
+%
+%\songti    或\ziti{A}  宋体
+%\heiti     或\ziti{B}  黑体
+%\kaishu    或\ziti{C}  楷体
+%\fangsong  或\ziti{D}  仿宋
+%\biaosong  或\ziti{E}  标宋
+%
+%  以下命令对英文有效, 对CCT中文字体的影响与英文不同
+%
+%=========字系列 =============
+%
+%  \fontseries{m}\selectfont         标准
+%  \fontseries{bx}\selectfont        粗体
+%  \fontseries{c}\selectfont         窄体
+%  \fontseries{bc}\selectfont        粗窄体
+%
+%====== 字型 ====================
+% \fontshape{n}\selectfont    直立
+% \fontshape{it}\selectfont   斜体
+% \fontshape{sl}\selectfont   斜体
+%
+%======字大小与行间距 =================
+%\fontsize{11}{22}   第一个参数为字大小， 第二个参数为行间距。对于True Type字体，可以定义任意大小。
+%
+
+
+\chapter{归纳法}
+\section{逻辑学家}
+逻辑学家说：``你看这个数学家, 他观察开头的99个数比100小,
+从而他就用他的所谓的`归纳'推断所有的数都比100小.''
+
+\newpage
+\section{数学家}
+ 数学家说: ``一个物理学家相信60能被一切数除尽.
+他发现60能被1, 2, 3, 4, 5和6除尽, 他还试验了更多的情况, 如象10,
+20, 30也能除尽60, 并且据他说这些例子是随意举出的.
+由于60还能被这些数除尽, 他就认为这些实验证据已经足够了. ''
+
+\newpage
+\section{物理学家}
+物理学家说: ``是的, 你去看工程师吧,
+一个工程师觉得所有奇数都是素数. 他辩解说, 1无论如何是素数,
+无疑地3, 5, 7也是素数, 9好象不灵了,先不管它, 接下来11和13又是素数.
+`回过头来再看9', 他说, `我断定, 9必定是一个实验性的错误'.''
+
+------ (美)G.波利亚著,李心灿等译校《数学与猜想》第一,
+二卷,科技出版社1984年. 
+
+\chapter{声明}
+cctpage.cls是在旧版cct5.13的基础上编写的. 对新版CCT也应该适应.
+\end{document}

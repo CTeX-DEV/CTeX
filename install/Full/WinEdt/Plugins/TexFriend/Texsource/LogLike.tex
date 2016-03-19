@@ -1,0 +1,63 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+macro="\noexpand#1"}}
+\def\ttotxt#1{
+\immediate\write\tf@txt{%
+macro="\string#1" \space package="amsmath"}}
+ \makeatother
+
+\begin{document}
+\outputm
+\def\arraystretch{1}
+\arraycolsep 0pt
+\def\tabsep{\makebox{\hskip 14mm}}
+\def\X#1{#1\ttotxt{#1}}
+
+\def\Z#1{#1\totxt{#1}}
+\def\vvspace{\mbox{\hskip 10mm \fontsize{20}{26}\selectfont H}}
+
+\(
+\begin{array}{*5{l}}
+\tabsep &\tabsep &\tabsep&\tabsep &\\
+\Z\arccos & \Z\cos  & \Z\csc & \Z\exp  &\vvspace \\
+\Z\arcsin & \Z\cosh & \Z\deg & \Z\gcd  &\vvspace \\
+\Z\arctan & \Z\cot  & \Z\det & \Z\hom  &\vvspace \\
+\Z\arg    & \Z\coth & \Z\dim & \Z\inf  &\vvspace \\
+ \Z\ker    & \Z\limsup & \Z\min & \Z\sinh &\vvspace \\
+  \Z\lg     & \Z\ln     & \Z\Pr  & \Z\sup  &\vvspace\\
+ \Z\lim    & \Z\log    & \Z\sec & \Z\tan  &\vvspace\\
+ \Z\liminf & \Z\max    & \Z\sin & \Z\tanh  &\vvspace \\
+ \X\varinjlim  & \X\varlimsup  & \X\varliminf  & \X\varprojlim &\vvspace
+\end{array}
+\)
+
+
+\vskip 20mm
+asd
+\end{document}
+ams
+
+
+ &
+
+stmaryrd
+
+
+
+\end{document}

@@ -1,0 +1,23 @@
+NewLine;
+NewLine;
+Ins("\[");
+NewLine;
+Ins("\begin{CD}");
+NewLine;
+Ins("\mathcal{A} @>{\rm superscript}>{\rm subscript}> \mathcal{B} @>>> \mathcal{C}@<<< \mathcal{E}\\");
+NewLine;
+Ins("@VVV @VVV @A{left}A{right}A @VVV\\");
+NewLine;
+Ins("\mathcal{U} @>>> \mathcal{V} @= \mathcal{W}@<<< \mathcal{X}");
+NewLine;
+Ins("\end{CD}");
+NewLine;
+Ins("\]");
+NewLine;
+NewLine;
+
+
+
+Assign("PackageLine","\usepackage{amscd}");
+Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
+End;

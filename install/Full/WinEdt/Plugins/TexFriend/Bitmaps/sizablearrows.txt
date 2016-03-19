@@ -1,0 +1,8 @@
+macro="\overrightarrow{text}" package="amsmath"
+macro="\underrightarrow{text}" package="amsmath"
+macro="\overleftarrow{text}" package="amsmath"
+macro="\underleftarrow{text}" package="amsmath"
+macro="\overleftrightarrow{text}" package="amsmath"
+macro="\underleftrightarrow{text}" package="amsmath"
+macro="\xleftarrow[thhh]{super script super}" package="amsmath"
+macro="\xrightarrow[thhh]{super script super}" package="amsmath"

@@ -1,0 +1,17 @@
+ // Exact sequence Xy-Pic diagram
+ GetCounter;
+ BeginGroup;
+ SetIndent(1); // Assumes Auto Indent Mode (to be restored)
+ SetSel(0);
+ TrackCaret;
+ InsText("\xymatrix@C=0.5cm{");
+ NewLine;
+ InsText("  0 \ar[r] & ");
+ Repeat(%!z-1,"CMD(""Insert Bullet"");>
+        InsText("" \ar[rr]^{"");CMD(""Insert Bullet"");>
+        InsText(""} && "")");
+   CMD("Insert Bullet");InsText(" \ar[r] & 0 }"); EndGroup;
+ CMD("Go To Beginning Of Line");
+ CMD("Line Up");CMD("Line Up");
+ CMD("Next Bullet");
+End;

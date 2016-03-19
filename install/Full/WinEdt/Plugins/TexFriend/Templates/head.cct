@@ -1,0 +1,60 @@
+\usepackage{amsmath}
+\usepackage[amsmath]{labelname}
+%  为了使用\LaTeX
+%  的交叉引用，你需要给每一个自动编号的项目加一个标签($\backslash$label\{ ... \}).
+%  当标签比较多的时候，要记住这些标签可能比较难。
+%
+%  为解决这一问题，我们编写了一个新的宏包labelname.sty\,\,
+%  只要在文件开始处加入命令
+%
+%
+%   \usepackage{labelname}
+%
+%
+%   每一个标签的名字就会打印在页面的边缘。当论文完成以后，只需要删除这一命令，即可回到普通模式。
+\usepackage{texdraw}                 % 绘图宏包
+\usepackage{picture}                 % For LaTeX 
+%\usepackage[dvips,clean]{picture}    % For LaTeX + DVIPS
+%\usepackage[pdftex,clean]{picture}   % For LaTeX + DVIPS
+%\usepackage{TimesNewRoman}           % 定义Times New Roman为缺省英文字体
+%
+%===========     缺省标题格式     ====================================
+%
+% \def\sectionname{\thechapter.\arabic{section}}
+%                                    %  定义节编号方式为 章编号.节编号， 如 1.3
+% \def\subsectionname{\thechapter.\arabic{section}.\arabic{subsection}}
+%                                    %  定义子节编号方式为 章编号.节编号.子节编号， 如 1.3.1
+% \def\subsubsectionname{\thechapter.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+%                                    %  定义子子节编号方式为 章编号.节编号.子节编号.子子节编号， 如 1.3.1.2
+%
+%\def\ChapterFonts{\LARGE\bfseries}  %  定义章标题字体
+%\def\sectionfonts{\large\bfseries}  %  定义节标题字体
+%\def\subsectionfonts{\bfseries}     %  定义子节标题字体
+%\def\subsubsectionfonts{\bfseries}  %  定义子子节标题字体
+%
+%\def\sectionformat{}                %  节标题样式，缺省为居左。     若需居中， 请用  \def\sectionformat{\centering}
+%\def\subsectionformat{}             %  子节标题样式，缺省为居左。   若需居中， 请用  \def\subsectionformat{\centering}
+%\def\subsubsectionformat{}          %  子子节标题样式，缺省为居左。 若需居中， 请用  \def\subsubsectionformat{\centering}
+%
+%\def\tocchapterfonts{\bfseries}     %  定义目录中章标题字体
+%\def\tocsectionfonts{\small}        %  定义目录中节标题字体
+%\def\tocsubsectionfonts{\small}%    %  定义目录中子节标题字体
+%
+%==============================================================================
+%
+\begin{document}
+
+\newtheorem{Theorem}{定理}[chapter]      %  定理类环境
+\newtheorem{Proposition}[Theorem]{命题}  %
+\newtheorem{Lemma}[Theorem]{引理}        %
+\newtheorem{Corollary}[Theorem]{推论}    %
+\newtheorem{Definition}{定义}[chapter]   %
+\newtheorem{Example}{例}[chapter]        %
+%
+%
+%  ==================定理类环境缺省值=============================================
+%\theoremindent 0pt                      % 左边界, 缺省为0
+%\def\theoremvskip{0pt}                  % 顶部空行, 缺省为0pt
+%\def\TheoremTitleFonts{\bfseries}        % 定理类环境标题字体, 缺省为黑体
+%\def\TheoremTextFonts{\itshape}          % 定理类环境正文字体, 缺省为斜体
+%

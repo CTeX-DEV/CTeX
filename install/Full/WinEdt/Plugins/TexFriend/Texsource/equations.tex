@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{cases}
+\title{\LaTeX equations}
+\author{Wenchang Sun}
+\date{\today}
+\textwidth 50mm
+
+\begin{document}
+
+\color{black}
+
+\addtocounter{equation}{1}
+\begin{align}
+c^2&=a^2+b^2 \tag{\theequation a}\\
+a^2&=c^2-b^2 \tag{\theequation b}
+\end{align}
+
+
+\color{blue}
+\begin{align}
+dy&=f'(x) dx \label{eq:a0} \\
+f'(x)&=dy/dx  \tag{\ref{eq:a0}$'$}
+\end{align}
+
+\color{black}
+\begin{equation}
+\begin{split}
+y'&= dy / dx \\
+ &= f'(x)
+\end{split}
+\end{equation}
+
+
+\color{blue}
+
+\begin{equation}
+\left\{ \begin{aligned}
+         \pi &= 3.141\cdots \\
+         \sqrt{2}&=1.414\cdots
+        \end{aligned} \right.
+\end{equation}
+
+
+\color{black}
+\makeatletter
+\let\@@@alph\@alph
+\def\@alph#1{\ifcase#1\or \or $'$\or $''$\fi}\makeatother
+\begin{subnumcases}
+{|x|=}
+x, &$x\ge 0$, \label{eq:a1}\\
+-x, &$x<0$.\label{eq:a2}
+\end{subnumcases}
+\makeatletter\let\@alph\@@@alph\makeatother
+
+
+\color{blue}
+
+\begin{multline}
+\pi=3.14159265358979323\\
+84626433832795028\\
+84197169399375105
+\end{multline}
+
+
+\[ab\]
+a
+
+\end{document}

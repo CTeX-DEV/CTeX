@@ -1,0 +1,157 @@
+// ==================================================================
+//
+// WinEdt Startup Macro
+// ====================
+//
+// This macro initializes some important variables!
+// Do not modify unless you understand how it works...
+//
+// You should modify Local Startup Macro instead!
+//
+// After Changes to the Startup Macro you should execute the
+// menu command: Macros -> Run Startup Macro (or restart WinEdt)
+// to make the changes effective!
+//
+// ==================================================================
+
+  Requires(20120413);
+
+  PushTagsandRegisters;
+
+  SetOK(1);
+  SetErrorFlag(0);
+  SetTracking(1);
+
+  // These variables are used in the default settings!
+  // They work faster if they are declared here:
+  Declare('_temp');
+  Declare('_errLog');
+  Declare('_errLogFile');
+
+// ==================================================================
+
+  // Upgrade Build
+  GetBuild(0);
+  Assign("Up-Build","%!0");
+
+  // Migrate from WinEdt 9?
+  LetReg(0,"%@('HKCU','Software\WinEdt 9','Install Root');");
+  IfStr('%!0','','<>',>
+    !`>
+      LetReg(0,"%@('HKCU','Software\WinEdt 9','AppData');");>
+      IfStr('%!0','','=',>
+        !|LetReg(0,"%@('HKCU','Software\WinEdt 9','Install Root');");>
+          LetReg(0,"%!0\Local");|);>
+     `);
+  Assign('Old-AppData','%!0');
+  // Prompt("%$('Old-AppData');");  // Debugging
+  Assign('First-Build','20160317'); // First WinEdt 10 Build
+
+// ==================================================================
+
+  // The Original PATH
+  IfStr("%$('xPATH')","","=",>
+    !"Assign('xPATH','%@(`PATH`)')",>
+    !"SetEnvVar('PATH','%$(`xPATH`)')");
+
+// ==================================================================
+
+  // Set the default startup folder
+  // Default: My Documents (language dependant)
+  // Make sure that the specified Home Folder exists!
+  LetReg(0,"%@('HKCU','Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders','Personal');");
+  Assign("Home-Folder","%!0"); // My Documents: should always exist
+  // or
+  // Assign("Home-Folder",!"%P"); // Enter a home folder of your choice
+  // or
+  // Assign("Home-Folder","C:\TeX Documents");  // Enter a home folder of your choice
+  // SetFolder(@@'%$("Home-Folder");');         // Set the Startup Folder...
+  // For Debugging Purposes:
+  //  IfFileExists(@@|%$("Home-Folder");\|,>
+  //    !'Prompt(@@|OK: %$("Home-Folder");|);',>
+  //    !'Prompt(@@|not OK: %$("Home-Folder");|);');
+
+// ==================================================================
+
+  // Command Prompt (Windows Console)
+  Assign("CMD","cmd.exe");
+  Assign("CMDTitle","Command Prompt");
+
+// ==================================================================
+
+  // Detect MS HTML Workshop in Windows Registry (if installed)!
+  LetReg(0,`%@('HKLM','SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\hhw.exe',' ');`);
+  SubstituteInString("%!0","hhw.exe","hhc.exe"); // Only Compiler not Workshop!
+  IfStr('%!0','','=','LetReg(0,"hhc.exe");');
+  FindInString('%!0','"',1,2,1010,0);
+  IfOK(!'Relax;',!'LetReg(0,''"%!0"'');');
+  Assign("HHC","%!0");
+  //? Assign("HHC",|"C:\Program Files\HTML Help Workshop\hhc.exe"|); // Enter it Manually if not found
+  // Prompt("%$('HHC');");  // Debugging
+
+  // Detect NSIS in Windows Registry (if installed)!
+  LetReg(0,`%@('HKLM','SOFTWARE\NSIS',' ');`);
+  IfStr('%!0','','=',!|LetReg(0,`%@('HKLM','SOFTWARE\Wow6432Node\NSIS',' ');`);|);
+  FindInString('%!0','"',1,2,1010,0);
+  IfOK(!|SubstituteInString('%!0','"','');|);
+  IfStr('%!0','','=','LetReg(1,"makensis.exe");',!'LetReg(1,"%!0\makensis.exe");');
+  LetReg(1,'"%!1"');
+  Assign("NSIS-Root","%!0");
+  Assign("NSIS-Exe","%!1");
+  // Prompt("%$('NSIS-Root'); %$('NSIS-Exe');");  // Debugging
+
+// ==================================================================
+// Important Initialization Code! ===================================
+// ==================================================================
+
+// Auto Detect of WinEdt:
+  SetRegStr('HKCU','Software\WinEdt','Install Root','%B');
+
+  // Just in case if Local Macro initializes anything that is used below...
+  Exe("%b\Config\Local Startup.edt");
+
+  // Current Configuration!
+  Exe('%b\Exec\Config.edt');
+  // Environment Variables
+  Exe('%b\Config\EnvVar.edt');
+  // Fix the PATH
+  Exe('%b\Config\PATH.edt');
+  // PDF Viewer Detection
+  Exe('%b\Config\PDF.edt');
+  // GS Detection
+  Exe('%b\Config\GS.edt');
+  // Fix the PATH (again)
+  Exe('%b\Config\PATH.edt');
+
+// ==================================================================
+// Global Startup Macro is subject to changes!
+// Add your custom code in Local Startup Macro...
+// ==================================================================
+
+Exe("%b\Config\Local Startup.edt");
+
+// ==================================================================
+// User Profile =====================================================
+// ==================================================================
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+  IfCMDSwitch(!"I",!"JMP(!'Profile_OK');"); // Install Run
+  IfCMDSwitch(!"X",!"JMP(!'Profile_OK');"); // No Profile...
+  IfCMDSwitch(!"x",!"JMP(!'Profile_OK');"); // Local...
+  IfCMDSwitch(!"E",!"JMP(!'Profile_OK');"); // Custom...
+  IfCMDSwitch(!"e",!"JMP(!'Profile_OK');"); // Custom...
+  // Create or Update a Personal Profile if needed...
+  IfFileExists("%B\WinShell\Create Startup User Profile.edt",!"Relax;",!"JMP(!'Profile_OK');");
+
+  Exe("%B\WinShell\Create Startup User Profile.edt");
+
+:Profile_OK:: =======================================================
+
+  SetOK(1);
+  SetErrorFlag(0);
+
+  PopTagsandRegisters;
+
+End;

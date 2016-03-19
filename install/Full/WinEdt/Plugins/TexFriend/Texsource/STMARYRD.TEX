@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{stmaryrd}
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+macro="\noexpand#1" \space package="stmaryrd"}} \makeatother
+\begin{document}
+\outputm
+\def\arraystretch{1.3}
+\arraycolsep 0pt
+\def\tabsep{\makebox{\hskip 24pt}}
+\def\K#1{\vbox{\vskip 5mm}#1\totxt{#1}}
+\def\Ks#1{\vbox{\vskip 5mm}{\fontencoding{T1}\selectfont#1}\totxt{{\noexpand\fontencoding{T1}\noexpand\selectfont\noexpand#1}}}
+\def\vvspace{\mbox{\hskip 10mm \fontsize{24}{28}\selectfont H}}
+
+\(
+\begin{array}{*9{c}}
+\tabsep &\tabsep &\tabsep&\tabsep &\tabsep &\tabsep &\tabsep &\tabsep  &\vvspace\\
+\K\varobar
+&\K\varobslash
+&\K\varolessthan
+&\K\varogreaterthan
+&\K\varovee
+&\K\varowedge
+&\K\varoplus
+&\K\varoast
+                             &\vvspace\\
+\K\obar
+&\K\obslash
+&\K\olessthan
+&\K\ogreaterthan
+&\K\ovee
+&\K\owedge
+&\K\varotimes
+&\K\varodot
+                          & \vvspace \\
+\K\varominus
+&\K\varoslash
+&\K\varocircle
+&\K\varbigcirc
+&\K\baro
+&\K\minuso
+&\K\binampersand
+&\K\bindnasrepma
+& \vvspace \\
+\K\boxcircle
+&\K\boxbox
+&\K\boxempty
+&\K\oblong
+&\K\boxbslash
+&\K\boxslash
+&\K\boxdot
+&\K\boxast
+            &\vvspace\\
+\K\rightslice
+&\K\leftslice
+&\K\moo
+&\K\vartimes
+&\K\Yup
+&\K\Ydown
+&\K\Yleft
+&\K\Yright
+&
+ \vvspace \\
+\K\varcurlyvee
+&\K\varcurlywedge
+&\K\curlyveedownarrow
+&\K\curlywedgeuparrow
+&\K\curlyveeuparrow
+&\K\curlywedgedownarrow
+&\K\merge
+&\K\boxbar
+                 &\vvspace\\
+\K\interleave
+&\K\bbslash
+&\K\sslash
+&\K\fatslash
+&\K\talloblong
+&\K\fatbslash
+&\K\trianglelefteqslant
+&\K\trianglerighteqslant
+                     &\vvspace\\
+\K\inplus
+&\K\niplus
+&\K\subsetplus
+&\K\supsetplus
+& \K\subsetpluseq
+&\K\supsetpluseq
+&\K\ntrianglelefteqslant
+&\K\ntrianglerighteqslant
+                         &\vvspace \\
+\K\Lbag          &\K\Rbag          &\K\lbag          &\K\rbag
+&\K\llceil        &\K\rrceil
+&\K\llfloor       &\K\rrfloor    &\vvspace \\
+
+\K\llparenthesis
+&\K\rrparenthesis
+&\K\llbracket
+& \K\rrbracket
+&\K\bigtriangledown
+&\K\bigtriangleup
+&\K\bigcurlyvee
+&\K\bigcurlywedge   &\vvspace \\
+\K\bigbox
+&\K\biginterleave
+&\K\bigsqcap
+&\K\bignplus
+&\K\bigparallel
+&\K\space
+&\K\space
+&\K\space
+ &\vvspace\\
+\end{array}
+\)
+
+\vskip 20mm
+
+  abc f
+ d
+
+\end{document}

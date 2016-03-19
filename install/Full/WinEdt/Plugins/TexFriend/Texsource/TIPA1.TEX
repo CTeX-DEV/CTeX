@@ -1,0 +1,191 @@
+\documentclass[12pt]{article}
+ \usepackage{tipa}
+\makeatletter
+%\immediate\write\@auxout{%
+%    \noexpand\gdef\noexpand\prevtotalsymbols{\thetotalsymbols}}
+\def\outputm{
+ \begingroup
+    \makeatletter
+    \if@filesw
+      \expandafter\newwrite\csname tf@txt\endcsname
+      \immediate\openout \csname tf@txt\endcsname \jobname.txt\relax
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+\def\totxt#1{
+\immediate\write\tf@txt{%
+macro="\noexpand#1"}} \makeatother
+\begin{document}
+\outputm
+\def\arraystretch{1}
+\tabcolsep 2pt
+\def\tabsep{\makebox{\hskip 18pt}}
+\def\K#1{\vbox{\vskip 5mm}#1\totxt{#1}}
+\def\Ks#1{\vbox{\vskip 5mm}{\fontencoding{T1}\selectfont#1}\totxt{{\noexpand\fontencoding{T1}\noexpand\selectfont\noexpand#1}}}
+\def\vvspace{\mbox{\hskip 10mm \fontsize{20}{22}\selectfont H}}
+\def\tabsep{\makebox{\hskip 26pt}}
+\begin{tabular}{ccccccccc}
+\tabsep & \tabsep & \tabsep& \tabsep & \tabsep & \tabsep & \tabsep & \tabsep  & \vvspace\\
+ \K\textbabygamma
+&\K\textglotstop
+&\K\textrtaill
+&\K\textbarb
+&\K\texthalflength
+&\K\textrtailn
+&\K\textbarc
+&\K\texthardsign           &\vvspace    \\
+ \K\textrtailr
+&\K\textbard
+&\K\texthooktop
+&\K\textrtails
+&\K\textbardotlessj
+&\K\texthtb
+&\K\textrtailt
+&\K\textbarg               &\vvspace       \\
+ \K\texthtbardotlessj
+&\K\textrtailz
+&\K\textbarglotstop
+&\K\texthtc
+&\K\textrthook
+&\K\textbari
+&\K\texthtd
+&\K\textsca                       &\vvspace\\
+ \K\textbarl
+&\K\texthtg
+&\K\textscb
+&\K\textbaro
+&\K\texthth
+&\K\textsce
+&\K\textbarrevglotstop
+&\K\texththeng                    &\vvspace\\
+ \K\textscg
+&\K\textbaru
+&\K\texthtk
+&\K\textsch
+&\K\textbeltl
+&\K\texthtp
+&\K\textschwa
+&\K\textbeta                     &\vvspace \\
+ \K\texthtq
+&\K\textsci
+&\K\textbullseye
+&\K\texthtscg
+&\K\textscj
+&\K\textceltpal
+&\K\texthtt
+&\K\textscl                     &\vvspace  \\
+ \K\textchi
+&\K\texthvlig
+&\K\textscn
+&\K\textcloseepsilon
+&\K\textinvglotstop
+&\K\textscoelig
+&\K\textcloseomega
+&\K\textinvscr                    &\vvspace\\
+ \K\textscomega
+&\K\textcloserevepsilon
+&\K\textiota
+&\K\space
+&\K\textcommatailz
+&\K\textlambda
+&\K\textscr
+&\K\textcorner                &\vvspace    \\
+ \K\textlengthmark
+&\K\textscripta
+&\K\textcrb
+&\K\textlhookt
+&\K\textscriptv
+&\K\textscu
+&\K\textcrg
+&\K\textlhtlongi                 &\vvspace \\
+ \K\textscy
+&\K\textcrh
+&\K\textlonglegr
+&\K\textsecstress
+&\K\textcrinvglotstop
+&\K\textlptr
+&\K\textsoftsign
+&\K\textcrlambda     &\vvspace             \\
+ \K\textltailm
+&\K\textstretchc
+&\K\textcrtwo
+&\K\textltailn
+&\K\texttctclig
+&\K\textctc
+&\K\textltilde
+&\K\textteshlig                  &\vvspace \\
+ \K\textctd
+&\K\textlyoghlig
+&\K\texttheta
+&\K\textctdctzlig
+&\K\textthorn
+&\K\textctesh
+&\K\textObardotlessj
+&\K\texttslig                   &\vvspace  \\
+ \K\textctj
+&\K\textOlyoghlig
+&\K\textturna
+&\K\textctn
+&\K\textomega
+&\K\textturncelig
+&\K\textctt
+&\K\textopencorner               &\vvspace \\
+ \K\textturnh
+&\K\textcttctclig
+&\K\textopeno
+&\K\textturnk
+&\K\textctyogh
+&\K\textpalhook
+&\K\textturnlonglegr
+&\K\textctz                     &\vvspace  \\
+ \K\textphi
+&\K\textturnm
+&\K\textdctzlig
+&\K\textpipe
+&\K\textturnmrleg
+&\K\textdoublebaresh
+&\K\textprimstress
+&\K\textturnr                 &\vvspace    \\
+ \K\textdoublebarpipe
+&\K\textraiseglotstop
+&\K\textturnrrtail
+&\K\textdoublebarslash
+&\K\textraisevibyi
+&\K\textturnscripta
+&\K\textdoublepipe
+&\K\textramshorns              &\vvspace   \\
+ \K\textturnt
+&\K\textdoublevertline
+&\K\textturnv
+&\K\textdownstep
+&\K\textrevapostrophe
+&\K\textturnw
+&\K\textdyoghlig
+&\K\textreve                  &\vvspace    \\
+ \K\textturny
+&\K\textdzlig
+&\K\textrevepsilon
+&\K\textupsilon
+&\K\textepsilon
+&\K\textrevglotstop
+&\K\textupstep
+&\K\textesh                   &\vvspace    \\
+ \K\textrevyogh
+&\K\textvertline
+&\K\textfishhookr
+&\K\textrhookrevepsilon
+&\K\textvibyi
+&\K\textg
+&\K\textrhookschwa
+&\K\textvibyy              &\vvspace       \\
+ \K\textgamma
+&\K\textrhoticity
+&\K\textwynn
+&\K\textglobfall
+&\K\textrptr
+&\K\textyogh
+&\K\textglobrise
+&\K\textrtaild              &\vvspace      \\
+\end{tabular}
+\end{document}

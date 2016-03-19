@@ -1,0 +1,21 @@
+Assign("LabelNumber","%@('HKEY_CURRENT_USER','Software','WinEdt','CurrentEq');");
+IfStr("%$('LabelNumber');","","=","LetRegNum(1,0)",!"LetRegNum(1,'%$(''LabelNumber'');')");
+LetRegNum(1,%!1+1);
+SetRegStr('HKEY_CURRENT_USER','Software\WinEdt','CurrentEq','%!1');
+
+NewLine;
+Ins("\begin{equation} \label{eq:%!1}");
+NewLine;
+Ins("\begin{split}");
+NewLine;
+Ins("y'&= dy / dx \\");
+NewLine;
+Ins(" &= f'(x)");
+NewLine;
+Ins("\end{split}");
+NewLine;
+Ins("\end{equation}");
+NewLine;
+Assign("PackageLine","\usepackage{amsmath}");
+Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
+End;

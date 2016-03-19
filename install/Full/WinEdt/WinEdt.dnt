@@ -1,5 +1,5 @@
 25
-1089357896855742345
+1089357896772115361
 WinEdt 10
 WinEdt #
 1
@@ -8387,6 +8387,73 @@ TeX Live
 WinExe('','tlmgr.bat -gui','','',1000);
 0
 
+3
+1
+CTeX_Tools>
+CTeX Tools
+Window
+Default;MiKTeX
+0
+0
+
+0
+TexFriend
+TexFriend...
+
+
+0
+0
+
+Run('%b\Plugins\TexFriend\TexFriend.exe');
+0
+
+3
+0
+CCT_LaTeX
+&CCT && LaTeX
+
+
+0
+0
+"%!M=TeX"?"%!T=.ctx"
+Run(|ctex.exe --src-specials -latex-runs=1 -dvips '%N%T'|, |%P|);
+0
+
+0
+CTeXify
+CTe&Xify
+
+
+0
+0
+"%!M=TeX"?"%!T=.ctx"
+Exe('%b\MUI\CTeXify\CTeXify.edt','%P');
+0
+
+3
+0
+TY_LaTeX
+TY
+
+
+0
+0
+"%!M=TeX"?"%!T=.ty"
+Run(|tywin.exe '%N%T'|, |%P|);
+0
+
+0
+TYCFG
+TY Config
+
+
+0
+0
+
+Run('tywin.exe');
+0
+
+2
 3
 1
 MUI>
@@ -32999,7 +33066,7 @@ INI
 0
 0
 1
-9
+0
 999
 9
 1
@@ -33149,23 +33216,14 @@ Dictionary
 0
 1
 0
-1
-0
-1
-1
-0
-0
-0
-0
-0
-1
 0
 1
 1
 1
 1
 0
-1
+0
+0
 0
 1
 0
@@ -33175,13 +33233,24 @@ Dictionary
 1
 0
 1
+0
+1
+0
+1
+1
 1
 1
 0
-
+1
+1
+1
 0
 
+0
 
+
+\documentclass
+\usepackage{stmaryrd}
 
 
 1
@@ -33292,8 +33361,8 @@ TeX
 10
 12
 1
-10
-20
+8
+16
 0
 0
 0
@@ -36347,8 +36416,8 @@ END_LIST
 Binary Files
 Binary
 1
-10
-20
+8
+16
 0
 0
 64
@@ -36378,8 +36447,8 @@ Courier New
 Macros and Configurations
 INI;EDT|XWE
 1
-10
-20
+8
+16
 0
 1
 80
@@ -36409,8 +36478,8 @@ Courier New
 HTML Documents
 HTML|HHC;XWE
 1
-6
-20
+5
+16
 0
 0
 98
@@ -36440,8 +36509,8 @@ Verdana
 XWE Documents
 XWE
 1
-10
-20
+8
+16
 0
 0
 98
@@ -36471,8 +36540,8 @@ Courier New
 ASCII Documents
 ASCII
 1
-10
-20
+8
+16
 0
 0
 68
@@ -36502,8 +36571,8 @@ Courier New
 TeX Source
 DTX;INS;STY
 1
-10
-20
+8
+16
 0
 0
 80
@@ -48570,7 +48639,7 @@ Exec\ASCII\ExecModes.edt
 0
 1
 64
-13
+14
 Math
 Math
 
@@ -50234,6 +50303,89 @@ Ins('\nVdash');
 nVdash
 Ins('\nVDash');
 nVDash
+Diagrams
+Diagrams
+
+*
+6
+Bitmaps\Gui\Xy-pic\pushback.bmp
+1
+2
+55
+40
+0
+0
+2
+Exe('%b\Macros\Xy-pic\pushout.edt')
+Pushout, Xy-pic
+Exe('%b\Macros\Xy-pic\pullback.edt')
+Pullback, Xy-pic
+Bitmaps\Gui\Xy-pic\rect.bmp
+1
+3
+49
+40
+0
+0
+3
+Exe('%b\Macros\Xy-pic\rectang.edt')
+Rectangular (n x m), Xy-pic
+Exe('%b\Macros\Xy-pic\cubic.edt')
+Cubic, Xy-pic
+Exe('%b\Macros\Xy-pic\lift.edt')
+Lift Square, Xy-pic
+Bitmaps\Gui\Xy-pic\triag1.bmp
+1
+4
+50
+40
+0
+0
+4
+Exe('%b\Macros\Xy-pic\b-triag.edt')
+Bottom Triangle
+Exe('%b\Macros\Xy-pic\t-triag.edt')
+Top Triangle, Xy-pic
+Exe('%b\Macros\Xy-pic\l-triag.edt')
+Left Triangle, Xy-pic
+Exe('%b\Macros\Xy-pic\r-triag.edt')
+Right Triangle, Xy-pic
+Bitmaps\Gui\Xy-pic\triag2.bmp
+1
+4
+45
+40
+0
+0
+4
+Exe('%b\Macros\Xy-pic\tr-triag.edt')
+Top-Right Triangle, Xy-pic
+Exe('%b\Macros\Xy-pic\lr-triag.edt')
+Lower-Right Triangle, Xy-pic
+Exe('%b\Macros\Xy-pic\ll-triag.edt')
+Lower-Left Triangle, Xy-pic
+Exe('%b\Macros\Xy-pic\tl-triag.edt')
+Top-Left Triangle, Xy-pic
+Bitmaps\Gui\Xy-pic\exact.bmp
+1
+1
+90
+40
+0
+0
+1
+Exe('%b\Macros\Xy-pic\exact.edt')
+Exact Sequence (n), Xy-pic
+Bitmaps\Gui\Xy-pic\cd.bmp
+1
+1
+49
+40
+0
+0
+1
+Exe('%b\Macros\Xy-pic\cd.edt')
+Commutative Diagram (n x m), AmSTeX
 
 *
 48
@@ -51110,8 +51262,8 @@ Default:MiKTeX
 1
 0
 0
-1349
-899
+1079
+672
 0
 0
 0
@@ -51124,16 +51276,16 @@ Default:MiKTeX
 1
 77
 1
+284
+207
+284
+207
 0
 0
-0
-0
-0
-0
-0
-0
-0
-0
+236
+171
+336
+243
 0
 0
 0
@@ -51144,8 +51296,8 @@ Default:MiKTeX
 0
 0
 0
-120
-120
+96
+96
 3
 3
 3
@@ -51154,10 +51306,10 @@ Default:MiKTeX
 
 *
 81
-400
-400
-205
-125
+320
+320
+164
+100
 
 Tree
 1
@@ -51168,8 +51320,8 @@ Tree
 1
 0
 0
-450
-650
+360
+520
 
 fclFormBk
 -16777211
@@ -51190,8 +51342,8 @@ Gather
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -51212,8 +51364,8 @@ Macro Recorder
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -51234,8 +51386,8 @@ Errors
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -51256,8 +51408,8 @@ Character Map
 1
 0
 0
-1000
-225
+800
+180
 
 fclFormBk
 -16777211
@@ -51278,8 +51430,8 @@ Find in Files
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -51300,8 +51452,8 @@ Console
 1
 0
 0
-1000
-550
+800
+440
 
 fclFormBk
 -16777211
@@ -51322,8 +51474,8 @@ Options Interface
 1
 0
 0
-450
-650
+360
+520
 
 fclFormBk
 -16777211

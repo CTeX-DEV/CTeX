@@ -1,0 +1,6 @@
+edt="amsequations1.edt"
+edt="amsequations2.edt"
+edt="amsequations3.edt"
+edt="amsequations4.edt"
+edt="amsequations5.edt"
+edt="amsequations6.edt"
