@@ -1,8 +1,0 @@
-MDI_CLIENT_HANDLER=1
-
-// No need to specify top margin (it looks better without it)
-TOP_MARGIN=0
-// Extra space between left panel and text
-LEFT_MARGIN=4
-
-// Dealing with Corrupted Line terminators

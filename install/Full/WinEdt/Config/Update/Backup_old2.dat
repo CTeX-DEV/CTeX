@@ -1,3 +1,0 @@
-// Document Menu allows you to open the backup file!
-// Defaults simply put it in the same folder ...
-BACKUP_FILENAME="%p\%n%t.bak"

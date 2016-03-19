@@ -1,5 +1,0 @@
-DEFAULT_FONT=1
-// ITALIC=0
-// BOLD=0
-// STRIKEOUT=0
-UNDERLINE=-1 // Suppress underline font attribute

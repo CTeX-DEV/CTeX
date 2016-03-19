@@ -1,5 +1,0 @@
-  START1_TRIGGER=""
-  START2_TRIGGER="begin{table}"
-  STOP1_TRIGGER=""
-  STOP2_TRIGGER="end{table}"
-    TEXT_COLOR=12

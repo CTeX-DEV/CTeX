@@ -38,7 +38,7 @@
 //
 // ==================================================================
 
-  Requires(20130125); // Requires this build of WinEdt to work properly
+  Requires(20160131); // Requires this build of WinEdt to work properly
 
   IfConsoleRunning("Relax;","JMP('not_Running');");
   ShowConsole(1);
@@ -100,9 +100,11 @@ Return;
   LetReg(1, !"0");
   LetReg(2, !"0");
   IfStr("%$('%!9-Wait');",             "1","=",!|LetRegNum(0,"%!0+00100");|);
-  IfStr("%$('%!9-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+01000");|);
   IfStr("%$('%!9-Background_Window');","1","=",!|LetRegNum(0,"%!0+10000");|);
   IfStr("%$('%!9-STD_IO');",           "1","=",!|LetRegNum(0,"%!0+00010");|);
+  // If hidden do not create console Window at all in order to avoid problems
+  // with MiKTeX's packages on demand installation (new in WinEdt 10)!
+  IfStr("%$('%!9-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+1100000000");|);
   IfStr("%$('%!9-Pause');",            "1","=",!|LetRegNum(1,"%!1+111");|);
   IfStr("%$('%!9-High_Priority');",    "1","=",!|LetReg(2,'1');|);
 
@@ -124,22 +126,14 @@ Return;
   IfStr('%!3','','<>',!'LetReg(3,"%!3%\");');
 
   // *** Execute it!!!
-  LetReg(4,!'0');
-:Run_Again:: ========================================================
   SetConsoleText('%!3Command Line:   %!5%\Startup Folder: %!6%\%\',1);
-  RunConsole('%!5','%!6','%!9 ...',1,1,0,%!4,%!4);
+  RunConsole('%!5','%!6','%!9 ...',1,1,0,0,0,0,0);
   IfOK(!"Assign(!'Compile Status',!'OK');",>
        !"ShowConsole(1);Assign('Force-Focus','1');Assign(!'Compile Status',!'Run Error');JMP(!'Exit');");
 
   // Execute tasks after compiling...
   Exe('%b\Exec\ExeCompilerPost.edt');
   UpdateStatus;
-
-  // Blues with MiKTeX's GUI Framework?
-  IfStr("%$('TeX System');",!"MiKTeX",!"<>",!"JMP(!'no_LOG');");
-  GetConsoleText(4);
-  FindInString("%!4",!"GUI framework cannot be initialized",-1,-1,10);
-  IfOK(!"ResetConsole;LetReg(4,!'1');JMP(!'Run_Again');");
   JMP(!'no_LOG');
 
 :Windows_Console:: ==================================================
@@ -242,23 +236,6 @@ panel displayed at the bottom of your screen.%\>
   SetConsoleText('%!3',1,1);
 
 :no_LOG:: ===========================================================
-
-  IfStr("%!9","LaTeX",    "=",!"JMP(!'gbk2uni');");
-  IfStr("%!9","PDFLaTeX", "=",!"JMP(!'gbk2uni');");
-  IfStr("%!9","TeXify",   "=",!"JMP(!'gbk2uni');");
-  IfStr("%!9","PDFTeXify","=",!"JMP(!'gbk2uni');");
-  JMP(!'gbk2uni-Done');
-
-:gbk2uni:: ================================================
-
-  IfFileExists("%!6\%N.out","",!"JMP(!'gbk2uni-Done');");
-  IfStr("%$('%!9-WinEdt_Console');",'1','=',>
-    !|RunConsole('gbk2uni.exe "%N"','%!6','%!9 ...',1,1);|,>
-    !|WinExe('','gbk2uni.exe "%N"','%!6','%!9 ...', %!0, %!2,>
-             '', '%b\_Out.log', '%b\_Err.log',%!1);|);
-
-:gbk2uni-Done:: ================================================
-
   IfFileExists("%b\_Err.log",!"DeleteFile('%b\_Err.log');");
   IfFileExists("%b\_Out.log",!"DeleteFile('%b\_Out.log');");
 

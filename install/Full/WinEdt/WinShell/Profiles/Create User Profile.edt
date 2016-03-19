@@ -20,7 +20,7 @@
 :_DefAppData:: ======================================================
   // Try default (in case there are problems with Registry key)!
   GetAppDataFolder(0,0); // Roaming Application Data
-  LetReg(0,'%!0\WinEdt Team\WinEdt 9');
+  LetReg(0,'%!0\WinEdt Team\WinEdt 10');
   IfFileExists("%!0\",!"JMP('_AppDataOK');");
 
   // If required Create the default Application Data folder(s):
@@ -48,9 +48,9 @@
     !|WriteFile('%!0\User Profile.dat','1');>
       IfStr('%!2','','=',!'LetReg(2," upgraded");');|);
 
-  LetReg(4, "%@('HKCU','Software\WinEdt 9','AppData');");
+  LetReg(4, "%@('HKCU','Software\WinEdt 10','AppData');");
   IfStr('%!0','%!4','<>',>
-    !|SetRegStr('HKCU','Software\WinEdt 9','AppData','%!0');>
+    !|SetRegStr('HKCU','Software\WinEdt 10','AppData','%!0');>
       IfStr('%!2','','=',!'LetReg(2," upgraded");');|);
 
 // ==================================================================

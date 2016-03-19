@@ -1,4 +1,4 @@
-WinEdt 9 has been Reinstalled or Upgraded on your System
+WinEdt 10 has been Reinstalled or Upgraded on your System
 ========================================================
 
 This is the default configuration (project file is not loaded
@@ -9,14 +9,14 @@ Start the Configuration Wizard (Options Menu):
 
   - (Optionally) Create or update any filetype associations.
     WinEdt has to be run with (elevated) Administrator Privileges
-    for this to work on Vista or Windows 7 or 8! This is a good
+    for this to work on Vista or Windows 7, 8 or 10! This is a good
     time to perform this task while WinEdt has elevated status...
 
   - Restart WinEdt NOW in order to finish the installation!
 
 ----------------------------------------------------------------------
 
-If you have upgraded over an older version of WinEdt 9 your local
+If you have upgraded over an older version of WinEdt 10 your local
 settings have been preserved. However, after restarting WinEdt you
 should execute the
 

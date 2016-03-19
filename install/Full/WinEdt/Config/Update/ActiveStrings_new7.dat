@@ -1,8 +1,0 @@
-  DBL_CLICK_MACRO="[LetReg(1,'%?');Exe('%b\Config\OpenLocalCopy.edt');]"
-
-STRING="?@$Alpha+Numeric+[""_""]$@{ }=@{ }""\(*\)"""
-  DBL_CLICK_ENABLED=1
-  DBL_CLICK_MODE_FILTER="INI"
-  DBL_CLICK_MACRO="[Exe('%b\Macros\Active Strings\ChangeINIColor.edt');]"
-
-// ===============================================================================

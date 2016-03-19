@@ -1,5 +1,0 @@
-  // Custom Input Directive Comment (should everything else fail):
-  DIRECTIVE="%INPUT ""?"""
-    EXTENSION="*;.tex"
-    PATH="%P;%p;%@('TEXINPUTS');"
-END="TeX"

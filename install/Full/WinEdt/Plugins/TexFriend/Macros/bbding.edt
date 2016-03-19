@@ -1,3 +1,0 @@
-Assign("PackageLine","\usepackage{bbding}");
-Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
-End;

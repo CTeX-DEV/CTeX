@@ -1,6 +1,9 @@
 // Open a Local Copy of file (%!1)
 // Unless a full filename specification is given...
 
+  FindInString("%!1",'<%',-1,-2,11);
+  IfOK('LetReg(1,"%!1");'); // Expand it!
+
   GetFileDrive("%!1",-1);
   IfStr("%-1",!"",!"=",!"JMP(!'Rel');");
   // Full filename specification (eg. custom %INCLUDE directive)
@@ -10,9 +13,12 @@
 :Rel:: ======================================================================
 
   // Relative filename specification
-  IfFileExists('%b\%!1',>
-    !'Relax;',>
-    !'CopyFile("%B\%!1","%b\%!1",0,1);');
+  IfFileExists('%B\%!1',!'Relax;',!'JMP("no_src");');
+
+  CopyFile("%B\%!1","%b\%!1",0,1);
+
+:no_src:: ===================================================================
+
   Open('%b\%!1');
 
 End;

@@ -1,8 +1,8 @@
 // PDF Auto Detection Data
 
-  Assign(!"PDFAuto-View", !"0");
-  Assign(!"PDF-View","""%@('HKEY_LOCAL_MACHINE','Software\CTeX','Install');\CTeX\ctex\bin\SumatraPDF.exe""");
-  Assign(!"PDF-ViewDef",!"""%@('HKEY_LOCAL_MACHINE','Software\CTeX','Install');\CTeX\ctex\bin\SumatraPDF.exe""");
+  Assign(!"PDFAuto-View", !"1");
+  Assign(!"PDF-View");
+  Release(!"PDF-ViewDef");
 
 
   Assign(!"PDF-View1",!"""%!H\SumatraPDF\SumatraPDF.exe""");
@@ -12,7 +12,7 @@
 
 
   Assign(!"PDF-SyncTeX", !"1");
-  Assign(!"PDF-Sync",!"--synctex=1");
-  Assign(!"PDF-SyncEx",!".synctex.gz");
+  Assign(!"PDF-Sync",!"--synctex=-1");
+  Assign(!"PDF-SyncEx",!".synctex");
 
 End;

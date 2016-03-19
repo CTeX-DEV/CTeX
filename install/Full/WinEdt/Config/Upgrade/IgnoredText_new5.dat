@@ -1,7 +1,0 @@
-  ENVIRONMENT="\loadglsentries?"
-    START="\loadglsentries"
-    SCOPE=1
-  ENVIRONMENT="\print?"
-    START="\print"
-    SCOPE=1
-  ENVIRONMENT="\input?"

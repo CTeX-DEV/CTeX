@@ -1,7 +1,0 @@
-  ITEM="\newglossaryentry{?}"
-    ALT="\longnewglossaryentry{?}"
-    ALT="\provideglossaryentry{?}"
-    ALT="\longprovideglossaryentry{?}"
-    ALT="\newterm{?}"
-    ALT="\newterm[?]{?}"
-    ALT="\storeglosentry{?}"

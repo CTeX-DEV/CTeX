@@ -1,5 +1,6 @@
 @charset "utf-8";
-/* CSS Document */
+/*   CSS Document   */
+/* -*- DATA:CSS -*- */
 
 /*
   Created with WinEdt
@@ -12,7 +13,7 @@ body{
     margin:0;
     padding:5px 0px 0px 0px;
     color: #000000;
-	background:rgb(239, 239, 239);
+    background:rgb(239, 239, 239);
     font-family: "Segoe UI", sans-serif;
     font-size: 12pt;
     font-weight:normal;
@@ -31,14 +32,15 @@ body{
     float:left;
     color: #000000;
     background: #FFFFFF;
-	border: 1px solid rgb(204, 204, 204);
+    border: 1px solid rgb(204, 204, 204);
+    width:834px;
 }
 
 #top{
     margin:0;
     padding:0;
     height: 103px;
-	background: #E0E1E2;
+    background: #E0E1E2;
     font-family: "Lucida Sans Unicode", sans-serif;
     font-weight:normal;
 }
@@ -55,6 +57,7 @@ body{
     font-size:50.5px;
     font-weight:normal;
     display: inline-block;
+    color:#606468;
     margin-top: 1px;
 }
 
@@ -63,6 +66,7 @@ body{
     font-weight:normal;
     display: inline-block;
     margin-top: 1px;
+    color:#606468;
     opacity: 0.95;
 }
 
@@ -243,21 +247,21 @@ CODE{font-family: "Courier New", monospaced; color: rgb(0, 60, 120);
 }
 
 table{
-	border: 1px solid rgb(180, 180, 180);
+    border: 1px solid rgb(180, 180, 180);
     !padding: 0px 0px 0px 0px;
     font-size: 11.5pt;
 }
 
 td{
-	border: 1px solid rgb(204, 204, 204);
+    border: 1px solid rgb(204, 204, 204);
     padding: 4px 2px 4px 8px;
 }
 
 th{
-  border-width: 1;
-  border-style: solid;
-  text-align: left;
-  padding: 4px 2px 4px 8px;
-  border-color: #FFFFFF;
-  background-color: #C0C0C0;
+    border-width: 1;
+    border-style: solid;
+    text-align: left;
+    padding: 4px 2px 4px 8px;
+    border-color: #FFFFFF;
+    background-color: #C0C0C0;
 }

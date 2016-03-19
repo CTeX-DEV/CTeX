@@ -1,5 +1,6 @@
-22
-WinEdt 9
+25
+1089357896855742345
+WinEdt 10
 WinEdt #
 1
 
@@ -109,8 +110,8 @@ _
 
 *
 47
-6
-Less than 120dpi
+9
+96 dpi
 96
 %B\Bitmaps\GUI125
 %b\Bitmaps\GUI
@@ -449,6 +450,119 @@ Image Dialog
 %B\Bitmaps\Images
 %b\Bitmaps\Images
 %B\Bitmaps\Resources\WRLib32(24).dll
+168 dpi
+168
+%B\Bitmaps\GUI200
+%b\Bitmaps\GUI
+200
+175
+175
+135
+2
+8
+48
+42
+0
+Default Values
+0
+24
+24
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(24).dll
+Menu Icons
+0
+24
+24
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(24).dll
+Main Toolbar
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Dialog Toolbars
+0
+24
+24
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(24).dll
+Form Toolbars
+0
+24
+24
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(24).dll
+Bitmap Buttons
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Tree Icons
+0
+24
+24
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(24).dll
+Gather Icons
+0
+24
+24
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(24).dll
+Document Tab Icons
+0
+24
+24
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(24).dll
+Image Dialog
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
 192 dpi
 192
 %B\Bitmaps\GUI200
@@ -562,6 +676,119 @@ Image Dialog
 %B\Bitmaps\Images
 %b\Bitmaps\Images
 %B\Bitmaps\Resources\WRLib32(32).dll
+216 dpi
+216
+%B\Bitmaps\GUI200
+%b\Bitmaps\GUI
+200
+200
+200
+165
+2
+10
+60
+52
+0
+Default Values
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Menu Icons
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Main Toolbar
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Dialog Toolbars
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Form Toolbars
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Bitmap Buttons
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Tree Icons
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Gather Icons
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Document Tab Icons
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Image Dialog
+0
+32
+32
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
 240 dpi
 240
 %B\Bitmaps\GUI200
@@ -574,6 +801,119 @@ Image Dialog
 11
 84
 76
+0
+Default Values
+0
+40
+40
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Menu Icons
+0
+40
+40
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Main Toolbar
+0
+48
+48
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(48).dll
+Dialog Toolbars
+0
+40
+40
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Form Toolbars
+0
+40
+40
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Bitmap Buttons
+0
+48
+48
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(48).dll
+Tree Icons
+0
+40
+40
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Gather Icons
+0
+40
+40
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Document Tab Icons
+0
+40
+40
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(32).dll
+Image Dialog
+0
+48
+48
+0
+0
+1
+%B\Bitmaps\Images
+%b\Bitmaps\Images
+%B\Bitmaps\Resources\WRLib32(48).dll
+264 dpi
+264
+%B\Bitmaps\GUI200
+%b\Bitmaps\GUI
+200
+200
+200
+190
+2
+12
+86
+78
 0
 Default Values
 0
@@ -796,6 +1136,7 @@ Image Dialog
 0
 0
 1
+1
 8219
 Recent_Files_List>
 Recent_Projects_List>
@@ -917,7 +1258,7 @@ Font
 0
 1
 
-Exe('%B\Menus\Popups\Font.edt');
+Exe('%b\Menus\Popups\Font.edt');
 0
 
 0
@@ -928,7 +1269,7 @@ Insert Font
 0
 1
 
-Exe('%B\Menus\Popups\Insert Font.edt');
+Exe('%b\Menus\Popups\Insert Font.edt');
 0
 
 0
@@ -939,7 +1280,7 @@ Change Font
 0
 1
 
-Exe('%B\Menus\Popups\Change Font.edt');
+Exe('%b\Menus\Popups\Change Font.edt');
 0
 
 0
@@ -950,7 +1291,7 @@ Environments
 0
 1
 
-Exe('%B\Menus\Popups\Environments.edt');
+Exe('%b\Menus\Popups\Environments.edt');
 0
 
 
@@ -1056,7 +1397,7 @@ Format Paragraph
 0
 1
 
-Exe('%B\Menus\Edit\Format Paragraph.edt');
+Exe('%b\Menus\Edit\Format Paragraph.edt');
 24663
 
 3
@@ -1068,7 +1409,7 @@ Escape
 0
 0
 
-Exe('%B\Menus\Shortcuts\Escape.edt');
+Exe('%b\Menus\Shortcuts\Escape.edt');
 27
 
 0
@@ -1090,7 +1431,7 @@ Enter
 0
 1
 
-Exe('%B\Menus\Shortcuts\Enter.edt');
+Exe('%b\Menus\Shortcuts\Enter.edt');
 13
 
 0
@@ -1112,7 +1453,7 @@ Backspace
 0
 1
 
-Exe('%B\Menus\Shortcuts\Backspace.edt');
+Exe('%b\Menus\Shortcuts\Backspace.edt');
 8
 
 0
@@ -1123,7 +1464,7 @@ Backspace + Shift
 0
 1
 
-Exe('%B\Menus\Shortcuts\Backspace.edt');
+Exe('%b\Menus\Shortcuts\Backspace.edt');
 8200
 
 0
@@ -1134,7 +1475,7 @@ Indent
 0
 1
 
-Exe('%B\Menus\Shortcuts\Indent.edt');
+Exe('%b\Menus\Shortcuts\Indent.edt');
 9
 
 0
@@ -1145,7 +1486,7 @@ Unindent
 0
 1
 
-Exe('%B\Menus\Shortcuts\Unindent.edt');
+Exe('%b\Menus\Shortcuts\Unindent.edt');
 8201
 
 0
@@ -1156,7 +1497,7 @@ Insert
 0
 1
 
-Exe('%B\Menus\Shortcuts\Insert.edt');
+Exe('%b\Menus\Shortcuts\Insert.edt');
 45
 
 3
@@ -1168,7 +1509,7 @@ Transpose Chars
 0
 1
 
-Exe('%B\Menus\Shortcuts\TransposeChars.edt');
+Exe('%b\Menus\Shortcuts\TransposeChars.edt');
 16468
 
 0
@@ -1223,7 +1564,7 @@ Select Word
 0
 1
 
-Exe('%B\Menus\Shortcuts\Select Word.edt');
+Exe('%b\Menus\Shortcuts\Select Word.edt');
 0
 
 0
@@ -1234,7 +1575,7 @@ Delete Word
 0
 1
 
-Exe('%B\Menus\Shortcuts\Delete Word.edt');
+Exe('%b\Menus\Shortcuts\Delete Word.edt');
 0
 
 0
@@ -1245,7 +1586,7 @@ Delete Word Right
 0
 1
 
-Exe('%B\Menus\Shortcuts\Delete Word Right.edt');
+Exe('%b\Menus\Shortcuts\Delete Word Right.edt');
 16430
 
 0
@@ -1256,7 +1597,7 @@ Delete Word Left
 0
 1
 
-Exe('%B\Menus\Shortcuts\Delete Word Left.edt');
+Exe('%b\Menus\Shortcuts\Delete Word Left.edt');
 16392
 
 3
@@ -1312,7 +1653,7 @@ Word Right
 0
 1
 
-Exe('%B\Menus\Shortcuts\Word Right.edt');
+Exe('%b\Menus\Shortcuts\Word Right.edt');
 16423
 
 0
@@ -1323,7 +1664,7 @@ Select Word Right
 0
 1
 
-Exe('%B\Menus\Shortcuts\Select Word Right.edt');
+Exe('%b\Menus\Shortcuts\Select Word Right.edt');
 24615
 
 0
@@ -1334,7 +1675,7 @@ Word Left
 0
 1
 
-Exe('%B\Menus\Shortcuts\Word Left.edt');
+Exe('%b\Menus\Shortcuts\Word Left.edt');
 16421
 
 0
@@ -1345,7 +1686,7 @@ Select Word Left
 0
 1
 
-Exe('%B\Menus\Shortcuts\Select Word Left.edt');
+Exe('%b\Menus\Shortcuts\Select Word Left.edt');
 24613
 
 0
@@ -1400,7 +1741,7 @@ Par Down
 0
 1
 
-Exe('%B\Menus\Shortcuts\Par Down.edt');
+Exe('%b\Menus\Shortcuts\Par Down.edt');
 16424
 
 0
@@ -1411,7 +1752,7 @@ Select Par Down
 0
 1
 
-Exe('%B\Menus\Shortcuts\Select Par Down.edt');
+Exe('%b\Menus\Shortcuts\Select Par Down.edt');
 24616
 
 0
@@ -1422,7 +1763,7 @@ Par Up
 0
 1
 
-Exe('%B\Menus\Shortcuts\Par Up.edt');
+Exe('%b\Menus\Shortcuts\Par Up.edt');
 16422
 
 0
@@ -1433,7 +1774,7 @@ Select Par Up
 0
 1
 
-Exe('%B\Menus\Shortcuts\Select Par Up.edt');
+Exe('%b\Menus\Shortcuts\Select Par Up.edt');
 24614
 
 0
@@ -1656,51 +1997,6 @@ Screen Refresh
 
 Refresh(1);
 32803
-
-0
-Command completion
-Command completion
-
-
-0
-0
-
-Exe('%B\Plugins\complete\complete.edt');
-16473
-
-3
-0
-Environment completion
-Environment completion
-
-
-0
-0
-
-Exe('%B\Plugins\complete\env.edt');
-24665
-
-0
-WinEdt macro completion
-WinEdt macro completion
-
-
-0
-0
-
-Exe('%B\Plugins\complete\macro.edt');
-32857
-
-0
-WinEdt command completion
-WinEdt command completion
-
-
-0
-0
-
-Exe('%B\Plugins\complete\cmd.edt');
-41049
 
 
 Alternatives
@@ -2318,7 +2614,7 @@ Reload
 0
 3
 
-Exe('%B\Macros\Restore from File.edt');
+Exe('%b\Macros\Restore from File.edt');
 0
 
 0
@@ -2595,7 +2891,7 @@ Delete
 0
 1
 
-Exe('%B\Menus\Edit\Delete.edt');
+Exe('%b\Menus\Edit\Delete.edt');
 46
 
 3
@@ -2660,7 +2956,7 @@ Tolower
 0
 1
 
-Exe('%B\Menus\Edit\Toggle Char.edt');
+Exe('%b\Menus\Edit\Toggle Char.edt');
 57384
 
 2
@@ -2681,7 +2977,7 @@ SelectPar
 0
 1
 
-Exe('%B\Menus\Edit\Select Paragraph.edt');
+Exe('%b\Menus\Edit\Select Paragraph.edt');
 24621
 
 0
@@ -2703,7 +2999,7 @@ FormatPar
 0
 1
 
-Exe('%B\Menus\Edit\Format Paragraph.edt');
+Exe('%b\Menus\Edit\Format Paragraph.edt');
 49197
 
 0
@@ -2714,7 +3010,7 @@ FormatDoc
 0
 1
 
-Exe('%B\Menus\Edit\Format Document.edt');
+Exe('%b\Menus\Edit\Format Document.edt');
 57389
 
 3
@@ -2884,7 +3180,7 @@ CommentInsert
 0
 1
 
-Exe('%B\Menus\Edit\Insert Comment.edt');
+Exe('%b\Menus\Edit\Insert Comment.edt');
 57383
 
 0
@@ -2895,7 +3191,7 @@ CommentRemove
 0
 1
 
-Exe('%B\Menus\Edit\Remove Comment.edt');
+Exe('%b\Menus\Edit\Remove Comment.edt');
 57381
 
 3
@@ -3095,7 +3391,7 @@ ErrorsHide
 0
 
 ShowErrorLog(-1);
-0
+24645
 
 3
 0
@@ -3366,7 +3662,7 @@ Bold
 0
 1
 
-Exe('%B\Menus\Insert\Bold.edt');
+Exe('%b\Menus\Insert\Bold.edt');
 0
 
 0
@@ -3377,7 +3673,7 @@ Italic
 0
 1
 
-Exe('%B\Menus\Insert\Emph.edt');
+Exe('%b\Menus\Insert\Emph.edt');
 0
 
 0
@@ -3388,7 +3684,7 @@ Teletype
 0
 1
 
-Exe('%B\Menus\Insert\Teletype.edt');
+Exe('%b\Menus\Insert\Teletype.edt');
 0
 
 3
@@ -3400,7 +3696,7 @@ Colors
 0
 1
 
-Exe('%B\Menus\Insert\Colors.edt');
+Exe('%b\Menus\Insert\Colors.edt');
 0
 
 2
@@ -3420,7 +3716,7 @@ Figure
 0
 1
 
-Exe('%B\Menus\Insert\Image.edt');
+Exe('%b\Menus\Insert\Image.edt');
 0
 
 0
@@ -3431,7 +3727,7 @@ Table
 0
 1
 
-Exe('%B\Menus\Insert\Table.edt');
+Exe('%b\Menus\Insert\Table.edt');
 0
 
 3
@@ -3443,7 +3739,7 @@ Hyperlink
 0
 1
 
-Exe('%B\Menus\Insert\Link.edt');
+Exe('%b\Menus\Insert\Link.edt');
 0
 
 2
@@ -3464,7 +3760,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Macros\Sections\Part.edt');
+Exe('%b\Macros\Sections\Part.edt');
 0
 
 0
@@ -3475,7 +3771,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Macros\Sections\Chapter.edt');
+Exe('%b\Macros\Sections\Chapter.edt');
 0
 
 3
@@ -3487,7 +3783,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Macros\Sections\Section.edt');
+Exe('%b\Macros\Sections\Section.edt');
 0
 
 0
@@ -3498,7 +3794,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Macros\Sections\Subsection.edt');
+Exe('%b\Macros\Sections\Subsection.edt');
 0
 
 0
@@ -3509,7 +3805,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Macros\Sections\Subsubsection.edt');
+Exe('%b\Macros\Sections\Subsubsection.edt');
 0
 
 3
@@ -3521,7 +3817,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Macros\Sections\Paragraph.edt');
+Exe('%b\Macros\Sections\Paragraph.edt');
 0
 
 0
@@ -3532,7 +3828,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Macros\Sections\Subparagraph.edt');
+Exe('%b\Macros\Sections\Subparagraph.edt');
 0
 
 3
@@ -3632,7 +3928,7 @@ ListItem
 0
 1
 
-LetReg(9,'List Items');LetReg(8,'itemize');Exe('%B\Menus\Insert\List.edt');
+LetReg(9,'List Items');LetReg(8,'itemize');Exe('%b\Menus\Insert\List.edt');
 0
 
 0
@@ -3643,7 +3939,7 @@ ListEnum
 0
 1
 
-LetReg(9,'Enumerate Items');LetReg(8,'enumerate');Exe('%B\Menus\Insert\List.edt');
+LetReg(9,'Enumerate Items');LetReg(8,'enumerate');Exe('%b\Menus\Insert\List.edt');
 0
 
 0
@@ -3654,7 +3950,7 @@ ListDesc
 0
 1
 
-LetReg(9,'Description Items');LetReg(8,'description');Exe('%B\Menus\Insert\List.edt');
+LetReg(9,'Description Items');LetReg(8,'description');Exe('%b\Menus\Insert\List.edt');
 0
 
 3
@@ -3666,7 +3962,7 @@ Default;MiKTeX;TeX Live
 0
 1
 
-Exe('%B\Menus\Insert\Cases.edt');
+Exe('%b\Menus\Insert\Cases.edt');
 0
 
 2
@@ -3686,7 +3982,7 @@ Array
 0
 1
 
-Exe('%B\Menus\Insert\Array.edt');
+Exe('%b\Menus\Insert\Array.edt');
 0
 
 0
@@ -3697,7 +3993,7 @@ Matrix
 0
 1
 
-Exe('%B\Menus\Insert\Matrix.edt');
+Exe('%b\Menus\Insert\Matrix.edt');
 0
 
 3
@@ -3709,7 +4005,7 @@ Tabular
 0
 1
 
-Exe('%B\Menus\Insert\Tabular.edt');
+Exe('%b\Menus\Insert\Tabular.edt');
 0
 
 0
@@ -3720,7 +4016,7 @@ Tabbing
 0
 1
 
-Exe('%B\Menus\Insert\Tabbing.edt');
+Exe('%b\Menus\Insert\Tabbing.edt');
 0
 
 3
@@ -3742,7 +4038,7 @@ Env
 0
 1
 
-EnterReg(9,'Environment name:','Insert Environment');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
+EnterReg(9,'Environment name:','Insert Environment');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
 0
 
 3
@@ -3754,7 +4050,7 @@ Equation
 0
 1
 
-LetReg(9,'equation');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'equation');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Env.edt');
 0
 
 0
@@ -3765,7 +4061,7 @@ EquationStar
 0
 1
 
-LetReg(9,'equation*');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'equation*');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
 0
 
 3
@@ -3777,7 +4073,7 @@ EqnArray
 0
 1
 
-LetReg(9);Exe('%B\Menus\Insert\EqnArray.edt');
+LetReg(9);Exe('%b\Menus\Insert\EqnArray.edt');
 0
 
 0
@@ -3788,7 +4084,7 @@ EqnArrayStar
 0
 1
 
-LetReg(9,'*');Exe('%B\Menus\Insert\EqnArray.edt');
+LetReg(9,'*');Exe('%b\Menus\Insert\EqnArray.edt');
 0
 
 3
@@ -3800,7 +4096,7 @@ EnvCenter
 0
 1
 
-LetReg(9,'center');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'center');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
 0
 
 0
@@ -3811,7 +4107,7 @@ EnvLeft
 0
 1
 
-LetReg(9,'flushleft');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'flushleft');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
 0
 
 0
@@ -3822,7 +4118,7 @@ EnvRight
 0
 1
 
-LetReg(9,'flushright');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'flushright');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
 0
 
 3
@@ -3834,7 +4130,7 @@ Teletype
 0
 1
 
-LetReg(9,'verbatim');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'verbatim');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
 0
 
 0
@@ -3845,7 +4141,7 @@ EnvQuote
 0
 1
 
-LetReg(9,'quote');LetReg(8);Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'quote');LetReg(8);Exe('%b\Menus\Insert\Env.edt');
 0
 
 0
@@ -3856,7 +4152,7 @@ Minipage
 0
 1
 
-LetReg(9,'minipage');LetReg(8,'[]{}');Exe('%B\Menus\Insert\Env.edt');
+LetReg(9,'minipage');LetReg(8,'[]{}');Exe('%b\Menus\Insert\Env.edt');
 0
 
 2
@@ -3876,7 +4172,7 @@ EqnMulti
 0
 1
 
-LetReg(9,'multline');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'multline');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3887,7 +4183,7 @@ EqnMultiStar
 0
 1
 
-LetReg(9,'multline*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'multline*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
 0
 
 3
@@ -3899,7 +4195,7 @@ EqnSplit
 0
 1
 
-LetReg(9,'split');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'split');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
 0
 
 3
@@ -3911,7 +4207,7 @@ EqnGather
 0
 1
 
-LetReg(9,'gather');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'gather');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3922,7 +4218,7 @@ EqnGatherStar
 0
 1
 
-LetReg(9,'gather*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'gather*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3933,7 +4229,7 @@ EqnAlign
 0
 1
 
-LetReg(9,'align');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'align');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3944,7 +4240,7 @@ EqnAlignStar
 0
 1
 
-LetReg(9,'align*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'align*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3955,7 +4251,7 @@ EqnAlign
 0
 1
 
-LetReg(9,'alignat');LetReg(8,'{}\label{}');Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'alignat');LetReg(8,'{}\label{}');Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3966,7 +4262,7 @@ EqnAlignStar
 0
 1
 
-LetReg(9,'alignat*');LetReg(8,'{}');Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'alignat*');LetReg(8,'{}');Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3977,7 +4273,7 @@ EqnAlign
 0
 1
 
-LetReg(9,'flalign');LetReg(8,'\label{}');Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'flalign');LetReg(8,'\label{}');Exe('%b\Menus\Insert\Split.edt');
 0
 
 0
@@ -3988,7 +4284,7 @@ EqnAlignStar
 0
 1
 
-LetReg(9,'flalign*');LetReg(8);Exe('%B\Menus\Insert\Split.edt');
+LetReg(9,'flalign*');LetReg(8);Exe('%b\Menus\Insert\Split.edt');
 0
 
 3
@@ -4000,7 +4296,7 @@ Matrix
 0
 1
 
-LetReg(9,'p');Exe('%B\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'p');Exe('%b\Menus\Insert\AMSMatrix.edt');
 0
 
 0
@@ -4011,7 +4307,7 @@ Matrix
 0
 1
 
-LetReg(9,'b');Exe('%B\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'b');Exe('%b\Menus\Insert\AMSMatrix.edt');
 0
 
 0
@@ -4022,7 +4318,7 @@ Matrix
 0
 1
 
-LetReg(9,'v');Exe('%B\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'v');Exe('%b\Menus\Insert\AMSMatrix.edt');
 0
 
 0
@@ -4033,7 +4329,7 @@ Matrix
 0
 1
 
-LetReg(9,'V');Exe('%B\Menus\Insert\AMSMatrix.edt');
+LetReg(9,'V');Exe('%b\Menus\Insert\AMSMatrix.edt');
 0
 
 2
@@ -4187,7 +4483,7 @@ Article
 0
 1
 
-LetReg(9,'Article');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Article');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4198,7 +4494,7 @@ Book
 0
 1
 
-LetReg(9,'Book');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Book');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4209,7 +4505,7 @@ InBook
 0
 1
 
-LetReg(9,'Inbook');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Inbook');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4220,7 +4516,7 @@ Proceedings
 0
 1
 
-LetReg(9,'Proc');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Proc');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4231,7 +4527,7 @@ InProceedings
 0
 1
 
-LetReg(9,'Inproc');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Inproc');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4242,7 +4538,7 @@ Collection
 0
 1
 
-LetReg(9,'Collect');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Collect');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4253,7 +4549,7 @@ InCollection
 0
 1
 
-LetReg(9,'Incollec');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Incollec');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4264,7 +4560,7 @@ Booklet
 0
 1
 
-LetReg(9,'Booklet');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Booklet');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4275,7 +4571,7 @@ Manual
 0
 1
 
-LetReg(9,'Manual');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Manual');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4286,7 +4582,7 @@ Report
 0
 1
 
-LetReg(9,'Report');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Report');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4297,7 +4593,7 @@ Conference
 0
 1
 
-LetReg(9,'Conf');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Conf');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4308,7 +4604,7 @@ ThesisPhD
 0
 1
 
-LetReg(9,'Phd');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Phd');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4319,7 +4615,7 @@ ThesisMaster
 0
 1
 
-LetReg(9,'Master');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Master');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4330,7 +4626,7 @@ Sample
 0
 1
 
-LetReg(9,'Misc');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Misc');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 0
@@ -4341,7 +4637,7 @@ Unpublished
 0
 1
 
-LetReg(9,'Unpub');Exe('%B\Menus\Insert\Bib.edt');
+LetReg(9,'Unpub');Exe('%b\Menus\Insert\Bib.edt');
 0
 
 2
@@ -4362,7 +4658,7 @@ Meta
 0
 1
 
-EnterReg(9,'Guard name:','Insert Guard');Exe('%B\Menus\Insert\DTX\Guard.edt');
+EnterReg(9,'Guard name:','Insert Guard');Exe('%b\Menus\Insert\DTX\Guard.edt');
 0
 
 0
@@ -4373,7 +4669,7 @@ Meta
 0
 1
 
-EnterReg(9,'Guard name:','Insert Guard');Exe('%B\Menus\Insert\DTX\SingleGuard.edt');
+EnterReg(9,'Guard name:','Insert Guard');Exe('%b\Menus\Insert\DTX\SingleGuard.edt');
 0
 
 3
@@ -4385,7 +4681,7 @@ Macro
 0
 1
 
-EnterReg(9,'Macro name:','Insert Macro');Exe('%B\Menus\Insert\DTX\Macro.edt');
+EnterReg(9,'Macro name:','Insert Macro');Exe('%b\Menus\Insert\DTX\Macro.edt');
 0
 
 0
@@ -4396,7 +4692,7 @@ Env
 0
 1
 
-EnterReg(9,'Environment name:','Insert Environment');Exe('%B\Menus\Insert\DTX\Env.edt');
+EnterReg(9,'Environment name:','Insert Environment');Exe('%b\Menus\Insert\DTX\Env.edt');
 0
 
 0
@@ -4407,7 +4703,7 @@ Code
 0
 1
 
-Exe('%B\Menus\Insert\DTX\Macrocode.edt');
+Exe('%b\Menus\Insert\DTX\Macrocode.edt');
 0
 
 3
@@ -4419,7 +4715,7 @@ Invert
 0
 1
 
-Exe('%B\Menus\Insert\DTX\Changes.edt');
+Exe('%b\Menus\Insert\DTX\Changes.edt');
 0
 
 3
@@ -4431,7 +4727,7 @@ DocSettings
 0
 1
 
-Exe('%B\Menus\Insert\DTX\Checksum.edt');
+Exe('%b\Menus\Insert\DTX\Checksum.edt');
 0
 
 0
@@ -4442,7 +4738,7 @@ CharMap
 0
 1
 
-Exe('%B\Menus\Insert\DTX\Table.edt');
+Exe('%b\Menus\Insert\DTX\Table.edt');
 0
 
 2
@@ -4463,7 +4759,7 @@ Figure
 0
 1
 
-EnterReg(9,'Figure number:','Insert Figure');Exe('%B\Menus\Insert\MetaPost\Fig.edt');
+EnterReg(9,'Figure number:','Insert Figure');Exe('%b\Menus\Insert\MetaPost\Fig.edt');
 0
 
 0
@@ -4474,7 +4770,7 @@ Graph
 0
 1
 
-Exe('%B\Menus\Insert\MetaPost\Graph.edt');
+Exe('%b\Menus\Insert\MetaPost\Graph.edt');
 0
 
 2
@@ -4503,7 +4799,7 @@ ImportSelect
 0
 5
 
-Exe('%B\Menus\Insert\HTML\Import.edt');
+Exe('%b\Menus\Insert\HTML\Import.edt');
 0
 
 0
@@ -4514,7 +4810,7 @@ ImportHighlight
 0
 5
 
-Exe('%B\Menus\Insert\HTML\Import Highlighted.edt');
+Exe('%b\Menus\Insert\HTML\Import Highlighted.edt');
 0
 
 3
@@ -4526,7 +4822,7 @@ ImportSelect
 0
 5
 
-Exe('%B\Menus\Insert\HTML\Import Pre.edt');
+Exe('%b\Menus\Insert\HTML\Import Pre.edt');
 0
 
 0
@@ -4537,7 +4833,7 @@ ImportHighlight
 0
 5
 
-Exe('%B\Menus\Insert\HTML\Import Pre Highlighted.edt');
+Exe('%b\Menus\Insert\HTML\Import Pre Highlighted.edt');
 0
 
 3
@@ -4549,7 +4845,7 @@ ExportSelect
 0
 5
 
-Exe('%B\Menus\Insert\HTML\Export.edt');
+Exe('%b\Menus\Insert\HTML\Export.edt');
 0
 
 2
@@ -4570,7 +4866,7 @@ Wizard
 0
 0
 
-LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Doc.edt');
 0
 
 3
@@ -4582,7 +4878,7 @@ TagHtml
 0
 1
 
-LetReg(0,!'html');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'html');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4593,7 +4889,7 @@ TagHead
 0
 1
 
-LetReg(0,!'head');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'head');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4604,7 +4900,7 @@ TagTitle
 0
 1
 
-LetReg(0,!'title');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'title');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4615,7 +4911,7 @@ TagBody
 0
 1
 
-LetReg(0,!'body');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'body');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -4627,7 +4923,7 @@ Meta
 0
 1
 
-LetReg(0,!'meta');Exe('%B\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'meta');Exe('%b\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4638,7 +4934,7 @@ MetaHttp
 0
 1
 
-LetReg(0,!'meta_http');Exe('%B\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'meta_http');Exe('%b\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4649,7 +4945,7 @@ MetaCharset
 0
 1
 
-LetReg(0,!'meta_charset');Exe('%B\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'meta_charset');Exe('%b\Menus\Insert\HTML\Doc.edt');
 0
 
 3
@@ -4661,7 +4957,7 @@ LinkDocs
 0
 1
 
-LetReg(0,!'link_rel');Exe('%B\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'link_rel');Exe('%b\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4672,7 +4968,7 @@ LinkStyle
 0
 1
 
-LetReg(0,!'link_style');Exe('%B\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'link_style');Exe('%b\Menus\Insert\HTML\Doc.edt');
 0
 
 0
@@ -4683,7 +4979,7 @@ Style
 0
 1
 
-LetReg(0,!'style');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'style');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4694,7 +4990,7 @@ Macro
 0
 1
 
-LetReg(0,!'script');Exe('%B\Menus\Insert\HTML\Doc.edt');
+LetReg(0,!'script');Exe('%b\Menus\Insert\HTML\Doc.edt');
 0
 
 2
@@ -4715,7 +5011,7 @@ Teletype
 0
 1
 
-LetReg(0,!'pre');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'pre');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4726,7 +5022,7 @@ Quote
 0
 1
 
-LetReg(0,!'blockquote');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'blockquote');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -4737,7 +5033,7 @@ Span
 0
 1
 
-Exe('%B\Menus\Insert\HTML\Span.edt');
+Exe('%b\Menus\Insert\HTML\Span.edt');
 0
 
 3
@@ -4925,7 +5221,7 @@ DocEmpty
 0
 1
 
-LetReg(0,!'p');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'p');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -4937,7 +5233,7 @@ Style
 0
 1
 
-Exe('%B\Menus\Insert\HTML\ParClass.edt');
+Exe('%b\Menus\Insert\HTML\ParClass.edt');
 0
 
 0
@@ -4948,7 +5244,7 @@ AlignJust
 0
 1
 
-LetReg(0,!'justify');Exe('%B\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'justify');Exe('%b\Menus\Insert\HTML\Par.edt');
 0
 
 0
@@ -4959,7 +5255,7 @@ AlignCenter
 0
 1
 
-LetReg(0,!'center');Exe('%B\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'center');Exe('%b\Menus\Insert\HTML\Par.edt');
 0
 
 0
@@ -4970,7 +5266,7 @@ AlignRight
 0
 1
 
-LetReg(0,!'right');Exe('%B\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'right');Exe('%b\Menus\Insert\HTML\Par.edt');
 0
 
 0
@@ -4981,7 +5277,7 @@ AlignLeft
 0
 1
 
-LetReg(0,!'left');Exe('%B\Menus\Insert\HTML\Par.edt');
+LetReg(0,!'left');Exe('%b\Menus\Insert\HTML\Par.edt');
 0
 
 2
@@ -5001,7 +5297,7 @@ DocEmpty
 0
 1
 
-LetReg(0,!'div');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'div');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -5013,7 +5309,7 @@ Style
 0
 1
 
-Exe('%B\Menus\Insert\HTML\DivClass.edt');
+Exe('%b\Menus\Insert\HTML\DivClass.edt');
 0
 
 0
@@ -5024,7 +5320,7 @@ AlignJust
 0
 1
 
-LetReg(0,!'justify');Exe('%B\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'justify');Exe('%b\Menus\Insert\HTML\Div.edt');
 0
 
 0
@@ -5035,7 +5331,7 @@ AlignCenter
 0
 1
 
-LetReg(0,!'center');Exe('%B\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'center');Exe('%b\Menus\Insert\HTML\Div.edt');
 0
 
 0
@@ -5046,7 +5342,7 @@ AlignRight
 0
 1
 
-LetReg(0,!'right');Exe('%B\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'right');Exe('%b\Menus\Insert\HTML\Div.edt');
 0
 
 0
@@ -5057,7 +5353,7 @@ AlignLeft
 0
 1
 
-LetReg(0,!'left');Exe('%B\Menus\Insert\HTML\Div.edt');
+LetReg(0,!'left');Exe('%b\Menus\Insert\HTML\Div.edt');
 0
 
 2
@@ -5264,7 +5560,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\List.edt');
+LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\List.edt');
 0
 
 3
@@ -5276,7 +5572,7 @@ ListItem
 0
 1
 
-LetReg(0,!'ul');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'ul');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5287,7 +5583,7 @@ ListEnum
 0
 1
 
-LetReg(0,!'ol');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'ol');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5298,7 +5594,7 @@ ListDesc
 0
 1
 
-LetReg(0,!'dl');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'dl');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -5310,7 +5606,7 @@ ListItemItem
 0
 1
 
-LetReg(0,!'li');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'li');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5321,7 +5617,7 @@ List Items (&n)
 0
 1
 
-LetReg(0,!'items');Exe('%B\Menus\Insert\HTML\List.edt');
+LetReg(0,!'items');Exe('%b\Menus\Insert\HTML\List.edt');
 0
 
 0
@@ -5332,7 +5628,7 @@ M&ake Items
 0
 1
 
-LetReg(0,!'make_items');Exe('%B\Menus\Insert\HTML\List.edt');
+LetReg(0,!'make_items');Exe('%b\Menus\Insert\HTML\List.edt');
 0
 
 0
@@ -5365,7 +5661,7 @@ Definition Ter&m/Desc (n)
 0
 1
 
-LetReg(0,!'term');Exe('%B\Menus\Insert\HTML\List.edt');
+LetReg(0,!'term');Exe('%b\Menus\Insert\HTML\List.edt');
 0
 
 2
@@ -5385,7 +5681,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 3
@@ -5397,7 +5693,7 @@ Table
 0
 1
 
-LetReg(0,!'table');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'table');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5408,7 +5704,7 @@ TableCaption
 0
 1
 
-LetReg(0,!'caption');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'caption');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -5420,7 +5716,7 @@ Columns
 0
 1
 
-LetReg(0,!'col_group');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'col_group');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5431,7 +5727,7 @@ ColumnsSingle
 0
 1
 
-LetReg(0,!'col_span');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'col_span');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5442,7 +5738,7 @@ ColumnsAttribute
 0
 1
 
-LetReg(0,!'col_spec');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'col_spec');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 3
@@ -5454,7 +5750,7 @@ TableHead
 0
 1
 
-LetReg(0,!'thead');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'thead');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5465,7 +5761,7 @@ TableFoot
 0
 1
 
-LetReg(0,!'tfoot');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'tfoot');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 0
@@ -5476,7 +5772,7 @@ TableBody
 0
 1
 
-LetReg(0,!'tbody');Exe('%B\Menus\Insert\HTML\Tag.edt');
+LetReg(0,!'tbody');Exe('%b\Menus\Insert\HTML\Tag.edt');
 0
 
 3
@@ -5499,7 +5795,7 @@ M&ake Row
 0
 1
 
-LetReg(0,!'rows');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'rows');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5521,7 +5817,7 @@ Tab&le Data (n)
 0
 1
 
-LetReg(0,!'data');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'data');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5543,7 +5839,7 @@ Table Header (&n)
 0
 1
 
-LetReg(0,!'headers');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'headers');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 0
@@ -5554,7 +5850,7 @@ Matrix
 0
 1
 
-LetReg(0,!'nxm');Exe('%B\Menus\Insert\HTML\Table.edt');
+LetReg(0,!'nxm');Exe('%b\Menus\Insert\HTML\Table.edt');
 0
 
 2
@@ -5574,7 +5870,7 @@ Image
 0
 1
 
-LetReg(0,!'img');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'img');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 3
@@ -5586,7 +5882,7 @@ Objects
 0
 1
 
-LetReg(0,!'data');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'data');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5597,7 +5893,7 @@ MacroInsert
 0
 1
 
-LetReg(0,!'app');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'app');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5608,7 +5904,7 @@ MacroCommand
 0
 1
 
-LetReg(0,!'apppar');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'apppar');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5619,7 +5915,7 @@ MacroParameter
 0
 1
 
-LetReg(0,!'par');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'par');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 3
@@ -5631,7 +5927,7 @@ ImageMap
 0
 1
 
-LetReg(0,!'map');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'map');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5642,7 +5938,7 @@ ImageMapArea
 0
 1
 
-LetReg(0,!'maparea');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'maparea');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 0
@@ -5653,7 +5949,7 @@ Image Map Area (&n)
 0
 1
 
-LetReg(0,!'imagemaparea');Exe('%B\Menus\Insert\HTML\Objects.edt');
+LetReg(0,!'imagemaparea');Exe('%b\Menus\Insert\HTML\Objects.edt');
 0
 
 2
@@ -5673,7 +5969,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 3
@@ -5685,7 +5981,7 @@ Hyperlink
 0
 1
 
-LetReg(0,!'link');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5696,7 +5992,7 @@ LinkName
 0
 1
 
-LetReg(0,!'link_name');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_name');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5707,7 +6003,7 @@ Hyperlink
 0
 1
 
-LetReg(0,!'link_href');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_href');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5718,7 +6014,7 @@ LinkAnchor
 0
 1
 
-LetReg(0,!'link_anchor');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_anchor');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5729,7 +6025,7 @@ HyperlinkName
 0
 1
 
-LetReg(0,!'link_name_href');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'link_name_href');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5740,7 +6036,7 @@ MailAddress
 0
 1
 
-LetReg(0,!'mail');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'mail');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5751,7 +6047,7 @@ MailNameAddress
 0
 1
 
-LetReg(0,!'mail_address');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'mail_address');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 0
@@ -5762,7 +6058,7 @@ Link
 0
 1
 
-LetReg(0,!'base');Exe('%B\Menus\Insert\HTML\Links.edt');
+LetReg(0,!'base');Exe('%b\Menus\Insert\HTML\Links.edt');
 0
 
 2
@@ -5783,7 +6079,7 @@ FrameColumns
 0
 1
 
-LetReg(0,!'frameset_col');Exe('%B\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frameset_col');Exe('%b\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5794,7 +6090,7 @@ FrameRows
 0
 1
 
-LetReg(0,!'frameset_row');Exe('%B\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frameset_row');Exe('%b\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5805,7 +6101,7 @@ Frame
 0
 1
 
-LetReg(0,!'frame');Exe('%B\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frame');Exe('%b\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5816,7 +6112,7 @@ $Frames_(n)
 0
 1
 
-LetReg(0,!'frames_n');Exe('%B\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'frames_n');Exe('%b\Menus\Insert\HTML\Frames.edt');
 0
 
 0
@@ -5827,7 +6123,7 @@ FrameDelete
 0
 1
 
-LetReg(0,!'noframes');Exe('%B\Menus\Insert\HTML\Frames.edt');
+LetReg(0,!'noframes');Exe('%b\Menus\Insert\HTML\Frames.edt');
 0
 
 2
@@ -5847,7 +6143,7 @@ Wizard
 0
 1
 
-LetReg(0,!'wizard');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'wizard');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 3
@@ -5859,7 +6155,7 @@ Form
 0
 1
 
-LetReg(0,!'form');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'form');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5870,7 +6166,7 @@ Fieldset
 0
 1
 
-LetReg(0,!'fieldset');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'fieldset');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5881,7 +6177,7 @@ FormCaption
 0
 1
 
-LetReg(0,!'legend');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'legend');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 3
@@ -5893,7 +6189,7 @@ CmdButton
 0
 1
 
-LetReg(0,!'button');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'button');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5904,7 +6200,7 @@ CmdSelect
 0
 1
 
-LetReg(0,!'select');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'select');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5915,7 +6211,7 @@ CmdSelectM
 0
 1
 
-LetReg(0,!'multi_select');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'multi_select');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5926,7 +6222,7 @@ CmdOption
 0
 1
 
-LetReg(0,!'options');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'options');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5937,7 +6233,7 @@ M&ake Options
 0
 1
 
-LetReg(0,!'make_options');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'make_options');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5948,7 +6244,7 @@ Option (&n)
 0
 1
 
-LetReg(0,!'option_n');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'option_n');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5959,7 +6255,7 @@ CmdOptionGroup
 0
 1
 
-LetReg(0,!'option_group');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'option_group');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5970,7 +6266,7 @@ CmdTextArea
 0
 1
 
-LetReg(0,!'text_area');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'text_area');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 0
@@ -5981,7 +6277,7 @@ Label
 0
 1
 
-LetReg(0,!'label');Exe('%B\Menus\Insert\HTML\Forms.edt');
+LetReg(0,!'label');Exe('%b\Menus\Insert\HTML\Forms.edt');
 0
 
 2
@@ -6001,7 +6297,7 @@ CmdInput
 0
 1
 
-LetReg(0,!'input');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'input');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 3
@@ -6013,7 +6309,7 @@ CmdText
 0
 1
 
-LetReg(0,!'text');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'text');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6024,7 +6320,7 @@ CmdPassword
 0
 1
 
-LetReg(0,!'password');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'password');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6035,7 +6331,7 @@ CmdCheck
 0
 1
 
-LetReg(0,!'checkbox');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'checkbox');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6046,7 +6342,7 @@ CmdRadio
 0
 1
 
-LetReg(0,!'radio');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'radio');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6057,7 +6353,7 @@ Check
 0
 1
 
-LetReg(0,!'submit');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'submit');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6068,7 +6364,7 @@ Delete
 0
 1
 
-LetReg(0,!'reset');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'reset');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6079,7 +6375,7 @@ CmdButton
 0
 1
 
-LetReg(0,!'push');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'push');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6090,7 +6386,7 @@ CmdHidden
 0
 1
 
-LetReg(0,!'hidden');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'hidden');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 0
@@ -6101,7 +6397,7 @@ Image
 0
 1
 
-LetReg(0,!'image');Exe('%B\Menus\Insert\HTML\Input.edt');
+LetReg(0,!'image');Exe('%b\Menus\Insert\HTML\Input.edt');
 0
 
 2
@@ -6121,7 +6417,7 @@ Code
 0
 1
 
-LetReg(0,!'code');Exe('%B\Menus\Insert\HTML\ASP.edt');
+LetReg(0,!'code');Exe('%b\Menus\Insert\HTML\ASP.edt');
 0
 
 0
@@ -6132,7 +6428,7 @@ Variables
 0
 1
 
-LetReg(0,!'value');Exe('%B\Menus\Insert\HTML\ASP.edt');
+LetReg(0,!'value');Exe('%b\Menus\Insert\HTML\ASP.edt');
 0
 
 2
@@ -6153,7 +6449,7 @@ AlignCenter
 0
 1
 
-LetReg(0,!'center');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'center');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 3
@@ -6165,7 +6461,7 @@ Font
 0
 1
 
-LetReg(0,!'basefont');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'basefont');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6176,7 +6472,7 @@ Font
 0
 1
 
-LetReg(0,!'font_empty');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_empty');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6187,7 +6483,7 @@ Font
 0
 1
 
-LetReg(0,!'font_face');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_face');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6198,7 +6494,7 @@ Font
 0
 1
 
-LetReg(0,!'font_size');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_size');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6209,7 +6505,7 @@ Font
 0
 1
 
-LetReg(0,!'font_face_size');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'font_face_size');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6220,7 +6516,7 @@ Strikethrough
 0
 1
 
-LetReg(0,!'s');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'s');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6231,7 +6527,7 @@ Strikethrough
 0
 1
 
-LetReg(0,!'strike');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'strike');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 0
@@ -6242,7 +6538,7 @@ Underline
 0
 1
 
-LetReg(0,!'u');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'u');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 3
@@ -6254,7 +6550,7 @@ Macro
 0
 1
 
-LetReg(0,!'app');Exe('%B\Menus\Insert\HTML\HTML32.edt');
+LetReg(0,!'app');Exe('%b\Menus\Insert\HTML\HTML32.edt');
 0
 
 2
@@ -6275,7 +6571,7 @@ Time
 0
 1
 
-Exe('%B\Menus\Insert\HTML\Date.edt');
+Exe('%b\Menus\Insert\HTML\Date.edt');
 0
 
 3
@@ -6287,7 +6583,7 @@ Zip
 0
 1
 
-Exe('%B\Menus\Insert\HTML\Compress.edt');
+Exe('%b\Menus\Insert\HTML\Compress.edt');
 0
 
 0
@@ -6298,7 +6594,7 @@ CommentRemove
 0
 1
 
-Exe('%B\Menus\Insert\HTML\Decomment.edt');
+Exe('%b\Menus\Insert\HTML\Decomment.edt');
 0
 
 0
@@ -6309,7 +6605,7 @@ Quotation
 0
 1
 
-LetReg(0,!'quote');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'quote');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 3
@@ -6321,7 +6617,7 @@ CapLarge
 0
 1
 
-LetReg(0,!'upper_tags');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'upper_tags');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6332,7 +6628,7 @@ CapSmall
 0
 1
 
-LetReg(0,!'lower_tags');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lower_tags');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6343,7 +6639,7 @@ CapLarge
 0
 1
 
-LetReg(0,!'upper_att');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'upper_att');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6354,7 +6650,7 @@ CapSmall
 0
 1
 
-LetReg(0,!'lower_att');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lower_att');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6365,7 +6661,7 @@ CapLarge
 0
 1
 
-LetReg(0,!'upper_val');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'upper_val');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6376,7 +6672,7 @@ CapSmall
 0
 1
 
-LetReg(0,!'lower_val');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lower_val');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 3
@@ -6388,7 +6684,7 @@ $->_amp;
 0
 1
 
-LetReg(0,!'amp');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'amp');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6399,7 +6695,7 @@ $<_->_lt;
 0
 1
 
-LetReg(0,!'lt');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'lt');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6410,7 +6706,7 @@ $>_->_gt;
 0
 1
 
-LetReg(0,!'gt');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'gt');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 0
@@ -6421,7 +6717,7 @@ $"_->_quot;
 0
 1
 
-LetReg(0,!'quot');Exe('%B\Menus\Insert\HTML\Fix.edt');
+LetReg(0,!'quot');Exe('%b\Menus\Insert\HTML\Fix.edt');
 0
 
 2
@@ -6443,7 +6739,7 @@ Section
 0
 1
 
-EnterReg(9,'Section name:','Insert Section');Exe('%B\Menus\Insert\NSIS\Section.edt');
+EnterReg(9,'Section name:','Insert Section');Exe('%b\Menus\Insert\NSIS\Section.edt');
 0
 
 0
@@ -6454,7 +6750,7 @@ Function
 0
 1
 
-EnterReg(9,'Function name:','Insert Function');Exe('%B\Menus\Insert\NSIS\Function.edt');
+EnterReg(9,'Function name:','Insert Function');Exe('%b\Menus\Insert\NSIS\Function.edt');
 0
 
 0
@@ -6465,7 +6761,7 @@ Macro
 0
 1
 
-EnterReg(9,'Macro name:','Insert Macro');Exe('%B\Menus\Insert\NSIS\Macro.edt');
+EnterReg(9,'Macro name:','Insert Macro');Exe('%b\Menus\Insert\NSIS\Macro.edt');
 0
 
 2
@@ -6518,7 +6814,7 @@ GetMode
 0
 1
 
-Exe('%B\Macros\GetMode.edt');
+Exe('%b\Macros\GetMode.edt');
 0
 
 3
@@ -6574,8 +6870,8 @@ STD
 
 0
 0
-%B\_Run.log
-CloseFile('%B\_Run.log',1);Open('%B\_Run.log',1,1,-1);GotoCL(1,1);TrackCaret;
+%b\_Run.log
+CloseFile('%b\_Run.log',1);Open('%b\_Run.log',1,1,-1);GotoCL(1,1);TrackCaret;
 24655
 
 3
@@ -6618,7 +6914,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Examples\Demo.tex');Exe('%B\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Examples\Demo.tex');Exe('%b\Macros\OpenSample.edt');]
 0
 
 0
@@ -6629,7 +6925,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Examples\UTF-8.tex');Exe('%B\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Examples\UTF-8.tex');Exe('%b\Macros\OpenSample.edt');]
 0
 
 0
@@ -6640,7 +6936,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\GUI\GuiSource.tex');Exe('%B\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\GUI\GuiSource.tex');Exe('%b\Macros\OpenSample.edt');]
 0
 
 3
@@ -6652,7 +6948,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Thesis\Thesis.tex');Exe('%B\Macros\OpenSample.edt');CreateFolders('%B\Samples\Thesis\TeXAux');]
+[LetReg(9,!'Samples\Thesis\Thesis.tex');Exe('%b\Macros\OpenSample.edt');CreateFolders('%b\Samples\Thesis\TeXAux');]
 0
 
 0
@@ -6663,7 +6959,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Paper\Paper.tex');Exe('%B\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Paper\Paper.tex');Exe('%b\Macros\OpenSample.edt');]
 0
 
 3
@@ -6675,7 +6971,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(9,!'Samples\Bib\xbib.tex');Exe('%B\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\Bib\xbib.tex');Exe('%b\Macros\OpenSample.edt');]
 0
 
 0
@@ -6686,7 +6982,7 @@ Default;MiKTeX;TeX Live
 0
 0
 
-[LetReg(1,!'Samples\Bib\xbib.bib');Exe('%B\Config\OpenLocalCopy.edt');]
+[LetReg(1,!'Samples\Bib\xbib.bib');Exe('%b\Config\OpenLocalCopy.edt');]
 0
 
 3
@@ -6698,7 +6994,7 @@ Default;HTML
 0
 0
 
-[LetReg(9,!'Samples\www\index.html');Exe('%B\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\www\index.html');Exe('%b\Macros\OpenSample.edt');]
 0
 
 0
@@ -6709,7 +7005,7 @@ Default;HTML
 0
 0
 
-[LetReg(9,!'Samples\HTML\Help.hhc');Exe('%B\Macros\OpenSample.edt');]
+[LetReg(9,!'Samples\HTML\Help.hhc');Exe('%b\Macros\OpenSample.edt');]
 0
 
 2
@@ -7048,7 +7344,7 @@ Recycle
 0
 1
 
-Exe('%B\Exec\Erase Working Files.edt');
+Exe('%b\Exec\Erase Working Files.edt');
 0
 
 3
@@ -7060,7 +7356,7 @@ Thesaurus
 0
 1
 
-Exe('%B\Menus\Tools\Word Web.edt');
+Exe('%b\Menus\Tools\Word Web.edt');
 49165
 
 3
@@ -7094,7 +7390,7 @@ Complete
 0
 1
 
-Exe('%B\Menus\Tools\Complete Word.edt');
+Exe('%b\Menus\Tools\Complete Word.edt');
 16397
 
 0
@@ -7151,7 +7447,7 @@ Right
 0
 1
 
-Exe('%B\Menus\Tools\Next Bullet.edt');
+Exe('%b\Menus\Tools\Next Bullet.edt');
 16416
 
 0
@@ -7365,7 +7661,7 @@ MacroStartupRun
 0
 0
 
-Exe('%B\Config\Startup.edt');
+Exe('%b\Config\Startup.edt');
 0
 
 3
@@ -7389,7 +7685,7 @@ MacroRun
 0
 1
 "%!m=ASCII:EDT"?"%!m=DATA:INI:EDT"
-Exe('%B\Config\ExeScript.edt');
+Exe('%b\Config\ExeScript.edt');
 24696
 %p
 3
@@ -7401,7 +7697,7 @@ MacroView
 0
 0
 
-Exe('%B\Macros\ExeMcr.edt');
+Exe('%b\Macros\ExeMcr.edt');
 16504
 
 
@@ -7418,7 +7714,7 @@ Default
 4
 0
 "%!M=HTML:HHC"*%P\%N.hhp?"%F=%P\%N.hhp"?"%!M=XWE"?"%!M=TeX"?"%!M=MetaPost"?"%!M=MetaFont"?"%!M=NSIS"|"%!M=TeX:STY"|"%!M=TeX:AUX"|"%!M=MetaPost:AUX"|"%!M=NSIS:NSH"
-Exe('%B\Exec\Compile.edt');
+Exe('%b\Exec\Compile.edt');
 120
 
 0
@@ -7429,7 +7725,7 @@ Default
 0
 5
 "%!M=TeX"*"%!m=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"|"%!m=TeX:STY"|"%!m=TeX:AUX"
-Exe('%B\Exec\Compile Selected.edt');
+Exe('%b\Exec\Compile Selected.edt');
 8312
 
 0
@@ -7440,7 +7736,7 @@ Default
 0
 0
 %$('%F-NSIS-Installer');*"%$('%F-NSIS-Source');=%F"?%P\%N.pdf?%P\%N.dvi?%P\%N.ps?%P\%N.eps?%p\%n.eps?%P\%N.chm?%P\%N.php?%P\%N.htm?%P\%N.html?%p\%n.php?%p\%n.htm?%p\%n.html
-Exe('%B\Exec\Preview.edt');
+Exe('%b\Exec\Preview.edt');
 119
 
 3
@@ -7452,7 +7748,7 @@ MiKTeX;TeX Live|Default
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\Compile.edt');
+Exe('%b\Exec\TeX\Compile.edt');
 120
 
 0
@@ -7463,7 +7759,7 @@ MiKTeX;TeX Live|Default
 0
 5
 "%!M=TeX"*"%!m=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"|"%!m=TeX:STY"|"%!m=TeX:AUX"
-Exe('%B\Exec\TeX\Compile Selected.edt');
+Exe('%b\Exec\TeX\Compile Selected.edt');
 8312
 
 0
@@ -7474,7 +7770,7 @@ MiKTeX;TeX Live|Default
 0
 0
 %P\%N.pdf?%P\%N.dvi?%P\%N.ps?%P\%N.eps?%p\%n.eps
-Exe('%B\Exec\TeX\Preview.edt');
+Exe('%b\Exec\TeX\Preview.edt');
 119
 
 3
@@ -7486,7 +7782,7 @@ Default
 4
 0
 "%!M=HTML:HHC"*%P\%N.hhp?"%F=%P\%N.hhp"?"%!M=XWE"
-Exe('%B\Exec\HTML\Compile.edt');
+Exe('%b\Exec\HTML\Compile.edt');
 0
 
 0
@@ -7497,7 +7793,7 @@ Default
 4
 0
 %P\%N.chm?%P\%N.php?%P\%N.htm?%P\%N.html?%p\%n.php?%p\%n.htm?%p\%n.html
-Exe('%B\Exec\HTML\Preview.edt');
+Exe('%b\Exec\HTML\Preview.edt');
 0
 
 3
@@ -7509,7 +7805,7 @@ HTML
 4
 0
 "%!M=HTML:HHC"*%P\%N.hhp?"%F=%P\%N.hhp"?"%!M=XWE"
-Exe('%B\Exec\HTML\Compile.edt');
+Exe('%b\Exec\HTML\Compile.edt');
 120
 
 0
@@ -7520,7 +7816,7 @@ HTML
 4
 0
 %P\%N.chm?%P\%N.php?%P\%N.htm?%P\%N.html?%p\%n.php?%p\%n.htm?%p\%n.html
-Exe('%B\Exec\HTML\Preview.edt');
+Exe('%b\Exec\HTML\Preview.edt');
 119
 
 3
@@ -7532,7 +7828,7 @@ Default
 4
 0
 "%!M=NSIS"|"%!M=NSIS:NSH"
-Exe('%B\Exec\NSIS\Compile.edt');
+Exe('%b\Exec\NSIS\Compile.edt');
 0
 
 0
@@ -7543,7 +7839,7 @@ Default
 0
 0
 %$('%F-NSIS-Installer');*"%$('%F-NSIS-Source');=%F"
-Exe('%B\Exec\NSIS\Preview.edt');
+Exe('%b\Exec\NSIS\Preview.edt');
 0
 
 3
@@ -7555,7 +7851,7 @@ NSIS
 4
 0
 "%!M=NSIS"|"%!M=NSIS:NSH"
-Exe('%B\Exec\NSIS\Compile.edt');
+Exe('%b\Exec\NSIS\Compile.edt');
 120
 
 0
@@ -7566,7 +7862,7 @@ NSIS
 0
 0
 %$('%F-NSIS-Installer');*"%$('%F-NSIS-Source');=%F"
-Exe('%B\Exec\NSIS\Preview.edt');
+Exe('%b\Exec\NSIS\Preview.edt');
 119
 
 3
@@ -7645,19 +7941,19 @@ Default;MiKTeX;TeX Live
 0
 0
 0
-LaTeXify
-LaTeXify
-TeXLaTeXify
+PDFTeXify
+PDFTe&Xify
+TeXPDFTeXify
 
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Exe('%b\Exec\TeX\TeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");
-49240
+Exe('%b\Exec\TeX\PDFTeXify.edt');
+24656
 
 0
 TeXify
-Te&Xify
+&TeXify
 TeXTeXify
 
 4
@@ -7665,6 +7961,161 @@ TeXTeXify
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
 Exe('%b\Exec\TeX\TeXify.edt');
 24664
+
+3
+1
+PDF>
+&PDF
+AcroRead
+
+0
+1
+
+0
+PDF_Preview
+PDF Pre&view
+AcroRead
+
+0
+0
+%P\%N.pdf
+Exe('%b\Exec\PDF\PDF Preview.edt');
+24658
+
+0
+PDF_Search
+PDF &Search
+AcroFind
+
+0
+3
+%P\%N.pdf*%P\%N%$(!'PDF-SyncEx');
+Exe('%b\Exec\PDF\PDF Search.edt');
+8311
+
+3
+0
+PDFLaTeX
+PDF&LaTeX
+TeXPDFLaTeX
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\PDFLaTeX.edt');
+0
+
+0
+PDFTeX
+PDF&TeX
+TeXPDFTeX
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\PDFTeX.edt');
+0
+
+3
+0
+LuaLaTeX
+LuaLaTeX
+TeXLuaLaTeX
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\LuaLaTeX.edt');
+0
+
+0
+LuaTeX
+LuaTeX
+TeXLuaTeX
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\LuaTeX.edt');
+0
+
+3
+0
+XeLaTeX
+XeLaTeX
+TeXXeLaTeX
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\XeLaTeX.edt');
+0
+
+0
+XeTeX
+XeTeX
+TeXXeTeX
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\XeTeX.edt');
+0
+
+3
+0
+dvi2pdf
+&dvi2pdf
+DviPdf
+
+0
+0
+%P\%N.dvi
+Exe('%b\Exec\TeX\dvi2pdf.edt');
+0
+
+0
+ps2pdf
+&ps2pdf
+PsPdf
+
+0
+0
+%P\%N.ps
+Exe('%b\Exec\TeX\ps2pdf.edt');
+0
+
+2
+3
+1
+DVI>
+&DVI
+DviView
+
+0
+1
+
+0
+DVI_Preview
+DVI Pre&view
+DviView
+
+0
+0
+%P\%N.dvi
+Exe('%b\Exec\TeX\DVI Preview.edt');
+24662
+
+0
+DVI_Search
+DVI &Search
+DviFind
+
+0
+3
+%P\%N.dvi
+Exe('%b\Exec\TeX\DVI Search.edt');
+24659
 
 3
 0
@@ -7675,7 +8126,7 @@ TeXLaTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\LaTeX.edt');
+Exe('%b\Exec\TeX\LaTeX.edt');
 24652
 
 0
@@ -7686,7 +8137,7 @@ TeXTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\TeX.edt');
+Exe('%b\Exec\TeX\TeX.edt');
 24660
 
 0
@@ -7697,9 +8148,33 @@ TeXAMSTeX
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\AMSTeX.edt');
+Exe('%b\Exec\TeX\AMSTeX.edt');
 24641
 
+3
+0
+GSView
+&GSView
+GSView
+
+0
+0
+%P\%N.ps?%P\%N.pdf?%p\%n.ps?%p\%n.eps
+Exe('%b\Exec\TeX\GSView.edt');
+0
+
+0
+DVIPS
+&DVIPS
+DviPs
+
+0
+0
+%P\%N.dvi
+Exe('%b\Exec\TeX\dvi2ps.edt');
+24644
+
+2
 3
 0
 ConTeXt
@@ -7709,21 +8184,10 @@ TeXConTeXt
 4
 0
 "%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\ConTeXt.edt');
+Exe('%b\Exec\TeX\ConTeXt.edt');
 0
 
 3
-0
-Biber
-Biber
-Biber
-
-0
-0
-%O\%N.bcf*"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Exe('%b\Exec\TeX\BibTeX.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");
-49218
-
 0
 BibTeX
 &BibTeX
@@ -7743,66 +8207,76 @@ Index
 0
 0
 %O\%N.idx*"%!M=TeX"|"%!M=TeX:INS"|"%!M=TeX:DTX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\MakeIndex.edt');
+Exe('%b\Exec\TeX\MakeIndex.edt');
 24649
 
 0
 Make_Glossary
-Make Glossary
+Make &Glossary
 Glossary
 
 0
 0
 %O\%N.glo?%O\%N.acn?%O\%N.acr*"%!M=TeX"|"%!M=TeX:INS"|"%!M=TeX:DTX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\MakeGlossary.edt');
-0
-
-3
-0
-DVI_Preview
-DVI Pre&view
-DviView
-
-0
-0
-%P\%N.dvi
-Exe('%B\Exec\TeX\DVI Preview.edt');
-24662
-
-0
-DVI_Search
-DVI &Search
-DviFind
-
-0
-3
-%P\%N.dvi
-Exe('%B\Exec\TeX\DVI Search.edt');
-24659
-
-3
-0
-GSView
-&GSView
-GSView
-
-0
-0
-%P\%N.ps?%P\%N.pdf?%p\%n.ps?%p\%n.eps
-Exe('%B\Exec\TeX\GSView.edt');
+Exe('%b\Exec\TeX\MakeGlossary.edt');
 24647
 
+3
+1
+HTML>
+&HTML
+IExplorer
+
 0
-DVIPS
-&DVIPS
-DviPs
+1
+
+0
+TeXHTML_Preview
+HTML Pre&view
+IExplorer
 
 0
 0
-%P\%N.dvi
-Exe('%B\Exec\TeX\dvi2ps.edt');
-24644
+%P\%N.html
+Exe('%b\Exec\HTML\Preview.edt');
+0
 
+3
+0
+LaTeX2HTML
+&LaTeX -> HTML
+LaTeX2HTML
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\LaTeX2HTML.edt');
+0
+
+0
+TeX2HTML
+&TeX -> HTML
+TeX2HTML
+
+4
+0
+"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\TeX2HTML.edt');
+0
+
+3
+0
+TtH
+TtH
+TtH
+
+4
+0
+"%!M=TeX"|"%!M=TeX:INS"|"%!M=TeX:DTX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+Exe('%b\Exec\TeX\TtH.edt');
+0
+
+2
 3
 0
 MetaFont
@@ -7812,7 +8286,7 @@ MetaFont
 4
 0
 "%!M=MetaFont"
-Exe('%B\Exec\TeX\MetaFont.edt');
+Exe('%b\Exec\TeX\MetaFont.edt');
 0
 
 0
@@ -7823,7 +8297,7 @@ MetaPost
 4
 0
 "%!M=MetaPost"|"%!M=MetaPost:AUX"
-Exe('%B\Exec\TeX\MetaPost.edt');
+Exe('%b\Exec\TeX\MetaPost.edt');
 24653
 
 3
@@ -7843,7 +8317,7 @@ Index
 0
 0
 "%!M=TeX:INS"?"%!M=TeX:DTX"*%O\%N.idx
-Exe('%B\Exec\TeX\DTXIndex.edt');
+Exe('%b\Exec\TeX\DTXIndex.edt');
 0
 
 0
@@ -7854,254 +8328,7 @@ Glossary
 0
 0
 "%!M=TeX:INS"?"%!M=TeX:DTX"*%O\%N.glo
-Exe('%B\Exec\TeX\DTXGlossary.edt');
-0
-
-2
-3
-1
-PDF>
-&PDF
-AcroRead
-
-0
-1
-
-0
-PDF_Preview
-PDF Pre&view
-AcroRead
-
-0
-0
-%P\%N.pdf
-Exe('%B\Exec\PDF\PDF Preview.edt');
-24658
-
-0
-PDF_Search
-PDF &Search
-AcroFind
-
-0
-3
-%P\%N.pdf*%P\%N%$(!'PDF-SyncEx');
-Exe('%B\Exec\PDF\PDF Search.edt');
-8311
-
-3
-0
-PDFLaTeXify
-PDFLaTeXify
-TeXPDFLaTeXify
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");
-49232
-
-0
-PDFTeXify
-PDFTe&Xify
-TeXPDFTeXify
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%b\Exec\TeX\PDFTeXify.edt');
-24656
-
-0
-LuaLaTeXify
-LuaLaTeXify
-TeXLuaLaTeXify
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","lualatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
-49237
-
-0
-LuaTeXify
-LuaTeXify
-TeXLuaTeXify
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","lualatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
-24661
-
-0
-XeLaTeXify
-XeLaTeXify
-TeXXeLaTeXify
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Assign("Old-BibTeX-Executable","%$('BibTeX-Executable');");Assign("BibTeX-Executable","biber.exe");Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","xelatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');Assign("BibTeX-Executable","%$('Old-BibTeX-Executable');");Release("Old-BibTeX-Executable");SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
-49221
-
-0
-XeTeXify
-XeTeXify
-TeXXeTeXify
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Assign("OLD-PDFLATEX","%@('PDFLATEX');");SetEnvVar("PDFLATEX","xelatex.exe");Exe('%b\Exec\TeX\PDFTeXify.edt');SetEnvVar("PDFLATEX","%$('OLD-PDFLATEX');");Release("OLD-PDFLATEX");
-24645
-
-3
-0
-PDFLaTeX
-PDF&LaTeX
-TeXPDFLaTeX
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\PDFLaTeX.edt');
-0
-
-0
-PDFTeX
-PDF&TeX
-TeXPDFTeX
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\PDFTeX.edt');
-0
-
-3
-0
-LuaLaTeX
-LuaLaTeX
-TeXLuaLaTeX
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\LuaLaTeX.edt');
-0
-
-0
-LuaTeX
-LuaTeX
-TeXLuaTeX
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\LuaTeX.edt');
-0
-
-3
-0
-XeLaTeX
-XeLaTeX
-TeXXeLaTeX
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\XeLaTeX.edt');
-0
-
-0
-XeTeX
-XeTeX
-TeXXeTeX
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\XeTeX.edt');
-0
-
-3
-0
-dvi2pdf
-&dvi2pdf
-DviPdf
-
-0
-0
-%P\%N.dvi
-Exe('%B\Exec\TeX\dvi2pdf.edt');
-0
-
-0
-ps2pdf
-&ps2pdf
-PsPdf
-
-0
-0
-%P\%N.ps
-Exe('%B\Exec\TeX\ps2pdf.edt');
-0
-
-2
-3
-1
-HTML>
-&HTML
-IExplorer
-
-0
-1
-
-0
-TeXHTML_Preview
-HTML Pre&view
-IExplorer
-
-0
-0
-%P\%N.html
-Exe('%B\Exec\HTML\Preview.edt');
-0
-
-3
-0
-LaTeX2HTML
-&LaTeX -> HTML
-LaTeX2HTML
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\LaTeX2HTML.edt');
-0
-
-0
-TeX2HTML
-&TeX -> HTML
-TeX2HTML
-
-4
-0
-"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\TeX2HTML.edt');
-0
-
-3
-0
-TtH
-TtH
-TtH
-
-4
-0
-"%!M=TeX"|"%!M=TeX:INS"|"%!M=TeX:DTX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
-Exe('%B\Exec\TeX\TtH.edt');
+Exe('%b\Exec\TeX\DTXGlossary.edt');
 0
 
 2
@@ -8162,74 +8389,6 @@ WinExe('','tlmgr.bat -gui','','',1000);
 
 3
 1
-CTeX_Tools>
-CTeX Tools
-Window
-Default;MiKTeX
-0
-0
-
-0
-TexFriend
-TexFriend...
-
-
-0
-0
-
-Run('%B\Plugins\TexFriend\TexFriend.exe');
-0
-
-3
-0
-CCT_LaTeX
-&CCT && LaTeX
-
-
-0
-0
-"%!M=TeX"?"%!T=.ctx"
-Run(|ctex.exe --src-specials -latex-runs=1 -dvips '%N%T'|, |%P|);
-0
-
-0
-CTeXify
-CTe&Xify
-
-
-0
-0
-"%!M=TeX"?"%!T=.ctx"
-Exe('%B\MUI\CTeXify\CTeXify.edt','%P');
-0
-
-3
-0
-TY_LaTeX
-TY
-
-
-0
-0
-"%!M=TeX"?"%!T=.ty"
-Run(|tywin.exe '%N%T'|, |%P|);
-0
-
-0
-TYCFG
-TY Config
-
-
-0
-0
-
-Run('tywin.exe');
-0
-
-3
-2
-3
-1
 MUI>
 M&UI
 Window
@@ -8245,7 +8404,7 @@ PsNup
 0
 0
 
-Exe('%B\MUI\psutils\psn.edt','%P');
+Exe('%b\MUI\psutils\psn.edt','%P');
 0
 %P
 0
@@ -8256,7 +8415,7 @@ PsSelect
 0
 0
 
-Exe('%B\MUI\psutils\pss.edt','%P');
+Exe('%b\MUI\psutils\pss.edt','%P');
 0
 %P
 0
@@ -8267,7 +8426,7 @@ PsBooklet
 0
 0
 
-Exe('%B\MUI\psutils\psb.edt','%P');
+Exe('%b\MUI\psutils\psb.edt','%P');
 0
 %P
 0
@@ -8278,7 +8437,7 @@ PsResize
 0
 0
 
-Exe('%B\MUI\psutils\psr.edt','%P');
+Exe('%b\MUI\psutils\psr.edt','%P');
 0
 %P
 3
@@ -8290,7 +8449,7 @@ IncludeGraphics
 0
 0
 
-Exe('%B\MUI\Graphics\Graphics.edt','%P');
+Exe('%b\MUI\Graphics\Graphics.edt','%P');
 0
 %P
 3
@@ -8302,7 +8461,7 @@ PsNup
 0
 0
 
-Exe('%B\MUI\psnup\psnup.edt');
+Exe('%b\MUI\psnup\psnup.edt');
 0
 
 2
@@ -8336,8 +8495,8 @@ Console
 
 0
 0
-%B\Exec\%$('Exec-Dir');\ExecModes.edt?%B\Exec\%$('Exec-Dir');\ExecModes.edt
-Exe(|%B\Exec\%$('Exec-Dir');\ExecModes.edt|);
+%b\Exec\%$('Exec-Dir');\ExecModes.edt?%B\Exec\%$('Exec-Dir');\ExecModes.edt
+Exe(|%b\Exec\%$('Exec-Dir');\ExecModes.edt|);
 0
 
 0
@@ -8391,7 +8550,7 @@ WinEdt
 0
 0
 
-Exe('%B\Exec\Default\Load Config.edt');
+Exe('%b\Exec\Default\Load Config.edt');
 0
 
 3
@@ -8403,7 +8562,7 @@ TeXMiKTeXPlus
 0
 0
 
-Exe('%B\Exec\Default-MiKTeX\Load Config.edt');
+Exe('%b\Exec\Default-MiKTeX\Load Config.edt');
 0
 
 0
@@ -8414,7 +8573,7 @@ TeXLivePlus
 0
 0
 
-Exe('%B\Exec\Default-TeX Live\Load Config.edt');
+Exe('%b\Exec\Default-TeX Live\Load Config.edt');
 0
 
 3
@@ -8426,7 +8585,7 @@ TeXMiKTeX
 0
 0
 
-Exe('%B\Exec\MiKTeX\Load Config.edt');
+Exe('%b\Exec\MiKTeX\Load Config.edt');
 0
 
 0
@@ -8437,7 +8596,7 @@ TeXLive
 0
 0
 
-Exe('%B\Exec\TeX Live\Load Config.edt');
+Exe('%b\Exec\TeX Live\Load Config.edt');
 0
 
 3
@@ -8449,7 +8608,7 @@ Hyperlink
 0
 0
 
-Exe('%B\Exec\HTML\Load Config.edt');
+Exe('%b\Exec\HTML\Load Config.edt');
 0
 
 0
@@ -8460,7 +8619,7 @@ NSIS
 0
 0
 
-Exe('%B\Exec\NSIS\Load Config.edt');
+Exe('%b\Exec\NSIS\Load Config.edt');
 0
 
 0
@@ -8471,7 +8630,7 @@ Omega
 0
 0
 
-Exe('%B\Exec\ASCII\Load Config.edt');
+Exe('%b\Exec\ASCII\Load Config.edt');
 0
 
 2
@@ -8490,8 +8649,8 @@ Erase
 
 0
 0
-|"%B=%B"
-Exe('%B\Config\Default\_Cleanup.edt');
+|"%B=%b"
+Exe('%b\Config\Default\_Cleanup.edt');
 0
 
 3
@@ -8503,7 +8662,7 @@ Compile
 0
 0
 
-Exe('%B\Config\Default\_Rebuild All.edt');
+Exe('%b\Config\Default\_Rebuild All.edt');
 0
 
 0
@@ -8513,8 +8672,8 @@ Compile
 
 0
 0
-|"%B=%B"
-Exe('%B\Config\Default\_Rebuild Local.edt');
+|"%B=%b"
+Exe('%b\Config\Default\_Rebuild Local.edt');
 0
 
 0
@@ -8524,8 +8683,8 @@ Compile
 
 0
 0
-|"%B=%B"
-Exe('%B\Config\Default\_Rebuild Default.edt');
+|"%B=%b"
+Exe('%b\Config\Default\_Rebuild Default.edt');
 0
 
 3
@@ -8536,8 +8695,8 @@ ConfigUpgrade
 
 0
 0
-|%B\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%B"
-Exe('%B\Config\Default\_Upgrade.edt');
+|%b\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%b"
+Exe('%b\Config\Default\_Upgrade.edt');
 0
 
 0
@@ -8547,20 +8706,20 @@ ConfigRollback
 
 0
 0
-%B\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%B"
-Exe('%B\Config\Default\_Rollback.edt');
+%b\Config\Update%$('Up-Build');\|"%$('Up-Build');=%$('First-Build');"|"%B=%b"
+Exe('%b\Config\Default\_Rollback.edt');
 0
 
 3
 0
-Import_WinEdt_8_Settings
-&Import WinEdt 8 Settings...
+Import_WinEdt_9_Settings
+&Import WinEdt 9 Settings...
 ConfigMigrate
 
 0
 0
-%$('Old-AppData');\|%B\ConfigEx\|"%B=%B"
-Exe('%B\Config\Default\_Migrate.edt');
+%$('Old-AppData');\|%b\ConfigEx\|"%B=%b"
+Exe('%b\Config\Default\_Migrate.edt');
 0
 
 2
@@ -8581,7 +8740,7 @@ WinEdt
 0
 0
 
-Assign('TOOLBAR','');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','');Exe('%b\Config\ChangeToolbar.edt');
 0
 
 3
@@ -8593,7 +8752,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','1l');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','1l');Exe('%b\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8604,7 +8763,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','1s');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','1s');Exe('%b\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8615,7 +8774,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','1c');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','1c');Exe('%b\Config\ChangeToolbar.edt');
 0
 
 3
@@ -8627,7 +8786,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','2d');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','2d');Exe('%b\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8638,7 +8797,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','2s');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','2s');Exe('%b\Config\ChangeToolbar.edt');
 0
 
 0
@@ -8649,7 +8808,7 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','2c');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','2c');Exe('%b\Config\ChangeToolbar.edt');
 0
 
 3
@@ -8661,7 +8820,84 @@ Toolbar
 0
 0
 
-Assign('TOOLBAR','5x');Exe('%B\Config\ChangeToolbar.edt');
+Assign('TOOLBAR','5x');Exe('%b\Config\ChangeToolbar.edt');
+0
+
+2
+1
+Theme>
+T&heme
+Templates
+
+0
+0
+
+0
+Theme_Default
+&Default
+WinEdt
+
+0
+0
+
+Assign('THEME','');Exe('%b\Config\ChangeTheme.edt');
+0
+
+3
+0
+Theme_Midnight_Black
+&Midnight Black
+Templates
+
+0
+0
+
+Assign('THEME','Midnight Black');Exe('%b\Config\ChangeTheme.edt');
+0
+
+0
+Theme_Midnight_Blue
+Midnight &Blue
+Templates
+
+0
+0
+
+Assign('THEME','Midnight Blue');Exe('%b\Config\ChangeTheme.edt');
+0
+
+0
+Theme_Midnight_Green
+Midnight &Green
+Templates
+
+0
+0
+
+Assign('THEME','Midnight Green');Exe('%b\Config\ChangeTheme.edt');
+0
+
+3
+0
+Theme_Solarized_Dark
+&Solarized Dark
+Templates
+
+0
+0
+
+Assign('THEME','Solarized Dark');Exe('%b\Config\ChangeTheme.edt');
+0
+
+0
+Theme_Solarized_Light
+Solarized &Light
+Templates
+
+0
+0
+
+Assign('THEME','Solarized Light');Exe('%b\Config\ChangeTheme.edt');
 0
 
 2
@@ -8966,7 +9202,7 @@ KeywordSearch
 0
 0
 
-Exe('%B\Menus\Help\Keyword Help.edt');
+Exe('%b\Menus\Help\Keyword Help.edt');
 16496
 
 3
@@ -8978,7 +9214,7 @@ MiKTeX
 0
 0
 
-Exe('%B\Macros\Doc\TeXDoc.edt');
+Exe('%b\Macros\Doc\TeXDoc.edt');
 24688
 
 0
@@ -13109,7 +13345,7 @@ Notepad
 MS_Paint
 
 Toolbar_TeX2
-42
+41
 0
 0
 0
@@ -13307,7 +13543,7 @@ $Erase_MPX_File
 
 
 0
-PDFLaTeXify
+PDFTeXify
 TeX Compile
 8
 0
@@ -13315,13 +13551,11 @@ TeX Compile
 
 
 
-22
-PDFLaTeXify
+16
 PDFTeXify
 PDFLaTeX
 PDFTeX
 -
-LaTeXify
 TeXify
 LaTeX
 TeX
@@ -13329,27 +13563,14 @@ AMSTeX
 -
 ConTeXt
 -
-LuaLaTeXify
-LuaTeXify
 LuaLaTeX
 LuaTeX
 -
-XeLaTeXify
-XeTeXify
 XeLaTeX
 XeTeX
 |
 
 1
-0
-0
-
-
-
-0
-Biber
-
-0
 0
 0
 
@@ -14119,6 +14340,7 @@ sclSel11Bk
 EmptySet
 
 
+
 []
 
 
@@ -14129,7 +14351,9 @@ EmptySet
 0
 0
 0
+0
 FullSet
+
 
 
 ~[]
@@ -14141,8 +14365,10 @@ FullSet
 1
 0
 0
+1
 0
 AlphaNumeric
+
 
 
 Alpha+Numeric
@@ -14154,8 +14380,10 @@ Alpha+Numeric
 1
 0
 0
+0
 1096648294656
 Numeric
+
 fscNumeric
 
 Numeric
@@ -14167,8 +14395,10 @@ Numeric
 1
 1
 0
+0
 1096648294656
 Numeric ASCII
+
 fscNumeric
 
 Numeric
@@ -14181,7 +14411,9 @@ ASCII
 1
 0
 0
+0
 Alpha
+
 
 
 Alpha
@@ -14191,10 +14423,12 @@ Alpha
 0
 1
 1
+0
 0
 0
 0
 Upper
+
 
 
 Upper
@@ -14207,7 +14441,9 @@ Upper
 1
 0
 0
+0
 AnyNum
+
 
 
 ["0123456789"]
@@ -14220,7 +14456,9 @@ AnyNum
 0
 0
 0
+0
 Num
+
 
 
 ["0123456789"]
@@ -14233,7 +14471,9 @@ Num
 0
 0
 0
+0
 ~Num
+
 
 
 ~["0123456789"]
@@ -14245,8 +14485,10 @@ Num
 1
 0
 0
+1
 597000454400
 Math Symbols
+
 fscMathSymbols
 
 ["+-*/^<>=(){}&#[]"]
@@ -14258,8 +14500,10 @@ fscMathSymbols
 1
 1
 0
+0
 8388864
 Text Delimiters
+
 fscTextDelimiters
 
 [".,;:?!`'""~_|@"]
@@ -14271,8 +14515,10 @@ fscTextDelimiters
 1
 1
 0
+0
 549764202752
 Delimiters
+
 fscDelimiters
 
 ["=_*#$&^"]
@@ -14285,7 +14531,9 @@ fscDelimiters
 1
 0
 0
+0
 ~Alpha
+
 
 
 ~Alpha
@@ -14297,8 +14545,10 @@ fscDelimiters
 1
 0
 0
+1
 0
 ~Alpha_
+
 
 
 ~(Alpha+["_"])
@@ -14310,8 +14560,10 @@ fscDelimiters
 1
 0
 0
+1
 0
 ~Alpha.
+
 
 
 ~(Alpha+["."])
@@ -14323,8 +14575,10 @@ fscDelimiters
 1
 0
 0
+1
 0
 ~Alpha@
+
 
 
 ~(Alpha+["@"])
@@ -14336,8 +14590,10 @@ fscDelimiters
 1
 0
 0
+1
 0
 ~AlphaNumeric
+
 
 
 ~(Alpha+Numeric)
@@ -14349,8 +14605,10 @@ fscDelimiters
 1
 0
 0
+1
 0
 ~AlphaNumeric_
+
 
 
 ~(Alpha+Numeric+["_"])
@@ -14362,8 +14620,10 @@ fscDelimiters
 1
 0
 0
+1
 0
 ~AlphaNumSpec
+
 
 
 ~(Alpha+Numeric+["%!@$~/"])
@@ -14375,8 +14635,10 @@ fscDelimiters
 1
 0
 0
+1
 0
 ~AlphaNumNSIS
+
 
 
 ~(Alpha+Numeric+[".:!_$\/"])
@@ -14388,8 +14650,10 @@ fscDelimiters
 1
 0
 0
+1
 8388864
 \
+
 fscBackslash
 
 ["\"]
@@ -14402,7 +14666,9 @@ fscBackslash
 1
 0
 0
+0
 ~\
+
 
 
 ~["\"]
@@ -14414,8 +14680,10 @@ fscBackslash
 1
 0
 0
+1
 0
 \ (single)
+
 
 
 ["\"]
@@ -14427,8 +14695,10 @@ fscBackslash
 1
 0
 0
+0
 620630114560
 %
+
 fscComment
 
 ["%"]
@@ -14440,8 +14710,10 @@ fscComment
 1
 0
 0
+0
 1095501938944
 $
+
 fscDollar
 
 ["$"]
@@ -14453,8 +14725,10 @@ fscDollar
 1
 1
 0
+0
 881985192256
 (
+
 fscParenthesis
 
 ["("]
@@ -14466,8 +14740,10 @@ fscParenthesis
 1
 1
 0
+0
 881985192256
 )
+
 fscParenthesis
 
 [")"]
@@ -14479,8 +14755,10 @@ fscParenthesis
 1
 1
 0
+0
 1095501939008
 [
+
 fscBrackets
 
 ["["]
@@ -14492,8 +14770,10 @@ fscBrackets
 1
 1
 0
+0
 1095501939008
 ]
+
 fscBrackets
 
 ["]"]
@@ -14505,8 +14785,10 @@ fscBrackets
 1
 1
 0
+0
 1095501938944
 *]
+
 fscBrackets
 
 ["*]"]
@@ -14518,8 +14800,10 @@ fscBrackets
 1
 0
 0
+0
 1096648294720
 {
+
 fscBraces
 
 ["{"]
@@ -14531,8 +14815,10 @@ fscBraces
 1
 1
 0
+0
 1096648294720
 }
+
 fscBraces
 
 ["}"]
@@ -14545,7 +14831,9 @@ fscBraces
 1
 0
 0
+0
 [..]{...}
+
 
 
 ["[{"]
@@ -14557,8 +14845,10 @@ fscBraces
 1
 0
 0
+0
 907676352918
 Control
+
 fscCtrl
 
 [#0..#31]
@@ -14570,8 +14860,10 @@ fscCtrl
 1
 1
 0
+0
 971393073558
 Tab (9)
+
 fscTab
 
 [#9]
@@ -14583,8 +14875,10 @@ fscTab
 1
 1
 0
+0
 599332487664
 HRT (31)
+
 fscHRT
 
 [#31]
@@ -14596,8 +14890,10 @@ fscHRT
 1
 1
 0
+0
 971393073408
 Bullet (127)
+
 fscBullet
 
 [#127]
@@ -14609,8 +14905,10 @@ fscBullet
 1
 1
 0
+0
 877022216454
 Space (160)
+
 fscNBSpace
 
 [#160]
@@ -14623,7 +14921,9 @@ Binary
 1
 0
 0
+0
 /
+
 
 
 ["/"]
@@ -14636,7 +14936,9 @@ Binary
 0
 0
 0
+0
 //
+
 
 
 ["/"]
@@ -14648,8 +14950,10 @@ Binary
 0
 0
 0
+0
 8388864
 @
+
 fscAt
 
 ["@"]
@@ -14662,7 +14966,9 @@ fscAt
 1
 0
 0
+0
 ~:
+
 
 
 ~[":"]
@@ -14674,8 +14980,10 @@ fscAt
 1
 0
 0
+1
 0
 :
+
 
 
 [":"]
@@ -14687,8 +14995,10 @@ fscAt
 1
 0
 0
+0
 599332487424
 =
+
 fscEqual
 
 ["="]
@@ -14700,8 +15010,10 @@ fscEqual
 1
 1
 0
+0
 549764202752
 <
+
 fscAngleBrackets
 
 ["<"]
@@ -14713,8 +15025,10 @@ fscAngleBrackets
 1
 1
 0
+0
 549764202752
 >
+
 fscAngleBrackets
 
 [">"]
@@ -14727,7 +15041,9 @@ fscAngleBrackets
 1
 0
 0
+0
 |
+
 
 
 ["|"]
@@ -14740,7 +15056,9 @@ fscAngleBrackets
 0
 0
 0
+0
 `
+
 
 
 ["`"]
@@ -14753,7 +15071,9 @@ fscAngleBrackets
 0
 0
 0
+0
 '
+
 
 
 ["'"]
@@ -14766,7 +15086,9 @@ fscAngleBrackets
 0
 0
 0
+0
 "
+
 
 
 [""""]
@@ -14779,7 +15101,9 @@ fscAngleBrackets
 0
 0
 0
+0
 *
+
 
 
 ["*"]
@@ -14792,7 +15116,9 @@ fscAngleBrackets
 0
 0
 0
+0
 &
+
 
 
 ["&"]
@@ -14805,7 +15131,9 @@ fscAngleBrackets
 0
 0
 0
+0
 ;
+
 
 
 [";"]
@@ -14818,7 +15146,9 @@ fscAngleBrackets
 0
 0
 0
+0
 #
+
 
 
 ["#"]
@@ -14831,7 +15161,9 @@ fscAngleBrackets
 0
 0
 0
+0
 !
+
 
 
 ["!"]
@@ -14844,7 +15176,9 @@ fscAngleBrackets
 0
 0
 0
+0
 (;
+
 
 
 ["(;"]
@@ -14857,7 +15191,9 @@ fscAngleBrackets
 0
 0
 0
+0
 EDT Quotes
+
 
 
 ["`'""|*"]
@@ -14870,7 +15206,9 @@ EDT Quotes
 0
 0
 0
+0
 EDT ' (start)
+
 
 
 ["'"]
@@ -14883,7 +15221,9 @@ EDT ' (start)
 0
 0
 0
+0
 EDT '
+
 
 
 ["'"]
@@ -14896,7 +15236,9 @@ EDT '
 0
 0
 0
+0
 EDT "
+
 
 
 [""""]
@@ -14909,7 +15251,9 @@ EDT "
 0
 0
 0
+0
 EDT `
+
 
 
 ["`"]
@@ -14922,7 +15266,9 @@ EDT `
 0
 0
 0
+0
 EDT |
+
 
 
 ["|"]
@@ -14935,7 +15281,9 @@ EDT |
 0
 0
 0
+0
 Space
+
 
 
 [" "]
@@ -14948,7 +15296,9 @@ Space
 0
 0
 0
+0
 Spaces
+
 
 
 [#9,#32]
@@ -14961,7 +15311,9 @@ Spaces
 0
 0
 0
+0
 Spaces:
+
 
 
 [":"]
@@ -14974,7 +15326,9 @@ Spaces
 0
 0
 0
+0
 EDT: \( start RegEx Tag
+
 
 
 ["("]
@@ -14987,7 +15341,9 @@ EDT: \( start RegEx Tag
 0
 0
 0
+0
 EDT: \) stop RegEx Tag
+
 
 
 ["\"]
@@ -15000,7 +15356,9 @@ EDT: \) stop RegEx Tag
 0
 0
 0
+0
 html >
+
 
 
 [" >"]
@@ -15013,7 +15371,9 @@ html >
 0
 0
 0
+0
 </html
+
 
 
 ["/"]
@@ -15025,8 +15385,10 @@ html >
 1
 0
 0
+0
 620630114560
 Point
+
 fscComment
 
 ["."]
@@ -15038,8 +15400,10 @@ MetaPost
 1
 0
 0
+0
 620630114561
 DTX %
+
 fscComment
 
 ["%"]
@@ -15051,8 +15415,10 @@ DTX
 1
 1
 0
+0
 620630114560
 DTX ^
+
 fscComment
 
 ["^"]
@@ -15064,10 +15430,12 @@ DTX
 1
 0
 0
+0
 158
 620630114561
 0
 % TeX Comment
+
 xclComment
 
 
@@ -15107,6 +15475,7 @@ TeX;BibTeX;MetaPost;MetaFont;BST;IST|DTX
 558350663936
 0
 \verb"?"
+
 xclVerbatim
 
 
@@ -15147,6 +15516,7 @@ TeX;BibTeX|INS;STY;AUX
 558350663936
 0
 \verb|?|
+
 xclVerbatim
 
 
@@ -15187,6 +15557,7 @@ TeX;BibTeX|INS;STY;AUX
 558350663936
 0
 \verb/?/
+
 xclVerbatim
 
 
@@ -15227,6 +15598,7 @@ TeX;BibTeX|INS;STY;AUX
 558350663936
 128
 \begin{verbatim*} .. \end{verbatim*}
+
 xclVerbatim
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15266,6 +15638,7 @@ end{verbatim*}
 558350663936
 128
 \begin{verbatim} .. \end{verbatim}
+
 xclVerbatim
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15305,6 +15678,7 @@ end{verbatim}
 620630114561
 128
 \begin{comment} .. \end{comment}
+
 xclComment
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15344,6 +15718,7 @@ end{comment}
 549755814144
 128
 \begin{equation*} .. \end{equation*}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15383,6 +15758,7 @@ end{equation*}
 549755814144
 128
 \begin{equation} .. \end{equation}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15422,6 +15798,7 @@ end{equation}
 549755814144
 128
 \begin{gather*} .. \end{gather*}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15461,6 +15838,7 @@ end{gather*}
 549755814144
 128
 \begin{gather} .. \end{gather}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15500,6 +15878,7 @@ end{gather}
 549755814144
 128
 \begin{multline*} .. \end{multline*}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15539,6 +15918,7 @@ end{multline*}
 549755814144
 128
 \begin{multline} .. \end{multline}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15578,6 +15958,7 @@ end{multline}
 549755814144
 128
 \begin{align*} .. \end{align*}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15617,6 +15998,7 @@ end{align*}
 549755814144
 128
 \begin{align} .. \end{align}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15656,6 +16038,7 @@ end{align}
 549755814144
 128
 \begin{alignat*} .. \end{alignat*}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15695,6 +16078,7 @@ end{alignat*}
 549755814144
 128
 \begin{alignat} .. \end{alignat}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15734,6 +16118,7 @@ end{alignat}
 549755814144
 128
 \begin{flalign*} .. \end{flalign*}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15773,6 +16158,7 @@ end{flalign*}
 549755814144
 128
 \begin{flalign} .. \end{flalign}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15812,6 +16198,7 @@ end{flalign}
 549755814144
 128
 \begin{eqnarray*} .. \end{eqnarray*}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15851,6 +16238,7 @@ end{eqnarray*}
 549755814144
 128
 \begin{eqnarray} .. \end{eqnarray}
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -15890,7 +16278,8 @@ end{eqnarray}
 599332487424
 128
 \begin{array} .. \end{array}
-RGB_7
+
+swclLaTeXArrayEnv
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -15930,6 +16319,7 @@ end{array}
 128
 \begin{tabbing} .. \end{tabbing}
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -15968,7 +16358,8 @@ end{tabbing}
 599332487424
 128
 \begin{tabular*} .. \end{tabular*}
-RGB_7
+
+swclLaTeXTabularEnv
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16007,7 +16398,8 @@ end{tabular*}
 599332487424
 128
 \begin{tabular} .. \end{tabular}
-RGB_7
+
+swclLaTeXTabularEnv
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16046,7 +16438,8 @@ end{tabular}
 881985192192
 128
 \begin{table*} .. \end{table*}
-RGB_8
+
+swclLaTeXTableEnv
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16085,7 +16478,8 @@ end{table*}
 881985192192
 128
 \begin{table} .. \end{table}
-RGB_8
+
+swclLaTeXTableEnv
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16124,7 +16518,8 @@ end{table}
 881985192192
 128
 \begin{figure*} .. \end{figure*}
-RGB_8
+
+swclLaTeXFigEnv
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16163,7 +16558,8 @@ end{figure*}
 881985192192
 128
 \begin{figure} .. \end{figure}
-RGB_8
+
+swclLaTeXFigEnv
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16202,6 +16598,7 @@ end{figure}
 0
 128
 \begin{abstract} .. \end{abstract}
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -16242,6 +16639,7 @@ end{abstract}
 128
 \begin{quote} .. \end{quote}
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16280,6 +16678,7 @@ end{quote}
 0
 128
 \begin{itemize} .. \end{itemize}
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -16320,6 +16719,7 @@ end{itemize}
 128
 \begin{description} .. \end{description}
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16358,6 +16758,7 @@ end{description}
 0
 128
 \begin{enumerate} .. \end{enumerate}
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -16398,6 +16799,7 @@ end{enumerate}
 128
 \begin{thm} .. \end{thm}
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16437,6 +16839,7 @@ end{thm}
 128
 \begin{macrocode} .. \end{macrocode}
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16475,7 +16878,8 @@ begin{macrocode}
 2533359876
 0
 \begin{?}
-RGB_6
+
+swclLaTeXEnvName
 
 
 \begin
@@ -16514,7 +16918,8 @@ TeX;BibTeX;MetaPost
 2533359876
 0
 \end{?}
-RGB_6
+
+swclLaTeXEnvName
 
 
 \end
@@ -16553,6 +16958,7 @@ TeX;BibTeX;MetaPost
 2
 128
 \begin{document}
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -16593,6 +16999,7 @@ begin{document}
 128
 \end{document}
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -16631,7 +17038,8 @@ end{document}
 599332487424
 0
 \\[?]
-RGB_7
+
+swcLaTeXBreakSkip
 
 
 
@@ -16670,6 +17078,7 @@ TeX
 549755814144
 128
 \[?\]
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -16709,6 +17118,7 @@ TeX|DTX;INS;STY;AUX
 549755814145
 0
 \(?\)
+
 xclMath
 
 
@@ -16748,7 +17158,8 @@ TeX|DTX;INS;STY;AUX
 1095501938944
 0
 \\
-RGB_1
+
+swcLaTeXBreak
 
 
 
@@ -16787,6 +17198,7 @@ FullSet
 194659746048
 0
 \
+
 xclBackslash
 
 
@@ -16826,6 +17238,7 @@ TeX;BibTeX;MetaPost
 549755814144
 128
 $$?$$
+
 xclMath
 xclEnvBk
 xclEnvBkLeftGradient
@@ -16865,6 +17278,7 @@ $
 549755814145
 0
 $?$
+
 xclMath
 
 
@@ -16904,7 +17318,8 @@ $
 194659746048
 0
 \documentclass{?}
-RGB_C
+
+swcDocClassArg
 
 
 \documentclass
@@ -16943,7 +17358,8 @@ TeX;MetaPost|AUX
 1095501938944
 0
 \usepackage{?}
-RGB_1
+
+swcUsePackageArg
 
 
 \usepackage
@@ -16982,7 +17398,8 @@ TeX;MetaPost|AUX
 2533359872
 0
 \include{?}
-RGB_6
+
+swcIncludeArg
 
 
 \include
@@ -17021,7 +17438,8 @@ TeX|AUX
 1095501938944
 0
 \input{?}
-RGB_1
+
+swcInputArg
 
 
 \input
@@ -17060,7 +17478,8 @@ TeX|AUX
 8388864
 0
 \bibliography{?}
-RGB_4
+
+swcBibliographyArg
 
 
 \bibliography
@@ -17099,7 +17518,8 @@ TeX|AUX
 8388864
 0
 \addbibresource{?}
-RGB_4
+
+swcAddBibArg
 
 
 \addbibresource
@@ -17140,7 +17560,8 @@ TeX|AUX
 599332487424
 0
 \bibliographystyle{?}
-RGB_7
+
+swcBibStyleArg
 
 
 \bibliographystyle
@@ -17179,7 +17600,8 @@ TeX|AUX
 8388864
 0
 \loadglsentries{?}
-RGB_4
+
+swcGlsEntryArg
 
 
 \loadglsentries
@@ -17218,7 +17640,8 @@ TeX|AUX
 599332487428
 0
 \index{?}
-RGB_7
+
+swcIndexArg
 
 
 \index
@@ -17259,7 +17682,8 @@ TeX|DTX;INS;STY;AUX
 599332487428
 0
 \label{?}
-RGB_7
+
+swcLabelArg
 
 
 \label
@@ -17298,7 +17722,8 @@ TeX|INS;STY;AUX
 599332487428
 0
 \tag{?}
-RGB_7
+
+swcTagArg
 
 
 \tag
@@ -17337,7 +17762,8 @@ TeX|DTX;INS;STY;AUX
 597000454404
 0
 \ref{?}
-RGB_0
+
+swcRefArg
 
 
 \ref
@@ -17382,7 +17808,8 @@ TeX|INS;STY;AUX
 597000454404
 0
 \gls{?}
-RGB_0
+
+swcGlsArg
 
 
 \glslink
@@ -17480,7 +17907,8 @@ TeX|DTX;INS;STY;AUX
 597000454404
 0
 \glsentry{?}
-RGB_0
+
+swcGlsArg
 
 
 \glsentryname
@@ -17552,7 +17980,8 @@ TeX|DTX;INS;STY;AUX
 1096648294660
 0
 \cite{?}
-RGB_9
+
+swcCiteArg
 
 
 \cite
@@ -17665,6 +18094,7 @@ TeX|INS;STY;AUX
 
 
 
+
 TeX
 {
 }
@@ -17699,6 +18129,7 @@ TeX
 1
 0
 \emph{?}
+
 
 
 
@@ -17741,6 +18172,7 @@ TeX;BibTeX;MetaPost
 
 
 
+
 \textbf
 
 TeX;BibTeX;MetaPost
@@ -17777,7 +18209,8 @@ TeX;BibTeX;MetaPost
 8388865
 0
 \textit{?}
-RGB_4
+
+swcTextit
 
 
 \textit
@@ -17816,7 +18249,8 @@ TeX;BibTeX;MetaPost
 881985192193
 0
 \textsl{?}
-RGB_8
+
+swcTextsl
 
 
 \textsl
@@ -17855,7 +18289,8 @@ TeX;BibTeX;MetaPost
 881985192192
 0
 \texttt{?}
-RGB_8
+
+swcTexttt
 
 
 \texttt
@@ -17897,6 +18332,7 @@ TeX;BibTeX;MetaPost
 
 
 
+
 \underline
 
 TeX;BibTeX;MetaPost
@@ -17933,7 +18369,8 @@ TeX;BibTeX;MetaPost
 597000454400
 0
 \footnote{?}
-RGB_0
+
+swcFootnote
 
 
 \footnote
@@ -17972,7 +18409,8 @@ TeX|INS;STY;AUX
 8388866
 128
 \part*{?}
-RGB_4
+
+swcPart
 xclEnvBk
 xclEnvBkLeftGradient
 \book*
@@ -18013,7 +18451,8 @@ TeX|INS;STY;AUX
 8388866
 128
 \part{?}
-RGB_4
+
+swcPart
 xclEnvBk
 xclEnvBkLeftGradient
 \book
@@ -18055,6 +18494,7 @@ TeX|INS;STY;AUX
 128
 \chapter*{?}
 
+swcChapter
 xclEnvBk
 xclEnvBkLeftGradient
 \chapter*
@@ -18095,6 +18535,7 @@ TeX|INS;STY;AUX
 128
 \chapter{?}
 
+swcChapter
 xclEnvBk
 xclEnvBkLeftGradient
 \chapter
@@ -18135,7 +18576,8 @@ TeX|INS;STY;AUX
 597000454402
 128
 \section*{?}
-RGB_0
+
+swcSection
 xclEnvBk
 xclEnvBkLeftGradient
 \section*
@@ -18175,7 +18617,8 @@ TeX|INS;STY;AUX
 597000454402
 128
 \section{?}
-RGB_0
+
+swcSection
 xclEnvBk
 xclEnvBkLeftGradient
 \section
@@ -18215,7 +18658,8 @@ TeX|INS;STY;AUX
 599332487426
 128
 \subsection*{?}
-RGB_7
+
+swcSubsection
 xclEnvBk
 xclEnvBkLeftGradient
 \subsection*
@@ -18254,7 +18698,8 @@ TeX|INS;STY;AUX
 599332487426
 128
 \subsection{?}
-RGB_7
+
+swcSubsection
 xclEnvBk
 xclEnvBkLeftGradient
 \subsection
@@ -18293,7 +18738,8 @@ TeX|INS;STY;AUX
 315495612674
 128
 \subsubsection*{?}
-RGB_F
+
+swcSubsubsection
 xclEnvBk
 xclEnvBkLeftGradient
 \subsubsection*
@@ -18333,7 +18779,8 @@ TeX|INS;STY;AUX
 315495612674
 128
 \subsubsection{?}
-RGB_F
+
+swcSubsubsection
 xclEnvBk
 xclEnvBkLeftGradient
 \subsubsection
@@ -18372,7 +18819,8 @@ TeX|INS;STY;AUX
 1095501938948
 0
 \href{?}
-RGB_1
+
+swcHrefArg
 
 
 \href
@@ -18413,7 +18861,8 @@ TeX|INS;STY;AUX
 1095501938948
 0
 \url{?}
-RGB_1
+
+swcHrefArg
 
 
 \url
@@ -18452,7 +18901,8 @@ TeX|INS;STY;AUX
 599332487426
 0
 \RCSMark{?}
-RGB_7
+
+swcRCSMark
 
 
 \RCSMark
@@ -18491,6 +18941,7 @@ TeX|INS;STY;AUX
 620630114561
 0
 \RCSRem{?}
+
 xclComment
 
 
@@ -18530,7 +18981,8 @@ TeX|INS;STY;AUX
 1095501938944
 0
 \RCSAdd{?}
-RGB_1
+
+swcRCSAdd
 
 
 \RCSAdd
@@ -18569,7 +19021,8 @@ TeX|INS;STY;AUX
 16711936
 0
 \RCSDel{?}
-RGB_5
+
+swcRCSDel
 
 
 \RCSDel
@@ -18608,6 +19061,7 @@ TeX|INS;STY;AUX
 558350663936
 0
 \MakeShortVerb{?}
+
 xclVerbatim
 
 
@@ -18653,6 +19107,7 @@ TeX|INS;STY;AUX
 
 
 
+
 TeX;BibTeX;MetaPost
 {
 }
@@ -18687,6 +19142,7 @@ TeX;BibTeX;MetaPost
 0
 128
 <desc>..</desc>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -18727,6 +19183,7 @@ desc>
 128
 <ex>..</ex>
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -18765,6 +19222,7 @@ ex>
 0
 128
 <re>..</re>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -18805,6 +19263,7 @@ re>
 128
 <txt>..</txt>
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -18844,6 +19303,7 @@ txt>
 128
 <arg>..</arg>
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -18882,6 +19342,7 @@ arg name=
 0
 128
 <opt>..</opt>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -18923,6 +19384,7 @@ opt>
 128
 <val>..</val>
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -18961,6 +19423,7 @@ val arg=
 0
 128
 <list>..</list>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -19001,6 +19464,7 @@ list>
 128
 <content>..</content>
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19039,6 +19503,7 @@ content>
 0
 128
 <topic>..</topic>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -19079,6 +19544,7 @@ topic file=
 558350663936
 128
 <pre>..</pre> (XWE: indented)
+
 xclVerbatim
 xclEnvBk
 xclEnvBkLeftGradient
@@ -19118,6 +19584,7 @@ pre>
 0
 128
 <preview>..</preview>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -19159,6 +19626,7 @@ preview type=
 128
 <header>..</header>
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19197,6 +19665,7 @@ header name=
 0
 128
 <footer>..</footer>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -19237,6 +19706,7 @@ footer name=
 128
 * Section
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19276,6 +19746,7 @@ XWE
 128
 ** Section
 
+
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19314,6 +19785,7 @@ XWE
 620630114561
 0
 HTML/XML Comment
+Courier New
 xclComment
 
 
@@ -19353,7 +19825,8 @@ HTML;XML
 599332487424
 0
 &HTMLchar;
-RGB_7
+Courier New
+swcHTMLCharArg
 
 
 
@@ -19368,11 +19841,11 @@ HTML
 0
 0
 1
+1
+1
 0
 0
-0
-0
-0
+1
 
 
 0
@@ -19392,7 +19865,8 @@ HTML
 1096648294660
 0
 "HREF"
-RGB_9
+
+swcHTMLHREFArg
 
 
 HREF=
@@ -19431,7 +19905,8 @@ HTML
 1096648294656
 0
 "SRC"
-RGB_9
+
+swcHTMLSRCArg
 
 
 SRC=
@@ -19471,6 +19946,7 @@ HTML
 128
 <H1>..</H1>
 
+swcHTMLH1Arg
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19509,7 +19985,8 @@ H1>
 597000454402
 128
 <H2>..</H2>
-RGB_0
+
+swcHTMLH2Arg
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19548,7 +20025,8 @@ H2>
 599332487426
 128
 <H3>..</H3>
-RGB_7
+
+swcHTMLH3Arg
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19587,7 +20065,8 @@ H3>
 315495612674
 128
 <H4>..</H4>
-RGB_F
+
+swcHTMLH4Arg
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19626,7 +20105,8 @@ H4>
 881985192192
 128
 <H5>..</H5>
-RGB_8
+
+swcHTMLH5Arg
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19665,7 +20145,8 @@ H5>
 130624389376
 128
 <H6>..</H6>
-RGB_D
+
+swcHTMLH6Arg
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19704,7 +20185,8 @@ H6>
 1095501938944
 128
 <IMG ..>
-RGB_1
+Courier New
+swcHTMLIMGArg
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -19718,12 +20200,12 @@ HTML
 0
 0
 0
-0
-0
+1
+1
 1
 0
 0
-0
+1
 IMG 
 
 1
@@ -19743,6 +20225,7 @@ IMG
 1
 0
 <i>..</i>
+
 
 
 
@@ -19787,6 +20270,7 @@ i>
 
 
 
+
 HTML
 <
 <
@@ -19826,6 +20310,7 @@ b>
 
 
 
+
 HTML
 <
 <
@@ -19860,7 +20345,8 @@ em>
 315495612672
 0
 <tt>..</tt>
-RGB_F
+Courier New
+swcHTMLTTArg
 
 
 
@@ -19904,6 +20390,7 @@ tt>
 
 
 
+
 HTML
 <
 <
@@ -19938,6 +20425,7 @@ strong>
 0
 128
 <HEAD>..</HEAD>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -19977,6 +20465,7 @@ HEAD>
 558350663936
 128
 <pre>..</pre>
+Courier New
 xclVerbatim
 xclEnvBk
 xclEnvBkLeftGradient
@@ -19991,12 +20480,12 @@ HTML|XWE
 0
 0
 0
-0
-0
+1
+1
 1
 0
 0
-0
+1
 pre>
 /pre>
 1
@@ -20010,12 +20499,14 @@ pre>
 0
 0
 0
-0
+1
+pre 
 0
 0
 0
 128
 <ul>..</ul>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -20049,12 +20540,14 @@ ul>
 0
 0
 0
-0
+1
+ul 
 0
 0
 0
 128
 <blockquote>..</blockquote>
+
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -20088,12 +20581,14 @@ blockquote>
 0
 0
 0
-0
+1
+blockquote 
 0
 0
 0
 128
 <table>..</table>
+Courier New
 
 xclEnvBk
 xclEnvBkLeftGradient
@@ -20109,11 +20604,11 @@ HTML
 0
 0
 1
-0
+1
 1
 0
 0
-0
+1
 table>
 /table>
 1
@@ -20134,7 +20629,8 @@ table
 1095501938944
 0
 <!...>
-RGB_1
+Courier New
+swcHTMLTTagExArg
 
 
 
@@ -20148,12 +20644,12 @@ HTML
 0
 0
 0
-0
-0
+1
+1
 1
 0
 0
-0
+1
 !
 
 0
@@ -20173,7 +20669,8 @@ HTML
 315495612672
 0
 <...>
-RGB_F
+
+swcHTMLTTagArg
 
 
 
@@ -20212,6 +20709,7 @@ HTML
 551903297792
 0
 INI =:
+
 xclString
 
 
@@ -20251,6 +20749,7 @@ INI
 551903297792
 0
 "INI String"
+
 xclString
 
 
@@ -20290,6 +20789,7 @@ EDT "
 551903297792
 0
 `INI String`
+
 xclString
 
 
@@ -20329,6 +20829,7 @@ EDT `
 551903297792
 0
 "EDT String"
+
 xclString
 
 
@@ -20368,7 +20869,8 @@ EDT "
 2533359872
 0
 'EDT String'
-RGB_6
+
+swcEDTString1
 
 
 
@@ -20407,7 +20909,8 @@ EDT '
 2155872512
 0
 `EDT String`
-RGB_E
+
+swcEDTString2
 
 
 
@@ -20446,7 +20949,8 @@ EDT `
 315495612672
 0
 |EDT String|
-RGB_F
+
+swcEDTString3
 
 
 
@@ -20485,6 +20989,7 @@ EDT |
 -508077726125522428
 128
 EDT: Capture RegEx Tag (num)
+
 
 xclEnvBkLeftGradient
 
@@ -20534,6 +21039,7 @@ EDT: \) stop RegEx Tag
 128
 EDT: Capture RegEx Tag (no num)
 
+
 xclEnvBkLeftGradient
 
 
@@ -20572,7 +21078,8 @@ EDT: \) stop RegEx Tag
 1095501938946
 128
 :EDT Label:
-RGB_1
+
+swcEDTLabel
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -20611,7 +21118,8 @@ EDT
 971393073410
 128
 :EDT Label: (Indented)
-RGB_2
+
+swcEDTLabelIndented
 xclEnvBk
 xclEnvBkLeftGradient
 
@@ -20650,6 +21158,7 @@ Spaces:
 620630114561
 0
 //Comment
+
 xclComment
 
 
@@ -20688,24 +21197,25 @@ EDT
 0
 620630114561
 0
-/* C++ Comment */
+/* Comment */
+
 xclComment
 
 
 
 *
-
+C;CPP;CSS
 /
 /
 9
-3
+4
 1
 1
 0
 0
 1
 1
-0
+1
 1
 1
 1
@@ -20728,6 +21238,7 @@ xclComment
 620630114561
 0
 X Fortran Comment
+
 xclComment
 
 
@@ -20772,6 +21283,7 @@ Alpha
 
 
 
+
 MetaPost;MetaFont;BST;IST
 "
 "
@@ -20811,6 +21323,7 @@ MetaPost;MetaFont;BST;IST
 
 
 
+
 IST
 '
 '
@@ -20845,6 +21358,7 @@ IST
 620630114561
 0
 DTX %% Comment
+
 xclComment
 
 
@@ -20884,7 +21398,8 @@ DTX %
 597000454400
 0
 DTX Begin Guard
-RGB_0
+
+swcDTXBeginGuard
 
 
 
@@ -20923,7 +21438,8 @@ DTX %
 16711936
 0
 DTX End Guard
-RGB_5
+
+swcDTXEndGuard
 
 
 
@@ -20962,7 +21478,8 @@ DTX %
 2155872512
 0
 DTX Single Guard
-RGB_E
+
+swcDTXSingleGuard
 
 
 
@@ -21001,6 +21518,7 @@ DTX %
 620630114561
 0
 DTX ^^A Comment
+
 xclComment
 
 
@@ -21040,6 +21558,7 @@ DTX ^
 558350663936
 0
 DTX |verbatim|
+
 xclVerbatim
 
 
@@ -21079,6 +21598,7 @@ DTX
 620630114561
 0
 ; NSIS Comment
+
 xclComment
 
 
@@ -21118,6 +21638,7 @@ NSIS
 620630114561
 0
 # NSIS Comment
+
 xclComment
 
 
@@ -21157,6 +21678,7 @@ NSIS
 620630114561
 0
 /* NSIS Comment */
+
 xclComment
 
 
@@ -21196,6 +21718,7 @@ NSIS
 551903297792
 0
 "NSIS String"
+
 xclString
 
 
@@ -21235,6 +21758,7 @@ NSIS
 551903297792
 0
 'NSIS String'
+
 xclString
 
 
@@ -21274,6 +21798,7 @@ NSIS
 551903297792
 0
 `NSIS String`
+
 xclString
 
 
@@ -21313,7 +21838,8 @@ NSIS
 8388864
 0
 NSIS Inner Variable
-RGB_4
+
+swcNSISVar
 
 
 
@@ -21352,7 +21878,8 @@ $
 8388864
 0
 NSIS User Constant
-RGB_4
+
+swcNSISVar
 
 
 
@@ -21391,7 +21918,8 @@ $
 8388864
 0
 NSIS User Variable
-RGB_4
+
+swcNSISVar
 
 
 
@@ -21430,7 +21958,8 @@ $
 71
 8388864
 Highlighted Words
-RGB_4
+
+kwcGeneric
 
 
 
@@ -21446,7 +21975,8 @@ RGB_4
 
 315495612674
 WinEdt MUI Controls
-RGB_F
+
+kwcMUICtrls
 
 ASCII:EDT
 ~Alpha_
@@ -21476,7 +22006,8 @@ TRadioGroup
 
 971393073410
 WinEdt MUI Events
-RGB_2
+
+kwcMUIEvents
 
 ASCII:EDT
 EDT '
@@ -21496,7 +22027,8 @@ on change
 
 599332487426
 WinEdt MUI Properties
-RGB_7
+
+kwcMUIProperties
 
 ASCII:EDT
 EDT '
@@ -21565,7 +22097,8 @@ selected count
 
 597000454400
 WinEdt MUI Property Values
-RGB_0
+
+kwcMUIValues
 
 ASCII:EDT
 ~Alpha_
@@ -21600,6 +22133,7 @@ crHandPoint
 2
 WinEdt Macros
 
+kwcWEMacros
 
 EDT
 ~Alpha_
@@ -21799,6 +22333,7 @@ GetPrjList
 GetPrjListCount
 GetRM
 GetScreenDPI
+GetScriptTagsAndFonts
 GetSearchData
 GetSel
 GetShortFilename
@@ -22230,7 +22765,8 @@ WriteFile
 
 194659746050
 WinEdt Temp Register
-RGB_C
+
+kwcWETmpReg
 
 EDT
 %
@@ -22254,7 +22790,8 @@ EDT
 
 16711938
 WinEdt Global Register
-RGB_5
+
+kwcWEGlobalReg
 
 EDT
 %
@@ -22290,7 +22827,8 @@ EDT
 
 1095501938946
 WinEdt Register
-RGB_1
+
+kwcWEWorkingReg
 
 EDT
 %
@@ -22326,7 +22864,8 @@ EDT
 
 877022216450
 WinEdt Negative Register
-RGB_A
+
+kwcWENegReg
 
 EDT
 %
@@ -22362,7 +22901,8 @@ EDT
 
 881985192194
 WinEdt RegEx Tags
-RGB_8
+
+kwcWETags
 
 EDT
 %
@@ -22398,7 +22938,8 @@ EDT
 
 1096648294656
 WinEdt %Variable
-RGB_9
+
+kwcWEVar
 
 EDT
 %
@@ -22490,7 +23031,8 @@ _
 
 1095501938950
 WinEdt INI %INCLUDE
-RGB_1
+
+kwcWEInput
 
 INI
 
@@ -22510,7 +23052,8 @@ INI
 
 971393073410
 WinEdt INI Sections
-RGB_2
+
+kwcINISections
 
 INI
 [
@@ -22600,7 +23143,8 @@ END
 
 597000454402
 WinEdt INI Keywords
-RGB_0
+
+kwcINIKeywords
 
 INI
 Space
@@ -22686,6 +23230,8 @@ MANUAL_POPUP_EVENT_MACRO
 LINE_NUMBERS_MODE_FILTER
 LEFT_INCLUDED_SEPARATORS
 HIDE_CURSOR_WHILE_TYPING
+EXTRA_LINE_SPACING_BELOW
+EXTRA_LINE_SPACING_ABOVE
 ENLARGE_DOCUMENT_WINDOWS
 CONSTRAINED_RIGHT_MARGIN
 CHANGE_FOLDER_ON_SAVE_AS
@@ -22705,6 +23251,7 @@ MIN_NEXT_SEGMENT_LENGTH
 INLINE_EXPRESSIONS_ONLY
 IGNORE_START_CHARACTERS
 HIGHLIGHT_EMPTY_COLUMNS
+FONT_MIXING_MODE_FILTER
 DISABLE_AUTO_COMPLETION
 DELETE_AUTO_SAVED_FILES
 AUTO_POPUP_MIN_EX_CHARS
@@ -22721,6 +23268,7 @@ PAGE_AFTER_BUILD_MACRO
 ON_ALT_DBL_CLICK_MACRO
 MOVE_AFTER_PASTED_TEXT
 INDENTED_SOFT_WRAPPING
+FAST_WIDTH_MODE_FILTER
 EXTRA_TREE_ITEM_HEIGHT
 ENVIRONMENT_BRIGHTNESS
 ENABLE_SCROLL_LOCK_KEY
@@ -22731,6 +23279,7 @@ BRANCH_IGNORE_COMMENTS
 BEGINNING_OF_LINE_ONLY
 AUTO_POPUP_EVENT_MACRO
 ALLOW_COMPOUNDED_WORDS
+UNISCRIBE_MODE_FILTER
 UNICODE_CHARSET_RANGE
 TRUNCATE_LINE_NUMBERS
 SPECIAL_LETTERS_AFTER
@@ -22742,6 +23291,8 @@ RELATIVE_RIGHT_MARGIN
 PRESERVE_FOLDED_NODES
 PAGE_NUMBERS_SELECTED
 MAINTAIN_PROJECT_LIST
+JUSTIFY_STRETCH_LIMIT
+FAST_WIDTH_LINE_LIMIT
 DISABLE_SOUND_EFFECTS
 DBL_CLICK_MODE_FILTER
 CUSTOM_WHEEL_RESPONSE
@@ -22752,6 +23303,7 @@ CHANGE_FOLDER_ON_OPEN
 BRANCH_CASE_SENSITIVE
 AUTO_MATCH_LEFT_RIGHT
 ALLOW_MOVING_PAST_EOF
+ALLOW_ALTGR_SHORTCUTS
 ADMISSIBLE_CHARACTERS
 WRAPPING_MODE_FILTER
 TEX_ENVIRONMENT_NAME
@@ -22772,6 +23324,7 @@ MANUAL_POPUP_ENABLED
 LINE_NUMBER_BULLET_5
 LEFT_WORD_SEPARATORS
 LATEX_DISPLAYED_MATH
+JUSTIFY_SHRINK_LIMIT
 INDENTED_LEFT_MARGIN
 IGNORE_STRING_LENGTH
 FULL_WIDTH_SELECTION
@@ -22810,12 +23363,14 @@ MINIMAL_WORD_LENGTH
 MINIMAL_LINE_LENGTH
 MAXIMAL_WORD_LENGTH
 MAX_SPELL_CHAR_CODE
+JUSTIFY_MODE_FILTER
 INDENTED_PARAGRAPHS
 INCLUDE_TYPE_FILTER
 IGNORE_WHILE_TYPING
 HIGH_CONTRAST_AWARE
 HIDE_DROP_DOWN_LIST
 GRADIENT_BACKGROUND
+FONT_MIXING_ENABLED
 FOLDING_MARGIN_MODE
 ENABLE_HIGHLIGHTING
 CUSTOM_MENU_DRAWING
@@ -22850,6 +23405,7 @@ HYPHENATION_STRING
 GUI_SCALED_BUTTONS
 FLOATING_BOOKMARKS
 FIXED_RIGHT_MARGIN
+FAST_WIDTH_ENABLED
 EXTRA_LINE_SPACING
 EXTRA_CHAR_SPACING
 ERASE_REPLACEMENTS
@@ -22870,6 +23426,7 @@ ALLOW_CURRENT_LINE
 WRAP_ENVIRONMENTS
 USE_SOURCE_FOLDER
 USE_LONG_CAPTIONS
+UNISCRIBE_ENABLED
 UNDERLINE_ENABLED
 TRANSLATION_TABLE
 TOTAL_LIST_LENGTH
@@ -22890,6 +23447,7 @@ NO_RIGHT_BOUNDARY
 MOVE_DOCUMENT_TAB
 MIN_FIRST_SEGMENT
 LINE_NUMBERS_MODE
+JUSTIFY_SOFT_ONLY
 INFO_CANCEL_COLOR
 IMG_SOURCE_FOLDER
 IDLE_SAVE_ENABLED
@@ -22910,6 +23468,7 @@ BACKGROUND_SCHEME
 BACKGROUND_BITMAP
 AUTO_SAVE_ENABLED
 APPLY_LINE_LIMITS
+ADJUST_BASE_LINES
 YIELDING_ENABLED
 WHOLE_WORDS_ONLY
 UTF8_MODE_FILTER
@@ -22938,6 +23497,8 @@ IMG_LOCAL_FOLDER
 IGNORE_TEXT_RULE
 GUI_SOURCE_SCALE
 GUI_LOCAL_FOLDER
+BIDI_CARET_WIDTH
+BIDI_CARET_SHAPE
 BACKGROUND_COLOR
 APPLY_LINE_LIMIT
 ALTERNATE_COLORS
@@ -22966,6 +23527,7 @@ MAX_CUSTOM_SIZE
 MATCH_MOVE_OVER
 LOCKED_POSITION
 KEEP_ALL_SPACES
+JUSTIFY_ENABLED
 INFO_MENU_COLOR
 INCLUDE_TRIGGER
 IGNORE_VERBATIM
@@ -22976,6 +23538,7 @@ GUI_LOCAL_SCALE
 GROUP_UNDO_SOFT
 FORMAT_INDENTED
 FILE_MUST_EXIST
+FAST_FONT_CACHE
 FACE_TEXT_COLOR
 EXTRA_TEXT_SIZE
 EXTENDED_ERRORS
@@ -23239,6 +23802,7 @@ VERBATIM
 UTF8_BOM
 TEX_MATH
 TEMPLATE
+TAB_DRAW
 SUB_FIND
 SHORTCUT
 SELECTOR
@@ -23373,7 +23937,8 @@ CR
 
 1095501938944
 LaTeX
-RGB_1
+
+kwcLaTeXEnv
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -23393,8 +23958,9 @@ right
 verb
 
 1096648294662
-LaTeX Input+
-RGB_9
+LaTeX Input
+
+kwcLaTeXInput
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -23421,8 +23987,9 @@ addsectionbib
 loadglsentries
 
 315495612674
-LaTeX Input
-RGB_F
+LaTeX Class
+
+kwcLaTeXClass
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -23440,7 +24007,8 @@ usepackage
 
 971393073408
 LaTeX Labels
-RGB_2
+
+kwcLaTeXLabels
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -23649,7 +24217,8 @@ Avolcite
 
 1096648294658
 LaTeX Sections
-RGB_9
+
+kwcLaTeXSections
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -23704,7 +24273,8 @@ listofpdfcomments
 
 2533359872
 LaTeX Classes
-RGB_6
+
+kwcLaTeXClassEx
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -23755,7 +24325,8 @@ AtBeginDocument
 
 597000454400
 [La]TeX  Keywords
-RGB_0
+
+kwcLaTeXKeywords
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -24578,7 +25149,8 @@ Alph
 
 8388864
 [La]TeX  Keywords...
-RGB_4
+
+kwcLaTeXKeywordsEx
 
 TeX;BibTeX;MetaPost
 \ (single)
@@ -25922,7 +26494,8 @@ AA
 
 877022216448
 TeX Units
-RGB_A
+
+kwcTeXUnits
 
 TeX
 Numeric
@@ -25950,7 +26523,8 @@ bp
 
 1096648294656
 BibLaTeX
-RGB_9
+
+kwcBibTeX
 
 BibTeX
 @
@@ -25986,7 +26560,8 @@ XDATA
 
 1096648294656
 BibTeX
-RGB_9
+
+kwcBibTeX
 
 BibTeX
 @
@@ -26019,7 +26594,8 @@ UNPUBLISHED
 
 599332487424
 BibLaTeX Fields
-RGB_7
+
+kwcBibTeXFields
 
 BibTeX
 Spaces
@@ -26144,7 +26720,8 @@ xref
 
 599332487424
 BibTeX Fields
-RGB_7
+
+kwcBibTeXFields
 
 BibTeX
 Spaces
@@ -26184,7 +26761,8 @@ year
 
 1095501938944
 BibTeX Style Commands
-RGB_1
+
+kwcBibTeXStyle
 
 BST
 ~Alpha.
@@ -26210,7 +26788,8 @@ STRINGS
 
 599332487424
 BibTeX Style Functions
-RGB_7
+
+kwcBibTeXStyleFunctions
 
 BST
 ~Alpha.
@@ -26259,7 +26838,8 @@ if
 
 599332487424
 BibTeX Style Operators
-RGB_7
+
+kwcBibTeXStyleOperators
 
 BST
 ~Alpha.
@@ -26282,7 +26862,8 @@ BST
 
 599332487424
 MakeIndex Style Specifiers
-RGB_7
+
+kwcMakeIndexStyle
 
 IST
 ~Alpha_
@@ -26352,7 +26933,8 @@ encap
 
 597000454400
 XWE 2 Attributes
-RGB_0
+
+kwcXWEAttr
 
 XWE
 ~Alpha_
@@ -26381,7 +26963,8 @@ arg
 
 971393073408
 XWE Elements
-RGB_2
+
+kwcXWEElements
 
 XWE
 <
@@ -26419,7 +27002,8 @@ re
 
 971393073408
 XWE /Elements
-RGB_2
+
+kwcXWEElements
 
 XWE
 </html
@@ -26427,7 +27011,7 @@ XWE
 7
 0
 0
-0
+1
 0
 1
 1
@@ -26457,7 +27041,8 @@ re
 
 877022216448
 HTML 4 Characters
-RGB_A
+
+kwcHTMLChar
 
 HTML
 &
@@ -26725,7 +27310,8 @@ zwnj
 
 599332487424
 HTML 4 Attributes
-RGB_7
+
+kwcHTMLAttr
 
 HTML
 ~Alpha_
@@ -26837,7 +27423,8 @@ width
 
 194659746048
 HTML 4 Elements
-RGB_C
+
+kwcHTMLElements
 
 HTML
 <
@@ -26934,7 +27521,8 @@ var
 
 194659746048
 HTML 4 /Elements
-RGB_C
+
+kwcHTMLElements
 
 HTML
 </html
@@ -26942,7 +27530,7 @@ HTML
 7
 0
 0
-0
+1
 0
 0
 1
@@ -27031,7 +27619,8 @@ var
 
 549764202753
 HTML 3.2 Attributes
-RGB_3
+
+kwcHTML3Attr
 
 HTML
 ~Alpha_
@@ -27068,7 +27657,8 @@ vspace
 
 971393073409
 HTML 3.2 Elements
-RGB_2
+
+kwcHTML3Elements
 
 HTML
 <
@@ -27093,8 +27683,9 @@ s
 u
 
 971393073409
-HTML 3.2/ Elements
-RGB_2
+HTML 3.2 /Elements
+
+kwcHTML3Elements
 
 HTML
 </html
@@ -27102,7 +27693,7 @@ HTML
 7
 0
 0
-0
+1
 0
 0
 1
@@ -27120,7 +27711,8 @@ u
 
 599332487426
 MetaPost/MetaFont Macros
-RGB_7
+
+kwcMPMacros
 
 MetaPost;MetaFont
 ~Alpha_
@@ -27159,7 +27751,8 @@ fi
 
 1095501938944
 MetaPost/MetaFont Keywords
-RGB_1
+
+kwcMPKeywords
 
 MetaPost;MetaFont
 ~Alpha_
@@ -27258,7 +27851,8 @@ to
 
 1095501938944
 MetaPost Keywords
-RGB_1
+
+kwcMPKeywords
 
 MetaPost
 ~Alpha_
@@ -27334,7 +27928,8 @@ log
 
 1095501938944
 MetaFont Keywords
-RGB_1
+
+kwcMPKeywords
 
 MetaFont
 ~Alpha_
@@ -27413,7 +28008,8 @@ at
 
 2533359872
 MetaPost/MetaFont Variables
-RGB_6
+
+kwcMPVar
 
 MetaPost;MetaFont
 ~Alpha_
@@ -27466,7 +28062,8 @@ day
 
 2533359872
 MetaPost Variables
-RGB_6
+
+kwcMPVar
 
 MetaPost
 ~Alpha_
@@ -27516,7 +28113,8 @@ hour
 
 2533359872
 MetaFont Variables
-RGB_6
+
+kwcMPVar
 
 MetaFont
 ~Alpha_
@@ -27561,7 +28159,8 @@ good
 
 8388864
 MetaPost/MetaFont Constants
-RGB_4
+
+kwcMPConst
 
 MetaPost;MetaFont
 ~Alpha_
@@ -27611,7 +28210,8 @@ bp
 
 8388864
 MetaPost Constants
-RGB_4
+
+kwcMPConst
 
 MetaPost
 ~Alpha_
@@ -27648,7 +28248,8 @@ EOF
 
 8388864
 MetaFont Constants
-RGB_4
+
+kwcMPConst
 
 MetaFont
 ~Alpha_
@@ -27668,7 +28269,8 @@ rulepen
 
 2533359874
 MetaPost Begin-End
-RGB_6
+
+kwcMPBegin_End
 
 MetaPost
 ~Alpha_
@@ -27690,7 +28292,8 @@ bye
 
 2533359874
 MetaFont Begin-End
-RGB_6
+
+kwcMPBegin_End
 
 MetaFont
 ~Alpha_
@@ -27713,7 +28316,8 @@ bye
 
 8388866
 MetaPost TeX
-RGB_4
+
+kwcMPTeX
 
 MetaPost
 ~Alpha_
@@ -27732,7 +28336,8 @@ btex
 
 2155872512
 MetaPost/MetaFont Positions
-RGB_E
+
+kwcMPPos
 
 MetaPost;MetaFont
 Point
@@ -27771,7 +28376,8 @@ c
 
 549764202752
 MetaPost/MetaFont Operators
-RGB_3
+
+kwcMPOper
 
 MetaPost;MetaFont
 ~Alpha_
@@ -27879,7 +28485,8 @@ of
 
 549764202752
 MetaPost Operators
-RGB_3
+
+kwcMPOper
 
 MetaPost
 ~Alpha_
@@ -27943,7 +28550,8 @@ on
 
 549764202752
 MetaFont Operators
-RGB_3
+
+kwcMPOper
 
 MetaFont
 ~Alpha_
@@ -27964,7 +28572,8 @@ hround
 
 1095501938944
 NSIS Instructions
-RGB_1
+
+kwcNSISInstructions
 
 NSIS
 ~AlphaNumNSIS
@@ -28179,7 +28788,8 @@ XPStyle
 
 315495612674
 NSIS Directives
-RGB_F
+
+kwcNSISDirectives
 
 NSIS
 !
@@ -28228,7 +28838,8 @@ cd
 
 8388866
 NSIS Predefines
-RGB_4
+
+kwcNSISPredefines
 
 NSIS
 {
@@ -28256,7 +28867,8 @@ NSISDIR
 
 8388864
 NSIS String Constants
-RGB_4
+
+kwcNSISStrConst
 
 NSIS
 $
@@ -28278,7 +28890,8 @@ $
 
 8388866
 NSIS Variables and Constants
-RGB_4
+
+kwcNSISVarConst
 
 NSIS
 $
@@ -28358,7 +28971,8 @@ R0
 
 597000454400
 NSIS MUI2
-RGB_0
+
+kwcNSISMUI2
 
 NSIS
 ~AlphaNumNSIS
@@ -28517,7 +29131,8 @@ MUI_UI
 
 16711936
 NSIS Parameters
-RGB_5
+
+kwcNSISPar
 
 NSIS
 ~AlphaNumNSIS
@@ -28659,7 +29274,8 @@ a
 
 16711936
 NSIS Slash Parameters
-RGB_5
+
+kwcNSISPar
 
 NSIS
 /
@@ -28718,6 +29334,7 @@ a
 NSIS Plug-ins
 
 
+
 NSIS
 ~AlphaNumNSIS
 :
@@ -28749,7 +29366,8 @@ nsExec
 
 971393073410
 NSIS Plug-ins Commands
-RGB_2
+
+kwcNSISPlugins
 
 NSIS
 :
@@ -28823,7 +29441,8 @@ Get
 
 2155872512
 Special
-RGB_E
+
+kwcEditSpecial
 
 
 ~Alpha_
@@ -28888,7 +29507,8 @@ NSIS
 
 130624389376
 Special+
-RGB_D
+
+kwcEditSpecialEx
 
 
 ~Alpha_
@@ -28901,6 +29521,7 @@ RGB_D
 1
 1
 0
+Uniscribe
 UTF7
 UTF8
 UTF16
@@ -29376,7 +29997,7 @@ TeX
 .@\:/*+?!0123456789
 1
 \-
-83
+85
 \\
 \\
 
@@ -29825,13 +30446,6 @@ _{
 0
 0
 0
-%%?
-%%
-
-2
-0
-0
-0
 \begin{?}
 \begin{
 }
@@ -29944,6 +30558,27 @@ _{
 0
 0
 0
+%%?
+%%
+
+2
+9
+1
+0
+%?
+%
+
+2
+9
+1
+1
+\%
+\%
+
+0
+0
+0
+1
 \$
 \$
 
@@ -30556,7 +31191,7 @@ slcProjectAlt
 
 *
 18
-Default|*.*|TeX|*.tex;*.ltx;*.texi;*.dtx;*.fdd;*.drv;*.ins;*.sty;*.fd;*.def;*.clo;*.cls;*.aux;*.lof;*.lot;*.toc;*.bbl;*.gls;*.glo;*.ind;*.idx|BibTeX|*.bib|MetaFont|*.mf|MetaPost|*.mp;*.mpx|BST|*.bst|IST|*.ist|HTML|*.html;*.htm;*.shtml;*.shtm;*.php;*.hhc;*.hhk|NSIS|*.nsi;*.nsh|DATA|*.*;*.dat;*.ini;*.cfg;*.dic|ASCII|*.*;*.txt;*.edt|ANSI|*.*;*.doc|Fortran|*.for;*.f;*.f77;*.f90;*.f95|Binary|*.*;*.exe;*.dll;*.com;*.dvi;*.bmp|Application|*.exe;*.com;*.bat|:EDT|*.edt|:DTX|*.dtx;*.fdd|:INS|*.ins;*.drv|:STY|*.sty;*.fd;*.def;*.clo;*.cls|:AUX|*.aux;*.lof;*.lot;*.toc;*.bbl;*.gls;*.glo;*.ind;*.idx;*.mpx|:NSH|*.nsh|:PHP|*.php|:HHC|*.hhc;*.hhk|:UK|*.uk;*.*|:US|*.us;*.*|:DE|*.de;*.*|:FR|*.fr;*.*|:Soft|*.*|:Hard|*.*|:UTF-8|*.*|:ACP|*.*
+Default|*.*|TeX|*.tex;*.ltx;*.texi;*.dtx;*.fdd;*.drv;*.ins;*.sty;*.fd;*.def;*.clo;*.cls;*.aux;*.lof;*.lot;*.toc;*.bbl;*.gls;*.glo;*.ind;*.idx|BibTeX|*.bib|MetaFont|*.mf|MetaPost|*.mp;*.mpx|BST|*.bst|IST|*.ist|HTML|*.html;*.htm;*.shtml;*.shtm;*.php;*.hhc;*.hhk|NSIS|*.nsi;*.nsh|DATA|*.*;*.dat;*.ini;*.cfg;*.dic|ASCII|*.*;*.txt;*.edt|ANSI|*.*;*.doc|Fortran|*.for;*.f;*.f77;*.f90;*.f95|Binary|*.*;*.exe;*.dll;*.com;*.dvi;*.bmp|Application|*.exe;*.com;*.bat|:EDT|*.edt|:DTX|*.dtx;*.fdd|:INS|*.ins;*.drv|:STY|*.sty;*.fd;*.def;*.clo;*.cls|:AUX|*.aux;*.lof;*.lot;*.toc;*.bbl;*.gls;*.glo;*.ind;*.idx;*.mpx|:NSH|*.nsh|:PHP|*.php|:CSS|*.css|:HHC|*.hhc;*.hhk|:UK|*.uk;*.*|:US|*.us;*.*|:DE|*.de;*.*|:FR|*.fr;*.*|:Soft|*.*|:Hard|*.*|:UTF-8|*.*|:ACP|*.*
 1
 
 0
@@ -30586,7 +31221,7 @@ ANSI
 0
 
 1
-ASCII;DATA|EDT
+ASCII;DATA|EDT;CSS
 0
 
 0
@@ -30651,12 +31286,13 @@ UTF-7
 UTF-7
 65000
 1
-42
+43
 -1    Auto Detect
 0     Default ANSI code page
 1     Default OEM  code page
 2     Default MAC  code page
 3     Current thread's ANSI code page
+9     ASCII: preserve 8-bit character codes
 42    SYMBOL translations
 437   OEM MS-DOS United States
 708   OEM Arabic (ASMO 708)
@@ -30699,109 +31335,123 @@ UTF-7
 2
   32-127
   161-382
-51
+1
+*
+1
+HTML|XWE
+1
+HTML|XWE
+1
+50
+25
+1
+DATA
+1111
+1425
+1
+-1
+2
+50
 
-Segoe UI;Arial;Tahoma
+Default;Arial Unicode MS;Arial;Tahoma;Courier New;Segoe UI;Segoe UI Symbol;Segoe UI Historic;@
 latn
-Segoe UI;Segoe UI Symbol;Arial;Tahoma
+Default;Arial Unicode MS;Arial;Tahoma;Courier New;Segoe UI;Segoe UI Symbol;Segoe UI Historic;@
 grek
-Segoe UI
-copt
-Segoe UI Symbol
+Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New
 cyrl
-Segoe UI;Arial
-armn
-Segoe UI
+Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New
 hebr
-Segoe UI
+Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New
 arab
-Arial
+Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New
+armn
+Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New
 thai
-Tahoma
+Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New
 hani
-Meiryo UI;Microsoft YaHei UI
+Default;Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;@
 kana
-Meiryo UI
-yi  
-Microsoft Yi Baiti
-bopo
-Microsoft JhengHei UI
-syrc
-Estrangelo Edessa
-thaa
-MV Boli
-nko 
-Ebrima
-deva
-Aparajita
-beng
-Nirmala UI
-guru
-Nirmala UI
-gujr
-Nirmala UI
-orya
-Nirmala UI
-taml
-Nirmala UI
-telu
-Nirmala UI
-knda
-Nirmala UI
-mlym
-Nirmala UI
-sinh
-Nirmala UI
-lao 
-Lao UI
-tibt
-Microsoft Himalaya
-mymr
-Myanmar Text
-geor
-Segoe UI
+Default;Yu Gothic UI;Microsoft YaHei UI;Microsoft JhengHei UI;@
 hang
-Malgun Gothic
-ethi
-Ebrima
-cher
-Gadugi
-cans
-Gadugi
-ogam
-Segoe UI Symbol
-runr
-Segoe UI Symbol
-khmr
-Khmer UI
-mong
-Mongolian Baiti
-tale
-Microsoft Tai Le
-talu
-Microsoft New Tai Lue
-bugi
-Leelawadee UI
-olck
-Nirmala UI
+Default;Malgun Gothic;@
+bopo
+Default;Microsoft JhengHei UI;Microsoft YaHei UI;@
+yi  
+Default;Microsoft JhengHei UI;Microsoft YaHei UI;Microsoft Yi Baiti;@
 brai
-Segoe UI Symbol
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic
+copt
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic
 glag
-Segoe UI Symbol
-tfng
-Ebrima
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic
+runr
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic
 lisu
-Segoe UI
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic
+ogam
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic
+geor
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;Sylfaen
+syrc
+Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;Estrangelo Edessa
+deva
+Default;Arial Unicode MS;Nirmala UI;Aparajita;Kokila;Mangal
+beng
+Default;Arial Unicode MS;Nirmala UI;Vrinda
+guru
+Default;Arial Unicode MS;Nirmala UI;Raavi
+gujr
+Default;Arial Unicode MS;Nirmala UI;Shruti
+orya
+Default;Arial Unicode MS;Nirmala UI;Kalinga
+taml
+Default;Arial Unicode MS;Nirmala UI;Latha;Vijaya
+telu
+Default;Arial Unicode MS;Nirmala UI;Gautami;Vani
+knda
+Default;Arial Unicode MS;Nirmala UI;Tunga
+mlym
+Default;Arial Unicode MS;Nirmala UI;Kartika
+sinh
+Default;Arial Unicode MS;Nirmala UI;Iskoola Pota
+olck
+Default;Arial Unicode MS;Nirmala UI
+khmr
+Default;Arial Unicode MS;Leelawadee UI;Khmer UI
+lao 
+Default;Arial Unicode MS;Leelawadee UI;Lao UI
+bugi
+Default;Arial Unicode MS;Leelawadee UI
+ethi
+Default;Arial Unicode MS;Ebrima;Nyala
+tfng
+Default;Arial Unicode MS;Ebrima
 vai 
-Ebrima
+Default;Arial Unicode MS;Ebrima
+nko 
+Default;Arial Unicode MS;Ebrima
+cher
+Default;Arial Unicode MS;Gadugi;Plantagenet Cherokee
+cans
+Default;Arial Unicode MS;Gadugi;Euphemia
+tale
+Default;Arial Unicode MS;Microsoft Tai Le
+talu
+Default;Arial Unicode MS;Microsoft New Tai Lue
 phag
-Microsoft PhagsPa
+Default;Arial Unicode MS;Microsoft PhagsPa
+tibt
+Default;Arial Unicode MS;Microsoft Himalaya
+thaa
+Default;Arial Unicode MS;MV Boli
+mong
+Default;Arial Unicode MS;Mongolian Baiti
+mymr
+Default;Arial Unicode MS;Myanmar Text
 java
-Javanese Text
-qavs
-Segoe UI
+Default;Arial Unicode MS;Javanese Text
 ?
-Segoe UI;Segoe UI Symbol;Arial;Tahoma
+Default;Arial Unicode MS;Arial;Tahoma;Courier New;Segoe UI;Segoe UI Symbol;Segoe UI Historic;@
 
 *
 21
@@ -32349,7 +32999,7 @@ INI
 0
 0
 1
-1
+9
 999
 9
 1
@@ -32642,8 +33292,8 @@ TeX
 10
 12
 1
-8
-16
+10
+20
 0
 0
 0
@@ -32657,10 +33307,12 @@ Courier New
 2
 2
 0
+0
 1
 0
 4
 1
+0
 0
 0
 1
@@ -32710,7 +33362,7 @@ HTML Document
 
 HTML
 .html
-%B\Templates\HTML\New.html
+Templates\HTML\New.html
 
 [NextBullet;ScreenCenterLine;]
 TeX Document
@@ -32738,56 +33390,56 @@ LaTeX: AMS Article
 
 TeX
 .tex
-%B\Templates\Doc\AmsArticle.tex
+Templates\Doc\AmsArticle.tex
 
 [NextBullet;ScreenCenterLine;]
 LaTeX: Article
 
 TeX
 .tex
-%B\Templates\Doc\Article.tex
+Templates\Doc\Article.tex
 
 [NextBullet;ScreenCenterLine;]
 LaTeX: Report
 
 TeX
 .tex
-%B\Templates\Doc\Report.tex
+Templates\Doc\Report.tex
 
 [NextBullet;ScreenCenterLine;]
 LaTeX: Book
 
 TeX
 .tex
-%B\Templates\Doc\Book.tex
+Templates\Doc\Book.tex
 
 [NextBullet;ScreenCenterLine;]
 LaTeX: Slides Main
 
 TeX
 .tex
-%B\Templates\Doc\Slides-Main.tex
+Templates\Doc\Slides-Main.tex
 
 [NextBullet;ScreenCenterLine;]
 LaTeX: Slides
 
 TeX
 .tex
-%B\Templates\Doc\Slides.tex
+Templates\Doc\Slides.tex
 
 [NextBullet;ScreenCenterLine;]
 LaTeX: Letter
 
 TeX
 .tex
-%B\Templates\Doc\Letter.tex
+Templates\Doc\Letter.tex
 
 [NextBullet;ScreenCenterLine;]
 LaTeX: Letters
 
 TeX
 .tex
-%B\Templates\Doc\Letters.tex
+Templates\Doc\Letters.tex
 
 [NextBullet;ScreenCenterLine;]
 
@@ -32955,7 +33607,7 @@ ___
 
 *
 34
-45
+48
 Preamble
 TeX
 0
@@ -33550,6 +34202,24 @@ HTML
 -1
 0
 0
+<pre ...</pre>
+HTML
+1
+1
+9
+1
+0
+<pre 
+</pre>
+-2
+0
+0
+-1
+1
+0
+-1
+0
+0
 <blockquote>...</blockquote>
 HTML
 1
@@ -33568,6 +34238,24 @@ HTML
 0
 0
 0
+<blockquote ...</blockquote>
+HTML
+1
+1
+4
+0
+0
+<blockquote 
+</blockquote>
+-2
+0
+0
+0
+1
+0
+0
+0
+0
 <ul>...</ul>
 HTML
 1
@@ -33576,6 +34264,24 @@ HTML
 0
 0
 <ul>
+</ul>
+-2
+0
+0
+0
+1
+0
+0
+0
+0
+<ul ...</ul>
+HTML
+1
+1
+4
+0
+0
+<ul 
 </ul>
 -2
 0
@@ -33631,7 +34337,7 @@ XWE
 0
 <content>
 </content>
--4
+-2
 0
 0
 -1
@@ -33649,7 +34355,7 @@ XWE
 0
 <preview
 </preview>
--4
+-2
 0
 0
 -1
@@ -33667,7 +34373,7 @@ XWE
 0
 <ex>
 </ex>
--4
+-2
 0
 0
 -1
@@ -33813,7 +34519,7 @@ HTML
 TeX;BibTeX;MetaPost;MetaFont;HTML;NSIS;INI|INS;STY;AUX
 1
 1
-57
+58
 Record-BibTeX
 BibTeX
 
@@ -35608,6 +36314,32 @@ ITEM="
 1
 END="
 0
+LIST-INI
+INI
+<%f>%p\%n.ini
+INI:LIST
+
+
+1
+0
+0
+0
+0
+1
+1
+1
+0
+1
+1
+
+3
+LIST="END_LIST"
+SUB="END_LIST"
+COLORS="END_LIST"
+
+1
+END_LIST
+0
 
 *
 36
@@ -35615,8 +36347,8 @@ END="
 Binary Files
 Binary
 1
-8
-16
+10
+20
 0
 0
 64
@@ -35631,12 +36363,14 @@ Courier New
 2
 2
 0
+0
 1
 0
 4
 0
 0
 1
+0
 1
 1
 0
@@ -35644,8 +36378,8 @@ Courier New
 Macros and Configurations
 INI;EDT|XWE
 1
-8
-16
+10
+20
 0
 1
 80
@@ -35660,6 +36394,7 @@ Courier New
 2
 2
 0
+0
 1
 0
 4
@@ -35667,14 +36402,15 @@ Courier New
 0
 0
 1
+1
 0
 0
 0
 HTML Documents
 HTML|HHC;XWE
 1
-5
-16
+6
+20
 0
 0
 98
@@ -35689,10 +36425,12 @@ Verdana
 2
 2
 0
-1
+0
+2
 0
 8
 1
+0
 0
 0
 1
@@ -35702,8 +36440,8 @@ Verdana
 XWE Documents
 XWE
 1
-8
-16
+10
+20
 0
 0
 98
@@ -35718,6 +36456,7 @@ Courier New
 2
 2
 0
+0
 1
 0
 4
@@ -35725,14 +36464,15 @@ Courier New
 0
 0
 1
+1
 0
 0
 0
 ASCII Documents
 ASCII
 1
-8
-16
+10
+20
 0
 0
 68
@@ -35747,10 +36487,12 @@ Courier New
 2
 2
 0
+0
 1
 0
 4
 1
+0
 0
 0
 1
@@ -35760,8 +36502,8 @@ Courier New
 TeX Source
 DTX;INS;STY
 1
-8
-16
+10
+20
 0
 0
 80
@@ -35776,10 +36518,12 @@ Courier New
 2
 2
 0
+0
 1
 0
 4
 1
+0
 0
 0
 1
@@ -36542,6 +37286,7 @@ HTML;PHP;XML
 1
 0
 0
+1
 1
 11
 Modified & Error
@@ -49493,7 +50238,7 @@ nVDash
 *
 48
 120
-899
+893
 526
 214
 478
@@ -50363,15 +51108,15 @@ Edt
 80
 Default:MiKTeX
 1
-505
-93
-1584
-812
+0
+0
+1349
+899
+0
 0
 0
 0
 1
-0
 1
 1
 1
@@ -50379,16 +51124,16 @@ Default:MiKTeX
 1
 77
 1
-282
-207
-282
-207
 0
 0
-235
-171
-335
-243
+0
+0
+0
+0
+0
+0
+0
+0
 0
 0
 0
@@ -50399,8 +51144,8 @@ Default:MiKTeX
 0
 0
 0
-96
-96
+120
+120
 3
 3
 3
@@ -50409,10 +51154,10 @@ Default:MiKTeX
 
 *
 81
-320
-320
-164
-100
+400
+400
+205
+125
 
 Tree
 1
@@ -50423,8 +51168,8 @@ Tree
 1
 0
 0
-360
-520
+450
+650
 
 fclFormBk
 -16777211
@@ -50445,8 +51190,8 @@ Gather
 1
 0
 0
-800
-440
+1000
+550
 
 fclFormBk
 -16777211
@@ -50467,8 +51212,8 @@ Macro Recorder
 1
 0
 0
-800
-440
+1000
+550
 
 fclFormBk
 -16777211
@@ -50489,8 +51234,8 @@ Errors
 1
 0
 0
-800
-440
+1000
+550
 
 fclFormBk
 -16777211
@@ -50511,8 +51256,8 @@ Character Map
 1
 0
 0
-800
-180
+1000
+225
 
 fclFormBk
 -16777211
@@ -50533,8 +51278,8 @@ Find in Files
 1
 0
 0
-800
-440
+1000
+550
 
 fclFormBk
 -16777211
@@ -50547,7 +51292,7 @@ Courier New
 0
 
 Console
-1
+0
 2
 0
 1
@@ -50555,8 +51300,8 @@ Console
 1
 0
 0
-800
-440
+1000
+550
 
 fclFormBk
 -16777211
@@ -50577,8 +51322,8 @@ Options Interface
 1
 0
 0
-360
-520
+450
+650
 
 fclFormBk
 -16777211
@@ -50677,7 +51422,7 @@ Recorded Macro.edt
 16777215
 7171437
 13395456
-279
+393
 bscBookmarkArrow
 #1177FF
 16742161
@@ -51227,6 +51972,171 @@ RGB_2
 fscTextDelimiters
 RGB_4
 128
+kwcBibTeX
+RGB_9
+16733525
+kwcBibTeXFields
+RGB_7
+9145088
+kwcBibTeXStyle
+RGB_1
+16716033
+kwcBibTeXStyleFunctions
+RGB_7
+9145088
+kwcBibTeXStyleOperators
+RGB_7
+9145088
+kwcEditSpecial
+RGB_E
+32896
+kwcEditSpecialEx
+RGB_D
+1993170
+kwcGeneric
+RGB_4
+128
+kwcHTML3Attr
+RGB_3
+8388736
+kwcHTML3Elements
+RGB_2
+14822282
+kwcHTMLAttr
+RGB_7
+9145088
+kwcHTMLChar
+RGB_A
+13382297
+kwcHTMLElements
+RGB_C
+2970272
+kwcINIKeywords
+RGB_0
+9109504
+kwcINISections
+RGB_2
+14822282
+kwcLaTeXClass
+RGB_F
+4814081
+kwcLaTeXClassEx
+RGB_6
+38656
+kwcLaTeXEnv
+RGB_1
+16716033
+kwcLaTeXInput
+RGB_9
+16733525
+kwcLaTeXKeywords
+RGB_0
+9109504
+kwcLaTeXKeywordsEx
+RGB_4
+128
+kwcLaTeXLabels
+RGB_2
+14822282
+kwcLaTeXSections
+RGB_9
+16733525
+kwcMakeIndexStyle
+RGB_7
+9145088
+kwcMPBegin_End
+RGB_6
+38656
+kwcMPConst
+RGB_4
+128
+kwcMPKeywords
+RGB_1
+16716033
+kwcMPMacros
+RGB_7
+9145088
+kwcMPOper
+RGB_3
+8388736
+kwcMPPos
+RGB_E
+32896
+kwcMPTeX
+RGB_4
+128
+kwcMPVar
+RGB_6
+38656
+kwcMUICtrls
+RGB_F
+4814081
+kwcMUIEvents
+RGB_2
+14822282
+kwcMUIProperties
+RGB_7
+9145088
+kwcMUIValues
+RGB_0
+9109504
+kwcNSISDirectives
+RGB_F
+4814081
+kwcNSISInstructions
+RGB_1
+16716033
+kwcNSISMUI2
+RGB_0
+9109504
+kwcNSISPar
+RGB_5
+255
+kwcNSISPlugins
+RGB_2
+14822282
+kwcNSISPredefines
+RGB_4
+128
+kwcNSISStrConst
+RGB_4
+128
+kwcNSISVarConst
+RGB_4
+128
+kwcTeXUnits
+RGB_A
+13382297
+kwcWEGlobalReg
+RGB_5
+255
+kwcWEInput
+RGB_1
+16716033
+kwcWEMacros
+SysNone
+16777216
+kwcWENegReg
+RGB_A
+13382297
+kwcWETags
+RGB_8
+13458026
+kwcWETmpReg
+RGB_C
+2970272
+kwcWEVar
+RGB_9
+16733525
+kwcWEWorkingReg
+RGB_1
+16716033
+kwcXWEAttr
+RGB_0
+9109504
+kwcXWEElements
+RGB_2
+14822282
 RGB_0
 clDarkBlue
 9109504
@@ -51467,6 +52377,183 @@ clRed
 spcWarning
 #00A0FF
 16752640
+swcAddBibArg
+RGB_4
+128
+swcBibliographyArg
+RGB_4
+128
+swcBibStyleArg
+RGB_7
+9145088
+swcChapter
+SysNone
+16777216
+swcCiteArg
+RGB_9
+16733525
+swcDocClassArg
+RGB_C
+2970272
+swcDTXBeginGuard
+RGB_0
+9109504
+swcDTXEndGuard
+RGB_5
+255
+swcDTXSingleGuard
+RGB_E
+32896
+swcEDTLabel
+RGB_1
+16716033
+swcEDTLabelIndented
+RGB_2
+14822282
+swcEDTString1
+RGB_6
+38656
+swcEDTString2
+RGB_E
+32896
+swcEDTString3
+RGB_F
+4814081
+swcFootnote
+RGB_0
+9109504
+swcGlsArg
+RGB_0
+9109504
+swcGlsEntryArg
+RGB_4
+128
+swcHrefArg
+RGB_1
+16716033
+swcHTMLCharArg
+RGB_7
+9145088
+swcHTMLH1Arg
+SysNone
+16777216
+swcHTMLH2Arg
+RGB_0
+9109504
+swcHTMLH3Arg
+RGB_7
+9145088
+swcHTMLH4Arg
+RGB_F
+4814081
+swcHTMLH5Arg
+RGB_8
+13458026
+swcHTMLH6Arg
+RGB_D
+1993170
+swcHTMLHREFArg
+RGB_9
+16733525
+swcHTMLIMGArg
+RGB_1
+16716033
+swcHTMLSRCArg
+RGB_9
+16733525
+swcHTMLTTagArg
+RGB_F
+4814081
+swcHTMLTTagExArg
+RGB_1
+16716033
+swcHTMLTTArg
+RGB_F
+4814081
+swcIncludeArg
+RGB_6
+38656
+swcIndexArg
+RGB_7
+9145088
+swcInputArg
+RGB_1
+16716033
+swcLabelArg
+RGB_7
+9145088
+swcLaTeXBreak
+RGB_1
+16716033
+swcLaTeXBreakSkip
+RGB_7
+9145088
+swclLaTeXArrayEnv
+RGB_7
+9145088
+swclLaTeXCommentEx
+RGB_B
+13850042
+swclLaTeXEnvName
+RGB_6
+38656
+swclLaTeXFigEnv
+RGB_8
+13458026
+swclLaTeXTableEnv
+RGB_8
+13458026
+swclLaTeXTabularEnv
+RGB_7
+9145088
+swcNSISVar
+RGB_4
+128
+swcNumber
+RGB_5
+255
+swcNumberNot
+RGB_F
+4814081
+swcPart
+RGB_4
+128
+swcRCSAdd
+RGB_1
+16716033
+swcRCSDel
+RGB_5
+255
+swcRCSMark
+RGB_7
+9145088
+swcRefArg
+RGB_0
+9109504
+swcSection
+RGB_0
+9109504
+swcSubsection
+RGB_7
+9145088
+swcSubsubsection
+RGB_F
+4814081
+swcTagArg
+RGB_7
+9145088
+swcTextit
+RGB_4
+128
+swcTextsl
+RGB_8
+13458026
+swcTexttt
+RGB_8
+13458026
+swcUsePackageArg
+RGB_1
+16716033
 SysBtnFace
 $1000001
 15790320
@@ -51855,7 +52942,7 @@ clBlack
 16777216
 
 16777216
-91
+205
 RGB_0
 clDarkBlue
 RGB_1
@@ -52038,6 +53125,234 @@ xclEnvBk
 clGhostWhite
 xclEnvBkLeftGradient
 #F2F2F8
+kwcGeneric
+RGB_4
+kwcEditSpecial
+RGB_E
+kwcEditSpecialEx
+RGB_D
+kwcMUICtrls
+RGB_F
+kwcMUIEvents
+RGB_2
+kwcMUIProperties
+RGB_7
+kwcMUIValues
+RGB_0
+kwcWEMacros
+SysNone
+kwcWETmpReg
+RGB_C
+kwcWEGlobalReg
+RGB_5
+kwcWEWorkingReg
+RGB_1
+kwcWENegReg
+RGB_A
+kwcWETags
+RGB_8
+kwcWEVar
+RGB_9
+kwcWEInput
+RGB_1
+kwcINISections
+RGB_2
+kwcINIKeywords
+RGB_0
+kwcLaTeXEnv
+RGB_1
+kwcLaTeXInput
+RGB_9
+kwcLaTeXClass
+RGB_F
+kwcLaTeXClassEx
+RGB_6
+kwcLaTeXLabels
+RGB_2
+kwcLaTeXSections
+RGB_9
+kwcLaTeXKeywords
+RGB_0
+kwcLaTeXKeywordsEx
+RGB_4
+kwcTeXUnits
+RGB_A
+kwcBibTeX
+RGB_9
+kwcBibTeXFields
+RGB_7
+kwcBibTeXStyle
+RGB_1
+kwcBibTeXStyleFunctions
+RGB_7
+kwcBibTeXStyleOperators
+RGB_7
+kwcMakeIndexStyle
+RGB_7
+kwcMPMacros
+RGB_7
+kwcMPKeywords
+RGB_1
+kwcMPVar
+RGB_6
+kwcMPConst
+RGB_4
+kwcMPBegin_End
+RGB_6
+kwcMPTeX
+RGB_4
+kwcMPPos
+RGB_E
+kwcMPOper
+RGB_3
+kwcNSISInstructions
+RGB_1
+kwcNSISDirectives
+RGB_F
+kwcNSISPredefines
+RGB_4
+kwcNSISStrConst
+RGB_4
+kwcNSISVarConst
+RGB_4
+kwcNSISMUI2
+RGB_0
+kwcNSISPar
+RGB_5
+kwcNSISPlugins
+RGB_2
+kwcHTMLChar
+RGB_A
+kwcHTMLAttr
+RGB_7
+kwcHTMLElements
+RGB_C
+kwcHTML3Attr
+RGB_3
+kwcHTML3Elements
+RGB_2
+kwcXWEAttr
+RGB_0
+kwcXWEElements
+RGB_2
+swclLaTeXArrayEnv
+RGB_7
+swclLaTeXTabularEnv
+RGB_7
+swclLaTeXTableEnv
+RGB_8
+swclLaTeXFigEnv
+RGB_8
+swclLaTeXEnvName
+RGB_6
+swcLaTeXBreakSkip
+RGB_7
+swcLaTeXBreak
+RGB_1
+swcDocClassArg
+RGB_C
+swcUsePackageArg
+RGB_1
+swcIncludeArg
+RGB_6
+swcInputArg
+RGB_1
+swcBibliographyArg
+RGB_4
+swcAddBibArg
+RGB_4
+swcBibStyleArg
+RGB_7
+swcGlsEntryArg
+RGB_4
+swcIndexArg
+RGB_7
+swcLabelArg
+RGB_7
+swcTagArg
+RGB_7
+swcRefArg
+RGB_0
+swcGlsArg
+RGB_0
+swcCiteArg
+RGB_9
+swcTextit
+RGB_4
+swcTextsl
+RGB_8
+swcTexttt
+RGB_8
+swcFootnote
+RGB_0
+swcPart
+RGB_4
+swcChapter
+SysNone
+swcSection
+RGB_0
+swcSubsection
+RGB_7
+swcSubsubsection
+RGB_F
+swcHrefArg
+RGB_1
+swcRCSMark
+RGB_7
+swcRCSAdd
+RGB_1
+swcRCSDel
+RGB_5
+swcHTMLCharArg
+RGB_7
+swcHTMLHREFArg
+RGB_9
+swcHTMLSRCArg
+RGB_9
+swcHTMLH1Arg
+SysNone
+swcHTMLH2Arg
+RGB_0
+swcHTMLH3Arg
+RGB_7
+swcHTMLH4Arg
+RGB_F
+swcHTMLH5Arg
+RGB_8
+swcHTMLH6Arg
+RGB_D
+swcHTMLIMGArg
+RGB_1
+swcHTMLTTArg
+RGB_F
+swcHTMLTTagExArg
+RGB_1
+swcHTMLTTagArg
+RGB_F
+swcEDTString1
+RGB_6
+swcEDTString2
+RGB_E
+swcEDTString3
+RGB_F
+swcEDTLabel
+RGB_1
+swcEDTLabelIndented
+RGB_2
+swcDTXBeginGuard
+RGB_0
+swcDTXEndGuard
+RGB_5
+swcDTXSingleGuard
+RGB_E
+swcNSISVar
+RGB_4
+swcNumber
+RGB_5
+swcNumberNot
+RGB_F
+swclLaTeXCommentEx
+RGB_B
 
 High Contrast Text (White)
 clBlack
@@ -52048,7 +53363,7 @@ clWhite
 16777216
 
 16777216
-91
+205
 RGB_0
 clAqua
 RGB_1
@@ -52231,6 +53546,234 @@ xclEnvBk
 #20283F
 xclEnvBkLeftGradient
 #20284B
+kwcGeneric
+RGB_4
+kwcEditSpecial
+RGB_E
+kwcEditSpecialEx
+RGB_D
+kwcMUICtrls
+RGB_F
+kwcMUIEvents
+RGB_2
+kwcMUIProperties
+RGB_7
+kwcMUIValues
+RGB_0
+kwcWEMacros
+SysNone
+kwcWETmpReg
+RGB_C
+kwcWEGlobalReg
+RGB_5
+kwcWEWorkingReg
+RGB_1
+kwcWENegReg
+RGB_A
+kwcWETags
+RGB_8
+kwcWEVar
+RGB_9
+kwcWEInput
+RGB_1
+kwcINISections
+RGB_2
+kwcINIKeywords
+RGB_0
+kwcLaTeXEnv
+RGB_1
+kwcLaTeXInput
+RGB_9
+kwcLaTeXClass
+RGB_F
+kwcLaTeXClassEx
+RGB_6
+kwcLaTeXLabels
+RGB_2
+kwcLaTeXSections
+RGB_9
+kwcLaTeXKeywords
+RGB_0
+kwcLaTeXKeywordsEx
+RGB_4
+kwcTeXUnits
+RGB_A
+kwcBibTeX
+RGB_9
+kwcBibTeXFields
+RGB_7
+kwcBibTeXStyle
+RGB_1
+kwcBibTeXStyleFunctions
+RGB_7
+kwcBibTeXStyleOperators
+RGB_7
+kwcMakeIndexStyle
+RGB_7
+kwcMPMacros
+RGB_7
+kwcMPKeywords
+RGB_1
+kwcMPVar
+RGB_6
+kwcMPConst
+RGB_4
+kwcMPBegin_End
+RGB_6
+kwcMPTeX
+RGB_4
+kwcMPPos
+RGB_E
+kwcMPOper
+RGB_3
+kwcNSISInstructions
+RGB_1
+kwcNSISDirectives
+RGB_F
+kwcNSISPredefines
+RGB_4
+kwcNSISStrConst
+RGB_4
+kwcNSISVarConst
+RGB_4
+kwcNSISMUI2
+RGB_0
+kwcNSISPar
+RGB_5
+kwcNSISPlugins
+RGB_2
+kwcHTMLChar
+RGB_A
+kwcHTMLAttr
+RGB_7
+kwcHTMLElements
+RGB_C
+kwcHTML3Attr
+RGB_3
+kwcHTML3Elements
+RGB_2
+kwcXWEAttr
+RGB_0
+kwcXWEElements
+RGB_2
+swclLaTeXArrayEnv
+RGB_7
+swclLaTeXTabularEnv
+RGB_7
+swclLaTeXTableEnv
+RGB_8
+swclLaTeXFigEnv
+RGB_8
+swclLaTeXEnvName
+RGB_6
+swcLaTeXBreakSkip
+RGB_7
+swcLaTeXBreak
+RGB_1
+swcDocClassArg
+RGB_C
+swcUsePackageArg
+RGB_1
+swcIncludeArg
+RGB_6
+swcInputArg
+RGB_1
+swcBibliographyArg
+RGB_4
+swcAddBibArg
+RGB_4
+swcBibStyleArg
+RGB_7
+swcGlsEntryArg
+RGB_4
+swcIndexArg
+RGB_7
+swcLabelArg
+RGB_7
+swcTagArg
+RGB_7
+swcRefArg
+RGB_0
+swcGlsArg
+RGB_0
+swcCiteArg
+RGB_9
+swcTextit
+RGB_4
+swcTextsl
+RGB_8
+swcTexttt
+RGB_8
+swcFootnote
+RGB_0
+swcPart
+RGB_4
+swcChapter
+SysNone
+swcSection
+RGB_0
+swcSubsection
+RGB_7
+swcSubsubsection
+RGB_F
+swcHrefArg
+RGB_1
+swcRCSMark
+RGB_7
+swcRCSAdd
+RGB_1
+swcRCSDel
+RGB_5
+swcHTMLCharArg
+RGB_7
+swcHTMLHREFArg
+RGB_9
+swcHTMLSRCArg
+RGB_9
+swcHTMLH1Arg
+SysNone
+swcHTMLH2Arg
+RGB_0
+swcHTMLH3Arg
+RGB_7
+swcHTMLH4Arg
+RGB_F
+swcHTMLH5Arg
+RGB_8
+swcHTMLH6Arg
+RGB_D
+swcHTMLIMGArg
+RGB_1
+swcHTMLTTArg
+RGB_F
+swcHTMLTTagExArg
+RGB_1
+swcHTMLTTagArg
+RGB_F
+swcEDTString1
+RGB_6
+swcEDTString2
+RGB_E
+swcEDTString3
+RGB_F
+swcEDTLabel
+RGB_1
+swcEDTLabelIndented
+RGB_2
+swcDTXBeginGuard
+RGB_0
+swcDTXEndGuard
+RGB_5
+swcDTXSingleGuard
+RGB_E
+swcNSISVar
+RGB_4
+swcNumber
+RGB_5
+swcNumberNot
+RGB_F
+swclLaTeXCommentEx
+RGB_B
 
 High Contrast Text (Yellow)
 clBlack
@@ -52241,7 +53784,7 @@ clYellow
 16777216
 
 16777216
-91
+205
 RGB_0
 clAqua
 RGB_1
@@ -52424,6 +53967,234 @@ xclEnvBk
 #20283F
 xclEnvBkLeftGradient
 #20284B
+kwcGeneric
+RGB_4
+kwcEditSpecial
+RGB_E
+kwcEditSpecialEx
+RGB_D
+kwcMUICtrls
+RGB_F
+kwcMUIEvents
+RGB_2
+kwcMUIProperties
+RGB_7
+kwcMUIValues
+RGB_0
+kwcWEMacros
+SysNone
+kwcWETmpReg
+RGB_C
+kwcWEGlobalReg
+RGB_5
+kwcWEWorkingReg
+RGB_1
+kwcWENegReg
+RGB_A
+kwcWETags
+RGB_8
+kwcWEVar
+RGB_9
+kwcWEInput
+RGB_1
+kwcINISections
+RGB_2
+kwcINIKeywords
+RGB_0
+kwcLaTeXEnv
+RGB_1
+kwcLaTeXInput
+RGB_9
+kwcLaTeXClass
+RGB_F
+kwcLaTeXClassEx
+RGB_6
+kwcLaTeXLabels
+RGB_2
+kwcLaTeXSections
+RGB_9
+kwcLaTeXKeywords
+RGB_0
+kwcLaTeXKeywordsEx
+RGB_4
+kwcTeXUnits
+RGB_A
+kwcBibTeX
+RGB_9
+kwcBibTeXFields
+RGB_7
+kwcBibTeXStyle
+RGB_1
+kwcBibTeXStyleFunctions
+RGB_7
+kwcBibTeXStyleOperators
+RGB_7
+kwcMakeIndexStyle
+RGB_7
+kwcMPMacros
+RGB_7
+kwcMPKeywords
+RGB_1
+kwcMPVar
+RGB_6
+kwcMPConst
+RGB_4
+kwcMPBegin_End
+RGB_6
+kwcMPTeX
+RGB_4
+kwcMPPos
+RGB_E
+kwcMPOper
+RGB_3
+kwcNSISInstructions
+RGB_1
+kwcNSISDirectives
+RGB_F
+kwcNSISPredefines
+RGB_4
+kwcNSISStrConst
+RGB_4
+kwcNSISVarConst
+RGB_4
+kwcNSISMUI2
+RGB_0
+kwcNSISPar
+RGB_5
+kwcNSISPlugins
+RGB_2
+kwcHTMLChar
+RGB_A
+kwcHTMLAttr
+RGB_7
+kwcHTMLElements
+RGB_C
+kwcHTML3Attr
+RGB_3
+kwcHTML3Elements
+RGB_2
+kwcXWEAttr
+RGB_0
+kwcXWEElements
+RGB_2
+swclLaTeXArrayEnv
+RGB_7
+swclLaTeXTabularEnv
+RGB_7
+swclLaTeXTableEnv
+RGB_8
+swclLaTeXFigEnv
+RGB_8
+swclLaTeXEnvName
+RGB_6
+swcLaTeXBreakSkip
+RGB_7
+swcLaTeXBreak
+RGB_1
+swcDocClassArg
+RGB_C
+swcUsePackageArg
+RGB_1
+swcIncludeArg
+RGB_6
+swcInputArg
+RGB_1
+swcBibliographyArg
+RGB_4
+swcAddBibArg
+RGB_4
+swcBibStyleArg
+RGB_7
+swcGlsEntryArg
+RGB_4
+swcIndexArg
+RGB_7
+swcLabelArg
+RGB_7
+swcTagArg
+RGB_7
+swcRefArg
+RGB_0
+swcGlsArg
+RGB_0
+swcCiteArg
+RGB_9
+swcTextit
+RGB_4
+swcTextsl
+RGB_8
+swcTexttt
+RGB_8
+swcFootnote
+RGB_0
+swcPart
+RGB_4
+swcChapter
+SysNone
+swcSection
+RGB_0
+swcSubsection
+RGB_7
+swcSubsubsection
+RGB_F
+swcHrefArg
+RGB_1
+swcRCSMark
+RGB_7
+swcRCSAdd
+RGB_1
+swcRCSDel
+RGB_5
+swcHTMLCharArg
+RGB_7
+swcHTMLHREFArg
+RGB_9
+swcHTMLSRCArg
+RGB_9
+swcHTMLH1Arg
+SysNone
+swcHTMLH2Arg
+RGB_0
+swcHTMLH3Arg
+RGB_7
+swcHTMLH4Arg
+RGB_F
+swcHTMLH5Arg
+RGB_8
+swcHTMLH6Arg
+RGB_D
+swcHTMLIMGArg
+RGB_1
+swcHTMLTTArg
+RGB_F
+swcHTMLTTagExArg
+RGB_1
+swcHTMLTTagArg
+RGB_F
+swcEDTString1
+RGB_6
+swcEDTString2
+RGB_E
+swcEDTString3
+RGB_F
+swcEDTLabel
+RGB_1
+swcEDTLabelIndented
+RGB_2
+swcDTXBeginGuard
+RGB_0
+swcDTXEndGuard
+RGB_5
+swcDTXSingleGuard
+RGB_E
+swcNSISVar
+RGB_4
+swcNumber
+RGB_5
+swcNumberNot
+RGB_F
+swclLaTeXCommentEx
+RGB_B
 
 High Contrast Text (Lime)
 clBlack
@@ -52434,7 +54205,7 @@ clLime
 16777216
 
 16777216
-91
+205
 RGB_0
 clAqua
 RGB_1
@@ -52617,6 +54388,234 @@ xclEnvBk
 #20283F
 xclEnvBkLeftGradient
 #20284B
+kwcGeneric
+RGB_4
+kwcEditSpecial
+RGB_E
+kwcEditSpecialEx
+RGB_D
+kwcMUICtrls
+RGB_F
+kwcMUIEvents
+RGB_2
+kwcMUIProperties
+RGB_7
+kwcMUIValues
+RGB_0
+kwcWEMacros
+SysNone
+kwcWETmpReg
+RGB_C
+kwcWEGlobalReg
+RGB_5
+kwcWEWorkingReg
+RGB_1
+kwcWENegReg
+RGB_A
+kwcWETags
+RGB_8
+kwcWEVar
+RGB_9
+kwcWEInput
+RGB_1
+kwcINISections
+RGB_2
+kwcINIKeywords
+RGB_0
+kwcLaTeXEnv
+RGB_1
+kwcLaTeXInput
+RGB_9
+kwcLaTeXClass
+RGB_F
+kwcLaTeXClassEx
+RGB_6
+kwcLaTeXLabels
+RGB_2
+kwcLaTeXSections
+RGB_9
+kwcLaTeXKeywords
+RGB_0
+kwcLaTeXKeywordsEx
+RGB_4
+kwcTeXUnits
+RGB_A
+kwcBibTeX
+RGB_9
+kwcBibTeXFields
+RGB_7
+kwcBibTeXStyle
+RGB_1
+kwcBibTeXStyleFunctions
+RGB_7
+kwcBibTeXStyleOperators
+RGB_7
+kwcMakeIndexStyle
+RGB_7
+kwcMPMacros
+RGB_7
+kwcMPKeywords
+RGB_1
+kwcMPVar
+RGB_6
+kwcMPConst
+RGB_4
+kwcMPBegin_End
+RGB_6
+kwcMPTeX
+RGB_4
+kwcMPPos
+RGB_E
+kwcMPOper
+RGB_3
+kwcNSISInstructions
+RGB_1
+kwcNSISDirectives
+RGB_F
+kwcNSISPredefines
+RGB_4
+kwcNSISStrConst
+RGB_4
+kwcNSISVarConst
+RGB_4
+kwcNSISMUI2
+RGB_0
+kwcNSISPar
+RGB_5
+kwcNSISPlugins
+RGB_2
+kwcHTMLChar
+RGB_A
+kwcHTMLAttr
+RGB_7
+kwcHTMLElements
+RGB_C
+kwcHTML3Attr
+RGB_3
+kwcHTML3Elements
+RGB_2
+kwcXWEAttr
+RGB_0
+kwcXWEElements
+RGB_2
+swclLaTeXArrayEnv
+RGB_7
+swclLaTeXTabularEnv
+RGB_7
+swclLaTeXTableEnv
+RGB_8
+swclLaTeXFigEnv
+RGB_8
+swclLaTeXEnvName
+RGB_6
+swcLaTeXBreakSkip
+RGB_7
+swcLaTeXBreak
+RGB_1
+swcDocClassArg
+RGB_C
+swcUsePackageArg
+RGB_1
+swcIncludeArg
+RGB_6
+swcInputArg
+RGB_1
+swcBibliographyArg
+RGB_4
+swcAddBibArg
+RGB_4
+swcBibStyleArg
+RGB_7
+swcGlsEntryArg
+RGB_4
+swcIndexArg
+RGB_7
+swcLabelArg
+RGB_7
+swcTagArg
+RGB_7
+swcRefArg
+RGB_0
+swcGlsArg
+RGB_0
+swcCiteArg
+RGB_9
+swcTextit
+RGB_4
+swcTextsl
+RGB_8
+swcTexttt
+RGB_8
+swcFootnote
+RGB_0
+swcPart
+RGB_4
+swcChapter
+SysNone
+swcSection
+RGB_0
+swcSubsection
+RGB_7
+swcSubsubsection
+RGB_F
+swcHrefArg
+RGB_1
+swcRCSMark
+RGB_7
+swcRCSAdd
+RGB_1
+swcRCSDel
+RGB_5
+swcHTMLCharArg
+RGB_7
+swcHTMLHREFArg
+RGB_9
+swcHTMLSRCArg
+RGB_9
+swcHTMLH1Arg
+SysNone
+swcHTMLH2Arg
+RGB_0
+swcHTMLH3Arg
+RGB_7
+swcHTMLH4Arg
+RGB_F
+swcHTMLH5Arg
+RGB_8
+swcHTMLH6Arg
+RGB_D
+swcHTMLIMGArg
+RGB_1
+swcHTMLTTArg
+RGB_F
+swcHTMLTTagExArg
+RGB_1
+swcHTMLTTagArg
+RGB_F
+swcEDTString1
+RGB_6
+swcEDTString2
+RGB_E
+swcEDTString3
+RGB_F
+swcEDTLabel
+RGB_1
+swcEDTLabelIndented
+RGB_2
+swcDTXBeginGuard
+RGB_0
+swcDTXEndGuard
+RGB_5
+swcDTXSingleGuard
+RGB_E
+swcNSISVar
+RGB_4
+swcNumber
+RGB_5
+swcNumberNot
+RGB_F
+swclLaTeXCommentEx
+RGB_B
 
 Default Controls
 

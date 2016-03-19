@@ -1,6 +1,6 @@
 % Macro Keywords List
 % -*- DATA:EDT -*-
-% Created: Thursday, June 11, 2015 at 13:02
+% Created: Sunday, March 13, 2016 at 17:43
 
 AboutWinEdt
 ActivateChild
@@ -189,6 +189,7 @@ GetPrjList
 GetPrjListCount
 GetRM
 GetScreenDPI
+GetScriptTagsAndFonts
 GetSearchData
 GetSel
 GetShortFilename

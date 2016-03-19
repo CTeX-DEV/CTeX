@@ -1,1 +1,0 @@
-    PATH="%P;%@('MFINPUTS');;%$('TeX-Root');\metafont//;"+

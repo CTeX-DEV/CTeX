@@ -1,16 +1,43 @@
 // -*- ASCII:EDT -*-
+// %b\Exec\PDF\PDF Preview.edt
+//////////////////////////////
 // Open PDF Document ...
+// ----------------------------------------------------------------------------
 
   Requires(20130513); // Requires this build of WinEdt to work properly
 
   PushTagsandRegisters;
 
+// ===============================================================================
+
+// SumatraPDF is the best pdf previewer for this purpose:
+// --------------------------------------------------------------------------
+// The free Sumatra PDF viewer  has a built-in support for forward and
+// inverse search. It supports synctex...
+
+// Sumatra?
+
+  FindInString(`%$('PDF-View');`,!'Sumatra',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP(!'not_Sumatra')");
+
+  Run('%$("PDF-View"); -reuse-instance "%P\%N.pdf"');
+  PopTagsandRegisters;
+  Exit;
+
+:not_Sumatra:: ======================================================
+
+// Adobe is not suitable for previewing working files compiled with TeX
+// It locks the output and causes all kind of problems (see Adobe Blues)
+
+// Adobe?
   FindInString(`%$('PDF-View');`,!'Adobe',1,2,1000,1);
   IfOK(!"JMP(!'Adobe')");
   FindInString(`%$('PDF-View');`,!'Acrobat.exe',1,2,1000,1);
   IfOK(!"JMP(!'Adobe')");
   FindInString(`%$('PDF-View');`,!'AcroRd',1,2,1000,1);
   IfOK(!"JMP(!'Adobe')");
+
+// ===============================================================================
 
 // PDF-XChange?
 
@@ -32,10 +59,20 @@
 
 :not_GS:: ===========================================================
 
-// Sumatra?
+// Foxit?
+
+  FindInString(`%$('PDF-View');`,!'Foxit',1,2,1000,1);
+  IfOK(!"Relax;",!"JMP(!'not_Foxit')");
+  Run('%$("PDF-View"); "%P\%N.pdf"');
+  PopTagsandRegisters;
+  Exit;
+
+:not_Foxit:: ========================================================
+
+// Sumatra via DDE?
 
   FindInString(`%$('PDF-View');`,!'Sumatra',1,2,1000,1);
-  IfOK(!"Relax;",!"JMP(!'not_Sumatra')");
+  IfOK(!"Relax;",!"JMP(!'not_Sumatra_dde')");
 
   SendMessage("%N.pdf - SumatraPDF");
   IfOK(!"JMP(!'Sumatra_Running');");
@@ -56,17 +93,7 @@
   PopTagsandRegisters;
   Exit;
 
-:not_Sumatra:: ======================================================
-
-// Foxit?
-
-  FindInString(`%$('PDF-View');`,!'Foxit',1,2,1000,1);
-  IfOK(!"Relax;",!"JMP(!'not_Foxit')");
-  Run('%$("PDF-View"); "%P\%N.pdf"');
-  PopTagsandRegisters;
-  Exit;
-
-:not_Foxit:: ========================================================
+:not_Sumatra_dde:: ==================================================
 
 // Some other viewer ...
 

@@ -1,9 +1,0 @@
-  END="Active Strings"
-  ITEM="Auto Complete"
-    ICON="Complete"
-    FILENAME="ConfigEx\AutoComplete.ini"
-    ACTION="$Help"
-      MACRO="HTMLHelp('%B\Doc\Help\WinEdt.chm',1,0,"+
-            "'Config/Active.html#AUTO_COMPLETE');"
-  END="Auto Complete"
-  ITEM="Abbreviations"

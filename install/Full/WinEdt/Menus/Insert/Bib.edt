@@ -3,7 +3,7 @@
    InsLine;
    GoToBeginningOfLine;
    Mark(9);
-   ReadFile("%B\Templates\Bib\%!9.bib",8);
+   ReadFile("Templates\Bib\%!9.bib",8);
    InsText("%!8");
    LetReg(8,'');
    Goto(9);

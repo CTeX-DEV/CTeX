@@ -1,552 +1,547 @@
 * WinEdt News.txt
-Last modified on Tuesday, August 4, 2015  13:15
+Last modified on Thursday, February 18, 2016  13:05
 __________________________________________________________________
 
 
-WinEdt 9 is a Unicode (UTF-8) text editor built on WinEdt 8 sources
-and compiled with Delphi XE6.
+WinEdt 10 is a Unicode (UTF-8) text editor built on WinEdt 9
+sources and compiled with a brand new Delphi 10 Seattle
+(Professional).
 
 UPGRADING ISSUES:
 =================
 
-WinEdt 9 is installed parallel to WinEdt 8, 7, 6 or 5 and you can
-continue to use an older version of WinEdt and possibly uninstall
-WinEdt 9 if you prefer the old version.
+WinEdt 10 is installed parallel to WinEdt 9, 8, 7, 6 or 5 and you
+can continue to use an older version of WinEdt and possibly
+uninstall WinEdt 10 if you prefer the old version.
 
-IMPORTANT: If you already have WinEdt 5.x, 6 or 7 on your system
-you cannot import your old settings directly into WinEdt 9! If you
-already have WinEdt 8 installed the migration is easy: just execute
-the command 'Import WinEdt 8 Settings' from within WinEdt 9 and
-you're done...
+NOTE: WinEdt 10 does not run on Windows XP. Windows 7 or later is
+required for this version to run on your computer! This version was
+developed and extensively tested on Windows 10.
 
-  Upgrading from WinEdt 9.0 to 9.1 is easy:
+IMPORTANT: If you already have WinEdt 5.x, 6, 7 or 8 on your system
+you cannot import your old settings directly into WinEdt 10! If you
+already have WinEdt 9 installed the migration is easy: just execute
+the command 'Import WinEdt 9 Settings' from the Options Menu ->
+Maintenance within WinEdt 10 and you're done...
+
+  Upgrading from WinEdt 10.0 is easy:
 
     Close WinEdt and install the new version over the old one.
     Executing the command 'Upgrade Personal Configuration' will
-    merge your custom WinEdt 9 settings with the new defaults...
+    merge your custom WinEdt 10 settings with the new defaults...
 
-REGISTRATION: WinEdt 9 series uses the same Registration Data as
-WinEdt 8, 7 and 6. You will, however, have to enter the data (Name
-and Code) again in the Registration Dialog of WinEdt 9. WinEdt 5
-users will have to pay an upgrade fee if they want to register
-WinEdt 9 (see www.winedt.com for details).
-
-------------------------------------------------------------------
-
-WinEdt 9 [Build 20150731 (v. 9.1)]
-==================================
-
-- Auto completion can now also be triggered by the Tab key (as well
-as Enter). This was suggested by a few users that are accustomed to
-such behavior in other applications.
-
-- Automatic assignment of DDE service for Adobe DC (for those that
-insist on using Adobe as a working previewer for pdf documents
-compiled from TeX sources)...
-
-- Minor improvements to BibTeX.edt compilation macro.
-
-- Minor bug fixes.
+REGISTRATION: WinEdt 10 series uses the same Registration Data as
+WinEdt 9, 8, 7 and 6. You will, however, have to enter the data
+(Name and Code) again in the Registration Dialog of WinEdt 10.
+WinEdt 5 users will have to pay an upgrade fee if they want to
+register WinEdt 10 (see www.winedt.com for details).
 
 ------------------------------------------------------------------
 
-WinEdt 9 [Build 20150515 (v. 9.1)]
-==================================
-
-- WinEdt features a new configurable auto-completion mechanism. If
-enabled the auto-completion popup window with a list of matching
-items (suggestions) shows up while you are typing certain items
-(such as LaTeX commands or environments). You can continue to type
-text in order to filter/ refine the number of suggested items.
-Pressing Enter inserts the selected item (or template).
-
-[Page] Down and Up keys can be used to move through the list of
-suggested items. Esc key (or any other shortcut) hides the
-auto-completion Window. You can (but do not have to) use the mouse
-interface to insert an item by double-clicking on it. A few
-keyboard shortcuts (like Down and Enter) will usually do if (like
-me) you don't want to use the mouse...
-
-In the default settings the auto-completion form can be manually
-activated (and hidden) by pressing the ESC key.
-
-The auto-completion form is resizable: size it to some dimensions
-suitable for your needs and the size of your screen. Its initial
-position is determined by the insertion point (caret) in your text.
-This form never gets focus and you can continue typing your text
-until you see the item or template that you want to insert, at
-which point press Enter to perform completion.
-
-A new [AUTO_COMPLETE] configuration section has been introduced to
-configure this functionality. Two global properties can be used to
-disable it:
-
-  DISABLE_AUTO_COMPLETION=1
-  DISABLE_ESC_COMPLETION=1
-
-They are also available in the Preferences Dialog | Editor...
-
-Completion of TeX environments allows you to insert nxm tables,
-arrays, or matrices, lists or equations. Eg. typing:
-
-  \begin{a
-
-will give a suggestion to insert n x m array template.
-
-It is also possible to enable LaTeX commands completion in which
-case typing
-
-  \beg
-
-will produce a list of completions with \begin{...} being the first
-item. Pressing Enter will continue auto-completions by offering
-available environments. You can type a letter or two to refine the
-list and then press Enter to insert the selected template.
-
-Beside standard LaTeX and AMS LaTeX environments WinEdt also
-collects user-defined environments in the preamble and they can be
-inserted as well. For some users this is a convenient alternative
-to having to choose numerous items from the Insert menu or toolbar.
-
-A new event handler "Dynamic Dictionaries" has been introduced to
-build a dictionary for user-defined environments and commands (with
-and without arguments). These dictionaries are used for
-auto-completion (and as always they are user-customizable - through
-the Advanced -> Event Handlers Section of the Options Interface).
-
-New macros can be used to manually activate or hide the
-Auto-Completion form:
-
-  AutoPopup(ESC: 0..1, "Item Name");
-  AutoPopupHide;
-
-AutoPopup(1); is used in the Escape Key event handler. It only
-activates the form when the global property DISABLE_ESC_COMPLETION
-is set to 0.
-
-For those who don't want the distraction of the completion form
-popping up all the time, a few active strings such as "\begin{}"
-for TeX and "<>" for HTML have been defined to activate completion
-via active strings.
-
-This functionality is configurable. Check the default settings in
-the Auto Completion and Active Strings configuration sections of
-the Options Interface. You can add your own commands and
-environments or comment out any that you never use. Some users may
-find this an essential feature while others may consider it an
-unwanted and annoying distraction. It is easy to disable or
-reconfigure it to only allow manual activation via the ESC key. The
-default settings have it enabled because new users may otherwise
-not be aware of its existence and for those who do not much like it
-(me included) it is easy to turn off (no need to complain to me
-about it being annoying)...
-
-- The Advanced Section of the Options Interface now contains
-toolbar buttons to browse the install directory (usually readonly)
-and to make and open a local copy of a macro or configuration
-script (assuming that a global readonly copy is currently opened in
-WinEdt).
-
-For example, the new auto-completion uses numerous macros in
-"%B\Macros\Auto Complete" folder. Advanced users may want to see
-how they work and perhaps make some modifications to meet their own
-particular needs. Rather than listing all of them in the Options
-Interface you can use this method to create and edit a local copy
-of event handler macros like this...
-
-- New macros
-
-  LetTempReg("Value","!");
-  // Assign a value to temporary registers %? ,%!?, %-?, or %#?
-  // when the second parameter is "", "!", "-", or "#"...
-  // This macro is used extensively in Auto Completion event handler macros.
-
-  EnableDict("Dictionary Name",Enable: -1..1, Reload: 0..1);
-  // Makes Dynamic Dictionaries for user-defined environments
-  // and commands easy to load (behind the scene).
-  // Dictionaries are automatically updated with the contents of
-  // your preamble when the tree is rebuilt or when you manually
-  // start the auto-completion form...
-
-- WinEdt bullets used as placeholders in many templates (including
-the new auto completion mechanism) are now represented by the
-proper Unicode Character 'BULLET' (U+2022) rather than an asterisk
-- in order to make them easier to spot. The Screen translation
-table has been modified for this purpose:
-
-  #127 -> "•" // Unicode Character 'BULLET' (U+2022)
-
-If you prefer something else (like *) modify this translation table
-according to your preferences. Internally this symbol remains
-represented by the non-printable character U+007F (#127), just like
-in older versions (for good reasons)...
-
-The Tools menu contains items and shortcuts to insert or quickly
-move through bullets by selecting them with the shortcuts
-Ctrl+[Shift+]Space. Once the placeholder (bullet) is selected you
-can start typing text that should replace it before a template
-environment is ready for compilation...
-
-For example the "\begin{cases}" auto-completion will insert
-something like:
-
-    \begin{cases}
-      , & \mbox{if }  \\
-      , & \mbox{if }  \\
-      , & \mbox{otherwise}.
-    \end{cases}
-
-You have to fill in the missing info marked by the Bullets: use the
-Ctrl+Space shortcut to move through them...
-
-- A new list interface (similar to the Windows Open Dialog) has
-been introduced to quickly select, open, or close a document. For
-users with the habit of having lots of documents opened at any time
-this interface may be preferable to browsing/ searching document
-tabs in order to activate a document. The menu item Window -> MDI
-Shortcuts -> Document List (F2) can be used to activate the new
-Document List dialog with the list of currently opened documents.
-Try it!
-
-- This interface can be customized and used to display and make
-selections in custom file lists... It can be configured through a
-new configuration section:
-
-  [DOCUMENT_LIST]
-
-available in the Options Interface -> Additional GUI Controls
-(after Document Tabs). Most of the tasks can be performed through
-the keyboard interface (rather than being forced to use a mouse).
-
-- A new macro has been introduced to launch this dialog with
-properties other than defaults as specified in the [DOCUMENT_LIST]
-configuration section (if required):
-
-  ShowDocumentList(
-    Data Flags: 0..11,
-    Fast: 0..1,
-    "CustomList",
-    Flags_on: 0..11111111,
-    Flags_off: 0..11111111,
-    MoveTab: 0..3,
-    UseCustomTypeFilter: 0..1,
-    "CustomTypeFilter");
-
-   Data Flags (from right to left):
-     Include Opened Documents
-     Include Recent Files List
-
-   Enabling the Fast property prevents WinEdt from checking for file
-   existence or file date stamp, which can be slow for large lists
-   on remote drives. If such checking makes this interface too slow
-   enable this flag and sacrifice date stamp info to improve the
-   performance in large lists...
-
-   CustomList is LF or CR+LF separated list of files supplied by the
-   caller. Eg. one can use ListFolderFiles or ListOpenedFiles
-   macros to produce and filter the list that will be displayed in
-   this interface. This parameter can be empty if Data Flags are
-   set so as to display standard file lists or it can be combined
-   with standard lists.
-
-   Flags suppress default properties in [DOCUMENT_LIST].
-   Flags_on force them enabled and Flags_off force them disabled.
-   If both flags are identical the default is applied.
-   Default properties are restored to their previous values after
-   the interface is finished.
-
-   In most cases both parameters can be set to 0...
-
-   Flags (from right to left):
-       EXIT_ON_ENTER
-       OPEN_ON_ENTER
-       CANCEL_ON_ESC
-       FOCUS_DROP_DOWN_LIST
-       HIDE_DROP_DOWN_LIST
-       LIST_NEW_DOCUMENTS
-       SELECT_ACTIVE_DOCUMENT
-       SHOW_IMAGES
-
-   These properties are described in [DOCUMENT_LIST] configuration
-   section...
-
-   Nonzero value for MoveTab property sets: MOVE_DOCUMENT_TAB=MoveTab-2
-
-   UseCustomTypeFilter=1 indicates that the specified
-   CustomTypeFilter is applied (otherwise the default one
-   TYPE_FILTER is used to filter out unwanted document types).
-
-- Gather control now allows you to crosscheck items in one page
-against another page and put a prefix in front of found or not
-found items. For example, if you "filter" labels a crosscheck with
-references is performed: unused labels are marked with prefix "!".
-In the final version of your document such labels can be safely
-removed. A few users suggested such functionality to help them with
-a cleanup. Furthermore, the same functionality applied to
-references will mark those that contain undefined labels with "?".
-This is a more serious issue and has to be fixed as such errors or
-warnings are also reported by LaTeX. Similar functionality is
-implemented for bibliography items against citations.
-
-New properties in the [GATHER] configuration section can be used to
-enable this functionality for certain pages. For example, TeX
-Labels Page contains the following definitions:
-
-  PAGE_FILTER="Ref-TeX"            // Search for references
-  PAGE_FILTER_FOUND_PREFIX=""
-  PAGE_FILTER_NOT_FOUND_PREFIX="!" // Prefix for unused labels
-
-Gather control contains a new button "Filter Items" that can be
-used to perform a crosscheck of items in the current page. The
-button is only enabled for those pages that have the PAGE_FILTER
-property set to a non-empty string.
-
-- [KEYWORDS] configuration section now allows
-
-  HIGHLIGHT_START=1
-
-property for keywords. Some users may prefer this option enabled
-for LaTeX Keywords in order to highlight the leading backslash with
-the color used for keywords. It is a matter of taste. For
-consistency HIGHLIGHT_STOP is also allowed (but never used in
-default settings)...
-
-- New macro (per request) returns the name of the top-file in the
-project list (the last closed document):
-
-  PrjGetLastClosedDocument(Reg: -11..9);
-
-- New macro (per request) returns the size of a file in bytes:
-
-  GetFileSize("FileName", Reg: -11..9);
-
-- New macros to manipulate file and project lists:
-
-  GetFileList(Reg, Existing_Only: 0..1, "TYPE_FILTER");
-  GetPrjList(Reg, Existing_Only: 0..1);
-  GetFileListCount(Reg, Existing_Only: 0..1, "TYPE_FILTER");
-  GetPrjListCount(Reg, Existing_Only: 0..1);
-  RemoveNonexistentFiles("TYPE_FILTER");
-  RemoveNonexistentProjects;
-
-- The following macros now allow larger 64-bit (rather than 32-bit)
-signed integer expressions as arguments (marked with ##):
-
-  LetRegNum(#-11..9,##,#0..99,#0..99);
-  IfNum(##,##,"","","");
-  IfGetNum("##",##,##,"","");
-
-This can come in handy and why not...
-
-- Selecting the value ROAMING_BOOKMARK=0 in [BOOKMARKS]
-configuration section now works as it did before. It is not a
-common selection (used by few) but for what it's worth it now works
-as it did in WinEdt 5 (as requested by one user that prefers this
-value disabled and feels strongly about how it should work in such
-a case:-).
-
-- A new property LEFT_MARGIN=0..99 in the [PREFERENCES]
-configuration section can be used to control the spacing between
-the left margin (bookmarks, line numbers, and folding) and text.
-Previously this value was hard-coded to 2 pixels (which may not be
-enough for some circumstances).
-
-- Extra LEFT_MARGIN specifications in indented switches with custom
-background is now ignored if the text in the next line is not
-indented "enough". This way users that do not indent certain
-environments will not experience background color shifted to the
-right of their text. Many users do not indent certain environments
-and text looked "odd" with background color starting at the
-specified left margin but text not being indented. Of course, it is
-possible to disable indented environments (Preferences Dialog) but
-this way users that do indent such environments and those that do
-not get the desired result with default settings...
-
-- Horizontal scrolling now excludes the left margin from scrolling
-and moves only text (clipped at the left margin)...
-
-- Duplicated encoding options have been removed from the Document
-Settings| Format Tab page since they are also present in the CP
-Converter Page of the same Dialog. Furthermore, using the Save
-button in CP Converter now updates the time stamp to prevent a
-message about the file being externally modified...
-
-- FindInString and SubstituteInString macros have been optimized
-and now work much faster with large strings as parameters...
-
-    For example, executing the code below in an older version takes
-    about 20 seconds (and increases quadratically with the length
-    of the input string). WinEdt 9.1 accomplishes the same task in
-    approx. 0.3sec. and the CPU increases linearly (Size*Log(Size))
-    with the size of the string (as it should):
-
-        LetReg(0);
-        StartWorking('Replacing...');
-        Repeat(20000,!"LetReg(0,'%!0a%\');");
-        StartTimer;
-        SubstituteInString('%!0','<a','bbb',11);
-        SubstituteInString('%!0','bbb','a',10);
-        SubstituteInString('%!0','a','b');
-        GetTimer(1);
-        StopWorking;
-        Prompt('CPU: %!1');
-      End;
-
-- Flags in SubstituteInString now have an extra value that can be
-used to tell the function that the replacement string is not a
-regular expression even when the find string is a RegEx. This can
-make such replacements faster since only the find portion needs to
-be treated as an expression...
-
-Furthermore, replacement regular expressions now allow less
-escaping because most special RegEx characters have no special
-meaning for RegEx replacements.
-
-The only characters that have a special meaning in RegEx
-replacements (and require escaping) are: '\', '<', and '>'.
-
-The Macro Manual now contains a short section on "RegEx
-Replacements" that explains how to properly use a simplified RegEx
-syntax in replacements...
-
-- A few minor bug fixes and enhancements to the default settings,
-including support for memoir and KOMA-script sectioning commands.
-
-=========
-
-    NOTE: Behind the scenes I have been making a significative
-    effort towards using MS Uniscribe library as the default
-    scripting engine. Once functional, this will allow WinEdt to
-    properly handle complex language processing (things like
-    bidirectional (RTL) text and exotic language features).
-    However, this engine is not used in WinEdt 9.1 as it requires
-    more testing and some optimization for when complex processing
-    is not required. This will take some time. A new "Uniscribe"
-    version, WinEdt 10, will likely be released as a major upgrade
-    sometime in 2016 or even 2017...
-
-    A few low-level screen refreshing optimizations required for
-    Uniscribe have been incorporated in version 9.1. For most users
-    this will result in faster refreshing and less flickering.
-
-------------------------------------------------------------------
-
-WinEdt 9 [Build 20140917 (v. 9.0)]
-==================================
-
-- By popular demand the default WinEdt icon has been replaced with
-a less transparent one in order to improve its visibility on
-desktop, taskbar, or window title bar. WinEdt-Logo.ico and
-WinEdt-Classic.ico are still available in %B\WinShell\Icons folder
-(together with other icons used for filetype associations).
-
-- Drag-and-drop from UNC Network drives now works (a bug that was
-there in all previous versions has been fixed).
-
-- Delete Working Files interface now uses a more reliable criteria
-to determine which files are protected and will not be deleted
-(only readonly, hidden, and system files are excluded)...
-
-- A few minor enhancements to Gather macros...
-
-------------------------------------------------------------------
-
-WinEdt 9 [Build 20140815 (v. 9.0)]
-==================================
-
-- WinEdt now has a new configuration [IMAGE_RESOURCES]. Here is
-where dpi-dependent Image Resources are managed:
-
-  This section manages dpi-dependent WinEdt Image Resources
-  The closest DPI selector <= screen resolution applies
-  Common Windows DPI (Magnification) values are:
-     96dpi (100%) - Old Low Resolution Monitors
-    120dpi (125%)
-    144dpi (150%)
-    192dpi (200%) - New Ultra High Definition Displays
-
-  WinEdt comes with a pre-compiled Office 2013-style (high quality)
-  set of (over 500) icons in four sizes: 16x16, 24x24, 32x32,and
-  48x48. They are available in
-  %B\Bitmaps\Resources\WRLib32(dim).dll files. As was the case in
-  all versions since WinEdt 6 images were prepared and created by
-  Luca (based on the icon sets from Glyfz.com in vector format).
-  Months of hard work were needed to complete this project.
-
-  The Licensing Agreement with Glyfz.com does not allow WinEdt to
-  include these graphic resources directly as png images.
-
-  WinEdt also comes with %B\Bitmaps\Images folder where old-style
-  16x16 png files are stored.
-  If you want to use old icons you will have to enable the option
-  USE_SOURCE_FOLDER and disable the option USE_RESOURCE_DLL.
-  Similarly, you will have to enable the option USE_LOCAL_FOLDER if
-  you want to add private icons to the mix. By default only the
-  compiled dll graphic resources are used (for performance and
-  consistent appearance purposes)!
-
-  If you want to use icons at sizes different from the above you
-  will have to enable the option ALLOW_SCALING. Keep in mind that
-  the quality of scaled images is seriously reduced (especially
-  when making them larger). When this option is disabled and WinEdt
-  encounters images of different size they are either cropped or
-  embedded (centered) in a larger image.
-
-  Memory consumption increases significantly (quadratically) with
-  the dimension or resources. Keep this in mind when modifying
-  these settings!
-
-  TeX Symbols bitmaps are included at 125% and 200% magnification
-  in %B\Bitmaps\GUI125 and %B\Bitmaps\GUI200 folders. Default
-  settings should work for most users. You can add more images in
-  your local folder at the appropriate resolution. These bitmaps
-  can be usually scaled-down reasonably well.
-
-  You can overwrite these values (for your resolution) in your
-  private settings if the defaults do not reflect your choices...
-
-- Some properties have been removed from MAIN_MENU, TOOLBAR and
-GUI_PAGE_CONTROL sections because they are now managed in
-IMAGE_RESOURCES.
-
-GUI_PAGE_CONTROL:
-  SCALED_IMAGES
-  SCALED_BUTTONS
-
-TOOLBAR:
-  DEFAULT_BUTTON_WIDTH
-  DEFAULT_BUTTON_HEIGHT
-  SEPARATOR_WIDTH
-  SEPARATOR_HEIGHT
-  IMAGE_WIDTH
-  IMAGE_HEIGHT
-
-MAIN_MENU:
-  CUSTOM_DISABLED_IMAGES
-  IMAGE_WIDTH
-  IMAGE_HEIGHT
-
-- The first page of the Configuration Wizard now displays your
-screen resolution (in case you are not sure)...
-
-- Images Arrow* have been renamed to Flag* (they have been flags
-since WinEdt 6)...
-
-- Captions in docked forms are now properly scaled on different
-resolutions and they now use a custom (modern-style) painting
-procedures.
-
-- Toolbars on Windows 7 and Vista are no longer transparent since
-coolbar gradient colors on these platforms blend poorly with
-modern-style images...
-
-- Frame titles (in TOC) now allow optional arguments and nested
-braces inside the title argument...
+WinEdt 10 [Build 20160317 (v. 10.0)]
+====================================
+
+- The major new feature in this version is the ability to handle
+bidirectional text (Arabic or Hebrew) and improved support for some
+complex unicode scripts (such as Thai). The use of MS Uniscribe
+library in WinEdt's text processing engine is instrumental for this
+functionality (also the main reason why this version doesn't run on
+Windows XP that does not support unicode script tags)...
+
+- New properties in [UNICODE] section:
+
+  UNISCRIBE_ENABLED
+  UNISCRIBE_MODE_FILTER
+
+For complex language processing (eg. Hebrew or Arabic bidirectional
+text or Thai non-spacing characters) this property should be
+enabled. Users that do not require such functionality can disable
+Uniscribe engine if they encounter problems or experience any
+problems with performance (extra text processing can add up in
+large documents). WinEdt has been optimized and it detects when
+complex processing is required and performs it as needed.
+
+These properties are also available in the Unicode page of
+Preferences Dialog...
+
+- New UNICODE properties that determine how the new Uniscribe
+library is used.
+
+The following UNICODE options are ignored unless Uniscribe text
+processing is enabled:
+
+  // ===============================================================================
+  // Highlighting may affect character widths and placement if
+  // FONT is a part of highlighting attributes or when
+  // font style (such a bold) affects character widths!
+  // This option affects the wrapping algorithm only:
+  // text is still properly displayed without enabling it!
+  FONT_MIXING_ENABLED=1
+  FONT_MIXING_MODE_FILTER="HTML|XWE"
+
+  // Justify paragraphs to the specified right margin by stretching lines
+  // as required to fill the available space between left and right margin...
+  // NOTE: In large documents this can become slow in long paragraphs!
+  JUSTIFY_ENABLED=1
+  JUSTIFY_MODE_FILTER="HTML|XWE"
+  JUSTIFY_SOFT_ONLY=1         // Only for Softly wrapped paragraphs
+  JUSTIFY_STRETCH_LIMIT=50    // At most 50% stretching is allowed
+  JUSTIFY_SHRINK_LIMIT=25     // At most 25% shrinking is allowed
+
+  // Calculating the exact line widths in order to initialize
+  // horizontal scroll bar can be expensive in complex languages!
+  // A faster version can be enabled for modes that use fixed width fonts
+  // without bells and whistles!
+  // This can sometimes result in an unwanted horizontal scroll bar
+  // but it can significantly improve the performance in large files!
+  FAST_WIDTH_ENABLED=1
+  FAST_WIDTH_MODE_FILTER="DATA"
+  // calculate exact widths within specified range from the current line
+  FAST_WIDTH_LINE_LIMIT=1111  // Not less than 9!
+
+  // Up to Hebrew letters the sum of character widths could be used to
+  // calculate left-to-right glyph positions in a line.
+  // This is much faster than using Uniscribe!
+  // Reduce the limit if you need fallback fonts below this range...
+  FAST_FONT_CACHE=1425 // The last character code for fast font cache
+
+  // When mixing fonts or using fallback fonts vertical offset may have
+  // to applied to secondary fonts in order to use a single font base line.
+  // In some cases this may require extra line spacing (above or below).
+  // If this property causes certain fonts to be clipped disable it and/or
+  // increase line spacing (Thai text could be problematic with some fonts)...
+  ADJUST_BASE_LINES=1
+
+  // Change the caret shape to indicate RTL text?
+  // Applies only to vertical caret shape!
+  // -1 = Never
+  //  0 = Only if line contains BiDi Text
+  //  1 = Always
+  BIDI_CARET_SHAPE=-1
+  BIDI_CARET_WIDTH=2 // Left or Right Flag Width
+  // ===============================================================================
+
+- Very few (probably no) fonts on Windows contain glyphs for all
+unicode characters. Normally WinEdt uses one primary font as
+specified in the Preferences dialog (or possibly overwritten for a
+particular mode in Font Schemes). If this font is lacking glyphs
+for a particular script then WinEdt substitutes it with the first
+exiting specified fallback font at the same height as the primary
+font (when missing glyphs have to be displayed).
+
+The new GetScriptTagsAndFonts macro function was used to compile
+the list of scripts and suitable fonts. Advanced users with special
+needs or a very different choice of the default font may have to
+modify the list in order to get a reasonable looking text in
+certain scripts. Fallback fonts were implicitly used in previous
+versions of WinEdt as well except that they were not customizable
+(Windows preformed substitutions automatically for better or
+worse). Some of the specified fallback fonts are native to Windows
+10 while others come with Windows 7 only. This does not impede
+runtime performance since WinEdt simply ignores and removes
+non-existent fonts on your system.
+
+  // ===============================================================================
+  // UNISCRIBE Fallback Fonts
+  // ========================
+  //
+  // The values below affect Uniscribe engine...
+  // Fallback fonts for different (exotic) scripts as defined by Windows Unicode
+
+  // If the list starts with ! then the currently active font is ignored and only
+  // fallback fonts listed after ! are applied (seldom useful)...
+  // If you specify @ in the list of fallback fonts then ALL fonts
+  // starting with the letter @ on your system are used for that script.
+  // Use GetScriptTagsAndFonts macro function to see what scripts and fonts
+  // are available on your computer (it depends on your version of Windows)!
+  // Non-existent fonts in the list are simply ignored!
+
+  SCRIPT=""     // Non-script-specific characters and symbols (eg. numbers, etc...)
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+         "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+  SCRIPT="latn" // @ABCDE ^_`abcde yz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°± ÀÁÂÃÄÅÆÇÈÉÊË...
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+         "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+  SCRIPT="grek" // ΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϏϐϑϒϓϔ
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+  SCRIPT="cyrl" // абвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџѠѡѢѣ
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+  SCRIPT="hebr" // דג סקרן שט בים מאוכזב ולפתע מצא חברה
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+  SCRIPT="arab" // صِف خَلقَ خَودِ كَمِثلِ الشَمسِ إِذ بَزَغَت — يَحظى الضَجيعُ بِها نَجلاءَ مِعطارِ
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+  SCRIPT="armn" // աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+  SCRIPT="thai" // กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬ
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+
+  SCRIPT="hani" // 丈三上下丌不与丏丐丑丒专且丕世丗丘丙 乤乥书乧乨乩乪乫乬乭乮乯买乱乲乳乴乵乶
+    FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;@"
+  SCRIPT="kana" // いろはにほへと ちりぬるを わかよたれそ つねならむ きゆめみし ゑひもせす ㋐㋑㋒
+    FONT="Default;Yu Gothic UI;Microsoft YaHei UI;Microsoft JhengHei UI;@"
+  SCRIPT="hang" // 가각갂갃간갅갆갇갈갉갊갋갌갍갎갏감갑값갓갔강갖갗갘 ㉠㉡㉢㉣㉤㉥㉦㉧㉨㉩㉪㉫
+    FONT="Default;Malgun Gothic;@"
+  SCRIPT="bopo" // ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕ  ㆠㆡㆢㆣㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭ
+    FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;@"
+  SCRIPT="yi  " // ꀀꀁꀂꀃꀄꀅꀆꀇꀈꀉꀊꀋꀌꀍꀎꀏꀐꀑꀒꀓꀔꀕꀖꀗꀘ ꒐꒑꒒꒓꒔꒕꒖꒗꒘꒙꒚꒛꒜꒝
+    FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Microsoft Yi Baiti;@"
+
+  SCRIPT="brai" //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱ ⣺⣻⣼⣽⣾⣿
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+  SCRIPT="copt" // ϢϣϤϥϦϧϨϩϪϫϬϭϮϯ ⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲔⲕⲖⲗⲘⲙⲚⲛⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲰⲱ ⳹⳺⳻⳼⳽⳾⳿
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+  SCRIPT="glag" // ⰀⰁⰂⰃⰄⰅⰆⰇⰈⰉⰊⰋⰌⰍⰎⰏⰐⰑⰒⰓⰔⰕⰖⰗⰘⰙⰚ ⰰⰱⰲⰳⰴⰵⰶⰷⰸⰹⰺⰻⰼⰽⰾⰿⱀⱁⱂⱃⱄⱅⱆⱇⱈⱉⱊ
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+  SCRIPT="runr" // ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚲᚳᚴᚵᚶᚷᚸᚹᚺᚻᚼᚽᚾᚿᛀᛁᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛌᛍᛎᛏᛐᛑ ᛒᛓᛔᛕᛖᛗᛘᛙᛚᛛᛜᛝᛞᛟᛠᛡᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+  SCRIPT="lisu" // ꓐꓑꓒꓓꓔꓕꓖꓗꓘꓙꓚꓛꓜꓝꓞꓟꓠꓡꓢꓣꓤꓥꓦꓧꓨꓩꓪꓫꓬꓭꓮꓯꓰꓱꓲꓳꓴꓵꓶꓷꓸꓹꓺꓻꓼꓽ꓾꓿
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+  SCRIPT="ogam" // ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊᚋᚌᚍᚎᚏᚐᚑᚒᚓᚔᚕᚖᚗᚘᚙᚚ᚛᚜
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+  SCRIPT="geor" // ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳ აბგდევზთიკლხჯჰჱჲჳჴჵჶჷჸჹჺ჻ჼჽჾჿ ⴀⴁⴂⴃⴄⴅⴆⴇⴈⴉⴊⴋⴌⴍⴎ
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;Sylfaen"
+  SCRIPT="syrc" // ܐܑܒܓܔܕܖܗܘܙܚܛܜܝܞܟܠܡܢܣܤܥܦܧܨܩܪܫܬܭܮܯܱܴܷܸܹܻܼܾܰܲܳܵܶܺܽܿ݀݁ ݍݎݏ
+    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;" +
+         "Estrangelo Edessa"
+
+  SCRIPT="deva" // ऄअआइईउऊऋऌऍऎएऐऑऒओऔकखगघङचछजझञटठडढणतथदधनऩपफबभमयरऱ
+    FONT="Default;Arial Unicode MS;Nirmala UI;Aparajita;Kokila;Mangal"
+  SCRIPT="beng" // ওঔকখগঘঙচছজঝঞটঠডঢণতথদধন পফবভমযর ০১২৩৪৫৬৭৮৯ৰৱ৲৳৴৵৶৷৸৹৺৻
+    FONT="Default;Arial Unicode MS;Nirmala UI;Vrinda"
+  SCRIPT="guru" // ਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨ ਪਫਬਭਮਯਰ ਖ਼ਗ਼ਜ਼ੜ  ਫ਼
+    FONT="Default;Arial Unicode MS;Nirmala UI;Raavi"
+  SCRIPT="gujr" // અઆઇઈઉઊઋઌઍ ઓઔકખગઘઙચછજઝઞટઠડઢણતથદધન વશષસહ
+    FONT="Default;Arial Unicode MS;Nirmala UI;Shruti"
+  SCRIPT="orya" // ଅଆଇଈଉଊଋଌ ଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନ ପଫବଭମଯର ଵଶଷସହ
+    FONT="Default;Arial Unicode MS;Nirmala UI;Kalinga"
+  SCRIPT="taml" // அஆஇஈஉஊ மயரறலளழவஶஷஸஹ ௦௧௨௩௪௫௬௭௮௯௰௱௲௳௴௵௶௷
+    FONT="Default;Arial Unicode MS;Nirmala UI;Latha;Vijaya"
+  SCRIPT="telu" // అఆఇఈఉఊఋఌ ఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధన పఫబభమయరఱలళఴ
+    FONT="Default;Arial Unicode MS;Nirmala UI;Gautami;Vani"
+  SCRIPT="knda" // ಅಆಇಈಉಊಋಌ ಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನ
+    FONT="Default;Arial Unicode MS;Nirmala UI;Tunga"
+  SCRIPT="mlym" // അആഇഈഉഊഋഌ ഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനഩ
+    FONT="Default;Arial Unicode MS;Nirmala UI;Kartika"
+  SCRIPT="sinh" // අආඇඈඉඊඋඌඍඎඏඐඑඒඓඔඕඖ ඳපඵබභමඹයර
+    FONT="Default;Arial Unicode MS;Nirmala UI;Iskoola Pota"
+  SCRIPT="olck" // ᱐᱑᱒᱓᱔᱕᱖᱗᱘᱙ᱚᱛᱜᱝᱞᱟᱠᱡᱢᱣᱤᱥᱦᱧᱨᱩᱪᱫᱬᱭᱮᱯᱰᱱᱲᱳᱴᱵᱶᱷᱸᱹᱺᱻᱼᱽ᱾᱿
+    FONT="Default;Arial Unicode MS;Nirmala UI"
+
+  SCRIPT="khmr" // កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវឝឞសហឡអឣឤឥឦឧឨឩឪឫឬឭឮឯ
+    FONT="Default;Arial Unicode MS;Leelawadee UI;Khmer UI"
+  SCRIPT="lao " // ນບປຜຝພຟ ເແໂໃໄ ໐໑໒໓໔໕໖໗໘໙ ໜໝໞໟ ດຕຖທ ໐໑໒໓໔໕໖໗໘໙ ເແໂໃໄ ອຮຯະັາຳິີຶືຸູ
+    FONT="Default;Arial Unicode MS;Leelawadee UI;Lao UI"
+  SCRIPT="bugi" // ᨀᨁᨂᨃᨄᨅᨆᨇᨈᨉᨊᨋᨌᨍᨎᨏᨐᨑᨒᨓᨔᨕᨖᨘᨗᨙᨚᨛ
+    FONT="Default;Arial Unicode MS;Leelawadee UI"
+
+  SCRIPT="ethi" // ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜም ፝፞፟፠፡።፣፤፥፦፧፨፩፪፫፬፭፮፯፰፱፲፳፴፵፶፷፸፹፺፻፼
+    FONT="Default;Arial Unicode MS;Ebrima;Nyala"
+  SCRIPT="tfng" // ⴰⴱⴲⴳⴴⴵⴶⴷⴸⴹⴺⴻⴼⴽⴾⴿⵀⵁⵂⵃⵄⵅⵆⵇⵈⵉⵊⵋⵌⵍⵎⵏⵐⵑⵒⵓⵔⵕⵖⵗⵘⵙⵚⵛⵜⵝⵞⵟⵠⵡ
+    FONT="Default;Arial Unicode MS;Ebrima"
+  SCRIPT="vai " // ꔀꔁꔂꔃꔄꔅꔆꔇꔈꔉꔊꔋꔌꔍꔎꔏꔐꔑꔒꔓꔔꔕꔖꔗꔘꔙꔚꔛꔜꔝꔞꔟꔠꔡꔢꔣꔤꔥꔦꔧꔨꔩꔪꔫ
+    FONT="Default;Arial Unicode MS;Ebrima"
+  SCRIPT="nko " // ߀߁߂߃߄߅߆߇߈߉ߊߋߌߍߎߏߐߑߒߓߔߕߖߗߘߙߚߛߜߝߞߟߠߡߢߣߤߥߦߧߨߩߪ߫߬߭߮߯߰߱
+    FONT="Default;Arial Unicode MS;Ebrima"
+
+  SCRIPT="cher" // ᎠᎡᎢᎣᎤᎥᎦᎧᎨᎩᎪᎫᎬᎭᎮᎯᎰᎱᎲᎳᎴᎵᎶᎷᎸᎹᎺᎻᎼᎽᎾᎿᏀᏁᏂᏃᏄᏅᏆᏇᏈᏉᏊᏋᏌᏍᏎᏏᏐᏑ
+    FONT="Default;Arial Unicode MS;Gadugi;Plantagenet Cherokee"
+  SCRIPT="cans" // ᢰᢱᢲᢳᢴᢵᢶᢻᢼᢽᢾᢿᣍᣎᣏᣐᣑᣒᣓᣔᣕᣖᣗᣛᣜᣝᣞᣟᣠᣡᘈᘉᘊᘋᘌᘍᘑᘒᘗᘘᘙᘚᘛᘜᘝᘞᘟᘤᘥᘦ
+    FONT="Default;Arial Unicode MS;Gadugi;Euphemia"
+
+  SCRIPT="tale" // ᥐᥑᥒᥓᥔᥕᥖᥗᥘᥙᥚᥛᥜᥝᥞᥟᥠᥡᥢᥣᥤᥥᥦᥧᥨᥩᥪᥫᥬᥭ
+    FONT="Default;Arial Unicode MS;Microsoft Tai Le"
+  SCRIPT="talu" // ᦀᦁᦂᦃᦄᦅᦆᦇᦈᦉᦊᦋᦌᦍᦎᦏᦐᦑᦒᦓᦔᦕᦖᦗᦘᦙᦚᦛᦜᦝᦞᦟᦠᦡᦢᦣᦤᦥᦦᦧᦨᦩᦪᦫ
+    FONT="Default;Arial Unicode MS;Microsoft New Tai Lue"
+  SCRIPT="phag" // ꡀꡁꡂꡃꡄꡅꡆꡇꡈꡉꡊꡋꡌꡍꡎꡏꡐꡑꡒꡓꡔꡕꡖꡗꡘꡙꡚꡛꡜꡝꡞꡟꡠꡡꡢ
+    FONT="Default;Arial Unicode MS;Microsoft PhagsPa"
+  SCRIPT="tibt" // ༀ༁༂༃༄༅༆༇༈༉༊་༌།༎༏༐༑༒༓༔༕༖༗༘༙༚༛༜༝༞༟༠༡༢༣༤༥༦༧༨༩༪༫༬༭༮༯༰༱
+    FONT="Default;Arial Unicode MS;Microsoft Himalaya"
+  SCRIPT="thaa" // ހށނރބޅކއވމފދތލގޏސޑޒޓޔޕޖޗޘޙޚޛޜޝޞޟޠޡޢޣޤ
+    FONT="Default;Arial Unicode MS;MV Boli"
+  SCRIPT="mong" // ᠠᠡᠢᠣᠤᠥᠦᠧᠨᠩᠪᠫᠬᠭᠮᠯᠰᠱᠲᠳᠴᠵᠶᠷᠸᠹᠺᠻᠼᠽᠾᠿᡀᡁᡂᡃᡄᡅᡆᡇᡈᡉᡊᡋᡌᡍᡎᡏᡐᡑ ᡒᡓᡔᡕᡖᡗᡘᡙᡚᡛᡜᡝᡞᡟᡠᡡᡢᡣᡤᡥᡦᡧᡨᡩᡪᡫᡬᡭᡮᡯᡰᡱᡲᡳᡴᡵᡶᡷ
+    FONT="Default;Arial Unicode MS;Mongolian Baiti"
+  SCRIPT="mymr" // ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဢဣဤဥဦဧဨဩဪါာိီုူေ
+    FONT="Default;Arial Unicode MS;Myanmar Text"
+  SCRIPT="java" // ꦲ꦳ꦴꦵꦶꦷꦸꦹꦺꦻꦼꦽꦾꦿ꧀꧁꧂꧃꧄꧅꧆꧇꧈꧉꧊꧋꧌꧍ ꧐꧑꧒꧓꧔꧕꧖꧗꧘꧙
+    FONT="Default;Arial Unicode MS;Javanese Text"
+
+  SCRIPT="?"    // Any Other (not listed): must be the last item!
+    FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+         "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+  // -------------------------------------------------------------------------------
+  // Unicode for Windows is a project in progress...
+  // On Windows 7 some scripts (above) will not display due to the lack of fonts
+  // or glyphs. On Windows 10 they will display correctly.
+  //
+  // The following 20 script tags are defined on Windows 10 but currently no font
+  // that comes with Windows 10 has glyphs for them (this may change in the future):
+  //
+  // SCRIPT="bali" // ᬅᬆᬇᬈᬉᬊᬋᬌᬍᬎᬏᬐᬑᬒᬓᬔᬕᬖᬗᬘᬙᬚᬛᬜᬝᬞᬟᬠᬡᬢᬣᬤᬥᬦᬧᬨᬩᬪᬫᬬᬭᬮᬯᬰᬱ
+  // SCRIPT="batk" // ᯀᯁᯂᯃᯄᯅᯆᯇᯈᯉᯊᯋᯌᯍᯎᯏᯐᯑᯒᯓᯔᯕᯖᯗᯘᯙᯚᯛᯜᯝᯞᯟᯠᯡᯢᯣᯤᯥ᯦ᯧᯨᯩᯪᯫᯬᯭᯮᯯᯰᯱ
+  // SCRIPT="buhd" // ᝀᝁᝂᝃᝄᝅᝆᝇᝈᝉᝊᝋᝌᝍᝎᝏᝐᝑᝒᝓ
+  // SCRIPT="cham" // ꨀꨁꨂꨃꨄꨅꨆꨇꨈꨉꨊꨋꨌꨍꨎꨏꨐꨑꨒꨓꨔꨕꨖꨗꨘꨙꨚꨛꨜꨝꨞꨟꨠꨡꨢꨣꨤꨥꨦꨧꨨꨩꨪꨫꨬꨭꨮꨯꨰꨱ
+  // SCRIPT="hano" // ᜠᜡᜢᜣᜤᜥᜦᜧᜨᜩᜪᜫᜬᜭᜮᜯᜰᜱᜲᜳ᜴᜵᜶
+  // SCRIPT="kali" // ꤀꤁꤂꤃꤄꤅꤆꤇꤈꤉ꤊꤋꤌꤍꤎꤏꤐꤑꤒꤓꤔꤕꤖꤗꤘꤙꤚꤛꤜꤝꤞꤟꤠꤡꤢꤣꤤꤥꤦꤧꤨꤩꤪ꤫꤬꤭
+  // SCRIPT="lana" // ᨠᨡᨢᨣᨤᨥᨦᨧᨨᨩᨪᨫᨬᨭᨮᨯᨰᨱᨲᨳᨴᨵᨶᨷᨸᨹᨺᨻᨼᨽᨾᨿᩀᩁᩂᩃᩄᩅᩆᩇᩈᩉᩊᩋᩌᩍᩎᩏᩐᩑ
+  // SCRIPT="lepc" // ᰀᰁᰂᰃᰄᰅᰆᰇᰈᰉᰊᰋᰌᰍᰎᰏᰐᰑᰒᰓᰔᰕᰖᰗᰘᰙᰚᰛᰜᰝᰞᰟᰠᰡᰢᰣᰤᰥᰦᰧᰨᰩᰪᰫᰬᰭᰮᰯᰰᰱ
+  // SCRIPT="limb" // ᤀᤁᤂᤃᤄᤅᤆᤇᤈᤉᤊᤋᤌᤍᤎᤏᤐᤑᤒᤓᤔᤕᤖᤗᤘᤙᤚᤛᤜᤝᤞ
+  // SCRIPT="mand" // ࡀࡁࡂࡃࡄࡅࡆࡇࡈࡉࡊࡋࡌࡍࡎࡏࡐࡑࡒࡓࡔࡕࡖࡗࡘ࡙࡚࡛
+  // SCRIPT="mtei" // ꫠꫡꫢꫣꫤꫥꫦꫧꫨꫩꫪꫫꫬꫭꫮꫯ꫰꫱ꫲꫳꫴꫵ꫶
+  // SCRIPT="qavs" // ︀︁︂︃︄︅︆︇︈︉︊︋︌︍︎️
+  // SCRIPT="rjng" // ꤰꤱꤲꤳꤴꤵꤶꤷꤸꤹꤺꤻꤼꤽꤾꤿꥀꥁꥂꥃꥄꥅꥆꥇꥈꥉꥊꥋꥌꥍꥎꥏꥐꥑꥒ꥓
+  // SCRIPT="samr" // ࠀࠁࠂࠃࠄࠅࠆࠇࠈࠉࠊࠋࠌࠍࠎࠏࠐࠑࠒࠓࠔࠕࠖࠗ࠘࠙ࠚࠛࠜࠝࠞࠟࠠࠡࠢࠣࠤࠥࠦࠧࠨࠩࠪࠫࠬ࠭
+  // SCRIPT="saur" // ꢂꢃꢄꢅꢆꢇꢈꢉꢊꢋꢌꢍꢎꢏꢐꢑꢒꢓꢔꢕꢖꢗꢘꢙꢚꢛꢜꢝꢞꢟꢠꢡꢢꢣꢤꢥꢦꢧꢨꢩꢪꢫꢬꢭꢮꢯꢰꢱ
+  // SCRIPT="sund" // ᮃᮄᮅᮆᮇᮈᮉᮊᮋᮌᮍᮎᮏᮐᮑᮒᮓᮔᮕᮖᮗᮘᮙᮚᮛᮜᮝᮞᮟᮠᮡᮢᮣᮤᮥᮦᮧᮨᮩ᮪᮫ᮬᮭ
+  // SCRIPT="sylo" // ꠃꠄꠅ꠆ꠇꠈꠉꠊꠋꠌꠍꠎꠏꠐꠑꠒꠓꠔꠕꠖꠗꠘꠙꠚꠛꠜꠝꠞꠟꠠꠡꠢꠣꠤꠥꠦꠧ꠨꠩꠪꠫
+  // SCRIPT="tagb" // ᝠᝡᝢᝣᝤᝥᝦᝧᝨᝩᝪᝫᝬᝮᝯᝰᝲᝳ
+  // SCRIPT="tavt" // ꪀꪁꪂꪃꪄꪅꪆꪇꪈꪉꪊꪋꪌꪍꪎꪏꪐꪑꪒꪓꪔꪕꪖꪗꪘꪙꪚꪛꪜꪝꪞꪟꪠꪡꪢꪣꪤꪥꪦꪧꪨꪩꪪꪫꪬꪭꪮꪯꪰꪱ
+  // SCRIPT="tglg" // ᜀᜁᜂᜃᜄᜅᜆᜇᜈᜉᜊᜋᜌᜎᜏᜐᜑᜒᜓ᜔
+  //
+  // -------------------------------------------------------------------------------
+  // ===============================================================================
+
+- Keywords, Switches, and Filter sets now allow a new highlighting
+attribute property:
+
+  FONT_NAME
+
+When "fancy" UNISCRIBE text processing is enabled this makes it
+possible to change the font family as a highlighting attribute.
+
+  Example: Default settings use a "nice" variable width font
+  Verdana for HTML documents. Some switch environments
+  (pre-formatted, comments, tables, images, teletype) use Courier
+  New font. This make text look pretty good but it comes with a
+  price as formatting becomes more sophisticated and slower (in
+  huge documents). Also not all combinations of fonts mix well with
+  a fixed line height. Keep this in mind if you want to use this
+  feature for other modes. See also the guidelines on how to use
+  "fancy" Uniscribe settings without degrading the performance...
+
+- Two new FONT and FONT_SCHEMES properties have been introduced:
+
+  EXTRA_LINE_SPACING_ABOVE
+  EXTRA_LINE_SPACING_BELOW
+
+to give more control over the line spacing. The "old" property
+EXTRA_LINE_SPACING is still available (for compatibility's sake)
+and it simply splits the spacing between the above values (Above =
+n div 2 and Below is the rest) just like before.
+
+Depending on scripts and selected fonts it is sometimes useful to
+distinguish between these two properties (some scripts use a lot of
+space above the baseline while some other fonts and scripts require
+extra space under the baseline). These two properties can be
+adjusted in the Preferences Dialog...
+
+- New 0/1 property TAB_DRAW for TAB characters. When enabled Tab
+characters are discretely drawn (using a custom algorithm similar
+to underlined misspelled words) in order to distinguish them from
+spaces. This property does not affect the alignment properties of
+tabs. This option is ignored when Tabs are translated and displayed
+(TAB_EXPAND=2). This property can also be set in the Tab page of
+the Preferences Dialog...
+
+- Filter Sets now allow extra 0/1 property EXTENDED. When set to 1
+Unicode characters > #255 match the set (even though the set
+expressions are limited to Ansi characters). A typical example
+where this property is required is a filter set "~\" (and few other
+"negated" sets)...
+
+- Document Tabs now allow an extra 0/1 property SHOW_HINTS. When
+enabled the full path and filename of a document is displayed as a
+hint when mouse pointer hovers over the tab...
+
+- [COLORS] section now contains named colors that are used for all
+Keywords and Switches in the default settings. Users that
+customized their highlighting do not have to use these color names.
+However, if you want to load any of the alternative color schemes
+included in this version you will have to update your customized
+settings with color names. Then you can remove the comment in front
+of your preferred alternative scheme and reload the settings:
+
+// ===============================================================================
+
+// Alternative Themes (they redefine named colors):
+// ================================================
+//
+// %INCLUDE="ConfigEx\Themes\Midnight Black.ini"
+// %INCLUDE="ConfigEx\Themes\Midnight Blue.ini"
+// %INCLUDE="ConfigEx\Themes\Midnight Green.ini"
+// %INCLUDE="ConfigEx\Themes\Solarized Light.ini"
+// %INCLUDE="ConfigEx\Themes\Solarized Dark.ini"
+
+// ===============================================================================
+
+Users with artistic skills can provide more alternatives based on
+these examples (it is just a matter of redefining the colors)...
+
+The idea behind this modification is to make it possible to define
+and share alternative colors schemes without having to work
+directly with keywords and switches (which most users find
+intimidating) or directly the generic RGB_0..RGB_F basic filenames
+which do not have any obvious meaning. Providing and loading a list
+of alternative colors is all that is required and named colors
+allow for complete customization. This was not possible working
+only with RGB_0..RGB_F colors and a few named colors available in
+previous versions. The default colors and appearance did not
+change...
+
+Options Menu contains a submenu Theme that allows you to switch
+between the default theme and custom predefined themes listed above
+(without editing the configuration script Colors.ini).
+
+- Alternative toolbars have now been placed in subfolder
+ConfigEx\Toolbars in order to reduce the increasing number of
+configuration files in ConfigEx\*.ini...
+
+Default Toolbar settings contain comments that make it easy to
+activate any of the predefined toolbar alternatives:
+
+// It is easy to comment out unwanted buttons and/or add/uncomment
+// the ones that you want in your custom toolbar!
+
+// Alternatives:
+// =============
+//
+// %%INCLUDE="ConfigEx\Toolbars\Toolbar1l.ini" // 1-row Toolbar (Large)
+// %%INCLUDE="ConfigEx\Toolbars\Toolbar1s.ini" // 1-row Toolbar (Small)
+// %%INCLUDE="ConfigEx\Toolbars\Toolbar1c.ini" // 1-row Toolbar (Custom)
+// %%INCLUDE="ConfigEx\Toolbars\Toolbar2d.ini" // 2-row Toolbar (Large)
+// %%INCLUDE="ConfigEx\Toolbars\Toolbar2s.ini" // 2-row Toolbar (Small)
+// %%INCLUDE="ConfigEx\Toolbars\Toolbar2c.ini" // 2-row Toolbar (Custom)
+// %%INCLUDE="ConfigEx\Toolbars\Toolbar5x.ini" // 2-row (WinEdt 5-style) Toolbar
+
+Options Menu contains a submenu Toolbar that allows you to switch
+between the default theme and custom predefined toolbars listed
+above (without editing the configuration script Toolbar.ini).
+
+- Generic lists in INI files can now be folded. For example try:
+
+  FoldNodes(1,0,"INI:LIST");
+
+in Keywords.ini...
+
+- Auto completion event handler macros can now determine how was
+the completion triggered by checking the value of %-? register:
+
+  0: Double-click
+  1: Tab Key
+  2: Enter Key
+
+Advanced users can modify event handlers taking this information
+into consideration. Default handlers do not distinguish between the
+triggers...
+
+- New macro:
+
+  GetScriptTagsAndFonts(Register: -11..9; All: 0..1);
+
+When All is zero only the list of currently cashed fonts is
+displayed. Otherwise all available fonts and supported unicode
+scripts on your system are listed in the specified register. The
+result is over 10K lines long and it contains all script ranges of
+unicode characters. This macro was used to help prepare the default
+settings for script-dependent fallback fonts as used by the new
+Uniscribe Scripting Engine. It is of little interest to other users
+unless they want to customize Uniscribe engine to better handle
+complex languages used on their system or test for any
+unicode-related oddities on their Windows.
+
+- A new option for the menu shortcuts:
+
+  ALLOW_ALTGR_SHORTCUTS=1
+
+Unless this option is enabled AltGr shortcuts are ignored in WinEdt
+menu (only Ctrl+Alt can be used) otherwise AltGr qualifier is
+equivalent to Ctrl+Alt. Most users will not care or notice any
+difference but those that feel that it should be one way or another
+can now reset this value. Note that it is not recommended to use
+such shortcuts in the menu (they can interfere with windows
+keyboard shortcuts on some keyboard layouts) but it is really up to
+you...
+
+- A refresh bug after pasting multi-line text at the end of a
+document with disabled environment background option has been fixed
+(not commonly encountered)...
+
+- Backward search inside selected text (not commonly used function)
+did not work properly and mostly failed to find a match. This has
+now been fixed...
+
+- Horizontal scrolling when selecting text with a mouse now uses a
+delay in order to slow it down. The speed increases if you move the
+mouse over the edge of the Window client (vertical scrolling was
+already using this feature). Not many users rely on this
+functionality but those that use mouse to select text in long lines
+will find this an improvement as it was hard to control the
+selection when fast horizontal scrolling "kicked" in....
+
+- A problem with MiKTeX's "Install Packages on Demand"
+functionality when running console applications inside WinEdt
+console has been fixed (regardless of whether the packages are
+installed on user or system level with UAC and regardless of MiKTeX
+asking for conformation or not). It turns out that MiKTeX's
+accessories (except TeXify) cannot initiate download and
+installation of missing packages with any kind of prompt if the
+process was created within invisible (hidden) console Window (it is
+not clear why: a bug in MiKTeX). However, the way around this
+problem is NOT to create (and then hide) an external console Window
+at all. Simple enough, once you find out what exactly is the
+matter...
+
+As a consequence a few minor changes have been made to RunConsole
+and WinExe macros (see the documentation - Macro Manual - for
+details). It is unlikely that this will cause any incompatibilities
+with custom macros that use these two functions (since the default
+values for extended parameters do what is needed).
+
+- MiKTeX users should update to the latest version of MiKTeX (Use
+WinEdt's TeX Menu -> MiKTeX -> MiKTeX Update Wizard) in order to
+allow WinEdt compilation macros take advantage of some recent
+MiKTeX fixes when it comes to handling of input paths...
+
+- New 0/1 parameter DetectExitCode for RunConsole. Zero value
+implies that exit codes that indicate a possible exception (access
+violation, floating point error, cancellation) are ignored by
+WinEdt... This is useful for console applications that return
+(non-standard) exit code outside the common ranges expected from
+Windows console applications: no point in disturbing a user with
+(harmless) extra messages.
+
+- Optional parameter Priority: -1..1 has been added to Run and
+RunConsole macro functions (to make them compatible with WinExe
+just in case)...
+
+- Optional parameter Unicode: -1..1 has been added to SendMail
+macro function. When set to 1 (or 0 on Windows 10) it uses unicode
+version of MAPI interface (MAPISendMailW). According to MS
+documentation this is a preferred behavior on Windows 10 (with
+recent versions of Office and Outlook). When set to -1 it always
+uses non-unicode (legacy) version (MAPISendMail). Details depend on
+your email client (there is no guarantee that this function works
+under all circumstances)...
+
+- PDF macros no longer use DDE for SumatraPDF. Using the command
+line switch -forward-search is faster and more reliable. I had a
+report that DDE stopped working after a Windows 10 update. Using a
+command line switch (if it exists) is always preferable (simple is
+better). Besides DDE does not (and will not) support Unicode!
+
+- Templates and macros that use them have been modified by skipping
+the %B qualifier in their specification. This makes it easier to
+localize them without having to modify any macro or configuration
+scripts (just make a local customized copy in %b)...
+
+- A few minor bug fixes and improvements...
 
 __________________________________________________________________
 
 
-WinEdt 8 [Build 20140613 (v. 8.2)]
+WinEdt 9 [Build 20150731 (v. 9.1)]
 ==================================
 
 (see History)...

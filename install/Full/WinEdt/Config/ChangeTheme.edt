@@ -1,0 +1,23 @@
+//  Change Theme
+
+  PushTagsandRegisters;
+
+  IfFileExists('%b\ConfigEx\Colors.ini',>
+    !'Relax;',>
+    !'CopyFile("%B\ConfigEx\Colors.ini","%b\ConfigEx\Colors.ini",1,1);');
+  ReadFile('%b\ConfigEx\Colors.ini',0);
+  SubstituteInString('%!0',>
+    '<@{ }%%INCLUDE',>
+    '/'+'/ %%INCLUDE',>
+    11);
+  SubstituteInString('%!0',>
+    '<@{ }/'+'/@{ }%%INCLUDE="ConfigEx\\Themes\\%$(|THEME|);\.ini"',>
+    '   %%INCLUDE="ConfigEx\\Themes\\%$(|THEME|);.ini"',>
+    11);
+  WriteFile('%b\ConfigEx\Colors.ini','%!0');
+
+  LoadConfig("ConfigEx\Colors.ini");
+
+  PopTagsandRegisters;
+
+End;

@@ -1,9 +1,0 @@
-      SHORTCUT="24621::Shift+Ctrl+Ins"
-      REQ_DOCUMENT=1
-    ITEM="Wrap_Paragraph"
-      CAPTION="&Wrap Paragraph"
-      IMAGE="Width"
-      MACRO="WrapSelectedText(-1,0);"
-      SHORTCUT="41005::Shift+Alt+Ins"
-      REQ_DOCUMENT=1
-    ITEM="Format_Paragraph"

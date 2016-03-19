@@ -1,8 +1,0 @@
-    BUTTON="$Load_Script"
-    BUTTON="|"
-    BUTTON="$Browse"
-    BUTTON="|"
-    BUTTON="$Insert_RGB"
-    BUTTON="$Insert_Color"
-    BUTTON="|"
-    BUTTON="$Help"

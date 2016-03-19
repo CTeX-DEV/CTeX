@@ -45,26 +45,26 @@ LetReg(2,'');
 
 LetReg(3, "%@('%!1','%!0','%!2Desktop');");
 IfFileExists('%!3\','LetReg(5,"0");','LetReg(5,"1");');
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"1");','LetReg(4,"0");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"1");','LetReg(4,"0");');
 AddCheckList("    Desktop","%!4","%!5");
 WrL('  Desktop (%!4/%!5): "%!3"');
 
 LetReg(3, "%@('%!1','%!0','%!2Programs');");
 IfFileExists('%!3\','LetReg(5,"0");','LetReg(5,"1");');
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"1");','LetReg(4,"0");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"1");','LetReg(4,"0");');
 AddCheckList("    Start Menu","%!4","%!5");
 WrL('  Start Menu (%!4/%!5): "%!3"');
 
 LetReg(3, "%@('%!1','%!0','%!2SendTo');");
 IfFileExists('%!3\','LetReg(5,"0");','LetReg(5,"1");');
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"1");','LetReg(4,"0");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"1");','LetReg(4,"0");');
 AddCheckList("    Send To","%!4","%!5");
 WrL('  Send To (%!4/%!5): "%!3"');
 
 LetReg(3, "%@('%!1','%!0','%!2AppData');");
 IfFileExists('%!3\Microsoft\Internet Explorer\Quick Launch\',>
              'LetReg(5,"0");','LetReg(5,"1");');
-IfFileExists('%!3\Microsoft\Internet Explorer\Quick Launch\WinEdt 9.lnk',>
+IfFileExists('%!3\Microsoft\Internet Explorer\Quick Launch\WinEdt 10.lnk',>
              'LetReg(4,"1");','LetReg(4,"0");');
 AddCheckList("    Quick Launch","%!4","%!5");
 WrL('  Quick Launch (%!4/%!5): "%!3\Microsoft\Internet Explorer\Quick Launch"');
@@ -80,14 +80,14 @@ LetReg(2,'Common ');
 LetReg(3, "%@('%!1','%!0','%!2Desktop');");
 IfFileExists('%!3\','LetReg(5,"0");','LetReg(5,"1");');
 IfStr("%$('isPowerUser');","0","=","LetReg(5,'1');");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"1");','LetReg(4,"0");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"1");','LetReg(4,"0");');
 AddCheckList("    Desktop","%!4","%!5");
 WrL('  Desktop (%!4/%!5): "%!3"');
 
 LetReg(3, "%@('%!1','%!0','%!2Programs');");
 IfFileExists('%!3\','LetReg(5,"0");','LetReg(5,"1");');
 IfStr("%$('isPowerUser');","0","=","LetReg(5,'1');");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"1");','LetReg(4,"0");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"1");','LetReg(4,"0");');
 AddCheckList("    Start Menu","%!4","%!5");
 WrL('  Start Menu (%!4/%!5): "%!3"');
 
@@ -113,65 +113,65 @@ LetReg(2,'');
 
 LetRegNum(9,"%!9+1");
 LetReg(3, "%@('%!1','%!0','%!2Desktop');");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
 IfChecked(%!9,>
-  !`CreateLink("%!3","WinEdt 9","%$('WinEdt-Exe');","",>
+  !`CreateLink("%!3","WinEdt 10","%$('WinEdt-Exe');","",>
                "%$('WinEdt-Start');");>
-    IfOK(!'WrL("  Desktop %!4d: ""%!3\WinEdt 9.lnk""");',>
-         !'WrL("  Desktop %!4 Error: ""%!3\WinEdt 9.lnk""");');>
+    IfOK(!'WrL("  Desktop %!4d: ""%!3\WinEdt 10.lnk""");',>
+         !'WrL("  Desktop %!4 Error: ""%!3\WinEdt 10.lnk""");');>
    `,>
-  !`IfFileExists('%!3\WinEdt 9.lnk',>
-    !'DeleteFile("%!3\WinEdt 9.lnk");>
-      IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 9.lnk""");'',>
-           !''WrL("  Desktop Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+  !`IfFileExists('%!3\WinEdt 10.lnk',>
+    !'DeleteFile("%!3\WinEdt 10.lnk");>
+      IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 10.lnk""");'',>
+           !''WrL("  Desktop Delete Error: ""%!3\WinEdt 10.lnk""");'');>
      ');>
    `);
 
 LetRegNum(9,"%!9+1");
 LetReg(3, "%@('%!1','%!0','%!2Programs');");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
 IfChecked(%!9,>
-  !`CreateLink("%!3","WinEdt 9","%$('WinEdt-Exe');","",>
+  !`CreateLink("%!3","WinEdt 10","%$('WinEdt-Exe');","",>
                "%$('WinEdt-Start');");>
-    IfOK(!'WrL("  Start Menu %!4d: ""%!3\WinEdt 9.lnk""");',>
-         !'WrL("  Start Menu %!4 Error: ""%!3\WinEdt 9.lnk""");');>
+    IfOK(!'WrL("  Start Menu %!4d: ""%!3\WinEdt 10.lnk""");',>
+         !'WrL("  Start Menu %!4 Error: ""%!3\WinEdt 10.lnk""");');>
    `,>
-  !`IfFileExists('%!3\WinEdt 9.lnk',>
-    !'DeleteFile("%!3\WinEdt 9.lnk");>
-      IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 9.lnk""");'',>
-           !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+  !`IfFileExists('%!3\WinEdt 10.lnk',>
+    !'DeleteFile("%!3\WinEdt 10.lnk");>
+      IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 10.lnk""");'',>
+           !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 10.lnk""");'');>
      ');>
    `);
 
 LetRegNum(9,"%!9+1");
 LetReg(3, "%@('%!1','%!0','%!2SendTo');");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
 IfChecked(%!9,>
-  !`CreateLink("%!3","WinEdt 9","%$('WinEdt-Exe');",'-V',>
+  !`CreateLink("%!3","WinEdt 10","%$('WinEdt-Exe');",'-V',>
                "%$('WinEdt-Start');");>
-    IfOK(!'WrL("  Send To %!4d: ""%!3\WinEdt 9.lnk""");',>
-         !'WrL("  Send To %!4 Error: ""%!3\WinEdt 9.lnk""");');>
+    IfOK(!'WrL("  Send To %!4d: ""%!3\WinEdt 10.lnk""");',>
+         !'WrL("  Send To %!4 Error: ""%!3\WinEdt 10.lnk""");');>
    `,>
-  !`IfFileExists('%!3\WinEdt 9.lnk',>
-    !'DeleteFile("%!3\WinEdt 9.lnk");>
-      IfOK(!''WrL("  Send To Deleted: ""%!3\WinEdt 9.lnk""");'',>
-           !''WrL("  Send To Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+  !`IfFileExists('%!3\WinEdt 10.lnk',>
+    !'DeleteFile("%!3\WinEdt 10.lnk");>
+      IfOK(!''WrL("  Send To Deleted: ""%!3\WinEdt 10.lnk""");'',>
+           !''WrL("  Send To Delete Error: ""%!3\WinEdt 10.lnk""");'');>
      ');>
    `);
 
 LetRegNum(9,"%!9+1");
 LetReg(3, "%@('%!1','%!0','%!2AppData');\Microsoft\Internet Explorer\Quick Launch");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
 IfChecked(%!9,>
-  !`CreateLink("%!3","WinEdt 9","%$('WinEdt-Exe');","",>
+  !`CreateLink("%!3","WinEdt 10","%$('WinEdt-Exe');","",>
                "%$('WinEdt-Start');");>
-    IfOK(!'WrL("  Quick Launch %!4d: ""%!3\WinEdt 9.lnk""");',>
-         !'WrL("  Quick Launch %!4 Error: ""%!3\WinEdt 9.lnk""");');>
+    IfOK(!'WrL("  Quick Launch %!4d: ""%!3\WinEdt 10.lnk""");',>
+         !'WrL("  Quick Launch %!4 Error: ""%!3\WinEdt 10.lnk""");');>
    `,>
-  !`IfFileExists('%!3\WinEdt 9.lnk',>
-    !'DeleteFile("%!3\WinEdt 9.lnk");>
-      IfOK(!''WrL("  Quick Launch Deleted: ""%!3\WinEdt 9.lnk""");'',>
-           !''WrL("  Quick Launch Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+  !`IfFileExists('%!3\WinEdt 10.lnk',>
+    !'DeleteFile("%!3\WinEdt 10.lnk");>
+      IfOK(!''WrL("  Quick Launch Deleted: ""%!3\WinEdt 10.lnk""");'',>
+           !''WrL("  Quick Launch Delete Error: ""%!3\WinEdt 10.lnk""");'');>
      ');>
    `);
 
@@ -186,33 +186,33 @@ LetReg(2,'Common ');
 
 LetRegNum(9,"%!9+1");
 LetReg(3, "%@('%!1','%!0','%!2Desktop');");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
 IfChecked(%!9,>
-  !`CreateLink("%!3","WinEdt 9","%$('WinEdt-Exe');","",>
+  !`CreateLink("%!3","WinEdt 10","%$('WinEdt-Exe');","",>
                "%$('WinEdt-Start');");>
-    IfOK(!'WrL("  Desktop %!4d: ""%!3\WinEdt 9.lnk""");',>
-         !'WrL("  Desktop %!4 Error: ""%!3\WinEdt 9.lnk""");');>
+    IfOK(!'WrL("  Desktop %!4d: ""%!3\WinEdt 10.lnk""");',>
+         !'WrL("  Desktop %!4 Error: ""%!3\WinEdt 10.lnk""");');>
    `,>
-  !`IfFileExists('%!3\WinEdt 9.lnk',>
-    !'DeleteFile("%!3\WinEdt 9.lnk");>
-      IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 9.lnk""");'',>
-           !''WrL("  Desktop Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+  !`IfFileExists('%!3\WinEdt 10.lnk',>
+    !'DeleteFile("%!3\WinEdt 10.lnk");>
+      IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 10.lnk""");'',>
+           !''WrL("  Desktop Delete Error: ""%!3\WinEdt 10.lnk""");'');>
      ');>
    `);
 
 LetRegNum(9,"%!9+1");
 LetReg(3, "%@('%!1','%!0','%!2Programs');");
-IfFileExists('%!3\WinEdt 9.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
+IfFileExists('%!3\WinEdt 10.lnk','LetReg(4,"Update");','LetReg(4,"Create");');
 IfChecked(%!9,>
-  !`CreateLink("%!3","WinEdt 9","%$('WinEdt-Exe');","",>
+  !`CreateLink("%!3","WinEdt 10","%$('WinEdt-Exe');","",>
                "%$('WinEdt-Start');");>
-    IfOK(!'WrL("  Start Menu %!4d: ""%!3\WinEdt 9.lnk""");',>
-         !'WrL("  Start Menu %!4 Error: ""%!3\WinEdt 9.lnk""");');>
+    IfOK(!'WrL("  Start Menu %!4d: ""%!3\WinEdt 10.lnk""");',>
+         !'WrL("  Start Menu %!4 Error: ""%!3\WinEdt 10.lnk""");');>
    `,>
-  !`IfFileExists('%!3\WinEdt 9.lnk',>
-    !'DeleteFile("%!3\WinEdt 9.lnk");>
-      IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 9.lnk""");'',>
-           !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+  !`IfFileExists('%!3\WinEdt 10.lnk',>
+    !'DeleteFile("%!3\WinEdt 10.lnk");>
+      IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 10.lnk""");'',>
+           !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 10.lnk""");'');>
      ');>
    `);
 

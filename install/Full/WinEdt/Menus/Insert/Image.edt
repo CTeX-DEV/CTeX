@@ -17,7 +17,7 @@ JMP('Default');
   GoToEndOfLine;
   IfNum(%!0,%c,'<','Goto(1);InsLine;Goto(1);'); // Not at the end of line!
   TrackCaret;
-  ReadFile("%B\Templates\LaTeX\Figure.ltx",9);
+  ReadFile("Templates\LaTeX\Figure.ltx",9);
   GoToBeginningOfLine;
   Mark(1);
   InsText("%!9");

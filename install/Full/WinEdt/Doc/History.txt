@@ -1,6 +1,519 @@
 * WinEdt History.txt
-Last modified on Monday, June 30, 2014 14:31
+Last modified on Monday, November 30, 2015  14:02
 ____________________________________________________________________
+
+
+WinEdt 9 [Build 20150731 (v. 9.1)]
+==================================
+
+- Auto completion can now also be triggered by the Tab key (as well
+as Enter). This was suggested by a few users that are accustomed to
+such behavior in other applications.
+
+- Automatic assignment of DDE service for Adobe DC (for those that
+insist on using Adobe as a working previewer for pdf documents
+compiled from TeX sources)...
+
+- Minor improvements to BibTeX.edt compilation macro.
+
+- Minor bug fixes.
+
+------------------------------------------------------------------
+
+WinEdt 9 [Build 20150515 (v. 9.1)]
+==================================
+
+- WinEdt features a new configurable auto-completion mechanism. If
+enabled the auto-completion popup window with a list of matching
+items (suggestions) shows up while you are typing certain items
+(such as LaTeX commands or environments). You can continue to type
+text in order to filter/ refine the number of suggested items.
+Pressing Enter inserts the selected item (or template).
+
+[Page] Down and Up keys can be used to move through the list of
+suggested items. Esc key (or any other shortcut) hides the
+auto-completion Window. You can (but do not have to) use the mouse
+interface to insert an item by double-clicking on it. A few
+keyboard shortcuts (like Down and Enter) will usually do if (like
+me) you don't want to use the mouse...
+
+In the default settings the auto-completion form can be manually
+activated (and hidden) by pressing the ESC key.
+
+The auto-completion form is resizable: size it to some dimensions
+suitable for your needs and the size of your screen. Its initial
+position is determined by the insertion point (caret) in your text.
+This form never gets focus and you can continue typing your text
+until you see the item or template that you want to insert, at
+which point press Enter to perform completion.
+
+A new [AUTO_COMPLETE] configuration section has been introduced to
+configure this functionality. Two global properties can be used to
+disable it:
+
+  DISABLE_AUTO_COMPLETION=1
+  DISABLE_ESC_COMPLETION=1
+
+They are also available in the Preferences Dialog | Editor...
+
+Completion of TeX environments allows you to insert nxm tables,
+arrays, or matrices, lists or equations. Eg. typing:
+
+  \begin{a
+
+will give a suggestion to insert n x m array template.
+
+It is also possible to enable LaTeX commands completion in which
+case typing
+
+  \beg
+
+will produce a list of completions with \begin{...} being the first
+item. Pressing Enter will continue auto-completions by offering
+available environments. You can type a letter or two to refine the
+list and then press Enter to insert the selected template.
+
+Beside standard LaTeX and AMS LaTeX environments WinEdt also
+collects user-defined environments in the preamble and they can be
+inserted as well. For some users this is a convenient alternative
+to having to choose numerous items from the Insert menu or toolbar.
+
+A new event handler "Dynamic Dictionaries" has been introduced to
+build a dictionary for user-defined environments and commands (with
+and without arguments). These dictionaries are used for
+auto-completion (and as always they are user-customizable - through
+the Advanced -> Event Handlers Section of the Options Interface).
+
+New macros can be used to manually activate or hide the
+Auto-Completion form:
+
+  AutoPopup(ESC: 0..1, "Item Name");
+  AutoPopupHide;
+
+AutoPopup(1); is used in the Escape Key event handler. It only
+activates the form when the global property DISABLE_ESC_COMPLETION
+is set to 0.
+
+For those who don't want the distraction of the completion form
+popping up all the time, a few active strings such as "\begin{}"
+for TeX and "<>" for HTML have been defined to activate completion
+via active strings.
+
+This functionality is configurable. Check the default settings in
+the Auto Completion and Active Strings configuration sections of
+the Options Interface. You can add your own commands and
+environments or comment out any that you never use. Some users may
+find this an essential feature while others may consider it an
+unwanted and annoying distraction. It is easy to disable or
+reconfigure it to only allow manual activation via the ESC key. The
+default settings have it enabled because new users may otherwise
+not be aware of its existence and for those who do not much like it
+(me included) it is easy to turn off (no need to complain to me
+about it being annoying)...
+
+- The Advanced Section of the Options Interface now contains
+toolbar buttons to browse the install directory (usually readonly)
+and to make and open a local copy of a macro or configuration
+script (assuming that a global readonly copy is currently opened in
+WinEdt).
+
+For example, the new auto-completion uses numerous macros in
+"%B\Macros\Auto Complete" folder. Advanced users may want to see
+how they work and perhaps make some modifications to meet their own
+particular needs. Rather than listing all of them in the Options
+Interface you can use this method to create and edit a local copy
+of event handler macros like this...
+
+- New macros
+
+  LetTempReg("Value","!");
+  // Assign a value to temporary registers %? ,%!?, %-?, or %#?
+  // when the second parameter is "", "!", "-", or "#"...
+  // This macro is used extensively in Auto Completion event handler macros.
+
+  EnableDict("Dictionary Name",Enable: -1..1, Reload: 0..1);
+  // Makes Dynamic Dictionaries for user-defined environments
+  // and commands easy to load (behind the scene).
+  // Dictionaries are automatically updated with the contents of
+  // your preamble when the tree is rebuilt or when you manually
+  // start the auto-completion form...
+
+- WinEdt bullets used as placeholders in many templates (including
+the new auto completion mechanism) are now represented by the
+proper Unicode Character 'BULLET' (U+2022) rather than an asterisk
+- in order to make them easier to spot. The Screen translation
+table has been modified for this purpose:
+
+  #127 -> "•" // Unicode Character 'BULLET' (U+2022)
+
+If you prefer something else (like *) modify this translation table
+according to your preferences. Internally this symbol remains
+represented by the non-printable character U+007F (#127), just like
+in older versions (for good reasons)...
+
+The Tools menu contains items and shortcuts to insert or quickly
+move through bullets by selecting them with the shortcuts
+Ctrl+[Shift+]Space. Once the placeholder (bullet) is selected you
+can start typing text that should replace it before a template
+environment is ready for compilation...
+
+For example the "\begin{cases}" auto-completion will insert
+something like:
+
+    \begin{cases}
+      , & \mbox{if }  \\
+      , & \mbox{if }  \\
+      , & \mbox{otherwise}.
+    \end{cases}
+
+You have to fill in the missing info marked by the Bullets: use the
+Ctrl+Space shortcut to move through them...
+
+- A new list interface (similar to the Windows Open Dialog) has
+been introduced to quickly select, open, or close a document. For
+users with the habit of having lots of documents opened at any time
+this interface may be preferable to browsing/ searching document
+tabs in order to activate a document. The menu item Window -> MDI
+Shortcuts -> Document List (F2) can be used to activate the new
+Document List dialog with the list of currently opened documents.
+Try it!
+
+- This interface can be customized and used to display and make
+selections in custom file lists... It can be configured through a
+new configuration section:
+
+  [DOCUMENT_LIST]
+
+available in the Options Interface -> Additional GUI Controls
+(after Document Tabs). Most of the tasks can be performed through
+the keyboard interface (rather than being forced to use a mouse).
+
+- A new macro has been introduced to launch this dialog with
+properties other than defaults as specified in the [DOCUMENT_LIST]
+configuration section (if required):
+
+  ShowDocumentList(
+    Data Flags: 0..11,
+    Fast: 0..1,
+    "CustomList",
+    Flags_on: 0..11111111,
+    Flags_off: 0..11111111,
+    MoveTab: 0..3,
+    UseCustomTypeFilter: 0..1,
+    "CustomTypeFilter");
+
+   Data Flags (from right to left):
+     Include Opened Documents
+     Include Recent Files List
+
+   Enabling the Fast property prevents WinEdt from checking for file
+   existence or file date stamp, which can be slow for large lists
+   on remote drives. If such checking makes this interface too slow
+   enable this flag and sacrifice date stamp info to improve the
+   performance in large lists...
+
+   CustomList is LF or CR+LF separated list of files supplied by the
+   caller. Eg. one can use ListFolderFiles or ListOpenedFiles
+   macros to produce and filter the list that will be displayed in
+   this interface. This parameter can be empty if Data Flags are
+   set so as to display standard file lists or it can be combined
+   with standard lists.
+
+   Flags suppress default properties in [DOCUMENT_LIST].
+   Flags_on force them enabled and Flags_off force them disabled.
+   If both flags are identical the default is applied.
+   Default properties are restored to their previous values after
+   the interface is finished.
+
+   In most cases both parameters can be set to 0...
+
+   Flags (from right to left):
+       EXIT_ON_ENTER
+       OPEN_ON_ENTER
+       CANCEL_ON_ESC
+       FOCUS_DROP_DOWN_LIST
+       HIDE_DROP_DOWN_LIST
+       LIST_NEW_DOCUMENTS
+       SELECT_ACTIVE_DOCUMENT
+       SHOW_IMAGES
+
+   These properties are described in [DOCUMENT_LIST] configuration
+   section...
+
+   Nonzero value for MoveTab property sets: MOVE_DOCUMENT_TAB=MoveTab-2
+
+   UseCustomTypeFilter=1 indicates that the specified
+   CustomTypeFilter is applied (otherwise the default one
+   TYPE_FILTER is used to filter out unwanted document types).
+
+- Gather control now allows you to crosscheck items in one page
+against another page and put a prefix in front of found or not
+found items. For example, if you "filter" labels a crosscheck with
+references is performed: unused labels are marked with prefix "!".
+In the final version of your document such labels can be safely
+removed. A few users suggested such functionality to help them with
+a cleanup. Furthermore, the same functionality applied to
+references will mark those that contain undefined labels with "?".
+This is a more serious issue and has to be fixed as such errors or
+warnings are also reported by LaTeX. Similar functionality is
+implemented for bibliography items against citations.
+
+New properties in the [GATHER] configuration section can be used to
+enable this functionality for certain pages. For example, TeX
+Labels Page contains the following definitions:
+
+  PAGE_FILTER="Ref-TeX"            // Search for references
+  PAGE_FILTER_FOUND_PREFIX=""
+  PAGE_FILTER_NOT_FOUND_PREFIX="!" // Prefix for unused labels
+
+Gather control contains a new button "Filter Items" that can be
+used to perform a crosscheck of items in the current page. The
+button is only enabled for those pages that have the PAGE_FILTER
+property set to a non-empty string.
+
+- [KEYWORDS] configuration section now allows
+
+  HIGHLIGHT_START=1
+
+property for keywords. Some users may prefer this option enabled
+for LaTeX Keywords in order to highlight the leading backslash with
+the color used for keywords. It is a matter of taste. For
+consistency HIGHLIGHT_STOP is also allowed (but never used in
+default settings)...
+
+- New macro (per request) returns the name of the top-file in the
+project list (the last closed document):
+
+  PrjGetLastClosedDocument(Reg: -11..9);
+
+- New macro (per request) returns the size of a file in bytes:
+
+  GetFileSize("FileName", Reg: -11..9);
+
+- New macros to manipulate file and project lists:
+
+  GetFileList(Reg, Existing_Only: 0..1, "TYPE_FILTER");
+  GetPrjList(Reg, Existing_Only: 0..1);
+  GetFileListCount(Reg, Existing_Only: 0..1, "TYPE_FILTER");
+  GetPrjListCount(Reg, Existing_Only: 0..1);
+  RemoveNonexistentFiles("TYPE_FILTER");
+  RemoveNonexistentProjects;
+
+- The following macros now allow larger 64-bit (rather than 32-bit)
+signed integer expressions as arguments (marked with ##):
+
+  LetRegNum(#-11..9,##,#0..99,#0..99);
+  IfNum(##,##,"","","");
+  IfGetNum("##",##,##,"","");
+
+This can come in handy and why not...
+
+- Selecting the value ROAMING_BOOKMARK=0 in [BOOKMARKS]
+configuration section now works as it did before. It is not a
+common selection (used by few) but for what it's worth it now works
+as it did in WinEdt 5 (as requested by one user that prefers this
+value disabled and feels strongly about how it should work in such
+a case:-).
+
+- A new property LEFT_MARGIN=0..99 in the [PREFERENCES]
+configuration section can be used to control the spacing between
+the left margin (bookmarks, line numbers, and folding) and text.
+Previously this value was hard-coded to 2 pixels (which may not be
+enough for some circumstances).
+
+- Extra LEFT_MARGIN specifications in indented switches with custom
+background is now ignored if the text in the next line is not
+indented "enough". This way users that do not indent certain
+environments will not experience background color shifted to the
+right of their text. Many users do not indent certain environments
+and text looked "odd" with background color starting at the
+specified left margin but text not being indented. Of course, it is
+possible to disable indented environments (Preferences Dialog) but
+this way users that do indent such environments and those that do
+not get the desired result with default settings...
+
+- Horizontal scrolling now excludes the left margin from scrolling
+and moves only text (clipped at the left margin)...
+
+- Duplicated encoding options have been removed from the Document
+Settings| Format Tab page since they are also present in the CP
+Converter Page of the same Dialog. Furthermore, using the Save
+button in CP Converter now updates the time stamp to prevent a
+message about the file being externally modified...
+
+- FindInString and SubstituteInString macros have been optimized
+and now work much faster with large strings as parameters...
+
+    For example, executing the code below in an older version takes
+    about 20 seconds (and increases quadratically with the length
+    of the input string). WinEdt 9.1 accomplishes the same task in
+    approx. 0.3sec. and the CPU increases linearly (Size*Log(Size))
+    with the size of the string (as it should):
+
+        LetReg(0);
+        StartWorking('Replacing...');
+        Repeat(20000,!"LetReg(0,'%!0a%\');");
+        StartTimer;
+        SubstituteInString('%!0','<a','bbb',11);
+        SubstituteInString('%!0','bbb','a',10);
+        SubstituteInString('%!0','a','b');
+        GetTimer(1);
+        StopWorking;
+        Prompt('CPU: %!1');
+      End;
+
+- Flags in SubstituteInString now have an extra value that can be
+used to tell the function that the replacement string is not a
+regular expression even when the find string is a RegEx. This can
+make such replacements faster since only the find portion needs to
+be treated as an expression...
+
+Furthermore, replacement regular expressions now allow less
+escaping because most special RegEx characters have no special
+meaning for RegEx replacements.
+
+The only characters that have a special meaning in RegEx
+replacements (and require escaping) are: '\', '<', and '>'.
+
+The Macro Manual now contains a short section on "RegEx
+Replacements" that explains how to properly use a simplified RegEx
+syntax in replacements...
+
+- A few minor bug fixes and enhancements to the default settings,
+including support for memoir and KOMA-script sectioning commands.
+
+=========
+
+    NOTE: Behind the scenes I have been making a significative
+    effort towards using MS Uniscribe library as the default
+    scripting engine. Once functional, this will allow WinEdt to
+    properly handle complex language processing (things like
+    bidirectional (RTL) text and exotic language features).
+    However, this engine is not used in WinEdt 9.1 as it requires
+    more testing and some optimization for when complex processing
+    is not required. This will take some time. A new "Uniscribe"
+    version, WinEdt 10, will likely be released as a major upgrade
+    sometime in 2016 or even 2017...
+
+    A few low-level screen refreshing optimizations required for
+    Uniscribe have been incorporated in version 9.1. For most users
+    this will result in faster refreshing and less flickering.
+
+------------------------------------------------------------------
+
+WinEdt 9 [Build 20140917 (v. 9.0)]
+==================================
+
+- By popular demand the default WinEdt icon has been replaced with
+a less transparent one in order to improve its visibility on
+desktop, taskbar, or window title bar. WinEdt-Logo.ico and
+WinEdt-Classic.ico are still available in %B\WinShell\Icons folder
+(together with other icons used for filetype associations).
+
+- Drag-and-drop from UNC Network drives now works (a bug that was
+there in all previous versions has been fixed).
+
+- Delete Working Files interface now uses a more reliable criteria
+to determine which files are protected and will not be deleted
+(only readonly, hidden, and system files are excluded)...
+
+- A few minor enhancements to Gather macros...
+
+------------------------------------------------------------------
+
+WinEdt 9 [Build 20140815 (v. 9.0)]
+==================================
+
+- WinEdt now has a new configuration [IMAGE_RESOURCES]. Here is
+where dpi-dependent Image Resources are managed:
+
+  This section manages dpi-dependent WinEdt Image Resources
+  The closest DPI selector <= screen resolution applies
+  Common Windows DPI (Magnification) values are:
+     96dpi (100%) - Old Low Resolution Monitors
+    120dpi (125%)
+    144dpi (150%)
+    192dpi (200%) - New Ultra High Definition Displays
+
+  WinEdt comes with a pre-compiled Office 2013-style (high quality)
+  set of (over 500) icons in four sizes: 16x16, 24x24, 32x32,and
+  48x48. They are available in
+  %B\Bitmaps\Resources\WRLib32(dim).dll files. As was the case in
+  all versions since WinEdt 6 images were prepared and created by
+  Luca (based on the icon sets from Glyfz.com in vector format).
+  Months of hard work were needed to complete this project.
+
+  The Licensing Agreement with Glyfz.com does not allow WinEdt to
+  include these graphic resources directly as png images.
+
+  WinEdt also comes with %B\Bitmaps\Images folder where old-style
+  16x16 png files are stored.
+  If you want to use old icons you will have to enable the option
+  USE_SOURCE_FOLDER and disable the option USE_RESOURCE_DLL.
+  Similarly, you will have to enable the option USE_LOCAL_FOLDER if
+  you want to add private icons to the mix. By default only the
+  compiled dll graphic resources are used (for performance and
+  consistent appearance purposes)!
+
+  If you want to use icons at sizes different from the above you
+  will have to enable the option ALLOW_SCALING. Keep in mind that
+  the quality of scaled images is seriously reduced (especially
+  when making them larger). When this option is disabled and WinEdt
+  encounters images of different size they are either cropped or
+  embedded (centered) in a larger image.
+
+  Memory consumption increases significantly (quadratically) with
+  the dimension or resources. Keep this in mind when modifying
+  these settings!
+
+  TeX Symbols bitmaps are included at 125% and 200% magnification
+  in %B\Bitmaps\GUI125 and %B\Bitmaps\GUI200 folders. Default
+  settings should work for most users. You can add more images in
+  your local folder at the appropriate resolution. These bitmaps
+  can be usually scaled-down reasonably well.
+
+  You can overwrite these values (for your resolution) in your
+  private settings if the defaults do not reflect your choices...
+
+- Some properties have been removed from MAIN_MENU, TOOLBAR and
+GUI_PAGE_CONTROL sections because they are now managed in
+IMAGE_RESOURCES.
+
+GUI_PAGE_CONTROL:
+  SCALED_IMAGES
+  SCALED_BUTTONS
+
+TOOLBAR:
+  DEFAULT_BUTTON_WIDTH
+  DEFAULT_BUTTON_HEIGHT
+  SEPARATOR_WIDTH
+  SEPARATOR_HEIGHT
+  IMAGE_WIDTH
+  IMAGE_HEIGHT
+
+MAIN_MENU:
+  CUSTOM_DISABLED_IMAGES
+  IMAGE_WIDTH
+  IMAGE_HEIGHT
+
+- The first page of the Configuration Wizard now displays your
+screen resolution (in case you are not sure)...
+
+- Images Arrow* have been renamed to Flag* (they have been flags
+since WinEdt 6)...
+
+- Captions in docked forms are now properly scaled on different
+resolutions and they now use a custom (modern-style) painting
+procedures.
+
+- Toolbars on Windows 7 and Vista are no longer transparent since
+coolbar gradient colors on these platforms blend poorly with
+modern-style images...
+
+- Frame titles (in TOC) now allow optional arguments and nested
+braces inside the title argument...
+
+__________________________________________________________________
 
 
 WinEdt 8 [Build 20140613 (v. 8.2)]

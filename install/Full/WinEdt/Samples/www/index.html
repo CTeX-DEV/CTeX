@@ -7,12 +7,17 @@
   <LINK REV="made" HREF="mailto:support@winedt.com"/>
   <LINK REL="stylesheet" TYPE="text/css" HREF="WinEdt.css"/>
   <LINK REL="shortcut icon" href="WinEdt.ico"/>
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"/>
-  <META NAME="author" CONTENT="Aleksander Simonic"/>
-  <META NAME="keywords"
-     CONTENT="WinEdt, WinEdt 9, Editor, Text Editor, TeX Editor, NSIS Editor, Windows, ASCII, Ansi, Unicode, UTF8, UTF-8, MiKTeX, TeX Live, TeXLive, TeX, LaTeX, PDFTeX, PDFLaTeX, LuaTeX, DTX, MetaPost, NSIS, Spell Checking, Macro Script, Syntax Highlighting, AMS, PDF, HTML, CTAN, TUG, Adobe, Acrobat, Sumatra, PDF-XChange"/>
-  <META NAME="description"
-     CONTENT="WinEdt is a powerful and versatile text editor for Windows with a strong predisposition towards the creation of LaTeX documents..."/>
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/>
+  <META HTTP-EQUIV="EXPIRES" CONTENT="0"/>
+  <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US"/>
+  <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8"/>
+  <META NAME="AUTHOR" CONTENT="Aleksander Simonic"/>
+  <META NAME="COPYRIGHT" CONTENT="&copy; 1993-2016 WinEdt Inc."/>
+  <META NAME="ROBOTS" CONTENT="INDEX,NOFOLLOW"/>
+  <META NAME="KEYWORDS"
+      CONTENT="WinEdt, WinEdt 10, Editor, Text Editor, TeX Editor, HTML Editor, NSIS Editor, Folding Editor, Windows, ASCII, Ansi, Unicode, UTF8, UTF-8, Code Folding, Folding, Highlighting, Auto-Completion, Wrapping, PDF, HTML, CTAN, TUG, AMS, MiKTeX, TeX Live, TeXLive, TeX, LaTeX, PDFTeX, PDFLaTeX, XeTeX, XeLaTeX, LuaTeX, DTX, MetaPost, NSIS, Spell Checking, Macro Script, Adobe, Acrobat, Sumatra PDF"/>
+  <META NAME="DESCRIPTION"
+      CONTENT="WinEdt is a powerful and versatile text editor for Windows with a strong predisposition towards the creation of LaTeX documents..."/>
   <TITLE>WinEdt</TITLE>
 </HEAD>
 
@@ -24,14 +29,22 @@
      <!--INCLUDE="WinEdt.css"-->
      <span class="tab1"><a href="index.html">Home</a></span>
      <span class="tab0"><a href="news.html">News</a></span>
+     <!--UL-->
+        <!--INCLUDE="log.html"-->
+     <!--/UL-->
+     <!--UL-->
+        <!--INCLUDE="uniscribe.html"-->
+     <!--/UL-->
      <span class="tab0"><a href="download.html">Downloads</a></span>
      <span class="tab0"><a href="support.html">Support</a></span>
+     <span class="tab0"><a href="about.html">About this HTML Sample</a></span>
+     <span class="tab0"><a href="http://www.winedt.com">WinEdt.com</a></span>
      <span class="tab2"><a href="mailto:support@winedt.com">Contact</a></span>
    </div>  <!--top_nav-->
    <div class="logo">
        <img align="left" class="logo_img" src="images/WinEdtSmall.png"/>
        <span class="logo_main_text">
-         WinEdt 9
+         WinEdt 10
        </span>
        <span class="created">
            Created with
@@ -57,25 +70,43 @@
 
 <HR/>
 
-<img src="images/WinEdt.png" height="150"  align="left"
+<img src="images/WinEdt.png" height="150" align="left"
   style="margin-top: 20px; margin-left: 10px; margin-right: 16px"/>
 
-<H2><span class="new">New:</span> WinEdt 9.0</H2>
+<H2><span class="new">New:</span> WinEdt 10.0</H2>
 
-<p>WinEdt 9.0 is now the <em>official</em> version of the program. It supports (customizable) <em>code folding</em>, it is <em>unicode-capable</em>, and it integrates seamlessly with the latest accessories and TeX Systems (such as MiKTeX 2.9 and TeX Live 2014). It has been extensively tested under Windows 7, <em>and</em> 8 (32-bit <em>and</em> 64-bit). Furthermore, WinEdt 9 is compatible with Windows High Contrast Schemes and it is <em>dpi-aware</em>: it automatically adjusts its GUI to (ultra) high resolution displays. WinEdt 9 comes with <em>new</em> high-quality graphic resources at different sizes  (suitable for different display resolutions)...</p>
+<p>WinEdt 10.0 is now the <em>official</em> version of the program. It supports (customizable) <em>auto completion</em> and <em>code folding</em>, it is unicode/utf8-capable, and it integrates seamlessly with the latest accessories and TeX Systems (such as SumatraPDF viewer, MiKTeX 2.9 and TeX Live 2015). It has been extensively tested under Windows 10, 8 and 7 (32-bit <em>and</em> 64-bit).</p>
 
-<p><em>Once installed, don't forget to check WinEdt's (updated and revised) Help and Documentation. A few sections in User's Guide explain how to set up your LaTeX projects in order to take full advantage of WinEdt's capabilities when it comes to navigating in large projects or collecting data for purpose of referencing and citations. If used properly WinEdt will make your TeX-ing more enjoyable by allowing you to focus on the contents of your documents while transparently taking care of typesetting-related tasks...</em></p>
+<blockquote>
+  <p>WinEdt is compatible with Windows High Contrast Schemes. It <em>is</em> compliant with Section 508 of the US Rehabilitation Act <a target="top" href="http://www.section508.gov/">&sect;1194.22</a>. Furthermore, WinEdt is <em>dpi-aware</em>: it comes with high-quality graphic resources at different sizes and it automatically adjusts its GUI to high-resolution displays (without stretched or blurred graphics and text)...</p>
+</blockquote>
 
-<HR/>
+<p>This version uses the powerful <a href="uniscribe.html">Uniscribe</a> library in order to better handle Unicode and complex language processing (including support for bidirectional text). It also contains improved integration with the latest versions of MiKTeX (including proper support for MiKTeX's "Install packages on demand" feature when running TeX accessories in WinEdt console).
+<em>And there is <a href="log.html">more</a>...</em></p>
 
-<p>This is a sample document included in WinEdt's distribution as a demo that illustrates how to use WinEdt's HTML configuration to edit HTML files and create web pages. For the latest news on WinEdt project visit our web page at: <a href="http://www.winedt.com">www.winedt.com</a>.</p>
+<p>To install WinEdt 10.0 follow the link below and proceed according to the instructions:</p>
+
+<blockquote>
+  <a href="news.html">WinEdt 10.0 [Build: 20160317]</a>
+</blockquote>
+
+<p><b>Hint: </b> For <em>legacy reasons</em> WinEdt by default features a large 2-row toolbar with interface to numerous TeX accessories and previewers (as still used by many long-time users). Through the Options menu it is easy to switch to one of the predefined 1-row toolbars. For most users this is a <em>better</em> starting point (it can be further customized as explained in WinEdt Documentation and <a href="download.html#Quick_Guide">Quick Guide</a>)...</p>
+
+<img src="http://www.downloadroute.com/images/av-awards/WinEdt-Aleksander-Simonic.png"
+     align="right"
+     style="border:none; margin-top: -8px; margin-left: 16px; margin-right: 1px"
+     width="180" height="120"
+     alt="WinEdt received 100% CLEAN award on DownloadRoute.com"/>
+
+<p><em>Once installed, don't forget to check WinEdt's (updated and revised) Help and Documentation (including the new <a href="download.html#Quick_Guide">Quick Guide</a>). A few sections in User's Guide explain how to set up your LaTeX projects in order to take full advantage of WinEdt's capabilities when it comes to navigating in large projects or collecting data for purpose of referencing and citations. If used properly WinEdt will make your TeX-ing more enjoyable by allowing you to focus on the contents of your documents while assisting you with typesetting-related tasks...</em></p>
 
 <HR/>
 
 <div id="footer">
-  Copyright &copy; 1993-2014 by Aleksander Simonic
+  Copyright &copy; 1993-2016 by Aleksander Simonic
   (<a href="mailto:alex@winedt.com">alex@winedt.com</a>).
   All rights reserved.<br/>
+  Last change: Thursday, February 18, 2016  15:58
 </div>
 
 </div> <!--main-->

@@ -153,11 +153,13 @@
     CopyFile('%B\Config\Default\Create Default.edt','%!0\Config\Default\Create Default.edt',1);
     CopyFile('%B\Config\Default\DefaultSettings.ini','%!0\Config\Default\DefaultSettings.ini',1);
 
-    // Rebuild Local Settings
+    // Rebuild and Save Local Settings
     IfFileExists("%b\ConfigEx\UserPreferences.ini",!'LoadConfig("%b\ConfigEx\UserPreferences.ini");');
     IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
     IfFileExists("%b\ConfigEx\UserPreferences.ini",>
       !'ExportPreferences("%b\ConfigEx\UserPreferences.ini");');
+    SaveSettings;
+    SavePrj;
 
     // Digital Signature for WinEdt (Class 3 Code Signing Certificate)
     LetReg(9, 'WinEdt');    // Executable(s) -32.exe and -64.exe

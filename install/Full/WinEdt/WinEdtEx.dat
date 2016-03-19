@@ -187,7 +187,7 @@ PAGE="*"                                                        00
 END="*"                                                         57
 
 [DOCUMENT_TABS]                                                 06
-21   // Identifiers
+22   // Identifiers
 VISIBLE="*"                                                     00
 FILETYPES="*"                                                   01
 MULTI_LINE="*"                                                  02
@@ -197,18 +197,19 @@ CLOSE_ON_MIDDLE_CLICK="*"                                       05
 EXTRA_TEXT_SIZE="*"                                             06
 EXTRA_HEIGHT="*"                                                07
 IMAGES_ENABLED="*"                                              08
-SELECTOR="*"                                                    09
-  IMAGE="*"                                                     10
-  TAG="*"                                                       11
-  RESET_TAG="*"                                                 12
-  MODE_FILTER="*"                                               13
-  ACTIVE="*"                                                    14
-  MODIFIED="*"                                                  15
-  EXT_MODIFIED="*"                                              16
-  READONLY="*"                                                  17
-  LOCKED="*"                                                    18
-  NEW="*"                                                       19
-  ERROR="*"                                                     20
+SHOW_HINTS="*"                                                  09
+SELECTOR="*"                                                    10
+  IMAGE="*"                                                     11
+  TAG="*"                                                       12
+  RESET_TAG="*"                                                 13
+  MODE_FILTER="*"                                               14
+  ACTIVE="*"                                                    15
+  MODIFIED="*"                                                  16
+  EXT_MODIFIED="*"                                              17
+  READONLY="*"                                                  18
+  LOCKED="*"                                                    19
+  NEW="*"                                                       20
+  ERROR="*"                                                     21
 
 [GUI_PAGE_CONTROL]                                              07
 17   // Identifiers
@@ -231,7 +232,7 @@ PAGE="*"                                                        04
       MACRO="*"                                                 16
 
 [FONT_SCHEMES]                                                  08
-24   // Identifiers
+27   // Identifiers
 FONT_SCHEME="*"                                                 00
   MODE_FILTER="*"                                               01
   FONT_NAME="*"                                                 02
@@ -241,21 +242,24 @@ FONT_SCHEME="*"                                                 00
   FONT_PITCH="*"                                                06
   FONT_FIXED="*"                                                07
   CENTER_CHAR="*"                                               08
-  EXTRA_LINE_SPACING="*"                                        09
-  EXTRA_CHAR_SPACING="*"                                        10
-  CARET_WIDTH="*"                                               11
-  CARET_HEIGHT="*"                                              12
-  CARET_SHAPE="*"                                               13
-  OVER_CARET_SHAPE="*"                                          14
-  USE_IN_DIALOGS="*"                                            15
-  TAB_LENGTH="*"                                                16
-  TAB_EXPAND="*"                                                17
-  TAB_ALLOW_INPUT="*"                                           18
-  TAB_ALLOW_KEYBOARD="*"                                        19
-  TAB_OPT_LEADING="*"                                           20
-  TAB_OPT_NON_LEADING="*"                                       21
-  FREE_CARET="*"                                                22
-  RIGHT_MARGIN="*"                                              23
+  EXTRA_LINE_SPACING_ABOVE="*"                                  09
+  EXTRA_LINE_SPACING_BELOW="*"                                  10
+  EXTRA_LINE_SPACING="*"                                        11
+  EXTRA_CHAR_SPACING="*"                                        12
+  CARET_WIDTH="*"                                               13
+  CARET_HEIGHT="*"                                              14
+  CARET_SHAPE="*"                                               15
+  OVER_CARET_SHAPE="*"                                          16
+  USE_IN_DIALOGS="*"                                            17
+  TAB_LENGTH="*"                                                18
+  TAB_EXPAND="*"                                                19
+  TAB_DRAW="*"                                                  20
+  TAB_ALLOW_INPUT="*"                                           21
+  TAB_ALLOW_KEYBOARD="*"                                        22
+  TAB_OPT_LEADING="*"                                           23
+  TAB_OPT_NON_LEADING="*"                                       24
+  FREE_CARET="*"                                                25
+  RIGHT_MARGIN="*"                                              26
 
 [ENVIRONMENTS]                                                  09
 18   // Identifiers
@@ -307,7 +311,7 @@ TOOLBAR="*"                                                     05
     MENU="*"                                                    15
 
 [MAIN_MENU]                                                     12
-33   // Identifiers
+34   // Identifiers
 FILE_MENU="*"                                                   00
 PROJECT_MENU="*"                                                01
 WINDOWS_MENU="*"                                                02
@@ -340,7 +344,8 @@ ENABLE_MENU_IMAGES="*"                                          28
 CUSTOM_MENU_DRAWING="*"                                         29
 AUTOMATIC_HOT_KEYS="*"                                          30
 PERSISTENT_SHORTCUTS="*"                                        31
-CANCEL_KEY="*"                                                  32
+ALLOW_ALTGR_SHORTCUTS="*"                                       32
+CANCEL_KEY="*"                                                  33
 
 [POPUP_MENUS]                                                   13
 28   // Identifiers
@@ -639,7 +644,7 @@ CR="*"                                                          24
 LF_CR="*"                                                       25
 
 [UNICODE]                                                       27
-17   // Identifiers
+33   // Identifiers
 UNICODE_CHARSET_RANGE="*"                                       00
 CP_CHAR_MAP="*"                                                 01
 UTF8_ENABLED="*"                                                02
@@ -655,8 +660,24 @@ CCP="*"                                                         08
 LIST="*"                                                        12
 PREVIEW_LINE_TERMINATORS="*"                                    13
 ADMISSIBLE_CHARACTERS="*"                                       14
-SCRIPT="*"                                                      15
-FONT="*"                                                        16
+UNISCRIBE_ENABLED="*"                                           15
+UNISCRIBE_MODE_FILTER="*"                                       16
+FONT_MIXING_ENABLED="*"                                         17
+FONT_MIXING_MODE_FILTER="*"                                     18
+JUSTIFY_ENABLED="*"                                             19
+JUSTIFY_MODE_FILTER="*"                                         20
+JUSTIFY_SOFT_ONLY="*"                                           21
+JUSTIFY_STRETCH_LIMIT="*"                                       22
+JUSTIFY_SHRINK_LIMIT="*"                                        23
+FAST_WIDTH_ENABLED="*"                                          24
+FAST_WIDTH_MODE_FILTER="*"                                      25
+FAST_WIDTH_LINE_LIMIT="*"                                       26
+FAST_FONT_CACHE="*"                                             27
+ADJUST_BASE_LINES="*"                                           28
+BIDI_CARET_SHAPE="*"                                            29
+BIDI_CARET_WIDTH="*"                                            30
+SCRIPT="*"                                                      31
+  FONT="*"                                                      32
 
 [PREFERENCES]                                                   28
 23   // Identifiers
@@ -695,7 +716,7 @@ SELECTION_MODE="*"                                              00
   BACKGROUND_COLOR="*"                                          02
 
 [FILTER_SETS]                                                   31
-17   // Identifiers
+19   // Identifiers
 FILTER_SET="*"                                                  00
   ENABLED="*"                                                   01
   MODE_FILTER="*"                                               02
@@ -708,14 +729,16 @@ FILTER_SET="*"                                                  00
   PRIORITY="*"                                                  09
   TEXT_COLOR="*"                                                10
   BACKGROUND_COLOR="*"                                          11
-  DEFAULT_FONT="*"                                              12
-  ITALIC="*"                                                    13
-  BOLD="*"                                                      14
-  UNDERLINE="*"                                                 15
-  STRIKEOUT="*"                                                 16
+  FONT_NAME="*"                                                 12
+  DEFAULT_FONT="*"                                              13
+  ITALIC="*"                                                    14
+  BOLD="*"                                                      15
+  UNDERLINE="*"                                                 16
+  STRIKEOUT="*"                                                 17
+  EXTENDED="*"                                                  18
 
 [SWITCHES]                                                      32
-37   // Identifiers
+38   // Identifiers
 SWITCH="*"                                                      00
   ENABLED="*"                                                   01
   MODE_FILTER="*"                                               02
@@ -737,25 +760,26 @@ SWITCH="*"                                                      00
   STOP1_TRIGGER="*"                                             18
   STOP2_TRIGGER="*"                                             19
   TEXT_COLOR="*"                                                20
-  BACKGROUND_COLOR="*"                                          22
-  DEFAULT_FONT="*"                                              24
-  ITALIC="*"                                                    25
-  BOLD="*"                                                      26
-  UNDERLINE="*"                                                 27
-  STRIKEOUT="*"                                                 28
-  CUSTOM_BACKGROUND="*"                                         29
-  GRADIENT_BACKGROUND="*"                                       30
-  GRADIENT_COLOR="*"                                            31
-  RELATIVE_RIGHT_MARGIN="*"                                     32
-  RIGHT_MARGIN="*"                                              33
-  INDENTED_LEFT_MARGIN="*"                                      34
-  LEFT_MARGIN="*"                                               35
-  INCLUDE_START="*"                                             36
-  INCLUDE_STOP="*"                                              37
-  TRANSPARENT="*"                                               38
+  BACKGROUND_COLOR="*"                                          21
+  FONT_NAME="*"                                                 22
+  DEFAULT_FONT="*"                                              23
+  ITALIC="*"                                                    24
+  BOLD="*"                                                      25
+  UNDERLINE="*"                                                 26
+  STRIKEOUT="*"                                                 27
+  CUSTOM_BACKGROUND="*"                                         28
+  GRADIENT_BACKGROUND="*"                                       29
+  GRADIENT_COLOR="*"                                            30
+  RELATIVE_RIGHT_MARGIN="*"                                     31
+  RIGHT_MARGIN="*"                                              32
+  INDENTED_LEFT_MARGIN="*"                                      33
+  LEFT_MARGIN="*"                                               34
+  INCLUDE_START="*"                                             35
+  INCLUDE_STOP="*"                                              36
+  TRANSPARENT="*"                                               37
 
 [KEYWORDS]                                                      33
-20   // Identifiers
+21   // Identifiers
 KEYWORD_GROUP="*"                                               00
   ENABLED="*"                                                   01
   MODE_FILTER="*"                                               02
@@ -770,12 +794,13 @@ KEYWORD_GROUP="*"                                               00
   CASE_SENSITIVE="*"                                            11
   TEXT_COLOR="*"                                                12
   BACKGROUND_COLOR="*"                                          13
-  DEFAULT_FONT="*"                                              14
-  ITALIC="*"                                                    15
-  BOLD="*"                                                      16
-  UNDERLINE="*"                                                 17
-  STRIKEOUT="*"                                                 18
-  LIST="*"                                                      19
+  FONT_NAME="*"                                                 14
+  DEFAULT_FONT="*"                                              15
+  ITALIC="*"                                                    16
+  BOLD="*"                                                      17
+  UNDERLINE="*"                                                 18
+  STRIKEOUT="*"                                                 19
+  LIST="*"                                                      20
 
 [COLUMNS]                                                       34
 16   // Identifiers
@@ -937,7 +962,7 @@ ALLOW_COMPOUNDED_WORDS="*"                                      17
 MAX_COMPOUNDED_WORD_LENGTH="*"                                  18
 
 [FONT]                                                          43
-11   // Identifiers
+13   // Identifiers
 FONT_NAME="*"                                                   00
 FONT_SIZE="*"                                                   01
 FONT_BOLD="*"                                                   02
@@ -945,19 +970,22 @@ FONT_ITALIC="*"                                                 03
 FONT_PITCH="*"                                                  04
 FONT_FIXED="*"                                                  05
 CENTER_CHAR="*"                                                 06
-EXTRA_LINE_SPACING="*"                                          07
-EXTRA_CHAR_SPACING="*"                                          08
-MAX_LARGE_SIZE="*"                                              09
-MAX_CUSTOM_SIZE="*"                                             10
+EXTRA_LINE_SPACING_ABOVE="*"                                    07
+EXTRA_LINE_SPACING_BELOW="*"                                    08
+EXTRA_LINE_SPACING="*"                                          09
+EXTRA_CHAR_SPACING="*"                                          10
+MAX_LARGE_SIZE="*"                                              11
+MAX_CUSTOM_SIZE="*"                                             12
 
 [TABS]                                                          44
-06   // Identifiers
+07   // Identifiers
 TAB_LENGTH="*"                                                  00
 TAB_EXPAND="*"                                                  01
-TAB_ALLOW_INPUT="*"                                             02
-TAB_ALLOW_KEYBOARD="*"                                          03
-TAB_OPT_LEADING="*"                                             04
-TAB_OPT_NON_LEADING="*"                                         05
+TAB_DRAW="*"                                                    02
+TAB_ALLOW_INPUT="*"                                             03
+TAB_ALLOW_KEYBOARD="*"                                          04
+TAB_OPT_LEADING="*"                                             05
+TAB_OPT_NON_LEADING="*"                                         06
 
 [CARET]                                                         45
 04   // Identifiers

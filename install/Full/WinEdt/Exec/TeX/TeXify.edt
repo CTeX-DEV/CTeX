@@ -54,10 +54,6 @@ Return;
     !|LetReg(4,'%$("TeX-Opt");--interaction=errorstopmode');|);
   // C Style Errors?
   IfStr("%$('%!9-C-style-errors');","1",!"=",!|LetReg(4,'%!4 %$("TeX-Opt");--file-line-error');|);
-  // Aux Directory?
-  IfStr("%$('TeX System');","MiKTeX","=",>
-    !|IfStr('%O','%P','<>',!`LetReg(4,'%!4 --include-directory="%P"');`);|,>
-    !|IfStr('%O','%P','<>',!`DosToUnix('%O',5);LetReg(4,'%!4 --output-directory="%!5"');`);|);
   // TeX Sync?
   Assign('Sync');
   IfStr('%0',!'--src',!'<>',!'JMP("no_Sync");');
@@ -75,8 +71,6 @@ Return;
   IfFileExists("%O\%N.glg",!"DeleteFile('%O\%N.glg');");
   IfStr("%$('%!9-Clean_Build');","1","=",>
     !|IfFileExists("%O\%N.bbl",!"DeleteFile('%O\%N.bbl');");>
-      IfFileExists("%O\%N.bcf",!"DeleteFile('%O\%N.bcf');");>
-      IfFileExists("%O\%N.run.xml",!"DeleteFile('%O\%N.run.xml');");>
       IfFileExists("%O\%N.ind",!"DeleteFile('%O\%N.ind');");>
       IfFileExists("%O\%N.idx",!"DeleteFile('%O\%N.idx');");>
       IfFileExists("%O\%N.gls",!"DeleteFile('%O\%N.gls');");>

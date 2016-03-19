@@ -1,7 +1,0 @@
-  ENVIRONMENT="\renew?"
-    START="\renew"
-    SCOPE=1
-  ENVIRONMENT="\altnew?"
-    START="\altnew"
-    SCOPE=1
-  ENVIRONMENT="\Declare?"

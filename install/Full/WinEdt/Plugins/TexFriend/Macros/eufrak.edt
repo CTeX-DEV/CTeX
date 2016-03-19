@@ -1,3 +1,0 @@
-Assign("PackageLine","\usepackage{eufrak}");
-Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
-End;

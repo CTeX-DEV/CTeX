@@ -10,7 +10,7 @@
 
     PushTagsandRegisters;
 
-    ListFolderFiles(1,'%b\ConfigEx','.ini',0,1);
+    ListFolderFiles(1,'%b\ConfigEx','.ini',1,1);
     LstEnum('%!1','%\');
     LstGetCount(1);
     Repeat(%!1,>

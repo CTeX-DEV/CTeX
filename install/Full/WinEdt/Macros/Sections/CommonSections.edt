@@ -15,6 +15,7 @@
      SetRegEx(0);
      SearchReset;
  InsLabel("","%!9","}");
+ SwapCaretSelect(1);
  Mark(1);
  Find;
  RestoreFind;

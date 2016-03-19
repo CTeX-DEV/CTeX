@@ -1,3 +1,0 @@
-    ACTION="Insert"
-      IMAGE="Insert"
-      MACRO="ActivateChild;BeginGroup;SetSel(0);Ins('%?');EndGroup;"

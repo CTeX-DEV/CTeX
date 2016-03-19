@@ -1,4 +1,4 @@
-WinEdt 9 has been Installed on your System
+WinEdt 10 has been Installed on your System
 ==========================================
 
 This is the default configuration (project file is not loaded
@@ -9,7 +9,7 @@ Start the Configuration Wizard (Options Menu):
 
   - (Optionally) Create or update any filetype associations.
     WinEdt has to be run with (elevated) Administrator Privileges
-    for this to work on Vista or Windows 7 or 8! This is a good
+    for this to work on Vista or Windows 7, 8 or 10! This is a good
     time to perform this task while WinEdt has elevated status...
 
   - Restart WinEdt to finish the installation!
@@ -22,25 +22,30 @@ before you start customizing your settings!!!
 UPGRADING ISSUES:
 =================
 
-WinEdt 9 is installed parallel to WinEdt 8, 7, 6 or 5 and you can
-continue to use an older version of WinEdt and possibly uninstall
-WinEdt 9 if you prefer the old version.
+WinEdt 10 is installed parallel to WinEdt 9, 8, 7, 6 or 5 and you
+can continue to use an older version of WinEdt and possibly
+uninstall WinEdt 10 if you prefer the old version.
 
-IMPORTANT: If you already have WinEdt 5.x, 6 or 7 on your system
-you cannot import your old settings directly into WinEdt 9! If you
-already have WinEdt 8 installed the migration is easy: just execute
-the command 'Import WinEdt 8 Settings' from within WinEdt 9 and
+NOTE: WinEdt 10 does not run on Windows XP. Windows 7 or later is
+required for this version to run on your computer! This version was
+developed and extensively tested on Windows 10...
+
+IMPORTANT: If you already have WinEdt 5.x, 6, 7 or 8 on your system
+you cannot import your old settings directly into WinEdt 10! If you
+already have WinEdt 9 installed the migration is easy: just execute
+the command 'Import WinEdt 9 Settings' from within WinEdt 10 and
 you're done...
 
-    Upgrading WinEdt 9 series from here on will be easy since your
-    local settings are preserved during upgrades. Executing the
-    command 'Upgrade Personal Configuration' will merge your custom
-    settings with the new defaults.
+  Upgrading from WinEdt 10.0 is easy:
 
-REGISTRATION: WinEdt 9 series uses the same Registration Data as
-WinEdt 8, 7 and 6. You will, however, have to enter the data (Name
-and Code) again in the Registration Dialog of WinEdt 9. WinEdt 5
-users will have to pay an upgrade fee if they want to register
-WinEdt 9 (see www.winedt.com for details).
+    Close WinEdt and install the new version over the old one.
+    Executing the command 'Upgrade Personal Configuration' will
+    merge your custom WinEdt 10 settings with the new defaults...
+
+REGISTRATION: WinEdt 10 series uses the same Registration Data as
+WinEdt 9, 8, 7 and 6. You will, however, have to enter the data
+(Name and Code) again in the Registration Dialog of WinEdt 10.
+WinEdt 5 users will have to pay an upgrade fee if they want to
+register WinEdt 10 (see www.winedt.com for details).
 
 ----------------------------------------------------------------------

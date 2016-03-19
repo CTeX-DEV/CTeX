@@ -1,9 +1,0 @@
-FLOATING_BOOKMARKS=0
-
-// Highlight the Current Line Panel
-HIGHLIGHT_BOOKMARK_PANEL=0
-
-// Set to 0 if you don't want bookmarks
-BOOKMARK_PANEL_WIDTH=24
-
-// ===============================================================================

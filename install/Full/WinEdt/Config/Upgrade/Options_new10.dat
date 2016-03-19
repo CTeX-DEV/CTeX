@@ -1,6 +1,0 @@
-    END="Build Tree (After)"
-    ITEM="Dynamic Dictionaries"
-      ICON="Dictionaries"
-      FILENAME="Macros\Events\DynDict.edt"
-    END="Dynamic Dictionaries"
-  END="Event Handlers..."

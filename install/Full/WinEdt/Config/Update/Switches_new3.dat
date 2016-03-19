@@ -1,3 +1,0 @@
-  START1_TRIGGER="\Citeauthor"
-  START1_TRIGGER="\Citeauthor*"
-  START1_TRIGGER="\citetitle"

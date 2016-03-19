@@ -1,5 +1,0 @@
-  START1_TRIGGER=""
-  START2_TRIGGER="begin{array}"
-  STOP1_TRIGGER=""
-  STOP2_TRIGGER="end{array}"
-    TEXT_COLOR=4

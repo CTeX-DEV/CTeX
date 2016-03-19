@@ -1,0 +1,619 @@
+<!DOCTYPE html PUBLIC>
+<!-- CREATED in WinEdt's HTML Mode -->
+<!-- -*- HTML:HTM:Soft -*-  -->
+<HTML>
+<HEAD>
+  <!--http://www.winedt.com/-->
+  <LINK REV="made" HREF="mailto:support@winedt.com"/>
+  <LINK REL="stylesheet" TYPE="text/css" HREF="WinEdt.css"/>
+  <LINK REL="shortcut icon" href="WinEdt.ico"/>
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/>
+  <META HTTP-EQUIV="EXPIRES" CONTENT="0"/>
+  <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US"/>
+  <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8"/>
+  <META NAME="AUTHOR" CONTENT="Aleksander Simonic"/>
+  <TITLE>WinEdt Change Log</TITLE>
+</HEAD>
+
+<BODY>
+<div id="wrapper">
+<div id="wrap">
+<div id="top">
+   <div class="top_nav">
+     <!--INCLUDE="WinEdt.css"-->
+     <span class="tab0"><a href="index.html">Home</a></span>
+     <span class="tab0"><a href="news.html">News</a></span>
+     <!--UL-->
+        <!--INCLUDE="log.html"-->
+     <!--/UL-->
+     <!--UL-->
+        <!--INCLUDE="uniscribe.html"-->
+     <!--/UL-->
+     <span class="tab0"><a href="download.html">Downloads</a></span>
+     <span class="tab0"><a href="support.html">Support</a></span>
+     <span class="tab0"><a href="about.html">About this HTML Sample</a></span>
+     <span class="tab0"><a href="http://www.winedt.com">WinEdt.com</a></span>
+     <span class="tab2"><a href="mailto:support@winedt.com">Contact</a></span>
+   </div>  <!--top_nav-->
+   <div class="logo">
+       <img align="left" class="logo_img" src="images/WinEdtSmall.png"/>
+       <span class="logo_text">
+         WinEdt
+       </span>
+   </div>
+</div>     <!--top-->
+
+<div id="main">
+
+<h2>What's New?</h2>
+
+<p>
+WinEdt 10.0 is now the <em>official</em> version of the program. Below you will find the changes log pertaining to the latest version and build of WinEdt...
+</p>
+
+<pre>
+  * WinEdt News.txt
+  Last modified on Thursday, February 18, 2016  13:05
+  __________________________________________________________________
+
+
+  WinEdt 10 is a Unicode (UTF-8) text editor built on WinEdt 9
+  sources and compiled with a brand new Delphi 10 Seattle
+  (Professional).
+
+  UPGRADING ISSUES:
+  =================
+
+  WinEdt 10 is installed parallel to WinEdt 9, 8, 7, 6 or 5 and you
+  can continue to use an older version of WinEdt and possibly
+  uninstall WinEdt 10 if you prefer the old version.
+
+  NOTE: WinEdt 10 does not run on Windows XP. Windows 7 or later is
+  required for this version to run on your computer! This version was
+  developed and extensively tested on Windows 10.
+
+  IMPORTANT: If you already have WinEdt 5.x, 6, 7 or 8 on your system
+  you cannot import your old settings directly into WinEdt 10! If you
+  already have WinEdt 9 installed the migration is easy: just execute
+  the command 'Import WinEdt 9 Settings' from the Options Menu ->
+  Maintenance within WinEdt 10 and you're done...
+
+    Upgrading from WinEdt 10.0 is easy:
+
+      Close WinEdt and install the new version over the old one.
+      Executing the command 'Upgrade Personal Configuration' will
+      merge your custom WinEdt 10 settings with the new defaults...
+
+  REGISTRATION: WinEdt 10 series uses the same Registration Data as
+  WinEdt 9, 8, 7 and 6. You will, however, have to enter the data
+  (Name and Code) again in the Registration Dialog of WinEdt 10.
+  WinEdt 5 users will have to pay an upgrade fee if they want to
+  register WinEdt 10 (see www.winedt.com for details).
+
+  ------------------------------------------------------------------
+
+  WinEdt 10 [Build 20160317 (v. 10.0)]
+  ====================================
+
+  - The major new feature in this version is the ability to handle
+  bidirectional text (Arabic or Hebrew) and improved support for some
+  complex unicode scripts (such as Thai). The use of MS Uniscribe
+  library in WinEdt's text processing engine is instrumental for this
+  functionality (also the main reason why this version doesn't run on
+  Windows XP that does not support unicode script tags)...
+
+  - New properties in [UNICODE] section:
+
+    UNISCRIBE_ENABLED
+    UNISCRIBE_MODE_FILTER
+
+  For complex language processing (eg. Hebrew or Arabic bidirectional
+  text or Thai non-spacing characters) this property should be
+  enabled. Users that do not require such functionality can disable
+  Uniscribe engine if they encounter problems or experience any
+  problems with performance (extra text processing can add up in
+  large documents). WinEdt has been optimized and it detects when
+  complex processing is required and performs it as needed.
+
+  These properties are also available in the Unicode page of
+  Preferences Dialog...
+
+  - New UNICODE properties that determine how the new Uniscribe
+  library is used.
+
+  The following UNICODE options are ignored unless Uniscribe text
+  processing is enabled:
+
+    // ===============================================================================
+    // Highlighting may affect character widths and placement if
+    // FONT is a part of highlighting attributes or when
+    // font style (such a bold) affects character widths!
+    // This option affects the wrapping algorithm only:
+    // text is still properly displayed without enabling it!
+    FONT_MIXING_ENABLED=1
+    FONT_MIXING_MODE_FILTER="HTML|XWE"
+
+    // Justify paragraphs to the specified right margin by stretching lines
+    // as required to fill the available space between left and right margin...
+    // NOTE: In large documents this can become slow in long paragraphs!
+    JUSTIFY_ENABLED=1
+    JUSTIFY_MODE_FILTER="HTML|XWE"
+    JUSTIFY_SOFT_ONLY=1         // Only for Softly wrapped paragraphs
+    JUSTIFY_STRETCH_LIMIT=50    // At most 50% stretching is allowed
+    JUSTIFY_SHRINK_LIMIT=25     // At most 25% shrinking is allowed
+
+    // Calculating the exact line widths in order to initialize
+    // horizontal scroll bar can be expensive in complex languages!
+    // A faster version can be enabled for modes that use fixed width fonts
+    // without bells and whistles!
+    // This can sometimes result in an unwanted horizontal scroll bar
+    // but it can significantly improve the performance in large files!
+    FAST_WIDTH_ENABLED=1
+    FAST_WIDTH_MODE_FILTER="DATA"
+    // calculate exact widths within specified range from the current line
+    FAST_WIDTH_LINE_LIMIT=1111  // Not less than 9!
+
+    // Up to Hebrew letters the sum of character widths could be used to
+    // calculate left-to-right glyph positions in a line.
+    // This is much faster than using Uniscribe!
+    // Reduce the limit if you need fallback fonts below this range...
+    FAST_FONT_CACHE=1425 // The last character code for fast font cache
+
+    // When mixing fonts or using fallback fonts vertical offset may have
+    // to applied to secondary fonts in order to use a single font base line.
+    // In some cases this may require extra line spacing (above or below).
+    // If this property causes certain fonts to be clipped disable it and/or
+    // increase line spacing (Thai text could be problematic with some fonts)...
+    ADJUST_BASE_LINES=1
+
+    // Change the caret shape to indicate RTL text?
+    // Applies only to vertical caret shape!
+    // -1 = Never
+    //  0 = Only if line contains BiDi Text
+    //  1 = Always
+    BIDI_CARET_SHAPE=-1
+    BIDI_CARET_WIDTH=2 // Left or Right Flag Width
+    // ===============================================================================
+
+  - Very few (probably no) fonts on Windows contain glyphs for all
+  unicode characters. Normally WinEdt uses one primary font as
+  specified in the Preferences dialog (or possibly overwritten for a
+  particular mode in Font Schemes). If this font is lacking glyphs
+  for a particular script then WinEdt substitutes it with the first
+  exiting specified fallback font at the same height as the primary
+  font (when missing glyphs have to be displayed).
+
+  The new GetScriptTagsAndFonts macro function was used to compile
+  the list of scripts and suitable fonts. Advanced users with special
+  needs or a very different choice of the default font may have to
+  modify the list in order to get a reasonable looking text in
+  certain scripts. Fallback fonts were implicitly used in previous
+  versions of WinEdt as well except that they were not customizable
+  (Windows preformed substitutions automatically for better or
+  worse). Some of the specified fallback fonts are native to Windows
+  10 while others come with Windows 7 only. This does not impede
+  runtime performance since WinEdt simply ignores and removes
+  non-existent fonts on your system.
+
+    // ===============================================================================
+    // UNISCRIBE Fallback Fonts
+    // ========================
+    //
+    // The values below affect Uniscribe engine...
+    // Fallback fonts for different (exotic) scripts as defined by Windows Unicode
+
+    // If the list starts with ! then the currently active font is ignored and only
+    // fallback fonts listed after ! are applied (seldom useful)...
+    // If you specify @ in the list of fallback fonts then ALL fonts
+    // starting with the letter @ on your system are used for that script.
+    // Use GetScriptTagsAndFonts macro function to see what scripts and fonts
+    // are available on your computer (it depends on your version of Windows)!
+    // Non-existent fonts in the list are simply ignored!
+
+    SCRIPT=""     // Non-script-specific characters and symbols (eg. numbers, etc...)
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+           "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+    SCRIPT="latn" // @ABCDE ^_`abcde yz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°± ÀÁÂÃÄÅÆÇÈÉÊË...
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+           "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+    SCRIPT="grek" // ΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϏϐϑϒϓϔ
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    SCRIPT="cyrl" // абвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџѠѡѢѣ
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    SCRIPT="hebr" // דג סקרן שט בים מאוכזב ולפתע מצא חברה
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    SCRIPT="arab" // صِف خَلقَ خَودِ كَمِثلِ الشَمسِ إِذ بَزَغَت — يَحظى الضَجيعُ بِها نَجلاءَ مِعطارِ
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    SCRIPT="armn" // աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    SCRIPT="thai" // กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬ
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+
+    SCRIPT="hani" // 丈三上下丌不与丏丐丑丒专且丕世丗丘丙 乤乥书乧乨乩乪乫乬乭乮乯买乱乲乳乴乵乶
+      FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;@"
+    SCRIPT="kana" // いろはにほへと ちりぬるを わかよたれそ つねならむ きゆめみし ゑひもせす ㋐㋑㋒
+      FONT="Default;Yu Gothic UI;Microsoft YaHei UI;Microsoft JhengHei UI;@"
+    SCRIPT="hang" // 가각갂갃간갅갆갇갈갉갊갋갌갍갎갏감갑값갓갔강갖갗갘 ㉠㉡㉢㉣㉤㉥㉦㉧㉨㉩㉪㉫
+      FONT="Default;Malgun Gothic;@"
+    SCRIPT="bopo" // ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕ  ㆠㆡㆢㆣㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭ
+      FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;@"
+    SCRIPT="yi  " // ꀀꀁꀂꀃꀄꀅꀆꀇꀈꀉꀊꀋꀌꀍꀎꀏꀐꀑꀒꀓꀔꀕꀖꀗꀘ ꒐꒑꒒꒓꒔꒕꒖꒗꒘꒙꒚꒛꒜꒝
+      FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Microsoft Yi Baiti;@"
+
+    SCRIPT="brai" //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱ ⣺⣻⣼⣽⣾⣿
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+    SCRIPT="copt" // ϢϣϤϥϦϧϨϩϪϫϬϭϮϯ ⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲔⲕⲖⲗⲘⲙⲚⲛⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲰⲱ ⳹⳺⳻⳼⳽⳾⳿
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+    SCRIPT="glag" // ⰀⰁⰂⰃⰄⰅⰆⰇⰈⰉⰊⰋⰌⰍⰎⰏⰐⰑⰒⰓⰔⰕⰖⰗⰘⰙⰚ ⰰⰱⰲⰳⰴⰵⰶⰷⰸⰹⰺⰻⰼⰽⰾⰿⱀⱁⱂⱃⱄⱅⱆⱇⱈⱉⱊ
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+    SCRIPT="runr" // ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚲᚳᚴᚵᚶᚷᚸᚹᚺᚻᚼᚽᚾᚿᛀᛁᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛌᛍᛎᛏᛐᛑ ᛒᛓᛔᛕᛖᛗᛘᛙᛚᛛᛜᛝᛞᛟᛠᛡᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+    SCRIPT="lisu" // ꓐꓑꓒꓓꓔꓕꓖꓗꓘꓙꓚꓛꓜꓝꓞꓟꓠꓡꓢꓣꓤꓥꓦꓧꓨꓩꓪꓫꓬꓭꓮꓯꓰꓱꓲꓳꓴꓵꓶꓷꓸꓹꓺꓻꓼꓽ꓾꓿
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+    SCRIPT="ogam" // ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊᚋᚌᚍᚎᚏᚐᚑᚒᚓᚔᚕᚖᚗᚘᚙᚚ᚛᚜
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+    SCRIPT="geor" // ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳ აბგდევზთიკლხჯჰჱჲჳჴჵჶჷჸჹჺ჻ჼჽჾჿ ⴀⴁⴂⴃⴄⴅⴆⴇⴈⴉⴊⴋⴌⴍⴎ
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;Sylfaen"
+    SCRIPT="syrc" // ܐܑܒܓܔܕܖܗܘܙܚܛܜܝܞܟܠܡܢܣܤܥܦܧܨܩܪܫܬܭܮܯܱܴܷܸܹܻܼܾܰܲܳܵܶܺܽܿ݀݁ ݍݎݏ
+      FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;" +
+           "Estrangelo Edessa"
+
+    SCRIPT="deva" // ऄअआइईउऊऋऌऍऎएऐऑऒओऔकखगघङचछजझञटठडढणतथदधनऩपफबभमयरऱ
+      FONT="Default;Arial Unicode MS;Nirmala UI;Aparajita;Kokila;Mangal"
+    SCRIPT="beng" // ওঔকখগঘঙচছজঝঞটঠডঢণতথদধন পফবভমযর ০১২৩৪৫৬৭৮৯ৰৱ৲৳৴৵৶৷৸৹৺৻
+      FONT="Default;Arial Unicode MS;Nirmala UI;Vrinda"
+    SCRIPT="guru" // ਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨ ਪਫਬਭਮਯਰ ਖ਼ਗ਼ਜ਼ੜ  ਫ਼
+      FONT="Default;Arial Unicode MS;Nirmala UI;Raavi"
+    SCRIPT="gujr" // અઆઇઈઉઊઋઌઍ ઓઔકખગઘઙચછજઝઞટઠડઢણતથદધન વશષસહ
+      FONT="Default;Arial Unicode MS;Nirmala UI;Shruti"
+    SCRIPT="orya" // ଅଆଇଈଉଊଋଌ ଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନ ପଫବଭମଯର ଵଶଷସହ
+      FONT="Default;Arial Unicode MS;Nirmala UI;Kalinga"
+    SCRIPT="taml" // அஆஇஈஉஊ மயரறலளழவஶஷஸஹ ௦௧௨௩௪௫௬௭௮௯௰௱௲௳௴௵௶௷
+      FONT="Default;Arial Unicode MS;Nirmala UI;Latha;Vijaya"
+    SCRIPT="telu" // అఆఇఈఉఊఋఌ ఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధన పఫబభమయరఱలళఴ
+      FONT="Default;Arial Unicode MS;Nirmala UI;Gautami;Vani"
+    SCRIPT="knda" // ಅಆಇಈಉಊಋಌ ಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನ
+      FONT="Default;Arial Unicode MS;Nirmala UI;Tunga"
+    SCRIPT="mlym" // അആഇഈഉഊഋഌ ഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനഩ
+      FONT="Default;Arial Unicode MS;Nirmala UI;Kartika"
+    SCRIPT="sinh" // අආඇඈඉඊඋඌඍඎඏඐඑඒඓඔඕඖ ඳපඵබභමඹයර
+      FONT="Default;Arial Unicode MS;Nirmala UI;Iskoola Pota"
+    SCRIPT="olck" // ᱐᱑᱒᱓᱔᱕᱖᱗᱘᱙ᱚᱛᱜᱝᱞᱟᱠᱡᱢᱣᱤᱥᱦᱧᱨᱩᱪᱫᱬᱭᱮᱯᱰᱱᱲᱳᱴᱵᱶᱷᱸᱹᱺᱻᱼᱽ᱾᱿
+      FONT="Default;Arial Unicode MS;Nirmala UI"
+
+    SCRIPT="khmr" // កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវឝឞសហឡអឣឤឥឦឧឨឩឪឫឬឭឮឯ
+      FONT="Default;Arial Unicode MS;Leelawadee UI;Khmer UI"
+    SCRIPT="lao " // ນບປຜຝພຟ ເແໂໃໄ ໐໑໒໓໔໕໖໗໘໙ ໜໝໞໟ ດຕຖທ ໐໑໒໓໔໕໖໗໘໙ ເແໂໃໄ ອຮຯະັາຳິີຶືຸູ
+      FONT="Default;Arial Unicode MS;Leelawadee UI;Lao UI"
+    SCRIPT="bugi" // ᨀᨁᨂᨃᨄᨅᨆᨇᨈᨉᨊᨋᨌᨍᨎᨏᨐᨑᨒᨓᨔᨕᨖᨘᨗᨙᨚᨛ
+      FONT="Default;Arial Unicode MS;Leelawadee UI"
+
+    SCRIPT="ethi" // ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜም ፝፞፟፠፡።፣፤፥፦፧፨፩፪፫፬፭፮፯፰፱፲፳፴፵፶፷፸፹፺፻፼
+      FONT="Default;Arial Unicode MS;Ebrima;Nyala"
+    SCRIPT="tfng" // ⴰⴱⴲⴳⴴⴵⴶⴷⴸⴹⴺⴻⴼⴽⴾⴿⵀⵁⵂⵃⵄⵅⵆⵇⵈⵉⵊⵋⵌⵍⵎⵏⵐⵑⵒⵓⵔⵕⵖⵗⵘⵙⵚⵛⵜⵝⵞⵟⵠⵡ
+      FONT="Default;Arial Unicode MS;Ebrima"
+    SCRIPT="vai " // ꔀꔁꔂꔃꔄꔅꔆꔇꔈꔉꔊꔋꔌꔍꔎꔏꔐꔑꔒꔓꔔꔕꔖꔗꔘꔙꔚꔛꔜꔝꔞꔟꔠꔡꔢꔣꔤꔥꔦꔧꔨꔩꔪꔫ
+      FONT="Default;Arial Unicode MS;Ebrima"
+    SCRIPT="nko " // ߀߁߂߃߄߅߆߇߈߉ߊߋߌߍߎߏߐߑߒߓߔߕߖߗߘߙߚߛߜߝߞߟߠߡߢߣߤߥߦߧߨߩߪ߫߬߭߮߯߰߱
+      FONT="Default;Arial Unicode MS;Ebrima"
+
+    SCRIPT="cher" // ᎠᎡᎢᎣᎤᎥᎦᎧᎨᎩᎪᎫᎬᎭᎮᎯᎰᎱᎲᎳᎴᎵᎶᎷᎸᎹᎺᎻᎼᎽᎾᎿᏀᏁᏂᏃᏄᏅᏆᏇᏈᏉᏊᏋᏌᏍᏎᏏᏐᏑ
+      FONT="Default;Arial Unicode MS;Gadugi;Plantagenet Cherokee"
+    SCRIPT="cans" // ᢰᢱᢲᢳᢴᢵᢶᢻᢼᢽᢾᢿᣍᣎᣏᣐᣑᣒᣓᣔᣕᣖᣗᣛᣜᣝᣞᣟᣠᣡᘈᘉᘊᘋᘌᘍᘑᘒᘗᘘᘙᘚᘛᘜᘝᘞᘟᘤᘥᘦ
+      FONT="Default;Arial Unicode MS;Gadugi;Euphemia"
+
+    SCRIPT="tale" // ᥐᥑᥒᥓᥔᥕᥖᥗᥘᥙᥚᥛᥜᥝᥞᥟᥠᥡᥢᥣᥤᥥᥦᥧᥨᥩᥪᥫᥬᥭ
+      FONT="Default;Arial Unicode MS;Microsoft Tai Le"
+    SCRIPT="talu" // ᦀᦁᦂᦃᦄᦅᦆᦇᦈᦉᦊᦋᦌᦍᦎᦏᦐᦑᦒᦓᦔᦕᦖᦗᦘᦙᦚᦛᦜᦝᦞᦟᦠᦡᦢᦣᦤᦥᦦᦧᦨᦩᦪᦫ
+      FONT="Default;Arial Unicode MS;Microsoft New Tai Lue"
+    SCRIPT="phag" // ꡀꡁꡂꡃꡄꡅꡆꡇꡈꡉꡊꡋꡌꡍꡎꡏꡐꡑꡒꡓꡔꡕꡖꡗꡘꡙꡚꡛꡜꡝꡞꡟꡠꡡꡢ
+      FONT="Default;Arial Unicode MS;Microsoft PhagsPa"
+    SCRIPT="tibt" // ༀ༁༂༃༄༅༆༇༈༉༊་༌།༎༏༐༑༒༓༔༕༖༗༘༙༚༛༜༝༞༟༠༡༢༣༤༥༦༧༨༩༪༫༬༭༮༯༰༱
+      FONT="Default;Arial Unicode MS;Microsoft Himalaya"
+    SCRIPT="thaa" // ހށނރބޅކއވމފދތލގޏސޑޒޓޔޕޖޗޘޙޚޛޜޝޞޟޠޡޢޣޤ
+      FONT="Default;Arial Unicode MS;MV Boli"
+    SCRIPT="mong" // ᠠᠡᠢᠣᠤᠥᠦᠧᠨᠩᠪᠫᠬᠭᠮᠯᠰᠱᠲᠳᠴᠵᠶᠷᠸᠹᠺᠻᠼᠽᠾᠿᡀᡁᡂᡃᡄᡅᡆᡇᡈᡉᡊᡋᡌᡍᡎᡏᡐᡑ ᡒᡓᡔᡕᡖᡗᡘᡙᡚᡛᡜᡝᡞᡟᡠᡡᡢᡣᡤᡥᡦᡧᡨᡩᡪᡫᡬᡭᡮᡯᡰᡱᡲᡳᡴᡵᡶᡷ
+      FONT="Default;Arial Unicode MS;Mongolian Baiti"
+    SCRIPT="mymr" // ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဢဣဤဥဦဧဨဩဪါာိီုူေ
+      FONT="Default;Arial Unicode MS;Myanmar Text"
+    SCRIPT="java" // ꦲ꦳ꦴꦵꦶꦷꦸꦹꦺꦻꦼꦽꦾꦿ꧀꧁꧂꧃꧄꧅꧆꧇꧈꧉꧊꧋꧌꧍ ꧐꧑꧒꧓꧔꧕꧖꧗꧘꧙
+      FONT="Default;Arial Unicode MS;Javanese Text"
+
+    SCRIPT="?"    // Any Other (not listed): must be the last item!
+      FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+           "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+    // -------------------------------------------------------------------------------
+    // Unicode for Windows is a project in progress...
+    // On Windows 7 some scripts (above) will not display due to the lack of fonts
+    // or glyphs. On Windows 10 they will display correctly.
+    //
+    // The following 20 script tags are defined on Windows 10 but currently no font
+    // that comes with Windows 10 has glyphs for them (this may change in the future):
+    //
+    // SCRIPT="bali" // ᬅᬆᬇᬈᬉᬊᬋᬌᬍᬎᬏᬐᬑᬒᬓᬔᬕᬖᬗᬘᬙᬚᬛᬜᬝᬞᬟᬠᬡᬢᬣᬤᬥᬦᬧᬨᬩᬪᬫᬬᬭᬮᬯᬰᬱ
+    // SCRIPT="batk" // ᯀᯁᯂᯃᯄᯅᯆᯇᯈᯉᯊᯋᯌᯍᯎᯏᯐᯑᯒᯓᯔᯕᯖᯗᯘᯙᯚᯛᯜᯝᯞᯟᯠᯡᯢᯣᯤᯥ᯦ᯧᯨᯩᯪᯫᯬᯭᯮᯯᯰᯱ
+    // SCRIPT="buhd" // ᝀᝁᝂᝃᝄᝅᝆᝇᝈᝉᝊᝋᝌᝍᝎᝏᝐᝑᝒᝓ
+    // SCRIPT="cham" // ꨀꨁꨂꨃꨄꨅꨆꨇꨈꨉꨊꨋꨌꨍꨎꨏꨐꨑꨒꨓꨔꨕꨖꨗꨘꨙꨚꨛꨜꨝꨞꨟꨠꨡꨢꨣꨤꨥꨦꨧꨨꨩꨪꨫꨬꨭꨮꨯꨰꨱ
+    // SCRIPT="hano" // ᜠᜡᜢᜣᜤᜥᜦᜧᜨᜩᜪᜫᜬᜭᜮᜯᜰᜱᜲᜳ᜴᜵᜶
+    // SCRIPT="kali" // ꤀꤁꤂꤃꤄꤅꤆꤇꤈꤉ꤊꤋꤌꤍꤎꤏꤐꤑꤒꤓꤔꤕꤖꤗꤘꤙꤚꤛꤜꤝꤞꤟꤠꤡꤢꤣꤤꤥꤦꤧꤨꤩꤪ꤫꤬꤭
+    // SCRIPT="lana" // ᨠᨡᨢᨣᨤᨥᨦᨧᨨᨩᨪᨫᨬᨭᨮᨯᨰᨱᨲᨳᨴᨵᨶᨷᨸᨹᨺᨻᨼᨽᨾᨿᩀᩁᩂᩃᩄᩅᩆᩇᩈᩉᩊᩋᩌᩍᩎᩏᩐᩑ
+    // SCRIPT="lepc" // ᰀᰁᰂᰃᰄᰅᰆᰇᰈᰉᰊᰋᰌᰍᰎᰏᰐᰑᰒᰓᰔᰕᰖᰗᰘᰙᰚᰛᰜᰝᰞᰟᰠᰡᰢᰣᰤᰥᰦᰧᰨᰩᰪᰫᰬᰭᰮᰯᰰᰱ
+    // SCRIPT="limb" // ᤀᤁᤂᤃᤄᤅᤆᤇᤈᤉᤊᤋᤌᤍᤎᤏᤐᤑᤒᤓᤔᤕᤖᤗᤘᤙᤚᤛᤜᤝᤞ
+    // SCRIPT="mand" // ࡀࡁࡂࡃࡄࡅࡆࡇࡈࡉࡊࡋࡌࡍࡎࡏࡐࡑࡒࡓࡔࡕࡖࡗࡘ࡙࡚࡛
+    // SCRIPT="mtei" // ꫠꫡꫢꫣꫤꫥꫦꫧꫨꫩꫪꫫꫬꫭꫮꫯ꫰꫱ꫲꫳꫴꫵ꫶
+    // SCRIPT="qavs" // ︀︁︂︃︄︅︆︇︈︉︊︋︌︍︎️
+    // SCRIPT="rjng" // ꤰꤱꤲꤳꤴꤵꤶꤷꤸꤹꤺꤻꤼꤽꤾꤿꥀꥁꥂꥃꥄꥅꥆꥇꥈꥉꥊꥋꥌꥍꥎꥏꥐꥑꥒ꥓
+    // SCRIPT="samr" // ࠀࠁࠂࠃࠄࠅࠆࠇࠈࠉࠊࠋࠌࠍࠎࠏࠐࠑࠒࠓࠔࠕࠖࠗ࠘࠙ࠚࠛࠜࠝࠞࠟࠠࠡࠢࠣࠤࠥࠦࠧࠨࠩࠪࠫࠬ࠭
+    // SCRIPT="saur" // ꢂꢃꢄꢅꢆꢇꢈꢉꢊꢋꢌꢍꢎꢏꢐꢑꢒꢓꢔꢕꢖꢗꢘꢙꢚꢛꢜꢝꢞꢟꢠꢡꢢꢣꢤꢥꢦꢧꢨꢩꢪꢫꢬꢭꢮꢯꢰꢱ
+    // SCRIPT="sund" // ᮃᮄᮅᮆᮇᮈᮉᮊᮋᮌᮍᮎᮏᮐᮑᮒᮓᮔᮕᮖᮗᮘᮙᮚᮛᮜᮝᮞᮟᮠᮡᮢᮣᮤᮥᮦᮧᮨᮩ᮪᮫ᮬᮭ
+    // SCRIPT="sylo" // ꠃꠄꠅ꠆ꠇꠈꠉꠊꠋꠌꠍꠎꠏꠐꠑꠒꠓꠔꠕꠖꠗꠘꠙꠚꠛꠜꠝꠞꠟꠠꠡꠢꠣꠤꠥꠦꠧ꠨꠩꠪꠫
+    // SCRIPT="tagb" // ᝠᝡᝢᝣᝤᝥᝦᝧᝨᝩᝪᝫᝬᝮᝯᝰᝲᝳ
+    // SCRIPT="tavt" // ꪀꪁꪂꪃꪄꪅꪆꪇꪈꪉꪊꪋꪌꪍꪎꪏꪐꪑꪒꪓꪔꪕꪖꪗꪘꪙꪚꪛꪜꪝꪞꪟꪠꪡꪢꪣꪤꪥꪦꪧꪨꪩꪪꪫꪬꪭꪮꪯꪰꪱ
+    // SCRIPT="tglg" // ᜀᜁᜂᜃᜄᜅᜆᜇᜈᜉᜊᜋᜌᜎᜏᜐᜑᜒᜓ᜔
+    //
+    // -------------------------------------------------------------------------------
+    // ===============================================================================
+
+  - Keywords, Switches, and Filter sets now allow a new highlighting
+  attribute property:
+
+    FONT_NAME
+
+  When "fancy" UNISCRIBE text processing is enabled this makes it
+  possible to change the font family as a highlighting attribute.
+
+    Example: Default settings use a "nice" variable width font
+    Verdana for HTML documents. Some switch environments
+    (pre-formatted, comments, tables, images, teletype) use Courier
+    New font. This make text look pretty good but it comes with a
+    price as formatting becomes more sophisticated and slower (in
+    huge documents). Also not all combinations of fonts mix well with
+    a fixed line height. Keep this in mind if you want to use this
+    feature for other modes. See also the guidelines on how to use
+    "fancy" Uniscribe settings without degrading the performance...
+
+  - Two new FONT and FONT_SCHEMES properties have been introduced:
+
+    EXTRA_LINE_SPACING_ABOVE
+    EXTRA_LINE_SPACING_BELOW
+
+  to give more control over the line spacing. The "old" property
+  EXTRA_LINE_SPACING is still available (for compatibility's sake)
+  and it simply splits the spacing between the above values (Above =
+  n div 2 and Below is the rest) just like before.
+
+  Depending on scripts and selected fonts it is sometimes useful to
+  distinguish between these two properties (some scripts use a lot of
+  space above the baseline while some other fonts and scripts require
+  extra space under the baseline). These two properties can be
+  adjusted in the Preferences Dialog...
+
+  - New 0/1 property TAB_DRAW for TAB characters. When enabled Tab
+  characters are discretely drawn (using a custom algorithm similar
+  to underlined misspelled words) in order to distinguish them from
+  spaces. This property does not affect the alignment properties of
+  tabs. This option is ignored when Tabs are translated and displayed
+  (TAB_EXPAND=2). This property can also be set in the Tab page of
+  the Preferences Dialog...
+
+  - Filter Sets now allow extra 0/1 property EXTENDED. When set to 1
+  Unicode characters > #255 match the set (even though the set
+  expressions are limited to Ansi characters). A typical example
+  where this property is required is a filter set "~\" (and few other
+  "negated" sets)...
+
+  - Document Tabs now allow an extra 0/1 property SHOW_HINTS. When
+  enabled the full path and filename of a document is displayed as a
+  hint when mouse pointer hovers over the tab...
+
+  - [COLORS] section now contains named colors that are used for all
+  Keywords and Switches in the default settings. Users that
+  customized their highlighting do not have to use these color names.
+  However, if you want to load any of the alternative color schemes
+  included in this version you will have to update your customized
+  settings with color names. Then you can remove the comment in front
+  of your preferred alternative scheme and reload the settings:
+
+  // ===============================================================================
+
+  // Alternative Themes (they redefine named colors):
+  // ================================================
+  //
+  // %INCLUDE="ConfigEx\Themes\Midnight Black.ini"
+  // %INCLUDE="ConfigEx\Themes\Midnight Blue.ini"
+  // %INCLUDE="ConfigEx\Themes\Midnight Green.ini"
+  // %INCLUDE="ConfigEx\Themes\Solarized Light.ini"
+  // %INCLUDE="ConfigEx\Themes\Solarized Dark.ini"
+
+  // ===============================================================================
+
+  Users with artistic skills can provide more alternatives based on
+  these examples (it is just a matter of redefining the colors)...
+
+  The idea behind this modification is to make it possible to define
+  and share alternative colors schemes without having to work
+  directly with keywords and switches (which most users find
+  intimidating) or directly the generic RGB_0..RGB_F basic filenames
+  which do not have any obvious meaning. Providing and loading a list
+  of alternative colors is all that is required and named colors
+  allow for complete customization. This was not possible working
+  only with RGB_0..RGB_F colors and a few named colors available in
+  previous versions. The default colors and appearance did not
+  change...
+
+  Options Menu contains a submenu Theme that allows you to switch
+  between the default theme and custom predefined themes listed above
+  (without editing the configuration script Colors.ini).
+
+  - Alternative toolbars have now been placed in subfolder
+  ConfigEx\Toolbars in order to reduce the increasing number of
+  configuration files in ConfigEx\*.ini...
+
+  Default Toolbar settings contain comments that make it easy to
+  activate any of the predefined toolbar alternatives:
+
+  // It is easy to comment out unwanted buttons and/or add/uncomment
+  // the ones that you want in your custom toolbar!
+
+  // Alternatives:
+  // =============
+  //
+  // %%INCLUDE="ConfigEx\Toolbars\Toolbar1l.ini" // 1-row Toolbar (Large)
+  // %%INCLUDE="ConfigEx\Toolbars\Toolbar1s.ini" // 1-row Toolbar (Small)
+  // %%INCLUDE="ConfigEx\Toolbars\Toolbar1c.ini" // 1-row Toolbar (Custom)
+  // %%INCLUDE="ConfigEx\Toolbars\Toolbar2d.ini" // 2-row Toolbar (Large)
+  // %%INCLUDE="ConfigEx\Toolbars\Toolbar2s.ini" // 2-row Toolbar (Small)
+  // %%INCLUDE="ConfigEx\Toolbars\Toolbar2c.ini" // 2-row Toolbar (Custom)
+  // %%INCLUDE="ConfigEx\Toolbars\Toolbar5x.ini" // 2-row (WinEdt 5-style) Toolbar
+
+  Options Menu contains a submenu Toolbar that allows you to switch
+  between the default theme and custom predefined toolbars listed
+  above (without editing the configuration script Toolbar.ini).
+
+  - Generic lists in INI files can now be folded. For example try:
+
+    FoldNodes(1,0,"INI:LIST");
+
+  in Keywords.ini...
+
+  - Auto completion event handler macros can now determine how was
+  the completion triggered by checking the value of %-? register:
+
+    0: Double-click
+    1: Tab Key
+    2: Enter Key
+
+  Advanced users can modify event handlers taking this information
+  into consideration. Default handlers do not distinguish between the
+  triggers...
+
+  - New macro:
+
+    GetScriptTagsAndFonts(Register: -11..9; All: 0..1);
+
+  When All is zero only the list of currently cashed fonts is
+  displayed. Otherwise all available fonts and supported unicode
+  scripts on your system are listed in the specified register. The
+  result is over 10K lines long and it contains all script ranges of
+  unicode characters. This macro was used to help prepare the default
+  settings for script-dependent fallback fonts as used by the new
+  Uniscribe Scripting Engine. It is of little interest to other users
+  unless they want to customize Uniscribe engine to better handle
+  complex languages used on their system or test for any
+  unicode-related oddities on their Windows.
+
+  - A new option for the menu shortcuts:
+
+    ALLOW_ALTGR_SHORTCUTS=1
+
+  Unless this option is enabled AltGr shortcuts are ignored in WinEdt
+  menu (only Ctrl+Alt can be used) otherwise AltGr qualifier is
+  equivalent to Ctrl+Alt. Most users will not care or notice any
+  difference but those that feel that it should be one way or another
+  can now reset this value. Note that it is not recommended to use
+  such shortcuts in the menu (they can interfere with windows
+  keyboard shortcuts on some keyboard layouts) but it is really up to
+  you...
+
+  - A refresh bug after pasting multi-line text at the end of a
+  document with disabled environment background option has been fixed
+  (not commonly encountered)...
+
+  - Backward search inside selected text (not commonly used function)
+  did not work properly and mostly failed to find a match. This has
+  now been fixed...
+
+  - Horizontal scrolling when selecting text with a mouse now uses a
+  delay in order to slow it down. The speed increases if you move the
+  mouse over the edge of the Window client (vertical scrolling was
+  already using this feature). Not many users rely on this
+  functionality but those that use mouse to select text in long lines
+  will find this an improvement as it was hard to control the
+  selection when fast horizontal scrolling "kicked" in....
+
+  - A problem with MiKTeX's "Install Packages on Demand"
+  functionality when running console applications inside WinEdt
+  console has been fixed (regardless of whether the packages are
+  installed on user or system level with UAC and regardless of MiKTeX
+  asking for conformation or not). It turns out that MiKTeX's
+  accessories (except TeXify) cannot initiate download and
+  installation of missing packages with any kind of prompt if the
+  process was created within invisible (hidden) console Window (it is
+  not clear why: a bug in MiKTeX). However, the way around this
+  problem is NOT to create (and then hide) an external console Window
+  at all. Simple enough, once you find out what exactly is the
+  matter...
+
+  As a consequence a few minor changes have been made to RunConsole
+  and WinExe macros (see the documentation - Macro Manual - for
+  details). It is unlikely that this will cause any incompatibilities
+  with custom macros that use these two functions (since the default
+  values for extended parameters do what is needed).
+
+  - MiKTeX users should update to the latest version of MiKTeX (Use
+  WinEdt's TeX Menu -> MiKTeX -> MiKTeX Update Wizard) in order to
+  allow WinEdt compilation macros take advantage of some recent
+  MiKTeX fixes when it comes to handling of input paths...
+
+  - New 0/1 parameter DetectExitCode for RunConsole. Zero value
+  implies that exit codes that indicate a possible exception (access
+  violation, floating point error, cancellation) are ignored by
+  WinEdt... This is useful for console applications that return
+  (non-standard) exit code outside the common ranges expected from
+  Windows console applications: no point in disturbing a user with
+  (harmless) extra messages.
+
+  - Optional parameter Priority: -1..1 has been added to Run and
+  RunConsole macro functions (to make them compatible with WinExe
+  just in case)...
+
+  - Optional parameter Unicode: -1..1 has been added to SendMail
+  macro function. When set to 1 (or 0 on Windows 10) it uses unicode
+  version of MAPI interface (MAPISendMailW). According to MS
+  documentation this is a preferred behavior on Windows 10 (with
+  recent versions of Office and Outlook). When set to -1 it always
+  uses non-unicode (legacy) version (MAPISendMail). Details depend on
+  your email client (there is no guarantee that this function works
+  under all circumstances)...
+
+  - PDF macros no longer use DDE for SumatraPDF. Using the command
+  line switch -forward-search is faster and more reliable. I had a
+  report that DDE stopped working after a Windows 10 update. Using a
+  command line switch (if it exists) is always preferable (simple is
+  better). Besides DDE does not (and will not) support Unicode!
+
+  - Templates and macros that use them have been modified by skipping
+  the %B qualifier in their specification. This makes it easier to
+  localize them without having to modify any macro or configuration
+  scripts (just make a local customized copy in %b)...
+
+  - A few minor bug fixes and improvements...
+
+  __________________________________________________________________
+
+
+  WinEdt 9 [Build 20150731 (v. 9.1)]
+  ==================================
+
+  (see History)...
+
+  ------------------------------------------------------------------
+</pre>
+
+<HR/>
+
+<div id="footer">
+  Copyright &copy; 1993-2016 by Aleksander Simonic
+  (<a href="mailto:alex@winedt.com">alex@winedt.com</a>).
+  All rights reserved.<br/>
+</div>
+
+</div> <!--main-->
+<p>  &nbsp;   </p>
+</div> <!--wrap-->
+</div> <!--wrapper-->
+</BODY>
+</HTML>

@@ -1,7 +1,0 @@
-STRING="\bibliographystyle{?}"
-  DBL_CLICK_ENABLED=1
-  DBL_CLICK_MODE_FILTER="TeX|AUX"
-  DBL_CLICK_MACRO="[Assign('LaTeXDoc','Active');"+
-                   "Exe('%b\Macros\Doc\LaTeXDoc.edt');]"
-
-STRING="\url{?}"

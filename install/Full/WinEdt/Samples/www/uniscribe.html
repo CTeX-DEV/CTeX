@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC>
+<!-- CREATED in WinEdt's HTML Mode -->
+<!-- -*- HTML:HTM:Soft -*-  -->
+<HTML>
+<HEAD>
+  <!--http://www.winedt.com/-->
+  <LINK REV="made" HREF="mailto:support@winedt.com"/>
+  <LINK REL="stylesheet" TYPE="text/css" HREF="WinEdt.css"/>
+  <LINK REL="shortcut icon" href="WinEdt.ico"/>
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/>
+  <META HTTP-EQUIV="EXPIRES" CONTENT="0"/>
+  <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US"/>
+  <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8"/>
+  <META NAME="AUTHOR" CONTENT="Aleksander Simonic"/>
+  <TITLE>Uniscribe Library at work</TITLE>
+</HEAD>
+
+<BODY>
+<div id="wrapper">
+<div id="wrap">
+<div id="top">
+   <div class="top_nav">
+     <!--INCLUDE="WinEdt.css"-->
+     <span class="tab1"><a href="index.html">Home</a></span>
+     <span class="tab0"><a href="news.html">News</a></span>
+     <!--UL-->
+        <!--INCLUDE="log.html"-->
+     <!--/UL-->
+     <!--UL-->
+        <!--INCLUDE="uniscribe.html"-->
+     <!--/UL-->
+     <span class="tab0"><a href="download.html">Downloads</a></span>
+     <span class="tab0"><a href="support.html">Support</a></span>
+     <span class="tab0"><a href="about.html">About this HTML Sample</a></span>
+     <span class="tab0"><a href="http://www.winedt.com">WinEdt.com</a></span>
+     <span class="tab2"><a href="mailto:support@winedt.com">Contact</a></span>
+   </div>  <!--top_nav-->
+   <div class="logo">
+       <img align="left" class="logo_img" src="images/WinEdtSmall.png"/>
+       <span class="logo_text">
+         WinEdt
+       </span>
+   </div>
+</div>     <!--top-->
+
+<div id="main">
+
+<H1>Uniscribe Library at work</H1>
+
+<p>WinEdt has been a native Unicode application for many years (since version 7, to be precise). However, until WinEdt 10 it lacked the ability to properly handle complex languages that involve bidirectional text, non-spacing characters, complicated wrapping rules, etc... WinEdt 10 uses a powerful MS Uniscribe library which gives it the ability to overcome these limitations. This HTML document (written in WinEdt 10) illustrates the new functionality.</p>
+
+<p><a target="top" href="https://en.wikipedia.org/wiki/Pangram">Pangrams</a> that were used to test the new WinEdt scripting engine with various (complex) languages were obtained from different sources on the internet. I do not speak any such language and I cannot guarantee that they are correct (or even that they may not be found offensive by some users). If native speakers spot any mistakes or have suggestions for improvements please send me your revisions and I will make updates in the future versions.</p>
+
+<blockquote>
+  <p><em>If you open the HTML source for this page in WinEdt 10 you'll notice that it justifies paragraphs to the specified right margin (rather than leaving ragged text). You will also notice the mix of two fonts (Verdana and <tt>Courier New</tt>) and the use of fallback fonts whenever the default font lacks glyphs for a particular script. This functionality is new in WinEdt 10.</em></p>
+</blockquote>
+
+<p>Below is a snapshot of WinEdt 10 working on this HTML document (note that selected text in bidirectional string is not continuous):</p>
+
+<p>
+  <img width="100%" src="images/HTML.png"/>
+</p>
+
+<HR/>
+
+<h2>Bidirectional text</h2>
+
+<p>We start with the most challenging complex text processing examples: handling a mix of right-to-left and left-to-right strings (a much demanded functionality lacking in the previous versions of WinEdt).</p>
+
+<h3>Arabic</h3>
+<ul>
+  <li>صِف خَلقَ خَودِ كَمِثلِ الشَمسِ إِذ بَزَغَت — يَحظى الضَجيعُ بِها نَجلاءَ مِعطارِ (A poem by Al Farāhīdi)</li>
+  <li>هلا سكنت بذي ضغثٍ فقد زعموا — شخصت تطلب ظبياً راح مجتازا</li>
+  <li>اصبر على حفظ خضر واستشر فطنا، وزج همك في بغداذ منثملا</li>
+  <li>نصٌّ حكيمٌ لهُ سِرٌّ قاطِعٌ وَذُو شَأنٍ عَظيمٍ مكتوبٌ على ثوبٍ أخضرَ ومُغلفٌ بجلدٍ أزرق </li>
+  <li><tt>naṣun ḥakymun lahu syrun qāṭiʿun wa ḏu šānin ʿẓymin maktubun ʿala ṯubin aẖḍra wa muġalafun biǧildin azraq</tt></li>
+  <li><em>A wise text which has an absolute secret and great importance, written on a green cloth and covered with blue leather (it has a riddle built into it)</em></li>
+</ul>
+
+<blockquote>
+  <p>صِف خَلقَ خَودِ كَمِثلِ الشَمسِ إِذ بَزَغَت — يَحظى الضَجيعُ بِها نَجلاءَ مِعطارِ (A poem by Al Farāhīdi) هلا سكنت بذي ضغثٍ فقد زعموا — شخصت تطلب ظبياً راح مجتازا اصبر على حفظ خضر واستشر فطنا، وزج همك في بغداذ منثملا نصٌّ حكيمٌ لهُ سِرٌّ قاطِعٌ وَذُو شَأنٍ عَظيمٍ مكتوبٌ على ثوبٍ أخضرَ ومُغلفٌ بجلدٍ أزرق ... (this example illustrates proper justifying of arabic glyphs -- inserting white spaces would not cut it for this script!)</p>
+</blockquote>
+
+<h3>Hebrew</h3>
+<ul>
+  <li>דג סקרן שט בים מאוכזב ולפתע מצא חברה</li>
+  <li><tt>dg sqrn šṭ bjM mʾwkzb wlptʿ mṣʾ ḥbrh</tt></li>
+  <li><em>A curious fish sailed the sea disappointedly, and suddenly found company</em></li>
+
+  <li>כך התרסק נפץ על גוזל קטן, שדחף את צבי למים</li>
+  <li><tt>kk htrsq npṣ ʿl gwzl qṭn, šdḥp ʾt ṣbj lmjm</tt></li>
+  <li><em>An explosive crashed into a small chick, which pushed my deer into the water.</em></li>
+
+  <li>שפן אכל קצת גזר בטעם חסה, ודי.</li>
+  <li><tt>špn ʾkl qṣt gzr bṭʿm ḥsh, wdj</tt></li>
+  <li><em>A hyrax ate some lettuce flavored carrot and that’s it.</em></li>
+
+  <li>עטלף אבק נס דרך מזגן שהתפוצץ כי חם</li>
+  <li><em>A “dust bat” escaped through the air conditioner, which exploded due to the heat</em></li>
+
+  <li>או הנסה אלהים, לבוא לקחת לו גוי מקרב גוי, במסת באתת ובמופתים ובמלחמה וביד חזקה ובזרוע נטויה, ובמוראים גדלים: ככל אשר-עשה לכם יהוה אלהיכם, במצרים—לעיניך (Deuteronomy 4:34)</li>
+  <li>לכן חכו לי נאם יהוה ליום קומי לעד, כי משפטי לאסף גוים לקבצי ממלכות, לשפך עליהם זעמי כל חרון אפי, כי באש קנאתי תאכל כל הארץ (Zephaniah 3:8 – the only verse in the Hebrew Bible that contains all medial forms of the letters plus all final forms)</li>
+</ul>
+
+<h3>Urdu</h3>
+<ul>
+  <li>ٹھنڈ میں، ایک قحط زدہ گاؤں سے گذرتے وقت ایک چڑچڑے، باأثر و فارغ شخص کو بعض جل پری نما اژدہے نظر آئے۔<br/>
+  ALA-LC: Ṭhanḍ meṉ, ek qaḥat̤-zadah gāʾoṉ se guẕarte waqt ek ciṛciṛe, bā-ʾas̱ar o-fārig̱ẖ s̱ẖaḵẖṣ ko baʿẓ jal-parī numā aẕẖdahe naz̤ar āʾe.<br/>
+  Translation: In the cold, passing through an arid village, an irritable, influential and leisurely person saw some mermaid-like pythons.</li><br/>
+
+  <li>ژالہ باری میں ر‌ضائی کو غلط اوڑھے بیٹھی قرأة العین اور عظمٰی کے پاس گھر کے ذخیرے سے آناً فاناً ڈش میں ثابت جو، صراحی میں چائے اور پلیٹ میں زرده آیا۔</li><br/>
+</ul>
+
+<h3>Uyghur</h3>
+<ul>
+  <li>ئاۋۇ بىر جۈپ خوراز فرانسىيەنىڭ پارىژ شەھرىگە يېقىن تاغقا كۆچەلمىدى.<br/>
+  Uyghur Latin Script: Awu bir jüp xoraz Fransiyening Parizh shehrige yëqin taghqa köchelmidi.<br/>
+  Translation: <em>Those two roosters were not able to move to the mountain near Paris in France.</em></li><br/>
+
+  <li>زۆھرەگۈل ئابدۇۋاجىت فرانسىيەنىڭ پارىژدىكى خېلى بىشەم ئوقۇغۇچى.<br/>
+  Uyghur Latin Script: Zöhregül Abduwajit Fransiyening Parizhdiki xëli bishem oqughuchi.<br/>
+  Translation: <em>Zöhregül Abduwajit is a quite unpleasant student in Paris, France.</em></li><br/>
+</ul>
+
+<HR/>
+
+<H2>Complex languages and fallback fonts</H2>
+
+<p>This section illustrates some other complex languages (in no particular order) using diacritic marks, non-spacing characters and fallback fonts (since the Verdana font lacks many glyphs).</p>
+
+<h3>Thai</h3>
+<ul>
+  <li>เป็นมนุษย์สุดประเสริฐเลิศคุณค่า กว่าบรรดาฝูงสัตว์เดรัจฉาน จงฝ่าฟันพัฒนาวิชาการ อย่าล้างผลาญฤๅเข่นฆ่าบีฑาใคร ไม่ถือโทษโกรธแช่งซัดฮึดฮัดด่า หัดอภัยเหมือนกีฬาอัชฌาสัย ปฏิบัติประพฤติกฎกำหนดใจ พูดจาให้จ๊ะๆ จ๋าๆ น่าฟังเอยฯ</li>
+  <li><tt>bpenM maH nootH sootL bpraL saehR ritH leertF khoonM khaaF gwaapL raawnM daaM fuungR satL daehM ratH chaanR johngM faaL fanM phatH naaM wiH chaaM gaanM aL yaaF laangH phlaanR reuuM khenL khaaF beeM thaaM khraiM maiF theuuR tho:htF gro:htL chaaengF satH heutH hatH daaL hatL aL phaiM meuuanR geeM laaM atL chaaM saiR bpaL dtiL batL bpraL phriH dtikL daL gamM nohtL jaiM phuutF jaaM haiF jaH jaH jaaR jaaR naaF fangM eeuyM</tt></li>
+  <li><em>Humans are most superb and worth more than any animal or beast. Do develop your academic expertise. Do not destroy or kill anyone. Do not be angry or execrate anyone. Practice forgiveness as you would good sportsmanship. Do behave under morals and rules. Speak and confer politely and with servility. (These phrases owned by The Computer Association of Thailand under the Royal Patronage of His Majesty the King)</em></li>
+
+  <li>นายสังฆภัณฑ์ เฮงพิทักษ์ฝั่ง ผู้เฒ่าซึ่งมีอาชีพเป็นฅนขายฃวด ถูกตำรวจปฏิบัติการจับฟ้องศาล ฐานลักนาฬิกาคุณหญิงฉัตรชฎา ฌานสมาธิ</li>
+  <li><em>Mr.Sangkapan Hengpitakfang, an elderly man who sells bottles, was sued by police because he pilfered Lady Chatchada Chansamati’s watch.</em></li>
+</ul>
+
+<h3>Korean</h3>
+<p>In current usage, Hangul has 14 simple consonant letters, 6 simple vowel letters, and 4 iotized vowel letters; there are also 5 double consonant letters, 11 consonant clusters, and 11 diphthongs, made from combinations of the simple consonants or simple vowels. Of these, the above phrase contains all the simple consonant letters, simple vowel letters, and iotized vowel letters, along with 1 double consonant letter (ㄲ “gg”), 1 consonant cluster (ㄶ “nh”), and one diphthong (ㅢ “ui”).</p>
+<ul>
+  <li>키스의 고유조건은 입술끼리 만나야 하고 특별한 기술은 필요치 않다.</li>
+  <li><tt>Kiseu-ui goyujogeoneun ipsulkkiri mannaya hago teukbyeolhan gisureun pilyochi antha.</tt></li>
+  <li><em>The essential condition for a kiss is that lips meet and there is no special technique required.</em></li>
+  <li>다람쥐 헌 쳇바퀴에 타고파</li>
+  <li><em>(I) Wanna ride on the chipmunk’s old hamster wheel. or Because Hamster want to ride on old Hamster wheel…</em> (uses all consonants but not all vowels)</li>
+</ul>
+
+<h3>Chinese</h3>
+ <p>There are several thousands of Chinese characters; a pangram would be impractical.</p>
+<ul>
+  <li>視野無限廣，窗外有藍天</li>
+  <li><em>The view is infinitely wide. There is blue sky outside the window.</em> (Traditional)</li>
+  <li>微風迎客，軟語伴茶</li>
+  <li><em>The breeze sees the guest in. Soft voice accompanies the tea.</em> (Traditional)</li>
+  <li>Innovation in China 中国智造，慧及全球 0123456789</li>
+  <li><em>Innovation in China benefits the whole world.</em> (Simplified)</li>
+</ul>
+
+<h3>Japanese</h3>
+
+<p>Since there are tens of thousands of kanji characters, Japanese pangrams are ones containing all kana.</p>
+
+<p><b>Iroha Uta</b></p>
+<ul>
+  <li>いろはにほへと ちりぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす（ん）</li>
+  <li><tt>irohanihoheto chirinuruwo wakayotareso tsunenaramu uwinookuyama kefukoete asakiyumemishi yehimosesu(n)</tt></li>
+  <li><em>Even the blossoming flowers / Will eventually scatter / Who in this world / is unchanging? / The deep mountains of vanity- / We cross them today / And we shall not see superficial dreams / Nor be deluded.</em></li>
+  <li>色は匂へど 散りぬるを 我が世誰ぞ 常ならむ 有為の奥山 今日越えて 浅き夢見じ 酔ひもせず（ん）</li>
+</ul>
+
+ <blockquote>
+  The poem Iroha uses all 47 classical kana characters exactly once, and it comes in the form of a poem. (The characters ゐ and ゑ are obsolete in modern Japanese.) Iroha is so classically entrenched that any modern construction of a Japanese pangram in classical form is called iroha-uta.
+</blockquote>
+
+<p><b>Tori Naku Uta</b></p>
+<ul>
+  <li>とりなくこゑす ゆめさませ みよあけわたる ひんかしを そらいろはえて おきつへに ほふねむれゐぬ もやのうち</li>
+  <li><tt>torinakukowesu yumesamase miyoakewataru hinkashiwo sorairohaete okitsuheni hofunemurewinu moyanōchi.</tt></li>
+  <li>鳥啼く声す 夢覚ませ 見よ明け渡る 東を 空色栄えて 沖つ辺に 帆船群れゐぬ 靄の中</li>
+  <li><em>Awaken from dreaming to the voice of the crying bird and see the coming daylight turning the east sky-blue; shrouded in mist is a flock of ships on the open sea</em></li>
+</ul>
+
+<p><b>Ametsuchi no Uta</b></p>
+<ul>
+  <li>あめ つち ほし そら / やま かは みね たに / くも きり むろ こけ / ひと いぬ うへ すゑ / ゆわ さる おふ せよ / えのえを なれ ゐて</li>
+  <li>天 地 星 空 / 山 川 峰 谷 / 雲 霧 室 苔 / 人 犬 上 末 / 硫黄 猿 生ふ 為よ / 榎の 枝を 馴れ 居て</li>
+</ul>
+
+<p><b>Taini no Uta</b></p>
+<ul>
+  <li>たゐにいて なつむわれをそ きみめすと あさりおひゆく やましろの うちゑへるこら もはほせよ えふねかけぬ</li>
+  <li>田居に出で 菜摘むわれをぞ 君召すと 求食り追ひゆく 山城の 打酔へる子ら 藻葉干せよ え舟繋けぬ</li>
+</ul>
+
+<HR/>
+
+<h2>More Scripts...</h2>
+
+<p>Using fallback fonts the following examples can be handled by WinEdt reasonably well...</p>
+
+<h3>Malayalam</h3>
+<ul>
+  <li>അജവും ആനയും ഐരാവതവും ഗരുഡനും കഠോര സ്വരം പൊഴിക്കെ ഹാരവും ഒഢ്യാണവും ഫാലത്തില്‍ മഞ്ഞളും ഈറന്‍ കേശത്തില്‍ ഔഷധ എണ്ണയുമായി ഋതുമതിയും അനഘയും ഭൂനാഥയുമായ ഉമ ദുഃഖഛവിയോടെ ഇടതു പാദം ഏന്തി ങ്യേയാദൃശം നിര്‍ഝരിയിലെ ചിറ്റലകളെ ഓമനിക്കുമ്പോള്‍ ബാ‍ലയുടെ കണ്‍കളില്‍ നീര്‍ ഊര്‍ന്നു വിങ്ങി.</li>
+</ul>
+
+<h3>Cherokee</h3>
+<ul>
+  <li>ᎠᏍᎦᏯᎡᎦᎢᎾᎨᎢᎣᏍᏓᎤᎩᏍᏗᎥᎴᏓᎯᎲᎢᏔᎵᏕᎦᏟᏗᏖᎸᎳᏗᏗᎧᎵᎢᏘᎴᎩ ᏙᏱᏗᏜᏫᏗᏣᏚᎦᏫᏛᏄᏓᎦᏝᏃᎠᎾᏗᎭᏞᎦᎯᎦᏘᏓᏠᎨᏏᏕᏡᎬᏢᏓᏥᏩᏝᎡᎢᎪᎢ ᎠᎦᏂᏗᎮᎢᎫᎩᎬᏩᎴᎢᎠᏆᏅᏛᎫᏊᎾᎥᎠᏁᏙᎲᏐᏈᎵᎤᎩᎸᏓᏭᎷᏤᎢᏏᏉᏯᏌᏊ ᎤᏂᏋᎢᏡᎬᎢᎰᏩᎬᏤᎵᏍᏗᏱᎩᎱᎱᎤᎩᎴᎢᏦᎢᎠᏂᏧᏣᏨᎦᏥᎪᎥᏌᏊᎤᎶᏒᎢᎢᏡᎬᎢ ᎹᎦᎺᎵᏥᎻᎼᏏᎽᏗᏩᏂᎦᏘᎾᎿᎠᏁᎬᎢᏅᎩᎾᏂᎡᎢᏌᎶᎵᏎᎷᎠᏑᏍᏗᏪᎩ ᎠᎴ ᏬᏗᏲᏭᎾᏓᏍᏓᏴᏁᎢᎤᎦᏅᏮᏰᎵᏳᏂᎨᎢ.</li>
+</ul>
+
+<h3>Hindi</h3>
+<ul>
+  <li>ऋषियों को सताने वाले दुष्ट राक्षसों के राजा रावण का सर्वनाश करने वाले विष्णुवतार भगवान श्रीराम, अयोध्या के महाराज दशरथ के बड़े सपुत्र थे।</li>
+</ul>
+
+<h3>Sanskrit</h3>
+<ul>
+  <li>कः खगौघाङचिच्छौजा झाञ्ज्ञोऽटौठीडडण्ढणः। तथोदधीन् पफर्बाभीर्मयोऽरिल्वाशिषां सहः।। </li>
+</ul>
+
+<h3>Tibetan</h3>
+<ul>
+  <li>༈ དཀར་མཛེས་ཨ་ཡིག་ལས་འཁྲུངས་ཡེ་ཤེས་གཏེར། །ཕས་རྒོལ་ཝ་སྐྱེས་ཟིལ་གནོན་གདོང་ལྔ་བཞིན། །ཆགས་ཐོགས་ཀུན་བྲལ་མཚུངས་མེད་འཇམ་བྱངས་མཐུས། །མ་ཧཱ་མཁས་པའི་གཙོ་བོ་ཉིད་གྱུར་ཅིག།</li>
+</ul>
+
+<h3>Myanmar</h3>
+<ul>
+  <li>သီဟိုဠ်မှ ဉာဏ်ကြီးရှင်သည် အာယုဝဍ္ဎနဆေးညွှန်းစာကို ဇလွန်ဈေးဘေးဗာဒံပင်ထက် အဓိဋ္ဌာန်လျက် ဂဃနဏဖတ်ခဲ့သည်။</li>
+</ul>
+
+<h3>Javanese</h3>
+<p>This poem is used as the ordering of the Javanese script (it is a perfect pangram, which means there is only one instance of each letter).</p>
+<ul>
+  <li>꧋ ꦲꦤꦕꦫꦏ꧈ ꦢꦠꦱꦮꦭ꧈ ꦥꦝꦗꦪꦚ꧈ ꦩꦒꦧꦛꦔ꧉</li>
+  <li><tt>Hanacaraka, datasawala, padhajayanya, magabathanga.</tt></li>
+  <li><em>There (were) two messengers; (they) had animosity (among each other); (they were) equally powerful (in fight); here are the corpses.</em></li>
+</ul>
+
+<blockquote>
+  <p><em>WinEdt will not handle this script well (in combination with other fallback fonts) because WinEdt currently uses a fixed line height and the descent for this font requires a larger value or else the font is too small to be legible (or else the decent would have to be clipped)...</em></p>
+</blockquote>
+
+<HR/>
+
+<h2>Problematic scripts...</h2>
+
+<p>Windows fonts may not contain glyphs for some scripts. This may change in the future...</p>
+
+<h3>Klingon</h3>
+<p>On my Windows 10 no font contains glyphs in this range (browser fails to display them as well):</p>
+<ul>
+  <li>    </li>
+  <li><tt>qajunpaQHeylIjmo’ batlh DuSuvqang charghwI’ ‘It.</tt></li>
+  <li><em>Because of your apparent audacity the depressed conqueror is willing to fight you.</em></li>
+</ul>
+
+<HR/>
+
+<h2>Not so complex...</h2>
+
+<p>Below are a few more examples involving Greek and Cyrillic alphabet. Ordinary unicode functionality (without complex processing) is sufficient to handle these scripts.</p>
+
+<h3>Greek</h3>
+<ul>
+  <li>Ταχίστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός Takhístè alôpèx vaphês psèménè gè, draskelízei ypér nòthroý kynós</li>
+  <li><em>The quick brown fox jumps over the lazy dog (where brown is assigned by “colour of roasted earth”)</em></li>
+
+  <li>Ξεσκεπάζω τὴν ψυχοφθόρα βδελυγμία. Xeskepazó tin psychofthóra vdelygmía.</li>
+  <li><em>I uncover the soul-destroying abhorrence.</em></li>
+
+  <li>Ζαφείρι δέξου πάγκαλο, βαθῶν ψυχῆς τὸ σῆμα.</li>
+  <li><em>Receive an excellent sapphire, denoting profundity of soul.</em></li>
+
+  <li>διαφυλάξτε γενικά τη ζωή σας από βαθειά ψυχικά τραύματα</li>
+  <li><em>protect in general your life from deep psychological wounds</em></li>
+</ul>
+
+<h3>Russian</h3>
+Traditional telegraph test; lacks ъ and ё):
+<ul>
+  <li>В чащах юга жил бы цитрус? Да, но фальшивый экземпляр!</li>
+  <li><em>Would a citrus live in the thickets of the south? Yes, but only a fake one!</em></li>
+</ul>
+The same text using quasiobsolete spelling for last word to include ъ:
+<ul>
+  <li>В чащах юга жил бы цитрус? Да, но фальшивый экземпляръ!</li>
+</ul>
+Each letter exactly once:
+<ul>
+  <li>Эх, чужак, общий съём цен шляп (юфть) – вдрызг!</li>
+  <li><em>Hey, stranger, the general takings from prices of hats (made from a thick leather) have completely crashed!</em></li>
+</ul>
+Each letter exactly once:
+<ul>
+  <li>Любя, съешь щипцы, — вздохнёт мэр, — Кайф жгуч!</li>
+  <li><em>The mayor will sigh, “Eat the pliers with love; pleasure burns!”</em></li>
+</ul>
+Microsoft used it in fontview.exe for Cyrillic fonts without «же»:
+<ul>
+  <li>Съешь же ещё этих мягких французских булок, да выпей чаю.</li>
+  <li><tt>S’eš’ že eŝë ètih mjagkih francuzskih bulok, da vypej čaju.</tt></li>
+  <li><em>So eat more of these soft French loaves, and have some tea!</em></li>
+</ul>
+Used in KDE:
+<ul>
+  <li>Широкая электрификация южных губерний даст мощный толчок подъёму сельского хозяйства.</li>
+  <li><em>Widespread electrification of southern guberniyas will give a powerful incentive to the rise of agriculture.</em></li>
+  <li>Разъяренный чтец эгоистично бьёт пятью жердями шустрого фехтовальщика.</li>
+  <li><em>An enraged narrator selfishly beats a nimble fencer with five poles.</em></li>
+</ul>
+Lacks ъ and ё:
+<ul>
+  <li>Наш банк вчера же выплатил Ф.Я. Эйхгольду комиссию за ценные вещи.</li>
+  <li><em>As of yesterday, our bank already remitted to F.J. Eichhold a commission payment for the valuables.</em></li>
+</ul>
+
+<HR/>
+
+<h2>Easy breezy...</h2>
+
+<p>There are hundreds (if not thousands) of pangrams in many languages. However, most are based on phonetic Latin alphabet with a few language-specific diacritical marks (included in unicode) and do not require any complex text processing functionality. Pretty much all European (and many other) languages fall in this category...</p>
+
+<h3>Esperanto</h3>
+<ul>
+  <li>Eble ĉiu kvazaŭ-deca fuŝĥoraĵo ĝojigos homtipon.</li>
+  <li><em>Maybe every quasi-fitting bungle-choir makes a human type happy.</em></li>
+
+  <li>Laŭ Ludoviko Zamenhof bongustas freŝa ĉeĥa manĝaĵo kun spicoj.</li>
+  <li><em>According to Ludwig Zamenhof, fresh Czech food with spices tastes good.</em></li>
+</ul>
+
+<h3>Latin</h3>
+<ul>
+  <li>Sic fugiens, dux, zelotypos, quam Karus haberis.</li>
+  <li><em>Thus fleeing, O leader, you are regarded with jealousy like Karus.</em></li>
+</ul>
+
+<blockquote>
+  Includes the letters k, y and z, used for words derived from Greek, but not the letters j, v or w, consonants that evolved from the vowels i and u.
+</blockquote>
+
+<HR/>
+
+<h2>What is a Pangram?</h2>
+
+<p>This section is <em>borrowed</em> from
+      <a target="top" href="https://en.wikipedia.org/wiki/Pangram">Wikipedia</a>:</p>
+
+<blockquote>
+  <p>A pangram (Greek: παν γράμμα, pan gramma, "every letter") or holoalphabetic sentence for a given alphabet is a sentence using every letter of the alphabet at least once. Pangrams have been used to display typefaces, test equipment, and develop skills in handwriting, calligraphy, and keyboarding.</p>
+
+  <p>The best known English pangram is "The quick brown fox jumps over the lazy dog." It has been used since at least the late 19th century, was utilized by Western Union to test Telex / TWX data communication equipment for accuracy and reliability, and is now used by a number of computer programs (most notably the font viewer built into Microsoft Windows) to display computer fonts.</p>
+
+  <p>An example in another language is the German Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich, containing all letters used in German, including every umlaut (ä, ö, ü) plus the ß. It has been used since before 1800.</p>
+
+  <p>Short pangrams in English are more difficult to come up with and tend to use uncommon words, because the English language uses some letters (especially vowels) much more frequently than others. Longer pangrams may afford more opportunity for humor, cleverness, or thoughtfulness. A perfect pangram contains every letter of the alphabet only once and can be considered an anagram of the alphabet; it is the shortest possible pangram. An example is the phrase "Cwm fjord bank glyphs vext quiz" (cwm, a loan word from Welsh, means a steep-sided valley, particularly in Wales).</p>
+</blockquote>
+
+<HR/>
+
+<div id="footer">
+  Copyright &copy; 1993-2016 by Aleksander Simonic
+  (<a href="mailto:alex@winedt.com">alex@winedt.com</a>).
+  All rights reserved.<br/>
+</div>
+
+</div> <!--main-->
+<p>  &nbsp;   </p>
+</div> <!--wrap-->
+</div> <!--wrapper-->
+</BODY>
+</HTML>

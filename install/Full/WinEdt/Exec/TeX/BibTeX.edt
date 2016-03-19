@@ -15,16 +15,8 @@
     !|GetString("Switches: ","%!9 Switches","%$('%!9--Switches');");>
       IfOK(!`Assign('%!9--Switches','%!?');`,!`PopTagsandRegisters;Exit;`);|,>
     !|Release('%!9--Switches');|);
-  // Aux Directory?
-  LetReg(3);
-  IfStr("%$('TeX System');","MiKTeX","=",>
-    !|IfStr('%O','%P','<>',!`LetReg(3,'--include-directory="%P"');`);|);
-  // Only for bibtex.exe (bibtex8 and biber do not support this switch)
-  IfIStr("%$('%!9-Executable');","bibtex.exe","<>",!"LetReg(3);");
-  IfIStr("%$('%!9-Executable');","biber.exe","=",>
-    !|IfStr('%O','%P','<>',!`LetReg(3,'--input-directory "%P"');`);|);
   // Build the Command Line ...
-  LetReg(5, "%$('%!9-Executable'); %$('%!9-Switches'); %!3 %$('%!9--Switches'); %$('%!9-Parameters');");
+  LetReg(5, "%$('%!9-Executable'); %$('%!9-Switches'); %$('%!9--Switches'); %$('%!9-Parameters');");
 
   // Use Execution Modes to determine the flow of execution...
   Exe('%b\Exec\ExeCompiler.edt');

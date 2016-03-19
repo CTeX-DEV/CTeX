@@ -5,7 +5,7 @@
 //
 // ==================================================================
 
-  Requires(20130125); // Requires this build of WinEdt to work properly
+  Requires(20160131); // Requires this build of WinEdt to work properly
 
   PushTagsandRegisters;
 
@@ -15,14 +15,8 @@
 :BibTeX_Run:: =======================================================
   IfStr("%$('BibTeX-file');","%N","=",!"Return;");
 
-  // Aux Directory?
-  LetReg(3);
-  IfStr("%$('TeX System');","MiKTeX","=",>
-    !|IfStr('%O','%P','<>',!`LetReg(3,'--include-directory="%P"');`);|);
-  // Only for bibtex.exe (bibtex8 and biber do not support this switch)
-  IfIStr("%$('BibTeX-Executable');","bibtex.exe","<>",!"LetReg(3);");
   // Build the Command Line ...
-  LetReg(5,`%$('BibTeX-Executable'); %$('BibTeX-Switches'); %!3 %$('BibTeX--Switches'); "%$('BibTeX-file');"`);
+  LetReg(5,`%$('BibTeX-Executable'); %$('BibTeX-Switches'); %$('BibTeX--Switches'); "%$('BibTeX-file');"`);
   TrimCommandLine(@@'%!5',5); // Expand Command Line (twice!) and Remove Extra Spaces
 
   IfStr("%$('BibTeX-WinEdt_Console');",'1','<>',!'JMP("Windows_Console");');
@@ -31,16 +25,8 @@
   GetConsoleText(3);
   IfStr('%!3','','<>',!'LetReg(3,"%!3%\");');
 
-  LetReg(4,!'0');
-:Run_Again:: ========================================================
   SetConsoleText('%!3Command Line:   %!5%\Startup Folder: %O%\%\',1);
-  RunConsole('%!5','%O','BibTeX ...',1,1,0,%!4,%!4);
-
-  // Blues with MiKTeX's GUI Framework?
-  IfStr("%$('TeX System');",!"MiKTeX",!"<>",!"Return;");
-  GetConsoleText(4);
-  FindInString("%!4",!"GUI framework cannot be initialized",-1,-1,10);
-  IfOK(!"ResetConsole;LetReg(4,!'1');JMP(!'Run_Again');");
+  RunConsole('%!5','%O','BibTeX ...',1,1,0,0,0,0,0);
 Return;
 
 :Windows_Console:: ==================================================
@@ -48,9 +34,11 @@ Return;
   LetReg(1, !"0");
   LetReg(2, !"0");
   IfStr("%$('BibTeX-Wait');",             "1","=",!|LetRegNum(0,"%!0+00100");|);
-  IfStr("%$('BibTeX-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+01000");|);
   IfStr("%$('BibTeX-Background_Window');","1","=",!|LetRegNum(0,"%!0+10000");|);
   IfStr("%$('BibTeX-STD_IO');",           "1","=",!|LetRegNum(0,"%!0+00010");|);
+  // If hidden do not create console Window at all in order to avoid problems
+  // with MiKTeX's packages on demand installation (new in WinEdt 10)!
+  IfStr("%$('BibTeX-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+1100000000");|);
   IfStr("%$('BibTeX-Pause');",            "1","=",!|LetRegNum(1,"%!1+111");|);
   IfStr("%$('BibTeX-High_Priority');",    "1","=",!|LetReg(2,'1');|);
 

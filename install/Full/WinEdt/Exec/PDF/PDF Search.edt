@@ -4,7 +4,7 @@
 
 // ----------------------------------------------------------------------------
 //           ***   Forward search for PDF documents   ***
-//   (Adobe Reader, Acrobat Professional, Sumatra PDF Viewer, Foxit Reader)
+//   (Sumatra PDF Viewer, Adobe Reader, Acrobat Professional, Foxit Reader)
 //   (Now also PDF-XChange v2 or later!)
 //
 // The document should be compiled with
@@ -24,18 +24,22 @@
   IfFileExists("%P\%N%$('PDF-SyncEx');",!"Relax;",!"JMP('Fallback');");
 
   // --------------------------------------------------------------------------
-  // The free Sumatra PDF viewer <http://blog.kowalczyk.info/software/sumatrapdf/>
-  // has built-in support for forward and inverse (!) search.
-  // It supports synctex.
+  // The free Sumatra PDF viewer  has a built-in support for forward and
+  // inverse search. It supports synctex...
   FindInString(`%$('PDF-View');`,'Sumatra',1,2,1000,1);
   IfOK(!"Relax;",!"JMP('not_Sumatra');");
 
-  // DDE command that can force a refresh in SumatraPDF...
+  Run('%$("PDF-View"); -reuse-instance "%P\%N.pdf" -forward-search "%p\%n%t" %!l');
+  PopTagsandRegisters;
+  Exit;
+
+  // --------------------------------------------------------------------------
+  // DDE is no longer used for this...
+  // Alternative DDE command that can force a refresh in SumatraPDF...
   // If Sumatra is not already running this may take a few seconds...
   DDEOpen("%$('PDF-View');","SUMATRA","control",1);
-  // Open("Filename.pdf", NewWindow,SetFocus,ForceRefresh: 0..1)
   DDEExe('[Open("%P\%N.pdf",0,1,1)]');
-  DDEExe('[ForwardSearch("%P\%N.pdf","%p\%n%t",%!l,0)]');
+  DDEExe('[ForwardSearch("%P\%N.pdf","%p\%n%t",%!l,0,0,1)]');
   DDEClose;
   PopTagsandRegisters;
   Exit;

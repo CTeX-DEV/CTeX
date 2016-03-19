@@ -1,5 +1,0 @@
-    ALT="\part*{?}"
-    ALT="\addpart{?}"
-    ALT="\addpart[?]"
-    ALT="\addpart*{?}"
-    MODE_FILTER="TeX"

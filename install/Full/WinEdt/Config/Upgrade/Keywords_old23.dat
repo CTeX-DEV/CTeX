@@ -1,5 +1,0 @@
-  BEFORE="Numeric"
-  AFTER="~Alpha"
-  BOLN_NOT_OK=1
-  EOLN_NOT_OK=0
-  STRICT_PRIORITY=0

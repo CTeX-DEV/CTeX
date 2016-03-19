@@ -1,3 +1,0 @@
-Assign("PackageLine","\usepackage{pifont}");
-Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
-End;

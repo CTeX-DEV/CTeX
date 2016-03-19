@@ -1,5 +1,0 @@
-    BUTTON="|"
-    BUTTON="$Insert_RGB"
-    BUTTON="|"
-    BUTTON="$Help"
-  END="Bookmarks and Line Numbers"

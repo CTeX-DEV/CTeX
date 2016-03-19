@@ -1,4 +1,0 @@
-  ITEM="Run_NSIS_Installer"
-    CAPTION="&Run NSIS Installer"
-    CONFIG_FILTER="Default"
-    IMAGE="MacroRun"

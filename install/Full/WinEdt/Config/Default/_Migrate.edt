@@ -1,18 +1,18 @@
-// Import Personal Configuration from WinEdt 8
+// Import Personal Configuration from WinEdt 9
 
     Requires(20150217);
     IfStr('%b','%B','=',>
       !"Prompt('You are using Global Configuration!');Exit;");
     IfStr('%$("Old-AppData");','','=',>
-      !"Prompt('No installation of WinEdt 8 found!');Exit;");
+      !"Prompt('No installation of WinEdt 9 found!');Exit;");
 
-    Prompt("This macro imports your personal configuration from WinEdt 8...%\>
+    Prompt("This macro imports your personal configuration from WinEdt 9...%\>
 All files (and project) will be closed to make it faster.%\%\>
                             Continue?",1,0);
 
     PushTagsandRegisters;
 
-    StartWorking('Importing Configuration from WinEdt 8...');
+    StartWorking('Importing Configuration from WinEdt 9...');
     ProcessMessages;
     SaveSettings;
 
@@ -30,15 +30,9 @@ All files (and project) will be closed to make it faster.%\%\>
     Assign("Folder","Update");
     Call('Migrate_Execute');
 
-    // Extra Tasks
-    Exe('%b\Config\Update\UpdateExtra.edt');
-
     // Migrate!
     Assign("Folder","Migrate");
     Call('Migrate_Execute');
-
-    // Extra Tasks
-    Exe('%b\Config\Migrate\MigrateExtra.edt');
 
     // Upgrade!
     Assign("Folder","Upgrade");
@@ -198,6 +192,9 @@ Return;
     // Save the Log File
     CloseOutput;
 
+    // Extra Tasks
+    Exe('%b\Config\Migrate\MigrateExtra.edt');
+
 // Rebuild All ======================================================
 
     LoadConfig("ConfigEx\Colors.ini");
@@ -280,15 +277,15 @@ Return;
     Exe('%b\Exec\%$("Config-Dir");\Load Config.edt');
     IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
 
-    // Reload the Default Project and the List of Projects
+    // Reload the last opened project and the List of Projects
     IfFileExists("%b\ConfigEx\Project.ini",>
       !|ReadFile('%b\ConfigEx\Project.ini',0);>
         FindInString('%!0','PROJECT_LIST_DATA_FILE="\(*\)"',-1,-1,1);>
         IfOK(!'LetReg(1,"%#0");',!'LetReg(1,"%b\WinEdt-PrjList.dat");');|,>
       !|LetReg(1,"%b\WinEdt-PrjList.dat");|);
     LetReg(0,@@"%!1"); // Expand it fully!
-    IfFileExists("%!0",!'LoadPrjList;');
-    IfFileExists("%b\WinEdt.prj",!'DefaultPrj;');
+    IfFileExists("%!0",!'LoadPrjList("",1);',>
+      !'IfFileExists("%b\WinEdt.prj",!"DefaultPrj;");');
 
     PopTagsandRegisters;
 

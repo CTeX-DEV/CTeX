@@ -1,6 +1,0 @@
-ITEM="Advanced Configuration..."
-  ICON="MacroTestRun"
-  ACTION="$Help"
-    MACRO="HTMLHelp('%B\Doc\Help\WinEdt.chm',1,0,"+
-          "'Config/Advanced.html#page_top');"
-  ITEM="Preferences"

@@ -31,13 +31,13 @@
 //     GetAppDataFolder(Register: 0..9, Local: 0..1);
 
 // Check if it is already in the Registry?
-  LetReg(0,"%@('HKCU','Software\WinEdt 9','AppData');");
+  LetReg(0,"%@('HKCU','Software\WinEdt 10','AppData');");
   // Prompt('%!0'); // For Debugging Purposes...
   IfStr('%!0','','>','Exit;');
 
 // Get the default
   GetAppDataFolder(0,0); // Roaming Application Data
-  LetReg(0,'%!0\WinEdt Team\WinEdt 9');
+  LetReg(0,'%!0\WinEdt Team\WinEdt 10');
 
 // Prompt('%!0'); // For debugging purposes
 

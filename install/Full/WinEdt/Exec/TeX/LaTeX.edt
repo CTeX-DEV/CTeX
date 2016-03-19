@@ -20,10 +20,6 @@
     !"LetReg(3,'--interaction=nonstopmode');",!"LetReg(3,'--interaction=errorstopmode');");
   // C Style Errors?
   IfStr("%$('%!9-C-style-errors');","1",!"=",!"LetReg(3,'%!3 --file-line-error');");
-  // Aux Directory?
-  IfStr("%$('TeX System');","MiKTeX","=",>
-    !|IfStr('%O','%P','<>',!`LetReg(3,'%!3 --include-directory="%P"');`);|,>
-    !|IfStr('%O','%P','<>',!`DosToUnix('%O',5);LetReg(3,'%!3 --output-directory="%!5"');`);|);
   // TeX Sync?
   Assign('Sync');
   IfStr('%0',!'--src',!'<>',!'JMP("no_Sync");');

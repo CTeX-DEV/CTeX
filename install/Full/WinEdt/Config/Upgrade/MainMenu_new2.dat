@@ -1,9 +1,0 @@
-    ITEM="Caret_<->_Select"
-      CAPTION="&Caret <-> Select"
-      IMAGE="Caret"
-      MACRO="SwapCaretSelect;"
-      SHORTCUT="122::F11"
-      REQ_DOCUMENT=1
-      //It can be useful in found text...
-      //REQ_SELECTED_TEXT=1
-    ITEM="Reset_Selection"

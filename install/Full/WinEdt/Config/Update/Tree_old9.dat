@@ -1,1 +1,0 @@
-      MACRO="GetFullPath(1, '%?', '%p');Open('%!1');"

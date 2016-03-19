@@ -1,7 +1,7 @@
 // Insert BibTeX Templates
   SetSel(0);
   Mark(9);
-  ReadFile("%B\Templates\Bib\%!0.bib",9);
+  ReadFile("Templates\Bib\%!0.bib",9);
   InsLine;GoToBeginningOfLine;
   InsText("%!9");
   Goto(9);

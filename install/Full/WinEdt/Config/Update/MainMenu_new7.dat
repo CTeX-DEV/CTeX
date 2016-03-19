@@ -1,1 +1,0 @@
-    MACRO="SetMainFile('%f');Assign('MAIN_FILE','%f');BuildTree;ErrorLogUpdate;"

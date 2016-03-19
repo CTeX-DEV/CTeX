@@ -34,18 +34,18 @@
   GetBuild(0);
   Assign("Up-Build","%!0");
 
-  // Migrate from WinEdt 8?
-  LetReg(0,"%@('HKCU','Software\WinEdt 8','Install Root');");
+  // Migrate from WinEdt 9?
+  LetReg(0,"%@('HKCU','Software\WinEdt 9','Install Root');");
   IfStr('%!0','','<>',>
     !`>
-      LetReg(0,"%@('HKCU','Software\WinEdt 8','AppData');");>
+      LetReg(0,"%@('HKCU','Software\WinEdt 9','AppData');");>
       IfStr('%!0','','=',>
-        !|LetReg(0,"%@('HKCU','Software\WinEdt 8','Install Root');");>
+        !|LetReg(0,"%@('HKCU','Software\WinEdt 9','Install Root');");>
           LetReg(0,"%!0\Local");|);>
      `);
   Assign('Old-AppData','%!0');
   // Prompt("%$('Old-AppData');");  // Debugging
-  Assign('First-Build','20140815'); // First WinEdt 9 Build
+  Assign('First-Build','20160317'); // First WinEdt 10 Build
 
 // ==================================================================
 
@@ -148,19 +148,6 @@ Exe("%b\Config\Local Startup.edt");
   Exe("%B\WinShell\Create Startup User Profile.edt");
 
 :Profile_OK:: =======================================================
-
-  // used for amsequations1,2,3,4,5,6.edt
-  SetRegStr('HKEY_CURRENT_USER','Software\WinEdt','CurrentEq','0');
-
-  // reset TexFriend
-  SetRegStr("HKEY_CURRENT_USER","Software\VB and VBA Program Settings\TexFriend\Refreshed Packages","WinEdt","True");
-  SetRegStr("HKEY_CURRENT_USER","Software\VB and VBA Program Settings\TexFriend\Options","AlwaysOnTop","False");
-  SetRegStr("HKEY_CURRENT_USER","Software\VB and VBA Program Settings\TexFriend\Paths","WinEdt","%B");
-
-  // start TexFriend
-  Assign("StartTexFriend","%@('HKEY_CURRENT_USER','Software\VB and VBA Program Settings\TexFriend\Options','StartupByWinEdt');");
-  IfStr("%$('StartTexFriend')","False","=","","Run(""%B\Plugins\TexFriend\TexFriend.exe"")");
-
 
   SetOK(1);
   SetErrorFlag(0);

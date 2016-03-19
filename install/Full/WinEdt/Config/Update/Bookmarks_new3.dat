@@ -1,4 +1,0 @@
-ROAMING_BOOKMARK=1
-ARROW_COLOR="bscBookmarkArrow"
-
-// Link Current Bookmark to Cursor (overwrites the ROAMING_BOOKMARK option)

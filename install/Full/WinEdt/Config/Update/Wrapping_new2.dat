@@ -1,9 +1,0 @@
-RIGHT_MARGIN=78
-
-// Right Margin Constraint when FIXED_RIGHT_MARGIN=0
-// When set to 1 fixed right margin is still used
-// as long as the window is large enough
-// This property is ignored when fixed right margin is enabled!
-CONSTRAINED_RIGHT_MARGIN=0
-
-// Soft Wrapping Options

@@ -7,9 +7,12 @@
   <LINK REV="made" HREF="mailto:support@winedt.com"/>
   <LINK REL="stylesheet" TYPE="text/css" HREF="WinEdt.css"/>
   <LINK REL="shortcut icon" href="WinEdt.ico"/>
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"/>
-  <META NAME="author" CONTENT="Aleksander Simonic"/>
-  <TITLE>WinEdt 9</TITLE>
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/>
+  <META HTTP-EQUIV="EXPIRES" CONTENT="0"/>
+  <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US"/>
+  <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8"/>
+  <META NAME="AUTHOR" CONTENT="Aleksander Simonic"/>
+  <TITLE>WinEdt 10</TITLE>
 </HEAD>
 
 <BODY>
@@ -17,10 +20,19 @@
 <div id="wrap">
 <div id="top">
    <div class="top_nav">
+     <!--INCLUDE="WinEdt.css"-->
      <span class="tab0"><a href="index.html">Home</a></span>
      <span class="tab1"><a href="news.html">News</a></span>
+     <!--UL-->
+        <!--INCLUDE="log.html"-->
+     <!--/UL-->
+     <!--UL-->
+        <!--INCLUDE="uniscribe.html"-->
+     <!--/UL-->
      <span class="tab0"><a href="download.html">Downloads</a></span>
      <span class="tab0"><a href="support.html">Support</a></span>
+     <span class="tab0"><a href="about.html">About this HTML Sample</a></span>
+     <span class="tab0"><a href="http://www.winedt.com">WinEdt.com</a></span>
      <span class="tab2"><a href="mailto:support@winedt.com">Contact</a></span>
    </div>  <!--top_nav-->
    <div class="logo">
@@ -33,32 +45,81 @@
 
 <div id="main">
 
-<h1>WinEdt 9</h1>
+<h1>WinEdt 10</h1>
 
-<p>This is a sample document included in WinEdt's distribution as a demo that illustrates how to use WinEdt's HTML configuration to edit HTML files and create web pages. For the latest news on WinEdt project visit our web page at: <a href="http://www.winedt.com">www.winedt.com</a>.</p>
+<p>WinEdt 10 is a Unicode text editor with code folding capability. Users that already have an older version of WinEdt should read the following important information pertaining to upgrading:</p>
+
+<p><b>NOTE:</b> WinEdt 10 does not run on Windows XP. Windows 7 or later is required for this version to run on your computer! This version was developed and extensively tested on Windows 10.</p>
+
+<blockquote>
+  <p>WinEdt 10 is installed parallel to WinEdt 9, 8, 7, 6 or 5 and you can continue to use an older version of WinEdt and possibly uninstall WinEdt 10 if you prefer the old version. WinEdt 10 can run simultaneously with an older version of the program. You should <em>not</em> attempt to install WinEdt 10 <em>over</em> the existing WinEdt 9, 8, 7, 6 or 5 on your system!</p>
+</blockquote>
+
+<p><b>Upgrading:</b> From version 5.x -- not really; you cannot import old settings from WinEdt 5: the new version will have to be customized from scratch! Some configuration (*.ini) files from WinEdt 6 can be loaded into WinEdt 10 after some modifications (with many exceptions that affect Unicode and Language functionality). If you already have WinEdt 9 installed the migration is easy: just execute the command 'Import WinEdt 9 Settings' from within WinEdt 10 and you're done...</p>
+
+<blockquote>
+    <p>Upgrading WinEdt 10 series is easy. Install the new version or build (when available) over the older instance of WinEdt 10 and execute the command 'Upgrade Personal Configuration' to merge your custom settings with the new defaults.</p>
+</blockquote>
+
+<p><b>Registration:</b> WinEdt 10 series uses the same registration data as WinEdt 6, 7,8, and 9  -- you will have to enter the same registration data in WinEdt 10. If you are currently using WinEdt 5 you can take advantage of the trial period and see if you want to use this version or you prefer the older WinEdt 5.x series. Should you opt for WinEdt 10 and already have a license for WinEdt 5, you will need to purchase an upgrade license from www.winedt.com (see the Tables at the Registration page: upgrade rates are at the bottom). Exceptions will be made (upon request) to users that have purchased a license or an upgrade within the last year and to (a few) users that make contributions to <a href="http://www.winedt.org">winedt.org</a>, or help with WinEdt project in some other way... This is your chance to get involved!</p>
+
+<p>WinEdt 10 uses dictionaries (word lists) in <em>unicode</em> format: they can be downloaded from <a href="http://www.winedt.org">winedt.org</a>. Properly converted English dictionaries are already included in the default settings.</p>
 
 <HR/>
 
-<h2>How to ...</h2>
+<p><b>Major new features in WinEdt 10:</b></p>
 
-<p>Set index.html as your main file and rebuild the tree. You will see something like:</p>
+<blockquote>
+  <li>The major new feature in this version is the ability to handle bidirectional text (Arabic or Hebrew) and improved support for some complex unicode scripts (such as <em>Thai</em>). The use of MS <a href="uniscribe.html">Uniscribe</a> library in WinEdt's text processing engine is instrumental for this functionality (also the main reason why this version doesn't run on Windows XP that does not support unicode script tags)...
+  </li><br/>
+  <li>The [UNICODE] section has plenty of new properties pertaining to the use Uniscribe library including some pretty fancy formatting options and mixing of fonts as highlighting attributes. These features are by default enabled for HTML mode. Check the new HTML project samples in Document -> Samples -> www Menu to see this functionality in action...
+  </li><br/>
+  <li>Document Tabs now allow an extra 0/1 property SHOW_HINTS. When enabled the full path and filename of a document is displayed as a hint when mouse pointer hovers over the tab. Document Tab hints are by default enabled.
+  </li><br/>
+  <li>An "old" problem with MiKTeX's "Install Packages on Demand" functionality when running console applications inside WinEdt console has been fixed (regardless of whether the packages are installed on user or system level with UAC and regardless of MiKTeX asking for conformation or not). It turns out that MiKTeX's accessories (except TeXify) cannot initiate download and installation of missing packages with any kind of prompt if the process was created within invisible (hidden) console Window (it is not clear why: a bug in MiKTeX). However, the way around this problem is NOT to create (and then hide) an external console Window at all. Simple enough, once you find out what exactly is the matter...
+  </li><br/>
+  <li>PDF macros no longer use DDE for SumatraPDF. Using the command line switch -forward-search is faster and more reliable. Using a command line switch (if it exists) is always preferable (simple is better). Besides DDE does not (and will not) support Unicode!
+  </li><br/>
+  <li>There are 32-bit and 64-bit versions of WinEdt 10 available. Users with 64-bit Windows can install either. Configurations and functionality of both versions are identical. The only difference is that WinEdt.exe is compiled as a native 32-bit or 64-bit Windows application, respectively. In the long run all applications will use a 64-bit platform but currently 32-bit applications run well on 64-bit Windows and not all applications offer a stable 64-bit version yet... 64-bit applications can launch 32-bit ones and vice versa. That's why both versions of WinEdt will work with either 32-bit or 64-bit version of other applications...
+  </li><br/>
+  <li><em>And there is more...</em> As always, plenty of work has gone into this version of WinEdt and every aspect of the code, documentation, and default settings has been revised and improved for this release. See WinEdt 10 Change Log below for details...
+  </li>
+</blockquote>
 
-<p align="center">
-  <img src="images/tree.png"/>
-</p>
+<p>Detailed list of changes for this version can be viewed by clicking on the <em>WinEdt 10 Change log</em> link below:</p>
+<blockquote>
+  <a href="log.html">WinEdt 10 Change Log</a>
+</blockquote>
 
-<p>You can use the Tree control to navigate between html files in this web site. You can also start Windows Explorer to see all the files in the sample www directory. In particular, WinEdt.css contains important definitions that affect the appearance of these web pages!</p>
+<p><b>New:</b><em> On our downloads page you will also find a brand new Quick Guide.pdf (and a self-contained zipped archive with its TeX sources). It might be a good idea to check it out...</em></p>
 
-<p>Working on an HTML-based web page does not require any compiler. <span class="cmd">HTML Preview</span> (<span class="hk">F8</span>) will start your browser displaying the index that should be set as the main file. When you make changes to a file in WinEdt you have to save it and then perform <span class="cmd">Refresh</span> (usually <span class="hk">F5</span>) in your browser in order to preview a modified file. The process is pretty straightforward and all editing and previewing is done off-line on your computer. The finished web system can then be uploaded to its destination on the web via FTP.</p>
+<p>Now you are ready to install the new version. Have fun!</p>
 
-<ul>
-  <p><b>Hint:</b> <em>WinEdt web pages have been created in HTML configuration as described above!</em></p>
-</ul>
+<blockquote>
+  <a href="download.html">WinEdt Downloads Page</a>
+</blockquote>
+
+<HR/>
+
+<p><b>What would I like to hear at this stage?</b></p>
+
+<blockquote>
+  <li>Any bugs and problems with the new version...</li>
+  <li>Comments on the new default settings and appearance...</li>
+  <li>Any problems with installation...</li>
+  <li>Confirmed fixes...</li>
+</blockquote>
+
+<p>Problems or confirmations of fixes can be reported directly to
+ <a href="mailto:alex@winedt.com">alex@winedt.com</a> or else they can be communicated on
+ <a href="support.html">WinEdt's Mailing List</a>.</p>
+
+<p>Avoid sending major feature requests: they will have to wait for the next version...</p>
 
 <HR/>
 
 <div id="footer">
-  Copyright &copy; 1993-2014 by Aleksander Simonic
+  Copyright &copy; 1993-2016 by Aleksander Simonic
   (<a href="mailto:alex@winedt.com">alex@winedt.com</a>).
   All rights reserved.<br/>
 </div>

@@ -4,7 +4,7 @@ Requires(20120317); // Requires this build of WinEdt to work properly
 
 // This macro calls WinEdt Uninstaller (UAC-Enabled)...
 
-  Prompt("This macro will uninstall WinEdt 9 from your system...",1,0);
+  Prompt("This macro will uninstall WinEdt 10 from your system...",1,0);
 
   Exe('%B\WinShell\Remove WinEdt Links.edt');
   LetReg(9,'0');  // Root

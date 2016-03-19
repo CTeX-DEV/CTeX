@@ -9,9 +9,9 @@
 ;--------------------------------
 ;Constants
 
-!define MUI_PRODUCT "WinEdt 9"
-!define MUI_VERSION "9.1"
-!define MUI_BUILD "20150731"
+!define MUI_PRODUCT "WinEdt 10"
+!define MUI_VERSION "10.0"
+!define MUI_BUILD "20160317"
 !define MUI_COMPANY "WinEdt Team"
 
 ;--------------------------------
@@ -50,7 +50,7 @@ Var OldWinEdt
 VIProductVersion "${MUI_VERSION}.0.0"
 VIAddVersionKey ProductName "${MUI_PRODUCT}"
 VIAddVersionKey CompanyName "${MUI_COMPANY}"
-VIAddVersionKey LegalCopyright "Copyright (C) 1993-2015 by Aleksander Simonic"
+VIAddVersionKey LegalCopyright "Copyright (C) 1993-2016 by Aleksander Simonic"
 VIAddVersionKey FileDescription "${MUI_PRODUCT} Setup"
 VIAddVersionKey FileVersion "${MUI_VERSION}.0.0"
 VIAddVersionKey ProductVersion "${MUI_VERSION} Build: ${MUI_BUILD}"
@@ -62,15 +62,16 @@ SetCompressor /SOLID LZMA
 
 Name "${MUI_PRODUCT}"
 !ifndef WINEDT_32
-      OutFile "winedt91-64.exe"
+      OutFile "winedt100-64.exe"
 !else
-      OutFile "winedt91-32.exe"
+      OutFile "winedt100-32.exe"
 !endif
 
 ShowInstDetails nevershow
 ShowUninstDetails nevershow
 
 RequestExecutionLevel highest
+ManifestDPIAware true
 
 ;--------------------------------
 ;Interface
@@ -115,6 +116,9 @@ Page custom AdditionalTasks AdditionalTasksLeave
 
 !insertmacro MUI_PAGE_INSTFILES
 
+!define MUI_FINISHPAGE_RUN "$INSTDIR\WinEdt.exe"
+!define MUI_FINISHPAGE_RUN_PARAMETERS ""
+!define MUI_FINISHPAGE_RUN_TEXT "Launch WinEdt"
 !insertmacro MUI_PAGE_FINISH
 
 ;--------------------------------
@@ -336,11 +340,11 @@ Function InstallType
   ${NSD_CreateLabel} 0 0 100% 12% "Select 'Admin installation' to install ${MUI_PRODUCT} for all users or 'Private installation' to install ${MUI_PRODUCT} \
                                    only for current user. Click Next to continue."
         Pop $label1
-  ${NSD_CreateLabel} 0 50 100% 6% "Installation type"
+  ${NSD_CreateLabel} 0 20% 100% 6% "Installation type"
         Pop $label2
-  ${NSD_CreateRadioButton} 10 70 100% 6% "Admin installation"
+  ${NSD_CreateRadioButton} 5% 30% 100% 6% "Admin installation"
         Pop $radiobutton1
-  ${NSD_CreateRadioButton} 10 90 100% 6% "Private installation"
+  ${NSD_CreateRadioButton} 5% 40% 100% 6% "Private installation"
         Pop $radiobutton2
         ${If} $AccountType == "Admin"
               ${NSD_Check} $radiobutton1
@@ -430,34 +434,34 @@ Function AdditionalTasks
         Pop $dialog
   ${NSD_CreateLabel} 0 0 100% 12% "Setup will perform selected additional tasks after installing ${MUI_PRODUCT}. Click Install to start the installation."
         Pop $label1
-  ${NSD_CreateLabel} 0 50 100% 6% "User Profiles"
+  ${NSD_CreateLabel} 0 20% 100% 6% "User Profiles"
         Pop $label2
-  ${NSD_CreateCheckBox} 10 70 100% 6% "Enable User Profile creation"
+  ${NSD_CreateCheckBox} 5% 30% 100% 6% "Enable User Profile creation"
         Pop $checkbox1
         ${If} $UserProfile != ""
               ${NSD_SetState} $checkbox1 $UserProfile
         ${Else}
               ${NSD_Check} $checkbox1
         ${EndIf}
-  ${NSD_CreateLabel} 0 100 100% 6% "Additional Shortcuts"
+  ${NSD_CreateLabel} 0 45% 100% 6% "Additional Shortcuts"
         Pop $label3
-  ${NSD_CreateCheckBox} 10 120 100% 6% "Create a Start Menu icon"
+  ${NSD_CreateCheckBox} 5% 55% 100% 6% "Create a Start Menu icon"
         Pop $checkbox2
         ${If} $StartMenuIcon != ""
               ${NSD_SetState} $checkbox2 $StartMenuIcon
         ${Else}
               ${NSD_Check} $checkbox2
         ${EndIf}
-  ${NSD_CreateCheckBox} 10 140 100% 6% "Create a Desktop icon"
+  ${NSD_CreateCheckBox} 5% 65% 100% 6% "Create a Desktop icon"
         Pop $checkbox3
         ${If} $DesktopIcon != ""
               ${NSD_SetState} $checkbox3 $DesktopIcon
         ${Else}
               ${NSD_Check} $checkbox3
         ${EndIf}
-  ${NSD_CreateLabel} 0 170 100% 6% "Filetypes Association"
+  ${NSD_CreateLabel} 0 80% 100% 6% "Filetypes Association"
         Pop $label4
-  ${NSD_CreateCheckBox} 10 190 100% 6% "Associate TeX Filetypes with WinEdt"
+  ${NSD_CreateCheckBox} 5% 90% 100% 6% "Associate TeX Filetypes with WinEdt"
         Pop $checkbox4
         ${If} $AssociateFiles != ""
               ${NSD_SetState} $checkbox4 $AssociateFiles
@@ -488,20 +492,20 @@ Function un.AdditionalTasks
         Pop $dialog
   ${NSD_CreateLabel} 0 0 100% 6% "Select things to be uninstalled. Click Uninstall to start the uninstallation."
         Pop $label1
-  ${NSD_CreateCheckBox} 10 40 100% 6% "Remove Program"
+  ${NSD_CreateCheckBox} 5% 20% 100% 6% "Remove Program"
         Pop $checkbox1
         ${NSD_Check} $checkbox1
         EnableWindow $checkbox1 0
   ${If} $UserProfileFolder != ""
-        ${NSD_CreateCheckBox} 10 60 100% 6% "Remove User Profile"
+        ${NSD_CreateCheckBox} 5% 30% 100% 6% "Remove User Profile"
         Pop $checkbox2
         ${NSD_Check} $checkbox2
   ${EndIf}
   ${If} $Registration != ""
         ${If} $UserProfileFolder != ""
-              ${NSD_CreateCheckBox} 10 80 100% 6% "Remove Registration Data"
+              ${NSD_CreateCheckBox} 5% 40% 100% 6% "Remove Registration Data"
         ${Else}
-              ${NSD_CreateCheckBox} 10 60 100% 6% "Remove Registration Data"
+              ${NSD_CreateCheckBox} 5% 30% 100% 6% "Remove Registration Data"
         ${EndIf}
         Pop $checkbox3
   ${EndIf}

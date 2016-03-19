@@ -27,31 +27,31 @@ LetReg(1,'HKEY_CURRENT_USER');
 LetReg(2,'');
 
 LetReg(3, "%@('%!1','%!0','%!2Desktop');");
-IfFileExists('%!3\WinEdt 9.lnk',>
-  !'DeleteFile("%!3\WinEdt 9.lnk");>
-    IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 9.lnk""");'',>
-         !''WrL("  Desktop Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+IfFileExists('%!3\WinEdt 10.lnk',>
+  !'DeleteFile("%!3\WinEdt 10.lnk");>
+    IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 10.lnk""");'',>
+         !''WrL("  Desktop Delete Error: ""%!3\WinEdt 10.lnk""");'');>
    ');
 
 LetReg(3, "%@('%!1','%!0','%!2Programs');");
-IfFileExists('%!3\WinEdt 9.lnk',>
-  !'DeleteFile("%!3\WinEdt 9.lnk");>
-    IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 9.lnk""");'',>
-         !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+IfFileExists('%!3\WinEdt 10.lnk',>
+  !'DeleteFile("%!3\WinEdt 10.lnk");>
+    IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 10.lnk""");'',>
+         !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 10.lnk""");'');>
    ');
 
 LetReg(3, "%@('%!1','%!0','%!2SendTo');");
-IfFileExists('%!3\WinEdt 9.lnk',>
-  !'DeleteFile("%!3\WinEdt 9.lnk");>
-    IfOK(!''WrL("  Send To Deleted: ""%!3\WinEdt 9.lnk""");'',>
-         !''WrL("  Send To Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+IfFileExists('%!3\WinEdt 10.lnk',>
+  !'DeleteFile("%!3\WinEdt 10.lnk");>
+    IfOK(!''WrL("  Send To Deleted: ""%!3\WinEdt 10.lnk""");'',>
+         !''WrL("  Send To Delete Error: ""%!3\WinEdt 10.lnk""");'');>
    ');
 
 LetReg(3, "%@('%!1','%!0','%!2AppData');\Microsoft\Internet Explorer\Quick Launch");
-IfFileExists('%!3\WinEdt 9.lnk',>
-  !'DeleteFile("%!3\WinEdt 9.lnk");>
-    IfOK(!''WrL("  Quick Launch Deleted: ""%!3\WinEdt 9.lnk""");'',>
-         !''WrL("  Quick Launch Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+IfFileExists('%!3\WinEdt 10.lnk',>
+  !'DeleteFile("%!3\WinEdt 10.lnk");>
+    IfOK(!''WrL("  Quick Launch Deleted: ""%!3\WinEdt 10.lnk""");'',>
+         !''WrL("  Quick Launch Delete Error: ""%!3\WinEdt 10.lnk""");'');>
    ');
 
 WrL;
@@ -62,17 +62,17 @@ LetReg(1,'HKEY_LOCAL_MACHINE');
 LetReg(2,'Common ');
 
 LetReg(3, "%@('%!1','%!0','%!2Desktop');");
-IfFileExists('%!3\WinEdt 9.lnk',>
-  !'DeleteFile("%!3\WinEdt 9.lnk");>
-    IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 9.lnk""");'',>
-         !''WrL("  Desktop Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+IfFileExists('%!3\WinEdt 10.lnk',>
+  !'DeleteFile("%!3\WinEdt 10.lnk");>
+    IfOK(!''WrL("  Desktop Deleted: ""%!3\WinEdt 10.lnk""");'',>
+         !''WrL("  Desktop Delete Error: ""%!3\WinEdt 10.lnk""");'');>
    ');
 
 LetReg(3, "%@('%!1','%!0','%!2Programs');");
-IfFileExists('%!3\WinEdt 9.lnk',>
-  !'DeleteFile("%!3\WinEdt 9.lnk");>
-    IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 9.lnk""");'',>
-         !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 9.lnk""");'');>
+IfFileExists('%!3\WinEdt 10.lnk',>
+  !'DeleteFile("%!3\WinEdt 10.lnk");>
+    IfOK(!''WrL("  Start Menu Deleted: ""%!3\WinEdt 10.lnk""");'',>
+         !''WrL("  Start Menu Delete Error: ""%!3\WinEdt 10.lnk""");'');>
    ');
 
 WrL;

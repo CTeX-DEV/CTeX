@@ -1,4 +1,0 @@
-  ITEM="TeX_Doc"
-    CAPTION="TeX &Doc..."
-    CONFIG_FILTER="TeX Live"
-    IMAGE="DocLaTeX"

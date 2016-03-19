@@ -1,8 +1,0 @@
-    MENU="NSIS_Macro"
-  BUTTON="|"
-  BUTTON="HTML:HTML_Help_Compiler"
-    CONFIG_FILTER="HTML"
-  BUTTON="HTML:HTML_Preview"
-    CONFIG_FILTER="HTML"
-  BUTTON="|"
-  BUTTON="NSIS:Compile_NSIS_Script"

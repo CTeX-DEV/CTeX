@@ -1,3 +1,0 @@
-  START1_TRIGGER="\chapter*"
-  START1_TRIGGER="\addchap*"
-  START2_TRIGGER=""

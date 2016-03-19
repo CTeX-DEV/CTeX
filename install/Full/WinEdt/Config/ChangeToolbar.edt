@@ -11,8 +11,8 @@
     '/'+'/ %%%%INCLUDE',>
     11);
   SubstituteInString('%!0',>
-    '<@{ }/'+'/@{ }%%%%INCLUDE="ConfigEx\\Toolbar%$(|TOOLBAR|);\.ini"',>
-    '   %%%%INCLUDE="ConfigEx\\Toolbar%$(|TOOLBAR|);.ini"',>
+    '<@{ }/'+'/@{ }%%%%INCLUDE="ConfigEx\\Toolbars\\Toolbar%$(|TOOLBAR|);\.ini"',>
+    '   %%%%INCLUDE="ConfigEx\\Toolbars\\Toolbar%$(|TOOLBAR|);.ini"',>
     11);
   WriteFile('%b\ConfigEx\Toolbar.ini','%!0');
 

@@ -1,5 +1,0 @@
-  START1_TRIGGER=""
-  START2_TRIGGER="begin{figure*}"
-  STOP1_TRIGGER=""
-  STOP2_TRIGGER="end{figure*}"
-    TEXT_COLOR="RGB_8"

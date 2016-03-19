@@ -10,7 +10,7 @@
     BeginGroup;
     IfSel(1,'=','SetSel(0);');
     IfNum(%c,'1','>','InsLine;');
-    ReadFile('%B\Templates\DTX\CharacterTable.dat',0);
+    ReadFile('Templates\DTX\CharacterTable.dat',0);
     InsText('%!0');Backspace;
     MoveBy(1);IfNum(%c,'1','>','MoveBy(-1);InsLine;');
     EndGroup;

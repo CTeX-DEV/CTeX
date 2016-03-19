@@ -1,4 +1,0 @@
-    ON_CTRL_CLICK_MACRO="GlobalMark;TreeTrack(2);"
-    ON_CLICK_MACRO="GlobalMark(1);TreeTrack(2,1);"
-    ON_DBL_CLICK_MACRO="GlobalReturn;SetSel(0);Ins('%?');GlobalMark;"
-    ON_ICON_CLICK_MACRO="SetSel(0);Ins('%?');GlobalMark;"

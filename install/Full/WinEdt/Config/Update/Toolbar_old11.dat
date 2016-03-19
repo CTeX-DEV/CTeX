@@ -1,9 +1,0 @@
-    MENU="Verbatim_Env"
-  BUTTON="Par_Center"
-    TYPE=6
-    CONFIG_FILTER="HTML"
-    MENU="Par_Center"
-    MENU="Par_Left"
-    MENU="Par_Right"
-    MENU="Par_Justify"
-  BUTTON="Itemize"

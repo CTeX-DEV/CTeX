@@ -1,6 +1,6 @@
 % Macro List
 % -*- DATA:EDT -*-
-% Created: Thursday, June 11, 2015 at 13:02
+% Created: Sunday, March 13, 2016 at 17:43
 
 AboutWinEdt;
 ActivateChild("Child_Name");
@@ -189,6 +189,7 @@ GetPrjList(Register,Existing_Only);
 GetPrjListCount(Register,Existing_Only);
 GetRM(Register);
 GetScreenDPI(Register,Vertical);
+GetScriptTagsAndFonts(Register,All);
 GetSearchData(Register,Mode);
 GetSel(Select_All,Register);
 GetShortFilename("Filename",Register);
@@ -275,7 +276,7 @@ LineUp(Count);
 ListFolderFiles(Register,"Path","Filetype_Filter",Recurse,Relative_Path,Flags);
 ListOpenedFiles(Register,Order_Flag,"Mode_Filter","File_Type_Filter",New,Readonly);
 LoadConfig("Filename",Append);
-LoadPrjList("Filename",Open_Top_Project);
+LoadPrjList("Filename",Open_Last_Project);
 Loop("Macro");
 LowerCase;
 LstEnum("Source","Separator",Trim_Spaces,Remove_Multiple_Spaces,Remove_Multiple_Entries);
@@ -392,8 +393,8 @@ RestoreSort;
 RestoreSpell;
 RestoreWrap;
 Return;
-Run("Command_Line","Directory",Maximized,Background,"Caption",Focus,Append,Wait);
-RunConsole("Command_Line","Startup_Folder","Application_Caption",no_Reset,no_Show,no_Echo,no_newConsole,no_UseShowWindow);
+Run("Command_Line","Directory",Maximized,Background,"Caption",Focus,Append,Wait,Priority);
+RunConsole("Command_Line","Startup_Folder","Application_Caption",no_Reset,no_Show,no_Echo,CreateConsoleWindow,HideConsoleWIndow,DetectExitCode,Priority);
 RunPrompt("Caption",Custom_Font);
 SaveAll(Confirm,Focus,Project_Only,New,Readonly,"Filename");
 SaveAllDoc;
@@ -442,7 +443,7 @@ SelectFromMark(Mark_Index);
 SelectParagraph;
 SelectWord;
 SendKeyInput(Key,Event);
-SendMail("Subject","Text","Recipients","Attachments",Flags);
+SendMail("Subject","Text","Recipients","Attachments",Flags,Unicode);
 SendMessage("Application",WM_Code,W_par,L_par);
 SetAppendDefExt(Append);
 SetBlock(Status,Test);

@@ -9,8 +9,6 @@
 // Users probably forget to do this before upgrading
 // so it is best to keep it tidy as we go...
 
-  CloseAppl("TexFriend");
-
   Exe('%b\Config\Cleanup.edt');
 
   PopTagsandRegisters;

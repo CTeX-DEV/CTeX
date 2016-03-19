@@ -1,1 +1,0 @@
-    ON_DBL_CLICK_MACRO="GetFullPath(-10,'%?','%P');Open('%-0');"

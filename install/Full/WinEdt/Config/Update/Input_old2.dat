@@ -1,2 +1,0 @@
-  RECURSE_TYPE_FILTER="tex;ltx;texi"
-  DIRECTIVE="\include{""?""}"

@@ -1,3 +1,0 @@
-Assign("PackageLine","\usepackage{amssymb}");
-Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
-End;
