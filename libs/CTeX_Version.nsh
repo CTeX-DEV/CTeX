@@ -1,4 +1,4 @@
-
+﻿
 !include "libs\CTeX_Build.nsh"
 
 ; Application information
@@ -18,9 +18,9 @@
 !define MiKTeX_Version      "2.9"
 !define Addons_Dir          "CTeX"
 !define Ghostscript_Dir     "Ghostscript"
-!define Ghostscript_Version "9.18"
+!define Ghostscript_Version "9.19"
 !define GSview_Dir          "GSview"
-!define GSview_Version      "5.0"
+!define GSview_Version      "6.0"
 !define WinEdt_Dir          "WinEdt"
 !define WinEdt_Version      "10.0"
 !define Logs_Dir            "Logs"

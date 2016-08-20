@@ -1,4 +1,4 @@
-;Internal Headers
+﻿;Internal Headers
 !include "WordFunc.nsh"
 !include "Sections.nsh"
 !include "TextReplace.nsh"
@@ -337,31 +337,18 @@ FunctionEnd
 		DetailPrint "Install GSview configs"
 
 		StrCpy $0 "$INSTDIR\${GSview_Dir}"
-		WriteRegStr HKLM "Software\Ghostgum\GSview" "$GSview" "$0"
-	
-		StrCpy $9 "$0\gsview\gsview32.ini"
-		StrCpy $8 "GSview-$GSview"
-		StrCpy $7 "$INSTDIR\${Ghostscript_Dir}"
-		StrCpy $6 "$7\gs$Ghostscript"
-		WriteINIStr $9 "$8"	"Version" "$GSview"
-		WriteINIStr $9 "$8"	"GSversion" "864"
-		WriteINIStr $9 "$8"	"GhostscriptDLL" "$6\bin\gsdll32.dll"
-		WriteINIStr $9 "$8"	"GhostscriptInclude" "$6\lib;$7\fonts;$FONTS"
-		WriteINIStr $9 "$8"	"GhostscriptOther" '-dNOPLATFONTS -sFONTPATH="c:\psfonts"'
-		WriteINIStr $9 "$8"	"Configured" "1"
-		Delete "$PROFILE\gsview32.ini"
 	
 		${AppendPath} "$0\gsview"
 	
-		StrCpy $9 "$0\gsview\gsview32.exe"
-		!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
-		!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$9,3" "Open with GSview" '$9 "%1"'
+		StrCpy $9 "$0\gsview\resources"
+		!insertmacro APP_ASSOCIATE "ps" "CTeX.PS" "PS $(Desc_File)" "$9\pagePS.ico,0" "Open with GSview" '$9 "%1"'
+		!insertmacro APP_ASSOCIATE "eps" "CTeX.EPS" "EPS $(Desc_File)" "$9\pageEPS.ico,0" "Open with GSview" '$9 "%1"'
 	
 ; ShortCuts
-		StrCpy $9 "$SMCTEX\Ghostgum"
+		StrCpy $9 "$SMCTEX\gsview"
 		CreateDirectory "$9"
-		CreateShortCut "$9\GSview.lnk" "$0\gsview\gsview32.exe"
-		CreateShortCut "$9\GSview Readme.lnk" "$0\gsview\Readme.htm"
+		CreateShortCut "$9\GSview.lnk" "$0\gsview\bin\gsview.exe"
+		CreateShortCut "$9\PS to text.lnk" "$0\pstotext\pstotxt.exe"
 	${EndIf}
 !macroend
 
