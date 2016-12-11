@@ -1,0 +1,4 @@
+FILTER_SET="~Num"
+  SET=:~["0123456789"]
+
+FILTER_SET="Math Symbols"

@@ -1,0 +1,3 @@
+  STOP2_TRIGGER="end{tabular*}"
+    TEXT_COLOR="swclLaTeXTabularEnv"
+    DEFAULT_FONT=1

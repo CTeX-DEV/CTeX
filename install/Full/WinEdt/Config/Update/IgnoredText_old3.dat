@@ -1,0 +1,8 @@
+  ENVIRONMENT="^{?}"
+    START="^{"
+    STOP="}"
+    SCOPE=2
+  ENVIRONMENT="%%?"
+    START="%%"
+    SCOPE=2
+  // Skip the rest of the line after this ...

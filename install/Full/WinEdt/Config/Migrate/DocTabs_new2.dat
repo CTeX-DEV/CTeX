@@ -1,0 +1,7 @@
+IMAGES_ENABLED=1
+
+// Show full Path and Filename as a hint
+// when mouse hovers over the tab...
+SHOW_HINTS=1
+
+// SELECTORS:

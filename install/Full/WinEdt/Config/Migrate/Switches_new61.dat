@@ -1,0 +1,5 @@
+  STOP2_TRIGGER=""
+    TEXT_COLOR="swcEDTString1"
+    DEFAULT_FONT=1
+
+SWITCH="`EDT String`"

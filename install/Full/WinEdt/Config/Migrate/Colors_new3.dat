@@ -1,0 +1,16 @@
+END="HC Black Controls"
+
+// ===============================================================================
+
+// Alternative Themes (they redefine named colors):
+// ================================================
+//
+// %INCLUDE="ConfigEx\Themes\Midnight Black.ini"
+// %INCLUDE="ConfigEx\Themes\Midnight Blue.ini"
+// %INCLUDE="ConfigEx\Themes\Midnight Green.ini"
+// %INCLUDE="ConfigEx\Themes\Solarized Light.ini"
+// %INCLUDE="ConfigEx\Themes\Solarized Dark.ini"
+
+// ===============================================================================
+
+[END]

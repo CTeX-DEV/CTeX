@@ -1,0 +1,4 @@
+END="240 dpi"
+
+IMAGE_DPI_SELECTOR="288 dpi"
+  DPI=288 // 300%, do such displays actually exist???

@@ -1,0 +1,5 @@
+FILTER_SET="~AlphaNumeric"
+  ENABLED=0
+  MODE_FILTER=""
+  SET="~(Alpha+Numeric)"
+  BEFORE=""

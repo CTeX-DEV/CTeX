@@ -1,0 +1,5 @@
+  IfStr("%$('%!9-C-style-errors');","1",!"=",!|LetReg(4,'%!4 %$("TeX-Opt");--file-line-error');|);
+  // Aux Directory?
+  IfStr("%$('TeX System');","MiKTeX","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(4,'%!4 --include-directory="%P"');`);|);
+  // TeX Sync?

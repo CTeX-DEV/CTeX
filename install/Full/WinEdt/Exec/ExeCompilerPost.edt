@@ -81,7 +81,7 @@
     Repeat(%!1,>
       !`LstGetItem(2,%!c-1);>
         GetFileName('%!2',3);>
-        FindInString('%!3','<%N+$Numeric$~$~[]$',5,6,1);>
+        FindInString('%!3','<\"|%N|+$Numeric$~$~[]$',5,6,1);>
         IfOK(!|CopyFile("%O\%!2","%P\%!2",1);DeleteFile("%O\%!2");|);>
         ProcessMessages;>
        `);
@@ -101,6 +101,8 @@
 
   FindInString("%!9","TeX",1,2,10);
   IfOK(!"Relax;",!"JMP(!'not_TeX');");
+    // Find any glossary
+    Exe("%b\Exec\TeX\FindGlossaries.edt");
   IfStr("%O","%P","=",!"JMP(!'Post_Done');");
     // Move output files
     IfFileExists("%O\%N.%!7",!"CopyFile('%O\%N.%!7','%P\%N.%!7',1);DeleteFile('%O\%N.%!7');");

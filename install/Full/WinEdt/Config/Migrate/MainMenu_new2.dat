@@ -1,0 +1,6 @@
+PERSISTENT_SHORTCUTS=0
+
+// Allow AltGr shortcuts?
+ALLOW_ALTGR_SHORTCUTS=1
+
+// Cancel Key!

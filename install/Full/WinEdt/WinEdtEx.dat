@@ -10,7 +10,7 @@
 //
 // ---------------------------------------------------------------------
 
-74   // Sections
+75   // Sections
 
 [END]                                                           00
 00   // Identifiers
@@ -680,7 +680,7 @@ SCRIPT="*"                                                      31
   FONT="*"                                                      32
 
 [PREFERENCES]                                                   28
-23   // Identifiers
+24   // Identifiers
 FIX_CORRUPTED_LINE_TERMINATORS="*"                              00
 DETECT_UNDEFINED_VARIABLES="*"                                  01
 TOP_MARGIN="*"                                                  02
@@ -704,6 +704,7 @@ ENLARGE_DOCUMENT_WINDOWS="*"                                    19
 MDI_CLIENT_HANDLER="*"                                          20
 USE_LONG_CAPTIONS="*"                                           21
 NEW_DOCUMENT_CAPTION="*"                                        22
+ALLOW_LOCK_WINDOW_UPDATE="*"                                    23
 
 [COLOR_GRID]                                                    29
 01   // Identifiers
@@ -1031,11 +1032,12 @@ ALTERATION_SAVE_THRESHOLD="*"                                   08
 DELETE_AUTO_SAVED_FILES="*"                                     09
 
 [WORKING_DIRECTORY]                                             49
-04   // Identifiers
+05   // Identifiers
 CHANGE_FOLDER_ON_OPEN="*"                                       00
 CHANGE_FOLDER_ON_SAVE_AS="*"                                    01
 CHANGE_FOLDER_ON_SAVE_COPY_AS="*"                               02
 PRESERVE_FOLDER_FOR_SAVE_COPY_AS="*"                            03
+USE_VIRTUAL_WORKING_DIRECTORY="*"                               04
 
 [FILE_STATUS]                                                   50
 13   // Identifiers
@@ -1179,16 +1181,17 @@ TOP="*"                                                         14
 LEFT="*"                                                        15
 
 [PRINT]                                                         60
-09   // Identifiers
+10   // Identifiers
 SCHEME_NAME="*"                                                 00
 SHOW_PAGE_HEADERS="*"                                           01
-SHOW_LINE_NUMBERS="*"                                           02
-WORD_WRAP="*"                                                   03
-WRAP_LONG_LINES="*"                                             04
-WRAP_ENVIRONMENTS="*"                                           05
-ENABLE_HIGHLIGHTING="*"                                         06
-ENABLE_SPELLING="*"                                             07
-SPACING="*"                                                     08
+SHOW_PAGE_FOOTERS="*"                                           02
+SHOW_LINE_NUMBERS="*"                                           03
+WORD_WRAP="*"                                                   04
+WRAP_LONG_LINES="*"                                             05
+WRAP_ENVIRONMENTS="*"                                           06
+ENABLE_HIGHLIGHTING="*"                                         07
+ENABLE_SPELLING="*"                                             08
+SPACING="*"                                                     09
 
 [PRINT_FONT]                                                    61
 09   // Identifiers
@@ -1210,7 +1213,7 @@ TOP_MARGIN="*"                                                  02
 BOTTOM_MARGIN="*"                                               03
 
 [PRINT_HEADER]                                                  63
-22   // Identifiers
+25   // Identifiers
 SHOW_FILE_NAME="*"                                              00
 FILE_NAME="*"                                                   01
 SHOW_DATE="*"                                                   02
@@ -1233,9 +1236,33 @@ BACKGROUND_COLOR="*"                                            18
 GRADIENT_COLOR="*"                                              19
 TOP_MARGIN="*"                                                  20
 BOTTOM_MARGIN="*"                                               21
+SEPARATOR_ENABLED="*"                                           22
+SEPARATOR_WIDTH="*"                                             23
+SEPARATOR_COLOR="*"                                             24
 
-[PRINT_LINE_NUMBERS]                                            64
-14   // Identifiers
+[PRINT_FOOTER]                                                  64
+18   // Identifiers
+SHOW_PAGE_NUMBERS="*"                                           00
+PAGE_NUMBERS="*"                                                01
+SHOW_PAGE_NUMBERS_SELECTED="*"                                  02
+PAGE_NUMBERS_SELECTED="*"                                       03
+FONT_NAME="*"                                                   04
+FONT_SIZE="*"                                                   05
+FONT_PITCH="*"                                                  06
+FONT_BOLD="*"                                                   07
+FONT_ITALIC="*"                                                 08
+FONT_UNDERLINE="*"                                              09
+FONT_STRIKEOUT="*"                                              10
+TEXT_COLOR="*"                                                  11
+TOP_MARGIN="*"                                                  12
+BOTTOM_MARGIN="*"                                               13
+SEPARATOR_ENABLED="*"                                           14
+SEPARATOR_WIDTH="*"                                             15
+SEPARATOR_COLOR="*"                                             16
+ALIGNED="*"                                                     17
+
+[PRINT_LINE_NUMBERS]                                            65
+17   // Identifiers
 LEADING_ZEROS="*"                                               00
 DEFAULT_FONT="*"                                                01
 FONT_BOLD="*"                                                   02
@@ -1250,8 +1277,11 @@ GRADIENT_COLOR="*"                                              10
 LINE_NUMBER_10="*"                                              11
 LINE_NUMBER_BULLET="*"                                          12
 LINE_NUMBER_BULLET_5="*"                                        13
+SEPARATOR_ENABLED="*"                                           14
+SEPARATOR_WIDTH="*"                                             15
+SEPARATOR_COLOR="*"                                             16
 
-[PRINT_OPTIONS]                                                 65
+[PRINT_OPTIONS]                                                 66
 09   // Identifiers
 PRINT_FF="*"                                                    00
 PRINT_TRANSPARENTLY="*"                                         01
@@ -1263,12 +1293,12 @@ SHOW_PROGRESS="*"                                               06
 CLOSE_PROGRESS="*"                                              07
 CLOSE_PROGRESS_DELAY="*"                                        08
 
-[PRINT_SCHEMES]                                                 66
+[PRINT_SCHEMES]                                                 67
 02   // Identifiers
 SCHEME="*"                                                      00
   FILE="*"                                                      01
 
-[HIGHLIGHTING_EFFECTS]                                          67
+[HIGHLIGHTING_EFFECTS]                                          68
 08   // Identifiers
 ALLOW_GRADIENT_PAINTING="*"                                     00
 ALLOW_CURRENT_LINE="*"                                          01
@@ -1279,7 +1309,7 @@ ENVIRONMENT_BRIGHTNESS="*"                                      05
 ALLOW_INDENTED_ENVIRONMENTS="*"                                 06
 HIGH_CONTRAST_AWARE="*"                                         07
 
-[CONFIGURATION]                                                 68
+[CONFIGURATION]                                                 69
 05   // Identifiers
 CONFIGURATION="*"                                               00
 CAPTION="*"                                                     01
@@ -1287,7 +1317,7 @@ DEFAULT_MODE="*"                                                02
 DEFAULT_EXTENSION="*"                                           03
 DEFAULT_PATH="*"                                                04
 
-[FOLDING]                                                       69
+[FOLDING]                                                       70
 20   // Identifiers
 SHOW_FOLDING_MARGIN="*"                                         00
 FOLDING_MARGIN_MODE_FILTER="*"                                  01
@@ -1310,7 +1340,7 @@ NODE="*"                                                        04
   EXCEPTION="*"                                                 18
 END="*"                                                         19
 
-[COLORS]                                                        70
+[COLORS]                                                        71
 07   // Identifiers
 COLOR_SCHEME="*"                                                00
   BACKGROUND_COLOR="*"                                          01
@@ -1320,7 +1350,7 @@ COLOR_SCHEME="*"                                                00
 COLORS="*"                                                      05
 END="*"                                                         06
 
-[IMAGE_RESOURCES]                                               71
+[IMAGE_RESOURCES]                                               72
 33   // Identifiers
 IMAGE_DPI_SELECTOR="*"                                          00
   DPI="*"                                                       01
@@ -1356,7 +1386,7 @@ IMAGE_DPI_SELECTOR="*"                                          00
     IMG_RESOURCE_DLL="*"                                        31
 END="*"                                                         32
 
-[DOCUMENT_LIST]                                                 72
+[DOCUMENT_LIST]                                                 73
 12   // Identifiers
 LIST_NEW_DOCUMENTS="*"                                          00
 FOCUS_DROP_DOWN_LIST="*"                                        01
@@ -1371,7 +1401,7 @@ TYPE="*"                                                        09
   TYPE_FILTER="*"                                               10
   IMAGE="*"                                                     11
 
-[AUTO_COMPLETE]                                                 73
+[AUTO_COMPLETE]                                                 74
 22   // Identifiers
 ITEM="*"                                                        00
   ENABLED="*"                                                   01

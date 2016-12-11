@@ -1,0 +1,53 @@
+END="144 dpi"
+
+IMAGE_DPI_SELECTOR="168 dpi"
+  DPI=168 // 175%
+  // TeX Symbols GUI Page Control settings
+  GUI_SCALED_BUTTONS=135
+  GUI_SCALED_IMAGES=175
+  GUI_SOURCE_FOLDER="%B\Bitmaps\GUI200"
+  GUI_SOURCE_SCALE=200
+  GUI_LOCAL_FOLDER="%b\Bitmaps\GUI"
+  GUI_LOCAL_SCALE=175
+  // Main Toolbar settings
+  SEPARATOR_HEIGHT=2
+  SEPARATOR_WIDTH=8
+  BUTTON_WIDTH=48
+  BUTTON_HEIGHT=42
+  // Adjust Tree Items Height
+  EXTRA_TREE_ITEM_HEIGHT=0
+  // Default Values
+  DEFAULT_VALUES="Default Values"
+    ALLOW_SCALING=0
+    IMAGE_WIDTH=24
+    IMAGE_HEIGHT=24
+    USE_RESOURCE_DLL=1
+    IMG_RESOURCE_DLL="%B\Bitmaps\Resources\WRLib(24).res"
+    USE_SOURCE_FOLDER=0
+    IMG_SOURCE_FOLDER="%B\Bitmaps\Images"
+    USE_LOCAL_FOLDER=0
+    IMG_LOCAL_FOLDER="%b\Bitmaps\Images"
+  // Default Values apply to:
+  MENU_ICONS="Menu Icons"
+  TREE_ICONS="Tree Icons"
+  GATHER_ICONS="Gather Icons"
+  DOCUMENT_TAB_ICONS="Document Tab Icons"
+  DLG_TOOLBARS="Dialog Toolbars"
+  FORM_TOOLBARS="Form Toolbars"
+  // Main Toolbar Values
+  MAIN_TOOLBAR="Main Toolbar"
+    ALLOW_SCALING=0
+    IMAGE_WIDTH=32
+    IMAGE_HEIGHT=32
+    USE_RESOURCE_DLL=1
+    IMG_RESOURCE_DLL="%B\Bitmaps\Resources\WRLib(32).res"
+    USE_SOURCE_FOLDER=0
+    IMG_SOURCE_FOLDER="%B\Bitmaps\Images"
+    USE_LOCAL_FOLDER=0
+    IMG_LOCAL_FOLDER="%b\Bitmaps\Images"
+  // These Values also apply to:
+  IMAGE_DIALOG="Image Dialog"
+  BITMAP_BUTTONS="Bitmap Buttons"
+END="168 dpi"
+
+IMAGE_DPI_SELECTOR="192 dpi"

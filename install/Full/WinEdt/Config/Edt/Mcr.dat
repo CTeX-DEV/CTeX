@@ -1,6 +1,6 @@
 % Macro List
 % -*- DATA:EDT -*-
-% Created: Sunday, March 13, 2016 at 17:43
+% Created: Thursday, May 26, 2016 at 13:23
 
 AboutWinEdt;
 ActivateChild("Child_Name");
@@ -188,7 +188,7 @@ GetPreamble("End_String",Register,Line_Limit);
 GetPrjList(Register,Existing_Only);
 GetPrjListCount(Register,Existing_Only);
 GetRM(Register);
-GetScreenDPI(Register,Vertical);
+GetScreenDPI(Register);
 GetScriptTagsAndFonts(Register,All);
 GetSearchData(Register,Mode);
 GetSel(Select_All,Register);
@@ -598,7 +598,7 @@ UndoAll;
 UnfoldNodes(All,Subnodes,"Category_Filter");
 Unindent;
 UnixToDos("Filename",Register);
-UpdateDoc;
+UpdateDoc(Ext_Modified_Only,All);
 UpdateFile("Filename");
 UpdateStatus(Refresh);
 UpperCase;

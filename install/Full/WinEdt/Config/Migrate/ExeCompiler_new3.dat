@@ -1,0 +1,1 @@
+  IfStr("%!8","","<>",!|IfLogErrors(!"JMP(!'Exit');",!"Relax;",0,-1,2);|);

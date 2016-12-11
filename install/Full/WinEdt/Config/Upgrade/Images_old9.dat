@@ -1,0 +1,8 @@
+  DOCUMENT_TAB_ICONS="Document Tab Icons"
+  DLG_TOOLBARS="Dialog Toolbars"
+  FORM_TOOLBARS="Form Toolbars"
+  // Main Toolbar Values
+  MAIN_TOOLBAR="Main Toolbar"
+    ALLOW_SCALING=0
+    IMAGE_WIDTH=24
+    IMAGE_HEIGHT=24

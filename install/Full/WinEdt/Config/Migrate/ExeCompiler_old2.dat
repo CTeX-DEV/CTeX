@@ -1,0 +1,18 @@
+  // *** Execute it!!!
+  LetReg(4,!'0');
+:Run_Again:: ========================================================
+  SetConsoleText('%!3Command Line:   %!5%\Startup Folder: %!6%\%\',1);
+  RunConsole('%!5','%!6','%!9 ...',1,1,0,%!4,%!4);
+  IfOK(!"Assign(!'Compile Status',!'OK');",>
+       !"ShowConsole(1);Assign('Force-Focus','1');Assign(!'Compile Status',!'Run Error');JMP(!'Exit');");
+
+  // Execute tasks after compiling...
+  Exe('%b\Exec\ExeCompilerPost.edt');
+  UpdateStatus;
+
+  // Blues with MiKTeX's GUI Framework?
+  IfStr("%$('TeX System');",!"MiKTeX",!"<>",!"JMP(!'no_LOG');");
+  GetConsoleText(4);
+  FindInString("%!4",!"GUI framework cannot be initialized",-1,-1,10);
+  IfOK(!"ResetConsole;LetReg(4,!'1');JMP(!'Run_Again');");
+  JMP(!'no_LOG');

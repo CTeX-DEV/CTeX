@@ -1,0 +1,16 @@
+PAGE="Glossary-TeX"
+  PAGE_CAPTION="Glos"
+  // Change Mode from TeX to ? to disable this item
+  PAGE_MODE_FILTER="TeX|DTX;INS;STY;AUX"
+  PAGE_SORTED=1
+  PAGE_CASE_SENSITIVE=1
+  PAGE_IGNORE_COMMENTS=1
+  PAGE_IGNORE_VERBATIM=1
+  PAGE_BEFORE_BUILD_MACRO="SaveSort;SetSort(1,1,1,-1,1,1);"
+  PAGE_AFTER_BUILD_MACRO="RestoreSort;"
+  PAGE_ON_ACTIVATE_MACRO="GlobalMark;"
+  PAGE_ON_SHOW_MACRO="GlobalMark;"
+  PAGE_FILTER="Gls-TeX"            // Search for references
+  PAGE_FILTER_FOUND_PREFIX=""
+  PAGE_FILTER_NOT_FOUND_PREFIX="!" // Prefix for unused glossary items
+  ITEM="\newglossaryentry{?}"

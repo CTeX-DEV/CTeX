@@ -1,0 +1,19 @@
+  DOCUMENT_TAB_ICONS="Document Tab Icons"
+  DEFAULT_VALUES="Form Toolbars"
+    ALLOW_SCALING=0
+    IMAGE_WIDTH=20
+    IMAGE_HEIGHT=20
+    USE_RESOURCE_DLL=1
+    IMG_RESOURCE_DLL="%B\Bitmaps\Resources\WRLib(16).res"
+    USE_SOURCE_FOLDER=0
+    IMG_SOURCE_FOLDER="%B\Bitmaps\Images"
+    USE_LOCAL_FOLDER=0
+    IMG_LOCAL_FOLDER="%b\Bitmaps\Images"
+  // These Values apply to:
+  DLG_TOOLBARS="Dialog Toolbars"
+  FORM_TOOLBARS="Form Toolbars"
+  // Main Toolbar Values
+  MAIN_TOOLBAR="Main Toolbar"
+    ALLOW_SCALING=0
+    IMAGE_WIDTH=24
+    IMAGE_HEIGHT=24

@@ -1,0 +1,6 @@
+  START1_TRIGGER="\addsectionbib"
+  START2_TRIGGER=""
+  STOP1_TRIGGER=""
+  STOP2_TRIGGER=""
+    TEXT_COLOR="swcAddBibArg"
+    DEFAULT_FONT=1

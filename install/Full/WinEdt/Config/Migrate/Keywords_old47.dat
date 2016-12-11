@@ -1,0 +1,4 @@
+    TEXT_COLOR="RGB_1"
+    DEFAULT_FONT=1
+LIST="END_LIST"
+define_whole_vertical_blacker_pixels

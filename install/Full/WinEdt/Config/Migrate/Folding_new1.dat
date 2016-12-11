@@ -1,0 +1,17 @@
+END="ITEM-INI"
+
+NODE="LIST-INI"
+  MODE_FILTER="INI"
+  CATEGORY="INI:LIST"
+  REQ_FILTER="<%f>%p\%n.ini"
+  CASE_SENSITIVE=1
+  BEGINNING_OF_LINE_ONLY=1
+  INCLUDE_STOP=1
+  SCOPE=1
+  START="LIST=""END_LIST"""
+  START="SUB=""END_LIST"""
+  START="COLORS=""END_LIST"""
+  STOP="END_LIST"
+END="LIST-INI"
+
+// ===============================================================================

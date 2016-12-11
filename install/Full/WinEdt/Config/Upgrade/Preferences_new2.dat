@@ -1,0 +1,8 @@
+ENLARGE_DOCUMENT_WINDOWS=0
+
+// Disable this option if you are working on multiple monitors
+// with different resolutions and you are experiencing refresh oddities...
+// If enabled it can reduce flickering when WinEdt controls are resized.
+ALLOW_LOCK_WINDOW_UPDATE=1
+
+MDI_CLIENT_HANDLER=1

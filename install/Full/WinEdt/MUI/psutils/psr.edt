@@ -20,7 +20,7 @@ PushTagsandRegisters;
   MUIReset('psresize...');
   // Main Form Size and Position
   MUISet('','width','500');
-  MUISet('','height','360');
+  MUISet('','height','372');
   MUISet('','position','1'); // Main Form Center
 //
   MUIGet('','client width',9); // Get the form size
@@ -28,7 +28,7 @@ PushTagsandRegisters;
 //
 //  // Options are in the Page Control ------------------------------
 //
-  MUIAdd(8,8,%!9-16,%!8-8-40,'PageControl','TPageControl');
+  MUIAdd(8,8,%!9-16,%!8-8-41,'PageControl','TPageControl');
 
 //  // OK/Cancel (aligned -> independent of the dialog size) --------
 //

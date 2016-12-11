@@ -1,0 +1,6 @@
+  START2_TRIGGER="!--"
+  STOP1_TRIGGER="--"
+  STOP2_TRIGGER=""
+    TEXT_COLOR="xclComment"
+    FONT_NAME="Courier New"
+    DEFAULT_FONT=1

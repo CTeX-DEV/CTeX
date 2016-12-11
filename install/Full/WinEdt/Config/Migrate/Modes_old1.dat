@@ -1,0 +1,2 @@
+MODE=":PHP|*.php"
+MODE=":HHC|*.hhc;*.hhk"

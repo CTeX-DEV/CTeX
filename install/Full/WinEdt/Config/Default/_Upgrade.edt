@@ -171,6 +171,9 @@ Return;
     // Save the Log File
     CloseOutput;
 
+    // Extra Tasks
+    Exe('%b\Config\Upgrade\UpgradeExtra.edt');
+
 // Rebuild All ======================================================
 
     LoadConfig("ConfigEx\Colors.ini");
@@ -227,13 +230,6 @@ Return;
     LoadConfig("ConfigEx\Switches.ini");
     LoadConfig("ConfigEx\Keywords.ini");
     LoadConfig("ConfigEx\Columns.ini");
-    LoadConfig("ConfigEx\PrintSchemes.ini");
-    LoadConfig("ConfigEx\PrintDefault.ini");
-    LoadConfig("ConfigEx\PrintAlternative.ini");
-    LoadConfig("ConfigEx\PrintCustom.ini");
-    LoadConfig("ConfigEx\PrintFancy.ini");
-    LoadConfig("ConfigEx\PrintPlain.ini");
-    LoadConfig("ConfigEx\PrintDefault.ini");
     LoadConfig("ConfigEx\Backup.ini");
     LoadConfig("ConfigEx\AutoSave.ini");
     LoadConfig("ConfigEx\Folders.ini");
@@ -245,6 +241,8 @@ Return;
     LoadConfig("ConfigEx\Options.ini");
     LoadConfig("ConfigEx\Events.ini");
     LoadConfig("ConfigEx\Config.ini");
+    LoadConfig("ConfigEx\PrintSchemes.ini");
+    LoadConfig("ConfigEx\Print Schemes\PrintDefault.ini");
     IfFileExists("%b\ConfigEx\UserPreferences.ini",!'LoadConfig("%b\ConfigEx\UserPreferences.ini");');
     IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
     ProcessMessages;

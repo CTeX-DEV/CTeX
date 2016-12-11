@@ -1,0 +1,4 @@
+  IfOK(!"Relax;",!"JMP(!'not_TeX');");
+    // Find any glossary
+    Exe("%b\Exec\TeX\FindGlossaries.edt");
+  IfStr("%O","%P","=",!"JMP(!'Post_Done');");

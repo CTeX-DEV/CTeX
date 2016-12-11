@@ -1,0 +1,10 @@
+// Change the IMAGE value to "DocNew" or any other custom image
+// of your choice for non-modified plain focused document
+// SELECTOR="Active"
+//   IMAGE=""     // None
+//   ACTIVE=1
+
+// Change the IMAGE value to "DocNew" or any other custom image
+// of your choice for non-modified plain documents
+// SELECTOR="All Other Documents"
+//   IMAGE="DocNew"  // Generic or None

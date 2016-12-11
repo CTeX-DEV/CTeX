@@ -1,0 +1,14 @@
+SCRIPT="hani" // 丈三上下丌不与丏丐丑丒专且丕世丗丘丙 乤乥书乧乨乩乪乫乬乭乮乯买乱乲乳乴乵乶
+  // If you prefer SimSun (宋体) font move it at the beginning of fallbacks!
+  FONT="Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;" +
+       "Microsoft JhengHei;Microsoft YaHei;Yu Gothic;MingLiU;SimSun;宋体"
+SCRIPT="hang" // 가각갂갃간갅갆갇갈갉갊갋갌갍갎갏감갑값갓갔강갖갗갘 ㉠㉡㉢㉣㉤㉥㉦㉧㉨㉩㉪㉫
+  FONT="Malgun Gothic;맑은 고딕"
+SCRIPT="kana" // いろはぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす ㋐㋑㋒
+  FONT="Yu Gothic UI;Microsoft JhengHei UI;Microsoft YaHei UI;" +
+       "Yu Gothic;Microsoft JhengHei;Microsoft YaHei"
+SCRIPT="bopo" // ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕ  ㆠㆡㆢㆣㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭ
+  FONT="Microsoft JhengHei UI;Microsoft YaHei UI;" +
+       "Microsoft JhengHei;Microsoft YaHei"
+SCRIPT="yi  " // ꀀꀁꀂꀃꀄꀅꀆꀇꀈꀉꀊꀋꀌꀍꀎꀏꀐꀑꀒꀓꀔꀕꀖꀗꀘ ꒐꒑꒒꒓꒔꒕꒖꒗꒘꒙꒚꒛꒜꒝
+  FONT="Microsoft Yi Baiti|"

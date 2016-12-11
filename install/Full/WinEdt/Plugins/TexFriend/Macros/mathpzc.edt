@@ -1,3 +1,0 @@
-Assign("PackageLine","\usepackage{mathpzc}");
-Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
-End;

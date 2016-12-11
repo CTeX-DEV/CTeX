@@ -1,0 +1,12 @@
+// -*- ASCII:EDT -*-
+// Find Glossaries
+
+  PushTagsandRegisters;
+
+  IfFileExists("%O\%N.aux",!"ReadFile('%O\%N.aux',9);",!"PopTagsandRegisters;Exit;");
+  FindInString("%!9","<\\\@newglossary\{\(0*\)\}\{\(1*\)\}\{\(2*\)\}\{\(3*\)\}",-11,-11,11);
+  IfOK(!"Assign(|%F-glo|,|%O\%N.%#3|);",!"Release(|%F-glo|);");
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,3 @@
+  CCP_VALUE=65000
+
+// If the mode ends with submode :CP<num> then the indicated code page

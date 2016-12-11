@@ -1,8 +1,0 @@
-Mark(1);
-SetSearchCyclic(1);
-SetSearchCaseSensitive(0);
-SetSearchEntire(1);
-GotoCL(1,1);
-SetFindStr('\usepackage{calfrak}');
-IfFound("CMD('Char Left');Goto(1);Ins('')","SetFindStr('\documentclass');SetSearchCyclic(1);SetSearchEntire(1);GotoCL(1,1);Find;CMD('Word Left');CMD('Line Down');Ins('\usepackage{calfrak}');NewLine;Goto(1)");
-End;

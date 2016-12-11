@@ -1,11 +1,10 @@
 * WinEdt News.txt
-Last modified on Thursday, February 18, 2016  13:05
+Last modified on Wednesday, May 25, 2016 16:52
 __________________________________________________________________
 
 
 WinEdt 10 is a Unicode (UTF-8) text editor built on WinEdt 9
-sources and compiled with a brand new Delphi 10 Seattle
-(Professional).
+sources and compiled with a brand new Delphi 10 (Professional).
 
 UPGRADING ISSUES:
 =================
@@ -14,9 +13,10 @@ WinEdt 10 is installed parallel to WinEdt 9, 8, 7, 6 or 5 and you
 can continue to use an older version of WinEdt and possibly
 uninstall WinEdt 10 if you prefer the old version.
 
-NOTE: WinEdt 10 does not run on Windows XP. Windows 7 or later is
-required for this version to run on your computer! This version was
-developed and extensively tested on Windows 10.
+NOTE: This build of WinEdt 10 runs on Windows XP (with some
+Uniscribe restrictions). Windows 7 or later is required for full
+Uniscribe functionality! This version was developed and extensively
+tested on Windows 10.
 
 IMPORTANT: If you already have WinEdt 5.x, 6, 7 or 8 on your system
 you cannot import your old settings directly into WinEdt 10! If you
@@ -35,6 +35,105 @@ WinEdt 9, 8, 7 and 6. You will, however, have to enter the data
 (Name and Code) again in the Registration Dialog of WinEdt 10.
 WinEdt 5 users will have to pay an upgrade fee if they want to
 register WinEdt 10 (see www.winedt.com for details).
+
+------------------------------------------------------------------
+
+WinEdt 10 [Build 20160526 (v. 10.1)]
+====================================
+
+- A few minor bug fixes and enhancements to the default settings...
+
+- WinEdt resource libraries have been renamed from WRLib32(xx).dll
+to WRLib(xx).res. They are no longer compiled as executables. They
+now use a private encrypted and compressed binary stream format
+which makes them slightly smaller with less overhead. This should
+eliminate false virus reports. They are just (harmless) binary
+image resource files. This modification requires changes to the
+[IMAGE_RESOURCES] configuration section...
+
+- Extra 0/1 property for [WORKING_DIRECTORY] section:
+
+  USE_VIRTUAL_WORKING_DIRECTORY
+
+This property is also available in the Preferences Dialog. Help
+explains what it does...
+
+- A new 0/1 property for [PREFERENCES]
+
+  ALLOW_LOCK_WINDOW_UPDATE
+
+This property is also available in the Preferences Dialog
+(Miscellaneous). Help explains what it does...
+
+- A problem with MUI Page Control not being properly scaled on
+higher dpi has been addressed for this build.
+
+- WinEdt now automatically configures SumatraPDF inverse search
+when Sumatra is launched from WinEdt...
+
+  Hint: If you are using 64-bit version of WinEdt use 64-bit
+        version of SumatraPDF as well in order to make
+        auto-detection possible...
+
+- Fallback strategy and fonts have been improved (especially for
+CJK users). If the font name ends with | then the font height is
+set to the height of the primary font. Otherwise, the font size
+attribute is preserved. Both approaches are sometimes required
+depending on the fallback font...
+
+- Improved support for glossaries package when invoked with
+"nomain" option.
+
+------------------------------------------------------------------
+
+WinEdt 10 [Build 20160413 (v. 10.0)]
+====================================
+
+- A few minor bug fixes and enhancements to the default settings...
+
+- A few oddities related to overwrite mode (rather than a more
+commonly used insert input mode) have been fixed.
+
+- Wrapping environments now take comments into consideration.
+
+- Background highlighting for Switches or Keywords did not work
+with Uniscribe. Now it does.
+
+- This version will run on Windows XP (with some restrictions in
+Uniscribe functionality that is not supported on XP -- unicode
+script tags).
+
+- Two extra parameters for macro function:
+
+  UpdateDoc(Ext_Modified_Only,All: 0/1);
+
+- Extra properties for [PRINT_HEADER] and [PRINT_LINE_NUMBERS]:
+
+  SEPARATOR_ENABLED
+  SEPARATOR_WIDTH
+  SEPARATOR_COLOR
+
+This properties can replace or be combined with the background
+color for these two items.
+
+- Printing Schemes now have an extra section [PRINT_FOOTER] for
+those that want page numbers at the bottom of the page. Help
+explains the available properties...
+
+- Extra property for [PRINT]:
+
+  SHOW_PAGE_FOOTERS
+
+This option is also available in the Print Dialog.
+
+- Printing Schemes have been moved in Print Schemes subdirectory.
+Default settings only provide Default and Alternative scheme (they
+differ in the use of the background colors for headers and line
+numbers). Users with special printing needs can create more schemes
+in the local copy of "ConfigEx\Print Schemes" folder...
+
+- Fallback font specification now allows wildcard * in order to
+iterate through all available fonts (that do not start with @).
 
 ------------------------------------------------------------------
 
@@ -126,7 +225,7 @@ unicode characters. Normally WinEdt uses one primary font as
 specified in the Preferences dialog (or possibly overwritten for a
 particular mode in Font Schemes). If this font is lacking glyphs
 for a particular script then WinEdt substitutes it with the first
-exiting specified fallback font at the same height as the primary
+existing specified fallback font at the same height as the primary
 font (when missing glyphs have to be displayed).
 
 The new GetScriptTagsAndFonts macro function was used to compile
@@ -147,129 +246,163 @@ non-existent fonts on your system.
   //
   // The values below affect Uniscribe engine...
   // Fallback fonts for different (exotic) scripts as defined by Windows Unicode
-
+  //
   // If the list starts with ! then the currently active font is ignored and only
   // fallback fonts listed after ! are applied (seldom useful)...
+  //
+  // You can use the wildcard * in order to list ALL fonts (that do not start with
+  // letter @) in alphabetical order.
+  // This is not very efficient and it is much better to list only suitable fonts
+  // in the preferred order! This feature is mostly intended for testing...
   // If you specify @ in the list of fallback fonts then ALL fonts
   // starting with the letter @ on your system are used for that script.
+  // Such fonts are usually rotated anti clockwise as sometimes / seldom
+  // used by CJK users. Again, the efficiency concern applies...
+  //
+  // If the font name ends with | then the font height is set to the height of
+  // the primary font. Otherwise, the font size attribute is preserved.
+  //
   // Use GetScriptTagsAndFonts macro function to see what scripts and fonts
   // are available on your computer (it depends on your version of Windows)!
+  // "Arial Unicode MS" might be a good choice for users that have this font
+  // installed on their system...
   // Non-existent fonts in the list are simply ignored!
+  // -------------------------------------------------------------------------------
+
+  // Fallback fonts for old Uniscribe library that does not support
+  // OpenType functions and unicode script tags (eg. Windows XP) ...
+  // This must be the first fallback script item!
+  SCRIPT="*"
+    FONT="Arial;Tahoma;Courier New;" +
+         "Segoe UI;Segoe UI Symbol|;Segoe UI Historic;" +
+         "Malgun Gothic;맑은 고딕;Microsoft Yi Baiti|;" +
+         "Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;" +
+         "Microsoft JhengHei;Microsoft YaHei;Yu Gothic;MingLiU;SimSun;宋体;" +
+         "Sylfaen;Estrangelo Edessa;Nirmala UI;Aparajita;Kokila;Mangal;" +
+         "Vrinda;Raavi;Shruti;Kalinga;Latha;Vijaya;Gautami;Vani;Tunga;Kartika;" +
+         "Iskoola Pota;Leelawadee UI;Khmer UI;Lao UI;" +
+         "Ebrima;Nyala;Gadugi;Plantagenet Cherokee;" +
+         "Microsoft Tai Le|;Microsoft New Tai Lue|" +
+         "Microsoft PhagsPa|;Microsoft Himalaya|;" +
+         "MV Boli;Mongolian Baiti|;Myanmar Text|;Javanese Text|"
 
   SCRIPT=""     // Non-script-specific characters and symbols (eg. numbers, etc...)
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
-         "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+    FONT="Arial;Tahoma;Courier New;" +
+         "Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
 
   SCRIPT="latn" // @ABCDE ^_`abcde yz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°± ÀÁÂÃÄÅÆÇÈÉÊË...
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
-         "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+    FONT="Arial;Tahoma;Courier New;" +
+         "Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
 
   SCRIPT="grek" // ΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϏϐϑϒϓϔ
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    FONT="Arial;Tahoma;Segoe UI;Courier New"
   SCRIPT="cyrl" // абвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџѠѡѢѣ
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    FONT="Arial;Tahoma;Segoe UI;Courier New"
   SCRIPT="hebr" // דג סקרן שט בים מאוכזב ולפתע מצא חברה
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    FONT="Arial;Tahoma;Segoe UI;Courier New"
   SCRIPT="arab" // صِف خَلقَ خَودِ كَمِثلِ الشَمسِ إِذ بَزَغَت — يَحظى الضَجيعُ بِها نَجلاءَ مِعطارِ
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    FONT="Arial;Tahoma;Segoe UI;Courier New"
   SCRIPT="armn" // աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
-  SCRIPT="thai" // กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬ
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+    FONT="Arial;Tahoma;Segoe UI;Courier New"
+  SCRIPT="thai" // กขฃคฅฆงจฉชซฌญฎฏฐฑ ฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬ
+    FONT="Arial;Tahoma;Segoe UI;Courier New"
 
   SCRIPT="hani" // 丈三上下丌不与丏丐丑丒专且丕世丗丘丙 乤乥书乧乨乩乪乫乬乭乮乯买乱乲乳乴乵乶
-    FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;@"
-  SCRIPT="kana" // いろはにほへと ちりぬるを わかよたれそ つねならむ きゆめみし ゑひもせす ㋐㋑㋒
-    FONT="Default;Yu Gothic UI;Microsoft YaHei UI;Microsoft JhengHei UI;@"
+    // If you prefer SimSun (宋体) font move it at the beginning of fallbacks!
+    FONT="Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;" +
+         "Microsoft JhengHei;Microsoft YaHei;Yu Gothic;MingLiU;SimSun;宋体"
   SCRIPT="hang" // 가각갂갃간갅갆갇갈갉갊갋갌갍갎갏감갑값갓갔강갖갗갘 ㉠㉡㉢㉣㉤㉥㉦㉧㉨㉩㉪㉫
-    FONT="Default;Malgun Gothic;@"
+    FONT="Malgun Gothic;맑은 고딕"
+  SCRIPT="kana" // いろはぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす ㋐㋑㋒
+    FONT="Yu Gothic UI;Microsoft JhengHei UI;Microsoft YaHei UI;" +
+         "Yu Gothic;Microsoft JhengHei;Microsoft YaHei"
   SCRIPT="bopo" // ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕ  ㆠㆡㆢㆣㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭ
-    FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;@"
+    FONT="Microsoft JhengHei UI;Microsoft YaHei UI;" +
+         "Microsoft JhengHei;Microsoft YaHei"
   SCRIPT="yi  " // ꀀꀁꀂꀃꀄꀅꀆꀇꀈꀉꀊꀋꀌꀍꀎꀏꀐꀑꀒꀓꀔꀕꀖꀗꀘ ꒐꒑꒒꒓꒔꒕꒖꒗꒘꒙꒚꒛꒜꒝
-    FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Microsoft Yi Baiti;@"
+    FONT="Microsoft Yi Baiti|"
 
   SCRIPT="brai" //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱ ⣺⣻⣼⣽⣾⣿
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
-  SCRIPT="copt" // ϢϣϤϥϦϧϨϩϪϫϬϭϮϯ ⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲔⲕⲖⲗⲘⲙⲚⲛⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲰⲱ ⳹⳺⳻⳼⳽⳾⳿
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
-  SCRIPT="glag" // ⰀⰁⰂⰃⰄⰅⰆⰇⰈⰉⰊⰋⰌⰍⰎⰏⰐⰑⰒⰓⰔⰕⰖⰗⰘⰙⰚ ⰰⰱⰲⰳⰴⰵⰶⰷⰸⰹⰺⰻⰼⰽⰾⰿⱀⱁⱂⱃⱄⱅⱆⱇⱈⱉⱊ
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
-  SCRIPT="runr" // ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚲᚳᚴᚵᚶᚷᚸᚹᚺᚻᚼᚽᚾᚿᛀᛁᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛌᛍᛎᛏᛐᛑ ᛒᛓᛔᛕᛖᛗᛘᛙᛚᛛᛜᛝᛞᛟᛠᛡᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
-  SCRIPT="lisu" // ꓐꓑꓒꓓꓔꓕꓖꓗꓘꓙꓚꓛꓜꓝꓞꓟꓠꓡꓢꓣꓤꓥꓦꓧꓨꓩꓪꓫꓬꓭꓮꓯꓰꓱꓲꓳꓴꓵꓶꓷꓸꓹꓺꓻꓼꓽ꓾꓿
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
+  SCRIPT="copt" // ϢϣϤϥϦϧϨϩϪϫϬϭϮϯ ⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲐⲑⲒⲓⲔⲕⲖⲗⲘⲙⲚⲛⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲰⲱ ⳹⳺⳻⳼⳽⳾
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
+  SCRIPT="glag" // ⰀⰁⰂⰃⰄⰅⰆⰇⰈⰉⰊⰋⰌⰍ ⰐⰑⰒⰓⰔⰕⰖⰗⰘⰙⰚ ⰰⰱⰲⰳⰴⰵⰶⰷⰸⰹⰺⰻⰼⰽⰾⰿⱀⱁⱂⱃⱄⱅⱆⱇⱈⱉⱊ
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
+  SCRIPT="runr" // ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚲᚳᚴᚵ ᚼᚽᚾᚿᛀᛁᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛌᛍᛎᛏᛐᛑ ᛒᛓᛔᛕᛖᛗᛘᛙᛚᛛᛜᛝᛞᛟᛠᛡᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
+  SCRIPT="lisu" // ꓐꓑꓒꓓꓔꓕꓖꓗꓘꓙꓚꓛꓜꓝꓞꓟꓠꓡꓢꓣꓤꓥꓦꓧꓨꓩꓪꓫꓬꓭꓮꓯꓰꓱꓲꓳꓴꓵꓶꓷ ꓸꓹꓺꓻꓼꓽ꓾꓿
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
   SCRIPT="ogam" // ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊᚋᚌᚍᚎᚏᚐᚑᚒᚓᚔᚕᚖᚗᚘᚙᚚ᚛᚜
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
-  SCRIPT="geor" // ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳ აბგდევზთიკლხჯჰჱჲჳჴჵჶჷჸჹჺ჻ჼჽჾჿ ⴀⴁⴂⴃⴄⴅⴆⴇⴈⴉⴊⴋⴌⴍⴎ
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;Sylfaen"
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
+  SCRIPT="geor" // ႠႡႢႣႤႥႦႧႨႩႪႫႬႭ აბგდევზთიკლხჯჰჱჲჳჴჵჶჷჸჹჺ჻ჼჽჾჿ ⴀⴁⴂⴃⴄⴅⴆⴇⴈⴉⴊⴋⴌⴍⴎ
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic;Sylfaen"
   SCRIPT="syrc" // ܐܑܒܓܔܕܖܗܘܙܚܛܜܝܞܟܠܡܢܣܤܥܦܧܨܩܪܫܬܭܮܯܱܴܷܸܹܻܼܾܰܲܳܵܶܺܽܿ݀݁ ݍݎݏ
-    FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;" +
-         "Estrangelo Edessa"
+    FONT="Segoe UI;Segoe UI Symbol|;Segoe UI Historic;Estrangelo Edessa"
 
   SCRIPT="deva" // ऄअआइईउऊऋऌऍऎएऐऑऒओऔकखगघङचछजझञटठडढणतथदधनऩपफबभमयरऱ
-    FONT="Default;Arial Unicode MS;Nirmala UI;Aparajita;Kokila;Mangal"
+    FONT="Nirmala UI;Aparajita;Kokila;Mangal"
   SCRIPT="beng" // ওঔকখগঘঙচছজঝঞটঠডঢণতথদধন পফবভমযর ০১২৩৪৫৬৭৮৯ৰৱ৲৳৴৵৶৷৸৹৺৻
-    FONT="Default;Arial Unicode MS;Nirmala UI;Vrinda"
+    FONT="Nirmala UI;Vrinda"
   SCRIPT="guru" // ਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨ ਪਫਬਭਮਯਰ ਖ਼ਗ਼ਜ਼ੜ  ਫ਼
-    FONT="Default;Arial Unicode MS;Nirmala UI;Raavi"
+    FONT="Nirmala UI;Raavi"
   SCRIPT="gujr" // અઆઇઈઉઊઋઌઍ ઓઔકખગઘઙચછજઝઞટઠડઢણતથદધન વશષસહ
-    FONT="Default;Arial Unicode MS;Nirmala UI;Shruti"
+    FONT="Nirmala UI;Shruti"
   SCRIPT="orya" // ଅଆଇଈଉଊଋଌ ଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନ ପଫବଭମଯର ଵଶଷସହ
-    FONT="Default;Arial Unicode MS;Nirmala UI;Kalinga"
-  SCRIPT="taml" // அஆஇஈஉஊ மயரறலளழவஶஷஸஹ ௦௧௨௩௪௫௬௭௮௯௰௱௲௳௴௵௶௷
-    FONT="Default;Arial Unicode MS;Nirmala UI;Latha;Vijaya"
-  SCRIPT="telu" // అఆఇఈఉఊఋఌ ఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధన పఫబభమయరఱలళఴ
-    FONT="Default;Arial Unicode MS;Nirmala UI;Gautami;Vani"
+    FONT="Nirmala UI;Kalinga"
+  SCRIPT="taml" // அஆஇஈஉஊ மயரறலளஷஸஹ ௦௧௨௩௪௫௬௭௮௯௰௱௲௳௴௵௶௷
+    FONT="Nirmala UI;Latha;Vijaya"
+  SCRIPT="telu" // అఆఇఈఉఊఋఌ ఒఓఔకఖగఘఙచఛజఝఞటఠడఢణత న పఫబభమయరఱలళ
+    FONT="Nirmala UI;Gautami;Vani"
   SCRIPT="knda" // ಅಆಇಈಉಊಋಌ ಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನ
-    FONT="Default;Arial Unicode MS;Nirmala UI;Tunga"
-  SCRIPT="mlym" // അആഇഈഉഊഋഌ ഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനഩ
-    FONT="Default;Arial Unicode MS;Nirmala UI;Kartika"
+    FONT="Nirmala UI;Tunga"
+  SCRIPT="mlym" // അആഇഈഉഊഋഌ ഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനഩ
+    FONT="Nirmala UI;Kartika"
   SCRIPT="sinh" // අආඇඈඉඊඋඌඍඎඏඐඑඒඓඔඕඖ ඳපඵබභමඹයර
-    FONT="Default;Arial Unicode MS;Nirmala UI;Iskoola Pota"
+    FONT="Nirmala UI;Iskoola Pota"
   SCRIPT="olck" // ᱐᱑᱒᱓᱔᱕᱖᱗᱘᱙ᱚᱛᱜᱝᱞᱟᱠᱡᱢᱣᱤᱥᱦᱧᱨᱩᱪᱫᱬᱭᱮᱯᱰᱱᱲᱳᱴᱵᱶᱷᱸᱹᱺᱻᱼᱽ᱾᱿
-    FONT="Default;Arial Unicode MS;Nirmala UI"
+    FONT="Nirmala UI"
 
-  SCRIPT="khmr" // កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវឝឞសហឡអឣឤឥឦឧឨឩឪឫឬឭឮឯ
-    FONT="Default;Arial Unicode MS;Leelawadee UI;Khmer UI"
-  SCRIPT="lao " // ນບປຜຝພຟ ເແໂໃໄ ໐໑໒໓໔໕໖໗໘໙ ໜໝໞໟ ດຕຖທ ໐໑໒໓໔໕໖໗໘໙ ເແໂໃໄ ອຮຯະັາຳິີຶືຸູ
-    FONT="Default;Arial Unicode MS;Leelawadee UI;Lao UI"
+  SCRIPT="khmr" // កខគឃងចឆជឈញដឋឌឍ នបផពភមយរលវឝឞសហឡអឣឤឥឦឧឨឩឪឫឬឭឮឯ
+    FONT="Leelawadee UI;Khmer UI"
+  SCRIPT="lao " // ນບປຜຝພຟ ເແໂໃໄ ໐໑໒໓໔໕ ໙ ໜໝໞໟ ດຕຖທ ໐໑໒໓໔໕໖໗໘໙ ເແໂໃໄ ອຮຯະັາຳິີຶືຸູ
+    FONT="Leelawadee UI;Lao UI"
   SCRIPT="bugi" // ᨀᨁᨂᨃᨄᨅᨆᨇᨈᨉᨊᨋᨌᨍᨎᨏᨐᨑᨒᨓᨔᨕᨖᨘᨗᨙᨚᨛ
-    FONT="Default;Arial Unicode MS;Leelawadee UI"
+    FONT="Leelawadee UI"
 
-  SCRIPT="ethi" // ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜም ፝፞፟፠፡።፣፤፥፦፧፨፩፪፫፬፭፮፯፰፱፲፳፴፵፶፷፸፹፺፻፼
-    FONT="Default;Arial Unicode MS;Ebrima;Nyala"
+  SCRIPT="ethi" // ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሗ መሙሚማሜም ፝፞፟፠፡።፣፤፥፦፧፨፩፪፫፬፭፮፯፰፱፲፳፴፵፶፷፸፹፺፻፼
+    FONT="Ebrima;Nyala"
   SCRIPT="tfng" // ⴰⴱⴲⴳⴴⴵⴶⴷⴸⴹⴺⴻⴼⴽⴾⴿⵀⵁⵂⵃⵄⵅⵆⵇⵈⵉⵊⵋⵌⵍⵎⵏⵐⵑⵒⵓⵔⵕⵖⵗⵘⵙⵚⵛⵜⵝⵞⵟⵠⵡ
-    FONT="Default;Arial Unicode MS;Ebrima"
-  SCRIPT="vai " // ꔀꔁꔂꔃꔄꔅꔆꔇꔈꔉꔊꔋꔌꔍꔎꔏꔐꔑꔒꔓꔔꔕꔖꔗꔘꔙꔚꔛꔜꔝꔞꔟꔠꔡꔢꔣꔤꔥꔦꔧꔨꔩꔪꔫ
-    FONT="Default;Arial Unicode MS;Ebrima"
+    FONT="Ebrima"
+  SCRIPT="vai " // ꔀꔁꔂꔃꔄꔅꔆꔇꔈꔉꔊꔋꔌꔍ ꔒꔓꔔꔕꔗꔘꔙꔚꔛꔜꔝꔞꔟꔠꔡꔢꔣꔤꔥꔦꔧꔨꔩꔪꔫ
+    FONT="Ebrima"
   SCRIPT="nko " // ߀߁߂߃߄߅߆߇߈߉ߊߋߌߍߎߏߐߑߒߓߔߕߖߗߘߙߚߛߜߝߞߟߠߡߢߣߤߥߦߧߨߩߪ߫߬߭߮߯߰߱
-    FONT="Default;Arial Unicode MS;Ebrima"
+    FONT="Ebrima"
 
   SCRIPT="cher" // ᎠᎡᎢᎣᎤᎥᎦᎧᎨᎩᎪᎫᎬᎭᎮᎯᎰᎱᎲᎳᎴᎵᎶᎷᎸᎹᎺᎻᎼᎽᎾᎿᏀᏁᏂᏃᏄᏅᏆᏇᏈᏉᏊᏋᏌᏍᏎᏏᏐᏑ
-    FONT="Default;Arial Unicode MS;Gadugi;Plantagenet Cherokee"
+    FONT="Gadugi;Plantagenet Cherokee"
   SCRIPT="cans" // ᢰᢱᢲᢳᢴᢵᢶᢻᢼᢽᢾᢿᣍᣎᣏᣐᣑᣒᣓᣔᣕᣖᣗᣛᣜᣝᣞᣟᣠᣡᘈᘉᘊᘋᘌᘍᘑᘒᘗᘘᘙᘚᘛᘜᘝᘞᘟᘤᘥᘦ
-    FONT="Default;Arial Unicode MS;Gadugi;Euphemia"
+    FONT="Gadugi;Euphemia"
 
   SCRIPT="tale" // ᥐᥑᥒᥓᥔᥕᥖᥗᥘᥙᥚᥛᥜᥝᥞᥟᥠᥡᥢᥣᥤᥥᥦᥧᥨᥩᥪᥫᥬᥭ
-    FONT="Default;Arial Unicode MS;Microsoft Tai Le"
+    FONT="Microsoft Tai Le|"
   SCRIPT="talu" // ᦀᦁᦂᦃᦄᦅᦆᦇᦈᦉᦊᦋᦌᦍᦎᦏᦐᦑᦒᦓᦔᦕᦖᦗᦘᦙᦚᦛᦜᦝᦞᦟᦠᦡᦢᦣᦤᦥᦦᦧᦨᦩᦪᦫ
-    FONT="Default;Arial Unicode MS;Microsoft New Tai Lue"
+    FONT="Microsoft New Tai Lue|"
   SCRIPT="phag" // ꡀꡁꡂꡃꡄꡅꡆꡇꡈꡉꡊꡋꡌꡍꡎꡏꡐꡑꡒꡓꡔꡕꡖꡗꡘꡙꡚꡛꡜꡝꡞꡟꡠꡡꡢ
-    FONT="Default;Arial Unicode MS;Microsoft PhagsPa"
+    FONT="Microsoft PhagsPa|"
   SCRIPT="tibt" // ༀ༁༂༃༄༅༆༇༈༉༊་༌།༎༏༐༑༒༓༔༕༖༗༘༙༚༛༜༝༞༟༠༡༢༣༤༥༦༧༨༩༪༫༬༭༮༯༰༱
-    FONT="Default;Arial Unicode MS;Microsoft Himalaya"
+    FONT="Microsoft Himalaya|"
   SCRIPT="thaa" // ހށނރބޅކއވމފދތލގޏސޑޒޓޔޕޖޗޘޙޚޛޜޝޞޟޠޡޢޣޤ
-    FONT="Default;Arial Unicode MS;MV Boli"
+    FONT="MV Boli"
   SCRIPT="mong" // ᠠᠡᠢᠣᠤᠥᠦᠧᠨᠩᠪᠫᠬᠭᠮᠯᠰᠱᠲᠳᠴᠵᠶᠷᠸᠹᠺᠻᠼᠽᠾᠿᡀᡁᡂᡃᡄᡅᡆᡇᡈᡉᡊᡋᡌᡍᡎᡏᡐᡑ ᡒᡓᡔᡕᡖᡗᡘᡙᡚᡛᡜᡝᡞᡟᡠᡡᡢᡣᡤᡥᡦᡧᡨᡩᡪᡫᡬᡭᡮᡯᡰᡱᡲᡳᡴᡵᡶᡷ
-    FONT="Default;Arial Unicode MS;Mongolian Baiti"
+    FONT="Mongolian Baiti|"
   SCRIPT="mymr" // ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဢဣဤဥဦဧဨဩဪါာိီုူေ
-    FONT="Default;Arial Unicode MS;Myanmar Text"
+    FONT="Myanmar Text|"
   SCRIPT="java" // ꦲ꦳ꦴꦵꦶꦷꦸꦹꦺꦻꦼꦽꦾꦿ꧀꧁꧂꧃꧄꧅꧆꧇꧈꧉꧊꧋꧌꧍ ꧐꧑꧒꧓꧔꧕꧖꧗꧘꧙
-    FONT="Default;Arial Unicode MS;Javanese Text"
+    FONT="Javanese Text|"
 
-  SCRIPT="?"    // Any Other (not listed): must be the last item!
-    FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
-         "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+  SCRIPT="?"    // Any other script (not listed): must be the last item!
+    FONT="Arial;Tahoma;Courier New;" +
+         "Segoe UI;Segoe UI Symbol|;Segoe UI Historic"
 
   // -------------------------------------------------------------------------------
   // Unicode for Windows is a project in progress...
@@ -301,7 +434,6 @@ non-existent fonts on your system.
   // SCRIPT="tglg" // ᜀᜁᜂᜃᜄᜅᜆᜇᜈᜉᜊᜋᜌᜎᜏᜐᜑᜒᜓ᜔
   //
   // -------------------------------------------------------------------------------
-  // ===============================================================================
 
 - Keywords, Switches, and Filter sets now allow a new highlighting
 attribute property:

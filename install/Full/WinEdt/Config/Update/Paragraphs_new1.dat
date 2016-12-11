@@ -1,0 +1,15 @@
+PARAGRAPH="	" // Tab (not a space!)
+  MODE_FILTER="*"
+  ALLOW_SOFT_WRAP=0
+  CASE_SENSITIVE=1
+  OFFSET=1
+  OFFSET_BY=0
+
+PARAGRAPH="" // WinEdt Bullet
+  MODE_FILTER="*"
+  ALLOW_SOFT_WRAP=0
+  CASE_SENSITIVE=1
+  OFFSET=1
+  OFFSET_BY=0
+
+// Hanging Indent for items...

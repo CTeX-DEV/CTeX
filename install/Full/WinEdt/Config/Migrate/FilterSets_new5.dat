@@ -1,0 +1,6 @@
+FILTER_SET="~Alpha_"
+  ENABLED=0
+  MODE_FILTER=""
+  SET=:~(Alpha+["_"])
+  EXTENDED=1
+  BEFORE=""

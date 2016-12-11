@@ -1,0 +1,1 @@
+  REQ_FILTER="<%f>%p\Options.ini?<%f>%p\Gather.ini?<%f>%p\Tree.ini"

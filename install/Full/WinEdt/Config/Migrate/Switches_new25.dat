@@ -1,0 +1,6 @@
+  START1_TRIGGER="\autoref"
+  START2_TRIGGER=""
+  STOP1_TRIGGER=""
+  STOP2_TRIGGER=""
+    TEXT_COLOR="swcRefArg"
+    DEFAULT_FONT=1

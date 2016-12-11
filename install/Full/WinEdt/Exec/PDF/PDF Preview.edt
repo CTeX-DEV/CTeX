@@ -20,7 +20,8 @@
   FindInString(`%$('PDF-View');`,!'Sumatra',1,2,1000,1);
   IfOK(!"Relax;",!"JMP(!'not_Sumatra')");
 
-  Run('%$("PDF-View"); -reuse-instance "%P\%N.pdf"');
+  Run('%$("PDF-View"); -reuse-instance "%P\%N.pdf" '+>
+      '-inverse-search "\"%B\WinEdt.exe\" \"[Open(|%%f|);SelPar(%%l,8);]\""');
   PopTagsandRegisters;
   Exit;
 

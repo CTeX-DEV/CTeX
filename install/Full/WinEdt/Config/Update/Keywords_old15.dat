@@ -1,0 +1,21 @@
+KEYWORD_GROUP="WinEdt MUI Events"
+  ENABLED=1
+  MODE_FILTER="ASCII:EDT"
+  BEFORE="EDT '"
+  AFTER="EDT '"
+  BOLN_NOT_OK=1
+  EOLN_NOT_OK=1
+  STRICT_PRIORITY=0
+  PRIORITY=8
+  CASE_SENSITIVE=1
+    TEXT_COLOR="RGB_2"
+    DEFAULT_FONT=1
+    BOLD=1
+LIST="END_LIST"
+on click
+on double click
+on right click
+on change
+END_LIST
+
+KEYWORD_GROUP="WinEdt Macros"

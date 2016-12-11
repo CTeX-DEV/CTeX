@@ -149,15 +149,6 @@ Exe("%b\Config\Local Startup.edt");
 
 :Profile_OK:: =======================================================
 
-  // reset TexFriend
-  SetRegStr("HKEY_CURRENT_USER","Software\VB and VBA Program Settings\TexFriend\Refreshed Packages","WinEdt","True");
-  SetRegStr("HKEY_CURRENT_USER","Software\VB and VBA Program Settings\TexFriend\Options","AlwaysOnTop","False");
-  SetRegStr("HKEY_CURRENT_USER","Software\VB and VBA Program Settings\TexFriend\Paths","WinEdt","%B");
-
-  // start TexFriend
-  Assign("StartTexFriend","%@('HKEY_CURRENT_USER','Software\VB and VBA Program Settings\TexFriend\Options','StartupByWinEdt');");
-  IfStr("%$('StartTexFriend')","False","=","","Run(""%b\Plugins\TexFriend\TexFriend.exe"")");
-
   SetOK(1);
   SetErrorFlag(0);
 

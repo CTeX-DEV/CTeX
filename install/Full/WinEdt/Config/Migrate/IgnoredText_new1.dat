@@ -1,0 +1,6 @@
+  ENVIRONMENT="^{?}"
+    START="^{"
+    STOP="}"
+    SCOPE=2
+  // No Spell Checking for Environment Names
+  ENVIRONMENT="\begin{?}"

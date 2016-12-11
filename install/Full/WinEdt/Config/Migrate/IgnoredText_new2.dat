@@ -1,0 +1,22 @@
+  ENVIRONMENT="\Declare?"
+    START="\Declare"
+    SCOPE=1
+  // Comments with high priority!
+  ENVIRONMENT="%%?"
+    START="%%"
+    SCOPE=2
+    PRIORITY=9
+    STRICT_PRIORITY=1
+    SPELL=0
+  ENVIRONMENT="%?"
+    START="%"
+    SCOPE=2
+    PRIORITY=9
+    STRICT_PRIORITY=1
+    SPELL=1
+  // But not \% !!!
+  ENVIRONMENT="\%"
+    START="\%"
+    SCOPE=0
+    SPELL=1
+  // Do Spell the following Environments

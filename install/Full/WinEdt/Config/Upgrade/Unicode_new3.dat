@@ -1,0 +1,12 @@
+SCRIPT="hani" // 丈三上下丌不与丏丐丑丒专且丕世丗丘丙 乤乥书乧乨乩乪乫乬乭乮乯买乱乲乳乴乵乶
+  FONT="Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;" +
+       "Microsoft JhengHei;Microsoft YaHei"
+SCRIPT="kana" // いろはにほへと ちりぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす ㋐㋑㋒
+  FONT="Yu Gothic UI;Microsoft JhengHei UI;Microsoft YaHei UI;" +
+       "Microsoft JhengHei;Microsoft YaHei"
+SCRIPT="bopo" // ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕ  ㆠㆡㆢㆣㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭ
+  FONT="Microsoft YaHei UI;Microsoft JhengHei UI;" +
+       "Microsoft YaHei;Microsoft JhengHei"
+SCRIPT="yi  " // ꀀꀁꀂꀃꀄꀅꀆꀇꀈꀉꀊꀋꀌꀍꀎꀏꀐꀑꀒꀓꀔꀕꀖꀗꀘ ꒐꒑꒒꒓꒔꒕꒖꒗꒘꒙꒚꒛꒜꒝
+  FONT="Microsoft Yi Baiti;Microsoft JhengHei UI;Microsoft YaHei UI;" +
+       "Microsoft JhengHei;Microsoft YaHei"

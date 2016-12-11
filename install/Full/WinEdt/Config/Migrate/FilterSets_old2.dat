@@ -1,0 +1,5 @@
+FILTER_SET="FullSet"
+  ENABLED=0
+  MODE_FILTER=""
+  SET="~[]"
+  BEFORE=""

@@ -1,0 +1,24 @@
+STRING="\end{{"
+  ENABLED=1
+  MODE_FILTER="TeX|AUX"
+  MACRO="[Exe('%b\Macros\Active Strings\CompleteEnv.edt');]"
+
+STRING="\end{}"
+  ENABLED=1
+  MODE_FILTER="TeX|AUX"
+  MACRO="[Exe('%b\Macros\Active Strings\CompleteEnv.edt');]"
+
+STRING="\end{?}"
+  ENABLED=0
+  MODE_FILTER="TeX"
+  MACRO="[MatchDelimiter(1,1,1);]"
+  DBL_CLICK_ENABLED=1
+  DBL_CLICK_MODE_FILTER="TeX"
+  DBL_CLICK_MACRO="[MatchDelimiter(1,1,1);]"
+
+STRING="\begin{}"
+  ENABLED=1
+  MODE_FILTER="TeX|AUX"
+  MACRO="[CharLeft;AutoPopup;]"
+
+STRING="\begin{?}}"

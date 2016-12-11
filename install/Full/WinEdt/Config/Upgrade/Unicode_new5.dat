@@ -1,0 +1,9 @@
+  CCP_VALUE=65000
+
+// Treat it as binary data (no cope page translations)
+CCP="Binary"
+  CCP_ENABLED=1
+  CCP_MODE_FILTER="Binary"
+  CCP_VALUE=9
+
+// If the mode ends with submode :CP<num> then the indicated code page

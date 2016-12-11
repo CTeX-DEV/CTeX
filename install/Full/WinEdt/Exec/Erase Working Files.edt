@@ -39,7 +39,6 @@
     AddFileItem(1,"TMP Files","*.tmp","");
 
     AddFileItem(1,"TEMP Files","_temp.*","TeX");
-	AddFileItem(1,"CTEXTEMP Files","ctextemp_*.*","");
 
     EraseWorkingFiles("%P;%O","Erase Output Files",0,0);
 

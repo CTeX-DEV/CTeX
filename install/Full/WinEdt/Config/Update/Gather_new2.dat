@@ -1,0 +1,4 @@
+    ALT="\Glsentryname{?}"
+    ALT="\glossentryname{?}"
+    ALT="\Glossentryname{?}"
+    ALT="\glsentrytext{?}"

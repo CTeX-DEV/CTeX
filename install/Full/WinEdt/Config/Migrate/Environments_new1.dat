@@ -1,0 +1,24 @@
+  START="<pre>"
+  STOP="</pre>"
+  FORMAT=-1
+  LINE_WRAP=-1
+  AUTO_INDENT=0
+  FREE_CARET=0
+  INPUT_TABS=0
+
+ENVIRONMENT="<pre ...</pre>"
+  MODE_FILTER="HTML"
+  ALLOW_SOFT_WRAP=1
+  SCOPE=1
+  PRIORITY=9
+  STRICT_PRIORITY=1
+  CASE_SENSITIVE=0
+  START="<pre "
+  STOP="</pre>"
+  FORMAT=-1
+  LINE_WRAP=-1
+  AUTO_INDENT=0
+  FREE_CARET=0
+  INPUT_TABS=0
+
+ENVIRONMENT="<blockquote>...</blockquote>"

@@ -1,0 +1,33 @@
+  END="HTML>"
+  ITEM="-"
+  ITEM="MetaFont"
+    CAPTION="Meta&Font"
+    IMAGE="MetaFont"
+    SAVE_INPUT=1
+    MACRO="Exe('%b\Exec\TeX\MetaFont.edt');"
+    REQ_FILTER=:"%!M=MetaFont"
+  ITEM="MetaPost"
+    CAPTION="&MetaPost"
+    IMAGE="MetaPost"
+    SAVE_INPUT=1
+    MACRO="Exe('%b\Exec\TeX\MetaPost.edt');"
+    SHORTCUT="24653::Shift+Ctrl+M"
+    REQ_FILTER=:"%!M=MetaPost"|"%!M=MetaPost:AUX"
+  ITEM="-"
+  SUBMENU="Documented_LaTeX>"
+      CAPTION="Documented LaTeX"
+      IMAGE="DTX"
+      REQ_DOCUMENT=1
+    ITEM="Build_Index"
+      CAPTION="Build &Index"
+      IMAGE="Index"
+      MACRO="Exe('%b\Exec\TeX\DTXIndex.edt');"
+      REQ_FILTER=:"%!M=TeX:INS"?"%!M=TeX:DTX"*%O\%N.idx
+    ITEM="Build_Change_History"
+      CAPTION="Build &Change History"
+      IMAGE="Glossary"
+      MACRO="Exe('%b\Exec\TeX\DTXGlossary.edt');"
+      REQ_FILTER=:"%!M=TeX:INS"?"%!M=TeX:DTX"*%O\%N.glo
+  END="Documented_LaTeX>"
+  ITEM="-"
+  SUBMENU="MiKTeX>"

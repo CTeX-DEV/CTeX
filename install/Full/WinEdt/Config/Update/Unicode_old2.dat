@@ -1,0 +1,6 @@
+// Note that RegEx \u matches any unicode character that is not listed above.
+// This can come handy if you want to ensure that your document(s) don't contain
+// any unicode (possibly invisible) characters that could cause problems with a
+// compiler such as TeX but are very hard to spot in the editor.
+
+// ===============================================================================

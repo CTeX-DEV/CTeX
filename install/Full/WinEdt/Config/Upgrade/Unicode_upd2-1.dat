@@ -1,0 +1,20 @@
+// -------------------------------------------------------------------------------
+
+// Fallback fonts for old Uniscribe library that does not support
+// OpenType functions and unicode script tags (eg. Windows XP) ...
+// This must be the first fallback script item!
+SCRIPT="*"
+  FONT="Arial;Tahoma;Courier New;" +
+       "Segoe UI;Segoe UI Symbol|;Segoe UI Historic;" +
+       "Malgun Gothic;맑은 고딕;Microsoft Yi Baiti|;" +
+       "Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;" +
+       "Microsoft JhengHei;Microsoft YaHei;Yu Gothic;MingLiU;SimSun;宋体;" +
+       "Sylfaen;Estrangelo Edessa;Nirmala UI;Aparajita;Kokila;Mangal;" +
+       "Vrinda;Raavi;Shruti;Kalinga;Latha;Vijaya;Gautami;Vani;Tunga;Kartika;" +
+       "Iskoola Pota;Leelawadee UI;Khmer UI;Lao UI;" +
+       "Ebrima;Nyala;Gadugi;Plantagenet Cherokee;" +
+       "Microsoft Tai Le|;Microsoft New Tai Lue|" +
+       "Microsoft PhagsPa|;Microsoft Himalaya|;" +
+       "MV Boli;Mongolian Baiti|;Myanmar Text|;Javanese Text|"
+
+SCRIPT=""     // Non-script-specific characters and symbols (eg. numbers, etc...)

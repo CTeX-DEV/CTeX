@@ -1,0 +1,5 @@
+    ALT="\section*{?}"
+    ALT="\addsec{?}"
+    ALT="\addsec[?]"
+    ALT="\addsec*{?}"
+    MODE_FILTER="TeX"

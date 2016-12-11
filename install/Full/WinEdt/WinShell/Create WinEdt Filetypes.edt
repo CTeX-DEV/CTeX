@@ -1587,7 +1587,8 @@ SetRegKey("%!1","%!0Applications\WinEdt.exe\shell\open\command",>
   "%$('WinEdt-Exe'); %!7""%%1""");
 
 // Required for explorer's "Search In Files" for TeX files on XP
-Exe('%B\WinShell\XPSearch PersistentHandler.edt');
+GetWinVersion(0,1);
+IfStr('%!0','6','<',!"Exe('%B\WinShell\XPSearch PersistentHandler.edt');");
 
 // Force the Explorer to Refresh the associated Icons
 // Only for Power Users (Win2K/XP)!!!

@@ -1,0 +1,5 @@
+SCHEME="Default"
+  FILE="ConfigEx\Print Schemes\PrintDefault.ini"
+
+SCHEME="Alternative"
+  FILE="ConfigEx\Print Schemes\PrintAlternative.ini"

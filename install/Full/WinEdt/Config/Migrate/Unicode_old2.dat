@@ -1,0 +1,9 @@
+// Remove code pages that are no interest to you
+// You can also reorder available code pages...
+LIST="END_LIST"
+-1    Auto Detect
+0     Default ANSI code page
+1     Default OEM  code page
+2     Default MAC  code page
+3     Current thread's ANSI code page
+42    SYMBOL translations

@@ -1,0 +1,5 @@
+FILTER_SET="~Alpha."
+  ENABLED=0
+  MODE_FILTER=""
+  SET=:~(Alpha+["."])
+  BEFORE=""

@@ -236,24 +236,6 @@ panel displayed at the bottom of your screen.%\>
   SetConsoleText('%!3',1,1);
 
 :no_LOG:: ===========================================================
-
-  IfStr("%!9","LaTeX",    "=",!"JMP(!'gbk2uni');");
-  IfStr("%!9","PDFLaTeX", "=",!"JMP(!'gbk2uni');");
-  IfStr("%!9","TeXify",   "=",!"JMP(!'gbk2uni');");
-  IfStr("%!9","PDFTeXify","=",!"JMP(!'gbk2uni');");
-  JMP(!'gbk2uni-Done');
-
-:gbk2uni:: ================================================
-
-  IfFileExists("%!6\%N.out","",!"JMP(!'gbk2uni-Done');");
-  IfStr("%$('%!9-WinEdt_Console');",'1','=',>
-    !|RunConsole('gbk2uni.exe "%N"','%!6','%!9 ...',1,1);|,>
-    !|WinExe('','gbk2uni.exe "%N"','%!6','%!9 ...', %!0, %!2,>
-             '', '%b\_Out.log', '%b\_Err.log',%!1);|);
-
-:gbk2uni-Done:: ================================================
-
-
   IfFileExists("%b\_Err.log",!"DeleteFile('%b\_Err.log');");
   IfFileExists("%b\_Out.log",!"DeleteFile('%b\_Out.log');");
 

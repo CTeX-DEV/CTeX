@@ -1,0 +1,11 @@
+      REQ_FILE=1
+    ITEM="-"
+    ITEM="PDFTeXify"
+      CAPTION="PDFTe&Xify"
+      IMAGE="TeXPDFTeXify"
+      SAVE_INPUT=1
+      MACRO="Exe('%b\Exec\TeX\PDFTeXify.edt');"
+      SHORTCUT="24656::Shift+Ctrl+P"
+      REQ_FILTER=:"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+    ITEM="-"
+    ITEM="PDFLaTeX"

@@ -1,0 +1,14 @@
+  START="\section*{"
+  STOP="\end{document}"
+  STOP="\part{"
+  STOP="\part["
+  STOP="\part*{"
+  STOP="\chapter{"
+  STOP="\chapter["
+  STOP="\chapter*{"
+  STOP="\prefacesection{" // Non-Standard
+  STOP="\nonumchapter{" // Non-Standard
+  STOP="\section{"
+  STOP="\section["
+  STOP="\section*{"
+END="Section-TeX"

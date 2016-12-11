@@ -67,13 +67,6 @@ It is recommended that you close all files (or project) to make it faster.%\%\>
     IfFileExists("%b\ConfigEx\Switches.ini",!'LoadConfig("%b\ConfigEx\Switches.ini");');
     IfFileExists("%b\ConfigEx\Keywords.ini",!'LoadConfig("%b\ConfigEx\Keywords.ini");');
     IfFileExists("%b\ConfigEx\Columns.ini",!'LoadConfig("%b\ConfigEx\Columns.ini");');
-    IfFileExists("%b\ConfigEx\PrintSchemes.ini",!'LoadConfig("%b\ConfigEx\PrintSchemes.ini");');
-    IfFileExists("%b\ConfigEx\PrintDefault.ini",!'LoadConfig("%b\ConfigEx\PrintDefault.ini");');
-    IfFileExists("%b\ConfigEx\PrintAlternative.ini",!'LoadConfig("%b\ConfigEx\PrintAlternative.ini");');
-    IfFileExists("%b\ConfigEx\PrintCustom.ini",!'LoadConfig("%b\ConfigEx\PrintCustom.ini");');
-    IfFileExists("%b\ConfigEx\PrintFancy.ini",!'LoadConfig("%b\ConfigEx\PrintFancy.ini");');
-    IfFileExists("%b\ConfigEx\PrintPlain.ini",!'LoadConfig("%b\ConfigEx\PrintPlain.ini");');
-    IfFileExists("%b\ConfigEx\PrintDefault.ini",!'LoadConfig("%b\ConfigEx\PrintDefault.ini");');
     IfFileExists("%b\ConfigEx\Backup.ini",!'LoadConfig("%b\ConfigEx\Backup.ini");');
     IfFileExists("%b\ConfigEx\AutoSave.ini",!'LoadConfig("%b\ConfigEx\AutoSave.ini");');
     IfFileExists("%b\ConfigEx\Folders.ini",!'LoadConfig("%b\ConfigEx\Folders.ini");');
@@ -85,6 +78,8 @@ It is recommended that you close all files (or project) to make it faster.%\%\>
     IfFileExists("%b\ConfigEx\Options.ini",!'LoadConfig("%b\ConfigEx\Options.ini");');
     IfFileExists("%b\ConfigEx\Events.ini",!'LoadConfig("%b\ConfigEx\Events.ini");');
     IfFileExists("%b\ConfigEx\Config.ini",!'LoadConfig("%b\ConfigEx\Config.ini");');
+    IfFileExists("%b\ConfigEx\PrintSchemes.ini",!'LoadConfig("%b\ConfigEx\PrintSchemes.ini");');
+    IfFileExists("%b\ConfigEx\Print Schemes\PrintDefault.ini",!'LoadConfig("%b\ConfigEx\Print Schemes\PrintDefault.ini");');
     IfFileExists("%b\ConfigEx\UserPreferences.ini",!'LoadConfig("%b\ConfigEx\UserPreferences.ini");');
     IfFileExists("%b\ConfigEx\Private.ini",!'LoadConfig("%b\ConfigEx\Private.ini");');
     ProcessMessages;

@@ -1,0 +1,10 @@
+  CONFIG_FILTER="Default;MiKTeX;TeX Live"
+  ITEM="PDFTeXify"
+    CAPTION="PDFTe&Xify"
+    IMAGE="TeXPDFTeXify"
+    SAVE_INPUT=1
+    MACRO="Exe('%b\Exec\TeX\PDFTeXify.edt');"
+    SHORTCUT="24656::Shift+Ctrl+P"
+    REQ_FILTER=:"%!M=TeX"|"%!M=TeX:STY"|"%!M=TeX:AUX"
+  ITEM="TeXify"
+    CAPTION="&TeXify"

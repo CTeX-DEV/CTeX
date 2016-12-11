@@ -1,0 +1,9 @@
+  START="<pre>"
+  STOP="</pre>"
+  FORMAT=-1
+  LINE_WRAP=-1
+  AUTO_INDENT=0
+  FREE_CARET=0
+  INPUT_TABS=0
+
+ENVIRONMENT="<blockquote>...</blockquote>"

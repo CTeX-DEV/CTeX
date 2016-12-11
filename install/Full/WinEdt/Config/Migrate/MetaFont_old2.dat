@@ -1,0 +1,5 @@
+  IfStr("%$('%!9-C-style-errors');","1",!"=",!"LetReg(3,'%!3 --file-line-error');");
+  // Aux Directory?
+  IfStr("%$('TeX System');","MiKTeX","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(3,'%!3 --include-directory="%P"');`);|);
+  // Build the Command Line ...

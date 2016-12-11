@@ -1,0 +1,5 @@
+  BEFORE="</html"
+  AFTER=">"
+  BOLN_NOT_OK=1
+  EOLN_NOT_OK=1
+  STRICT_PRIORITY=0

@@ -1,0 +1,97 @@
+// Extra Tasks
+
+  PushTagsandRegisters;
+
+  IfFileExists("%b\Config\Startup.edt",>
+    !`ReadFile("%b\Config\Startup.edt",0);>
+      ReadFile("%B\Config\Migrate\Startup_old1.dat",4);>
+      ReadFile("%B\Config\Migrate\Startup_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Config\Startup.edt","%!0");`);
+
+  IfFileExists("%b\Exec\ExeCompiler.edt",>
+    !`ReadFile("%b\Exec\ExeCompiler.edt",0);>
+      ReadFile("%B\Config\Migrate\ExeCompiler_old1.dat",4);>
+      ReadFile("%B\Config\Migrate\ExeCompiler_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      ReadFile("%B\Config\Migrate\ExeCompiler_old2.dat",4);>
+      ReadFile("%B\Config\Migrate\ExeCompiler_new2.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      ReadFile("%B\Config\Migrate\ExeCompiler_old3.dat",4);>
+      ReadFile("%B\Config\Migrate\ExeCompiler_new3.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Exec\ExeCompiler.edt","%!0");`);
+
+  IfFileExists("%b\Exec\TeX\MetaFont.edt",>
+    !`ReadFile("%b\Exec\TeX\MetaFont.edt",0);>
+      ReadFile("%B\Config\Migrate\MetaFont_old1.dat",4);>
+      ReadFile("%B\Config\Migrate\MetaFont_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      ReadFile("%B\Config\Migrate\MetaFont_old2.dat",4);>
+      ReadFile("%B\Config\Migrate\MetaFont_new2.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Exec\TeX\MetaFont.edt","%!0");`);
+
+  IfFileExists("%b\Exec\TeX\PDFTeXify.edt",>
+    !`ReadFile("%b\Exec\TeX\PDFTeXify.edt",0);>
+      ReadFile("%B\Config\Migrate\PDFTeXify_old1.dat",4);>
+      ReadFile("%B\Config\Migrate\PDFTeXify_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      ReadFile("%B\Config\Migrate\PDFTeXify_old2.dat",4);>
+      ReadFile("%B\Config\Migrate\PDFTeXify_new2.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Exec\TeX\PDFTeXify.edt","%!0");`);
+
+  IfFileExists("%b\Exec\TeX\TeXify.edt",>
+    !`ReadFile("%b\Exec\TeX\TeXify.edt",0);>
+      ReadFile("%B\Config\Migrate\TeXify_old1.dat",4);>
+      ReadFile("%B\Config\Migrate\TeXify_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      ReadFile("%B\Config\Migrate\TeXify_old2.dat",4);>
+      ReadFile("%B\Config\Migrate\TeXify_new2.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Exec\TeX\TeXify.edt","%!0");`);
+
+  JMP(!"Check_TeX_Menu");
+
+:Default_TeX_Menu:: =================================================
+
+  ReadFile("%B\ConfigEx\MainMenu.ini",1);
+  FindInString("%!1",'\(<MENU="TeX_Menu">**END="TeX_Menu">\)',-1,-1,11);
+  IfOK(!`SubstituteInString("%!0",'<MENU="TeX_Menu">**END="TeX_Menu">',"%#0",10011);`);
+  WriteFile("%b\ConfigEx\MainMenu.ini","%!0");
+  Prompt("Your TeX menu in MainMenu.ini cannot be imported!%\>
+Please add your old customizations manually.",3,1);
+
+  PopTagsandRegisters;
+  Exit;
+
+:Check_TeX_Menu:: ===================================================
+
+  IfFileExists("%b\ConfigEx\MainMenu.ini",>
+    !`ReadFile("%b\ConfigEx\MainMenu.ini",0);>
+      ReadFile("%B\Config\Migrate\TeXMenu_old1.dat",4);>
+      ReadFile("%B\Config\Migrate\TeXMenu_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      IfOK(!"Relax;",!'JMP(!"Default_TeX_Menu");');>
+      ReadFile("%B\Config\Migrate\TeXMenu_old2.dat",4);>
+      ReadFile("%B\Config\Migrate\TeXMenu_new2.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      IfOK(!"Relax;",!'JMP(!"Default_TeX_Menu");');>
+      ReadFile("%B\Config\Migrate\TeXMenu_old3.dat",4);>
+      ReadFile("%B\Config\Migrate\TeXMenu_new3.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      IfOK(!"Relax;",!'JMP(!"Default_TeX_Menu");');>
+      ReadFile("%B\Config\Migrate\TeXMenu_old4.dat",4);>
+      ReadFile("%B\Config\Migrate\TeXMenu_new4.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      IfOK(!"Relax;",!'JMP(!"Default_TeX_Menu");');>
+      ReadFile("%B\Config\Migrate\TeXMenu_old5.dat",4);>
+      ReadFile("%B\Config\Migrate\TeXMenu_new5.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      IfOK(!"Relax;",!'JMP(!"Default_TeX_Menu");');>
+      WriteFile("%b\ConfigEx\MainMenu.ini","%!0");`);
+
+  PopTagsandRegisters;
+
+End;

@@ -1,0 +1,2 @@
+  IfOK(!"Relax;",!"JMP(!'not_TeX');");
+  IfStr("%O","%P","=",!"JMP(!'Post_Done');");

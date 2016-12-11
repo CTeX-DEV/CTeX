@@ -1,0 +1,5 @@
+// Create a personal profile from the Startup Macro
+
+  Exe('%B\WinShell\Profiles\Create User Profile.edt');
+
+End;

@@ -1,0 +1,34 @@
+// Extra Tasks
+
+  PushTagsandRegisters;
+
+  IfFileExists("%b\Exec\ExeCompilerPre.edt",>
+    !`ReadFile("%b\Exec\ExeCompilerPre.edt",0);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPre_old1.dat",4);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPre_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPre_old2.dat",4);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPre_new2.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Exec\ExeCompilerPre.edt","%!0");`);
+
+  IfFileExists("%b\Exec\ExeCompilerPost.edt",>
+    !`ReadFile("%b\Exec\ExeCompilerPost.edt",0);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPost_old1.dat",4);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPost_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPost_old2.dat",4);>
+      ReadFile("%B\Config\Upgrade\ExeCompilerPost_new2.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Exec\ExeCompilerPost.edt","%!0");`);
+
+  IfFileExists("%b\Exec\TeX\BibTeXify.edt",>
+    !`ReadFile("%b\Exec\TeX\BibTeXify.edt",0);>
+      ReadFile("%B\Config\Upgrade\BibTeXify_old1.dat",4);>
+      ReadFile("%B\Config\Upgrade\BibTeXify_new1.dat",5);>
+      SubstituteInString("%!0","%!4","%!5",10);>
+      WriteFile("%b\Exec\TeX\BibTeXify.edt","%!0");`);
+
+  PopTagsandRegisters;
+
+End;

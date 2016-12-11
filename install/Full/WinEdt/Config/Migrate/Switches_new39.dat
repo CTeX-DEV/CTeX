@@ -1,0 +1,6 @@
+  START1_TRIGGER="\subsection*"
+  START2_TRIGGER=""
+  STOP1_TRIGGER=""
+  STOP2_TRIGGER=""
+    TEXT_COLOR="swcSubsection"
+    DEFAULT_FONT=1

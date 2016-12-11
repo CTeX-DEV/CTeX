@@ -9,7 +9,7 @@ Requires(20010724); // Requires this build of WinEdt to work properly
   // Enter ASCII Filetypes of your choice
   LetReg(3,!'.prj;.edt;.txt;.tex;.ltx;.aux;.bbl;.bib;.blg;.bst;.clo;>
              .cls;.def;.dtx;.drv;.ins;.fdd;.idx;.ilg;.ind;.ist;.glo;>
-             .glg;.gls;.nlo;.nlg:.nls;.lof;.log;.lot;.sty;.toc;.tfm;>
+             .glg;.gls;.nlo;.nlg;.nls;.lof;.log;.lot;.sty;.toc;.tfm;>
              .pk;.vf;.fd;.mf;.mp;.mpx;.synctex;.nsi;.nsh;>
              .dvi;.pas;.inc;.dat;.ini;.dic;.text;');
 

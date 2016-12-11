@@ -1,0 +1,6 @@
+  START1_TRIGGER="\input"
+  START2_TRIGGER=""
+  STOP1_TRIGGER=""
+  STOP2_TRIGGER=""
+    TEXT_COLOR="swcInputArg"
+    DEFAULT_FONT=1

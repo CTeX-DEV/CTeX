@@ -1,0 +1,5 @@
+  IfStr("%$('%!9-Wait');",             "1","=",!|LetRegNum(0,"%!0+00100");|);
+  IfStr("%$('%!9-Hidden_Window');",    "1","=",!|LetRegNum(0,"%!0+01000");|);
+  IfStr("%$('%!9-Background_Window');","1","=",!|LetRegNum(0,"%!0+10000");|);
+  IfStr("%$('%!9-STD_IO');",           "1","=",!|LetRegNum(0,"%!0+00010");|);
+  IfStr("%$('%!9-Pause');",            "1","=",!|LetRegNum(1,"%!1+111");|);

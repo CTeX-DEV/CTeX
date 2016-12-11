@@ -1,0 +1,12 @@
+  ENVIRONMENT="\begin{array}{?"
+    START="\begin{array}{"
+    SCOPE=1
+//  ENVIRONMENT="\begin{?}"
+//    START="\begin{"
+//    STOP="}"
+//    SCOPE=1
+//  ENVIRONMENT="\end{?}"
+//    START="\end{"
+//    STOP="}"
+//    SCOPE=1
+  ENVIRONMENT="\bibliography?"

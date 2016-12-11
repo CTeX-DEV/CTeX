@@ -26,7 +26,7 @@ MUIReset('Include Graphics');
 
 // Main Form Size and Position
 MUISet('','width','400');
-MUISet('','height','320');
+MUISet('','height','344');
 MUISet('','position','1'); // Main Form Center
 
 MUIGet('','client width',9); // Get the form size
@@ -35,9 +35,9 @@ Assign(`g_width`, "%!9");
 Assign(`g_height`, "%!8");
 
 // Main panel and OK,Cancel buttons
-MUIAdd(0,0,0,"%$(`g_btmpnl_height`);", 'pnl_bottom','TPanel');
+MUIAdd(0,0,0,"%$(`g_btmpnl_height`);+1", 'pnl_bottom','TPanel');
     MUISet('pnl_bottom','aligned', 'alBottom');
-    MUIAdd(0,0,"2*%$(`g_button_w`);+2*%$(`g_margin`);",0, 'pnl_modal','TPanel','pnl_bottom');
+    MUIAdd(0,0,"2*%$(`g_button_w`);+3*%$(`g_margin`);",0, 'pnl_modal','TPanel','pnl_bottom');
     MUISet('pnl_modal','aligned', 'alRight');
       MUIAdd(0,"%$(`g_margin`);",0,0, 'btn_ok','TButton','pnl_modal','&OK');
         MUISet('btn_ok','default', '1');
@@ -52,11 +52,11 @@ MUIAdd(0,0,0,"%$(`g_btmpnl_height`);", 'pnl_bottom','TPanel');
 MUIAdd("%$(`g_margin`);","%$(`g_margin`);","%$(`g_width`);-2*%$(`g_margin`);","%$(`g_height`);-%$(`g_margin`);-%$(`g_btmpnl_height`);",'panel','TPanel');
     MUIGet('panel', 'width', 1);
     Assign(`pnl_wd`, '%!1');
-    MUIAdd("%$(`g_margin`);","%$(`g_margin`);+1",0,0,'lbl_file','TLabel','panel','File:');
+    MUIAdd("%$(`g_margin`);","%$(`g_margin`);+2",0,0,'lbl_file','TLabel','panel','File:');
         MUIGet('lbl_file', 'width', 7);
-    MUIAdd("%!7+2*%$(`g_margin`);","%$(`g_margin`);-%$(`g_cor`);+1","%$(`pnl_wd`);-4*%$(`g_margin`);-%!7-%$(`g_mbutton_w`);",0, 'edt_file','TEdit','panel');
+    MUIAdd("%!7+2*%$(`g_margin`);","%$(`g_margin`);-%$(`g_cor`);+2","%$(`pnl_wd`);-4*%$(`g_margin`);-%!7-%$(`g_mbutton_w`);",0, 'edt_file','TEdit','panel');
         MUIGet('edt_file', 'width', 6);
-    MUIAdd("%!7+%!6+3*%$(`g_margin`);","%$(`g_margin`);-2*%$(`g_cor`);",30,28, 'btn_browse','TSpeedButton','panel');
+    MUIAdd("%!7+%!6+3*%$(`g_margin`);","%$(`g_margin`);-2*%$(`g_cor`);+2",30,28, 'btn_browse','TSpeedButton','panel');
         MUISet('btn_browse','glyph','Browse');
         MUISet('btn_browse','on click',!'Call("evt_browse");');
         MUIGet('edt_file', 'top', 9);
@@ -66,7 +66,7 @@ MUIAdd("%$(`g_margin`);","%$(`g_margin`);","%$(`g_width`);-2*%$(`g_margin`);","%
         MUIGet('cb_aspect', 'top', 9);
         MUIGet('cb_aspect', 'height', 8);
 
-    MUIAdd("%$(`g_margin`);","%!9+%!8+%$(`g_margin`);","%$(`pnl_wd`);/2-%$(`g_margin`);",110, 'grp_env','TGroupBox','panel','Environment');
+    MUIAdd("%$(`g_margin`);","%!9+%!8+%$(`g_margin`);","%$(`pnl_wd`);/2-%$(`g_margin`);",120, 'grp_env','TGroupBox','panel','Environment');
     MUIAdd("%$(`g_margin`);","3*%$(`g_margin`);",150,0, 'cb_figenv','TCheckBox','grp_env','Use Figure Environment');
         MUISet('cb_figenv', 'checked', '1');
         MUISet('cb_figenv', 'on click', !'Call("evt_figure");');
@@ -88,7 +88,7 @@ MUIAdd("%$(`g_margin`);","%$(`g_margin`);","%$(`g_width`);-2*%$(`g_margin`);","%
         MUIGet('grp_env', 'top', 7);
         MUIGet('grp_env', 'height', 6);
 
-    MUIAdd("%!9+%!8+%$(`g_margin`);","%!7","%$(`pnl_wd`);/2-2*%$(`g_margin`);",110, 'grp_size','TGroupBox','panel','Size');
+    MUIAdd("%!9+%!8+%$(`g_margin`);","%!7","%$(`pnl_wd`);/2-2*%$(`g_margin`);",120, 'grp_size','TGroupBox','panel','Size');
         MUIAdd("%$(`g_margin`);","3*%$(`g_margin`);",0,0,'lbl_size','TLabel','grp_size','Size:');
         MUIGet('lbl_size', 'width', 7);
         MUIGet('lbl_size', 'top', 9);

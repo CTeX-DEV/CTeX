@@ -1,0 +1,3 @@
+  CONFIG_FILTER="Default;MiKTeX;TeX Live"
+  ITEM="TeXify"
+    CAPTION="Te&Xify"

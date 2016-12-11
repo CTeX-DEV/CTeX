@@ -1,0 +1,10 @@
+  ENVIRONMENT="\loadglsentries?"
+    START="\loadglsentries"
+    SCOPE=1
+  ENVIRONMENT="\document?"
+    START="\document"
+    SCOPE=1
+  ENVIRONMENT="\use?"
+    START="\use"
+    SCOPE=1
+  ENVIRONMENT="\input?"

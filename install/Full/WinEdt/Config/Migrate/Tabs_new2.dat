@@ -1,0 +1,6 @@
+TAB_EXPAND=0
+
+// Use Custom Draw to distinguish Tabs from Spaces
+TAB_DRAW=0
+
+// Do not replace Tabs with Spaces if they are already there

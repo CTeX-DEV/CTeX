@@ -20,7 +20,7 @@ PushTagsandRegisters;
   MUIReset('psbook(let)...');
   // Main Form Size and Position
   MUISet('','width','460');
-  MUISet('','height','398');
+  MUISet('','height','388');
   MUISet('','position','1'); // Main Form Center
 //
   MUIGet('','client width',9); // Get the form size
@@ -28,7 +28,7 @@ PushTagsandRegisters;
 //
 //  // Options are in the Page Control ----------------------------------
 //
-  MUIAdd(8,8,%!9-16,%!8-8-40,'PageControl','TPageControl');
+  MUIAdd(8,8,%!9-16,%!8-8-41,'PageControl','TPageControl');
 //
 //  // OK/Cancel (aligned -> independent of the dialog size) ------------
 //

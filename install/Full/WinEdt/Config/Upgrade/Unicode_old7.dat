@@ -1,0 +1,2 @@
+JUSTIFY_STRETCH_LIMIT=50    // At most 50% stretching is allowed
+JUSTIFY_SHRINK_LIMIT=25     // At most 25% shrinking is allowed

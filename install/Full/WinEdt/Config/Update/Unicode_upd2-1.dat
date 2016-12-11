@@ -1,0 +1,226 @@
+// RegEx \u matches any unicode character (>#FF) that is not listed above.
+// This can come handy if you want to ensure that your document(s) don't contain
+// any unicode (possibly invisible) characters that could cause problems with a
+// compiler such as TeX but are very hard to spot in the editor.
+
+// ===============================================================================
+// UNISCRIBE
+// =========
+// Required for bidirectional text and complex languages
+// Disable this option if you encounter problems and you don't need
+// complex language processing functionality!
+UNISCRIBE_ENABLED=1
+UNISCRIBE_MODE_FILTER="*"
+
+// The rest of the options work only when Uniscribe text processing is enabled!
+
+// Highlighting may affect character widths and placement if
+// FONT is a part of highlighting attributes or when
+// font style (such a bold) affects character widths!
+// This option affects the wrapping algorithm only:
+// text is still properly displayed without enabling it!
+FONT_MIXING_ENABLED=1
+FONT_MIXING_MODE_FILTER="HTML|XWE"
+
+// Justify paragraphs to the specified right margin by stretching lines
+// as required to fill the available space between left and right margin...
+// NOTE: In large documents this can become slow in long paragraphs!
+JUSTIFY_ENABLED=1
+JUSTIFY_MODE_FILTER="HTML|XWE"
+JUSTIFY_SOFT_ONLY=1         // Only for Softly wrapped paragraphs
+JUSTIFY_STRETCH_LIMIT=50    // At most 50% stretching is allowed
+JUSTIFY_SHRINK_LIMIT=25     // At most 25% shrinking is allowed
+
+// Calculating the exact line widths in order to initialize
+// horizontal scroll bar can be expensive in complex languages!
+// A faster version can be enabled for modes that use fixed width fonts
+// without bells and whistles!
+// This can sometimes result in an unwanted horizontal scroll bar
+// but it can significantly improve the performance in large files!
+FAST_WIDTH_ENABLED=1
+FAST_WIDTH_MODE_FILTER="DATA"
+// calculate exact widths within specified range from the current line
+FAST_WIDTH_LINE_LIMIT=1111  // Not less than 9!
+
+// Up to Hebrew letters the sum of character widths could be used to
+// calculate left-to-right glyph positions in a line.
+// This is much faster than using Uniscribe!
+// Reduce the limit if you need fallback fonts below this range...
+FAST_FONT_CACHE=1425 // The last character code for fast font cache
+
+// When mixing fonts or using fallback fonts vertical offset may have
+// to applied to secondary fonts in order to use a single font base line.
+// In some cases this may require extra line spacing (above or below).
+// If this property causes certain fonts to be clipped disable it and/or
+// increase line spacing (Thai text could be problematic with some fonts)...
+ADJUST_BASE_LINES=1
+
+// Change the caret shape to indicate RTL text?
+// Applies only to vertical caret shape!
+// -1 = Never
+//  0 = Only if line contains BiDi Text
+//  1 = Always
+BIDI_CARET_SHAPE=-1
+BIDI_CARET_WIDTH=2 // Left or Right Flag Width
+
+// ===============================================================================
+// UNISCRIBE Fallback Fonts
+// ========================
+//
+// The values below affect Uniscribe engine...
+// Fallback fonts for different (exotic) scripts as defined by Windows Unicode
+
+// If the list starts with ! then the currently active font is ignored and only
+// fallback fonts listed after ! are applied (seldom useful)...
+// If you specify @ in the list of fallback fonts then ALL fonts
+// starting with the letter @ on your system are used for that script.
+// Use GetScriptTagsAndFonts macro function to see what scripts and fonts
+// are available on your computer (it depends on your version of Windows)!
+// Non-existent fonts in the list are simply ignored!
+
+SCRIPT=""     // Non-script-specific characters and symbols (eg. numbers, etc...)
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+       "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+SCRIPT="latn" // @ABCDE ^_`abcde yz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°± ÀÁÂÃÄÅÆÇÈÉÊË...
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+       "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+SCRIPT="grek" // ΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϏϐϑϒϓϔ
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+SCRIPT="cyrl" // абвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџѠѡѢѣ
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+SCRIPT="hebr" // דג סקרן שט בים מאוכזב ולפתע מצא חברה
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+SCRIPT="arab" // صِف خَلقَ خَودِ كَمِثلِ الشَمسِ إِذ بَزَغَت — يَحظى الضَجيعُ بِها نَجلاءَ مِعطارِ
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+SCRIPT="armn" // աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+SCRIPT="thai" // กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬ
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Segoe UI;Courier New"
+
+SCRIPT="hani" // 丈三上下丌不与丏丐丑丒专且丕世丗丘丙 乤乥书乧乨乩乪乫乬乭乮乯买乱乲乳乴乵乶
+  FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Yu Gothic UI;@"
+SCRIPT="kana" // いろはにほへと ちりぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす ㋐㋑㋒
+  FONT="Default;Yu Gothic UI;Microsoft YaHei UI;Microsoft JhengHei UI;@"
+SCRIPT="hang" // 가각갂갃간갅갆갇갈갉갊갋갌갍갎갏감갑값갓갔강갖갗갘 ㉠㉡㉢㉣㉤㉥㉦㉧㉨㉩㉪㉫
+  FONT="Default;Malgun Gothic;@"
+SCRIPT="bopo" // ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕ  ㆠㆡㆢㆣㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭ
+  FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;@"
+SCRIPT="yi  " // ꀀꀁꀂꀃꀄꀅꀆꀇꀈꀉꀊꀋꀌꀍꀎꀏꀐꀑꀒꀓꀔꀕꀖꀗꀘ ꒐꒑꒒꒓꒔꒕꒖꒗꒘꒙꒚꒛꒜꒝
+  FONT="Default;Microsoft JhengHei UI;Microsoft YaHei UI;Microsoft Yi Baiti;@"
+
+SCRIPT="brai" //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱ ⣺⣻⣼⣽⣾⣿
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+SCRIPT="copt" // ϢϣϤϥϦϧϨϩϪϫϬϭϮϯ ⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲔⲕⲖⲗⲘⲙⲚⲛⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲰⲱ ⳹⳺⳻⳼⳽⳾⳿
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+SCRIPT="glag" // ⰀⰁⰂⰃⰄⰅⰆⰇⰈⰉⰊⰋⰌⰍⰎⰏⰐⰑⰒⰓⰔⰕⰖⰗⰘⰙⰚ ⰰⰱⰲⰳⰴⰵⰶⰷⰸⰹⰺⰻⰼⰽⰾⰿⱀⱁⱂⱃⱄⱅⱆⱇⱈⱉⱊ
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+SCRIPT="runr" // ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚲᚳᚴᚵᚶᚷᚸᚹᚺᚻᚼᚽᚾᚿᛀᛁᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛌᛍᛎᛏᛐᛑ ᛒᛓᛔᛕᛖᛗᛘᛙᛚᛛᛜᛝᛞᛟᛠᛡᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+SCRIPT="lisu" // ꓐꓑꓒꓓꓔꓕꓖꓗꓘꓙꓚꓛꓜꓝꓞꓟꓠꓡꓢꓣꓤꓥꓦꓧꓨꓩꓪꓫꓬꓭꓮꓯꓰꓱꓲꓳꓴꓵꓶꓷꓸꓹꓺꓻꓼꓽ꓾꓿
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+SCRIPT="ogam" // ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊᚋᚌᚍᚎᚏᚐᚑᚒᚓᚔᚕᚖᚗᚘᚙᚚ᚛᚜
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic"
+SCRIPT="geor" // ႠႡႢႣႤႥႦႧႨႩႪႫႬႭႮႯႰႱႲႳ აბგდევზთიკლხჯჰჱჲჳჴჵჶჷჸჹჺ჻ჼჽჾჿ ⴀⴁⴂⴃⴄⴅⴆⴇⴈⴉⴊⴋⴌⴍⴎ
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;Sylfaen"
+SCRIPT="syrc" // ܐܑܒܓܔܕܖܗܘܙܚܛܜܝܞܟܠܡܢܣܤܥܦܧܨܩܪܫܬܭܮܯܱܴܷܸܹܻܼܾܰܲܳܵܶܺܽܿ݀݁ ݍݎݏ
+  FONT="Default;Arial Unicode MS;Segoe UI;Segoe UI Symbol;Segoe UI Historic;Estrangelo Edessa"
+
+SCRIPT="deva" // ऄअआइईउऊऋऌऍऎएऐऑऒओऔकखगघङचछजझञटठडढणतथदधनऩपफबभमयरऱ
+  FONT="Default;Arial Unicode MS;Nirmala UI;Aparajita;Kokila;Mangal"
+SCRIPT="beng" // ওঔকখগঘঙচছজঝঞটঠডঢণতথদধন পফবভমযর ০১২৩৪৫৬৭৮৯ৰৱ৲৳৴৵৶৷৸৹৺৻
+  FONT="Default;Arial Unicode MS;Nirmala UI;Vrinda"
+SCRIPT="guru" // ਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨ ਪਫਬਭਮਯਰ ਖ਼ਗ਼ਜ਼ੜ  ਫ਼
+  FONT="Default;Arial Unicode MS;Nirmala UI;Raavi"
+SCRIPT="gujr" // અઆઇઈઉઊઋઌઍ ઓઔકખગઘઙચછજઝઞટઠડઢણતથદધન વશષસહ
+  FONT="Default;Arial Unicode MS;Nirmala UI;Shruti"
+SCRIPT="orya" // ଅଆଇଈଉଊଋଌ ଓଔକଖଗଘଙଚଛଜଝଞଟଠଡଢଣତଥଦଧନ ପଫବଭମଯର ଵଶଷସହ
+  FONT="Default;Arial Unicode MS;Nirmala UI;Kalinga"
+SCRIPT="taml" // அஆஇஈஉஊ மயரறலளழவஶஷஸஹ ௦௧௨௩௪௫௬௭௮௯௰௱௲௳௴௵௶௷
+  FONT="Default;Arial Unicode MS;Nirmala UI;Latha;Vijaya"
+SCRIPT="telu" // అఆఇఈఉఊఋఌ ఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధన పఫబభమయరఱలళఴ
+  FONT="Default;Arial Unicode MS;Nirmala UI;Gautami;Vani"
+SCRIPT="knda" // ಅಆಇಈಉಊಋಌ ಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನ
+  FONT="Default;Arial Unicode MS;Nirmala UI;Tunga"
+SCRIPT="mlym" // അആഇഈഉഊഋഌ ഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനഩ
+  FONT="Default;Arial Unicode MS;Nirmala UI;Kartika"
+SCRIPT="sinh" // අආඇඈඉඊඋඌඍඎඏඐඑඒඓඔඕඖ ඳපඵබභමඹයර
+  FONT="Default;Arial Unicode MS;Nirmala UI;Iskoola Pota"
+SCRIPT="olck" // ᱐᱑᱒᱓᱔᱕᱖᱗᱘᱙ᱚᱛᱜᱝᱞᱟᱠᱡᱢᱣᱤᱥᱦᱧᱨᱩᱪᱫᱬᱭᱮᱯᱰᱱᱲᱳᱴᱵᱶᱷᱸᱹᱺᱻᱼᱽ᱾᱿
+  FONT="Default;Arial Unicode MS;Nirmala UI"
+
+SCRIPT="khmr" // កខគឃងចឆជឈញដឋឌឍណតថទធនបផពភមយរលវឝឞសហឡអឣឤឥឦឧឨឩឪឫឬឭឮឯ
+  FONT="Default;Arial Unicode MS;Leelawadee UI;Khmer UI"
+SCRIPT="lao " // ນບປຜຝພຟ ເແໂໃໄ ໐໑໒໓໔໕໖໗໘໙ ໜໝໞໟ ດຕຖທ ໐໑໒໓໔໕໖໗໘໙ ເແໂໃໄ ອຮຯະັາຳິີຶືຸູ
+  FONT="Default;Arial Unicode MS;Leelawadee UI;Lao UI"
+SCRIPT="bugi" // ᨀᨁᨂᨃᨄᨅᨆᨇᨈᨉᨊᨋᨌᨍᨎᨏᨐᨑᨒᨓᨔᨕᨖᨘᨗᨙᨚᨛ
+  FONT="Default;Arial Unicode MS;Leelawadee UI"
+
+SCRIPT="ethi" // ሀሁሂሃሄህሆሇለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜም ፝፞፟፠፡።፣፤፥፦፧፨፩፪፫፬፭፮፯፰፱፲፳፴፵፶፷፸፹፺፻፼
+  FONT="Default;Arial Unicode MS;Ebrima;Nyala"
+SCRIPT="tfng" // ⴰⴱⴲⴳⴴⴵⴶⴷⴸⴹⴺⴻⴼⴽⴾⴿⵀⵁⵂⵃⵄⵅⵆⵇⵈⵉⵊⵋⵌⵍⵎⵏⵐⵑⵒⵓⵔⵕⵖⵗⵘⵙⵚⵛⵜⵝⵞⵟⵠⵡ
+  FONT="Default;Arial Unicode MS;Ebrima"
+SCRIPT="vai " // ꔀꔁꔂꔃꔄꔅꔆꔇꔈꔉꔊꔋꔌꔍꔎꔏꔐꔑꔒꔓꔔꔕꔖꔗꔘꔙꔚꔛꔜꔝꔞꔟꔠꔡꔢꔣꔤꔥꔦꔧꔨꔩꔪꔫ
+  FONT="Default;Arial Unicode MS;Ebrima"
+SCRIPT="nko " // ߀߁߂߃߄߅߆߇߈߉ߊߋߌߍߎߏߐߑߒߓߔߕߖߗߘߙߚߛߜߝߞߟߠߡߢߣߤߥߦߧߨߩߪ߫߬߭߮߯߰߱
+  FONT="Default;Arial Unicode MS;Ebrima"
+
+SCRIPT="cher" // ᎠᎡᎢᎣᎤᎥᎦᎧᎨᎩᎪᎫᎬᎭᎮᎯᎰᎱᎲᎳᎴᎵᎶᎷᎸᎹᎺᎻᎼᎽᎾᎿᏀᏁᏂᏃᏄᏅᏆᏇᏈᏉᏊᏋᏌᏍᏎᏏᏐᏑ
+  FONT="Default;Arial Unicode MS;Gadugi;Plantagenet Cherokee"
+SCRIPT="cans" // ᢰᢱᢲᢳᢴᢵᢶᢻᢼᢽᢾᢿᣍᣎᣏᣐᣑᣒᣓᣔᣕᣖᣗᣛᣜᣝᣞᣟᣠᣡᘈᘉᘊᘋᘌᘍᘑᘒᘗᘘᘙᘚᘛᘜᘝᘞᘟᘤᘥᘦ
+  FONT="Default;Arial Unicode MS;Gadugi;Euphemia"
+
+SCRIPT="tale" // ᥐᥑᥒᥓᥔᥕᥖᥗᥘᥙᥚᥛᥜᥝᥞᥟᥠᥡᥢᥣᥤᥥᥦᥧᥨᥩᥪᥫᥬᥭ
+  FONT="Default;Arial Unicode MS;Microsoft Tai Le"
+SCRIPT="talu" // ᦀᦁᦂᦃᦄᦅᦆᦇᦈᦉᦊᦋᦌᦍᦎᦏᦐᦑᦒᦓᦔᦕᦖᦗᦘᦙᦚᦛᦜᦝᦞᦟᦠᦡᦢᦣᦤᦥᦦᦧᦨᦩᦪᦫ
+  FONT="Default;Arial Unicode MS;Microsoft New Tai Lue"
+SCRIPT="phag" // ꡀꡁꡂꡃꡄꡅꡆꡇꡈꡉꡊꡋꡌꡍꡎꡏꡐꡑꡒꡓꡔꡕꡖꡗꡘꡙꡚꡛꡜꡝꡞꡟꡠꡡꡢ
+  FONT="Default;Arial Unicode MS;Microsoft PhagsPa"
+SCRIPT="tibt" // ༀ༁༂༃༄༅༆༇༈༉༊་༌།༎༏༐༑༒༓༔༕༖༗༘༙༚༛༜༝༞༟༠༡༢༣༤༥༦༧༨༩༪༫༬༭༮༯༰༱
+  FONT="Default;Arial Unicode MS;Microsoft Himalaya"
+SCRIPT="thaa" // ހށނރބޅކއވމފދތލގޏސޑޒޓޔޕޖޗޘޙޚޛޜޝޞޟޠޡޢޣޤ
+  FONT="Default;Arial Unicode MS;MV Boli"
+SCRIPT="mong" // ᠠᠡᠢᠣᠤᠥᠦᠧᠨᠩᠪᠫᠬᠭᠮᠯᠰᠱᠲᠳᠴᠵᠶᠷᠸᠹᠺᠻᠼᠽᠾᠿᡀᡁᡂᡃᡄᡅᡆᡇᡈᡉᡊᡋᡌᡍᡎᡏᡐᡑ ᡒᡓᡔᡕᡖᡗᡘᡙᡚᡛᡜᡝᡞᡟᡠᡡᡢᡣᡤᡥᡦᡧᡨᡩᡪᡫᡬᡭᡮᡯᡰᡱᡲᡳᡴᡵᡶᡷ
+  FONT="Default;Arial Unicode MS;Mongolian Baiti"
+SCRIPT="mymr" // ကခဂဃငစဆဇဈဉညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠအဢဣဤဥဦဧဨဩဪါာိီုူေ
+  FONT="Default;Arial Unicode MS;Myanmar Text"
+SCRIPT="java" // ꦲ꦳ꦴꦵꦶꦷꦸꦹꦺꦻꦼꦽꦾꦿ꧀꧁꧂꧃꧄꧅꧆꧇꧈꧉꧊꧋꧌꧍ ꧐꧑꧒꧓꧔꧕꧖꧗꧘꧙
+  FONT="Default;Arial Unicode MS;Javanese Text"
+
+SCRIPT="?"    // Any Other (not listed): must be the last item!
+  FONT="Default;Arial Unicode MS;Arial;Tahoma;Courier New;" +
+       "Segoe UI;Segoe UI Symbol;Segoe UI Historic;@"
+
+// -------------------------------------------------------------------------------
+// Unicode for Windows is a project in progress...
+// On Windows 7 some scripts (above) will not display due to the lack of fonts
+// or glyphs. On Windows 10 they will display correctly.
+//
+// The following 20 script tags are defined on Windows 10 but currently no font
+// that comes with Windows 10 has glyphs for them (this may change in the future):
+//
+// SCRIPT="bali" // ᬅᬆᬇᬈᬉᬊᬋᬌᬍᬎᬏᬐᬑᬒᬓᬔᬕᬖᬗᬘᬙᬚᬛᬜᬝᬞᬟᬠᬡᬢᬣᬤᬥᬦᬧᬨᬩᬪᬫᬬᬭᬮᬯᬰᬱ
+// SCRIPT="batk" // ᯀᯁᯂᯃᯄᯅᯆᯇᯈᯉᯊᯋᯌᯍᯎᯏᯐᯑᯒᯓᯔᯕᯖᯗᯘᯙᯚᯛᯜᯝᯞᯟᯠᯡᯢᯣᯤᯥ᯦ᯧᯨᯩᯪᯫᯬᯭᯮᯯᯰᯱ
+// SCRIPT="buhd" // ᝀᝁᝂᝃᝄᝅᝆᝇᝈᝉᝊᝋᝌᝍᝎᝏᝐᝑᝒᝓ
+// SCRIPT="cham" // ꨀꨁꨂꨃꨄꨅꨆꨇꨈꨉꨊꨋꨌꨍꨎꨏꨐꨑꨒꨓꨔꨕꨖꨗꨘꨙꨚꨛꨜꨝꨞꨟꨠꨡꨢꨣꨤꨥꨦꨧꨨꨩꨪꨫꨬꨭꨮꨯꨰꨱ
+// SCRIPT="hano" // ᜠᜡᜢᜣᜤᜥᜦᜧᜨᜩᜪᜫᜬᜭᜮᜯᜰᜱᜲᜳ᜴᜵᜶
+// SCRIPT="kali" // ꤀꤁꤂꤃꤄꤅꤆꤇꤈꤉ꤊꤋꤌꤍꤎꤏꤐꤑꤒꤓꤔꤕꤖꤗꤘꤙꤚꤛꤜꤝꤞꤟꤠꤡꤢꤣꤤꤥꤦꤧꤨꤩꤪ꤫꤬꤭
+// SCRIPT="lana" // ᨠᨡᨢᨣᨤᨥᨦᨧᨨᨩᨪᨫᨬᨭᨮᨯᨰᨱᨲᨳᨴᨵᨶᨷᨸᨹᨺᨻᨼᨽᨾᨿᩀᩁᩂᩃᩄᩅᩆᩇᩈᩉᩊᩋᩌᩍᩎᩏᩐᩑ
+// SCRIPT="lepc" // ᰀᰁᰂᰃᰄᰅᰆᰇᰈᰉᰊᰋᰌᰍᰎᰏᰐᰑᰒᰓᰔᰕᰖᰗᰘᰙᰚᰛᰜᰝᰞᰟᰠᰡᰢᰣᰤᰥᰦᰧᰨᰩᰪᰫᰬᰭᰮᰯᰰᰱ
+// SCRIPT="limb" // ᤀᤁᤂᤃᤄᤅᤆᤇᤈᤉᤊᤋᤌᤍᤎᤏᤐᤑᤒᤓᤔᤕᤖᤗᤘᤙᤚᤛᤜᤝᤞ
+// SCRIPT="mand" // ࡀࡁࡂࡃࡄࡅࡆࡇࡈࡉࡊࡋࡌࡍࡎࡏࡐࡑࡒࡓࡔࡕࡖࡗࡘ࡙࡚࡛
+// SCRIPT="mtei" // ꫠꫡꫢꫣꫤꫥꫦꫧꫨꫩꫪꫫꫬꫭꫮꫯ꫰꫱ꫲꫳꫴꫵ꫶
+// SCRIPT="qavs" // ︀︁︂︃︄︅︆︇︈︉︊︋︌︍︎️
+// SCRIPT="rjng" // ꤰꤱꤲꤳꤴꤵꤶꤷꤸꤹꤺꤻꤼꤽꤾꤿꥀꥁꥂꥃꥄꥅꥆꥇꥈꥉꥊꥋꥌꥍꥎꥏꥐꥑꥒ꥓
+// SCRIPT="samr" // ࠀࠁࠂࠃࠄࠅࠆࠇࠈࠉࠊࠋࠌࠍࠎࠏࠐࠑࠒࠓࠔࠕࠖࠗ࠘࠙ࠚࠛࠜࠝࠞࠟࠠࠡࠢࠣࠤࠥࠦࠧࠨࠩࠪࠫࠬ࠭
+// SCRIPT="saur" // ꢂꢃꢄꢅꢆꢇꢈꢉꢊꢋꢌꢍꢎꢏꢐꢑꢒꢓꢔꢕꢖꢗꢘꢙꢚꢛꢜꢝꢞꢟꢠꢡꢢꢣꢤꢥꢦꢧꢨꢩꢪꢫꢬꢭꢮꢯꢰꢱ
+// SCRIPT="sund" // ᮃᮄᮅᮆᮇᮈᮉᮊᮋᮌᮍᮎᮏᮐᮑᮒᮓᮔᮕᮖᮗᮘᮙᮚᮛᮜᮝᮞᮟᮠᮡᮢᮣᮤᮥᮦᮧᮨᮩ᮪᮫ᮬᮭ
+// SCRIPT="sylo" // ꠃꠄꠅ꠆ꠇꠈꠉꠊꠋꠌꠍꠎꠏꠐꠑꠒꠓꠔꠕꠖꠗꠘꠙꠚꠛꠜꠝꠞꠟꠠꠡꠢꠣꠤꠥꠦꠧ꠨꠩꠪꠫
+// SCRIPT="tagb" // ᝠᝡᝢᝣᝤᝥᝦᝧᝨᝩᝪᝫᝬᝮᝯᝰᝲᝳ
+// SCRIPT="tavt" // ꪀꪁꪂꪃꪄꪅꪆꪇꪈꪉꪊꪋꪌꪍꪎꪏꪐꪑꪒꪓꪔꪕꪖꪗꪘꪙꪚꪛꪜꪝꪞꪟꪠꪡꪢꪣꪤꪥꪦꪧꪨꪩꪪꪫꪬꪭꪮꪯꪰꪱ
+// SCRIPT="tglg" // ᜀᜁᜂᜃᜄᜅᜆᜇᜈᜉᜊᜋᜌᜎᜏᜐᜑᜒᜓ᜔
+//
+// -------------------------------------------------------------------------------
+
+// ===============================================================================

@@ -1,3 +1,0 @@
-Assign("PackageLine","\usepackage[sans]{dsfont}");
-Exe("%B\Plugins\TexFriend\Macros\InsertPackage.edt");
-End;

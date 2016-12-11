@@ -1,0 +1,10 @@
+  // *** Execute it!!!
+  SetConsoleText('%!3Command Line:   %!5%\Startup Folder: %!6%\%\',1);
+  RunConsole('%!5','%!6','%!9 ...',1,1,0,0,0,0,0);
+  IfOK(!"Assign(!'Compile Status',!'OK');",>
+       !"ShowConsole(1);Assign('Force-Focus','1');Assign(!'Compile Status',!'Run Error');JMP(!'Exit');");
+
+  // Execute tasks after compiling...
+  Exe('%b\Exec\ExeCompilerPost.edt');
+  UpdateStatus;
+  JMP(!'no_LOG');

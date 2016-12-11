@@ -1,5 +1,0 @@
-// version 2004/01/01
-Assign("NewDocGuide","%@('HKEY_CURRENT_USER','Software\VB and VBA Program Settings\TexFriend\Options','NewDocumentGuide')");
-Assign("MiKTeX-Root","%@('HKEY_LOCAL_MACHINE','SOFTWARE','MiK','MiKTeX','CurrentVersion','MiKTeX','Install Root');");
-IfStr("%$('NewDocGuide')","Off","=","CMD('New');End","Run('%B\Plugins\TexFriend\Macros\New-document.exe','')");
-End;

@@ -1,0 +1,6 @@
+  STOP2_TRIGGER=""
+    TEXT_COLOR="RGB_0"
+    DEFAULT_FONT=1
+    UNDERLINE=1
+
+SWITCH="\cite{?}"

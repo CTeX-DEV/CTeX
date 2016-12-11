@@ -1,6 +1,0 @@
- // lift Xy-Pic diagram
- BeginGroup;
- SetSel(0);Mark(9);
- ReadFile('%b\Templates\xy-pic\lift.ltx',9);
- Ins('%!9');CMD("Delete Line");Goto(9);CMD('Next Bullet');
-End;

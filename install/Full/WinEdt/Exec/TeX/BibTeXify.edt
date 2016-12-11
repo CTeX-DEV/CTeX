@@ -59,7 +59,7 @@ IfFileExists('%O\%N.idx',!'Relax;',!'JMP("MakeGlossary");');
   SetErrorFlag(0);
 
 IfFileExists('%O\%N.glo',!'Relax;',>
-  !'IfFileExists(|%O\%N.acn|,!|Relax;|,>
+  !'IfFileExists(|%$(`%F-glo`);|,!|Relax;|,>
       !|IfFileExists(`%O\%N.acr`,!`Relax;`,!`JMP("Cleanup");`);|);');
 
     Assign(!"Compile-Flag",!|2|); // Do not Complain ...

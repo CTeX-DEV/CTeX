@@ -1,0 +1,8 @@
+  PAR="\include"
+  PAR="\book"
+  PAR="\addpart"
+  PAR="\chapter"
+  PAR="\addchap"
+  PAR="\section"
+  PAR="\addsec"
+  PAR="\subsection"

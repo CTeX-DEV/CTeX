@@ -1,3 +1,0 @@
-edt="table1.edt"
-edt="table2.edt"
-edt="cd.edt"

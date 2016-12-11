@@ -1,0 +1,5 @@
+    TEXT_COLOR="kwcLaTeXClass"
+    DEFAULT_FONT=1
+    BOLD=1
+LIST="END_LIST"
+documentclass

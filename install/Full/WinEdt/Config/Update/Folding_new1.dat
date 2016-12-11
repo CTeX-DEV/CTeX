@@ -1,0 +1,19 @@
+END="Preamble-TeX"
+
+NODE="Book-TeX"
+  MODE_FILTER="TeX|DTX;INS;STY;AUX"
+  CATEGORY="TOC:Book"
+  CASE_SENSITIVE=1
+  IGNORE_VERBATIM=1
+  INCLUDE_STOP=0
+  SCOPE=1
+  START="\book{"
+  START="\book["
+  START="\book*{"
+  STOP="\end{document}"
+  STOP="\book{"
+  STOP="\book["
+  STOP="\book*{"
+END="Book-TeX"
+
+NODE="Part-TeX"

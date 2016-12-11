@@ -1,0 +1,6 @@
+  START1_TRIGGER="\bibliography"
+  START2_TRIGGER=""
+  STOP1_TRIGGER=""
+  STOP2_TRIGGER=""
+    TEXT_COLOR="swcBibliographyArg"
+    DEFAULT_FONT=1

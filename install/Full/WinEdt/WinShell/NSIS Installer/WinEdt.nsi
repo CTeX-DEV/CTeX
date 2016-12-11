@@ -10,8 +10,8 @@
 ;Constants
 
 !define MUI_PRODUCT "WinEdt 10"
-!define MUI_VERSION "10.0"
-!define MUI_BUILD "20160317"
+!define MUI_VERSION "10.1"
+!define MUI_BUILD "20160526"
 !define MUI_COMPANY "WinEdt Team"
 
 ;--------------------------------
@@ -62,9 +62,9 @@ SetCompressor /SOLID LZMA
 
 Name "${MUI_PRODUCT}"
 !ifndef WINEDT_32
-      OutFile "winedt100-64.exe"
+      OutFile "winedt101-64.exe"
 !else
-      OutFile "winedt100-32.exe"
+      OutFile "winedt101-32.exe"
 !endif
 
 ShowInstDetails nevershow

@@ -1,0 +1,12 @@
+  // Migrate from WinEdt 9?
+  LetReg(0,"%@('HKCU','Software\WinEdt 9','Install Root');");
+  IfStr('%!0','','<>',>
+    !`>
+      LetReg(0,"%@('HKCU','Software\WinEdt 9','AppData');");>
+      IfStr('%!0','','=',>
+        !|LetReg(0,"%@('HKCU','Software\WinEdt 9','Install Root');");>
+          LetReg(0,"%!0\Local");|);>
+     `);
+  Assign('Old-AppData','%!0');
+  // Prompt("%$('Old-AppData');");  // Debugging
+  Assign('First-Build','20160317'); // First WinEdt 10 Build

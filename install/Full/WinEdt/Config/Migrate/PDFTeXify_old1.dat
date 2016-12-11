@@ -1,0 +1,6 @@
+  IfStr("%$('%!9-C-style-errors');","1",!"=",!|LetReg(4,'%!4 %$("TeX-Opt");--file-line-error');|);
+  // Aux Directory?
+  IfStr("%$('TeX System');","MiKTeX","=",>
+    !|IfStr('%O','%P','<>',!`LetReg(4,'%!4 --include-directory="%P"');`);|,>
+    !|IfStr('%O','%P','<>',!`DosToUnix('%O',5);LetReg(4,'%!4 --output-directory="%!5"');`);|);
+  // TeX Sync?

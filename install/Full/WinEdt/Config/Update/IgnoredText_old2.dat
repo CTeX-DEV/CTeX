@@ -1,0 +1,5 @@
+  ENVIRONMENT="\autoref?}"
+    START="\autoref"
+    STOP="}"
+    SCOPE=3
+  ENVIRONMENT="_{?}"

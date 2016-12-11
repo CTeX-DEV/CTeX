@@ -108,7 +108,7 @@
     Repeat(%!1,>
       !`LstGetItem(2,%!c-1);>
         GetFileName('%!2',3);>
-        FindInString('%!3','<%N+$Numeric$~$~[]$',5,6,1);>
+        FindInString('%!3','<\"|%N|+$Numeric$~$~[]$',5,6,1);>
         IfOK(!|DeleteFile("%P\%!2");|);>
         ProcessMessages;>
        `);
@@ -120,7 +120,7 @@
     Repeat(%!1,>
       !`LstGetItem(2,%!c-1);>
         GetFileName('%!2',3);>
-        FindInString('%!3','<%N+$Numeric$x~$~[]$',5,6,1);>
+        FindInString('%!3','<\"|%N|+$Numeric$x~$~[]$',5,6,1);>
         IfOK(!|DeleteFile("%P\Images\%!2");|);>
         ProcessMessages;>
        `);
